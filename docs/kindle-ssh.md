@@ -209,7 +209,8 @@ powershell -ExecutionPolicy Bypass -File tools\kindle-usb.ps1 -OutFile kindle-re
 
 它会检查这些，正好覆盖「菜单里没有 SSH 服务器」的两种原因：
 
-- `koreader/dropbear`、`koreader/dropbearkey` 是否存在（缺失 → 插件静默禁用，菜单不出现）；
+- `koreader/dropbear` 是否存在（**只有它决定菜单项出不出现**；`dropbearkey` 只是可选工具，
+  插件启动时会用 dropbear 的 `-R` 自己生成 host key）；
 - `settings/reader.lua` 的 `plugins_disabled` 里有没有 `SSH`（在插件管理里被关掉也会没菜单项）；
 - `koreader/plugins/` 是否可写、已装了哪些 `*.koplugin`；
 - `koreader/settings/SSH/authorized_keys`、`koreader/settings/octopus004.lua` 是否存在；
@@ -263,8 +264,11 @@ USB 网卡模式会替换掉「插上就是 U 盘」的行为，对日常拷书�
    或顶部菜单的放大镜里搜 `ssh`。
 2. **插件被关掉了**：工具 → 更多工具 → **插件管理（Plugin management）** → 找到
    `SSH` / `SSH server`，勾选启用，然后重启 KOReader。被禁用的插件不会出现在菜单里。
-3. **这个 KOReader 包确实没带 dropbear**：SSH 插件启动时会检查 KOReader 目录下有没有
-   `dropbear` 可执行文件，没有就**静默禁用自己**（不报错、不留菜单项）。
+3. **这个 KOReader 包确实没带 dropbear**：SSH 插件加载时只检查 KOReader 目录下有没有
+   `dropbear` 可执行文件（`util.pathExists("dropbear")`），没有就**静默禁用自己**（不报错、
+   不留菜单项）。`dropbearkey` 缺失**不影响**，别把它当成原因。
+   顺带一提，v2024.11 这类旧版的 SSH 插件没有「仅公钥登录 / 开机自启 / 状态栏」这些开关，
+   菜单里只有 `SSH server`、`SSH port (2222)`、`SSH public key`、`Login without password`。
    - 用 U 盘连电脑，看 `koreader/` 根目录里有没有无扩展名的 `dropbear`；
    - 或者用 KOReader 自带的终端：工具 → 更多工具 → 终端模拟器（Terminal），执行
      `ls -l /mnt/us/koreader/dropbear`。

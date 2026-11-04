@@ -86,13 +86,20 @@ fi
 
 echo
 echo "== SSH 依赖（菜单里没有 SSH 服务器时看这里）=="
-for bin in dropbear dropbearkey; do
-    if [ -f "$K/$bin" ]; then
-        ok "koreader/$bin 存在"
-    else
-        bad "koreader/$bin 不存在 —— SSH.koplugin 会静默禁用自己，菜单里就不会出现 SSH 服务器"
+if [ -f "$K/dropbear" ]; then
+    size=$(wc -c < "$K/dropbear" | tr -d ' ')
+    ok "koreader/dropbear 存在（$size 字节）"
+    if [ "$size" -lt 100000 ] 2>/dev/null; then
+        warn "  这个文件比正常 dropbear 小很多，可能不是真的可执行文件（解压不完整？）"
     fi
-done
+else
+    bad "koreader/dropbear 不存在 —— SSH.koplugin 会静默禁用自己，菜单里就不会出现 SSH 服务器"
+fi
+if [ -f "$K/dropbearkey" ]; then
+    info "koreader/dropbearkey 存在（可选工具）"
+else
+    info "koreader/dropbearkey 没有：不影响菜单项，插件启动时用 dropbear 的 -R 自动生成 host key"
+fi
 if find "$K" -maxdepth 2 -name 'sftp-server*' -print -quit 2>/dev/null | grep -q .; then
     ok "找到 sftp-server（SFTP 可用）"
 else

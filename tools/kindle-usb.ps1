@@ -103,12 +103,20 @@ if (Test-Path -LiteralPath $gitRev) {
 
 Say ''
 Say '== SSH 依赖（菜单里没有 SSH 服务器时看这里）=='
-foreach ($bin in @('dropbear', 'dropbearkey')) {
-    if (Test-Path -LiteralPath (Join-Path $koreader $bin)) {
-        Ok ("koreader\" + $bin + " 存在")
-    } else {
-        Missing ("koreader\" + $bin + " 不存在 —— SSH.koplugin 会静默禁用自己，菜单里就不会出现 SSH 服务器")
+$dropbear = Join-Path $koreader 'dropbear'
+if (Test-Path -LiteralPath $dropbear) {
+    $dropbearSize = (Get-Item -LiteralPath $dropbear).Length
+    Ok ("koreader\dropbear 存在（" + $dropbearSize + " 字节）")
+    if ($dropbearSize -lt 100000) {
+        Warn '  这个文件比正常 dropbear 小很多，可能不是真的可执行文件（解压不完整？）'
     }
+} else {
+    Missing 'koreader\dropbear 不存在 —— SSH.koplugin 会静默禁用自己，菜单里就不会出现 SSH 服务器'
+}
+if (Test-Path -LiteralPath (Join-Path $koreader 'dropbearkey')) {
+    Info 'koreader\dropbearkey 存在（可选工具）'
+} else {
+    Info 'koreader\dropbearkey 没有：不影响菜单项，插件启动时用 dropbear 的 -R 自动生成 host key'
 }
 $sftp = Get-ChildItem -LiteralPath $koreader -Filter 'sftp-server*' -Recurse -Depth 1 -ErrorAction SilentlyContinue | Select-Object -First 1
 if ($sftp) {
