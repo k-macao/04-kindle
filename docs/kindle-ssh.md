@@ -1,15 +1,17 @@
 # SSH 连接 Kindle（越狱 + KOReader 之后）
 
 越狱和 KOReader 都装好之后，下一步就是拿到一个 shell：用它部署、更新本仓库的
-`octopus004.koplugin`，看日志、查网络。这里给两条路线，先看结论：
+`octopus004.koplugin`，看日志、查网络。这里给三条路线，先看结论：
 
 | 路线 | 需要额外安装 | 端口 | 能做什么 |
 | --- | --- | --- | --- |
 | A. KOReader 内置 SSH 服务 | 不用装，KOReader 自带 | 2222 | 传文件、跑命令、看日志（KOReader 运行时） |
-| B. USBNetwork 破解包 | 需要 KUAL/MRPI + usbnet | 22 或 USB 网卡 | 开机即有的 root shell，KOReader 没启动也能连 |
+| B. USB 直连 | 不用装 | 无 | 只能读写 U 盘里的文件：装插件、查日志、做自检 |
+| C. USBNetwork 破解包 | 需要 KUAL/MRPI + usbnet | 22 或 USB 网卡 | 开机即有的 root shell，KOReader 没启动也能连 |
 
-**先走 A**：不需要装任何东西，两分钟就能连上。B 只在需要 22 端口、KOReader 崩溃后
-仍要登录、或要改系统文件（`mntroot rw`）时才用。
+**先走 A**：不需要装任何东西，两分钟就能连上。C 只在需要 22 端口、KOReader 崩溃后
+仍要登录、或要改系统文件（`mntroot rw`）时才用。**A 的菜单项找不到、或眼下只想把插件
+装上**，用 B（USB 直连）最快，见后面同名一节。
 
 本文依据 KOReader 源码里 `SSH.koplugin` 的行为和官方 wiki（`koreader/koreader/wiki/SSH`）
 整理，尚未在本仓库的目标设备上逐条验证（与 README 的验证状态一致）。菜单文字以英文
@@ -24,7 +26,7 @@
    - KOReader：菜单 → 网络（Network）→ 网络信息（Network info）；
    - 或在 Kindle 原生界面搜索框输入 `;711`，翻到第二页看 IP。
 3. **不要先试 22 端口**。Kindle 的 iptables 只放行少数端口，KOReader 只为自己使用的
-   2222 开了洞，所以 22 通常直接 connection refused（路线 B 才解决这个）。
+   2222 开了洞，所以 22 通常直接 connection refused（要 22 得走路线 C）。
 
 ---
 
@@ -160,9 +162,43 @@ KOReader 里确认能打开 `https://k-macao.github.io/004/kindle.txt`（HTTPS�
 
 ---
 
-## B. 用 USBNetwork 拿完整 root shell（可选）
+## B. USB 直连：不开 SSH 也能自检和装插件
 
-只有当 A 不够用时才做：需要 22 端口、KOReader 起不来时仍要登录、或要改只读根分区。
+Kindle 插上电脑就是一个普通 U 盘（根目录即 `/mnt/us`），`koreader/` 全在里面。适合
+「SSH 菜单项找不到」时先排查，或者干脆先把插件装上。
+
+**先退出 KOReader 再插线**，否则设备可能只充电、不出盘。本仓库的脚本会自检并可选安装：
+
+```sh
+cd /home/user/04-kindle
+tools/kindle-usb.sh                 # 自动找 /Volumes、/media、/run/media、/mnt 下的 Kindle
+tools/kindle-usb.sh /Volumes/Kindle # 或手动指定挂载点
+tools/kindle-usb.sh --install       # 顺带把插件复制到 koreader/plugins
+```
+
+它会检查这些，正好覆盖「菜单里没有 SSH 服务器」的两种原因：
+
+- `koreader/dropbear`、`koreader/dropbearkey` 是否存在（缺失 → 插件静默禁用，菜单不出现）；
+- `koreader/plugins/` 是否可写、已装了哪些 `*.koplugin`；
+- `koreader/settings/SSH/authorized_keys`、`koreader/settings/octopus004.lua` 是否存在；
+- 有 `koreader/crash.log` 就打印最后 15 行（**可能含书名和路径，贴出来前自己先看**）。
+
+脚本是纯 POSIX sh：macOS/Linux 直接跑，Windows 用 Git Bash 或 WSL；Windows 下挂载点一般
+是 `/d`、`/e`（或传 `D:/`）。不想装脚本就是纯手工三件事：
+
+1. 打开 U 盘里的 `koreader/`，看有没有无扩展名的 `dropbear` 文件 —— 有没有决定 SSH 菜单
+   项出不出现；
+2. 要装插件：把 `octopus004.koplugin` 整个文件夹复制到 U 盘的
+   `koreader/plugins/` 下；
+3. 安全弹出、拔线，在 Kindle 上重开 KOReader → 工具 → 004 Report。
+
+USB 直连不能跑命令，所以要交互式 shell（看进程、ping、改配置）仍然得回到 A 或 C。
+
+---
+
+## C. 用 USBNetwork 拿完整 root shell（可选）
+
+只有当 A / B 不够用时才做：需要 22 端口、KOReader 起不来时仍要登录、或要改只读根分区。
 
 前置：KUAL + MRPI 已装（越狱的 hotfix 不等于 KUAL，需要单独装）。整个过程是往
 `mrpackages` 放 `.bin`，然后在 KUAL → Helper → Install MR Packages 安装。
@@ -201,7 +237,7 @@ USB 网卡模式会替换掉「插上就是 U 盘」的行为，对日常拷书�
 4. **没有 dropbear 时**，二选一：
    - 换成官方最新 Kindle 包（当前 v2026.07.1）：固件 ≥5.16.3 用 `koreader-kindlehf`，
      更低（Oasis 1 多半属于这类）用 `koreader-kindlepw2`，整个覆盖到 Kindle 根目录；
-   - 走下面的路线 B（USBNetwork / usbnetlite）。
+   - 走后面的路线 C（USBNetwork / usbnetlite）。
 5. 顺带一提：**不用 SSH 也能装插件**。把 `octopus004.koplugin` 文件夹拷到 Kindle 根目录
    （U 盘可见的 `/mnt/us`），在 KOReader 的终端模拟器里执行：
 
