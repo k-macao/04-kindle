@@ -118,6 +118,24 @@ if ($sftp) {
 }
 
 Say ''
+Say '== 插件开关（插件管理里被关掉时，菜单项也会消失）=='
+$readerSettings = Join-Path (Join-Path $koreader 'settings') 'reader.lua'
+if (Test-Path -LiteralPath $readerSettings) {
+    $readerText = Get-Content -LiteralPath $readerSettings -Raw -ErrorAction SilentlyContinue
+    if ($readerText -match '(?s)plugins_disabled\s*=\s*\{(.{0,4000}?)\}') {
+        if ($matches[1] -match 'SSH') {
+            Warn 'settings\reader.lua 的 plugins_disabled 里出现 SSH —— 插件可能被插件管理关掉了'
+        } else {
+            Ok 'plugins_disabled 里没有 SSH'
+        }
+    } else {
+        Ok '没有 plugins_disabled，插件全部默认启用'
+    }
+} else {
+    Info '还没有 settings\reader.lua（KOReader 还没写过设置）'
+}
+
+Say ''
 Say '== 插件目录 =='
 $plugins = Join-Path $koreader 'plugins'
 $target = Join-Path $plugins 'octopus004.koplugin'

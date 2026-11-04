@@ -210,6 +210,7 @@ powershell -ExecutionPolicy Bypass -File tools\kindle-usb.ps1 -OutFile kindle-re
 它会检查这些，正好覆盖「菜单里没有 SSH 服务器」的两种原因：
 
 - `koreader/dropbear`、`koreader/dropbearkey` 是否存在（缺失 → 插件静默禁用，菜单不出现）；
+- `settings/reader.lua` 的 `plugins_disabled` 里有没有 `SSH`（在插件管理里被关掉也会没菜单项）；
 - `koreader/plugins/` 是否可写、已装了哪些 `*.koplugin`；
 - `koreader/settings/SSH/authorized_keys`、`koreader/settings/octopus004.lua` 是否存在；
 - 有 `koreader/crash.log` 就打印最后 15 行（**可能含书名和路径，贴出来前自己先看**）。

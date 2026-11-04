@@ -100,6 +100,26 @@ else
 fi
 
 echo
+echo "== 插件开关（插件管理里被关掉时，菜单项也会消失）=="
+reader="$K/settings/reader.lua"
+if [ -f "$reader" ]; then
+    # 折叠换行，取 plugins_disabled 之后的一小段做包含判断
+    flat=$(tr '\n\r' '  ' < "$reader" 2>/dev/null)
+    case "$flat" in
+        *plugins_disabled*)
+            window=$(printf '%s' "$flat" | sed 's/.*plugins_disabled//' | cut -c1-2000)
+            case "$window" in
+                *SSH*) warn "settings/reader.lua 的 plugins_disabled 里出现 SSH —— 插件可能被插件管理关掉了" ;;
+                *)     ok "plugins_disabled 里没有 SSH" ;;
+            esac
+            ;;
+        *) ok "没有 plugins_disabled，插件全部默认启用" ;;
+    esac
+else
+    info "还没有 settings/reader.lua（KOReader 还没写过设置）"
+fi
+
+echo
 echo "== 插件目录 =="
 if [ -d "$K/plugins" ]; then
     ok "koreader/plugins 存在"
