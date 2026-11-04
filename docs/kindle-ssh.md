@@ -169,12 +169,26 @@ Kindle 插上电脑就是一个普通 U 盘（根目录即 `/mnt/us`），`korea
 
 **先退出 KOReader 再插线**，否则设备可能只充电、不出盘。本仓库的脚本会自检并可选安装：
 
+macOS / Linux（POSIX sh）：
+
 ```sh
 cd /home/user/04-kindle
 tools/kindle-usb.sh                 # 自动找 /Volumes、/media、/run/media、/mnt 下的 Kindle
 tools/kindle-usb.sh /Volumes/Kindle # 或手动指定挂载点
 tools/kindle-usb.sh --install       # 顺带把插件复制到 koreader/plugins
 ```
+
+Windows（PowerShell，无需装 Git Bash）：
+
+```powershell
+cd 路径\04-kindle
+powershell -ExecutionPolicy Bypass -File tools\kindle-usb.ps1
+powershell -ExecutionPolicy Bypass -File tools\kindle-usb.ps1 -MountPoint D:\ -Install
+powershell -ExecutionPolicy Bypass -File tools\kindle-usb.ps1 -OutFile kindle-report.txt
+```
+
+`-MountPoint` 不给就自动找盘；`-Install` 直接装插件；`-OutFile` 把输出另存为 UTF-8
+文本，方便贴出来。脚本带 BOM，Windows PowerShell 5.1 下中文不会乱码。
 
 它会检查这些，正好覆盖「菜单里没有 SSH 服务器」的两种原因：
 
@@ -183,8 +197,10 @@ tools/kindle-usb.sh --install       # 顺带把插件复制到 koreader/plugins
 - `koreader/settings/SSH/authorized_keys`、`koreader/settings/octopus004.lua` 是否存在；
 - 有 `koreader/crash.log` 就打印最后 15 行（**可能含书名和路径，贴出来前自己先看**）。
 
-脚本是纯 POSIX sh：macOS/Linux 直接跑，Windows 用 Git Bash 或 WSL；Windows 下挂载点一般
-是 `/d`、`/e`（或传 `D:/`）。不想装脚本就是纯手工三件事：
+两个脚本都是只读检查 + 可选复制，不联网、不碰系统分区。PowerShell 版按 5.1 / 7 的语法写成，
+目前还没有在真实 Windows 上跑过：报错就把整段输出贴出来。
+
+不想跑脚本就是纯手工三件事（Windows 上对着盘符操作即可）：
 
 1. 打开 U 盘里的 `koreader/`，看有没有无扩展名的 `dropbear` 文件 —— 有没有决定 SSH 菜单
    项出不出现；
