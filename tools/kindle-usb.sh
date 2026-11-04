@@ -40,6 +40,7 @@ while [ $# -gt 0 ]; do
 done
 
 REPO_ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+PLUGIN_SRC="$REPO_ROOT/octopus004.koplugin"
 
 if [ -z "$MOUNT" ]; then
     for base in /Volumes /media /run/media /mnt; do
@@ -112,6 +113,9 @@ fi
 
 echo
 echo "== 本仓库插件与设置 =="
+if [ ! -d "$PLUGIN_SRC" ]; then
+    warn "脚本旁边没有 octopus004.koplugin（只做检查没关系；--install 需要它）"
+fi
 if [ -d "$K/plugins/octopus004.koplugin" ]; then
     ok "octopus004.koplugin 已安装"
     for f in main.lua wake.lua _meta.lua; do
@@ -141,6 +145,10 @@ fi
 if [ "$INSTALL" -eq 1 ]; then
     echo
     echo "== 安装插件 =="
+    if [ ! -d "$PLUGIN_SRC" ]; then
+        echo "错误: 找不到 $PLUGIN_SRC —— 把 octopus004.koplugin 文件夹和 tools/ 放在同一层目录里。" >&2
+        exit 1
+    fi
     if [ ! -d "$K/plugins" ]; then
         echo "错误: $K/plugins 不存在，先修好 KOReader 安装再来。" >&2
         exit 1
@@ -154,7 +162,7 @@ if [ "$INSTALL" -eq 1 ]; then
         echo "  覆盖已有的 $target"
         rm -rf "$target"
     fi
-    cp -R "$REPO_ROOT/octopus004.koplugin" "$K/plugins/" || {
+    cp -R "$PLUGIN_SRC" "$K/plugins/" || {
         echo "错误: 复制失败（盘是只读的？换个 USB 线/口再试）。" >&2
         exit 1
     }

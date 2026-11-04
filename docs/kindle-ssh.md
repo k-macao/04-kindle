@@ -19,6 +19,23 @@
 
 ---
 
+## 仓库目录是什么
+
+下面说的「仓库目录」指这个 Git 仓库的根目录，也就是同时能看到 `README.md`、`docs/`、
+`tools/`、`octopus004.koplugin/` 的那一层。`tools/` 里的脚本靠这个布局找插件。
+
+电脑上还没有的话，二选一（注意这些文件在 PR 分支上，`main` 里暂时还没有）：
+
+- 下载 ZIP 解压：
+  `https://github.com/k-macao/04-kindle/archive/refs/heads/arena/95728559-04-kindle.zip`
+  解压出来的文件夹（例如 `04-kindle-arena-95728559-04-kindle`）就是仓库目录；
+- 或者 `git clone -b arena/95728559-04-kindle https://github.com/k-macao/04-kindle.git`。
+
+Windows 上典型路径是 `C:\Users\<你的用户名>\Downloads\04-kindle-arena-95728559-04-kindle`。
+只做检查、不装插件时，其实只要 `tools\kindle-usb.ps1` 这一个文件也能跑。
+
+---
+
 ## 0. 先确认三件事
 
 1. Kindle 和电脑在**同一个局域网**，Kindle 的 Wi-Fi 已连上。

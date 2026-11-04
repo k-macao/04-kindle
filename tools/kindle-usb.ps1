@@ -58,10 +58,6 @@ if ($Help) {
 
 $repo = Split-Path -Parent $PSScriptRoot
 $pluginSource = Join-Path $repo 'octopus004.koplugin'
-if (-not (Test-Path -LiteralPath $pluginSource)) {
-    Write-Host ("错误: 找不到 " + $pluginSource) -ForegroundColor Red
-    exit 1
-}
 
 function Test-KindleRoot {
     param([string]$Root)
@@ -139,6 +135,9 @@ if (Test-Path -LiteralPath $plugins) {
 
 Say ''
 Say '== 本仓库插件与设置 =='
+if (-not (Test-Path -LiteralPath $pluginSource)) {
+    Warn '脚本旁边没有 octopus004.koplugin（只做检查没关系；-Install 需要它）'
+}
 if (Test-Path -LiteralPath $target) {
     Ok 'octopus004.koplugin 已安装'
     foreach ($f in @('main.lua', 'wake.lua', '_meta.lua')) {
@@ -179,6 +178,10 @@ $exitCode = 0
 if ($Install) {
     Say ''
     Say '== 安装插件 =='
+    if (-not (Test-Path -LiteralPath $pluginSource)) {
+        Write-Host ('错误: 找不到 ' + $pluginSource + ' —— 把 octopus004.koplugin 文件夹和 tools 放在同一层目录里。') -ForegroundColor Red
+        exit 1
+    }
     if (-not (Test-Path -LiteralPath $plugins)) {
         Write-Host ('错误: ' + $plugins + ' 不存在，先修好 KOReader 安装再来。') -ForegroundColor Red
         exit 1
