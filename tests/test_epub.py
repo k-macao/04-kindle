@@ -13,6 +13,7 @@ import build_epub as be
 
 SAMPLE = """<html><body><nav>menu</nav><main>
 <h2>01 / 每日全球全景扫描 (Daily Global Panorama Scan)</h2>
+<p>扫描时间 2026-11-02 10:09:05 UTC · 行情日期 2026-11-02 · 数据覆盖 99%</p>
 <p>1. 全球风险偏好（美股三大指数对港股的隔夜映射）重点 · 利空 · 100.0 分</p>
 <p>归类：市场盘面　当次读数：美股三指均值 −1.92%，三指同向</p>
 <p>◆ 三大关注面 · 宏观事件 / 板块轮动</p>
@@ -122,7 +123,7 @@ class StructureTest(unittest.TestCase):
         self.assertNotIn('<td class="num">—</td>', self.body)
 
     def test_sections_get_anchors_and_ids(self):
-        _, sections = be.build_document(SAMPLE)
+        _, sections, _ = be.build_document(SAMPLE)
         self.assertEqual(sections[0][0], "s01")
         self.assertIn('id="s01"', self.body)
 
@@ -131,11 +132,52 @@ class StructureTest(unittest.TestCase):
         self.assertNotIn('<span class="num"><span class="num">', again)
 
 
+class HeadingBandTest(unittest.TestCase):
+    def setUp(self):
+        self.body = be.extract_main(SAMPLE)
+
+    def test_sections_are_banded_and_start_a_new_page(self):
+        css = be.STYLE_CSS
+        self.assertIn("h2.section {", css)
+        self.assertIn("background: #000000", css)
+        self.assertIn("color: #ffffff", css)
+        self.assertIn("page-break-before: always", css)
+        # The very first section must not create a blank page.
+        self.assertIn("h2.section.first { page-break-before: auto; }", css)
+
+    def test_sub_headings_have_their_own_grey_bands(self):
+        css = be.STYLE_CSS
+        self.assertIn("h3.force {", css)
+        self.assertIn("background: #dcdcdc", css)
+        self.assertIn("border-left: 4px solid #000000", css)
+        self.assertIn("h4.sub {", css)
+        self.assertIn("background: #efefef", css)
+
+    def test_first_heading_carries_the_first_class(self):
+        self.assertIn('class="section first"', self.body)
+        self.assertEqual(self.body.count('class="section first"'), 1)
+
+
+class DataTimeTest(unittest.TestCase):
+    def test_scan_time_becomes_iso_utc(self):
+        body, _, data = be.build_document(SAMPLE)
+        self.assertEqual(data, "2026-11-02T10:09:05Z")
+
+    def test_date_only_falls_back_to_midnight(self):
+        _, _, data = be.build_document("<main><p>行情日期 2026-11-02</p></main>")
+        self.assertEqual(data, "2026-11-02T00:00:00Z")
+
+    def test_missing_timestamp_is_empty(self):
+        _, _, data = be.build_document("<main><p>纯文本</p></main>")
+        self.assertIsNone(data)
+
+
 class EpubTest(unittest.TestCase):
     def _build(self, tmp):
-        body, sections = be.build_document(SAMPLE)
+        body, sections, data_time = be.build_document(SAMPLE)
         path = Path(tmp) / "site" / "report.epub"
-        be.write_epub(path, body, title="004 报告", sections=sections)
+        be.write_epub(path, body, title="004 报告", sections=sections,
+                      data_time=data_time)
         return path
 
     def test_mimetype_is_first_and_stored(self):
@@ -173,6 +215,8 @@ class EpubTest(unittest.TestCase):
             with zipfile.ZipFile(path) as zf:
                 toc = zf.read("OEBPS/toc.xhtml").decode("utf-8")
                 self.assertIn('href="report.xhtml#s01"', toc)
+                self.assertIn('class="meta"', toc)
+                self.assertIn("数据时间：2026-11-02 10:09:05 UTC", toc)
                 nav = zf.read("OEBPS/nav.xhtml").decode("utf-8")
                 self.assertIn('href="report.xhtml#s01"', nav)
                 ncx = zf.read("OEBPS/toc.ncx").decode("utf-8")
@@ -197,6 +241,7 @@ class EpubTest(unittest.TestCase):
             data = json.loads((out / "epub.json").read_text(encoding="utf-8"))
             self.assertEqual(data["doc"], "report.epub")
             self.assertEqual(data["sections"], 1)
+            self.assertEqual(data["data_time"], "2026-11-02T10:09:05Z")
             self.assertGreater(data["chars"], 0)
             self.assertGreater(data["bytes"], 500)
             self.assertTrue((out / "report.epub").is_file())
