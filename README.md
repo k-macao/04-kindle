@@ -33,9 +33,10 @@ pip install pillow playwright && python -m playwright install chromium
 python tools/render_report.py --out site
 ```
 
-默认输出是电子墨水友好的 **白底黑字、铺满屏宽**：渲染时注入 CSS 去掉主题色/阴影/窄栏，切片后转
-8 位灰阶（`--color` 保留彩色，`--theme auto` 沿用页面原配色）。插件显示时整屏一张图、不显示
-状态栏，图片与屏幕尺寸一致就 1:1 绘制，字不缩放所以最锐利；状态改由点屏幕的菜单查看。
+默认输出是电子墨水友好的 **白底黑字、铺满屏宽**：渲染时注入 CSS 去掉主题色/阴影/窄栏，正文按
+`--zoom 1.25` 放大、行距 1.5、表格黑线（`--zoom/--line-height/--margin` 可调），切片后转 8 位
+灰阶（`--color` 保留彩色，`--theme auto` 沿用页面原配色）。插件显示时整屏一张图、不显示状态栏，
+图片与屏幕尺寸一致就 1:1 绘制，字不缩放所以最锐利；状态改由点屏幕的菜单查看。
 
 上传 `site/`（不要传 `site/full.png`），插件里 **Display mode → Page images**、**Image manifest
 URL** 填 `site/report.json` 的地址即可。详步骤、机型参数、切页规则和限制见
