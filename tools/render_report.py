@@ -72,6 +72,56 @@ body { max-width: none !important; }
 body * { max-width: none !important; }
 """
 
+# Typography for e-ink: bigger text, generous leading, black table rules.
+# `zoom` is applied to <body> and the viewport is narrowed by the same factor,
+# so the rendered pixel width stays exactly --width: text is rasterised at the
+# magnified size (crisp) instead of being upscaled afterwards (soft).
+LAYOUT_CSS = """
+html { padding: 0 !important; }
+body {
+  zoom: __ZOOM__ !important;
+  width: __WIDTH__px !important;
+  max-width: __WIDTH__px !important;
+  margin: 0 !important;
+  padding: 0 __MARGIN__px !important;
+  line-height: __LINE_HEIGHT__ !important;
+  hyphens: none !important;
+  overflow-wrap: break-word !important;
+}
+p, li, td, th, dd, dt {
+  line-height: __LINE_HEIGHT__ !important;
+}
+h1, h2, h3, h4, h5 {
+  line-height: 1.25 !important;
+  margin: 0.55em 0 0.25em !important;
+}
+p, ul, ol, table, blockquote {
+  margin: 0 0 0.5em !important;
+}
+table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+}
+td, th {
+  border: 1px solid #000000 !important;
+  padding: 3px 5px !important;
+  vertical-align: top !important;
+}
+img, svg, canvas {
+  max-width: 100% !important;
+  height: auto !important;
+}
+"""
+
+
+def layout_css(zoom, layout_width, line_height, margin):
+    """CSS that makes the page readable on a 6" e-ink screen at 1:1."""
+    return (LAYOUT_CSS
+            .replace("__ZOOM__", f"{zoom:.6f}")
+            .replace("__WIDTH__", str(int(layout_width)))
+            .replace("__LINE_HEIGHT__", f"{line_height:.3f}")
+            .replace("__MARGIN__", str(int(margin))))
+
 
 def _require_pillow():
     try:
@@ -183,7 +233,8 @@ def build_pages(img, page_height, width=None, window=CUT_WINDOW, margin=BOTTOM_M
 
 
 def render_with_playwright(url, width, height, wait_seconds, scroll,
-                           theme="light", bleed=True):
+                           theme="light", bleed=True, zoom=1.0,
+                           line_height=1.5, margin=12):
     try:
         from playwright.sync_api import sync_playwright
     except ImportError:
@@ -195,8 +246,12 @@ def render_with_playwright(url, width, height, wait_seconds, scroll,
     import io
 
     with sync_playwright() as p:
+        # Lay the page out this many CSS pixels wide, then magnify by `zoom`
+        # so the screenshot still comes out exactly `width` pixels wide.
+        layout_width = max(320, int(round(width / zoom)))
+        zoom_effective = width / layout_width
         browser = p.chromium.launch()
-        page = browser.new_page(viewport={"width": width, "height": height},
+        page = browser.new_page(viewport={"width": layout_width, "height": height},
                                 color_scheme="light" if theme == "light" else theme,
                                 device_scale_factor=1)
         page.goto(url, wait_until="load", timeout=60000)
@@ -205,8 +260,8 @@ def render_with_playwright(url, width, height, wait_seconds, scroll,
             css += THEME_CSS
         if theme != "auto" and bleed:
             css += BLEED_CSS
-        if css:
-            page.add_style_tag(content=css)
+        css += layout_css(zoom_effective, layout_width, line_height, margin)
+        page.add_style_tag(content=css)
         if scroll:
             # Trigger lazy-loaded sections, then return to the top.
             page.evaluate(
@@ -240,6 +295,10 @@ def parse_args(argv=None):
                     help="强制页面配色，默认 light（白底黑字，适合电子墨水）")
     ap.add_argument("--no-bleed", action="store_true",
                     help="保留页面原有的左右留白（默认去掉窄栏，让文字铺满屏宽）")
+    ap.add_argument("--zoom", type=float, default=1.25,
+                    help="正文放大倍数，默认 1.25（1 = 网页原尺寸；越大字越大、页数越多）")
+    ap.add_argument("--line-height", type=float, default=1.5, help="行距倍数，默认 1.5")
+    ap.add_argument("--margin", type=int, default=12, help="左右页边距（CSS 像素，默认 12）")
     ap.add_argument("--color", action="store_true",
                     help="保留彩色（默认转 8 位灰阶，电子墨水更干净不抖动）")
     ap.add_argument("--keep-full", action="store_true", help="保留整页截图 site/full.png")
@@ -250,10 +309,16 @@ def parse_args(argv=None):
 def main(argv=None):
     args = parse_args(argv)
     Image = _require_pillow()
+    if args.zoom <= 0:
+        sys.exit("--zoom 必须大于 0（1 = 网页原尺寸，1.25 = 放大 25%）")
+    if args.line_height <= 0:
+        sys.exit("--line-height 必须大于 0（建议 1.4–1.7）")
 
     if args.from_png:
         if args.theme != "auto":
             print("提示：--theme 只作用于实时渲染；--from-png 用的是截图本身的配色。")
+        if abs(args.zoom - 1.0) > 1e-9:
+            print("提示：--zoom 只作用于实时渲染；--from-png 请直接缩放截图本身。")
         img = Image.open(args.from_png).convert("RGB")
         if img.size[0] != args.width:
             ratio = args.width / img.size[0]
@@ -261,11 +326,13 @@ def main(argv=None):
             img = img.resize((args.width, max(1, round(img.size[1] * ratio))), _resample(Image, "LANCZOS"))
         source = args.from_png
     else:
-        print(f"渲染 {args.url} …（主题 {args.theme}"
+        print(f"渲染 {args.url} …（主题 {args.theme}，放大 {args.zoom}x，行距 {args.line_height}"
               f"{'，铺满屏宽' if args.theme != 'auto' and not args.no_bleed else ''}）")
         img = render_with_playwright(args.url, args.width, args.height,
                                      args.wait, not args.no_scroll,
-                                     theme=args.theme, bleed=not args.no_bleed)
+                                     theme=args.theme, bleed=not args.no_bleed,
+                                     zoom=args.zoom, line_height=args.line_height,
+                                     margin=args.margin)
         source = args.url
 
     if img.size[0] != args.width:
@@ -310,7 +377,7 @@ def main(argv=None):
 
     size = f"{total / 1024 / 1024:.1f} MiB" if total >= 1024 * 1024 else f"{total / 1024:.0f} KiB"
     print(f"完成：{len(pages)} 页，共 {size}，页面 {args.width}x{args.height}"
-          f"，{'彩色' if args.color else '灰阶'}")
+          f"，{'彩色' if args.color else '灰阶'}，放大 {args.zoom}x")
     print(f"清单：{out / 'report.json'}")
     print("上传后把插件 Display mode 设为 page images，并把 Image manifest URL 指向 report.json")
     return 0

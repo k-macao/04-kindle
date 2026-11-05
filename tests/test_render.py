@@ -49,6 +49,28 @@ class ThemeTest(unittest.TestCase):
         self.assertFalse(args.color)
         self.assertFalse(args.no_bleed)
 
+    def test_typography_defaults_are_reader_sized(self):
+        args = rr.parse_args(["--out", "site"])
+        self.assertAlmostEqual(args.zoom, 1.25)
+        self.assertAlmostEqual(args.line_height, 1.5)
+        self.assertEqual(args.margin, 12)
+
+
+class LayoutTest(unittest.TestCase):
+    def test_css_magnifies_and_spaces_the_page(self):
+        css = rr.layout_css(1.25, 858, 1.6, 10)
+        self.assertIn("zoom: 1.250000", css)
+        self.assertIn("width: 858px", css)
+        self.assertIn("line-height: 1.600", css)
+        self.assertIn("padding: 0 10px", css)
+        self.assertIn("border: 1px solid #000000", css)
+        self.assertNotIn("__", css, "占位符必须全部替换")
+
+    def test_zoom_one_keeps_native_layout_width(self):
+        css = rr.layout_css(1.0, 1072, 1.5, 12)
+        self.assertIn("width: 1072px", css)
+        self.assertIn("zoom: 1.000000", css)
+
 
 @unittest.skipUnless(HAVE_PIL, "需要 Pillow 才能测试图片切片")
 class SliceTest(unittest.TestCase):
