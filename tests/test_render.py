@@ -28,6 +28,28 @@ def fake_page(width=400, height=4000, line_height=20, gap=40, first=100, ink=Non
     return img
 
 
+class ThemeTest(unittest.TestCase):
+    """The device is e-ink: force black ink on white paper, nothing else."""
+
+    def test_light_theme_is_black_on_white(self):
+        css = rr.THEME_CSS
+        self.assertIn("#ffffff", css)
+        self.assertIn("#000000", css)
+        self.assertIn("color-scheme: light", css)
+        # Coloured backgrounds would turn into dithered grey mush.
+        self.assertIn("background-image: none", css)
+
+    def test_bleed_css_removes_narrow_column(self):
+        self.assertIn("max-width: none", rr.BLEED_CSS)
+        self.assertIn("padding: 0", rr.BLEED_CSS)
+
+    def test_defaults_are_light_gray_full_bleed(self):
+        args = rr.parse_args(["--out", "site"])
+        self.assertEqual(args.theme, "light")
+        self.assertFalse(args.color)
+        self.assertFalse(args.no_bleed)
+
+
 @unittest.skipUnless(HAVE_PIL, "需要 Pillow 才能测试图片切片")
 class SliceTest(unittest.TestCase):
     def test_pages_have_exact_height(self):
@@ -98,3 +120,25 @@ class SliceTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+    def test_cli_writes_grayscale_pages(self):
+        with tempfile.TemporaryDirectory() as td:
+            src = Path(td) / "full.png"
+            fake_page(width=400, height=2200).save(src)
+            out = Path(td) / "site"
+            rr.main(["--from-png", str(src), "--out", str(out),
+                     "--width", "400", "--height", "1000"])
+            manifest = json.loads((out / "report.json").read_text(encoding="utf-8"))
+            page = Image.open(out / manifest["pages"][0])
+            self.assertEqual(page.mode, "L")
+            self.assertEqual(page.size, (400, 1000))
+
+    def test_color_flag_keeps_rgb(self):
+        with tempfile.TemporaryDirectory() as td:
+            src = Path(td) / "full.png"
+            fake_page(width=400, height=2200).save(src)
+            out = Path(td) / "site"
+            rr.main(["--from-png", str(src), "--out", str(out), "--color",
+                     "--width", "400", "--height", "1000"])
+            manifest = json.loads((out / "report.json").read_text(encoding="utf-8"))
+            self.assertEqual(Image.open(out / manifest["pages"][0]).mode, "RGB")

@@ -44,6 +44,34 @@ BLANK_ROW_LIMIT = 0.004
 # Keep a little whitespace after the last line of content.
 BOTTOM_MARGIN = 16
 
+# Forced light theme: e-ink wants black ink on white paper, nothing else.
+THEME_CSS = """
+html, body {
+  background: #ffffff !important;
+  color: #000000 !important;
+  color-scheme: light !important;
+}
+body *:not(svg):not(svg *) {
+  color: #000000 !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+body *:not(svg):not(svg *) {
+  border-color: #000000 !important;
+}
+"""
+
+# Drop the narrow desktop column so the text fills the full page width.
+# Only max-width is neutralised: forcing `width` would collapse tables and
+# inline blocks that carry their own explicit sizing.
+BLEED_CSS = """
+html, body { margin: 0 !important; padding: 0 !important; }
+body { max-width: none !important; }
+body * { max-width: none !important; }
+"""
+
 
 def _require_pillow():
     try:
@@ -154,7 +182,8 @@ def build_pages(img, page_height, width=None, window=CUT_WINDOW, margin=BOTTOM_M
     return pages
 
 
-def render_with_playwright(url, width, height, wait_seconds, scroll):
+def render_with_playwright(url, width, height, wait_seconds, scroll,
+                           theme="light", bleed=True):
     try:
         from playwright.sync_api import sync_playwright
     except ImportError:
@@ -167,8 +196,17 @@ def render_with_playwright(url, width, height, wait_seconds, scroll):
 
     with sync_playwright() as p:
         browser = p.chromium.launch()
-        page = browser.new_page(viewport={"width": width, "height": height})
+        page = browser.new_page(viewport={"width": width, "height": height},
+                                color_scheme="light" if theme == "light" else theme,
+                                device_scale_factor=1)
         page.goto(url, wait_until="load", timeout=60000)
+        css = ""
+        if theme == "light":
+            css += THEME_CSS
+        if theme != "auto" and bleed:
+            css += BLEED_CSS
+        if css:
+            page.add_style_tag(content=css)
         if scroll:
             # Trigger lazy-loaded sections, then return to the top.
             page.evaluate(
@@ -198,6 +236,12 @@ def parse_args(argv=None):
     ap.add_argument("--wait", type=float, default=3.0, help="渲染后等待秒数（默认 3）")
     ap.add_argument("--max-pages", type=int, default=60,
                     help="页数上限，超过就报错（默认 60，与插件一致）")
+    ap.add_argument("--theme", choices=["light", "dark", "auto"], default="light",
+                    help="强制页面配色，默认 light（白底黑字，适合电子墨水）")
+    ap.add_argument("--no-bleed", action="store_true",
+                    help="保留页面原有的左右留白（默认去掉窄栏，让文字铺满屏宽）")
+    ap.add_argument("--color", action="store_true",
+                    help="保留彩色（默认转 8 位灰阶，电子墨水更干净不抖动）")
     ap.add_argument("--keep-full", action="store_true", help="保留整页截图 site/full.png")
     ap.add_argument("--no-scroll", action="store_true", help="渲染前不做滚动触发")
     return ap.parse_args(argv)
@@ -208,6 +252,8 @@ def main(argv=None):
     Image = _require_pillow()
 
     if args.from_png:
+        if args.theme != "auto":
+            print("提示：--theme 只作用于实时渲染；--from-png 用的是截图本身的配色。")
         img = Image.open(args.from_png).convert("RGB")
         if img.size[0] != args.width:
             ratio = args.width / img.size[0]
@@ -215,14 +261,20 @@ def main(argv=None):
             img = img.resize((args.width, max(1, round(img.size[1] * ratio))), _resample(Image, "LANCZOS"))
         source = args.from_png
     else:
-        print(f"渲染 {args.url} …")
+        print(f"渲染 {args.url} …（主题 {args.theme}"
+              f"{'，铺满屏宽' if args.theme != 'auto' and not args.no_bleed else ''}）")
         img = render_with_playwright(args.url, args.width, args.height,
-                                     args.wait, not args.no_scroll)
+                                     args.wait, not args.no_scroll,
+                                     theme=args.theme, bleed=not args.no_bleed)
         source = args.url
 
     if img.size[0] != args.width:
         img = img.resize((args.width, max(1, round(img.size[1] * args.width / img.size[0]))),
                          _resample(Image, "LANCZOS"))
+
+    if not args.color:
+        # E-ink has 16 grey levels; dithered colour turns text mushy.
+        img = img.convert("L")
 
     pages = build_pages(img, args.height, width=args.width)
     if len(pages) > args.max_pages:
@@ -257,7 +309,8 @@ def main(argv=None):
         json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     size = f"{total / 1024 / 1024:.1f} MiB" if total >= 1024 * 1024 else f"{total / 1024:.0f} KiB"
-    print(f"完成：{len(pages)} 页，共 {size}，页面 {args.width}x{args.height}")
+    print(f"完成：{len(pages)} 页，共 {size}，页面 {args.width}x{args.height}"
+          f"，{'彩色' if args.color else '灰阶'}")
     print(f"清单：{out / 'report.json'}")
     print("上传后把插件 Display mode 设为 page images，并把 Image manifest URL 指向 report.json")
     return 0
