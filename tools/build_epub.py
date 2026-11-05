@@ -483,7 +483,7 @@ def anchor_sections(root):
         match = re.match(r"^(\d{2})\s*[/／]", title)
         anchor = "s" + (match.group(1) if match else f"{index:02d}")
         heading.attrs["id"] = anchor
-        heading.attrs["class"] = "section"
+        heading.attrs["class"] = "section first" if index == 1 else "section"
         if title:
             sections.append((anchor, title))
     return sections
@@ -558,7 +558,7 @@ def read_source(source):
 
 
 def build_document(source, base_url=""):
-    """Return (body_xhtml, sections) for the report body."""
+    """Return (body_xhtml, sections, data_time) for the report body."""
     parser = MainTree(base_url)
     parser.feed(source)
     root = parser.tree()
@@ -573,7 +573,33 @@ def build_document(source, base_url=""):
         raise ValueError("检测到未替换的模板占位符；请使用 004 构建后的报告")
     if len(body) > 4 * 1024 * 1024:
         raise ValueError("正文超过 4 MiB，设备端可能拒绝打开")
-    return body, sections
+    return body, sections, extract_data_time(plain_text(body))
+
+
+DATA_TIME_RE = re.compile(r"扫描时间\s*(\d{4})-(\d{2})-(\d{2})\s+(\d{2}):(\d{2}):(\d{2})")
+DATA_DATE_RE = re.compile(r"行情日期\s*(\d{4})-(\d{2})-(\d{2})")
+
+
+def extract_data_time(text):
+    """Return the report's own timestamp as ISO-8601 UTC, or None.
+
+    004 states it twice: "扫描时间 2026-11-02 10:09:05 UTC" (when the data was
+    read) and "行情日期 2026-11-02". The file's mtime says nothing about data
+    freshness, so we keep them apart.
+    """
+    match = DATA_TIME_RE.search(text)
+    if match:
+        year, month, day, hour, minute, second = match.groups()
+        return f"{year}-{month}-{day}T{hour}:{minute}:{second}Z"
+    match = DATA_DATE_RE.search(text)
+    if match:
+        return f"{match.group(1)}-{match.group(2)}-{match.group(3)}T00:00:00Z"
+    return None
+
+
+def plain_text(body_xhtml):
+    text = re.sub(r"<[^>]+>", " ", body_xhtml)
+    return re.sub(r"\s+", " ", html.unescape(text))
 
 
 def extract_main(source, base_url=""):
@@ -609,18 +635,53 @@ h2 { font-size: 1.3em; }
 h3 { font-size: 1.14em; }
 h4, h5, h6 { font-size: 1.02em; }
 
-/* Sections get a rule so 00/01/02/03 are visibly separated. */
-h2.section {
-  border-top: 1px solid #000000;
-  padding-top: 0.6em;
-  margin-top: 1.2em;
+/* Headings carry a filled band so they never blend into the prose.
+   E-ink renders solid black/grey crisply (no anti-aliased colour fringes). */
+h1 {
+  background: #000000;
+  color: #ffffff;
+  font-size: 1.5em;
+  padding: 0.3em 0.4em;
+  margin: 0 0 0.8em;
 }
-h3.force { font-size: 1.1em; margin: 0.9em 0 0.15em; }
-h4.sub { font-size: 1.02em; margin: 0.9em 0 0.3em; }
+h2.section {
+  background: #000000;
+  color: #ffffff;
+  font-size: 1.22em;
+  padding: 0.35em 0.4em;
+  margin: 1em 0 0.7em;
+  border-top: 0;
+  page-break-before: always;
+}
+/* The first section stays on the same page as the top of the book. */
+h2.section.first { page-break-before: auto; }
+h3.force {
+  background: #dcdcdc;
+  color: #000000;
+  font-size: 1.1em;
+  border-left: 4px solid #000000;
+  padding: 0.25em 0.4em;
+  margin: 1.1em 0 0.35em;
+}
+h4.sub {
+  background: #efefef;
+  color: #000000;
+  font-size: 1.02em;
+  padding: 0.2em 0.4em;
+  margin: 0.9em 0 0.35em;
+}
 
 p { margin: 0 0 0.55em; text-indent: 0; }
 ul, ol { margin: 0.2em 0 0.6em 1.1em; padding: 0; }
 li { margin: 0 0 0.25em; }
+
+/* Data timestamp band on the TOC page. */
+p.meta {
+  font-size: 0.9em;
+  border: 1px solid #000000;
+  padding: 0.3em 0.4em;
+  margin: 0 0 0.9em;
+}
 
 /* Numbers: bold everywhere, right aligned inside tables. */
 .num { font-weight: bold; }
@@ -716,18 +777,19 @@ def _xhtml_document(body, title):
     )
 
 
-def _toc_document(title, sections):
+def _toc_document(title, sections, meta=""):
     items = "".join(
         f'<li><a href="report.xhtml#{html.escape(anchor)}">{html.escape(heading)}</a></li>'
         for anchor, heading in sections
     ) or '<li><a href="report.xhtml">正文</a></li>'
+    meta_html = f'<p class="meta">{meta}</p>' if meta else ""
     return (
         '<?xml version="1.0" encoding="utf-8"?>\n'
         '<!DOCTYPE html>\n'
         '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">\n'
         f"<head><meta charset=\"utf-8\"/><title>目录</title>"
         '<link rel="stylesheet" type="text/css" href="style.css"/></head>\n'
-        f"<body><h1>目录</h1><ul class=\"toc\">{items}</ul></body>\n</html>\n"
+        f"<body><h1>目录</h1>{meta_html}<ul class=\"toc\">{items}</ul></body>\n</html>\n"
     )
 
 
@@ -808,7 +870,8 @@ CONTAINER_XML = (
 )
 
 
-def write_epub(path, body, title="004 报告", modified=None, source="", sections=None):
+def write_epub(path, body, title="004 报告", modified=None, source="", sections=None,
+               data_time=None):
     """Write a self-contained EPUB 3 to `path`; returns the plain-text length."""
     sections = sections or []
     stamp = datetime.now(timezone.utc)
@@ -816,6 +879,12 @@ def write_epub(path, body, title="004 报告", modified=None, source="", section
     identifier = "urn:uuid:" + str(
         uuid.uuid5(uuid.NAMESPACE_URL, f"004-kindle:{modified}:{len(body)}"))
     words = len(re.sub(r"\s+", "", re.sub(r"<[^>]+>", "", body)))
+    built = stamp.strftime("%Y-%m-%d %H:%M UTC")
+    meta = []
+    if data_time:
+        meta.append("数据时间：" + data_time.replace("T", " ").replace("Z", " UTC"))
+    meta.append("文件生成：" + built)
+    meta = " ｜ ".join(meta)
 
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -831,7 +900,7 @@ def write_epub(path, body, title="004 报告", modified=None, source="", section
                     compress_type=zipfile.ZIP_DEFLATED)
         zf.writestr("OEBPS/nav.xhtml", _nav_document(title, sections),
                     compress_type=zipfile.ZIP_DEFLATED)
-        zf.writestr("OEBPS/toc.xhtml", _toc_document(title, sections),
+        zf.writestr("OEBPS/toc.xhtml", _toc_document(title, sections, meta),
                     compress_type=zipfile.ZIP_DEFLATED)
         zf.writestr("OEBPS/toc.ncx", _ncx_document(title, identifier, modified, sections),
                     compress_type=zipfile.ZIP_DEFLATED)
@@ -855,11 +924,11 @@ def main(argv=None):
     try:
         source = read_source(args.source)
         base_url = args.source if args.source.startswith(("https://", "http://")) else ""
-        body, sections = build_document(source, base_url)
+        body, sections, data_time = build_document(source, base_url)
         out = Path(args.out)
         epub = out / "report.epub"
         words = write_epub(epub, body, title=args.title, source=args.source,
-                           sections=sections)
+                           sections=sections, data_time=data_time)
         manifest = {
             "generated": datetime.now(timezone.utc).isoformat(timespec="seconds"),
             "doc": "report.epub",
@@ -867,6 +936,7 @@ def main(argv=None):
             "chars": words,
             "bytes": epub.stat().st_size,
             "sections": len(sections),
+            "data_time": data_time or "",
             "source": args.source,
         }
         (out / "epub.json").write_text(
@@ -875,7 +945,7 @@ def main(argv=None):
         print(f"生成失败：{exc}", file=sys.stderr)
         return 1
     print(f"完成：{manifest['bytes'] / 1024:.0f} KiB，{manifest['chars']} 字符，"
-          f"{manifest['sections']} 个章节，{epub}")
+          f"{manifest['sections']} 个章节，数据时间 {data_time or '未知'}，{epub}")
     print(f"清单：{out / 'epub.json'}")
     print("上传 site/report.epub 与 site/epub.json，插件 Display mode 选 EPUB")
     return 0

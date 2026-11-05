@@ -28,7 +28,8 @@ python tools/build_epub.py https://k-macao.github.io/004/ --out site
 
 ```
 site/report.epub     单文件 EPUB 3（含 toc.ncx，兼容旧版 crengine）
-site/epub.json       {"generated", "doc", "title", "chars", "bytes", "source"}
+site/epub.json       {"generated", "doc", "title", "chars", "bytes",
+                      "sections", "data_time", "source"}
 ```
 
 成功时打印 `完成：84 KiB，19342 字符，site/report.epub`。
@@ -78,7 +79,10 @@ site/epub.json       {"generated", "doc", "title", "chars", "bytes", "source"}
 
 ### 章节与目录
 
-- 每个 `<h2>` 章节加 1px 上边线、生成锚点（`01 /` → `#s01`）；
+- 标题带**实心底色横条**，和正文硬分隔：`h2` 章节标题是黑底白字并另起一页
+  （第一个章节除外，避免空白页），`h3` 力量条目是浅灰底 + 左侧 4px 黑竖条，
+  `h4` 小标题是更浅的灰底；
+- 每个 `<h2>` 生成锚点（`01 /` → `#s01`）；
 - 书首插一页 **目录**（`toc.xhtml`），`toc.ncx` 与 `nav.xhtml` 同步指向各章，KOReader 里
   的「目录」按钮可直接跳转。
 
@@ -143,6 +147,22 @@ return {
   更新算，一天约 0.5 MiB 历史。
 
 设备端无需任何改动：`generated` 一变，插件下一次 60 秒轮询就会下载新版本并从头打开。
+
+## 4.6 数据时间：别把「文件新」当成「数据新」
+
+`epub.json` 里有三个时间，含义完全不同：
+
+| 字段 | 含义 | 谁产生 |
+| --- | --- | --- |
+| `data_time` | 报告里的**行情时间**（页面上的「扫描时间 / 行情日期」），ISO-8601 UTC | 004 的数据源 |
+| `generated` | 这份 EPUB **文件生成**时间 | `build_epub.py` |
+| 设备 `Last check` | 插件拉清单的时间 | 插件 |
+
+- 目录页会印一行：`数据时间：2026-11-02 10:09:05 UTC ｜ 文件生成：2026-11-05 10:28 UTC`；
+- 插件 0.4.1 起，菜单 **Status** 增加 `Data: 2026-11-02 10:09:05 UTC`，超过 24 小时
+  会自动追加 `(stale 3d)`，一眼就能看出「新的是文件，不是行情」；
+- 004 的构建挂了（它自己的 Actions 在 `🧪 舆情层自检` 失败）时，`generated` 会变、
+  `data_time` 不动 —— 这正是需要区分两者的场景。
 
 ## 5. 想调排版
 

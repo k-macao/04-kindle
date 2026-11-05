@@ -469,6 +469,7 @@ function Report:refreshDoc()
     local manifest, err = self:fetchDocManifest()
     if not manifest then error(err) end
     local sig = manifest.generated
+    if type(manifest.data_time) == "string" then self.settings.data_time = manifest.data_time end
     local current = self.settings.doc_file
     local have = current and lfs.attributes(current, "mode") == "file"
     self.last_check = os.time()
@@ -551,9 +552,34 @@ function Report:advance()
     UIManager:setDirty(self.dashboard, "full")
 end
 
+-- "2026-11-02T10:09:05Z" -> epoch-ish seconds, or nil when unparsable.
+local function isoSeconds(iso)
+    local y, mo, d, h, mi, sec =
+        tostring(iso):match("^(%d%d%d%d)-(%d%d)-(%d%d)T(%d%d):(%d%d):(%d%d)Z$")
+    if not y then return nil end
+    return os.time{ year = tonumber(y), month = tonumber(mo), day = tonumber(d),
+                    hour = tonumber(h), min = tonumber(mi), sec = tonumber(sec) }
+end
+
 function Report:status()
     local mode = self.wake:mode(true) == "rtc" and "hardware wake" or "awake timer"
     local checked = self.last_check and os.date("%Y-%m-%d %H:%M:%S", self.last_check) or "never"
+    local data = ""
+    local stamp = tostring(self.settings.data_time or "")
+    if stamp ~= "" then
+        local then_time = isoSeconds(stamp)
+        local age = nil
+        if then_time then
+            -- os.time(os.date("!*t")) is "now" in the same (local) scale.
+            age = (os.time(os.date("!*t")) - then_time) / 3600
+        end
+        data = "\nData: " .. stamp:gsub("T", " "):gsub("Z$", " UTC")
+        if age and age >= 24 then
+            data = data .. string.format("  (stale %.0fd)", age / 24)
+        elseif age and age < 0 then
+            data = data .. "  (future?)"
+        end
+    end
     local source
     if self:isDocMode() then
         source = "epub: " .. tostring(self.settings.doc_url)
@@ -577,7 +603,7 @@ function Report:status()
                 .. (pw == Screen:getWidth() and ph == Screen:getHeight() and ", 1:1" or ", scaled") .. ")"
         end
     end
-    self:note("004 (" .. self.settings.display .. ")\n" .. source .. "\n" .. mode .. page ..
+    self:note("004 (" .. self.settings.display .. ")\n" .. source .. "\n" .. mode .. page .. data ..
         "\nLast check: " .. checked .. "\n" .. (self.last_error or "No error"))
 end
 
