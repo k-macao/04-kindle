@@ -452,6 +452,80 @@ def mark_direction(text):
     return text
 
 
+CARD_BOUNDARY = {"h1", "h2", "h3", "h4", "h5", "h6"}
+CARD_CONTAINERS = {"main", "div", "section", "article"}
+
+
+def _class(node):
+    return node.attrs.get("class", "") if isinstance(node, Node) else ""
+
+
+def _starts_new_card(node):
+    if not isinstance(node, Node):
+        return False
+    if node.tag in CARD_BOUNDARY:
+        return True
+    if node.tag == "table":
+        # kv tables are part of the entry; a data table is a section of its own.
+        return _class(node) != "kv"
+    return _class(node) in ("force-block", "card", "verdict")
+
+
+def _wrap_force_cards(children):
+    """Wrap one 力量条目 and everything under it in a single card box."""
+    out = []
+    index = 0
+    while index < len(children):
+        node = children[index]
+        if _class(node) != "force-block":
+            out.append(node)
+            index += 1
+            continue
+        card = el("div", list(node.children), **{"class": "card"})
+        index += 1
+        while index < len(children) and not _starts_new_card(children[index]):
+            card.children.append(children[index])
+            index += 1
+        out.append(card)
+    return out
+
+
+def _lead_is_bold(node):
+    if not isinstance(node, Node) or node.tag != "li":
+        return False
+    for child in node.children:
+        if isinstance(child, str):
+            if child.strip():
+                return False
+            continue
+        return child.tag in ("strong", "b")
+    return False
+
+
+def _cards_from_lists(children):
+    """A bullet list whose items lead with a bold label reads better as cards."""
+    out = []
+    for node in children:
+        if (isinstance(node, Node) and node.tag == "ul"
+                and len([c for c in node.children if isinstance(c, Node)]) >= 2
+                and all(_lead_is_bold(c) for c in node.children if isinstance(c, Node))):
+            for item in node.children:
+                if isinstance(item, Node):
+                    out.append(el("div", list(item.children), **{"class": "card slim"}))
+            continue
+        out.append(node)
+    return out
+
+
+def group_cards(root):
+    for child in root.children:
+        if isinstance(child, Node) and child.tag != "table":
+            group_cards(child)
+    if root.tag not in CARD_CONTAINERS or "card" in _class(root):
+        return
+    root.children = _cards_from_lists(_wrap_force_cards(root.children))
+
+
 def style_tables(root):
     for table in iter_tags(root, "table"):
         if table.attrs.get("class") == "kv":
@@ -504,6 +578,7 @@ def transform_tree(root):
         node.children = children
 
     walk(root)
+    group_cards(root)
     style_tables(root)
     return anchor_sections(root)
 
@@ -735,6 +810,31 @@ table.data th, table.data td {
   vertical-align: top;
 }
 table.data th { font-weight: bold; }
+
+/* Cards: one 力量条目 = one bordered box, sub-blocks stacked inside. */
+div.card {
+  border: 2px solid #000000;
+  padding: 0.35em 0.45em 0.45em;
+  margin: 0.9em 0 1.15em;
+  page-break-inside: avoid;
+}
+div.card > h3.force {
+  margin: 0.05em 0 0.5em;
+  font-size: 1.06em;
+}
+div.card > p.signal { margin: 0 0 0.45em; }
+div.card > table.kv { margin: 0.1em 0 0.5em; }
+div.card > ul { margin: 0.2em 0 0.3em 1em; }
+div.card > div.ai {
+  margin: 0.45em 0 0.15em;
+  padding: 0.1em 0 0.1em 0.5em;
+}
+/* Bullet lists that lead with a bold label become one small card per item. */
+div.card.slim {
+  border-width: 1px;
+  padding: 0.25em 0.4em;
+  margin: 0.55em 0 0.6em;
+}
 
 /* AI commentary: boxed with a left rule, a notch smaller than body text. */
 div.ai {

@@ -132,6 +132,63 @@ class StructureTest(unittest.TestCase):
         self.assertNotIn('<span class="num"><span class="num">', again)
 
 
+CARD_SAMPLE = """<main>
+<h2>01 / 每日全球全景扫描</h2>
+<h4>◆ 推动股价的 5 大力量</h4>
+<p>1. 全球风险偏好（美股三指映射）重点 · 利空 · 100.0 分</p>
+<p>归类：市场盘面　当次读数：美股三指均值 −1.92%</p>
+<ul><li>[10 月 30 日] 标普 7,580.07（−1.82%）</li></ul>
+<p>▶ AI 总结解读：三指同向；提取信息：标普；规则判断：重点。</p>
+<p>2. 大宗商品与供应链重点 · 利好 · 100.0 分</p>
+<p>归类：宏观事件　当次读数：油价均值 −4.39%</p>
+<table><thead><tr><th>市场</th><th>最新</th></tr></thead>
+<tbody><tr><td>WTI 原油</td><td>99.62</td></tr></tbody></table>
+<h4>◆ 三大关注面</h4>
+<ul>
+<li><strong>宏观事件（利空）</strong>　4 项证据</li>
+<li><strong>板块轮动（利空）</strong>　1 项证据</li>
+</ul>
+</main>"""
+
+
+class CardTest(unittest.TestCase):
+    def setUp(self):
+        self.body = be.extract_main(CARD_SAMPLE)
+
+    def _card_span(self, start):
+        end = self.body.find("</div>", start)
+        return self.body[start:end]
+
+    def test_entry_and_its_blocks_live_in_one_card(self):
+        start = self.body.index('<div class="card">')
+        card = self._card_span(start)
+        for marker in ('<h3 class="force">', 'class="signal"', '<table class="kv">',
+                       '<div class="ai">'):
+            self.assertIn(marker, card)
+
+    def test_each_entry_gets_its_own_card(self):
+        self.assertEqual(self.body.count('<div class="card">'), 2)
+
+    def test_market_table_is_not_swallowed_by_a_card(self):
+        first = self.body.index('<div class="card">')
+        start = self.body.index('<div class="card">', first + 1)
+        card = self._card_span(start)
+        self.assertNotIn('<table><thead>', card)
+        self.assertIn('<table class="data">', self.body)
+
+    def test_bold_lead_bullets_become_slim_cards(self):
+        self.assertEqual(self.body.count('class="card slim"'), 2)
+        self.assertNotIn("<li><strong>宏观事件", self.body)
+
+    def test_card_css(self):
+        css = be.STYLE_CSS
+        self.assertIn("div.card {", css)
+        self.assertIn("border: 2px solid #000000", css)
+        self.assertIn("page-break-inside: avoid", css)
+        self.assertIn("div.card.slim {", css)
+        self.assertIn("border-width: 1px", css)
+
+
 class HeadingBandTest(unittest.TestCase):
     def setUp(self):
         self.body = be.extract_main(SAMPLE)
