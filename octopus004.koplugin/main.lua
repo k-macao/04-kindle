@@ -289,6 +289,11 @@ function Report:refreshImage()
         if not self:hasPage(i) then missing = true; break end
     end
     if signature ~= tostring(self.settings.image_sig or "") or missing then
+        self.page_count = #manifest.pages
+        if not self.dashboard then
+            self:showText("004 · 图形界面\n\n正在下载 1/" .. #manifest.pages ..
+                " 页页面图片…\n首次需要下载全部页面，之后每 60 秒只检查是否有更新。", false)
+        end
         local count, download_error = self:downloadPages(manifest)
         if not count then error(download_error) end
         self.page_count = count
