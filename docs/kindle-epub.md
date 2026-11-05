@@ -127,6 +127,23 @@ return {
 - 点屏幕不再有插件菜单，改用 KOReader 原生操作（左右点/滑动翻页，`Status` 之类在
   KOReader 菜单里）；插件自己的入口仍在 工具 → 004 Report。
 
+## 4.5 自动刷新（GitHub Actions）
+
+`.github/workflows/refresh-epub.yml` 会在仓库里定时跑一遍生成，你不用再手动执行、手动上传：
+
+- **节奏**：cron 每 20 分钟叫醒一次，job 自己限流到 **200 分钟**一次
+  （`env.INTERVAL_MINUTES`，想改成 60/360 直接改这里）；间隔不够时只跑几秒就跳过。
+- **做什么**：抓 `https://k-macao.github.io/004/` → `tools/build_epub.py` → 只在
+  `site/report.epub` / `site/epub.json` 真的变了才提交，提交信息带生成时间。
+- **手动触发**：Actions → *Refresh 004 EPUB* → **Run workflow**，勾 `force` 可以无视间隔。
+- **不会被 004 拖累**：004 自己没更新时，抓回来的内容一样，`git diff` 为空 → 不产生提交。
+- **前提**：仓库 Settings → Actions → Workflow permissions 需为
+  **Read and write permissions**（否则 `git push` 会被拒）。
+- **体积**：EPUB 约 60–100 KiB，一次内容变化才提交一次；按 200 分钟节奏、004 每 2–3 小时
+  更新算，一天约 0.5 MiB 历史。
+
+设备端无需任何改动：`generated` 一变，插件下一次 60 秒轮询就会下载新版本并从头打开。
+
 ## 5. 想调排版
 
 不用改脚本——这些都在 KOReader 里调，插件不管：
