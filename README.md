@@ -26,8 +26,10 @@ python3 -m unittest discover -s tests -v
 ### 字模式（EPUB，推荐）
 
 截图再清晰也是图片：放大发虚、每轮刷新下几 MB、字号改不了。字模式把 004 正文清洗成
-XHTML，配电子墨水用的 CSS，打成单文件 EPUB，交给设备上现成的 KOReader 阅读器显示——
-文字矢量渲染，字号/行距/边距全用 KOReader 自己的设置调，表格是真排版，文件只有几十 KB：
+XHTML，再按它的写作套路重排（力量条目 → 标题 + 信号 + 分数；「归类 / 当次读数」→ 两列表格；
+AI 解读 → 引用块；结论 → 结论框；数字加粗、涨跌带 ▲▼；章节带目录锚点），配电子墨水 CSS
+打成单文件 EPUB，交给设备上现成的 KOReader 阅读器显示——文字矢量渲染，字号/行距/边距全用
+KOReader 自己的设置调，表格是真排版，文件只有几十 KB：
 
 ```sh
 python tools/build_epub.py https://k-macao.github.io/004/ --out site   # 只用标准库

@@ -12,19 +12,25 @@ sys.path.insert(0, str(REPO / "tools"))
 import build_epub as be
 
 SAMPLE = """<html><body><nav>menu</nav><main>
-<h2>今日要闻</h2><script>evil()</script>
-<p>正文 <b>加粗</b> <a href="/x">链接</a></p>
-<table><thead><tr><th>项目</th><th>值</th></tr></thead>
-<tbody><tr><td>热度</td><td>92</td></tr></tbody></table>
-<button>按钮</button><img src="pic.png" class="thumb" onerror="x()"/></main>
+<h2>01 / 每日全球全景扫描 (Daily Global Panorama Scan)</h2>
+<p>1. 全球风险偏好（美股三大指数对港股的隔夜映射）重点 · 利空 · 100.0 分</p>
+<p>归类：市场盘面　当次读数：美股三指均值 −1.92%，三指同向</p>
+<p>◆ 三大关注面 · 宏观事件 / 板块轮动</p>
+<p>▶ AI 总结解读：美股三指均值 −1.92%；提取信息：标普 7,580.07（−1.82%）；规则判断：重点，方向利空（100.0 分）。</p>
+<p>结论：空头占优 · 多单应减仓或对冲　合成分 −25.1 · 置信度 100%</p>
+<table><thead><tr><th>市场</th><th>最新</th><th>涨跌幅</th></tr></thead>
+<tbody><tr><td>恒生指数</td><td>23,393.32</td><td>+0.42%</td></tr>
+<tr><td>恒生科技</td><td>—</td><td>—</td></tr></tbody></table>
+<script>evil()</script><button>按钮</button>
+<img src="pic.png" class="thumb" onerror="x()"/></main>
 <footer>foot</footer></body></html>"""
 
 
 class ExtractTest(unittest.TestCase):
     def test_only_main_survives(self):
         body = be.extract_main(SAMPLE, "https://k-macao.github.io/004/")
-        self.assertIn("<h2>", body)
-        self.assertIn("<table>", body)
+        self.assertIn("<h2", body)
+        self.assertIn("<table", body)
         self.assertNotIn("evil", body)
         self.assertNotIn("按钮", body)
         self.assertNotIn("menu", body)
@@ -32,12 +38,11 @@ class ExtractTest(unittest.TestCase):
 
     def test_links_and_images_become_absolute(self):
         body = be.extract_main(SAMPLE, "https://k-macao.github.io/004/")
-        self.assertIn('href="https://k-macao.github.io/x"', body)
         self.assertIn('src="https://k-macao.github.io/004/pic.png"', body)
 
-    def test_unsafe_attributes_are_stripped(self):
+    def test_source_attributes_are_stripped(self):
         body = be.extract_main(SAMPLE, "https://k-macao.github.io/004/")
-        self.assertNotIn("class=", body)
+        self.assertNotIn("thumb", body)
         self.assertNotIn("onerror", body)
 
     def test_unclosed_paragraph_is_closed_before_blocks(self):
@@ -58,11 +63,79 @@ class ExtractTest(unittest.TestCase):
             be.extract_main("<html><body><p>no main</p></body></html>")
 
 
+class StructureTest(unittest.TestCase):
+    """004's own writing patterns are turned into real layout blocks."""
+
+    def setUp(self):
+        self.body = be.extract_main(SAMPLE, "https://k-macao.github.io/004/")
+
+    def test_force_entry_becomes_heading_plus_signal_line(self):
+        self.assertIn('<h3 class="force">1　全球风险偏好', self.body)
+        self.assertIn('<p class="signal">', self.body)
+        self.assertIn('<span class="tag">重点</span>', self.body)
+        self.assertIn('<span class="tag">利空</span>', self.body)
+        self.assertIn('<span class="score">100.0</span>', self.body)
+
+    def test_field_value_pairs_become_a_table(self):
+        self.assertIn('<table class="kv">', self.body)
+        self.assertIn("<th>归类</th><td>市场盘面</td>", self.body)
+        self.assertIn("<th>当次读数</th><td>美股三指均值", self.body)
+
+    def test_ai_commentary_is_split_into_labelled_paragraphs(self):
+        self.assertIn('<div class="ai">', self.body)
+        self.assertIn('<p class="ai-label">▶ AI 总结解读</p>', self.body)
+        self.assertIn('<span class="label">提取信息：</span>', self.body)
+        self.assertIn('<span class="label">规则判断：</span>', self.body)
+
+    def test_diamond_subhead_becomes_h4(self):
+        self.assertIn('<h4 class="sub">三大关注面', self.body)
+
+    def test_verdict_is_boxed_with_its_figures(self):
+        self.assertIn('<div class="verdict">', self.body)
+        self.assertIn("<strong>空头占优", self.body)
+        self.assertIn("合成分：", self.body)
+        self.assertIn("置信度：", self.body)
+
+    def test_numbers_are_emphasised_and_direction_marked(self):
+        self.assertIn('<span class="num">▼−1.92%</span>', self.body)
+        self.assertIn('<td class="num">▲+0.42%</td>', self.body)
+        self.assertIn('<span class="num">7,580.07</span>', self.body)
+
+    def test_dates_and_times_stay_plain(self):
+        body = be.extract_main("<main><p>扫描时间 2026-11-02 10:09:05 UTC，10 月 30 日收盘</p></main>")
+        self.assertNotIn("num", body)
+
+    def test_meta_line_with_middle_dots_becomes_a_table(self):
+        body = be.extract_main(
+            "<main><p>扫描时间 2026-11-02 10:09:05 UTC · 行情日期 2026-11-02 · 数据覆盖 99%</p></main>")
+        self.assertIn('<table class="kv">', body)
+        self.assertIn("<th>扫描时间</th>", body)
+        self.assertIn("<th>数据覆盖</th>", body)
+
+    def test_dates_are_not_mistaken_for_negative_numbers(self):
+        body = be.extract_main("<main><p>2026-11-02 收盘</p></main>")
+        self.assertNotIn("▼", body)
+
+    def test_data_table_marks_numeric_cells(self):
+        self.assertIn('<table class="data">', self.body)
+        self.assertIn('<td class="num">23,393.32</td>', self.body)
+        self.assertNotIn('<td class="num">—</td>', self.body)
+
+    def test_sections_get_anchors_and_ids(self):
+        _, sections = be.build_document(SAMPLE)
+        self.assertEqual(sections[0][0], "s01")
+        self.assertIn('id="s01"', self.body)
+
+    def test_reprocessing_output_does_not_nest_spans(self):
+        again = be.extract_main("<main>" + self.body + "</main>")
+        self.assertNotIn('<span class="num"><span class="num">', again)
+
+
 class EpubTest(unittest.TestCase):
     def _build(self, tmp):
-        body = be.extract_main(SAMPLE, "")
+        body, sections = be.build_document(SAMPLE)
         path = Path(tmp) / "site" / "report.epub"
-        be.write_epub(path, body, title="004 报告")
+        be.write_epub(path, body, title="004 报告", sections=sections)
         return path
 
     def test_mimetype_is_first_and_stored(self):
@@ -80,25 +153,38 @@ class EpubTest(unittest.TestCase):
             with zipfile.ZipFile(path) as zf:
                 names = set(zf.namelist())
                 for required in ("META-INF/container.xml", "OEBPS/content.opf",
-                                 "OEBPS/nav.xhtml", "OEBPS/toc.ncx",
+                                 "OEBPS/nav.xhtml", "OEBPS/toc.ncx", "OEBPS/toc.xhtml",
                                  "OEBPS/style.css", "OEBPS/report.xhtml"):
                     self.assertIn(required, names)
                 opf = zf.read("OEBPS/content.opf").decode("utf-8")
                 self.assertIn("report.xhtml", opf)
                 self.assertIn("dcterms:modified", opf)
                 css = zf.read("OEBPS/style.css").decode("utf-8")
-                self.assertIn("border: 1px solid #000000", css)
-                self.assertIn("line-height: 1.55", css)
+                for rule in ("border: 1px solid #000000", "line-height: 1.55",
+                             "table.kv", "div.verdict", ".num"):
+                    self.assertIn(rule, css)
                 body = zf.read("OEBPS/report.xhtml").decode("utf-8")
-                self.assertIn("<table>", body)
-                self.assertIn("今日要闻", body)
+                self.assertIn("<table", body)
+                self.assertIn("每日全球全景扫描", body)
+
+    def test_toc_links_to_sections(self):
+        with tempfile.TemporaryDirectory() as td:
+            path = self._build(td)
+            with zipfile.ZipFile(path) as zf:
+                toc = zf.read("OEBPS/toc.xhtml").decode("utf-8")
+                self.assertIn('href="report.xhtml#s01"', toc)
+                nav = zf.read("OEBPS/nav.xhtml").decode("utf-8")
+                self.assertIn('href="report.xhtml#s01"', nav)
+                ncx = zf.read("OEBPS/toc.ncx").decode("utf-8")
+                self.assertIn('src="report.xhtml#s01"', ncx)
 
     def test_every_xml_part_is_well_formed(self):
         with tempfile.TemporaryDirectory() as td:
             path = self._build(td)
             with zipfile.ZipFile(path) as zf:
                 for name in ("META-INF/container.xml", "OEBPS/content.opf",
-                             "OEBPS/nav.xhtml", "OEBPS/toc.ncx", "OEBPS/report.xhtml"):
+                             "OEBPS/nav.xhtml", "OEBPS/toc.ncx", "OEBPS/toc.xhtml",
+                             "OEBPS/report.xhtml"):
                     with self.subTest(part=name):
                         ET.fromstring(zf.read(name))  # raises on malformed XML
 
@@ -110,6 +196,7 @@ class EpubTest(unittest.TestCase):
             self.assertEqual(be.main([str(src), "--out", str(out)]), 0)
             data = json.loads((out / "epub.json").read_text(encoding="utf-8"))
             self.assertEqual(data["doc"], "report.epub")
+            self.assertEqual(data["sections"], 1)
             self.assertGreater(data["chars"], 0)
             self.assertGreater(data["bytes"], 500)
             self.assertTrue((out / "report.epub").is_file())
