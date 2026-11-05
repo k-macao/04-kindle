@@ -158,6 +158,10 @@ return {
   （`env.INTERVAL_MINUTES`，想改成 60/360 直接改这里）；间隔不够时只跑几秒就跳过。
 - **做什么**：抓 `https://k-macao.github.io/004/` → `tools/build_epub.py` → 只在
   `site/report.epub` / `site/epub.json` 真的变了才提交，提交信息带生成时间。
+- **推送前检验源时间**：生成后、提交前，job 会读 `site/epub.json` 的 `data_time`
+  （报告正文里的「扫描时间 / 行情日期」），距今超过 `env.MAX_SOURCE_AGE_HOURS`
+  （默认 **12 小时**）或缺失时就跳过提交——「文件新」不等于「数据新」，旧数据
+  不推给设备。手动触发的 `force` 只无视间隔限流，不会绕过这条新鲜度检查。
 - **手动触发**：Actions → *Refresh 004 EPUB* → **Run workflow**，勾 `force` 可以无视间隔。
 - **不会被 004 拖累**：004 自己没更新时，抓回来的内容一样，`git diff` 为空 → 不产生提交。
 - **前提**：仓库 Settings → Actions → Workflow permissions 需为
@@ -182,6 +186,8 @@ return {
   会自动追加 `(stale 3d)`，一眼就能看出「新的是文件，不是行情」；
 - 004 的构建挂了（它自己的 Actions 在 `🧪 舆情层自检` 失败）时，`generated` 会变、
   `data_time` 不动 —— 这正是需要区分两者的场景。
+- 自动刷新 job 在提交前也会用 `data_time` 做新鲜度闸门：超过 12 小时
+  （`env.MAX_SOURCE_AGE_HOURS`）就不推送，见 §4.5。
 
 ## 5. 想调排版
 

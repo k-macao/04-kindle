@@ -672,6 +672,42 @@ def extract_data_time(text):
     return None
 
 
+def parse_data_time(value):
+    """Parse an ISO-8601 timestamp (as stored in epub.json) into UTC."""
+    if not value:
+        return None
+    text = str(value).strip()
+    if not text:
+        return None
+    if text.endswith("Z"):
+        text = text[:-1] + "+00:00"
+    try:
+        parsed = datetime.fromisoformat(text)
+    except ValueError:
+        return None
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=timezone.utc)
+    return parsed
+
+
+def check_data_age(data_time, now=None, max_hours=12):
+    """Return (ok, reason): 源数据时间距今是否还在 max_hours（默认 12 小时）内。
+
+    数据新鲜度以报告正文里的行情/采集时间（data_time）为准，不是文件生成时间：
+    超过上限就不推给设备，避免「文件新、数据旧」。源时间缺失或无法解析时
+    也视为不通过——无法确认新鲜度就不该推送。
+    """
+    now = now or datetime.now(timezone.utc)
+    max_hours = float(max_hours)
+    then = parse_data_time(data_time)
+    if then is None:
+        return False, "报告里没有可用的源时间（扫描时间/行情日期），无法确认新鲜度"
+    age_hours = max(0.0, (now - then).total_seconds() / 3600)
+    if age_hours > max_hours:
+        return False, f"源时间 {data_time} 距今 {age_hours:.1f} 小时，超过 {max_hours:g} 小时上限"
+    return True, f"源时间 {data_time} 距今 {age_hours:.1f} 小时，未超过 {max_hours:g} 小时上限"
+
+
 def plain_text(body_xhtml):
     text = re.sub(r"<[^>]+>", " ", body_xhtml)
     return re.sub(r"\s+", " ", html.unescape(text))
