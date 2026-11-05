@@ -23,6 +23,21 @@ python3 -m unittest discover -s tests -v
 
 不要将私密报告发布到公开 Pages。设备通过 HTTPS 请求，要求 KOReader 的 `ca-bundle.crt` 可用；重定向未启用，因此需填写最终的 HTTPS 地址。
 
+### 字模式（EPUB，推荐）
+
+截图再清晰也是图片：放大发虚、每轮刷新下几 MB、字号改不了。字模式把 004 正文清洗成
+XHTML，配电子墨水用的 CSS，打成单文件 EPUB，交给设备上现成的 KOReader 阅读器显示——
+文字矢量渲染，字号/行距/边距全用 KOReader 自己的设置调，表格是真排版，文件只有几十 KB：
+
+```sh
+python tools/build_epub.py https://k-macao.github.io/004/ --out site   # 只用标准库
+```
+
+上传 `site/report.epub` + `site/epub.json`，插件里 **EPUB manifest URL** 指向
+`site/epub.json`，**Display mode → EPUB (styled)**。每 60 秒只拉一次几百字节的清单：
+没更新就翻页，`generated` 变了才重下 EPUB 并从头打开。详见
+[docs/kindle-epub.md](docs/kindle-epub.md)。
+
 ### 图形界面模式（页面截图）
 
 纯文本丢排版；要看到和网页一样的版式，用 `tools/render_report.py` 把发布页按设备分辨率截成
@@ -45,7 +60,7 @@ URL** 填 `site/report.json` 的地址即可。详步骤、机型参数、切页
 ## 2. Kindle 安装与使用
 
 1. 已越狱的 Kindle 安装并启动 KOReader。将 `octopus004.koplugin` 文件夹完整复制到 `koreader/plugins/`，重启 KOReader。部署方式见 [docs/kindle-ssh.md](docs/kindle-ssh.md)：USB 直连用 `tools/kindle-usb.sh`（Windows 用 `tools/kindle-usb.ps1`；`--install` / `-Install` 直接拷入，无需 SSH），联网用 `tools/deploy-plugin.sh`（KOReader 自带 SSH 服务，默认端口 2222，无需另装 usbnet）。
-2. Tools → **004 Report** → **Report URL** 填默认地址（纯文本）或 **Image manifest URL** 填清单地址，再用 **Display mode** 选 text / page images。选择 **Show report** 开始。
+2. Tools → **004 Report** → 按显示模式填地址：**Report URL**（纯文本）、**EPUB manifest URL**（字模式）或 **Image manifest URL**（截图），再用 **Display mode** 选 text / epub / page images。选择 **Show report** 开始。
 3. 每 60 秒检查一次报告并翻到下一页，末页回到首页。点击屏幕可手动翻页、立即刷新、查看状态或停止。停止会恢复原有屏保设置。
 4. 有硬件唤醒时尝试使用 KOReader 唤醒管理器；否则保持设备唤醒并使用软件计时。是否支持取决于 Oasis 1 的 KOReader 构建。Wi-Fi 保持开启；一分钟联网和翻页会增加耗电。
 
