@@ -19,6 +19,7 @@ local InfoMessage = require("ui/widget/infomessage")
 local ButtonDialog = require("ui/widget/buttondialog")
 local InputDialog = require("ui/widget/inputdialog")
 local WidgetContainer = require("ui/widget/container/widgetcontainer")
+local CenterContainer = require("ui/widget/container/centercontainer")
 local logger = require("logger")
 local lfs = require("libs/libkoreader-lfs")
 local _ = require("gettext")
@@ -92,6 +93,20 @@ end
 
 function Report:hasPage(index)
     return lfs.attributes(self:pagePath(index), "mode") == "file"
+end
+
+-- Read width/height out of a PNG's IHDR chunk (8-byte signature + 8-byte
+-- length/type, then two big-endian 32-bit values).
+function Report:pngSize(path)
+    local f = io.open(path, "rb")
+    if not f then return nil end
+    local head = f:read(24); f:close()
+    if not head or #head < 24 or head:sub(1, 8) ~= "\137PNG\r\n\26\n" then return nil end
+    local function be32(chunk)
+        local b1, b2, b3, b4 = chunk:byte(1, 4)
+        return ((b1 * 256 + b2) * 256 + b3) * 256 + b4
+    end
+    return be32(head:sub(17, 20)), be32(head:sub(21, 24))
 end
 
 function Report:holdScreen()
@@ -327,7 +342,14 @@ function Report:refresh(interactive)
             if self.dashboard then UIManager:setDirty(self.dashboard, "full") end
         end
         self.wake:kindle_hold(false)
-        if error_message and interactive then self:note("004: " .. error_message) end
+        if error_message and (interactive or self:isImageMode()) then
+            if interactive or self.last_notified_error ~= error_message then
+                self:note("004: " .. error_message)
+                self.last_notified_error = error_message
+            end
+        else
+            self.last_notified_error = nil
+        end
         if error_message and self.dashboard then self:advance() end
         self.next_due = os.time() + INTERVAL
         self.wake:schedule(INTERVAL, self.refresh_task, self.wake:mode(true))
@@ -376,14 +398,18 @@ end
 function Report:showPage(preserve)
     if not self:hasPage(self.page_index) then return false end
     local w, h = Screen:getWidth(), Screen:getHeight()
-    local header = TextWidget:new{ text = "004  |  page " .. self.page_index, face = Font:getFace("smallinfofont") }
-    local image = ImageWidget:new{ file = self:pagePath(self.page_index), width = w,
-        height = h - header:getSize().h - 8, scale_factor = 0 }
-    local group = VerticalGroup:new{ align = "left", header, image }
-    local frame = FrameContainer:new{ width = w, height = h, padding = 0, bordersize = 0, background = Blitbuffer.COLOR_WHITE, group }
+    local path = self:pagePath(self.page_index)
+    -- Pages rendered at the exact screen size are shown unscaled (scale 1),
+    -- which keeps e-ink text crisp; anything else falls back to best-fit.
+    local pw, ph = self:pngSize(path)
+    local scale = (pw == w and ph == h) and 1 or 0
+    local image = ImageWidget:new{ file = path, width = w, height = h, scale_factor = scale }
+    local frame = FrameContainer:new{ width = w, height = h, padding = 0, bordersize = 0,
+        background = Blitbuffer.COLOR_WHITE,
+        CenterContainer:new{ dimen = Geom:new{ x = 0, y = 0, w = w, h = h }, image } }
     local old = self.dashboard
     local screen = self:makeScreen(frame)
-    self.box, self.dashboard, self.current_text, self.header, self.page_widget = nil, screen, nil, header, image
+    self.box, self.dashboard, self.current_text, self.header, self.page_widget = nil, screen, nil, nil, image
     UIManager:show(screen); UIManager:setDirty(screen, "full")
     if old then UIManager:close(old) end
     return true
@@ -409,7 +435,19 @@ function Report:status()
     local mode = self.wake:mode(true) == "rtc" and "hardware wake" or "awake timer"
     local checked = self.last_check and os.date("%Y-%m-%d %H:%M:%S", self.last_check) or "never"
     local source = self:isImageMode() and ("images: " .. tostring(self.settings.image_url)) or ("text: " .. self.settings.url)
-    self:note("004 (" .. self.settings.display .. ")\n" .. source .. "\n" .. mode ..
+    local page = ""
+    if self:isImageMode() then
+        page = "\nPage " .. tostring(self.page_index or 0) .. "/" .. tostring(self.page_count or 0)
+        local pw, ph
+        if self:hasPage(self.page_index) then
+            pw, ph = self:pngSize(self:pagePath(self.page_index))
+        end
+        if pw then
+            page = page .. "  (" .. tostring(pw) .. "x" .. tostring(ph)
+                .. (pw == Screen:getWidth() and ph == Screen:getHeight() and ", 1:1" or ", scaled") .. ")"
+        end
+    end
+    self:note("004 (" .. self.settings.display .. ")\n" .. source .. "\n" .. mode .. page ..
         "\nLast check: " .. checked .. "\n" .. (self.last_error or "No error"))
 end
 

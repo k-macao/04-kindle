@@ -1,2 +1,2 @@
 local _ = require("gettext")
-return { name = "octopus004", fullname = _("004 Report"), description = _("Show the public 004 report on the Kindle: plain text, or the real page as device-sized images."), version = "0.2.0" }
+return { name = "octopus004", fullname = _("004 Report"), description = _("Show the public 004 report full screen as black-on-white device-sized pages, or as plain text."), version = "0.3.0" }
