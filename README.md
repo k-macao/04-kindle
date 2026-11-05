@@ -1,6 +1,6 @@
 # 004 → Kindle（无需 Tesserae Cloud）
 
-通过 GitHub Pages 发布 004 **构建后的报告正文**，KOReader 插件每 60 秒检查一次，并使用设备原生文本排版自动翻页。不依赖 Tesserae 服务端或 Cloud 账号。已有的 Tesserae 插件如启用了自动刷新，请先停止，以免两者抢占屏幕。
+通过 GitHub Pages 发布 004 **构建后的报告正文**，KOReader 插件每 60 秒检查一次并自动翻页。两种显示方式：**纯文本**（设备原生排版，轻量）和**页面截图**（真实排版、图表和表格都在，见 [docs/kindle-graphic.md](docs/kindle-graphic.md)）。不依赖 Tesserae 服务端或 Cloud 账号。已有的 Tesserae 插件如启用了自动刷新，请先停止，以免两者抢占屏幕。
 
 > 当前是可安装的初版，尚未在 Kindle Oasis 1 或真实 GitHub Pages 部署上做端到端验证。必须先把下面的生成步骤接入 **004 仓库实际的 Pages 发布流程**；本仓库改动不会自动修改 004。004 自身最短计划约 5 分钟，且 GitHub Actions 可能延迟；一分钟只指设备的检查/翻页间隔，不代表数据每分钟更新。
 
@@ -23,10 +23,24 @@ python3 -m unittest discover -s tests -v
 
 不要将私密报告发布到公开 Pages。设备通过 HTTPS 请求，要求 KOReader 的 `ca-bundle.crt` 可用；重定向未启用，因此需填写最终的 HTTPS 地址。
 
+### 图形界面模式（页面截图）
+
+纯文本丢排版；要看到和网页一样的版式，用 `tools/render_report.py` 把发布页按设备分辨率截成
+每页一张 PNG，并生成 `site/report.json` 清单：
+
+```sh
+pip install pillow playwright && python -m playwright install chromium
+python tools/render_report.py --out site
+```
+
+上传 `site/`（不要传 `site/full.png`），插件里 **Display mode → Page images**、**Image manifest
+URL** 填 `site/report.json` 的地址即可。详步骤、机型参数、切页规则和限制见
+[docs/kindle-graphic.md](docs/kindle-graphic.md)。
+
 ## 2. Kindle 安装与使用
 
 1. 已越狱的 Kindle 安装并启动 KOReader。将 `octopus004.koplugin` 文件夹完整复制到 `koreader/plugins/`，重启 KOReader。部署方式见 [docs/kindle-ssh.md](docs/kindle-ssh.md)：USB 直连用 `tools/kindle-usb.sh`（Windows 用 `tools/kindle-usb.ps1`；`--install` / `-Install` 直接拷入，无需 SSH），联网用 `tools/deploy-plugin.sh`（KOReader 自带 SSH 服务，默认端口 2222，无需另装 usbnet）。
-2. Tools → **004 Report** → **Report URL**：默认地址如上，可改为实际发布地址。选择 **Show report** 开始。
+2. Tools → **004 Report** → **Report URL** 填默认地址（纯文本）或 **Image manifest URL** 填清单地址，再用 **Display mode** 选 text / page images。选择 **Show report** 开始。
 3. 每 60 秒检查一次报告并翻到下一页，末页回到首页。点击屏幕可手动翻页、立即刷新、查看状态或停止。停止会恢复原有屏保设置。
 4. 有硬件唤醒时尝试使用 KOReader 唤醒管理器；否则保持设备唤醒并使用软件计时。是否支持取决于 Oasis 1 的 KOReader 构建。Wi-Fi 保持开启；一分钟联网和翻页会增加耗电。
 
@@ -34,7 +48,7 @@ python3 -m unittest discover -s tests -v
 
 ## 内容范围
 
-提取 `<main>` 中可见文本并按源顺序排版，表格转成文本；交互按钮、脚本、导航、图片、图表和链接目标不保留。只由网页后续 JavaScript 生成的内容也不会提取。因此这是**正文文本全量轮播的初版**，不是 004 网页的视觉完整复刻。网页正文较长时，一分钟一页可能需要很久才能轮完；实际能否完整显示及中文字体效果需要在设备上验证。文本输出超过 2 MiB 会拒绝生成，避免设备资源耗尽。
+纯文本模式提取 `<main>` 中可见文本并按源顺序排版，表格转成文本；交互按钮、脚本、导航、图片、图表和链接目标不保留，只由网页后续 JavaScript 生成的内容也不会提取。要保留版式、表格和图表，请用图形界面模式（页面截图）：它按设备分辨率渲染真实页面，但同样不能交互。网页正文较长时，一分钟一页可能需要很久才能轮完；实际能否完整显示及中文字体效果需要在设备上验证。文本输出超过 2 MiB 会拒绝生成，避免设备资源耗尽。
 
 ## 开发与许可证
 
