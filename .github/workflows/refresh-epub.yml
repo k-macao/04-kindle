@@ -3,6 +3,8 @@ name: Refresh 004 EPUB
 # 定时把 004 的公开页面重排成 EPUB，内容真的变了才提交。
 # cron 每 20 分钟叫醒一次，但 job 自己按 INTERVAL_MINUTES（默认 200 分钟）
 # 限流：间隔不够就直接跳过，既做到"每 200 分钟刷新一次"，又不浪费 Actions。
+# 推送前还会检验源数据时间（MAX_SOURCE_AGE_HOURS，默认 12 小时）：报告正文
+# 里的行情/采集时间距今超过上限（或缺失）就不提交，避免把旧数据推给设备。
 on:
   schedule:
     - cron: "*/20 * * * *"
@@ -22,6 +24,7 @@ concurrency:
 
 env:
   INTERVAL_MINUTES: "200"
+  MAX_SOURCE_AGE_HOURS: "12"
   SOURCE_URL: "https://k-macao.github.io/004/"
 
 jobs:
@@ -78,8 +81,37 @@ jobs:
         if: steps.gate.outputs.skip != 'true'
         run: python tools/build_epub.py "$SOURCE_URL" --out site
 
-      - name: 内容变了才提交
+      - name: 检验源时间（源数据超过 12 小时不推送）
         if: steps.gate.outputs.skip != 'true'
+        id: freshness
+        run: |
+          python - <<'PY'
+          import datetime as dt
+          import json
+          import os
+          import pathlib
+          import sys
+
+          sys.path.insert(0, "tools")
+          from build_epub import check_data_age
+
+          max_hours = float(os.environ.get("MAX_SOURCE_AGE_HOURS", "12"))
+          manifest = pathlib.Path("site/epub.json")
+          data_time = None
+          if manifest.is_file():
+              try:
+                  data_time = json.loads(manifest.read_text("utf-8")).get("data_time") or None
+              except (ValueError, OSError):
+                  data_time = None
+          ok, reason = check_data_age(data_time, dt.datetime.now(dt.timezone.utc), max_hours)
+          print(f"{'继续推送' if ok else '跳过推送'}：{reason}")
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
+              out.write(f"skip={'false' if ok else 'true'}\n")
+              out.write(f"reason={reason}\n")
+          PY
+
+      - name: 内容变了才提交
+        if: steps.gate.outputs.skip != 'true' && steps.freshness.outputs.skip != 'true'
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
@@ -94,5 +126,10 @@ jobs:
           git push
 
       - name: 提示
-        if: steps.gate.outputs.skip == 'true'
-        run: echo "本次跳过：${{ steps.gate.outputs.reason }}"
+        if: steps.gate.outputs.skip == 'true' || steps.freshness.outputs.skip == 'true'
+        run: |
+          reason="${{ steps.gate.outputs.reason }}"
+          if [ -z "$reason" ]; then
+            reason="${{ steps.freshness.outputs.reason }}"
+          fi
+          echo "本次跳过：${reason}"

@@ -1,3 +1,4 @@
+import datetime as dt
 import json
 import sys
 import tempfile
@@ -227,6 +228,48 @@ class DataTimeTest(unittest.TestCase):
     def test_missing_timestamp_is_empty(self):
         _, _, data = be.build_document("<main><p>纯文本</p></main>")
         self.assertIsNone(data)
+
+
+class FreshnessGateTest(unittest.TestCase):
+    """推送前的源时间闸门：源数据超过 12 小时就不推。"""
+
+    NOW = dt.datetime(2026, 11, 5, 23, 30, tzinfo=dt.timezone.utc)
+
+    def test_fresh_source_passes(self):
+        ok, reason = be.check_data_age("2026-11-05T23:00:00Z", self.NOW, 12)
+        self.assertTrue(ok)
+        self.assertIn("未超过 12 小时上限", reason)
+
+    def test_exactly_at_limit_passes(self):
+        ok, _ = be.check_data_age("2026-11-05T11:30:00Z", self.NOW, 12)
+        self.assertTrue(ok)
+
+    def test_one_minute_over_limit_is_blocked(self):
+        ok, reason = be.check_data_age("2026-11-05T11:29:00Z", self.NOW, 12)
+        self.assertFalse(ok)
+        self.assertIn("超过 12 小时上限", reason)
+
+    def test_missing_source_time_is_blocked(self):
+        ok, reason = be.check_data_age(None, self.NOW, 12)
+        self.assertFalse(ok)
+        self.assertIn("源时间", reason)
+
+    def test_unparseable_source_time_is_blocked(self):
+        ok, _ = be.check_data_age("昨天下午", self.NOW, 12)
+        self.assertFalse(ok)
+
+    def test_offset_timestamp_is_accepted(self):
+        ok, _ = be.check_data_age("2026-11-05T23:00:00+00:00", self.NOW, 12)
+        self.assertTrue(ok)
+
+    def test_future_source_time_is_not_an_error(self):
+        ok, _ = be.check_data_age("2026-11-06T00:00:00Z", self.NOW, 12)
+        self.assertTrue(ok)
+
+    def test_default_limit_is_twelve_hours(self):
+        ok, reason = be.check_data_age("2026-11-05T11:29:00Z", self.NOW)
+        self.assertFalse(ok)
+        self.assertIn("12", reason)
 
 
 class EpubTest(unittest.TestCase):
