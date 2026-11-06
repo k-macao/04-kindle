@@ -191,7 +191,7 @@ function Report:httpGet(url, max_bytes, extra_headers)
         for k, v in pairs(extra_headers) do headers[k] = v end
     end
     local chunks, size, too_large = {}, 0, false
-    local ok, code, response_headers = https.request{
+    local request = {
         url = url, method = "GET", headers = headers,
         protocol = "any", options = { "all", "no_sslv2", "no_sslv3", "no_tlsv1", "no_tlsv1_1" },
         verify = "peer", cafile = ca, redirect = false,
@@ -204,9 +204,30 @@ function Report:httpGet(url, max_bytes, extra_headers)
             return 1
         end,
     }
-    code = tonumber(code)
-    if too_large then return nil, "Response exceeds limit", code end
-    if not ok then return nil, tostring(code or "network failure"), code end
+    -- Keep both LuaSec's regular return values and any thrown Lua error. Some
+    -- KOReader/LuaSec builds provide only a nil result on transport failures;
+    -- retaining the other values makes the on-device error actionable.
+    local called, ok, code, response_headers, status_line = pcall(https.request, request)
+    if not called then
+        logger.warn("004: HTTPS request raised an error", tostring(ok))
+        return nil, "HTTPS request error: " .. tostring(ok), nil
+    end
+    local numeric_code = tonumber(code)
+    if too_large then return nil, "Response exceeds limit", numeric_code end
+    if not ok then
+        local detail = code
+        if detail == nil or detail == "" then detail = status_line end
+        if detail == nil or detail == "" then
+            detail = type(response_headers) == "string" and response_headers or nil
+        end
+        if detail == nil or detail == "" then
+            detail = "no transport details returned; check Wi-Fi, URL, and TLS certificates"
+        end
+        detail = tostring(detail):gsub("%c", " "):sub(1, 240)
+        logger.warn("004: HTTPS request failed", detail)
+        return nil, detail, numeric_code
+    end
+    code = numeric_code
     if code ~= 200 then return nil, "HTTP " .. tostring(code), code, response_headers end
     return table.concat(chunks), nil, code, response_headers
 end
