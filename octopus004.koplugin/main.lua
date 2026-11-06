@@ -36,6 +36,8 @@ local DOC_MAX = 8 * 1024 * 1024
 local DOC_PREFIX = "octopus004-report-"
 local INTERVAL = 60
 local WIFI_WAIT = 90
+-- 设备上显示的时间统一为北京时间（UTC+8），与设备本地时区无关。
+local BEIJING_OFFSET = 8 * 3600
 
 local Report = WidgetContainer:extend{ name = "octopus004", is_doc_only = false }
 
@@ -384,7 +386,7 @@ function Report:refresh(interactive)
         self.gen = self.gen + 1; self.in_cycle = false; self.last_error = error_message
         if self.header then
             local state = error_message and "OFFLINE / CACHED" or "ONLINE"
-            local checked = self.last_check and os.date("%m-%d %H:%M", self.last_check) or "--"
+            local checked = self.last_check and beijing(self.last_check, "%m-%d %H:%M") or "--"
             self.header:setText("004 | " .. state .. " | " .. checked .. " | tap")
             if self.dashboard then UIManager:setDirty(self.dashboard, "full") end
         end
@@ -573,28 +575,46 @@ function Report:advance()
     UIManager:setDirty(self.dashboard, "full")
 end
 
--- "2026-11-02T10:09:05Z" -> epoch-ish seconds, or nil when unparsable.
+-- Epoch seconds for a UTC civil time (days-from-civil). Does not consult the
+-- device timezone, so it is correct whatever the Kindle's local clock is set to.
+local function utcEpoch(y, mo, d, h, mi, sec)
+    y = (mo <= 2) and (y - 1) or y
+    local era = math.floor(y / 400)
+    local yoe = y - era * 400
+    local mp = (mo + 9) % 12
+    local doy = math.floor((153 * mp + 2) / 5) + d - 1
+    local doe = yoe * 365 + math.floor(yoe / 4) - math.floor(yoe / 100) + doy
+    local days = era * 146097 + doe - 719468
+    return days * 86400 + h * 3600 + mi * 60 + sec
+end
+
+-- "2026-11-02T10:09:05Z" -> epoch seconds, or nil when unparsable.
 local function isoSeconds(iso)
     local y, mo, d, h, mi, sec =
         tostring(iso):match("^(%d%d%d%d)-(%d%d)-(%d%d)T(%d%d):(%d%d):(%d%d)Z$")
     if not y then return nil end
-    return os.time{ year = tonumber(y), month = tonumber(mo), day = tonumber(d),
-                    hour = tonumber(h), min = tonumber(mi), sec = tonumber(sec) }
+    return utcEpoch(tonumber(y), tonumber(mo), tonumber(d),
+                    tonumber(h), tonumber(mi), tonumber(sec))
+end
+
+-- Format an epoch as Beijing wall-clock time.
+local function beijing(epoch, fmt)
+    return os.date("!" .. fmt, epoch + BEIJING_OFFSET)
 end
 
 function Report:status()
     local mode = self.wake:mode(true) == "rtc" and "hardware wake" or "awake timer"
-    local checked = self.last_check and os.date("%Y-%m-%d %H:%M:%S", self.last_check) or "never"
+    local checked = self.last_check and (beijing(self.last_check, "%Y-%m-%d %H:%M:%S") .. " (Beijing)") or "never"
     local data = ""
     local stamp = tostring(self.settings.data_time or "")
     if stamp ~= "" then
         local then_time = isoSeconds(stamp)
         local age = nil
         if then_time then
-            -- os.time(os.date("!*t")) is "now" in the same (local) scale.
-            age = (os.time(os.date("!*t")) - then_time) / 3600
+            age = (os.time() - then_time) / 3600
         end
-        data = "\nData: " .. stamp:gsub("T", " "):gsub("Z$", " UTC")
+        local shown = then_time and (beijing(then_time, "%Y-%m-%d %H:%M:%S") .. " (Beijing)") or stamp
+        data = "\nData: " .. shown
         if age and age >= 24 then
             data = data .. string.format("  (stale %.0fd)", age / 24)
         elseif age and age < 0 then

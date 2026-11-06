@@ -30,7 +30,15 @@ import re
 import sys
 import uuid
 import zipfile
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
+
+# 页面显示用的北京时间（固定 UTC+8，中国不实行夏令时）。
+BEIJING = timezone(timedelta(hours=8))
+
+
+def _beijing_text(moment):
+    """Format an aware datetime as 'YYYY-MM-DD HH:MM:SS 北京时间'."""
+    return moment.astimezone(BEIJING).strftime("%Y-%m-%d %H:%M:%S") + " 北京时间"
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urljoin
@@ -1119,9 +1127,12 @@ def write_epub(path, body, title="004 报告", modified=None, source="", section
         uuid.uuid5(uuid.NAMESPACE_URL, f"004-kindle:{modified_text}:{len(body)}"))
     words = len(re.sub(r"\s+", "", re.sub(r"<[^>]+>", "", body)))
     # 目录页第一行是本次运行（更新）时间；源数据时间（004 报告里的扫描时间）放在后面。
-    meta = ["更新时间：" + stamp.strftime("%Y-%m-%d %H:%M:%S UTC")]
+    # 页面上统一按北京时间（UTC+8）显示；epub.json 与提交信息仍保持 UTC。
+    meta = ["更新时间：" + _beijing_text(stamp)]
     if data_time:
-        meta.append("源数据时间：" + data_time.replace("T", " ").replace("Z", " UTC"))
+        source = parse_data_time(data_time)
+        meta.append("源数据时间：" + (_beijing_text(source) if source
+                                  else data_time.replace("T", " ").replace("Z", " UTC")))
     meta = " ｜ ".join(meta)
 
     path = Path(path)
