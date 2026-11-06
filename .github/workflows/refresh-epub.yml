@@ -1,19 +1,14 @@
 name: Refresh 004 EPUB
 
-# 定时把 004 的公开页面重排成 EPUB，内容真的变了才提交。
-# cron 每 20 分钟叫醒一次，但 job 自己按 INTERVAL_MINUTES（默认 200 分钟）
-# 限流：间隔不够就直接跳过，既做到"每 200 分钟刷新一次"，又不浪费 Actions。
-# 推送前还会检验源数据时间（MAX_SOURCE_AGE_HOURS，默认 12 小时）：报告正文
-# 里的行情/采集时间距今超过上限（或缺失）就不提交，避免把旧数据推给设备。
+# 定时把 004 的公开页面重排成 EPUB。每次运行都会生成 site/report.epub 与
+# site/epub.json，并提交推送（不限流、内容没变也推送）。
+# 目录页的「更新时间」就是本次运行的生成时间，提交信息里也是同一个时间。
+# 源数据时间（004 报告正文里的扫描时间）超过 MAX_SOURCE_AGE_HOURS 时只在日志里
+# 给出警告，仍然推送，设备端目录页会同时显示源数据时间供你判断新鲜度。
 on:
   schedule:
     - cron: "*/20 * * * *"
   workflow_dispatch:
-    inputs:
-      force:
-        description: "忽略 200 分钟间隔，立即重新生成"
-        type: boolean
-        default: false
 
 permissions:
   contents: write
@@ -23,7 +18,6 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  INTERVAL_MINUTES: "200"
   MAX_SOURCE_AGE_HOURS: "12"
   SOURCE_URL: "https://k-macao.github.io/004/"
 
@@ -40,50 +34,10 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: 限流（距上次生成不足 INTERVAL_MINUTES 就跳过）
-        id: gate
-        env:
-          FORCE: ${{ inputs.force }}
-        run: |
-          python - <<'PY'
-          import datetime as dt
-          import json
-          import os
-          import pathlib
-
-          interval = int(os.environ.get("INTERVAL_MINUTES", "200"))
-          force = str(os.environ.get("FORCE", "")).strip().lower() in ("true", "1", "yes")
-          manifest = pathlib.Path("site/epub.json")
-          last = None
-          if manifest.is_file():
-              try:
-                  last = dt.datetime.fromisoformat(json.loads(manifest.read_text("utf-8"))["generated"])
-              except (ValueError, KeyError, TypeError):
-                  last = None
-          now = dt.datetime.now(dt.timezone.utc)
-          age = None if last is None else (now - last).total_seconds() / 60
-          skip = bool(age is not None and age < interval and not force)
-          if force:
-              reason = "强制运行"
-          elif age is None:
-              reason = "没有历史清单"
-          elif skip:
-              reason = f"上次生成 {age:.0f} 分钟前，未满 {interval} 分钟"
-          else:
-              reason = f"上次生成 {age:.0f} 分钟前，已满 {interval} 分钟"
-          print(f"{'跳过' if skip else '继续'}：{reason}")
-          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
-              out.write(f"skip={'true' if skip else 'false'}\n")
-              out.write(f"reason={reason}\n")
-          PY
-
       - name: 抓 004 并生成 EPUB
-        if: steps.gate.outputs.skip != 'true'
         run: python tools/build_epub.py "$SOURCE_URL" --out site
 
-      - name: 检验源时间（源数据超过 12 小时不推送）
-        if: steps.gate.outputs.skip != 'true'
-        id: freshness
+      - name: 检查源数据时间（仅警告，不阻止推送）
         run: |
           python - <<'PY'
           import datetime as dt
@@ -104,32 +58,18 @@ jobs:
               except (ValueError, OSError):
                   data_time = None
           ok, reason = check_data_age(data_time, dt.datetime.now(dt.timezone.utc), max_hours)
-          print(f"{'继续推送' if ok else '跳过推送'}：{reason}")
-          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
-              out.write(f"skip={'false' if ok else 'true'}\n")
-              out.write(f"reason={reason}\n")
+          if ok:
+              print(f"源数据时间正常：{reason}")
+          else:
+              print(f"::warning title=004 源数据可能过期::{reason}")
           PY
 
-      - name: 内容变了才提交
-        if: steps.gate.outputs.skip != 'true' && steps.freshness.outputs.skip != 'true'
+      - name: 提交并推送（每次运行都推送）
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add site/report.epub site/epub.json
-          if git diff --cached --quiet; then
-            echo "004 内容没有变化，本次不提交"
-            exit 0
-          fi
           stamp=$(python -c "import json;print(json.load(open('site/epub.json'))['generated'])")
-          git commit -m "chore(site): 刷新 004 EPUB（生成于 ${stamp}）"
+          git commit --allow-empty -m "chore(site): 刷新 004 EPUB（更新于 ${stamp}）"
           git push
-
-      - name: 提示
-        if: steps.gate.outputs.skip == 'true' || steps.freshness.outputs.skip == 'true'
-        run: |
-          reason="${{ steps.gate.outputs.reason }}"
-          if [ -z "$reason" ]; then
-            reason="${{ steps.freshness.outputs.reason }}"
-          fi
-          echo "本次跳过：${reason}"

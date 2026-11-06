@@ -1113,16 +1113,15 @@ def write_epub(path, body, title="004 报告", modified=None, source="", section
                data_time=None):
     """Write a self-contained EPUB 3 to `path`; returns the plain-text length."""
     sections = sections or []
-    stamp = datetime.now(timezone.utc)
-    modified = (modified or stamp).strftime("%Y-%m-%dT%H:%M:%SZ")
+    stamp = modified or datetime.now(timezone.utc)
+    modified_text = stamp.strftime("%Y-%m-%dT%H:%M:%SZ")
     identifier = "urn:uuid:" + str(
-        uuid.uuid5(uuid.NAMESPACE_URL, f"004-kindle:{modified}:{len(body)}"))
+        uuid.uuid5(uuid.NAMESPACE_URL, f"004-kindle:{modified_text}:{len(body)}"))
     words = len(re.sub(r"\s+", "", re.sub(r"<[^>]+>", "", body)))
-    built = stamp.strftime("%Y-%m-%d %H:%M UTC")
-    meta = []
+    # 目录页第一行是本次运行（更新）时间；源数据时间（004 报告里的扫描时间）放在后面。
+    meta = ["更新时间：" + stamp.strftime("%Y-%m-%d %H:%M:%S UTC")]
     if data_time:
-        meta.append("数据时间：" + data_time.replace("T", " ").replace("Z", " UTC"))
-    meta.append("文件生成：" + built)
+        meta.append("源数据时间：" + data_time.replace("T", " ").replace("Z", " UTC"))
     meta = " ｜ ".join(meta)
 
     path = Path(path)
@@ -1135,13 +1134,13 @@ def write_epub(path, body, title="004 报告", modified=None, source="", section
         zf.writestr("META-INF/container.xml", CONTAINER_XML,
                     compress_type=zipfile.ZIP_DEFLATED)
         zf.writestr("OEBPS/content.opf",
-                    _opf_document(title, identifier, modified, words),
+                    _opf_document(title, identifier, modified_text, words),
                     compress_type=zipfile.ZIP_DEFLATED)
         zf.writestr("OEBPS/nav.xhtml", _nav_document(title, sections),
                     compress_type=zipfile.ZIP_DEFLATED)
         zf.writestr("OEBPS/toc.xhtml", _toc_document(title, sections, meta),
                     compress_type=zipfile.ZIP_DEFLATED)
-        zf.writestr("OEBPS/toc.ncx", _ncx_document(title, identifier, modified, sections),
+        zf.writestr("OEBPS/toc.ncx", _ncx_document(title, identifier, modified_text, sections),
                     compress_type=zipfile.ZIP_DEFLATED)
         zf.writestr("OEBPS/style.css", STYLE_CSS, compress_type=zipfile.ZIP_DEFLATED)
         zf.writestr("OEBPS/report.xhtml", _xhtml_document(body, title),
@@ -1166,10 +1165,12 @@ def main(argv=None):
         body, sections, data_time = build_document(source, base_url)
         out = Path(args.out)
         epub = out / "report.epub"
+        # 同一个时间戳同时写入 EPUB 目录页、epub.json 与提交信息，三者保持一致。
+        generated = datetime.now(timezone.utc).replace(microsecond=0)
         words = write_epub(epub, body, title=args.title, source=args.source,
-                           sections=sections, data_time=data_time)
+                           modified=generated, sections=sections, data_time=data_time)
         manifest = {
-            "generated": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+            "generated": generated.isoformat(timespec="seconds"),
             "doc": "report.epub",
             "title": args.title,
             "chars": words,

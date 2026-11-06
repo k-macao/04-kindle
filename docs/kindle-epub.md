@@ -154,20 +154,21 @@ return {
 
 `.github/workflows/refresh-epub.yml` 会在仓库里定时跑一遍生成，你不用再手动执行、手动上传：
 
-- **节奏**：cron 每 20 分钟叫醒一次，job 自己限流到 **200 分钟**一次
-  （`env.INTERVAL_MINUTES`，想改成 60/360 直接改这里）；间隔不够时只跑几秒就跳过。
-- **做什么**：抓 `https://k-macao.github.io/004/` → `tools/build_epub.py` → 只在
-  `site/report.epub` / `site/epub.json` 真的变了才提交，提交信息带生成时间。
-- **推送前检验源时间**：生成后、提交前，job 会读 `site/epub.json` 的 `data_time`
-  （报告正文里的「扫描时间 / 行情日期」），距今超过 `env.MAX_SOURCE_AGE_HOURS`
-  （默认 **12 小时**）或缺失时就跳过提交——「文件新」不等于「数据新」，旧数据
-  不推给设备。手动触发的 `force` 只无视间隔限流，不会绕过这条新鲜度检查。
-- **手动触发**：Actions → *Refresh 004 EPUB* → **Run workflow**，勾 `force` 可以无视间隔。
-- **不会被 004 拖累**：004 自己没更新时，抓回来的内容一样，`git diff` 为空 → 不产生提交。
+- **节奏**：cron 每 20 分钟运行一次（`*/20 * * * *`），**每次运行都生成并推送**，
+  不再限流、内容没变也会提交（提交用 `--allow-empty`）。
+- **做什么**：抓 `https://k-macao.github.io/004/` → `tools/build_epub.py` → 提交
+  `site/report.epub` / `site/epub.json` 并推送。提交信息与目录页的「更新时间」是同一个时间戳。
+- **源时间只警告**：生成后，job 会检查 `site/epub.json` 的 `data_time`
+  （报告正文里的「扫描时间 / 行情日期」）。距今超过 `env.MAX_SOURCE_AGE_HOURS`
+  （默认 **12 小时**）或缺失时，只在 Actions 日志里输出 `warning`，**仍然推送**；
+  设备目录页同时显示源数据时间，「文件新」与「数据新」可以自己分辨。
+  若想恢复「旧数据不推送」，需要在 job 里把这一步改回 `exit 1` 或跳过提交。
+- **手动触发**：Actions → *Refresh 004 EPUB* → **Run workflow**。
 - **前提**：仓库 Settings → Actions → Workflow permissions 需为
-  **Read and write permissions**（否则 `git push` 会被拒）。
-- **体积**：EPUB 约 60–100 KiB，一次内容变化才提交一次；按 200 分钟节奏、004 每 2–3 小时
-  更新算，一天约 0.5 MiB 历史。
+  **Read and write permissions**（否则 `git push` 会被拒）。定时任务只在默认分支上运行。
+- **体积**：每次运行都是一个新提交，EPUB 约 60–100 KiB（zip 已压缩，Git 基本无法再压缩）。
+  按 20 分钟一次计，一天约 72 个提交、约 4 MiB 历史，一年约 1.5 GiB。
+  如果仓库体积是问题，可把 `cron` 改成更稀疏的间隔。
 
 设备端无需任何改动：`generated` 一变，插件下一次 60 秒轮询就会下载新版本并从头打开。
 
@@ -181,13 +182,14 @@ return {
 | `generated` | 这份 EPUB **文件生成**时间 | `build_epub.py` |
 | 设备 `Last check` | 插件拉清单的时间 | 插件 |
 
-- 目录页会印一行：`数据时间：2026-11-02 10:09:05 UTC ｜ 文件生成：2026-11-05 10:28 UTC`；
+- 目录页会印一行：`更新时间：2026-11-05 10:28:00 UTC ｜ 源数据时间：2026-11-02 10:09:05 UTC`。
+  第一项是本次文件生成/推送的时间（与提交信息一致），第二项是 004 报告里的源数据时间；
 - 插件 0.4.1 起，菜单 **Status** 增加 `Data: 2026-11-02 10:09:05 UTC`，超过 24 小时
   会自动追加 `(stale 3d)`，一眼就能看出「新的是文件，不是行情」；
 - 004 的构建挂了（它自己的 Actions 在 `🧪 舆情层自检` 失败）时，`generated` 会变、
   `data_time` 不动 —— 这正是需要区分两者的场景。
-- 自动刷新 job 在提交前也会用 `data_time` 做新鲜度闸门：超过 12 小时
-  （`env.MAX_SOURCE_AGE_HOURS`）就不推送，见 §4.5。
+- 自动刷新 job 会用 `data_time` 检查新鲜度，超过 12 小时（`env.MAX_SOURCE_AGE_HOURS`）
+  只给出日志警告，仍然推送，见 §4.5。
 
 ## 5. 想调排版
 
