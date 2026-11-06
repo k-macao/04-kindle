@@ -71,28 +71,8 @@ jobs:
               print(f"::warning title=004 源数据可能过期::{reason}")
           PY
 
-      - name: 状态类文字残留自检（不该有就把日志打出来）
-        run: |
-          python - <<'PY'
-          import pathlib
-          import sys
-          import zipfile
-
-          sys.path.insert(0, ".")
-          from kindle_report import is_status_text
-
-          leftovers = [line for line in
-                       pathlib.Path("kindle.txt").read_text("utf-8").splitlines()
-                       if is_status_text(line)]
-          body = zipfile.ZipFile("site/report.epub").read("OEBPS/report.xhtml").decode("utf-8")
-          for marker in ("STATUS &gt;", "抓取状态", "当次实抓", "抓取核验 ", "SOURCE FEEDS"):
-              if marker in body:
-                  leftovers.append(f"EPUB 里还有 {marker}")
-          if leftovers:
-              print("::warning title=状态类文字残留::" + " | ".join(leftovers[:5]))
-          else:
-              print("状态类文字已清空：kindle.txt 与 report.epub 都没有残留")
-          PY
+      - name: 状态类文字残留自检（有残留就不推送）
+        run: python tools/check_no_status.py
 
       - name: 提交并推送（每次运行都推送）
         run: |
