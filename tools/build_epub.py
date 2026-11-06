@@ -4,8 +4,9 @@
 截图模式（render_report.py）保真但费流量、放大后发虚；这个脚本换一条路：
 抓 004 的 <main> 正文，清洗成 XHTML，再按 004 自己的写作套路重新组织结构
 （力量条目 → 标题 + 信号 + 分数；「归类 / 当次读数」→ 两列表格；AI 解读 →
-左边线引用块；◆ 小标题 → 四级标题；章节加锚点与目录），数字统一加粗突出，
-表格保留并强化，最后打包成单文件 EPUB。插件把 EPUB 下载到设备后用
+左边线引用块；◆ 小标题 → 四级标题；章节加锚点与目录），并给排版加卡片与数据
+强调：行情表格、章节导语（VIX 仪表、结论摘要等文字图表）装进卡片，数字统一
+加粗并加背景填充突出，最后打包成单文件 EPUB。插件把 EPUB 下载到设备后用
 KOReader 阅读器打开，字号、行距、页边距全由 KOReader 自己管。
 
 用法：
@@ -549,6 +550,78 @@ def iter_tags(node, tag):
             yield from iter_tags(child, tag)
 
 
+def iter_all(node):
+    """Yield every node in the tree, including `node` itself."""
+    yield node
+    for child in node.children:
+        if isinstance(child, Node):
+            yield from iter_all(child)
+
+
+def wrap_data_cards(root):
+    """行情快照等数据表格也装进卡片：文字之外，图表按卡片呈现。"""
+    for parent in list(iter_all(root)):
+        children = parent.children
+        for index, child in enumerate(children):
+            if (isinstance(child, Node) and child.tag == "table"
+                    and child.attrs.get("class") == "data"):
+                children[index] = el("div", [child], **{"class": "card chart"})
+
+
+# Section intros end at the first structured block; kv tables belong to the
+# intro (a meta line is still an intro, not a boundary).
+LEAD_BOUNDARY = {"force-block", "card", "verdict", "ai"}
+
+
+def _find_parent(root, target):
+    for child in root.children:
+        if child is target:
+            return root
+        if isinstance(child, Node):
+            found = _find_parent(child, target)
+            if found is not None:
+                return found
+    return None
+
+
+def _is_structured(node):
+    if not isinstance(node, Node):
+        # Whitespace-only text nodes between blocks are formatting, not
+        # content — they must not break a section's intro run.
+        return bool(node.strip())
+    if node.tag in {"h1", "h2", "h3", "h4", "h5", "h6", "ul", "ol", "blockquote",
+                    "figure"}:
+        return True
+    if node.tag == "table":
+        return _class(node) != "kv"
+    return _class(node) in LEAD_BOUNDARY
+
+
+def wrap_section_leads(root):
+    """每个章节开头（标题之后、第一个结构化块之前）的连续导语装进卡片。
+
+    导语是 00 章的 VIX 仪表、07 章的结论摘要这类"文字图表"：两行以上才装卡，
+    单行或已转成表格的元信息保持原样。
+    """
+    for section in list(iter_tags(root, "h2")):
+        parent = _find_parent(root, section)
+        if parent is None:
+            continue
+        children = parent.children
+        try:
+            index = children.index(section)
+        except ValueError:
+            continue
+        run = []
+        cursor = index + 1
+        while cursor < len(children) and not _is_structured(children[cursor]):
+            run.append(children[cursor])
+            cursor += 1
+        if len(run) >= 2:
+            children[index + 1:index + 1 + len(run)] = [
+                el("div", run, **{"class": "card lead"})]
+
+
 def anchor_sections(root):
     """Give each <h2> an id and return the (id, title) list for the TOC."""
     sections = []
@@ -580,6 +653,8 @@ def transform_tree(root):
     walk(root)
     group_cards(root)
     style_tables(root)
+    wrap_data_cards(root)
+    wrap_section_leads(root)
     return anchor_sections(root)
 
 
@@ -730,7 +805,7 @@ html, body {
 }
 body {
   font-size: 1em;
-  line-height: 1.55;
+  line-height: 1.5;
   text-align: left;
   hyphens: none;
 }
@@ -782,7 +857,10 @@ h4.sub {
   margin: 0.9em 0 0.35em;
 }
 
-p { margin: 0 0 0.55em; text-indent: 0; }
+p { margin: 0 0 0.6em; }
+/* 中文段落首行缩进两字，整齐美观；表格、引用、信号行等不缩进。 */
+p { text-indent: 2em; }
+p.ai-line, p.verdict-line, p.signal, p.meta, p.ai-label { text-indent: 0; }
 ul, ol { margin: 0.2em 0 0.6em 1.1em; padding: 0; }
 li { margin: 0 0 0.25em; }
 
@@ -794,10 +872,11 @@ p.meta {
   margin: 0 0 0.9em;
 }
 
-/* Numbers: bold everywhere, right aligned inside tables. */
-.num { font-weight: bold; }
-td.num, th.num { text-align: right; font-weight: bold; }
-span.date { font-weight: bold; white-space: nowrap; }
+/* Numbers: bold everywhere, right aligned inside tables, with a grey fill
+   so figures stand out from the prose (data emphasis). */
+.num { font-weight: bold; background: #dcdcdc; }
+td.num, th.num { text-align: right; font-weight: bold; background: #dcdcdc; }
+span.date { font-weight: bold; white-space: nowrap; background: #efefef; }
 
 /* "重点 · 利空 · 100.0 分" becomes its own signal line. */
 p.signal { margin: 0 0 0.5em; font-size: 0.95em; }
@@ -807,7 +886,14 @@ span.tag {
   margin-right: 0.35em;
   font-size: 0.9em;
 }
-span.score { font-size: 1.3em; font-weight: bold; margin-left: 0.2em; }
+span.score {
+  background: #000000;
+  color: #ffffff;
+  padding: 0 0.3em;
+  font-size: 1.3em;
+  font-weight: bold;
+  margin-left: 0.2em;
+}
 
 /* Field/value pairs are tables, not sentences. */
 table.kv {
@@ -828,6 +914,7 @@ table.kv td {
   border: 1px solid #000000;
   padding: 0.2em 0.3em;
   vertical-align: top;
+  background: #efefef;
 }
 
 /* Market data table. */
@@ -845,7 +932,7 @@ table.data th, table.data td {
   text-align: left;
   vertical-align: top;
 }
-table.data th { font-weight: bold; }
+table.data th { font-weight: bold; background: #efefef; }
 
 /* Cards: one 力量条目 = one bordered box, sub-blocks stacked inside. */
 div.card {
@@ -871,6 +958,22 @@ div.card.slim {
   padding: 0.25em 0.4em;
   margin: 0.55em 0 0.6em;
 }
+
+/* Section intro cards: VIX gauge, verdict summaries and other text charts. */
+div.card.lead {
+  margin: 0.5em 0 1em;
+}
+div.card.lead > p { margin: 0 0 0.45em; }
+div.card.lead > table.kv { margin: 0.1em 0 0.5em; }
+div.card.lead > p:last-child { margin-bottom: 0; }
+
+/* Data tables (quotes, forecasts) get their own card. */
+div.card.chart {
+  margin: 0.4em 0 0.9em;
+}
+div.card.chart > table.data { margin: 0; }
+div.card > p:last-child, div.card > table:last-child,
+div.card > ul:last-child { margin-bottom: 0; }
 
 /* AI commentary: boxed with a left rule, a notch smaller than body text. */
 div.ai {

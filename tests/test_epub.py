@@ -190,6 +190,93 @@ class CardTest(unittest.TestCase):
         self.assertIn("border-width: 1px", css)
 
 
+class ChartCardTest(unittest.TestCase):
+    """数据表格装进卡片；章节导语装进卡片。"""
+
+    def test_data_table_becomes_a_card_chart(self):
+        body = be.extract_main(
+            "<main><h2>02 / 行情快照</h2><table><thead><tr><th>市场</th>"
+            "<th>最新</th></tr></thead><tbody><tr><td>恒指</td>"
+            "<td>24,681.51</td></tr></tbody></table></main>")
+        self.assertIn('<div class="card chart">', body)
+        self.assertIn('<table class="data">', body)
+        # 数据表格仍是独立卡片，不与其它卡片粘连
+        self.assertNotIn('<div class="card chart"><div class="card">', body)
+
+    def test_kv_table_stays_out_of_chart_cards(self):
+        body = be.extract_main(
+            "<main><h2>01 / 全景</h2><p>扫描时间 2026-11-02 10:09:05 UTC</p></main>")
+        self.assertNotIn('<div class="card chart">', body)
+
+    def test_section_preamble_becomes_a_lead_card(self):
+        body = be.extract_main(
+            "<main><h2>00 / 每日 VIX</h2><p>CBOE VIX 28.18 +11.57 / +69.66%</p>"
+            "<p>今日判读： 风险定价升温 · 恐慌定价升温</p>"
+            "<p>期权市场正在提高未来波动与下行保险的定价</p></main>")
+        self.assertIn('<div class="card lead">', body)
+        self.assertIn('<h2 id="s00" class="section first">00 / 每日 VIX</h2>',
+                      body)
+
+    def test_single_meta_line_is_not_carded(self):
+        body = be.extract_main(
+            "<main><h2>01 / 全景</h2><p>扫描时间 2026-11-02 10:09:05 UTC</p>"
+            "<p>1. 全球风险偏好 重点 · 利空 · 100.0 分</p></main>")
+        self.assertNotIn('<div class="card lead">', body)
+
+    def test_lead_runs_stop_at_structured_blocks(self):
+        body = be.extract_main(
+            "<main><h2>00 / VIX</h2><p>CBOE VIX 28.18</p><p>今日判读：升温</p>"
+            "<p>◆ 仪表</p><p>仪表细节</p></main>")
+        self.assertIn('<div class="card lead">', body)
+        self.assertIn("<h4 class=\"sub\">仪表</h4>", body)
+
+    def test_whitespace_text_nodes_do_not_break_lead_runs(self):
+        # 真实报告里块与块之间有换行文本节点；它们只是排版，不能截断导语。
+        body = be.extract_main(
+            "<main><h2>00 / VIX</h2>\n<p>CBOE VIX 28.18</p>\n"
+            "<p>今日判读：升温</p>\n<p>口径：当前 28.18</p>\n</main>")
+        self.assertIn('<div class="card lead">', body)
+
+
+class DataFillTest(unittest.TestCase):
+    """数据突出：数字加粗 + 背景填充。"""
+
+    def test_numbers_get_a_background_fill(self):
+        css = be.STYLE_CSS
+        self.assertIn(".num { font-weight: bold; background: #dcdcdc; }", css)
+        self.assertIn("td.num, th.num { text-align: right; font-weight: bold; background: #dcdcdc; }",
+                      css)
+
+    def test_score_is_a_black_badge(self):
+        css = be.STYLE_CSS
+        self.assertIn("span.score {", css)
+        self.assertIn("background: #000000", css)
+        self.assertIn("color: #ffffff", css)
+
+    def test_table_values_get_a_fill(self):
+        css = be.STYLE_CSS
+        self.assertIn("table.kv td {", css)
+        self.assertIn("background: #efefef", css)
+        self.assertIn("table.data th { font-weight: bold; background: #efefef; }", css)
+
+    def test_lead_and_chart_card_css(self):
+        css = be.STYLE_CSS
+        self.assertIn("div.card.lead {", css)
+        self.assertIn("div.card.chart {", css)
+        self.assertIn("div.card.chart > table.data { margin: 0; }", css)
+
+    def test_prose_paragraphs_are_indented(self):
+        css = be.STYLE_CSS
+        self.assertIn("text-indent: 2em", css)
+        self.assertIn(
+            "p.ai-line, p.verdict-line, p.signal, p.meta, p.ai-label { text-indent: 0; }",
+            css)
+
+    def test_line_height_is_concise(self):
+        css = be.STYLE_CSS
+        self.assertIn("line-height: 1.5", css)
+
+
 class HeadingBandTest(unittest.TestCase):
     def setUp(self):
         self.body = be.extract_main(SAMPLE)
@@ -302,7 +389,7 @@ class EpubTest(unittest.TestCase):
                 self.assertIn("report.xhtml", opf)
                 self.assertIn("dcterms:modified", opf)
                 css = zf.read("OEBPS/style.css").decode("utf-8")
-                for rule in ("border: 1px solid #000000", "line-height: 1.55",
+                for rule in ("border: 1px solid #000000", "line-height: 1.5",
                              "table.kv", "div.verdict", ".num"):
                     self.assertIn(rule, css)
                 body = zf.read("OEBPS/report.xhtml").decode("utf-8")
