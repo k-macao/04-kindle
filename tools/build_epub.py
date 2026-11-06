@@ -289,10 +289,10 @@ STATUS_LINE_PATTERNS = (
     r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}",
     r"^时间未知\s*[·・]",
     r"^发布时间未知\s*[·・]",
-    r"本次匹配\s*\d+\s*条[，,]\s*展示\s*\d+\s*条",
+    r"本次匹配\s*\d+\s*条[，,]\s*展示\s*\d+\s*条\s*$",
     # —— 本次构建的汇总状态、缺口与降级 ——
     r"^\d+\s*/\s*\d+\s*(?:项同步成功|个社区实抓成功|源可用|源均未获取)",
-    r"\d+\s*/\s*\d+\s*可用\s*[·・]",
+    r"^[^\d]{0,12}\d+\s*/\s*\d+\s*可用\s*[·・]",
     r"\d+\s*个接口本次自动降级",
     r"^查看(?:原帖|原文|原页|更多)",
     r"\d+\s*条入库\s*[·・]",
@@ -312,9 +312,10 @@ STATUS_LINE_PATTERNS = (
     r"恢复命令[：:]",
 )
 STATUS_LINE_RES = tuple(re.compile(pattern) for pattern in STATUS_LINE_PATTERNS)
-# 删空之后可以顺手丢掉的容器（表格单元不在此列：删掉会让列错位）。
-STATUS_EMPTY_TAGS = frozenset({
-    "div", "p", "li", "ul", "ol", "article", "section", "blockquote", "figure",
+# 内容被删空之后可以顺手丢掉的外壳；表格相关的一律保留，删了会让列错位。
+STATUS_KEEP_WHEN_EMPTY = frozenset({
+    "td", "th", "tr", "table", "thead", "tbody", "tfoot", "col", "colgroup",
+    "caption", "img", "br", "hr", "main",
 })
 
 
@@ -328,30 +329,95 @@ def is_status_text(text):
     return any(pattern.search(text) for pattern in STATUS_LINE_RES)
 
 
-def strip_status(node):
-    """就地删掉状态块，返回删除数量；正文一律不动。
+def _is_block(child):
+    """块级子节点：它自己就是一块，不能和邻居的文字拼成一行来判。"""
+    return isinstance(child, Node) and child.tag not in INLINE and child.tag != "br"
 
-    自下而上：先清子节点，再看自己。子节点被删空的容器（例如一张只剩标题的
-    「未获取」卡片外壳）一并丢掉，不留空白块。
+
+def _is_single_line(node):
+    """这个节点是不是「一视觉行」（没有块级子节点、也没有 <br>）。
+
+    只有单行节点才整块判定；跨行的容器交给 _runs 按行拆开判，否则一句状态文字
+    会把同容器里的正文一起带走（真实页面里 03B 的采集概况就是这样：小标题、
+    裸文本状态句、口径说明挤在同一个 div 里）。
+    """
+    return not any(_is_block(child) or (isinstance(child, Node) and child.tag == "br")
+                   for child in node.children)
+
+
+def _runs(children):
+    """把子节点按块级元素与 <br> 切成行内片段，返回 [(start, end)] 索引区间。
+
+    源页面里不少状态句没有自己的标签，直接是容器里的裸文本（还夹着 <strong>），
+    所以除了「整块是元素」的情况，还得能按行内片段删。
+    """
+    runs = []
+    start = end = None
+    for index, child in enumerate(children):
+        inline = not _is_block(child) and not (isinstance(child, Node) and child.tag == "br")
+        if inline:
+            if start is None:
+                start = index
+            end = index + 1
+        elif start is not None:
+            runs.append((start, end))
+            start = end = None
+    if start is not None:
+        runs.append((start, end))
+    return runs
+
+
+def _run_text(run):
+    return normalize("".join(child if isinstance(child, str) else child.text()
+                             for child in run))
+
+
+def strip_status(node):
+    """就地删掉状态类文字，返回删除数量；正文一律不动。
+
+    三层，自下而上：
+    1. 递归清子节点；
+    2. 元素级——class/#id 命中（推送框、筛选 chips）整块删；单行节点整块文字就是
+       状态文字的（`抓取状态：…`、`当次实抓 · 端点 …`、chip「未获取」）整块删；
+       内容被删空的外壳顺手丢掉，不留空白块；
+    3. 行内片段级——容器里裸文本 + 行内元素混排出来的那一行，命中就只删这一行，
+       同容器的正文（小标题、口径说明）原样留下。
     """
     dropped = 0
+    for child in node.children:
+        if isinstance(child, Node):
+            dropped += strip_status(child)
+
     kept = []
     for child in node.children:
         if isinstance(child, Node):
             if child.marks & STATUS_DROP_CLASSES or child.marks & STATUS_DROP_IDS:
                 dropped += 1
                 continue
-            dropped += strip_status(child)
-            if is_status_text(child.text()):
+            if _is_single_line(child) and is_status_text(child.text()):
                 dropped += 1
                 continue
-            # 子节点被删空的容器（只剩换行缩进）一并丢掉，不留空白块。
-            if (child.tag in STATUS_EMPTY_TAGS and not normalize(child.text())
+            if (child.tag not in STATUS_KEEP_WHEN_EMPTY and not normalize(child.text())
                     and not any(isinstance(item, Node) for item in child.children)):
                 dropped += 1
                 continue
         kept.append(child)
-    node.children = kept
+
+    result = []
+    cursor = 0
+    for start, end in _runs(kept):
+        result.extend(kept[cursor:start])
+        run = kept[start:end]
+        if is_status_text(_run_text(run)):
+            dropped += 1
+            # 被删掉的这一行如果紧跟在 <br> 后面，那个换行也没意义了。
+            if result and isinstance(result[-1], Node) and result[-1].tag == "br":
+                result.pop()
+        else:
+            result.extend(run)
+        cursor = end
+    result.extend(kept[cursor:])
+    node.children = result
     return dropped
 
 

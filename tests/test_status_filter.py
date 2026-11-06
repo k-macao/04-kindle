@@ -146,6 +146,55 @@ class EpubStatusFilterTest(unittest.TestCase):
                 self.assertNotIn(marker, self.body)
 
 
+class MixedBlockTest(unittest.TestCase):
+    """状态句没有自己的标签时，只删那一行，别把同容器的正文带走。
+
+    真实页面 03B 就是这样：小标题、裸文本状态句（还夹着 <strong>）、口径说明
+    三者挤在同一个 <div> 里；04/03B 也有一行正文 + <br> + 状态 span 的写法。
+    """
+
+    BOX = (
+        "<main><div class=\"pub-box\">"
+        "<div class=\"pub-sub\">◆ 本次采集概况（多量化平台合并 · 不显示来源）</div>"
+        "量化平台接口 <strong>2/11</strong> 可用 · 采集新闻 <strong>60</strong> 条 · "
+        "指数序列 0 行 · <strong>9</strong> 个接口本次自动降级（单接口失败不阻断构建与推送）"
+        "<div>数据日期 2026-11-06 · 模式 联网实测：优先平台现成因子，缺失时以免费源 + "
+        "自建词库补齐；来源明细仅保留在内部构建产物中。</div>"
+        "</div></main>"
+    )
+
+    def test_bare_status_sentence_only_loses_itself(self):
+        body = be.extract_main(self.BOX)
+        self.assertNotIn("个接口本次自动降级", body)
+        self.assertNotIn("可用 · 采集新闻", body)
+        # 小标题与口径说明都在，容器也没被整块吞掉
+        self.assertIn("本次采集概况", body)
+        self.assertIn("数据日期 2026-11-06", body)
+        self.assertIn("联网实测", body)
+        # 裸文本删掉后不留空的 <strong>
+        self.assertNotIn("<strong></strong>", body)
+
+    def test_orphan_strong_left_by_a_cut_run_is_not_serialised(self):
+        body = be.extract_main(self.BOX)
+        self.assertNotIn("2/11", body)
+
+    def test_status_span_after_a_line_break_is_cut_from_content(self):
+        body = be.extract_main(
+            "<main><p><span class=\"lead\">舆情温度计 62.46 · 偏热</span> 净情感 +0.07 · "
+            "负面占比 3.33%<br/><span style=\"color:#7d838b\">数据日期 2026-11-06 · "
+            "采集状态 量化平台接口 2/11 可用 · 生成于 2026-11-06 03:02:55 UTC</span></p></main>")
+        self.assertIn("舆情温度计", body)
+        self.assertIn("净情感", body)
+        self.assertNotIn("采集状态", body)
+        self.assertNotIn("生成于", body)
+
+    def test_text_mode_agrees_on_the_same_box(self):
+        text = k.extract_text(self.BOX)
+        self.assertIn("本次采集概况", text)
+        self.assertIn("数据日期 2026-11-06", text)
+        self.assertNotIn("个接口本次自动降级", text)
+
+
 class TextStatusFilterTest(unittest.TestCase):
     def setUp(self):
         self.text = k.extract_text(PAGE)
