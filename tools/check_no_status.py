@@ -99,7 +99,8 @@ def check(text_path, epub_path, manifest_path=None,
             errors.append(f"读不懂清单 {manifest}：{exc}")
         else:
             summary.update({key: data.get(key) for key in
-                            ("generated", "data_time", "chars", "sections", "status_removed")})
+                            ("generated", "data_time", "data_time_kind", "chars",
+                             "sections", "status_removed")})
     return errors, summary
 
 
@@ -115,11 +116,16 @@ def main(argv=None):
     errors, summary = check(args.text, args.epub, args.manifest,
                             args.min_lines, args.min_chars)
     if summary:
+        shown = {**dict.fromkeys(("text_lines", "epub_lines", "epub_chars", "sections",
+                                  "status_removed", "data_time", "data_time_kind"), "—"),
+                 **summary}
+        # 精度要跟着时间一起打出来：只有日期时 data_time 里的 00:00:00 是补出来的，
+        # 光看时间分不清「真的是午夜」还是「正文只给到交易日」。
+        if shown["data_time_kind"] not in ("—", None, ""):
+            shown["data_time"] = f"{shown['data_time']}（{shown['data_time_kind']}）"
         print("纯文本 {text_lines} 行 ｜ EPUB {epub_lines} 行 / {epub_chars} 字符 ｜ "
               "章节 {sections} ｜ 本次删掉状态块 {status_removed} ｜ 数据时间 {data_time}"
-              .format(**{**dict.fromkeys(("text_lines", "epub_lines", "epub_chars",
-                                          "sections", "status_removed", "data_time"), "—"),
-                         **summary}))
+              .format(**shown))
     for error in errors:
         # CI 里用 workflow command 前缀，错误才会显示成 run 的注解。
         prefix = "::error title=状态类文字自检::" if os.environ.get("GITHUB_ACTIONS") else ""

@@ -28,8 +28,8 @@ python tools/build_epub.py https://k-macao.github.io/004/ --out site
 
 ```
 site/report.epub     单文件 EPUB 3（含 toc.ncx，兼容旧版 crengine）
-site/epub.json       {"generated", "doc", "title", "chars", "bytes",
-                      "sections", "data_time", "status_removed", "source"}
+site/epub.json       {"generated", "doc", "title", "chars", "bytes", "sections",
+                      "data_time", "data_time_kind", "status_removed", "source"}
 ```
 
 成功时打印 `完成：84 KiB，19342 字符，site/report.epub`，并跟着打印
@@ -79,10 +79,11 @@ python kindle_report.py report-built.html --format text -o kindle.txt
 - **口径说明与方法论注释是内容，不删**：`口径：…`、`指标口径：…`、
   `▶ 词库极性与摘录说明：…`、`注：本节结论…`、`⚠️ 风险提示`、
   `评论仅为有限样本…`、`缺口记账：3/49 个源当次未获取 —— …`；
-- **时间戳行保留**：`扫描时间 … · 行情日期 … · 数据覆盖 99%`、`预测生成 … · 基准日 …`。
-  源数据时间（`data_time`，新鲜度闸门用）本来就从这里读，而且是在过滤**之前**读的：
-  即使以后规则更激进，闸门也不会拿不到时间；模板占位符检查（`{{FETCH_STATUS}}` 正好
-  落在会被删的状态块里）同样跑在过滤之前。
+- **时间戳行保留**：`扫描时间 … · 行情日期 … · 数据覆盖 99%`、`预测生成 … · 基准日 …`、
+  `◆ 行情快照 · 11 月 6 日 · 2026-11-06 22:57:20 UTC`。源数据时间（`data_time`，
+  新鲜度闸门用）本来就从这里读，而且是在过滤**之前**读的：即使以后规则更激进，
+  闸门也不会拿不到时间；模板占位符检查（`{{FETCH_STATUS}}` 正好落在会被删的状态块里）
+  同样跑在过滤之前。取值分三级，精度记在 `data_time_kind` 里，见 §4.6。
 
 `kindle_report.py`（纯文本模式）带一份逐条相同的规则——它要单独拷进 004 仓库，不能
 import 本仓库的模块，所以 `tests/test_status_filter.py` 会比对两边的 `STATUS_*` 常量，
@@ -214,10 +215,12 @@ return {
   发现整行状态类文字（`抓取状态：…`、`当次实抓 · 端点 …`、`STATUS > …`）就报错退出，
   这次运行不提交、不推送，设备上留着上一版；正文行数/字符数掉到下限以下同样报错
   （防过滤规则写宽了把正文删掉）。
-- **源时间只警告**：生成后，job 会检查 `site/epub.json` 的 `data_time`
-  （报告正文里的「扫描时间 / 行情日期」）。距今超过 `env.MAX_SOURCE_AGE_HOURS`
-  （默认 **12 小时**）或缺失时，只在 Actions 日志里输出 `warning`，**仍然推送**；
-  设备目录页同时显示源数据时间，「文件新」与「数据新」可以自己分辨。
+- **源时间只警告**：生成后，job 会检查 `site/epub.json` 的 `data_time` 与
+  `data_time_kind`（都来自报告正文，三级取值见 §4.6）。距今超过
+  `env.MAX_SOURCE_AGE_HOURS`（默认 **12 小时**）或缺失时，只在 Actions 日志里输出
+  `warning`，**仍然推送**；设备目录页同时显示源数据时间，「文件新」与「数据新」
+  可以自己分辨。`kind` 必须一起传：精度只到日期时 `data_time` 里的 `00:00:00` 是
+  补出来的，拿它当真实时刻算「距今几小时」，报告当天晚上就会误报过期。
   若想恢复「旧数据不推送」，需要在 job 里把这一步改回 `exit 1` 或跳过提交。
 - **手动触发**：Actions → *Refresh 004 EPUB* → **Run workflow**。
 - **前提**：仓库 Settings → Actions → Workflow permissions 需为
@@ -234,15 +237,30 @@ return {
 
 | 字段 | 含义 | 谁产生 |
 | --- | --- | --- |
-| `data_time` | 报告里的**行情时间**（页面上的「扫描时间 / 行情日期」），ISO-8601 UTC | 004 的数据源 |
+| `data_time` | 报告里的**行情时间**，ISO-8601 UTC；三级取值见下 | 004 的数据源 |
+| `data_time_kind` | `data_time` 的**精度**：`scan` / `build` / `date` | `build_epub.py` |
 | `generated` | 这份 EPUB **文件生成**时间 | `build_epub.py` |
 | 设备 `Last check` | 插件拉清单的时间 | 插件 |
 
+- `data_time` 按三级取，`data_time_kind` 记它是哪一级：
+
+  | kind | 取自正文哪里 | 精度 |
+  | --- | --- | --- |
+  | `scan` | `扫描时间 2026-11-02 10:09:05 UTC`（旧模板） | 秒 |
+  | `build` | 页面构建戳 `… · 2026-11-06 22:57:20 UTC`（上游 2026-11-06 换模板后只剩这个） | 秒 |
+  | `date` | `行情日期 2026-11-06` | **只到日** |
+
+  取 `build` 时只认不晚于「现在 + 1 小时」的戳：正文里引用的未来时间（协议生效日之类）
+  不能当构建时间，否则闸门永远判「很新」。同级有多个戳就取最晚的那个。
 - 目录页会印一行：`更新时间：2026-11-05 18:28:00 北京时间 ｜ 源数据时间：2026-11-02 18:09:05 北京时间`。
   页面时间统一为北京时间（UTC+8）；`epub.json` 与提交信息仍为 UTC。
-  第一项是本次文件生成/推送的时间（与提交信息一致），第二项是 004 报告里的源数据时间；
+  第一项是本次文件生成/推送的时间（与提交信息一致），第二项是 004 报告里的源数据时间。
+  `kind` 是 `date` 时改印 `源数据日期：2026-11-06`——补出来的午夜换算成北京时间是
+  `08:00:00`，那是个看着精确到秒的假时刻，不能显示；
 - 插件 0.4.1 起，菜单 **Status** 增加 `Data: …`；0.4.2 起 Status 中的 Data 和 Last check 都按北京时间显示（`(Beijing)`），例如 `Data: 2026-11-02 18:09:05 (Beijing)`。超过 24 小时
   会自动追加 `(stale 3d)`，一眼就能看出「新的是文件，不是行情」；
+  0.4.3 起读 `data_time_kind`：`date` 时显示 `Data: 2026-11-06 (date only)`，
+  年龄按当天 23:59:59 UTC 起算，不会报告当天晚上就变成 `(stale 1d)`；
 - 004 的构建挂了（它自己的 Actions 在 `🧪 舆情层自检` 失败）时，`generated` 会变、
   `data_time` 不动 —— 这正是需要区分两者的场景。
 - 自动刷新 job 会用 `data_time` 检查新鲜度，超过 12 小时（`env.MAX_SOURCE_AGE_HOURS`）
