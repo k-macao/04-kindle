@@ -154,7 +154,7 @@ return {
 
 `.github/workflows/refresh-epub.yml` 会在仓库里定时跑一遍生成，你不用再手动执行、手动上传：
 
-- **节奏**：cron 每 20 分钟运行一次（`*/20 * * * *`），**每次运行都生成并推送**，
+- **节奏**：cron 每 60 分钟运行一次（`0 * * * *`，每小时整点），**每次运行都生成并推送**，
   不再限流、内容没变也会提交（提交用 `--allow-empty`）。
 - **做什么**：抓 `https://k-macao.github.io/004/` → `tools/build_epub.py` → 提交
   `site/report.epub` / `site/epub.json` 并推送。提交信息与目录页的「更新时间」是同一个时间戳。
@@ -167,7 +167,7 @@ return {
 - **前提**：仓库 Settings → Actions → Workflow permissions 需为
   **Read and write permissions**（否则 `git push` 会被拒）。定时任务只在默认分支上运行。
 - **体积**：每次运行都是一个新提交，EPUB 约 60–100 KiB（zip 已压缩，Git 基本无法再压缩）。
-  按 20 分钟一次计，一天约 72 个提交、约 4 MiB 历史，一年约 1.5 GiB。
+  按 60 分钟一次计，一天约 24 个提交、约 1.4 MiB 历史，一年约 0.5 GiB。
   如果仓库体积是问题，可把 `cron` 改成更稀疏的间隔。
 
 设备端无需任何改动：`generated` 一变，插件下一次 60 秒轮询就会下载新版本并从头打开。

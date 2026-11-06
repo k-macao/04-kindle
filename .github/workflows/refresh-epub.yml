@@ -1,13 +1,13 @@
 name: Refresh 004 EPUB
 
-# 定时把 004 的公开页面重排成 EPUB。每次运行都会生成 site/report.epub 与
+# 定时（每小时整点）把 004 的公开页面重排成 EPUB。每次运行都会生成 site/report.epub 与
 # site/epub.json，并提交推送（不限流、内容没变也推送）。
 # 目录页的「更新时间」就是本次运行的生成时间，提交信息里也是同一个时间。
 # 源数据时间（004 报告正文里的扫描时间）超过 MAX_SOURCE_AGE_HOURS 时只在日志里
 # 给出警告，仍然推送，设备端目录页会同时显示源数据时间供你判断新鲜度。
 on:
   schedule:
-    - cron: "*/20 * * * *"
+    - cron: "0 * * * *"
   workflow_dispatch:
 
 permissions:
