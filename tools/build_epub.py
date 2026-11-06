@@ -94,12 +94,15 @@ ATTRS = {
 class Node:
     """Minimal element node; text children are plain strings."""
 
-    __slots__ = ("tag", "attrs", "children")
+    __slots__ = ("tag", "attrs", "children", "marks")
 
-    def __init__(self, tag, attrs=None, children=None):
+    def __init__(self, tag, attrs=None, children=None, marks=None):
         self.tag = tag
         self.attrs = dict(attrs or {})
         self.children = list(children or [])
+        # 源页面的 class / #id 只作为「这块是什么」的判断依据（见 strip_status），
+        # 不写进 attrs，所以不会带进 EPUB——排版仍然只由本文件的 CSS 决定。
+        self.marks = set(marks or ())
 
     def text(self):
         parts = []
@@ -116,8 +119,8 @@ class Node:
         return self
 
 
-def el(tag, children=None, **attrs):
-    return Node(tag, attrs, children if children is not None else [])
+def el(tag, children=None, marks=None, **attrs):
+    return Node(tag, attrs, children if children is not None else [], marks)
 
 
 def normalize(text):
@@ -161,6 +164,17 @@ class MainTree(HTMLParser):
             out[name] = value or ""
         return out
 
+    @staticmethod
+    def _marks(attrs):
+        """记住源页面的 class / #id，供 strip_status 认块用（不进输出）。"""
+        marks = set()
+        for name, value in attrs:
+            if name == "class" and value:
+                marks.update(value.split())
+            elif name == "id" and value:
+                marks.add("#" + value)
+        return marks
+
     def _pop_to(self, names, multi=False):
         while len(self.stack) > 1:
             top = self.stack[-1].tag
@@ -194,7 +208,7 @@ class MainTree(HTMLParser):
             names, multi = SIBLING_CLOSERS[tag]
             self._pop_to(names, multi)
         if tag in KEEP:
-            node = el(tag, None, **self._attrs(tag, attrs))
+            node = el(tag, None, marks=self._marks(attrs), **self._attrs(tag, attrs))
             self.stack[-1].children.append(node)
             if tag not in VOID:
                 self.stack.append(node)
@@ -224,6 +238,121 @@ class MainTree(HTMLParser):
 
     def tree(self):
         return self.root
+
+
+# ---------------------------------------------------------------------------
+# 状态类文字：整块丢弃
+# ---------------------------------------------------------------------------
+#
+# 目标：正文「全部内容」都留（行情、力量条目、快讯标题与摘要、AI 解读、社区摘录、
+# 预测、结论……），只删掉「这台机器这次跑得怎么样」的话——抓取/加载/推送状态、
+# 端点与耗时、核验时间、缺口与降级计数、界面按钮与筛选 chips、构建兜底占位。
+# 口径说明、方法论注释（「口径：…」「指标口径：…」「▶ 词库极性与摘录说明：…」
+# 「注：…」「⚠️ 风险提示」）属于报告内容，保留。
+#
+# 下面三组规则与 kindle_report.py 里的同名常量必须逐条一致；
+# tests/test_status_filter.py 会直接比对两个模块，改一处就得改两处。
+
+# 源页面里这些 class / id 整块是界面或运行状态，连同子节点一起丢。
+STATUS_DROP_CLASSES = frozenset({
+    "push-wrap", "push-title", "push-tip", "terminal-log-box", "pixel-push-btn",
+    "filter-row", "filter-tab", "filter-result", "hud-stat", "hud-stats",
+    "live-state", "loading", "spinner", "skeleton", "status-bar", "fetch-status",
+})
+STATUS_DROP_IDS = frozenset({"#pushStatus", "#pushBtn", "#filterResult"})
+# 整行/整块只有这几个字时，它是枚状态标签（例如社区卡片右上角的「未获取」）。
+STATUS_CHIP_TEXT = frozenset({
+    "未获取", "今日未获取", "抓取中", "加载中", "抓取失败", "同步中", "推送中",
+})
+# 行级规则：命中任意一条即丢掉整块。绝大多数以 ^ 锚定，避免误伤正文里
+# 顺带提到「抓取」「降级」的说明句。
+STATUS_LINE_PATTERNS = (
+    # —— 界面与运行状态：推送框、终端状态行、加载提示、筛选 chips ——
+    r"^(?:STATUS|TIME CHECK|TRANSMITTING|SUCCESS|FAILED|LOADING|FETCHING)\s*[>＞]",
+    r"^(?:OFFLINE|CACHED)(?:\s*/\s*(?:OFFLINE|CACHED))?$",
+    r"\d+\s*SOURCE\s+FEEDS\s*$",
+    r"^(?:抓取中|加载中|正在抓取|正在加载|正在推送|正在发送|正在构建|请稍候|请稍后)",
+    r"(?:抓取中|加载中|同步中|推送中)[…\.。]?\s*$",
+    r"^微信推送\s*[·・]",
+    r"^点击下方按钮",
+    r"^▶?\s*立即推送",
+    # —— 逐源抓取状态、端点与耗时、核验时间 ——
+    r"^抓取状态[：:]",
+    r"^当次(?:未获取|抓取成功|抓取失败|实抓)",
+    r"^未获取原因[：:]",
+    r"^未提供站内热度指标",
+    r"^热度未知\s*[·・]",
+    r"^端点\s+https?://",
+    r"[·・]\s*抓取核验\s*\d{4}-\d{2}-\d{2}\s*$",
+    r"[·・]\s*抓取于\s*\d{4}-\d{2}-\d{2}",
+    r"核验日期\s*\d{4}-\d{2}-\d{2}",
+    r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}",
+    r"^时间未知\s*[·・]",
+    r"^发布时间未知\s*[·・]",
+    r"本次匹配\s*\d+\s*条[，,]\s*展示\s*\d+\s*条",
+    # —— 本次构建的汇总状态、缺口与降级 ——
+    r"^\d+\s*/\s*\d+\s*(?:项同步成功|个社区实抓成功|源可用|源均未获取)",
+    r"\d+\s*/\s*\d+\s*可用\s*[·・]",
+    r"\d+\s*个接口本次自动降级",
+    r"^查看(?:原帖|原文|原页|更多)",
+    r"\d+\s*条入库\s*[·・]",
+    r"^数据缺口[：:]",
+    r"^本次判定[：:]",
+    r"^窗口内无匹配快讯的小节[：:]",
+    r"^数据日期\s.*[·・]\s*采集状态",
+    r"^采集状态\s",
+    # —— 构建兜底占位：产物缺失时页面上那段「怎么把它跑出来」的运行提示 ——
+    r"^今日未获取",
+    r"[—-]\s*今日未获取\s*$",
+    r"待构建注入",
+    r"^运行\s*python3?\s",
+    r"^⚠️\s*未读到",
+    r"^本栏(?:不再回填|不回填)",
+    r"未找到\s*[\w./-]+\.json",
+    r"恢复命令[：:]",
+)
+STATUS_LINE_RES = tuple(re.compile(pattern) for pattern in STATUS_LINE_PATTERNS)
+# 删空之后可以顺手丢掉的容器（表格单元不在此列：删掉会让列错位）。
+STATUS_EMPTY_TAGS = frozenset({
+    "div", "p", "li", "ul", "ol", "article", "section", "blockquote", "figure",
+})
+
+
+def is_status_text(text):
+    """一行/一块文字是不是「状态类文字」（抓取中、STATUS、核验时间……）。"""
+    text = normalize(text)
+    if not text:
+        return False
+    if text in STATUS_CHIP_TEXT:
+        return True
+    return any(pattern.search(text) for pattern in STATUS_LINE_RES)
+
+
+def strip_status(node):
+    """就地删掉状态块，返回删除数量；正文一律不动。
+
+    自下而上：先清子节点，再看自己。子节点被删空的容器（例如一张只剩标题的
+    「未获取」卡片外壳）一并丢掉，不留空白块。
+    """
+    dropped = 0
+    kept = []
+    for child in node.children:
+        if isinstance(child, Node):
+            if child.marks & STATUS_DROP_CLASSES or child.marks & STATUS_DROP_IDS:
+                dropped += 1
+                continue
+            dropped += strip_status(child)
+            if is_status_text(child.text()):
+                dropped += 1
+                continue
+            # 子节点被删空的容器（只剩换行缩进）一并丢掉，不留空白块。
+            if (child.tag in STATUS_EMPTY_TAGS and not normalize(child.text())
+                    and not any(isinstance(item, Node) for item in child.children)):
+                dropped += 1
+                continue
+        kept.append(child)
+    node.children = kept
+    return dropped
 
 
 # ---------------------------------------------------------------------------
@@ -707,23 +836,35 @@ def read_source(source):
     return raw.decode("utf-8-sig")
 
 
-def build_document(source, base_url=""):
-    """Return (body_xhtml, sections, data_time) for the report body."""
+def build_document(source, base_url="", stats=None):
+    """Return (body_xhtml, sections, data_time) for the report body.
+
+    `stats`（可选 dict）会写入 {"status_removed": N}，供清单与日志说明这次
+    删掉了多少状态块。
+    """
     parser = MainTree(base_url)
     parser.feed(source)
     root = parser.tree()
     if not parser.found:
         raise ValueError("未找到非空的 <main> 报告正文")
+    # 占位符检查与源数据时间都取自「过滤前」的正文：模板占位符可能正好落在被删的
+    # 状态块里（{{FETCH_STATUS}}），而扫描时间也可能被更激进的过滤规则删掉——
+    # 先取时间再删状态，新鲜度闸门才不会拿到空值。
+    raw_text = normalize(root.text())
+    if re.search(r"\{\{[A-Z][A-Z0-9_]*\}\}", raw_text):
+        raise ValueError("检测到未替换的模板占位符；请使用 004 构建后的报告")
+    data_time = extract_data_time(raw_text)
+    if stats is not None:
+        stats["status_removed"] = strip_status(root)
+    else:
+        strip_status(root)
     sections = transform_tree(root)
     body = serialize(root).strip()
     if not re.search(r"<[a-z]", body):
         raise ValueError("未找到非空的 <main> 报告正文")
-    text = re.sub(r"<[^>]+>", "", body)
-    if re.search(r"\{\{[A-Z][A-Z0-9_]*\}\}", text):
-        raise ValueError("检测到未替换的模板占位符；请使用 004 构建后的报告")
     if len(body) > 4 * 1024 * 1024:
         raise ValueError("正文超过 4 MiB，设备端可能拒绝打开")
-    return body, sections, extract_data_time(plain_text(body))
+    return body, sections, data_time
 
 
 DATA_TIME_RE = re.compile(r"扫描时间\s*(\d{4})-(\d{2})-(\d{2})\s+(\d{2}):(\d{2}):(\d{2})")
@@ -1162,7 +1303,8 @@ def main(argv=None):
     try:
         source = read_source(args.source)
         base_url = args.source if args.source.startswith(("https://", "http://")) else ""
-        body, sections, data_time = build_document(source, base_url)
+        stats = {}
+        body, sections, data_time = build_document(source, base_url, stats)
         out = Path(args.out)
         epub = out / "report.epub"
         # 同一个时间戳同时写入 EPUB 目录页、epub.json 与提交信息，三者保持一致。
@@ -1177,6 +1319,8 @@ def main(argv=None):
             "bytes": epub.stat().st_size,
             "sections": len(sections),
             "data_time": data_time or "",
+            # 这次删掉多少个状态块（抓取状态、端点耗时、核验时间、推送框……）。
+            "status_removed": stats.get("status_removed", 0),
             "source": args.source,
         }
         (out / "epub.json").write_text(
@@ -1186,6 +1330,7 @@ def main(argv=None):
         return 1
     print(f"完成：{manifest['bytes'] / 1024:.0f} KiB，{manifest['chars']} 字符，"
           f"{manifest['sections']} 个章节，数据时间 {data_time or '未知'}，{epub}")
+    print(f"状态类文字：已删除 {manifest['status_removed']} 块（正文全部保留）")
     print(f"清单：{out / 'epub.json'}")
     print("上传 site/report.epub 与 site/epub.json，插件 Display mode 选 EPUB")
     return 0
