@@ -36,7 +36,7 @@ AI 解读 → 引用块；结论 → 结论框；数字加粗、涨跌带 ▲▼
 python tools/build_epub.py https://k-macao.github.io/004/ --out site   # 只用标准库
 ```
 
-上传也可以用 `.github/workflows/refresh-epub.yml` 自动完成（默认每 200 分钟跑一次，内容变了才提交；推送前还会检验源数据时间，距今超过 12 小时就不推）。
+上传也可以用 `.github/workflows/refresh-epub.yml` 自动完成（每次定时运行（默认每 60 分钟）都会生成并推送一次；目录页第一行是本次更新时间，源数据时间超过 12 小时只给出警告，仍然推送）。
 手动上传 `site/report.epub` + `site/epub.json` 时，插件里 **EPUB manifest URL** 指向
 `site/epub.json`，**Display mode → EPUB (styled)**。每 60 秒只拉一次几百字节的清单：
 没更新就翻页，`generated` 变了才重下 EPUB 并从头打开。详见

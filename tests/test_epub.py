@@ -403,7 +403,10 @@ class EpubTest(unittest.TestCase):
                 toc = zf.read("OEBPS/toc.xhtml").decode("utf-8")
                 self.assertIn('href="report.xhtml#s01"', toc)
                 self.assertIn('class="meta"', toc)
-                self.assertIn("数据时间：2026-11-02 10:09:05 UTC", toc)
+                self.assertIn("源数据时间：2026-11-02 10:09:05 UTC", toc)
+                # 第一行是本次更新时间（运行时间），源数据时间排在后面。
+                self.assertRegex(toc, r"更新时间：\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} UTC")
+                self.assertLess(toc.index("更新时间："), toc.index("源数据时间："))
                 nav = zf.read("OEBPS/nav.xhtml").decode("utf-8")
                 self.assertIn('href="report.xhtml#s01"', nav)
                 ncx = zf.read("OEBPS/toc.ncx").decode("utf-8")
