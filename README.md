@@ -6,13 +6,15 @@
 
 ## 1. 生成并发布报告
 
-需要 Python 3，标准库即可。把本仓库的 `kindle_report.py` 和 `viewer.html` 放在 004 仓库的同一目录中。在 004 的 Pages deploy job 中，**所有正文构建和注入步骤之后、上传 `_site` 之前**加入：
+需要 Python 3，标准库即可。把本仓库的 `kindle_report.py` 和 `viewer.html` 放在 004 仓库的同一目录中。在 004 的 Pages deploy job 中，**所有正文构建和注入步骤之后、上传 Pages 构建产物之前**加入：
 
 ```sh
 python3 kindle_report.py report.html --format text -o _site/kindle.txt
 ```
 
-必须使用构建产物 `report.html`，不是 Git 中的原始模板。原有 Pages 任务发布 `_site` 后，设备默认读取 `https://k-macao.github.io/004/kindle.txt`。该地址根据 004 的 GitHub Pages 配置推定，文件发布前会返回 404；004 README 中还写有 `/03/`，请以实际部署为准。构建失败应阻止发布，避免误以为有新报告；转换器出错时不会覆盖本地旧输出。
+这里的 `_site` 是 004 的 Actions 构建流程中常见的输出目录，**不是本仓库（04-kindle）里已有的目录，也不需要手动创建或提交**；转换器会自动创建目标父目录。若 004 的 workflow 上传的是别的目录（例如 `public` 或 `dist`），就把 `-o` 改成那个实际上传目录下的 `kindle.txt`，并确认该文件确实包含在 Pages 上传产物中。
+
+必须使用构建产物 `report.html`，不是 Git 中的原始模板。原有 Pages 任务发布生成目录后，设备默认读取 `https://k-macao.github.io/004/kindle.txt`。该地址根据 004 的 GitHub Pages 配置推定，文件发布前会返回 404；004 README 中还写有 `/03/`，请以实际部署为准。构建失败应阻止发布，避免误以为有新报告；转换器出错时不会覆盖本地旧输出。
 
 也可用公开的 004 构建报告手动生成，再放到任何支持 HTTPS 的静态站点：
 
