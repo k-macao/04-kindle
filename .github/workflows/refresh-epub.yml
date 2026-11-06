@@ -1,7 +1,9 @@
 name: Refresh 004 EPUB
 
-# 定时（每小时整点）把 004 的公开页面重排成 EPUB。每次运行都会生成 site/report.epub 与
-# site/epub.json，并提交推送（不限流、内容没变也推送）。
+# 定时（每小时整点）把 004 的公开页面重排成 EPUB 与纯文本。每次运行都会生成
+# site/report.epub、site/epub.json 与 kindle.txt，并提交推送（不限流、内容没变也推送）。
+# 两种字模式走同一套「正文全留、状态类文字不要」的过滤规则，所以两个产物一起刷新，
+# 免得设备上的文本模式还是几小时前的旧内容。
 # 目录页的「更新时间」就是本次运行的生成时间，提交信息里也是同一个时间。
 # 源数据时间（004 报告正文里的扫描时间）超过 MAX_SOURCE_AGE_HOURS 时只在日志里
 # 给出警告，仍然推送，设备端目录页会同时显示源数据时间供你判断新鲜度。
@@ -34,8 +36,30 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: 抓 004 并生成 EPUB
-        run: python tools/build_epub.py "$SOURCE_URL" --out site
+      - name: 跑测试（过滤规则与两个转换器是否一致）
+        run: python -m unittest discover -s tests
+
+      - name: 抓一次 004 页面（两种产物共用同一份）
+        run: |
+          python - <<'PY'
+          import os
+          import urllib.request
+
+          url = os.environ["SOURCE_URL"]
+          request = urllib.request.Request(url, headers={"User-Agent": "004-kindle/1.0"})
+          with urllib.request.urlopen(request, timeout=60) as response, \
+                  open("report-built.html", "wb") as handle:
+              handle.write(response.read())
+          print(f"已抓取 {url}：{os.path.getsize('report-built.html')} 字节")
+          PY
+
+      # 两个转换器读同一份 report-built.html：分别抓两次的话，004 正好在中间发布，
+      # EPUB 和纯文本就会来自不同的构建。两步写在一起也是有意的——要么两种产物
+      # 一起更新，要么都不更新，设备上不会出现「一个是新的、一个是旧的」。
+      - name: 生成 EPUB + 纯文本
+        run: |
+          python tools/build_epub.py report-built.html --base-url "$SOURCE_URL" --out site
+          python kindle_report.py report-built.html --format text -o kindle.txt
 
       - name: 检查源数据时间（仅警告，不阻止推送）
         run: |
@@ -64,12 +88,17 @@ jobs:
               print(f"::warning title=004 源数据可能过期::{reason}")
           PY
 
+      - name: 状态类文字残留自检（有残留就不推送）
+        run: python tools/check_no_status.py
+
       - name: 提交并推送（每次运行都推送）
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add site/report.epub site/epub.json
+          git add site/report.epub site/epub.json kindle.txt
           stamp=$(python -c "import json;print(json.load(open('site/epub.json'))['generated'])")
-          git commit --allow-empty -m "chore(site): 刷新 004 EPUB（更新于 ${stamp}）"
-          git push
+          git commit --allow-empty -m "chore(site): 刷新 004 EPUB 与纯文本（更新于 ${stamp}）"
+          # 定时运行时 HEAD 就是默认分支；手动指定 ref 运行时是游离 HEAD，
+          # 所以显式推到当前 ref 对应的分支，两种触发方式都能推上去。
+          git push origin "HEAD:refs/heads/${GITHUB_REF_NAME}"
