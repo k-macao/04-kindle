@@ -76,12 +76,18 @@ jobs:
           max_hours = float(os.environ.get("MAX_SOURCE_AGE_HOURS", "12"))
           manifest = pathlib.Path("site/epub.json")
           data_time = None
+          data_time_kind = None
           if manifest.is_file():
               try:
-                  data_time = json.loads(manifest.read_text("utf-8")).get("data_time") or None
+                  payload = json.loads(manifest.read_text("utf-8"))
+                  data_time = payload.get("data_time") or None
+                  # 精度要一起传：正文只给到交易日时，data_time 里的 00:00:00 是补出来的，
+                  # 拿它算「距今几小时」会在当天晚上就误报过期。
+                  data_time_kind = payload.get("data_time_kind") or None
               except (ValueError, OSError):
                   data_time = None
-          ok, reason = check_data_age(data_time, dt.datetime.now(dt.timezone.utc), max_hours)
+          ok, reason = check_data_age(data_time, dt.datetime.now(dt.timezone.utc),
+                                      max_hours, data_time_kind)
           if ok:
               print(f"源数据时间正常：{reason}")
           else:

@@ -927,8 +927,12 @@ def build_document(source, base_url="", stats=None):
     raw_text = normalize(root.text())
     if re.search(r"\{\{[A-Z][A-Z0-9_]*\}\}", raw_text):
         raise ValueError("检测到未替换的模板占位符；请使用 004 构建后的报告")
-    data_time = extract_data_time(raw_text)
+    data_time, data_time_kind = extract_data_time_detail(
+        raw_text, datetime.now(timezone.utc))
     if stats is not None:
+        # 精度要跟着时间一起走：只有日期时，目录页不能显示成精确到秒，
+        # 新鲜度闸门也不能拿午夜当时刻去算「距今多少小时」。
+        stats["data_time_kind"] = data_time_kind
         stats["status_removed"] = strip_status(root)
     else:
         strip_status(root)
@@ -943,23 +947,56 @@ def build_document(source, base_url="", stats=None):
 
 DATA_TIME_RE = re.compile(r"扫描时间\s*(\d{4})-(\d{2})-(\d{2})\s+(\d{2}):(\d{2}):(\d{2})")
 DATA_DATE_RE = re.compile(r"行情日期\s*(\d{4})-(\d{2})-(\d{2})")
+# 004 在 2026-11-06 换了模板：正文里不再有「扫描时间 … · 数据覆盖 …」那一行，
+# 只剩构建戳 {{TS_FULL}}，形如「◆ 行情快照 · 11 月 6 日 · 2026-11-06 22:57:20 UTC」。
+# 旧模板里这两个值是同一个（扫描时间 == TS_FULL），所以构建戳可以直接当源数据时间用。
+DATA_BUILD_RE = re.compile(r"(\d{4})-(\d{2})-(\d{2})\s+(\d{2}):(\d{2}):(\d{2})\s*UTC")
 
 
-def extract_data_time(text):
-    """Return the report's own timestamp as ISO-8601 UTC, or None.
+def extract_data_time_detail(text, now=None):
+    """Return (iso_utc_or_None, kind) for the report's own timestamp.
 
-    004 states it twice: "扫描时间 2026-11-02 10:09:05 UTC" (when the data was
-    read) and "行情日期 2026-11-02". The file's mtime says nothing about data
-    freshness, so we keep them apart.
+    `kind` 说明这个时间从哪儿来，精度差别很大，显示和新鲜度判定都要分开对待：
+
+      "scan"  —— 「扫描时间 2026-11-02 10:09:05」（旧模板，秒级）
+      "build" —— 正文里的构建戳「2026-11-06 22:57:20 UTC」（新模板，秒级）
+      "date"  —— 只有「行情日期 2026-11-02」（**日级，时刻未知**）
+      None    —— 正文里没有任何可用时间
+
+    文件 mtime 说明不了数据新鲜度，所以一律以正文里的时间为准。
     """
     match = DATA_TIME_RE.search(text)
     if match:
         year, month, day, hour, minute, second = match.groups()
-        return f"{year}-{month}-{day}T{hour}:{minute}:{second}Z"
+        return f"{year}-{month}-{day}T{hour}:{minute}:{second}Z", "scan"
+    stamps = DATA_BUILD_RE.findall(text)
+    if stamps and now is not None:
+        # 晚于「现在」的戳不是构建戳，是正文里引用的未来时间（例如某条快讯预告
+        # 「2027-01-01 00:00:00 UTC 生效」）；留着它会让新鲜度闸门永远判「很新」。
+        limit = now + timedelta(hours=1)
+        kept = []
+        for parts in stamps:
+            moment = parse_data_time("{}-{}-{}T{}:{}:{}Z".format(*parts))
+            if moment is not None and moment <= limit:
+                kept.append(parts)
+        stamps = kept
+    if stamps:
+        # 正文里可能有多个 UTC 戳（逐源抓取戳都早于整页构建戳），取最晚的那个：
+        # 最晚的才是「这份报告什么时候做出来的」，也就是报告里最新证据的时间。
+        year, month, day, hour, minute, second = max(stamps)
+        return f"{year}-{month}-{day}T{hour}:{minute}:{second}Z", "build"
     match = DATA_DATE_RE.search(text)
     if match:
-        return f"{match.group(1)}-{match.group(2)}-{match.group(3)}T00:00:00Z"
-    return None
+        return f"{match.group(1)}-{match.group(2)}-{match.group(3)}T00:00:00Z", "date"
+    return None, None
+
+
+def extract_data_time(text, now=None):
+    """Return the report's own timestamp as ISO-8601 UTC, or None.
+
+    只给时间值；精度（秒级还是日级）见 `extract_data_time_detail`。
+    """
+    return extract_data_time_detail(text, now)[0]
 
 
 def parse_data_time(value):
@@ -980,22 +1017,32 @@ def parse_data_time(value):
     return parsed
 
 
-def check_data_age(data_time, now=None, max_hours=12):
+def check_data_age(data_time, now=None, max_hours=12, kind=None):
     """Return (ok, reason): 源数据时间距今是否还在 max_hours（默认 12 小时）内。
 
     数据新鲜度以报告正文里的行情/采集时间（data_time）为准，不是文件生成时间：
     超过上限就不推给设备，避免「文件新、数据旧」。源时间缺失或无法解析时
     也视为不通过——无法确认新鲜度就不该推送。
+
+    `kind` 是 `extract_data_time_detail` 给的精度："scan"/"build" 是秒级时刻，
+    "date" 表示正文只给到交易日，此时 data_time 里的 00:00:00 是补出来的、
+    不是真实时刻，不能拿它算年龄——否则报告当天晚上就会「距今 23 小时」误报过期
+    （上游 2026-11-06 换模板去掉「扫描时间」行之后就撞上了这个）。日期精度改按
+    当天 23:59:59 UTC 起算：当天算新鲜，跨天超过 max_hours 才判过期。
     """
     now = now or datetime.now(timezone.utc)
     max_hours = float(max_hours)
     then = parse_data_time(data_time)
     if then is None:
-        return False, "报告里没有可用的源时间（扫描时间/行情日期），无法确认新鲜度"
+        return False, "报告里没有可用的源时间（扫描时间/构建戳/行情日期），无法确认新鲜度"
+    label = "源时间"
+    if kind == "date":
+        then = then.replace(hour=23, minute=59, second=59)
+        label = "源日期（正文只到日）"
     age_hours = max(0.0, (now - then).total_seconds() / 3600)
     if age_hours > max_hours:
-        return False, f"源时间 {data_time} 距今 {age_hours:.1f} 小时，超过 {max_hours:g} 小时上限"
-    return True, f"源时间 {data_time} 距今 {age_hours:.1f} 小时，未超过 {max_hours:g} 小时上限"
+        return False, f"{label} {data_time} 距今 {age_hours:.1f} 小时，超过 {max_hours:g} 小时上限"
+    return True, f"{label} {data_time} 距今 {age_hours:.1f} 小时，未超过 {max_hours:g} 小时上限"
 
 
 def plain_text(body_xhtml):
@@ -1325,7 +1372,7 @@ CONTAINER_XML = (
 
 
 def write_epub(path, body, title="004 报告", modified=None, source="", sections=None,
-               data_time=None):
+               data_time=None, data_time_kind=None):
     """Write a self-contained EPUB 3 to `path`; returns the plain-text length."""
     sections = sections or []
     stamp = modified or datetime.now(timezone.utc)
@@ -1333,13 +1380,19 @@ def write_epub(path, body, title="004 报告", modified=None, source="", section
     identifier = "urn:uuid:" + str(
         uuid.uuid5(uuid.NAMESPACE_URL, f"004-kindle:{modified_text}:{len(body)}"))
     words = len(re.sub(r"\s+", "", re.sub(r"<[^>]+>", "", body)))
-    # 目录页第一行是本次运行（更新）时间；源数据时间（004 报告里的扫描时间）放在后面。
-    # 页面上统一按北京时间（UTC+8）显示；epub.json 与提交信息仍保持 UTC。
+    # 目录页第一行是本次运行（更新）时间；源数据时间（004 报告里的扫描时间，
+    # 新模板下是页面构建戳）放在后面。页面上统一按北京时间（UTC+8）显示；
+    # epub.json 与提交信息仍保持 UTC。
     meta = ["更新时间：" + _beijing_text(stamp)]
     if data_time:
-        source = parse_data_time(data_time)
-        meta.append("源数据时间：" + (_beijing_text(source) if source
-                                  else data_time.replace("T", " ").replace("Z", " UTC")))
+        if data_time_kind == "date":
+            # 正文只给到交易日时，00:00:00 是补出来的，换算成北京时间会变成
+            # 「08:00:00」这种看着精确到秒的假时刻；如实写成日期。
+            meta.append("源数据日期：" + data_time[:10])
+        else:
+            parsed = parse_data_time(data_time)
+            meta.append("源数据时间：" + (_beijing_text(parsed) if parsed
+                                      else data_time.replace("T", " ").replace("Z", " UTC")))
     meta = " ｜ ".join(meta)
 
     path = Path(path)
@@ -1396,8 +1449,10 @@ def main(argv=None):
         # 清单里的 source 记「这份内容来自哪个地址」：本地文件 + --base-url 时记那个地址，
         # 否则记的是本地路径，追溯不到源。
         source_label = args.base_url or args.source
+        data_time_kind = stats.get("data_time_kind")
         words = write_epub(epub, body, title=args.title, source=source_label,
-                           modified=generated, sections=sections, data_time=data_time)
+                           modified=generated, sections=sections, data_time=data_time,
+                           data_time_kind=data_time_kind)
         manifest = {
             "generated": generated.isoformat(timespec="seconds"),
             "doc": "report.epub",
@@ -1406,6 +1461,9 @@ def main(argv=None):
             "bytes": epub.stat().st_size,
             "sections": len(sections),
             "data_time": data_time or "",
+            # 源时间精度：scan=扫描时间行，build=页面构建戳，date=只到交易日。
+            # 设备与新鲜度闸门据此决定怎么显示、怎么算年龄。
+            "data_time_kind": data_time_kind or "",
             # 这次删掉多少个状态块（抓取状态、端点耗时、核验时间、推送框……）。
             "status_removed": stats.get("status_removed", 0),
             "source": source_label,

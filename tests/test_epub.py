@@ -472,3 +472,117 @@ class BaseUrlTest(unittest.TestCase):
             self.assertIn('src="pic.png"', body)
             data = json.loads((out / "epub.json").read_text(encoding="utf-8"))
             self.assertTrue(data["source"].endswith("report-built.html"))
+
+
+class DataTimeTierTest(unittest.TestCase):
+    """源数据时间的三级取值：扫描时间 → 页面构建戳 → 只有交易日。
+
+    上游 004 在 2026-11-06 换了模板，正文里不再有「扫描时间 … · 数据覆盖 …」那一行。
+    只靠「行情日期」兜底的话，值会变成当天午夜：目录页显示出一个看着精确到秒、
+    其实是编出来的时刻，新鲜度闸门也会在当天晚上就判「距今 23 小时，已过期」。
+    """
+
+    NOW = dt.datetime(2026, 11, 6, 23, 2, tzinfo=dt.timezone.utc)
+
+    def detail(self, text, now=None):
+        return be.extract_data_time_detail(text, now or self.NOW)
+
+    def test_scan_time_wins(self):
+        text = "扫描时间 2026-11-06 03:03:52 UTC · 行情日期 2026-11-06 · 数据覆盖 99%"
+        self.assertEqual(self.detail(text), ("2026-11-06T03:03:52Z", "scan"))
+
+    def test_build_stamp_used_when_scan_time_gone(self):
+        text = "◆ 行情快照 · 11 月 6 日 · 2026-11-06 22:57:20 UTC 行情日期 2026-11-06"
+        self.assertEqual(self.detail(text), ("2026-11-06T22:57:20Z", "build"))
+
+    def test_latest_build_stamp_wins(self):
+        text = "抓取 2026-11-06 03:02:36 UTC · 构建 2026-11-06 03:03:52 UTC"
+        self.assertEqual(self.detail(text), ("2026-11-06T03:03:52Z", "build"))
+
+    def test_future_stamp_is_content_not_build_time(self):
+        # 正文引用未来时间（协议生效日之类）不能当构建戳，否则闸门永远判「很新」。
+        text = "本协议于 2099-01-01 00:00:00 UTC 生效 · 行情日期 2026-11-06"
+        self.assertEqual(self.detail(text), ("2026-11-06T00:00:00Z", "date"))
+
+    def test_date_only_is_labelled_as_date(self):
+        self.assertEqual(self.detail("行情日期 2026-11-06"),
+                         ("2026-11-06T00:00:00Z", "date"))
+
+    def test_no_time_at_all(self):
+        self.assertEqual(self.detail("纯文本"), (None, None))
+
+    def test_legacy_wrapper_still_returns_only_the_value(self):
+        self.assertEqual(be.extract_data_time("行情日期 2026-11-06", self.NOW),
+                         "2026-11-06T00:00:00Z")
+
+    def test_build_document_records_precision_in_stats(self):
+        stamp = (dt.datetime.now(dt.timezone.utc) - dt.timedelta(hours=1))
+        page = ("<main><h2>02 / 行情快照</h2>"
+                f"<p>◆ 行情快照 · {stamp:%Y-%m-%d %H:%M:%S} UTC</p>"
+                "<p>行情日期 2026-11-06</p></main>")
+        stats = {}
+        _, _, data_time = be.build_document(page, "", stats)
+        self.assertEqual(data_time, f"{stamp:%Y-%m-%dT%H:%M:%S}Z")
+        self.assertEqual(stats["data_time_kind"], "build")
+
+    def test_scan_time_precision_in_stats(self):
+        stats = {}
+        be.build_document(SAMPLE, "", stats)
+        self.assertEqual(stats["data_time_kind"], "scan")
+
+
+class DateOnlyDisplayTest(unittest.TestCase):
+    """只有交易日时，目录页如实写日期，不把补出来的午夜显示成精确时刻。"""
+
+    def _toc(self, td, data_time, kind):
+        body, sections, _ = be.build_document(SAMPLE)
+        path = Path(td) / "site" / "report.epub"
+        be.write_epub(path, body, sections=sections, data_time=data_time,
+                      data_time_kind=kind)
+        with zipfile.ZipFile(path) as zf:
+            return zf.read("OEBPS/toc.xhtml").decode("utf-8")
+
+    def test_date_only_shows_a_date_not_a_clock_time(self):
+        with tempfile.TemporaryDirectory() as td:
+            toc = self._toc(td, "2026-11-06T00:00:00Z", "date")
+            self.assertIn("源数据日期：2026-11-06", toc)
+            # 午夜 UTC 换北京时间是 08:00:00 —— 那是补出来的，不能显示。
+            self.assertNotIn("08:00:00", toc)
+            self.assertNotIn("源数据时间：", toc)
+
+    def test_second_precision_still_shows_beijing_time(self):
+        with tempfile.TemporaryDirectory() as td:
+            toc = self._toc(td, "2026-11-06T22:57:20Z", "build")
+            self.assertIn("源数据时间：2026-11-07 06:57:20 北京时间", toc)
+
+    def test_missing_kind_keeps_the_old_behaviour(self):
+        with tempfile.TemporaryDirectory() as td:
+            toc = self._toc(td, "2026-11-02T10:09:05Z", None)
+            self.assertIn("源数据时间：2026-11-02 18:09:05 北京时间", toc)
+
+
+class DateOnlyFreshnessTest(unittest.TestCase):
+    """日期精度按当天 23:59:59 起算：当天算新鲜，跨天超过上限才判过期。"""
+
+    NOW = dt.datetime(2026, 11, 6, 23, 2, tzinfo=dt.timezone.utc)
+
+    def test_same_day_date_is_fresh(self):
+        ok, reason = be.check_data_age("2026-11-06T00:00:00Z", self.NOW, 12, "date")
+        self.assertTrue(ok)
+        self.assertIn("源日期", reason)
+
+    def test_yesterday_date_is_stale(self):
+        ok, reason = be.check_data_age("2026-11-05T00:00:00Z", self.NOW, 12, "date")
+        self.assertFalse(ok)
+        self.assertIn("超过 12 小时上限", reason)
+
+    def test_second_precision_is_unchanged_by_kind(self):
+        ok, _ = be.check_data_age("2026-11-06T22:57:20Z", self.NOW, 12, "build")
+        self.assertTrue(ok)
+        ok, _ = be.check_data_age("2026-11-06T10:00:00Z", self.NOW, 12, "build")
+        self.assertFalse(ok)
+
+    def test_midnight_without_kind_still_counts_as_a_moment(self):
+        # 不传 kind 时保持旧行为：午夜就是一个时刻（向后兼容既有调用方）。
+        ok, _ = be.check_data_age("2026-11-06T00:00:00Z", self.NOW, 12)
+        self.assertFalse(ok)

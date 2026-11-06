@@ -148,3 +148,47 @@ class GeneratedArtifactsTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ManifestPrecisionTest(unittest.TestCase):
+    """清单里的 data_time_kind 要跟着 data_time 一起报出来。"""
+
+    def setUp(self):
+        self.dir = Path(tempfile.mkdtemp())
+        self.text = self.dir / "kindle.txt"
+        self.text.write_text("\n".join(f"正文 {i}" for i in range(12)), encoding="utf-8")
+        self.epub = self.dir / "report.epub"
+        write_epub(self.epub, "<p>" + "正文 " * 40 + "</p>")
+
+    def test_kind_is_read_from_manifest(self):
+        manifest = self.dir / "epub.json"
+        manifest.write_text('{"data_time": "2026-11-06T00:00:00Z",'
+                            ' "data_time_kind": "date", "sections": 9,'
+                            ' "status_removed": 19}', encoding="utf-8")
+        errors, summary = cs.check(self.text, self.epub, manifest, 10, 10)
+        self.assertEqual(errors, [])
+        self.assertEqual(summary["data_time_kind"], "date")
+
+    def test_summary_prints_precision_next_to_the_time(self):
+        manifest = self.dir / "epub.json"
+        manifest.write_text('{"data_time": "2026-11-06T00:00:00Z",'
+                            ' "data_time_kind": "date", "sections": 9,'
+                            ' "status_removed": 19}', encoding="utf-8")
+        out = io.StringIO()
+        with contextlib.redirect_stdout(out):
+            self.assertEqual(cs.main(["--text", str(self.text), "--epub", str(self.epub),
+                                      "--manifest", str(manifest),
+                                      "--min-lines", "10", "--min-chars", "10"]), 0)
+        self.assertIn("数据时间 2026-11-06T00:00:00Z（date）", out.getvalue())
+
+    def test_old_manifest_without_kind_still_prints(self):
+        manifest = self.dir / "epub.json"
+        manifest.write_text('{"data_time": "2026-11-06T13:32:10Z", "sections": 9,'
+                            ' "status_removed": 19}', encoding="utf-8")
+        out = io.StringIO()
+        with contextlib.redirect_stdout(out):
+            self.assertEqual(cs.main(["--text", str(self.text), "--epub", str(self.epub),
+                                      "--manifest", str(manifest),
+                                      "--min-lines", "10", "--min-chars", "10"]), 0)
+        self.assertIn("数据时间 2026-11-06T13:32:10Z", out.getvalue())
+        self.assertNotIn("（—）", out.getvalue())

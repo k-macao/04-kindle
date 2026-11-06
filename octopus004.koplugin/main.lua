@@ -493,6 +493,11 @@ function Report:refreshDoc()
     if not manifest then error(err) end
     local sig = manifest.generated
     if type(manifest.data_time) == "string" then self.settings.data_time = manifest.data_time end
+    -- 精度跟着时间一起存：正文只给到交易日时，清单里的 00:00:00 是补出来的，
+    -- 不是真实时刻，显示和算年龄都要区别对待。
+    if type(manifest.data_time_kind) == "string" then
+        self.settings.data_time_kind = manifest.data_time_kind
+    end
     local current = self.settings.doc_file
     local have = current and lfs.attributes(current, "mode") == "file"
     self.last_check = os.time()
@@ -608,12 +613,22 @@ function Report:status()
     local data = ""
     local stamp = tostring(self.settings.data_time or "")
     if stamp ~= "" then
+        local date_only = self.settings.data_time_kind == "date"
         local then_time = isoSeconds(stamp)
+        -- 只到日期时按当天 23:59:59 UTC 起算：报告当天晚上不该被显示成 stale。
+        if date_only and then_time then then_time = then_time + 86399 end
         local age = nil
         if then_time then
             age = (os.time() - then_time) / 3600
+            if date_only and age < 0 then age = 0 end
         end
-        local shown = then_time and (beijing(then_time, "%Y-%m-%d %H:%M:%S") .. " (Beijing)") or stamp
+        local shown
+        if date_only then
+            -- 不把补出来的午夜换算成「08:00:00 (Beijing)」这种看着精确的假时刻。
+            shown = stamp:sub(1, 10) .. " (date only)"
+        else
+            shown = then_time and (beijing(then_time, "%Y-%m-%d %H:%M:%S") .. " (Beijing)") or stamp
+        end
         data = "\nData: " .. shown
         if age and age >= 24 then
             data = data .. string.format("  (stale %.0fd)", age / 24)
