@@ -1372,6 +1372,9 @@ def parse_args(argv=None):
     ap.add_argument("source", help="004 构建后的 report.html 本地路径或公开 URL")
     ap.add_argument("--out", required=True, help="输出目录，例如 site")
     ap.add_argument("--title", default="004 报告", help="书名（默认 004 报告）")
+    ap.add_argument("--base-url", default=None,
+                    help="源是本地文件时，用这个地址把相对链接/图片补成绝对地址"
+                         "（例如 https://k-macao.github.io/004/）；也作为清单里的 source")
     return ap.parse_args(argv)
 
 
@@ -1379,14 +1382,21 @@ def main(argv=None):
     args = parse_args(argv)
     try:
         source = read_source(args.source)
-        base_url = args.source if args.source.startswith(("https://", "http://")) else ""
+        # 只抓一次页面、两种产物共用同一份时，源是本地文件，相对地址要靠 --base-url 补。
+        if args.base_url:
+            base_url = args.base_url
+        else:
+            base_url = args.source if args.source.startswith(("https://", "http://")) else ""
         stats = {}
         body, sections, data_time = build_document(source, base_url, stats)
         out = Path(args.out)
         epub = out / "report.epub"
         # 同一个时间戳同时写入 EPUB 目录页、epub.json 与提交信息，三者保持一致。
         generated = datetime.now(timezone.utc).replace(microsecond=0)
-        words = write_epub(epub, body, title=args.title, source=args.source,
+        # 清单里的 source 记「这份内容来自哪个地址」：本地文件 + --base-url 时记那个地址，
+        # 否则记的是本地路径，追溯不到源。
+        source_label = args.base_url or args.source
+        words = write_epub(epub, body, title=args.title, source=source_label,
                            modified=generated, sections=sections, data_time=data_time)
         manifest = {
             "generated": generated.isoformat(timespec="seconds"),
@@ -1398,7 +1408,7 @@ def main(argv=None):
             "data_time": data_time or "",
             # 这次删掉多少个状态块（抓取状态、端点耗时、核验时间、推送框……）。
             "status_removed": stats.get("status_removed", 0),
-            "source": args.source,
+            "source": source_label,
         }
         (out / "epub.json").write_text(
             json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

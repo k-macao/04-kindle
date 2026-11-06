@@ -39,10 +39,27 @@ jobs:
       - name: 跑测试（过滤规则与两个转换器是否一致）
         run: python -m unittest discover -s tests
 
-      - name: 抓 004 并生成 EPUB + 纯文本
+      - name: 抓一次 004 页面（两种产物共用同一份）
         run: |
-          python tools/build_epub.py "$SOURCE_URL" --out site
-          python kindle_report.py "$SOURCE_URL" --format text -o kindle.txt
+          python - <<'PY'
+          import os
+          import urllib.request
+
+          url = os.environ["SOURCE_URL"]
+          request = urllib.request.Request(url, headers={"User-Agent": "004-kindle/1.0"})
+          with urllib.request.urlopen(request, timeout=60) as response, \
+                  open("report-built.html", "wb") as handle:
+              handle.write(response.read())
+          print(f"已抓取 {url}：{os.path.getsize('report-built.html')} 字节")
+          PY
+
+      # 两个转换器读同一份 report-built.html：分别抓两次的话，004 正好在中间发布，
+      # EPUB 和纯文本就会来自不同的构建。两步写在一起也是有意的——要么两种产物
+      # 一起更新，要么都不更新，设备上不会出现「一个是新的、一个是旧的」。
+      - name: 生成 EPUB + 纯文本
+        run: |
+          python tools/build_epub.py report-built.html --base-url "$SOURCE_URL" --out site
+          python kindle_report.py report-built.html --format text -o kindle.txt
 
       - name: 检查源数据时间（仅警告，不阻止推送）
         run: |

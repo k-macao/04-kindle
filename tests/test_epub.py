@@ -440,3 +440,35 @@ class EpubTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class BaseUrlTest(unittest.TestCase):
+    """本地文件 + --base-url：CI 只抓一次页面、两个转换器共用同一份时用得到。"""
+
+    PAGE = '<main><h2>01 / 全景</h2><p>正文</p><img src="pic.png"/></main>'
+
+    def _build(self, td, extra=()):
+        src = Path(td) / "report-built.html"
+        src.write_text(self.PAGE, encoding="utf-8")
+        out = Path(td) / "site"
+        code = be.main([str(src), "--out", str(out), *extra])
+        return code, out
+
+    def test_base_url_absolutises_links_and_labels_the_source(self):
+        with tempfile.TemporaryDirectory() as td:
+            code, out = self._build(td, ["--base-url", "https://k-macao.github.io/004/"])
+            self.assertEqual(code, 0)
+            body = zipfile.ZipFile(out / "report.epub").read("OEBPS/report.xhtml").decode("utf-8")
+            self.assertIn('src="https://k-macao.github.io/004/pic.png"', body)
+            data = json.loads((out / "epub.json").read_text(encoding="utf-8"))
+            # 清单记「内容来自哪个地址」，不是本地临时路径。
+            self.assertEqual(data["source"], "https://k-macao.github.io/004/")
+
+    def test_without_base_url_relative_links_stay_relative(self):
+        with tempfile.TemporaryDirectory() as td:
+            code, out = self._build(td)
+            self.assertEqual(code, 0)
+            body = zipfile.ZipFile(out / "report.epub").read("OEBPS/report.xhtml").decode("utf-8")
+            self.assertIn('src="pic.png"', body)
+            data = json.loads((out / "epub.json").read_text(encoding="utf-8"))
+            self.assertTrue(data["source"].endswith("report-built.html"))

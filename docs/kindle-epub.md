@@ -36,7 +36,16 @@ site/epub.json       {"generated", "doc", "title", "chars", "bytes",
 `状态类文字：已删除 N 块（正文全部保留）`——同一个 N 也写进清单的 `status_removed`。
 
 手头有本地 HTML 也可以：`python tools/build_epub.py report.html --out site`
-（相对链接会失效，公开页面抓取时会自动改成绝对地址）。
+（不带 `--base-url` 时相对链接会失效）。CI 就是先把页面抓成本地的
+`report-built.html`（已在 `.gitignore` 里），再让两个转换器共用这一份：
+
+```sh
+python tools/build_epub.py report-built.html --base-url https://k-macao.github.io/004/ --out site
+python kindle_report.py report-built.html --format text -o kindle.txt
+```
+
+`--base-url` 用来把相对链接/图片补成绝对地址，同时作为 `epub.json` 里的 `source`
+（否则清单里记的是本地临时路径，追溯不到源）。
 
 生成内容做了什么：
 
@@ -191,8 +200,20 @@ return {
 
 - **节奏**：cron 每 60 分钟运行一次（`0 * * * *`，每小时整点），**每次运行都生成并推送**，
   不再限流、内容没变也会提交（提交用 `--allow-empty`）。
-- **做什么**：抓 `https://k-macao.github.io/004/` → `tools/build_epub.py` → 提交
-  `site/report.epub` / `site/epub.json` 并推送。提交信息与目录页的「更新时间」是同一个时间戳。
+- **做什么**：**抓一次** `https://k-macao.github.io/004/` 存成 `report-built.html` →
+  跑测试 → `tools/build_epub.py`（EPUB）与 `kindle_report.py --format text`（纯文本）
+  共用这一份页面 → `tools/check_no_status.py` 自检 → 提交
+  `site/report.epub` / `site/epub.json` / `kindle.txt` 并推送。提交信息与目录页的
+  「更新时间」是同一个时间戳。
+  - 只抓一次是有意的：分别抓两次，004 正好在中间发布的话，EPUB 和纯文本就会来自
+    不同的构建；两步写在同一个 step 里也是有意的——**要么两种产物一起更新，要么都不更新**，
+    设备上不会出现一个新一个旧。
+  - 推送用 `git push origin HEAD:refs/heads/$GITHUB_REF_NAME`：定时运行时 HEAD 就是默认分支，
+    手动指定 ref 运行时是游离 HEAD，裸 `git push` 会失败。
+- **自检不过就不推送**：`tools/check_no_status.py` 用生成时同一套规则逐行检查两种产物，
+  发现整行状态类文字（`抓取状态：…`、`当次实抓 · 端点 …`、`STATUS > …`）就报错退出，
+  这次运行不提交、不推送，设备上留着上一版；正文行数/字符数掉到下限以下同样报错
+  （防过滤规则写宽了把正文删掉）。
 - **源时间只警告**：生成后，job 会检查 `site/epub.json` 的 `data_time`
   （报告正文里的「扫描时间 / 行情日期」）。距今超过 `env.MAX_SOURCE_AGE_HOURS`
   （默认 **12 小时**）或缺失时，只在 Actions 日志里输出 `warning`，**仍然推送**；
