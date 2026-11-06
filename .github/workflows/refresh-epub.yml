@@ -1,7 +1,9 @@
 name: Refresh 004 EPUB
 
-# 定时（每小时整点）把 004 的公开页面重排成 EPUB。每次运行都会生成 site/report.epub 与
-# site/epub.json，并提交推送（不限流、内容没变也推送）。
+# 定时（每小时整点）把 004 的公开页面重排成 EPUB 与纯文本。每次运行都会生成
+# site/report.epub、site/epub.json 与 kindle.txt，并提交推送（不限流、内容没变也推送）。
+# 两种字模式走同一套「正文全留、状态类文字不要」的过滤规则，所以两个产物一起刷新，
+# 免得设备上的文本模式还是几小时前的旧内容。
 # 目录页的「更新时间」就是本次运行的生成时间，提交信息里也是同一个时间。
 # 源数据时间（004 报告正文里的扫描时间）超过 MAX_SOURCE_AGE_HOURS 时只在日志里
 # 给出警告，仍然推送，设备端目录页会同时显示源数据时间供你判断新鲜度。
@@ -34,8 +36,13 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: 抓 004 并生成 EPUB
-        run: python tools/build_epub.py "$SOURCE_URL" --out site
+      - name: 跑测试（过滤规则与两个转换器是否一致）
+        run: python -m unittest discover -s tests
+
+      - name: 抓 004 并生成 EPUB + 纯文本
+        run: |
+          python tools/build_epub.py "$SOURCE_URL" --out site
+          python kindle_report.py "$SOURCE_URL" --format text -o kindle.txt
 
       - name: 检查源数据时间（仅警告，不阻止推送）
         run: |
@@ -64,12 +71,37 @@ jobs:
               print(f"::warning title=004 源数据可能过期::{reason}")
           PY
 
+      - name: 状态类文字残留自检（不该有就把日志打出来）
+        run: |
+          python - <<'PY'
+          import pathlib
+          import sys
+          import zipfile
+
+          sys.path.insert(0, ".")
+          from kindle_report import is_status_text
+
+          leftovers = [line for line in
+                       pathlib.Path("kindle.txt").read_text("utf-8").splitlines()
+                       if is_status_text(line)]
+          body = zipfile.ZipFile("site/report.epub").read("OEBPS/report.xhtml").decode("utf-8")
+          for marker in ("STATUS &gt;", "抓取状态", "当次实抓", "抓取核验 ", "SOURCE FEEDS"):
+              if marker in body:
+                  leftovers.append(f"EPUB 里还有 {marker}")
+          if leftovers:
+              print("::warning title=状态类文字残留::" + " | ".join(leftovers[:5]))
+          else:
+              print("状态类文字已清空：kindle.txt 与 report.epub 都没有残留")
+          PY
+
       - name: 提交并推送（每次运行都推送）
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add site/report.epub site/epub.json
+          git add site/report.epub site/epub.json kindle.txt
           stamp=$(python -c "import json;print(json.load(open('site/epub.json'))['generated'])")
-          git commit --allow-empty -m "chore(site): 刷新 004 EPUB（更新于 ${stamp}）"
-          git push
+          git commit --allow-empty -m "chore(site): 刷新 004 EPUB 与纯文本（更新于 ${stamp}）"
+          # 定时运行时 HEAD 就是默认分支；手动指定 ref 运行时是游离 HEAD，
+          # 所以显式推到当前 ref 对应的分支，两种触发方式都能推上去。
+          git push origin "HEAD:refs/heads/${GITHUB_REF_NAME}"
