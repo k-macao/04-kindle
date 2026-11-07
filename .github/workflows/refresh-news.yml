@@ -58,8 +58,18 @@ jobs:
       - name: 跑测试（解析、去重、时间窗、排版规则）
         run: python -m unittest discover -s tests
 
+      # 定时/手动（日报模式）会写标题指纹，保证一天只推一次不重复；
+      # 改代码触发的运行（push）用 --no-seen：既不读也不写指纹，
+      # 免得把当天还没到 07:00 的条目「提前吃掉」，日报就只剩零头。
       - name: 抓一轮 RSSHub 新闻
-        run: python tools/fetch_news.py --out news_data.json --min-items "$MIN_ITEMS"
+        run: |
+          set -euo pipefail
+          args=(--out news_data.json --min-items "$MIN_ITEMS")
+          if [ "${{ github.event_name }}" = "push" ]; then
+            args+=(--no-seen)
+            echo "push 触发：本次不读写标题指纹，按完整 24 小时窗口生成"
+          fi
+          python tools/fetch_news.py "${args[@]}"
 
       - name: 生成日报 EPUB + 清单 + 纯文本
         run: >-
