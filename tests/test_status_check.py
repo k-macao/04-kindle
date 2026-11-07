@@ -101,6 +101,42 @@ class CheckTest(unittest.TestCase):
         self.assertEqual(summary["sections"], 9)
 
 
+class BodyResidueTest(unittest.TestCase):
+    """自检也要挡住站点外壳与乱码：它们和状态文字一样不该出现在产物里。"""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.dir = Path(self.tmp.name)
+        self.epub = self.dir / "report.epub"
+        self.text = self.dir / "kindle.txt"
+        write_epub(self.epub, CLEAN_BODY)
+        self.text.write_text("\n".join(cs.xhtml_lines(CLEAN_BODY) * 80), encoding="utf-8")
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def _run(self):
+        return cs.main(["--text", str(self.text), "--epub", str(self.epub),
+                        "--min-lines", "10", "--min-chars", "10"])
+
+    def test_chrome_line_in_text_fails(self):
+        self.text.write_text("恒指 24,481.86\n关于我们 | 网站声明 | 联系方式 | 用户反馈\n",
+                             encoding="utf-8")
+        self.assertEqual(self._run(), 1)
+
+    def test_chrome_block_in_epub_fails(self):
+        write_epub(self.epub, CLEAN_BODY + "<p>© 2026 某某网 版权所有 粤ICP备12345678号-1</p>")
+        self.assertEqual(self._run(), 1)
+
+    def test_garbled_line_fails(self):
+        write_epub(self.epub, CLEAN_BODY + "<p>ÐÂÀË²Æ¾­Íø</p>")
+        self.assertEqual(self._run(), 1)
+
+    def test_clean_artifacts_still_pass(self):
+        self.assertEqual(self._run(), 0)
+        self.assertEqual(cs.junk_residues(cs.xhtml_lines(CLEAN_BODY)), [])
+
+
 class GeneratedArtifactsTest(unittest.TestCase):
     """用真的生成器跑一遍：过滤后的产物必须过自检。"""
 
