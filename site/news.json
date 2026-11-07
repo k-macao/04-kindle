@@ -1,14 +1,19 @@
 {
-  "generated": "2026-11-07T13:42:47+00:00",
+  "generated": "2026-11-07T14:45:46+00:00",
   "doc": "news.epub",
   "title": "004 新闻订阅",
-  "chars": 27654,
-  "bytes": 33405,
+  "chars": 11932,
+  "bytes": 17774,
   "sections": 3,
-  "items": 128,
-  "sources_ok": 12,
-  "sources_total": 17,
-  "data_time": "2026-11-07T13:40:15Z",
+  "items": 54,
+  "sources_ok": 15,
+  "sources_total": 18,
+  "sources_failed": [
+    "YICAI_HEAD",
+    "XUEQIU_HOTS",
+    "COINDESK"
+  ],
+  "data_time": "2026-11-07T14:35:47Z",
   "data_time_kind": "item",
   "source": "RSSHub"
 }
