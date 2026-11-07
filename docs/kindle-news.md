@@ -188,7 +188,10 @@ https://rsshub.rss.tips, https://rsshub.isrss.com, https://rsshub.cups.moe, http
 - 流程：跑测试 → `fetch_news.py` → `build_news.py` → 产物自检（条目数、分节数、EPUB 可读、
   清单指向的文件存在）→ 提交推送 `site/news.epub`、`site/news.json`、`site/news.txt`、`site/news_seen.json`；
 - 任何一步失败就**不推送**：抓不到足够的条目时旧日报保持原样，设备不会拿到空书；
-- 与小时级报告完全隔离（`concurrency: refresh-news`），报告失败不影响新闻，新闻失败也不动报告产物。
+- 与小时级报告完全隔离（`concurrency: refresh-news`），报告失败不影响新闻，新闻失败也不动报告产物；
+- 另外，改了抓取/排版/源的代码（`tools/*news*`、`build_feed.py`、本工作流）也会跑一次：
+  这种运行带 `--no-seen`，按完整 24 小时窗口生成、也不写标题指纹，免得把当天还没到 07:00 的
+  条目提前吃掉。
 
 ## 7. 设备端
 
