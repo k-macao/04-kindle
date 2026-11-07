@@ -1783,8 +1783,11 @@ CONTAINER_XML = (
 
 
 def write_epub(path, body, title="004 报告", modified=None, source="", sections=None,
-               data_time=None, data_time_kind=None):
-    """Write a self-contained EPUB 3 to `path`; returns the plain-text length."""
+               data_time=None, data_time_kind=None, style=None):
+    """Write a self-contained EPUB 3 to `path`; returns the plain-text length.
+
+    `style` 用来换掉报告那套 CSS——新闻日报是另一套版式（见 build_news.py）。
+    """
     sections = sections or []
     stamp = modified or datetime.now(timezone.utc)
     modified_text = stamp.strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -1824,7 +1827,8 @@ def write_epub(path, body, title="004 报告", modified=None, source="", section
                     compress_type=zipfile.ZIP_DEFLATED)
         zf.writestr("OEBPS/toc.ncx", _ncx_document(title, identifier, modified_text, sections),
                     compress_type=zipfile.ZIP_DEFLATED)
-        zf.writestr("OEBPS/style.css", STYLE_CSS, compress_type=zipfile.ZIP_DEFLATED)
+        zf.writestr("OEBPS/style.css", style or STYLE_CSS,
+                    compress_type=zipfile.ZIP_DEFLATED)
         zf.writestr("OEBPS/report.xhtml", _xhtml_document(body, title),
                     compress_type=zipfile.ZIP_DEFLATED)
     temporary.replace(path)
