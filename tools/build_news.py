@@ -268,6 +268,8 @@ def build(payload, out_dir, min_items=10, max_items=MAX_ITEMS, now=None):
         "instances_probe": payload.get("instances_probe") or {},
         "sources_error": {report.get("key"): (report.get("error") or "")[:180]
                           for report in reports if not report.get("ok")},
+        # 时间被修正的条目数（有些路由会把日期解析到未来，见 fetch_news.FUTURE_TOLERANCE_HOURS）。
+        "future_clamped": sum(int(report.get("clamped") or 0) for report in reports),
         "data_time": data_time,
         "data_time_kind": "item" if data_time else "",
         "source": "RSSHub",
