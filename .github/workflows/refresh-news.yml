@@ -1,8 +1,9 @@
 name: Refresh daily news
 
-# 每天 07:00 北京时间（UTC 前一天 23:00）抓一轮 RSSHub 财经新闻，生成独立的一本书：
-# site/news.epub + 清单 site/news.json + 纯文本 site/news.txt，再合成一个聚合 RSS
-# site/news.xml（任何阅读器都能订阅），然后一起提交推送。
+# 每天 07:00 北京时间（UTC 前一天 23:00）抓一轮 RSSHub 新闻（财经 / 政治 / 哲学思想），
+# 生成独立的一本书：site/news.epub + 清单 site/news.json + 纯文本 site/news.txt，
+# 英文条目自动配中文译文（site/news_zh_cache.json 是译文缓存，跟着仓库走），
+# 再合成一个聚合 RSS site/news.xml（任何阅读器都能订阅），然后一起提交推送。
 # 设备端把 Display mode 切到「News subscription」、新闻清单 URL 指向 site/news.json
 # 即可；插件只在清单里的 generated 变了时才重下，所以一天只会下一本新书。
 #
@@ -25,6 +26,7 @@ on:
       - "tools/build_news.py"
       - "tools/build_feed.py"
       - "tools/radar_discover.py"
+      - "tools/translate_news.py"
 
 permissions:
   contents: write
@@ -36,9 +38,10 @@ concurrency:
 env:
   MIN_ITEMS: "10"
   MAX_ITEMS: "150"
-  # 公共 RSSHub 实例，逗号分隔。rsshub.app 对 Actions 出口 IP 常回 403，
-  # 所以排最后；自建实例请放在最前面（见 README「每日新闻」一节）。
-  RSSHUB_BASE: "https://rsshub.rss.tips,https://rsshub.isrss.com,https://rsshub.cups.moe,https://rsshub.app"
+  # RSSHub 实例，逗号分隔，顺序＝优先级：官方 rsshub.app 第一，后面是公共镜像。
+  # 官方实例对 Actions 出口 IP 回 403 时，抓取脚本会先探活（/healthz）再把它挪到队尾，
+  # 所以「先接官方」与「官方挂了也能出报」不冲突；自建实例请放在最前面。
+  RSSHUB_BASE: "https://rsshub.app,https://rsshub.rss.tips,https://rsshub.isrss.com,https://rsshub.cups.moe"
   # 这份聚合 RSS 的公开地址（写进 feed 的 <atom:link rel="self">，阅读器据此判断来源）。
   FEED_SELF_URL: "https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news.xml"
 
@@ -70,6 +73,14 @@ jobs:
             echo "push 触发：本次不读写标题指纹，按完整 24 小时窗口生成"
           fi
           python tools/fetch_news.py "${args[@]}"
+
+      # 英文条目补中文。翻译接口（Google → Lingva → MyMemory）全挂也不该挡住出报，
+      # 所以这一步允许失败：清单里的 zh_missing 会如实记下有几条没配上中文。
+      - name: 英文条目补中文译文
+        continue-on-error: true
+        run: >-
+          python tools/translate_news.py --data news_data.json
+          --cache site/news_zh_cache.json --max-items 80 --strict
 
       - name: 生成日报 EPUB + 清单 + 纯文本
         run: >-
@@ -126,9 +137,14 @@ jobs:
           if sections < 1 or articles < minimum:
               print(f"排版异常：分节 {sections}、条目 {articles}", file=sys.stderr)
               raise SystemExit(1)
+          english = int(manifest.get("english") or 0)
+          zh_missing = int(manifest.get("zh_missing") or 0)
+          if zh_missing:
+              print(f"提示：{zh_missing}/{english} 条英文还没配上中文（翻译接口这轮不通）",
+                    file=sys.stderr)
           print(f"自检通过：{manifest['items']} 条 / {sections} 节 / {articles} 个条目 / "
                 f"{manifest['bytes']} 字节 / 数据时间 {manifest.get('data_time') or '未知'} / "
-                f"RSS {feed_items} 条")
+                f"RSS {feed_items} 条 / 英文 {english} 条中 {english - zh_missing} 条有中文")
           PY
 
       - name: 提交并推送
@@ -136,9 +152,11 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add site/news.epub site/news.json site/news.txt site/news.xml site/news_seen.json
+          git add site/news.epub site/news.json site/news.txt site/news.xml \
+                  site/news_seen.json site/news_zh_cache.json
           stamp=$(python -c "import json;print(json.load(open('site/news.json'))['generated'])")
           items=$(python -c "import json;print(json.load(open('site/news.json'))['items'])")
-          git commit --allow-empty -m "chore(news): 每日新闻订阅 ${items} 条 + 聚合 RSS（更新于 ${stamp}）"
+          zh=$(python -c "import json;print(json.load(open('site/news.json')).get('zh_added',0))")
+          git commit --allow-empty -m "chore(news): 每日新闻订阅 ${items} 条（英文附中文 ${zh} 条）+ 聚合 RSS（更新于 ${stamp}）"
           # 定时运行时 HEAD 是默认分支；手动跑时是游离 HEAD，两种都要能推。
           git push origin "HEAD:refs/heads/${GITHUB_REF_NAME}"

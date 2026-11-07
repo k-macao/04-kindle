@@ -128,6 +128,45 @@ class ItemContentTest(unittest.TestCase):
         self.assertEqual(self.one().findtext("description"), "摘要一句")
 
 
+class ChinesePairingTest(unittest.TestCase):
+    """英文条目必须中英并列：阅读器列表页只显示标题，译文不接在标题上就等于没翻。"""
+
+    def build(self, data):
+        folder = Path(tempfile.mkdtemp())
+        info, path = build_feed.build(data, folder, now=NOW)
+        return info, parse(path.read_text(encoding="utf-8"))
+
+    def test_english_item_shows_both_languages(self):
+        data = payload(12)
+        data["items"][0].update({"title": "Fed cuts rates by 25bp", "lang": "en",
+                                 "summary": "The Fed lowered rates for the second time.",
+                                 "title_zh": "美联储降息 25 个基点",
+                                 "summary_zh": "美联储第二次下调利率"})
+        info, root = self.build(data)
+        items = root.findall("./channel/item")
+        item = next(node for node in items if "Fed cuts" in (node.findtext("title") or ""))
+        self.assertIn("美联储降息 25 个基点", item.findtext("title"))
+        self.assertIn("中文：美联储第二次下调利率", item.findtext("description"))
+        self.assertIn("原文：The Fed lowered rates", item.findtext("description"))
+        self.assertEqual(info["zh"], 1)
+
+    def test_chinese_item_is_untouched(self):
+        info, root = self.build(payload(12))
+        self.assertEqual(info["zh"], 0)
+        for node in root.findall("./channel/item"):
+            self.assertNotIn("｜", node.findtext("title"))
+
+    def test_translated_summary_alone_is_used_when_no_english_summary(self):
+        data = payload(12)
+        data["items"][0].update({"title": "Fed cuts rates by 25bp", "lang": "en",
+                                 "summary": "", "title_zh": "美联储降息",
+                                 "summary_zh": "美联储下调利率"})
+        _info, root = self.build(data)
+        item = next(node for node in root.findall("./channel/item")
+                    if "Fed cuts" in (node.findtext("title") or ""))
+        self.assertEqual(item.findtext("description"), "中文：美联储下调利率")
+
+
 class EscapingTest(unittest.TestCase):
     def build_one(self, **fields):
         item = {"title": "标题一条财经新闻", "link": "https://example.com/a?x=1&y=2",

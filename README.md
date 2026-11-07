@@ -66,31 +66,45 @@ URL** 填 `site/report.json` 的地址即可。详步骤、机型参数、切页
 报告是「每小时的判断」，新闻是「每天一次的读报」。第二本书独立生成、独立刷新：
 
 ```sh
-python tools/fetch_news.py --out news_data.json      # 抓一轮 RSSHub 新闻
+python tools/fetch_news.py --out news_data.json          # 抓一轮 RSSHub 新闻
+python tools/translate_news.py --data news_data.json \
+       --cache site/news_zh_cache.json                   # 英文条目补中文
 python tools/build_news.py --data news_data.json --out site
+python tools/build_feed.py --data news_data.json --out site
 ```
 
-产出 `site/news.epub`（按「快讯 / 深度 / 全球」分节，每天一本）、清单 `site/news.json`、
-`site/news.txt`，以及**聚合 RSS** `site/news.xml`——后者是标准 RSS 2.0，任何阅读器（含 KOReader
-的新闻下载器）都能直接订阅：
+产出 `site/news.epub`（按「快讯 / 深度 / 全球 / 政治与政策 / 哲学与思想」分节，每天一本）、
+清单 `site/news.json`、`site/news.txt`，以及**聚合 RSS** `site/news.xml`——后者是标准 RSS 2.0，
+任何阅读器（含 KOReader 的新闻下载器）都能直接订阅：
 
 ```
 https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news.xml
 https://cdn.jsdelivr.net/gh/k-macao/04-kindle@main/site/news.xml     ← raw 不通时用这个
-```源目录在 `tools/news_sources.py`，18 条 RSSHub 路由（财联社电报、华尔街见闻的要闻与
-A 股快讯、金十、同花顺、第一财经的简报/最新/头条、新浪股市滚动、财新、格隆汇的推荐与日热文、香港01、
-彭博的市场与加密、CoinDesk），挑的都是 004 那 49 条之外的站点，路由按 RSSHub 仓库里的
+```
+
+源目录在 `tools/news_sources.py`，23 条 RSSHub 路由分五组：财经快讯（财联社电报、华尔街见闻的
+要闻/A 股/港股快讯、金十、同花顺、第一财经简报、新浪股市滚动）、财经深度（华尔街见闻要闻、财新、
+格隆汇推荐与日热文、第一财经最新/头条、香港01）、全球市场（彭博市场与加密、CoinDesk）、
+**政治与政策**（中国政府网最新政策、外交部发言人表态、联合早报国际）、**哲学与思想**
+（Aeon 哲学、Psyche Ideas）。挑的都是 004 那 49 条之外的站点，路由按 RSSHub 仓库里的
 `route.path` 核对过。英文大站（路透、WSJ）实测在机房 IP 上取不到（Cloudflare / `antiCrawler`），
 已经换成同域名下能用的中文源；换掉的原因写在目录的 `note` 里，清单里的 `sources_failed` 会记录
 每轮失败的源，持续失败就该换。
 
+**英文条目自动附中文**：`tools/translate_news.py` 只翻英文（源标 `en`，或标题字母占一半以上），
+接口按 Google → Lingva → MyMemory 顺序回退，译文缓存在 `site/news_zh_cache.json`（同一句只翻
+一次）。EPUB 里标题下多一行「中文：…」，聚合 RSS 里标题写成 `English Title｜中文标题`。
+翻译接口全挂也不挡出报——那一步在工作流里是 `continue-on-error`，`news.json` 的
+`zh_missing` 会记下这轮有几条没配上中文。
+
 分工很明确：**抓取只负责按路由取回并归一化**（`news_data.json`），**排版只负责判断与生成**
 （条目不足 10 条、乱码超标就退出码 1、不覆盖旧产物）。一层是纯数据、一层是纯文档，排错了不用重抓。
 
-每天 07:00（北京时间）由 `.github/workflows/refresh-news.yml` 自动跑：跑测试 → 抓取 → 生成 →
-产物自检 → 提交推送。`rsshub.app` 对 Actions 出口 IP 常回 403，所以默认先试 `rsshub.rss.tips` /
-`rsshub.isrss.com` / `rsshub.cups.moe`，`RSSHUB_BASE` 环境变量可以换成自建实例；同一实例连续失败
-3 次就跳过，单源失败不影响别的源。跨天不重复：`site/news_seen.json` 记着最近 7 天推过的标题指纹，
+每天 07:00（北京时间）由 `.github/workflows/refresh-news.yml` 自动跑：跑测试 → 抓取 → 英译中 →
+生成 → 产物自检 → 提交推送。实例顺序是**官方 `rsshub.app` 第一**，后面 `rsshub.rss.tips` /
+`rsshub.isrss.com` / `rsshub.cups.moe` 兜底；开工前先探一次 `/healthz`，官方实例对机房 IP 回 403
+时自动排到队尾（日志会写原因），`RSSHUB_BASE` 可换成自建实例；同一实例连续失败 3 次就跳过，
+单源失败不影响别的源。跨天不重复：`site/news_seen.json` 记着最近 7 天推过的标题指纹，
 昨天 20:00 的稿子今天不会再出现一次。
 
 找不到路由的站点，用 **RSSHub Radar** 的规则去发现（`tools/radar_discover.py`：先查实例的
