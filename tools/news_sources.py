@@ -160,18 +160,17 @@ SOURCES = [
         "note": "yicai/latest.ts 的 path /latest，第一财经最新成稿。",
     },
     {
-        "key": "MINGPAO_ECO",
-        "name": "明报 · 经济",
+        "key": "CAIXIN_WEEKLY",
+        "name": "财新周刊",
         "group": "depth",
         "lang": "zh",
-        "route": "/mingpao/pns/s00004",
-        "site": "news.mingpao.com",
-        # 每日明报的经济版，一天一批。
-        "max_age_hours": 168,
-        "note": "mingpao/index.tsx 的 path /:type?/:category?，type=pns（每日明报）＋category=s00004"
-                "（经济）。原来这里是香港01 即时（/hk01/latest）——列表混着娱乐稿（抓到「璀璨之城"
-                "大结局｜吳卓羲…」）；换成明报即时经济（ins/s00002）后公共实例一直 503，而同路由的"
-                "每日明报版（pns）正常，所以改用 pns。",
+        "route": "/caixin/weekly",
+        "site": "weekly.caixin.com",
+        # 周刊，一周一批。
+        "max_age_hours": 336,
+        "note": "caixin/weekly.ts 的 path /weekly，《财新周刊》每期目录。深度组原来这里是香港01 即时"
+                "（混娱乐稿），后来试过明报两个版（ins 与经济版都 503、观点版报 XML 语法错误）——"
+                "明报这个命名空间在公共实例上不稳，放弃；改成与「财新·最新」同一命名空间的周刊。",
     },
     {
         "key": "WSCN_HK",
@@ -283,16 +282,15 @@ SOURCES = [
                 "英文条目自动附中文。",
     },
     {
-        "key": "MINGPAO_VIEW",
-        "name": "明报 · 观点",
+        "key": "AISIXIANG_REC",
+        "name": "爱思想 · 推荐排行",
         "group": "thought",
         "lang": "zh",
-        "route": "/mingpao/pns/s00012",
-        "site": "news.mingpao.com",
-        # 每日评论版，一天几篇但常隔天才有新稿。
-        "max_age_hours": 168,
-        "note": "mingpao/index.tsx 的 type=pns（每日明报）＋category=s00012（观点）。香港报纸的社评与"
-                "名家评论，中文语境里最接近「政治哲学随笔」的日常读物。",
+        "route": "/aisixiang/toplist/11",
+        "site": "aisixiang.com",
+        "max_age_hours": 336,
+        "note": "aisixiang/toplist.ts 的 id=11＝文章推荐排行（编辑推荐，比「最近更新」更耐读）。"
+                "思想组原来这里是明报观点（公共实例 503 / XML 语法错误），换回已经跑通的爱思想命名空间。",
     },
     {
         "key": "AISIXIANG",
