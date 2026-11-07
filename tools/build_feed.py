@@ -80,7 +80,7 @@ def group_label(key):
     return news_sources.GROUP_LABELS.get(key, key or "")
 
 
-def item_xml(item, names, sites):
+def item_xml(item, names, sites, desc_limit=None):
     """一条新闻对应一个 <item>；缺什么就省什么，不写空标签。"""
     # 英文条目把中文接在标题后面：阅读器的列表页只显示标题，译文必须在这里才看得见。
     title_zh = build_news.normalize(str(item.get("title_zh") or ""))
@@ -118,13 +118,15 @@ def item_xml(item, names, sites):
     elif summary and summary != item["title"]:
         description = summary
     if description and description != shown:
+        if desc_limit and len(description) > desc_limit:
+            description = description[:desc_limit].rstrip() + "…"
         parts.append(f"      <description>{xml_text(description)}</description>")
     parts.append("    </item>")
     return "\n".join(parts)
 
 
 def render(items, now, title=FEED_TITLE, self_url=DEFAULT_SELF_URL, site_url=DEFAULT_SITE_URL,
-           ttl=TTL_MINUTES):
+           ttl=TTL_MINUTES, desc_limit=None):
     names = {source["key"]: source["name"] for source in news_sources.SOURCES}
     sites = {source["key"]: source.get("site") or "" for source in news_sources.SOURCES}
     stamp = rfc822(now)
@@ -143,18 +145,20 @@ def render(items, now, title=FEED_TITLE, self_url=DEFAULT_SELF_URL, site_url=DEF
         "    <generator>04-kindle tools/build_feed.py</generator>",
         f"    <ttl>{int(ttl)}</ttl>",
     ]
-    body = [item_xml(item, names, sites) for item in items]
+    body = [item_xml(item, names, sites, desc_limit=desc_limit) for item in items]
     return "\n".join(head + body + ["  </channel>", "</rss>", ""])
 
 
 def build(payload, out_dir, min_items=10, max_items=build_news.MAX_ITEMS, now=None,
-          title=FEED_TITLE, self_url=DEFAULT_SELF_URL, site_url=DEFAULT_SITE_URL):
+          title=FEED_TITLE, self_url=DEFAULT_SELF_URL, site_url=DEFAULT_SITE_URL,
+          filename="news.xml", desc_limit=None):
     """生成 site/news.xml，返回 (info, path)。条目不足或 XML 不自洽时抛 ValueError。"""
     now = now or datetime.now(timezone.utc)
     items = build_news.prune(payload.get("items") or [], max_items)
     if len(items) < min_items:
         raise ValueError(f"有效条目 {len(items)} 条，少于下限 {min_items}")
-    xml = render(items, now, title=title, self_url=self_url, site_url=site_url)
+    xml = render(items, now, title=title, self_url=self_url, site_url=site_url,
+                 desc_limit=desc_limit)
     if len(xml.encode("utf-8")) > FEED_MAX_BYTES:
         raise ValueError(f"feed 超过 {FEED_MAX_BYTES // 1024} KiB，阅读器可能拒收")
 
@@ -169,7 +173,7 @@ def build(payload, out_dir, min_items=10, max_items=build_news.MAX_ITEMS, now=No
 
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
-    target = out / "news.xml"
+    target = out / filename
     target.write_text(xml, encoding="utf-8")
     newest = fetch_news.parse_published(items[0].get("published") or "")
     reports = payload.get("sources") or []
@@ -200,6 +204,10 @@ def parse_args(argv=None):
     ap.add_argument("--title", default=FEED_TITLE, help="channel 标题")
     ap.add_argument("--self-url", default=DEFAULT_SELF_URL, help="这份 feed 自己的公开地址")
     ap.add_argument("--site-url", default=DEFAULT_SITE_URL, help="站点主页（channel/link）")
+    ap.add_argument("--filename", default="news.xml",
+                    help="输出文件名（默认 news.xml；精简版写 news-lite.xml）")
+    ap.add_argument("--desc-limit", type=int, default=None,
+                    help="摘要最多保留多少字（默认不限；精简版用 140）")
     return ap.parse_args(argv)
 
 
@@ -209,7 +217,8 @@ def main(argv=None):
         payload = json.loads(Path(args.data).read_text(encoding="utf-8"))
         info, path = build(payload, args.out, min_items=args.min_items,
                            max_items=args.max_items, title=args.title,
-                           self_url=args.self_url, site_url=args.site_url)
+                           self_url=args.self_url, site_url=args.site_url,
+                           filename=args.filename, desc_limit=args.desc_limit)
     except (OSError, ValueError, json.JSONDecodeError) as exc:
         print(f"生成失败：{exc}", file=sys.stderr)
         return 1

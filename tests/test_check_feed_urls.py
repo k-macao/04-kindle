@@ -110,7 +110,7 @@ class DefaultFetchTest(unittest.TestCase):
 
         def fake_http_get(url, timeout=15):
             calls.append(url)
-            return RSS.encode()
+            return RSS.encode(), {"status": 200, "content_length": str(len(RSS.encode()))}
 
         original = check_feed_urls.http_get
         try:
@@ -123,6 +123,47 @@ class DefaultFetchTest(unittest.TestCase):
             self.assertEqual(len(results), 1)
         finally:
             check_feed_urls.http_get = original
+
+
+class KoreaderRuleTest(unittest.TestCase):
+    """复现 KOReader 新聞下載器（epubdownloadbackend.lua）的四条判据。"""
+
+    def test_content_length_mismatch_is_flagged(self):
+        result = check_feed_urls.koreader_check(
+            RSS.encode(), {"content_length": str(len(RSS.encode()) + 20)})
+        self.assertFalse(result["ok"])
+        self.assertIn("content-length", " ".join(result["notes"]))
+
+    def test_chunked_is_flagged(self):
+        result = check_feed_urls.koreader_check(
+            RSS.encode(), {"transfer_encoding": "chunked"})
+        self.assertFalse(result["ok"])
+        self.assertIn("chunked", " ".join(result["notes"]))
+
+    def test_gzip_is_flagged(self):
+        result = check_feed_urls.koreader_check(RSS.encode(), {"content_encoding": "gzip"})
+        self.assertFalse(result["ok"])
+        self.assertIn("gzip", " ".join(result["notes"]))
+
+    def test_plain_response_passes(self):
+        result = check_feed_urls.koreader_check(
+            RSS.encode(), {"content_length": str(len(RSS.encode())),
+                          "content_encoding": "identity",
+                          "transfer_encoding": "", "tls_issuer": "DigiCert Inc"})
+        self.assertTrue(result["ok"])
+        self.assertEqual(result["notes"], [])
+        self.assertEqual(result["issuer"], "DigiCert Inc")
+
+
+class UrlsTest(unittest.TestCase):
+    def test_three_files_times_hosts(self):
+        urls = check_feed_urls.feed_urls()
+        self.assertEqual(len(urls), len(check_feed_urls.HOSTS) * len(check_feed_urls.FILES))
+        keys = [key for key, _label, _url in urls]
+        self.assertIn("raw/news-lite.xml", keys)
+        self.assertIn("release/news-test.xml", keys)
+        raw = [url for key, _label, url in urls if key == "raw/news-lite.xml"][0]
+        self.assertTrue(raw.endswith("/site/news-lite.xml"))
 
 
 class CheckAllTest(unittest.TestCase):
@@ -150,8 +191,8 @@ class CliTest(unittest.TestCase):
                                     fetch=fetch_of({"jsdelivr.net": RSS}))
         self.assertEqual(code, 0)
         payload = json.loads(target.read_text(encoding="utf-8"))
-        self.assertEqual(payload["ok"], 1)
-        self.assertTrue(payload["results"][0]["ok"])
+        self.assertEqual(payload["ok"], payload["total"])      # 四个 jsDelivr 端点全过
+        self.assertTrue(all(item["ok"] for item in payload["results"]))
         self.assertEqual(payload["results"][0]["items"], 2)
 
     def test_failure_exits_one(self):

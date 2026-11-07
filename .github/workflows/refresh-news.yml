@@ -95,7 +95,22 @@ jobs:
           --min-items "$MIN_ITEMS" --max-items "$MAX_ITEMS"
           --self-url "$FEED_SELF_URL"
 
-      - name: 产物自检（xml 可解析、条目数、guid、中文配对、self 地址）
+      # 另外出两份同源的小文件。设备上「內容下載失敗」时按体积从小到大试：
+      #   news-test.xml 几 KB（只验线路/证书，别的不说明）
+      #   news-lite.xml 60 条 + 摘要截断（慢设备/超时）
+      #   news.xml      完整版
+      - name: 生成精简版与连通性测试版
+        run: |
+          set -euo pipefail
+          base="${FEED_SELF_URL%news.xml}"
+          python tools/build_feed.py --data news_data.json --out site \
+            --filename news-lite.xml --min-items 5 --max-items 60 --desc-limit 140 \
+            --title "004 每日新闻聚合（精简）" --self-url "${base}news-lite.xml"
+          python tools/build_feed.py --data news_data.json --out site \
+            --filename news-test.xml --min-items 1 --max-items 3 --desc-limit 80 \
+            --title "004 新闻订阅（连通性测试）" --self-url "${base}news-test.xml"
+
+      - name: 产物自检（三份 feed：可解析、条数、guid、中文配对、self 地址）
         run: |
           python - <<'PY'
           import os
@@ -104,64 +119,58 @@ jobs:
           import sys
           from xml.etree import ElementTree
 
-          minimum = int(os.environ.get("MIN_ITEMS", "10"))
-          self_url = os.environ.get("FEED_SELF_URL", "")
-          path = pathlib.Path("site/news.xml")
           cjk = re.compile(r"[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]")
+          base = os.environ.get("FEED_SELF_URL", "")
+          minimum = int(os.environ.get("MIN_ITEMS", "10"))
+          targets = (("news.xml", minimum), ("news-lite.xml", 1), ("news-test.xml", 1))
           problems = []
+          lines = []
 
-          if not path.is_file():
-              print("缺少 site/news.xml", file=sys.stderr)
-              raise SystemExit(1)
-          try:
-              root = ElementTree.fromstring(path.read_bytes())
-          except ElementTree.ParseError as exc:
-              print(f"聚合 RSS 解析失败：{exc}", file=sys.stderr)
-              raise SystemExit(1)
+          for name, floor in targets:
+              path = pathlib.Path("site", name)
+              if not path.is_file():
+                  problems.append(f"缺少 {name}")
+                  continue
+              try:
+                  root = ElementTree.fromstring(path.read_bytes())
+              except ElementTree.ParseError as exc:
+                  problems.append(f"{name} 解析失败：{exc}")
+                  continue
+              channel = root.find("channel")
+              items = channel.findall("item") if channel is not None else []
+              if len(items) < floor:
+                  problems.append(f"{name} 只有 {len(items)} 条，少于下限 {floor}")
+              link = channel.find("{http://www.w3.org/2005/Atom}link") if channel is not None else None
+              expected = base.rsplit("/", 1)[0] + "/" + name if base else ""
+              if link is None:
+                  problems.append(f"{name} 缺少 <atom:link rel=\"self\">")
+              elif expected and link.get("href") != expected:
+                  problems.append(f"{name} 的 self 地址不对：{link.get('href')}")
 
-          channel = root.find("channel")
-          items = channel.findall("item") if channel is not None else []
-          if not items:
-              problems.append("feed 里一条 item 都没有")
-          if len(items) < minimum:
-              problems.append(f"只有 {len(items)} 条，少于下限 {minimum}")
+              guids = set()
+              for item in items:
+                  guid = item.findtext("guid") or ""
+                  title = item.findtext("title") or ""
+                  if not guid:
+                      problems.append(f"{name} 有条目缺 guid：{title[:20]}")
+                  elif guid in guids:
+                      problems.append(f"{name} guid 重复：{guid}")
+                  guids.add(guid)
+                  if item.findtext("pubDate") is None:
+                      problems.append(f"{name} 有条目缺 pubDate：{title[:20]}")
 
-          link = channel.find("{http://www.w3.org/2005/Atom}link") if channel is not None else None
-          if link is None:
-              problems.append("缺少 <atom:link rel=\"self\">")
-          elif self_url and link.get("href") != self_url:
-              problems.append(f"self 地址不对：{link.get('href')}")
+              titles = [item.findtext("title") or "" for item in items]
+              paired = sum(1 for title in titles if "｜中文：" in title)
+              untranslated = [title for title in titles if not cjk.search(title)]
+              lines.append(f"{name}: {len(items)} 条 / {path.stat().st_size} 字节 / "
+                           f"中英并列 {paired} / 英文未译 {len(untranslated)}")
 
-          guids = set()
-          for item in items:
-              title = item.findtext("title") or ""
-              guid = item.findtext("guid") or ""
-              if not title:
-                  problems.append("有条目缺标题")
-              if not guid:
-                  problems.append(f"条目缺 guid：{title[:24]}")
-              elif guid in guids:
-                  problems.append(f"guid 重复：{guid}")
-              guids.add(guid)
-              if item.findtext("pubDate") is None:
-                  problems.append(f"条目缺 pubDate：{title[:24]}")
-
-          titles = [item.findtext("title") or "" for item in items]
-          paired = [title for title in titles if "｜中文：" in title]
-          # 标题里一个汉字都没有＝英文条目，没配上中文就是翻译这轮没跑通。
-          untranslated = [title for title in titles if not cjk.search(title)]
-          if untranslated:
-              print(f"提示：{len(untranslated)} 条英文标题还没配上中文"
-                    f"（如「{untranslated[0][:40]}」），下一轮会补", file=sys.stderr)
           if problems:
               print("；".join(problems), file=sys.stderr)
               raise SystemExit(1)
-
-          print(f"自检通过：{len(items)} 条 / {path.stat().st_size} 字节 / "
-                f"{len(guids)} 个唯一 guid / 中英并列 {len(paired)} 条 / "
-                f"英文未译 {len(untranslated)} 条 / 最新一条 "
-                f"{(items[0].findtext('pubDate') if items else '无')}")
-          print(f"订阅地址：{self_url}")
+          for line in lines:
+              print(f"自检通过 · {line}")
+          print(f"订阅地址：{base.rsplit('/', 1)[0]}/news.xml")
           PY
 
       - name: 提交并推送
@@ -170,7 +179,8 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           # 只提交 feed 本体与两个状态文件：标题指纹（跨天去重）和译文缓存。
-          git add site/news.xml site/news_seen.json site/news_zh_cache.json
+          git add site/news.xml site/news-lite.xml site/news-test.xml \
+                  site/news_seen.json site/news_zh_cache.json
           read -r items paired built <<<"$(python - <<'PY'
           from xml.etree import ElementTree
           root = ElementTree.parse("site/news.xml").getroot()
@@ -192,15 +202,15 @@ jobs:
         run: |
           set -euo pipefail
           tag=news-feed
-          cp site/news.xml news.xml
+          for name in news.xml news-lite.xml news-test.xml; do cp "site/$name" "$name"; done
           if gh release view "$tag" >/dev/null 2>&1; then
-            gh release upload "$tag" news.xml --clobber
+            gh release upload "$tag" news.xml news-lite.xml news-test.xml --clobber
           else
-            gh release create "$tag" news.xml \
+            gh release create "$tag" news.xml news-lite.xml news-test.xml \
               --title "每日新闻聚合 RSS（每天 07:00 更新）" \
               --notes "订阅地址：https://github.com/k-macao/04-kindle/releases/download/news-feed/news.xml"
           fi
-          echo "资产地址：https://github.com/k-macao/04-kindle/releases/download/${tag}/news.xml"
+          echo "资产地址前缀：https://github.com/k-macao/04-kindle/releases/download/${tag}/"
 
       # 把每个对外地址挨个取一遍：哪条 404、哪条能取回多少条，写进 site/feed-mirrors.json。
       # 设备上「内容下载失败」时，先看这份表就知道是地址不对还是那台设备的线路不通。
