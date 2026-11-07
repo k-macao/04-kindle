@@ -190,6 +190,32 @@ def _first_link(entry):
     return fallback
 
 
+URL_PREFIXES = ("http://", "https://")
+
+# 没有 <link> 的条目只按 guid 造地址：认得的 guid 形状就补真实详情页，认不得就留空。
+GUID_URL_RULES = (
+    (re.compile(r"^jin10:index:(\d+)$"), "https://flash.jin10.com/detail/{}"),
+)
+
+
+def _is_url(value):
+    return str(value or "").strip().lower().startswith(URL_PREFIXES)
+
+
+def _link_from_guid(guid):
+    """金十快讯这类没有 <link> 的源，guid 里就藏着详情页 id。"""
+    text = str(guid or "").strip()
+    if not text:
+        return ""
+    if _is_url(text):
+        return text
+    for pattern, template in GUID_URL_RULES:
+        found = pattern.match(text)
+        if found:
+            return template.format(found.group(1))
+    return ""
+
+
 def _child_text(entry, *names):
     for child in entry:
         if _local(child.tag) in names:
@@ -217,10 +243,16 @@ def parse_feed(payload, source=None):
                                          "content", "encoded"), SUMMARY_MAX)
         if summary and summary.lower() == title.lower():
             summary = ""
-        link = _first_link(entry) or _child_text(entry, "guid", "id")
+        # link 只放真的能用浏览器打开的地址；金十快讯只有 guid，就从 guid 里还原详情页。
+        # 注意千万别把 `jin10:index:…` 这种非 URL 写进 <link>：KOReader 的新闻下载器
+        # 会拿它当 base_url 去拼相对链接，而缺 <link> 的条目更糟——它直接索引 nil 报错，
+        # 整个 feed 的下载就停在那儿（表现就是「讀一半失敗」）。
+        link = _first_link(entry).strip()
+        if not _is_url(link):
+            link = _link_from_guid(_child_text(entry, "guid", "id"))
         items.append({
             "title": title,
-            "link": link.strip(),
+            "link": link,
             "published": published.isoformat().replace("+00:00", "Z") if published else "",
             "summary": summary,
             "source": (source or {}).get("key", ""),

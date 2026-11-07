@@ -140,6 +140,44 @@ KOReader 的新聞下載器只给一句「內容下載失敗」，它分不清�
 - `status: 200` 但 `items: 0` / `不是 feed` → 那层回的是 404 页面（Pages 未构建完时常见），
   过一分钟再试。
 
+### 2.3 「讀到一半就停」：一條壞，整輪就停
+
+新聞下載器不是「下一本書」，而是**每條新聞單獨做一個 EPUB**，`for` 循環一條一條來。
+所以「feed 本身讀得開，卻只出來一部分」只有兩種樣子：
+
+| 你看到的 | 说明 |
+| --- | --- |
+| 進度条停在 `Fetching article 37/150`，然後報錯 | 第 37 條讓整輪中止 |
+| `news/<feed 标题>/` 裡有前 36 個 epub，第 37 個沒有或只有 `.tmp` | 同上，改成看目錄更好判斷 |
+
+為什麼一條能讓整輪停？它對每條都要 `feed.link._attr`——**缺 `<link>` 的條目它直接索引 nil 報錯**，
+`feed.description` 也不是可選的。所以「有沒有原文地址」這種小事在它這裡是硬傷。
+
+仓库这边已经把它变成发布前的硬校验（`build_feed.check_device_fields`，加进工作流自检）：
+每条必须有**绝对 http(s) `<link>`**、`<title>` 不能为空也不能带换行、`<guid>` 不能重复，否则这一轮
+不发布。金十快讯那种没有 `<link>` 的源，从 guid（`jin10:index:<id>`）还原真实详情页
+`https://flash.jin10.com/detail/<id>`；实在没有原文地址就退回站点首页——**绝不写 `jin10:index:…`
+这种假地址**。
+
+设备侧有三个开关能直接止血（`<koreader>/news/feed_config.lua`，或插件 UI 里改）：
+
+```lua
+{ "https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news-lite.xml",
+  limit = 30, download_full_article = false, include_images = false },
+```
+
+- **`limit`**：一次只做前 N 條（`0` = 全做，150 條）。**最省事的二分法**：先設 `limit = 20`，
+  通了翻倍；停在 40 就說明第 21–40 條裡有一條有問題；
+- **`download_full_article`**：`true` 時每條還會去開原文網站。原文站多在牆外、又慢，每條 10 秒讀超時、
+  整輪 30 秒——這是「讀一半」最常見的原因，設 `false` 就只用 feed 裡的摘要，十幾秒做完；
+- **`include_images`**：`true` 會給每條抓圖，慢且容易失敗，設 `false`。
+
+重試前**先刪掉 `news/<feed 标题>/` 裡的半成品**：它看到同名文件已存在會 `already exists. Skipping`，
+你會以為改了設定沒生效。
+
+若 `crash.log` 裡出現 `NewsDownloader: Error processing feed` 再加一段 Lua 报错，那條報錯就直接指出
+第幾條、哪一行出的錯——把這一段貼出來，比猜快得多。
+
 ### 聚合 RSS（`site/news.xml`）
 
 `build_feed.py` 把 `news_data.json` 合成一份**标准 RSS 2.0**——不装插件、不用清单，任何阅读器都能订：
@@ -157,6 +195,9 @@ https://cdn.jsdelivr.net/gh/k-macao/04-kindle@main/site/news.xml
   一句摘要；**英文条目标题后面接中文**（`English Title｜中文：译文`），摘要为「中文：… 原文：…」；
 - `guid` 用原文链接（`isPermaLink="true"`），没有链接的用标题指纹 `urn:004:news:<hash>`——
   同一条新闻在读者端不会因为每天重发而重复；
+- **每条都有绝对的 `<link>`**：没有原文地址的条目（金十快讯）补真实详情页
+  `https://flash.jin10.com/detail/<id>`，再不行退回站点首页，`guid` 仍是 `urn:004:news:<hash>`；
+  原因见「2.3」——设备端缺 `<link>` 会让整轮下载停在中途；
 - `lastBuildDate` 是本次生成时间，`ttl` = 60 分钟；
 - 正文先删掉 XML 1.0 不允许的控制字符再转义，`&`、`<`、引号都不会破坏文件；
   生成后立刻用解析器自检，解析不过就不发布；
@@ -333,7 +374,7 @@ https://rsshub.rss.tips, https://rsshub.isrss.com, https://rsshub.cups.moe, http
 ## 7. 订阅方式
 
 - **KOReader**：工具 → **新闻下载器**（News downloader）→ 管理新聞源 → 新增，把地址粘进去；
-  报「內容下載失敗」就按「2.1 多入口」换一条地址再试；
+  报「內容下載失敗」就按「2.2 多入口」换一条地址再试，「只出來一部分」按「2.3」調 `limit`；
 - **其它阅读器**：NetNewsWire / Feedly / Reeder / Inoreader 里直接加这个 feed 地址；
 - **插件**：`News subscription` 模式读的是 `site/news.json`，工作流已不再生成它。想继续用那个模式，
   就手动跑 `build_news.py`（见「做那本 EPUB」）并自己提交 `site/news.epub`、`site/news.json`、

@@ -70,6 +70,14 @@ def rss_with(titles, published="Fri, 07 Nov 2026 02:00:00 +0800"):
     return f'<?xml version="1.0"?><rss version="2.0"><channel>{items}</channel></rss>'
 
 
+# 只有 guid、没有 <link> 的条目（金十快讯就是这样）。
+GUID_ONLY = ("""<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel>"""
+             """<item><title>一条快讯</title>"""
+             """<pubDate>Fri, 07 Nov 2026 23:26:05 +0800</pubDate>"""
+             """<guid>{}</guid><description>快讯正文</description></item>"""
+             """</channel></rss>""")
+
+
 def source(key="CLS", group="flash", route="/cls/telegraph", lang="zh"):
     return {"key": key, "name": f"源 {key}", "group": group, "route": route, "lang": lang}
 
@@ -208,6 +216,21 @@ class ParseFeedTest(unittest.TestCase):
         payload = rss_with(["", "  ", "正常标题一条"]).encode()
         self.assertEqual([item["title"] for item in fetch_news.parse_feed(payload, source())],
                          ["正常标题一条"])
+
+    def test_jin10_guid_becomes_the_real_detail_page(self):
+        """金十快讯没有 <link>，guid 里藏着详情页 id：要从 guid 还原真地址。"""
+        items = fetch_news.parse_feed(GUID_ONLY.format("jin10:index:20261107232605506800"),
+                                      source("JIN10", "flash"))
+        self.assertEqual(items[0]["link"], "https://flash.jin10.com/detail/20261107232605506800")
+
+    def test_unknown_guid_shape_never_becomes_a_link(self):
+        """认不出的 guid 只能留空，绝不把 `unknown:index:42` 这种假地址写进 feed。"""
+        items = fetch_news.parse_feed(GUID_ONLY.format("unknown:index:42"), source())
+        self.assertEqual(items[0]["link"], "")
+
+    def test_http_guid_is_used_as_the_link(self):
+        items = fetch_news.parse_feed(GUID_ONLY.format("https://example.com/only-guid"), source())
+        self.assertEqual(items[0]["link"], "https://example.com/only-guid")
 
     def test_title_gets_unescaped_and_collapsed(self):
         payload = rss_with(["&amp;lt;b&amp;gt;标题&amp;lt;/b&amp;gt;   两格"]).encode()
