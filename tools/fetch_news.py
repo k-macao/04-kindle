@@ -96,12 +96,18 @@ def probe_instance(instance, fetch=None, timeout=8):
     return True, ""
 
 
-def probe_instances(instances, fetch=None, timeout=8, log=print):
-    """探活并把不通的实例挪到队尾（不删，留着兜底）。返回新的实例顺序。"""
+def probe_instances(instances, fetch=None, timeout=8, log=print, notes=None):
+    """探活并把不通的实例挪到队尾（不删，留着兜底）。返回新的实例顺序。
+
+    `notes` 给了就把每个实例的探活结果写进去（进 news_data.json → news.json，
+    没有日志也能看出官方实例今天通没通）。
+    """
     fetch = fetch or http_get
     alive, dead = [], []
     for instance in instances:
         ok, note = probe_instance(instance, fetch=fetch, timeout=timeout)
+        if notes is not None:
+            notes[instance] = {"ok": ok, "note": note}
         if ok:
             alive.append(instance)
             if note:
@@ -274,7 +280,7 @@ def save_seen(path, seen, items, now=None, days=7):
 
 def collect(sources=None, instances=None, timeout=15, max_age_hours=24,
             per_source=12, trip_after=3, now=None, fetch=None, log=print, seen=None,
-            radar_base=None, probe=False):
+            radar_base=None, probe=False, probe_notes=None):
     """抓一轮，返回 (items, source_reports)。fetch(url, timeout) 可注入，便于离线测试。
 
     `seen` 是之前推过的标题指纹（见 load_seen）：命中的条目不再进今天的日报，
@@ -290,7 +296,8 @@ def collect(sources=None, instances=None, timeout=15, max_age_hours=24,
     now = now or datetime.now(timezone.utc)
     instances = list(instances or DEFAULT_INSTANCES)
     if probe and len(instances) > 1:
-        instances = probe_instances(instances, fetch=fetch, timeout=min(timeout, 8), log=log)
+        instances = probe_instances(instances, fetch=fetch, timeout=min(timeout, 8), log=log,
+                                    notes=probe_notes)
     sources = list(sources if sources is not None else news_sources.SOURCES)
     horizon = now - timedelta(hours=max_age_hours)
     seen_titles = dict(seen or {})
@@ -381,10 +388,12 @@ def fetch_news(sources=None, instances=None, timeout=15, max_age_hours=24,
     `fetch` 可注入（测试里用假报文），默认真联网。
     """
     now = now or datetime.now(timezone.utc)
+    probes = {}
     items, reports = collect(sources=sources, instances=instances, timeout=timeout,
                              max_age_hours=max_age_hours, per_source=per_source,
                              trip_after=trip_after, now=now, log=log, fetch=fetch,
-                             seen=seen, radar_base=radar_base, probe=probe)
+                             seen=seen, radar_base=radar_base, probe=probe,
+                             probe_notes=probes)
     # 哪个实例真的供了稿：写进清单，一眼能看出官方实例这轮通没通。
     used = {}
     for report in reports:
@@ -394,6 +403,7 @@ def fetch_news(sources=None, instances=None, timeout=15, max_age_hours=24,
         "generated": now.isoformat(timespec="seconds"),
         "instances": list(instances or DEFAULT_INSTANCES),
         "instances_used": used,
+        "instances_probe": probes,
         "sources": reports,
         "items": items,
     }

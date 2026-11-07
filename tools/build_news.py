@@ -264,6 +264,10 @@ def build(payload, out_dir, min_items=10, max_items=MAX_ITEMS, now=None):
         "zh_added": zh_added,
         "zh_missing": zh_missing,
         "instances_used": payload.get("instances_used") or {},
+        # 实例探活结果与失败源的具体报错：产物是提交进仓库的，没有 CI 日志也能事后查。
+        "instances_probe": payload.get("instances_probe") or {},
+        "sources_error": {report.get("key"): (report.get("error") or "")[:180]
+                          for report in reports if not report.get("ok")},
         "data_time": data_time,
         "data_time_kind": "item" if data_time else "",
         "source": "RSSHub",

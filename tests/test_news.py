@@ -144,6 +144,18 @@ class ProbeTest(unittest.TestCase):
             log=lambda *_: None)
         self.assertEqual(order, ["https://alive.example", "https://dead.example"])
 
+    def test_probe_notes_are_recorded(self):
+        notes = {}
+        fetch_news.probe_instances(
+            ["https://rsshub.app", "https://mirror.example"],
+            fetch=self.fetch({"rsshub.app/healthz":
+                              HTTPError("https://rsshub.app/healthz", 403, "Forbidden", {}, None),
+                              "mirror.example": "OK"}),
+            log=lambda *_: None, notes=notes)
+        self.assertEqual(notes["https://rsshub.app"]["ok"], False)
+        self.assertIn("403", notes["https://rsshub.app"]["note"])
+        self.assertEqual(notes["https://mirror.example"], {"ok": True, "note": ""})
+
     def test_collect_probes_only_when_asked(self):
         calls = []
 
@@ -397,6 +409,8 @@ class BuildTest(unittest.TestCase):
             self.assertEqual(manifest["sources_total"], 2)
             # 失败源也写进清单：清单是提交到仓库的，第二天能看出哪条源是常死。
             self.assertEqual(manifest["sources_failed"], ["COINDESK"])
+            # 失败原因也要落到清单里：没有 CI 日志时只能靠它判断是限流还是路由变了。
+            self.assertIn("COINDESK", manifest["sources_error"])
             self.assertEqual(manifest["doc"], "news.epub")
             self.assertEqual(manifest["data_time"], "2026-11-07T09:00:00Z")
             self.assertEqual(manifest["data_time_kind"], "item")
