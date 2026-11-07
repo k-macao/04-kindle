@@ -29,11 +29,14 @@ python tools/build_epub.py https://k-macao.github.io/004/ --out site
 ```
 site/report.epub     单文件 EPUB 3（含 toc.ncx，兼容旧版 crengine）
 site/epub.json       {"generated", "doc", "title", "chars", "bytes", "sections",
-                      "data_time", "data_time_kind", "status_removed", "source"}
+                      "data_time", "data_time_kind", "status_removed",
+                      "body_removed", "source"}
 ```
 
 成功时打印 `完成：84 KiB，19342 字符，site/report.epub`，并跟着打印
-`状态类文字：已删除 N 块（正文全部保留）`——同一个 N 也写进清单的 `status_removed`。
+`状态类文字：已删除 N 块（正文全部保留）` 与
+`非正文内容：已删除 M 块（站点导航/页脚/版权备案、乱码段）`——两个数字分别写进清单的
+`status_removed` 与 `body_removed`。
 
 手头有本地 HTML 也可以：`python tools/build_epub.py report.html --out site`
 （不带 `--base-url` 时相对链接会失效）。CI 就是先把页面抓成本地的
@@ -49,7 +52,7 @@ python kindle_report.py report-built.html --format text -o kindle.txt
 
 生成内容做了什么：
 
-- 只取 `<main>` 里的正文，`nav`/`footer`/`button`/`script`/`svg` 等整段丢弃；
+- 只取 `<main>` 里的正文，`nav`/`aside`/`footer`/`button`/`script`/`svg` 等整段丢弃；
 - 保留 `p / h1-h6 / ul / ol / li / table / thead / tbody / tr / td / th / b / strong / em / a / img / hr` 等；
 - 删掉所有 `class`、`id`、内联 `style`、`on*` 事件属性——避免 004 的样式混进来；
 - `a[href]`、`img[src]` 改成绝对地址；
@@ -84,6 +87,36 @@ python kindle_report.py report-built.html --format text -o kindle.txt
   新鲜度闸门用）本来就从这里读，而且是在过滤**之前**读的：即使以后规则更激进，
   闸门也不会拿不到时间；模板占位符检查（`{{FETCH_STATUS}}` 正好落在会被删的状态块里）
   同样跑在过滤之前。取值分三级，精度记在 `data_time_kind` 里，见 §4.6。
+
+### 正文判定：不是正文的不要，乱码不要
+
+社区摘要是各站公开页的抓取文字，抓回来的常常不是文章正文。状态过滤之后再过一道正文判定
+（`strip_nonbody()`，规则见 `BODY_DROP_CLASSES` / `BODY_DROP_IDS` / `BODY_DROP_ROLES` /
+`BODY_DROP_TAGS` / `CHROME_TEXT_PATTERNS` / `CHROME_TOKENS_CJK` / `NAV_TOKENS_WORD` /
+`GARBLED_*`）：
+
+| 删掉 | 例子 |
+| --- | --- |
+| 站点外壳（按 class / id / role 整块删，`<aside>` `<footer>` 同样整块删） | `site-footer`、`role="navigation"`、`comments`、`share-bar`、`cookie-banner`、`pagination`、`qrcode` |
+| 版权与备案的整行 | `© 2026 深圳开盘啦网络科技有限公司 版权所有 ｜ 联系方式： … ｜ 地址： …`、`粤ICP备2026012599号-4` |
+| 导航条（导航词扎堆、又没有句子收尾） | `财联社A股24小时电报-… 关于我们 网站声明 联系方式 用户反馈 网站地图 帮助 首页 电报 话题 盯盘 …`、`Home About us Contact us Privacy policy`、`総合トップ ニュース 掲示板 投資信託 ログイン 会員登録 サイトマップ` |
+| 空数据骨架（`-.--`、`--`、`N/A` 占满的分段） | 财联社页头那串 `上证指数 -.-- -.-- (-.--%) 深证成指 …` |
+| 行内页脚（只切那几节，正文留着） | `… 传台积电进军DRAM！ … 查看更多` → `… 传台积电进军DRAM！` |
+| 乱码（整段删，不留半句） | `锟斤拷锟斤拷`、`æ–‡ç« `、`ÐÂÀË²Æ¾­Íø`、`□□□□`、含 `U+FFFD` 的段落 |
+
+保留的边界：
+
+- **正文里的普通词不算外壳**：分段里带逗号顿号句号的是句子（`公司官网首页改版，导航更清楚，
+  用户反馈也更快。` 整句保留）；按空格切分只切「紧挨汉字」的空格，英文正文不会被
+  `comments`、`home` 这类词切成碎片；
+- **口径说明、方法论注释、风险提示照旧保留**，正文判定只认站点界面与编码坏了；
+- **零散坏字符不等于整段乱码**：`U+FFFD`、控制符、零宽字符会被摘掉，句子留着；只有可疑
+  字符占比 ≥12% 才整段删；
+- **解不出码就不生成**：页面不是 UTF-8 时按它声明的编码再解一次（`decode_source()`），
+  仍失败就报错退出；过滤之后整份正文的乱码占比 ≥2% 也拒绝生成——宁可这一轮不推送。
+
+两个转换器各带一份同样的规则（`kindle_report.py` 要单独拷进 004 仓库，不能 import），
+`tests/test_body_filter.py` 会逐条比对。
 
 `kindle_report.py`（纯文本模式）带一份逐条相同的规则——它要单独拷进 004 仓库，不能
 import 本仓库的模块，所以 `tests/test_status_filter.py` 会比对两边的 `STATUS_*` 常量，
@@ -212,9 +245,9 @@ return {
   - 推送用 `git push origin HEAD:refs/heads/$GITHUB_REF_NAME`：定时运行时 HEAD 就是默认分支，
     手动指定 ref 运行时是游离 HEAD，裸 `git push` 会失败。
 - **自检不过就不推送**：`tools/check_no_status.py` 用生成时同一套规则逐行检查两种产物，
-  发现整行状态类文字（`抓取状态：…`、`当次实抓 · 端点 …`、`STATUS > …`）就报错退出，
-  这次运行不提交、不推送，设备上留着上一版；正文行数/字符数掉到下限以下同样报错
-  （防过滤规则写宽了把正文删掉）。
+  发现整行状态类文字（`抓取状态：…`、`当次实抓 · 端点 …`、`STATUS > …`）、整行站点外壳
+  （导航条、页脚版权与 ICP 备案）或乱码就报错退出，这次运行不提交、不推送，设备上留着
+  上一版；正文行数/字符数掉到下限以下同样报错（防过滤规则写宽了把正文删掉）。
 - **源时间只警告**：生成后，job 会检查 `site/epub.json` 的 `data_time` 与
   `data_time_kind`（都来自报告正文，三级取值见 §4.6）。距今超过
   `env.MAX_SOURCE_AGE_HOURS`（默认 **12 小时**）或缺失时，只在 Actions 日志里输出
