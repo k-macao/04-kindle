@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>004 新闻订阅（连通性测试）</title>
+    <link>https://github.com/k-macao/04-kindle</link>
+    <atom:link href="https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news-test.xml" rel="self" type="application/rss+xml"/>
+    <description>每天 07:00（北京时间）从 RSSHub 抓取并合并的财经、政治与哲学思想新闻，英文条目附中文译文，本次 3 条。</description>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 07 Nov 2026 15:50:58 +0000</lastBuildDate>
+    <generator>04-kindle tools/build_feed.py</generator>
+    <ttl>60</ttl>
+    <item>
+      <title>《财新周刊》第1230期</title>
+      <link>https://weekly.caixin.com/2026/cw1230/</link>
+      <guid isPermaLink="true">https://weekly.caixin.com/2026/cw1230/</guid>
+      <pubDate>Sat, 07 Nov 2026 15:49:40 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://weekly.caixin.com">财新周刊</source>
+      <description>封面报道 Cover Story “蓝色海啸”扑向特朗普 美国中期选举成为对特朗普的公投，共和党大败动摇其权力根基，任期进入更难预测的下半场 财新观察 Opin…</description>
+    </item>
+    <item>
+      <title>波兰总理：克拉科夫枪击事件是“悲剧”</title>
+      <link>https://www.cls.cn/detail/2528154</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2528154</guid>
+      <pubDate>Sat, 07 Nov 2026 15:44:02 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+      <description>【波兰总理：克拉科夫枪击事件是“悲剧”】财联社11月7日电，波兰警方7日在社交媒体发文称，该国克拉科夫市当日发生枪击事件，已造成5人死亡、十余人受伤。枪手被警察…</description>
+    </item>
+    <item>
+      <title>波兰克拉科夫枪击事件致2死10伤</title>
+      <link>jin10:index:20261107232605506800</link>
+      <guid isPermaLink="true">jin10:index:20261107232605506800</guid>
+      <pubDate>Sat, 07 Nov 2026 15:26:05 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>金十数据11月7日讯，波兰媒体7日援引当地消防部门消息报道，波兰克拉科夫当天发生枪击事件，已造成2人死亡、10人受伤。</description>
+    </item>
+  </channel>
+</rss>
