@@ -15,7 +15,9 @@ https://cdn.jsdelivr.net/gh/k-macao/04-kindle@main/site/news.xml            ← 
 
 | 文件 | 内容 | 谁用 |
 | --- | --- | --- |
-| `site/news.xml` | **聚合 RSS**：所有源合成一个标准 feed，英文条目中英并列 | 阅读器订阅、KOReader 新闻下载器 |
+| `site/news.xml` | **聚合 RSS**：所有源合成一个标准 feed，英文条目中英并列（约 140 KB / 150 条） | 阅读器订阅、KOReader 新闻下载器 |
+| `site/news-lite.xml` | 同源精简版：最多 60 条、摘要截到 140 字（约 40 KB） | 慢设备、老设备 |
+| `site/news-test.xml` | 连通性测试版：只有 3 条（约 3 KB） | 先验线路与证书，再谈内容 |
 | `site/news_seen.json` | 最近 7 天推过的标题指纹 | 抓取时跨天去重，不进 feed |
 | `site/news_zh_cache.json` | 英文标题/摘要的中文译文缓存 | 重译同一句英文时直接命中，省额度、译文稳定 |
 
@@ -81,7 +83,37 @@ python tools/build_news.py --data news_data.json --out site   # site/news.epub +
 - 少于 `--min-items`（默认 10）条、或者正文乱码占比超过 2% → 退出码 1，**不覆盖旧产物**：
   宁可设备上还是昨天的日报，也不推一份空书。
 
-### 2.1 多入口：设备说「内容下载失败」时
+### 2.1 先分清是哪种失败：按体积从小到大试
+
+KOReader 的新闻下载器（`epubdownloadbackend.lua`）判失败的口径很窄，只有这几条：
+
+- 连接/握手超时（默认读超时 10 秒、整轮 30 秒）；
+- 响应没有 HTTP 头（DNS/线路不通）；
+- 4xx（地址没了）；
+- `content-length` 与实际收到的字节数不等（"Incomplete content received"）；
+- 它**不解压 gzip、不认 chunked**——喂过去就是坏 XML。
+
+所以先按体积试，能把范围缩到「线路/证书」还是「体积/超时」：
+
+| 顺序 | 文件 | 体积 | 能下载说明什么 |
+| --- | --- | --- | --- |
+| 1 | `news-test.xml` | 约 3 KB | 线路与证书都通，问题在体积或内容 |
+| 2 | `news-lite.xml` | 约 40 KB | 大 feed 超时或有解析负担 |
+| 3 | `news.xml` | 约 140 KB | 全部正常 |
+
+三个文件都有同样的四个入口（见 2.2），所以是「体积 × 入口」的组合，哪一格通就用哪一格。
+
+**还不行就看设备日志**：`koreader/crash.log` 里搜 `NewsDownloader`，那几句 warn 直接对应原因——
+
+| 日志 | 含义 | 怎么办 |
+| --- | --- | --- |
+| `request interrupted: SSL_HANDSHAKE` | 证书/加密套件谈不下来 | 换入口（raw / Release 是 DigiCert），或校一下设备时钟 |
+| `request interrupted: TIMEOUT` / sink timeout | 太慢或太大 | 先试 `news-test.xml`；通了再换 `news-lite.xml` |
+| `No HTTP headers: ... network unreachable` | DNS/线路不通 | 换 jsDelivr 端点 |
+| `HTTP error: 404` | 地址没了 | 换入口 |
+| `Incomplete content received` | 长度对不上（压缩/分块） | 换入口，并把入口告诉我，我去看响应头 |
+
+### 2.2 多入口：同一份 feed 挂在不同主机上
 
 KOReader 的新聞下載器只给一句「內容下載失敗」，它分不清是地址错了、文件坏了，还是这台设备
 那条线路不通。所以同一份 feed 挂在几个互不相关的主机上，按下面顺序试：
@@ -98,8 +130,9 @@ KOReader 的新聞下載器只给一句「內容下載失敗」，它分不清�
 > 这种设备上 `github.io` 会报「內容下載失敗」，而 raw / Release 的证书通常没问题。
 > 反过来，如果线路被墙，jsDelivr 更容易通。两条路都堵住的情况基本没有。
 
-每轮跑完，工作流会把这几条**逐个取一遍**，结果写在 `site/feed-mirrors.json`
-（`ok` / `total` / 每条的状态码、字节数、条目数、报错）。设备报错时先看这份表：
+每轮跑完，工作流会把**三份文件 × 七个入口**逐条取一遍，结果写在 `site/feed-mirrors.json`
+（`ok` / `total` / 每条的状态码、字节数、条目数、报错，以及 `koreader` 小节：复现上面那五条
+判据、记下 TLS 签发者与耗时）。设备报错时先看这份表：
 
 - 某条 `ok: false` + `404` → 地址真的没了（Pages 没开、Release 资产没上传），换别的入口；
 - 全都 `ok: true`，设备还是失败 → 是**这台设备的网络/TLS**，不是 feed 的问题：换个入口

@@ -86,8 +86,10 @@ https://k-macao.github.io/04-kindle/site/news.xml                            ←
 https://cdn.jsdelivr.net/gh/k-macao/04-kindle@main/site/news.xml             ← 被墙时用 jsDelivr
 ```
 
-四条挂在不同主机上，设备上一条不通就换下一条；每轮跑完会把它们逐个取一遍，结果写在
-`site/feed-mirrors.json`，设备报「內容下載失敗」时先看这份表。
+四条挂在不同主机上，设备上一条不通就换下一条。同一目录下还有两份「救急」文件：
+`news-lite.xml`（60 条、摘要截断，约 40 KB）和 `news-test.xml`（3 条、约 3 KB，只验线路与证书），
+路径把文件名换掉即可。每轮跑完会把三份 × 七个入口逐条取一遍，结果写在 `site/feed-mirrors.json`，
+设备报「內容下載失敗」时先看这份表。
 
 源目录在 `tools/news_sources.py`，24 条 RSSHub 路由分五组：财经快讯（财联社电报、华尔街见闻的
 要闻/A 股/港股快讯、金十、同花顺、第一财经简报、新浪股市滚动）、财经深度（华尔街见闻要闻、财新、
