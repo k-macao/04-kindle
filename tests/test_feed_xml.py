@@ -118,6 +118,37 @@ class ItemContentTest(unittest.TestCase):
         # 同一条没链接的新闻，两次生成的指纹必须一样，否则读者端会重复。
         self.assertEqual(guid.text, self.one(link="").find("guid").text)
 
+    def test_item_without_a_url_still_gets_the_source_homepage(self):
+        """没有原文地址时 <link> 退回站点首页：KOReader 缺 <link> 会整轮停在中途。"""
+        item = self.one(link="")
+        self.assertEqual(item.findtext("link"), "https://cls.cn")
+        self.assertEqual(item.find("guid").get("isPermaLink"), "false")
+
+    def test_pseudo_link_is_not_published_as_a_link(self):
+        """`jin10:index:…` 这种伪链接既不能当 <link>，也不能当 permalink 的 guid。"""
+        item = self.one(link="jin10:index:20261107232605506800", source="JIN10")
+        self.assertEqual(item.findtext("link"), "https://jin10.com")
+        guid = item.find("guid")
+        self.assertEqual(guid.get("isPermaLink"), "false")
+        self.assertTrue(guid.text.startswith("urn:004:news:"))
+
+    def test_every_item_always_has_an_absolute_link(self):
+        data = payload(6)
+        data["items"][0]["link"] = ""
+        data["items"][1]["link"] = "jin10:index:1"
+        del data["items"][2]["link"]
+        folder = tempfile.mkdtemp()
+        _info, path = build_feed.build(data, Path(folder), now=NOW, min_items=1)
+        root = parse(path.read_text(encoding="utf-8"))
+        for item in root.findall("./channel/item"):
+            self.assertTrue(item.findtext("link", "").startswith("https://"),
+                            item.findtext("title"))
+
+    def test_newline_in_title_is_collapsed(self):
+        item = self.one(title="上半句\n下半句")
+        self.assertNotIn("\n", item.findtext("title"))
+        self.assertEqual(item.findtext("title"), "上半句 下半句")
+
     def test_empty_summary_is_omitted(self):
         self.assertIsNone(self.one(summary="").find("description"))
 
@@ -199,6 +230,44 @@ class EscapingTest(unittest.TestCase):
         text = path.read_text(encoding="utf-8")
         self.assertTrue(text.startswith('<?xml version="1.0" encoding="utf-8"?>'))
         self.assertIn("财经新闻", text)
+
+
+class DeviceFieldGuardTest(unittest.TestCase):
+    """设备侧硬要求：缺一条就整轮停在中途（KOReader 索引 nil 报错）。"""
+
+    def fields(self, xml):
+        return parse(xml).findall("./channel/item")
+
+    def good(self):
+        return ("<rss><channel><item><title>标题</title><link>https://a.example/1</link>"
+                "<guid>g</guid></item></channel></rss>")
+
+    def test_good_item_passes(self):
+        self.assertTrue(build_feed.check_device_fields(self.fields(self.good())))
+
+    def test_missing_link_is_rejected(self):
+        xml = "<rss><channel><item><title>标题</title><guid>g</guid></item></channel></rss>"
+        with self.assertRaises(ValueError) as caught:
+            build_feed.check_device_fields(self.fields(xml))
+        self.assertIn("第 1 条", str(caught.exception))
+
+    def test_relative_link_is_rejected(self):
+        xml = ("<rss><channel><item><title>标题</title><link>jin10:index:1</link>"
+               "<guid>g</guid></item></channel></rss>")
+        with self.assertRaises(ValueError):
+            build_feed.check_device_fields(self.fields(xml))
+
+    def test_newline_in_title_is_rejected(self):
+        xml = ("<rss><channel><item><title>上\n下</title><link>https://a.example/1</link>"
+               "<guid>g</guid></item></channel></rss>")
+        with self.assertRaises(ValueError) as caught:
+            build_feed.check_device_fields(self.fields(xml))
+        self.assertIn("换行", str(caught.exception))
+
+    def test_missing_guid_is_rejected(self):
+        xml = "<rss><channel><item><title>标题</title><link>https://a.example/1</link></item></channel></rss>"
+        with self.assertRaises(ValueError):
+            build_feed.check_device_fields(self.fields(xml))
 
 
 class GuardTest(unittest.TestCase):

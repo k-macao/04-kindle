@@ -60,6 +60,13 @@ def xml_attr(value):
     return escape(INVALID_XML_RE.sub("", str(value or "")), {'"': "&quot;"})
 
 
+def _absolute(value):
+    """只认 http(s) 绝对地址；`jin10:index:…` 这种「伪链接」一律当没有。"""
+    text = str(value or "").strip()
+    lowered = text.lower()
+    return text if lowered.startswith(("http://", "https://")) else ""
+
+
 def rfc822(moment):
     """RSS 只认 RFC 822 的时间，统一写 UTC。"""
     if moment is None:
@@ -80,20 +87,27 @@ def group_label(key):
     return news_sources.GROUP_LABELS.get(key, key or "")
 
 
-def item_xml(item, names, sites, desc_limit=None):
+def item_xml(item, names, sites, desc_limit=None, fallback_link=DEFAULT_SITE_URL):
     """一条新闻对应一个 <item>；缺什么就省什么，不写空标签。"""
     # 英文条目把中文接在标题后面：阅读器的列表页只显示标题，译文必须在这里才看得见。
     title_zh = build_news.normalize(str(item.get("title_zh") or ""))
     shown = f"{item['title']}｜中文：{title_zh}" if title_zh else item["title"]
+    # 标题里绝不能留换行：设备端用 <title>…</title> 抠书名，跨行就抠不到（见 check_device_fields）。
+    shown = " ".join(str(shown).split())
     title = xml_text(shown)
-    link = (item.get("link") or "").strip()
-    guid_value = link or ("urn:004:news:" + fetch_news.title_hash(item["title"]))
-    permalink = "true" if link else "false"
+    key = item.get("source") or ""
+    name = names.get(key) or key
+    site = sites.get(key) or ""
+    # 每条都必须有绝对的 http(s) <link>：KOReader 的新闻下载器对每条都要
+    # `feed.link._attr`，缺 <link> 时它索引 nil 当场报错，整个 feed 停在中途
+    # （「讀一半失敗」就是这么来的）。没有原文地址的条目退回站点首页，绝不写假地址。
+    link = _absolute(item.get("link")) or _absolute("https://" + site if site else "") or fallback_link
+    guid_value = _absolute(item.get("link")) or ("urn:004:news:" + fetch_news.title_hash(item["title"]))
+    permalink = "true" if _absolute(item.get("link")) else "false"
     parts = ["    <item>",
-             f"      <title>{title}</title>"]
-    if link:
-        parts.append(f"      <link>{xml_text(link)}</link>")
-    parts.append(f'      <guid isPermaLink="{permalink}">{xml_text(guid_value)}</guid>')
+             f"      <title>{title}</title>",
+             f"      <link>{xml_text(link)}</link>",
+             f'      <guid isPermaLink="{permalink}">{xml_text(guid_value)}</guid>']
     moment = fetch_news.parse_published(item.get("published") or "")
     stamp = rfc822(moment)
     if stamp:
@@ -101,9 +115,6 @@ def item_xml(item, names, sites, desc_limit=None):
     label = group_label(item.get("group"))
     if label:
         parts.append(f"      <category>{xml_text(label)}</category>")
-    key = item.get("source") or ""
-    name = names.get(key) or key
-    site = sites.get(key) or ""
     if name:
         source_open = (f'      <source url="{xml_attr("https://" + site)}">' if site
                        else "      <source>")
@@ -145,8 +156,32 @@ def render(items, now, title=FEED_TITLE, self_url=DEFAULT_SELF_URL, site_url=DEF
         "    <generator>04-kindle tools/build_feed.py</generator>",
         f"    <ttl>{int(ttl)}</ttl>",
     ]
-    body = [item_xml(item, names, sites, desc_limit=desc_limit) for item in items]
+    body = [item_xml(item, names, sites, desc_limit=desc_limit, fallback_link=site_url)
+            for item in items]
     return "\n".join(head + body + ["  </channel>", "</rss>", ""])
+
+
+def check_device_fields(parsed_items):
+    """设备侧（KOReader 的新闻下载器）读这份 feed 时的硬要求，缺一条就整轮停在中途。
+
+    - 每条都要有 `<link>`，而且是 http(s) 绝对地址：它拿 `feed.link` 去拼相对链接，
+      缺 `<link>` 会直接索引 nil 报错；
+    - 标题不能为空、不能带换行：它从 `%1` 里抠 `<title>…</title>` 当 EPUB 的
+      `<dc:title>`，抠不到就是 nil，`string.format` 当场抛错；
+    - `guid` 必须有，阅读器靠它去重。
+    """
+    for index, item in enumerate(parsed_items, start=1):
+        link = (item.findtext("link") or "").strip()
+        if not _absolute(link):
+            raise ValueError(f"第 {index} 条没有绝对的 <link>：{link!r}（设备会停在这里）")
+        title = item.findtext("title") or ""
+        if not title.strip():
+            raise ValueError(f"第 {index} 条的 <title> 是空的")
+        if "\n" in title or "\r" in title:
+            raise ValueError(f"第 {index} 条的 <title> 里有换行")
+        if not (item.findtext("guid") or "").strip():
+            raise ValueError(f"第 {index} 条没有 <guid>")
+    return True
 
 
 def build(payload, out_dir, min_items=10, max_items=build_news.MAX_ITEMS, now=None,
@@ -170,6 +205,7 @@ def build(payload, out_dir, min_items=10, max_items=build_news.MAX_ITEMS, now=No
     parsed_items = root.findall("./channel/item")
     if len(parsed_items) != len(items):
         raise ValueError(f"XML 条目数不符：写出 {len(parsed_items)}，应有 {len(items)}")
+    check_device_fields(parsed_items)
 
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)

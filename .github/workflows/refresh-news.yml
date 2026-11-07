@@ -158,6 +158,12 @@ jobs:
                   guids.add(guid)
                   if item.findtext("pubDate") is None:
                       problems.append(f"{name} 有条目缺 pubDate：{title[:20]}")
+                  # 设备侧硬要求：缺绝对的 <link> 会让 KOReader 的新闻下载器整轮停在中途。
+                  item_link = (item.findtext("link") or "").strip()
+                  if not item_link.lower().startswith(("http://", "https://")):
+                      problems.append(f"{name} 有条目没有绝对的 <link>：{item_link[:40] or '(缺)'}")
+                  if not title.strip() or "\n" in title:
+                      problems.append(f"{name} 的 <title> 为空或带换行：{title[:20]!r}")
 
               titles = [item.findtext("title") or "" for item in items]
               paired = sum(1 for title in titles if "｜中文：" in title)
