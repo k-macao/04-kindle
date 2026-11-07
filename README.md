@@ -61,21 +61,23 @@ python tools/render_report.py --out site
 URL** 填 `site/report.json` 的地址即可。详步骤、机型参数、切页规则和限制见
 [docs/kindle-graphic.md](docs/kindle-graphic.md)。
 
-## 每日新闻订阅（RSSHub）
+## 每日新闻聚合 RSS（RSSHub）
 
-报告是「每小时的判断」，新闻是「每天一次的读报」。第二本书独立生成、独立刷新：
+报告是「每小时的判断」，新闻是「每天一次的一条 feed」。抓一轮 RSSHub（财经 / 政治 / 哲学思想），
+英文条目自动配中文，合成**一个标准 RSS 2.0**：`site/news.xml`，任何阅读器（含 KOReader 的
+新闻下载器）都能直接订阅：
 
 ```sh
 python tools/fetch_news.py --out news_data.json          # 抓一轮 RSSHub 新闻
 python tools/translate_news.py --data news_data.json \
        --cache site/news_zh_cache.json                   # 英文条目补中文
-python tools/build_news.py --data news_data.json --out site
-python tools/build_feed.py --data news_data.json --out site
+python tools/build_feed.py --data news_data.json --out site   # → site/news.xml
 ```
 
-产出 `site/news.epub`（按「快讯 / 深度 / 全球 / 政治与政策 / 哲学与思想」分节，每天一本）、
-清单 `site/news.json`、`site/news.txt`，以及**聚合 RSS** `site/news.xml`——后者是标准 RSS 2.0，
-任何阅读器（含 KOReader 的新闻下载器）都能直接订阅：
+日报 EPUB / 清单 / 纯文本（`news.epub`、`news.json`、`news.txt`）**不再自动产出**——工作流只生成 xml；
+需要那本书时手动跑 `python tools/build_news.py --data news_data.json --out site`。
+
+订阅地址：
 
 ```
 https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news.xml
@@ -89,20 +91,21 @@ https://cdn.jsdelivr.net/gh/k-macao/04-kindle@main/site/news.xml     ← raw 不
 （Aeon 哲学、Psyche Ideas、爱思想最近更新）。政策、哲学类源更新稀疏，可以在目录里给单源写
 `max_age_hours`（如中国政府网 168 小时、Aeon 336 小时），靠 `news_seen.json` 的指纹保证不重复推。挑的都是 004 那 49 条之外的站点，路由按 RSSHub 仓库里的
 `route.path` 核对过。英文大站（路透、WSJ）实测在机房 IP 上取不到（Cloudflare / `antiCrawler`），
-已经换成同域名下能用的中文源；换掉的原因写在目录的 `note` 里，清单里的 `sources_failed` 会记录
-每轮失败的源，持续失败就该换。
+已经换成同域名下能用的中文源；换掉的原因都写在目录的 `note` 里。`build_feed.py` 每次会在日志末尾
+列出这一轮的失败源与报错，持续失败就该换源。
 
 **英文条目自动附中文**：`tools/translate_news.py` 只翻英文（源标 `en`，或标题字母占一半以上），
 接口按 Google → Lingva → MyMemory 顺序回退，译文缓存在 `site/news_zh_cache.json`（同一句只翻
-一次）。EPUB 里标题下多一行「中文：…」，聚合 RSS 里标题写成 `English Title｜中文标题`。
-翻译接口全挂也不挡出报——那一步在工作流里是 `continue-on-error`，`news.json` 的
-`zh_missing` 会记下这轮有几条没配上中文。
+一次）。feed 里标题写成 `English Title｜中文：译文`，摘要是「中文：… 原文：…」。
+翻译接口全挂也不挡出 feed——那一步在工作流里是 `continue-on-error`，自检会打出这轮还有几条
+英文标题没配上中文。
 
-分工很明确：**抓取只负责按路由取回并归一化**（`news_data.json`），**排版只负责判断与生成**
-（条目不足 10 条、乱码超标就退出码 1、不覆盖旧产物）。一层是纯数据、一层是纯文档，排错了不用重抓。
+分工很明确：**抓取只负责按路由取回并归一化**（`news_data.json`），**合成只负责判断与输出**
+（条目不足 10 条、xml 不自洽就退出码 1、不覆盖旧 feed）。一层是纯数据、一层是纯文件，改了模板
+不用重抓。
 
 每天 07:00（北京时间）由 `.github/workflows/refresh-news.yml` 自动跑：跑测试 → 抓取 → 英译中 →
-生成 → 产物自检 → 提交推送。实例顺序是**官方 `rsshub.app` 第一**，后面 `rsshub.rss.tips` /
+合成 xml → 自检（可解析、条数、guid、中文配对、self 地址）→ 只提交 `site/news.xml` 与两个状态文件。实例顺序是**官方 `rsshub.app` 第一**，后面 `rsshub.rss.tips` /
 `rsshub.isrss.com` / `rsshub.cups.moe` 兜底；开工前先探一次 `/healthz`，官方实例对机房 IP 回 403
 时自动排到队尾（日志会写原因），`RSSHUB_BASE` 可换成自建实例；同一实例连续失败 3 次就跳过，
 单源失败不影响别的源。跨天不重复：`site/news_seen.json` 记着最近 7 天推过的标题指纹，
@@ -112,9 +115,9 @@ https://cdn.jsdelivr.net/gh/k-macao/04-kindle@main/site/news.xml     ← raw 不
 `/api/radar/rules/{域名}`，没有规则就找站点自带 RSS）；抓取时哪条源挂了，日志里会直接给出 Radar
 建议的替换路由，但**不会自动换源**——确认后才改目录。
 
-设备端：菜单 → **004 Report** → **News manifest URL** 填 `site/news.json`，**Display mode →
-News subscription**。之后和字模式一样——每 60 秒只拉几百字节的清单，`generated` 变了才重下 EPUB
-并从头打开，新书用新文件名，报告那本与新闻那本各自缓存、互不覆盖。详见
+订阅：KOReader → 工具 → **新闻下载器**（News downloader）粘上面的地址；或丢给 NetNewsWire /
+Feedly / Reeder。插件那套「News subscription」读的是 `site/news.json`，工作流已不再生成它——
+想继续用就手动跑 `build_news.py` 并自己提交那三个文件。详见
 [docs/kindle-news.md](docs/kindle-news.md)。
 
 ## 2. Kindle 安装与使用
