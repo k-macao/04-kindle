@@ -419,7 +419,7 @@ class GroupedTest(unittest.TestCase):
                  {"title": "快讯一条新闻", "group": "flash", "published": ""}]
         groups = build_news.grouped(items)
         self.assertEqual([label for _key, label, _rows in groups],
-                         ["一、中文财经快讯", "二、全球市场与加密"])
+                         ["一、中文财经快讯", "二、全球市场与要闻"])
 
 
 class BuildTest(unittest.TestCase):
@@ -459,7 +459,7 @@ class BuildTest(unittest.TestCase):
                 self.assertTrue(Path(path).is_file(), path)
             text = paths["text"].read_text(encoding="utf-8")
             self.assertIn("一、中文财经快讯", text)
-            self.assertIn("二、全球市场与加密", text)
+            self.assertIn("二、全球市场与要闻", text)
             self.assertIn("财联社 · 电报", text)
             # 摘要只出一次，标题不会被当成摘要重复一行。
             self.assertEqual(text.count("第 1 条财经新闻标题"), 1)

@@ -5,7 +5,7 @@
 
 | 文件 | 内容 | 谁用 |
 | --- | --- | --- |
-| `site/news.epub` | 当天的新闻，按「快讯 / 深度 / 全球 / 政治与政策 / 哲学与思想」分节 | 插件「News subscription」模式 |
+| `site/news.epub` | 当天的新闻，按「快讯 / 深度 / 全球市场与要闻 / 政治与政策 / 哲学与思想」分节 | 插件「News subscription」模式 |
 | `site/news.json` | 清单：`generated`、`doc`、条目数、源可用数、最新一条的时间 | 插件每 60 秒只拉这个 |
 | `site/news.txt` | 同一份内容的纯文本 | 文本模式或自己看 |
 | `site/news.xml` | **聚合 RSS**：所有源合成一个标准 feed | 任何 RSS 阅读器 / KOReader 新闻下载器 |
@@ -86,7 +86,7 @@ NetNewsWire / Feedly / Reeder / Inoreader 之类的阅读器。设备上如果 `
 
 ## 2. 源目录
 
-源写在 `tools/news_sources.py`，23 条，五个分组：
+源写在 `tools/news_sources.py`，24 条，五个分组：
 
 | 分组 | 源 | RSSHub 路由 |
 | --- | --- | --- |
@@ -103,15 +103,16 @@ NetNewsWire / Feedly / Reeder / Inoreader 之类的阅读器。设备上如果 `
 | | 格隆汇·推荐 | `/gelonghui/home` |
 | | 格隆汇·日热文 | `/gelonghui/hot-article` |
 | | 第一财经·最新 | `/yicai/latest` |
-| | 香港01·即时 | `/hk01/latest` |
+| | 明报·即时经济 | `/mingpao/ins/s00002` |
 | 全球 | 彭博社·市场 | `/bloomberg/markets` |
 | | 彭博社·加密 | `/bloomberg/crypto` |
-| | AP News·商业 | `/apnews/rss/business` |
+| | 经济学人·Espresso | `/economist/espresso` |
 | 政治 | 中国政府网·最新政策 | `/gov/zhengce/zuixin` |
 | | 外交部·发言人表态 | `/gov/mfa/wjdt/fyrbt` |
 | | 联合早报·国际 | `/zaobao/realtime/world` |
 | 思想 | Aeon·哲学 | `/aeon/category/philosophy` |
 | | Psyche·Ideas | `/psyche/type/ideas` |
+| | 明报·观点 | `/mingpao/pns/s00012` |
 | | 爱思想·最近更新 | `/aisixiang/toplist/10` |
 
 2026-11-07 首轮真实运行（128 条 / 12 个源可用）换掉了四条**在机房 IP 上取不到**的源，理由都写在
@@ -129,6 +130,9 @@ Playwright，必挂），一并换成港股快讯——**加源前先看路由�
 - **CoinDesk 连挂三轮**（超时 / 503），换成 AP News 自带的官方 RSS（`/apnews/rss/business`）——
   上游本身就提供 RSS 的源最不容易挂。
 - 第一财经头条能解析出 30 条但全部在窗口外（接口回的是老稿），与「第一财经·最新」重复，删掉。
+- 第四轮：香港01 即时的列表混着娱乐稿（抓到「璀璨之城大结局｜吳卓羲…」），换成明报即时·经济；
+  AP News 商业在公共实例上回 503，换成《经济学人》Espresso；思想组补上明报·观点（每日明报评论版）——
+  中文语境里最接近「政治哲学随笔」的日常读物。
 
 清单里的 `sources_failed` / `sources_error` / `instances_probe` 每轮都会记下失败源、具体报错
 和实例探活结果——不用翻 CI 日志也能判断是 403、超时，还是真的没更新。

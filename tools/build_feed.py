@@ -84,7 +84,7 @@ def item_xml(item, names, sites):
     """一条新闻对应一个 <item>；缺什么就省什么，不写空标签。"""
     # 英文条目把中文接在标题后面：阅读器的列表页只显示标题，译文必须在这里才看得见。
     title_zh = build_news.normalize(str(item.get("title_zh") or ""))
-    shown = f"{item['title']}｜{title_zh}" if title_zh else item["title"]
+    shown = f"{item['title']}｜中文：{title_zh}" if title_zh else item["title"]
     title = xml_text(shown)
     link = (item.get("link") or "").strip()
     guid_value = link or ("urn:004:news:" + fetch_news.title_hash(item["title"]))
