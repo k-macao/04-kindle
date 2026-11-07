@@ -5,9 +5,13 @@
 Feedly、Reeder…）直接订阅，不需要插件、不需要清单：
 
 ```
-https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news.xml
-https://cdn.jsdelivr.net/gh/k-macao/04-kindle@main/site/news.xml   ← raw 不通时用这个
+https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news.xml      ← 先试这条
+https://github.com/k-macao/04-kindle/releases/download/news-feed/news.xml   ← 再试这条（Release 资产）
+https://k-macao.github.io/04-kindle/site/news.xml                           ← GitHub Pages
+https://cdn.jsdelivr.net/gh/k-macao/04-kindle@main/site/news.xml            ← 被墙时用 jsDelivr
 ```
+
+四条挂在不同主机家族、不同 CA 上，**设备上一条不通就换下一条**（顺序与理由见「2.1 多入口」）。
 
 | 文件 | 内容 | 谁用 |
 | --- | --- | --- |
@@ -77,17 +81,44 @@ python tools/build_news.py --data news_data.json --out site   # site/news.epub +
 - 少于 `--min-items`（默认 10）条、或者正文乱码占比超过 2% → 退出码 1，**不覆盖旧产物**：
   宁可设备上还是昨天的日报，也不推一份空书。
 
+### 2.1 多入口：设备说「内容下载失败」时
+
+KOReader 的新聞下載器只给一句「內容下載失敗」，它分不清是地址错了、文件坏了，还是这台设备
+那条线路不通。所以同一份 feed 挂在几个互不相关的主机上，按下面顺序试：
+
+| 顺序 | 入口 | 地址 | 说明 |
+| --- | --- | --- | --- |
+| 1 | raw | `https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news.xml` | 立即生效；证书是老牌子（DigiCert），旧 Kindle 的 CA 库也认 |
+| 2 | Release 资产 | `https://github.com/k-macao/04-kindle/releases/download/news-feed/news.xml` | 每轮自动重传，走 github.com；同样老证书，稳 |
+| 3 | GitHub Pages | `https://k-macao.github.io/04-kindle/site/news.xml` | 推送后约 30–60 秒生效；证书是 Let's Encrypt，个别旧设备不认 |
+| 4 | jsDelivr | `https://cdn.jsdelivr.net/gh/k-macao/04-kindle@main/site/news.xml` | CDN，`@main` 有十来分钟缓存；线路独立，常能绕开墙 |
+| 5 | jsDelivr 备用端点 | `fastly.` / `gcore.` / `testingcf.jsdelivr.net`（路径同上） | 某个 CDN 节点不通时换 |
+
+> 顺序是有讲究的：旧 Kindle（比如 Oasis 1）的 CA 证书库可能认不出 Let's Encrypt，
+> 这种设备上 `github.io` 会报「內容下載失敗」，而 raw / Release 的证书通常没问题。
+> 反过来，如果线路被墙，jsDelivr 更容易通。两条路都堵住的情况基本没有。
+
+每轮跑完，工作流会把这几条**逐个取一遍**，结果写在 `site/feed-mirrors.json`
+（`ok` / `total` / 每条的状态码、字节数、条目数、报错）。设备报错时先看这份表：
+
+- 某条 `ok: false` + `404` → 地址真的没了（Pages 没开、Release 资产没上传），换别的入口；
+- 全都 `ok: true`，设备还是失败 → 是**这台设备的网络/TLS**，不是 feed 的问题：换个入口
+  （jsDelivr 常能绕开），或者在 KOReader 里用浏览器打开那个地址看报什么错；
+- `status: 200` 但 `items: 0` / `不是 feed` → 那层回的是 404 页面（Pages 未构建完时常见），
+  过一分钟再试。
+
 ### 聚合 RSS（`site/news.xml`）
 
 `build_feed.py` 把 `news_data.json` 合成一份**标准 RSS 2.0**——不装插件、不用清单，任何阅读器都能订：
 
 ```
+https://k-macao.github.io/04-kindle/site/news.xml
 https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news.xml
-https://cdn.jsdelivr.net/gh/k-macao/04-kindle@main/site/news.xml   ← raw 不通时用这个
+https://github.com/k-macao/04-kindle/releases/download/news-feed/news.xml
+https://cdn.jsdelivr.net/gh/k-macao/04-kindle@main/site/news.xml
 ```
 
-（仓库如果以后开了 GitHub Pages，同一份文件也会出现在
-`https://k-macao.github.io/04-kindle/site/news.xml`。）
+（仓库如果以后改了 Pages 域名，同一份文件也在 `site/news.xml`；各入口的区别见「2.1 多入口」。）
 
 - 一个 `<item>`＝标题、原文链接、`pubDate`（RFC822/UTC）、分类、`<source url="站点">来源名</source>`、
   一句摘要；**英文条目标题后面接中文**（`English Title｜中文：译文`），摘要为「中文：… 原文：…」；
@@ -268,8 +299,8 @@ https://rsshub.rss.tips, https://rsshub.isrss.com, https://rsshub.cups.moe, http
 
 ## 7. 订阅方式
 
-- **KOReader**：工具 → **新闻下载器**（News downloader），把上面的 raw 地址粘进 `Download settings`
-  的 feed 列表，然后「下载新闻」；
+- **KOReader**：工具 → **新闻下载器**（News downloader）→ 管理新聞源 → 新增，把地址粘进去；
+  报「內容下載失敗」就按「2.1 多入口」换一条地址再试；
 - **其它阅读器**：NetNewsWire / Feedly / Reeder / Inoreader 里直接加这个 feed 地址；
 - **插件**：`News subscription` 模式读的是 `site/news.json`，工作流已不再生成它。想继续用那个模式，
   就手动跑 `build_news.py`（见「做那本 EPUB」）并自己提交 `site/news.epub`、`site/news.json`、

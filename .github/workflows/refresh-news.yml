@@ -4,9 +4,12 @@ name: Refresh daily news RSS
 # 英文条目自动配中文译文（site/news_zh_cache.json 是译文缓存，跟着仓库走），
 # 只合成一个聚合 RSS：site/news.xml，然后提交推送。
 #
-# 订阅地址（任何阅读器都能用，含 KOReader 的新闻下载器／NetNewsWire／Feedly）：
-#   https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news.xml
-#   https://cdn.jsdelivr.net/gh/k-macao/04-kindle@main/site/news.xml   （raw 不通时用）
+# 同一份 feed 挂在几个互不相关的主机上，设备上一条不通就换下一条（见 docs/kindle-news.md）：
+#   https://k-macao.github.io/04-kindle/site/news.xml                       GitHub Pages
+#   https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news.xml  raw
+#   https://github.com/k-macao/04-kindle/releases/download/news-feed/news.xml  Release 资产
+#   https://cdn.jsdelivr.net/gh/k-macao/04-kindle@main/site/news.xml        jsDelivr（另有 fastly/gcore/testingcf）
+# 每轮跑完会把这几条逐个取一遍，结果写进 site/feed-mirrors.json。
 #
 # **这个工作流只生成 xml**：日报 EPUB、清单、纯文本（site/news.epub、news.json、news.txt）
 # 不再由它产出，仓库里也不再保留那三个文件——要做那本书时手动跑：
@@ -178,4 +181,46 @@ jobs:
           )"
           git commit --allow-empty -m "chore(news): 聚合 RSS ${items} 条（中英并列 ${paired} 条，${built}）"
           # 定时运行时 HEAD 是默认分支；手动跑时是游离 HEAD，两种都要能推。
+          git push origin "HEAD:refs/heads/${GITHUB_REF_NAME}"
+
+      # 第二个入口：把同一份 feed 挂成 Release 资产。它和 Pages / raw / jsDelivr 是不同的
+      # 主机家族，设备上哪条线路通就用哪条。失败不影响主流程（feed 已经在仓库里了）。
+      - name: 上传 feed 到 Release（第二个下载入口）
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          tag=news-feed
+          cp site/news.xml news.xml
+          if gh release view "$tag" >/dev/null 2>&1; then
+            gh release upload "$tag" news.xml --clobber
+          else
+            gh release create "$tag" news.xml \
+              --title "每日新闻聚合 RSS（每天 07:00 更新）" \
+              --notes "订阅地址：https://github.com/k-macao/04-kindle/releases/download/news-feed/news.xml"
+          fi
+          echo "资产地址：https://github.com/k-macao/04-kindle/releases/download/${tag}/news.xml"
+
+      # 把每个对外地址挨个取一遍：哪条 404、哪条能取回多少条，写进 site/feed-mirrors.json。
+      # 设备上「内容下载失败」时，先看这份表就知道是地址不对还是那台设备的线路不通。
+      - name: 核对对外地址（多入口）
+        continue-on-error: true
+        run: >-
+          python tools/check_feed_urls.py --write site/feed-mirrors.json
+          --timeout 20
+
+      - name: 提交镜像核对结果
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add site/feed-mirrors.json
+          if git diff --cached --quiet; then
+            echo "镜像表没有变化，跳过提交"
+            exit 0
+          fi
+          ok=$(python -c "import json;print(json.load(open('site/feed-mirrors.json'))['ok'])")
+          total=$(python -c "import json;print(json.load(open('site/feed-mirrors.json'))['total'])")
+          git commit -m "chore(news): 对外地址核对 ${ok}/${total} 可用"
           git push origin "HEAD:refs/heads/${GITHUB_REF_NAME}"
