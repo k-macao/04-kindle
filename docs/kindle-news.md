@@ -33,27 +33,33 @@ python tools/build_news.py --data news_data.json --out site
 
 ## 2. 源目录
 
-源写在 `tools/news_sources.py`，17 条：
+源写在 `tools/news_sources.py`，18 条：
 
 | 分组 | 源 | RSSHub 路由 |
 | --- | --- | --- |
 | 快讯 | 财联社·电报 | `/cls/telegraph` |
 | | 华尔街见闻·要闻快讯 | `/wallstreetcn/live/global` |
+| | 华尔街见闻·A 股快讯 | `/wallstreetcn/live/a-stock` |
 | | 金十数据 | `/jin10` |
-| | 证券时报·快讯 | `/stcn/article/list/kx` |
 | | 同花顺·实时财经新闻 | `/10jqka/realtimenews` |
 | | 第一财经·简报 | `/yicai/brief` |
 | | 新浪·股市滚动 | `/sina/rollnews/2517` |
 | 深度 | 华尔街见闻·要闻文章 | `/wallstreetcn/news/global` |
 | | 财新·最新 | `/caixin/latest` |
 | | 格隆汇·推荐 | `/gelonghui/home` |
+| | 格隆汇·日热文 | `/gelonghui/hot-article` |
 | | 第一财经·最新 | `/yicai/latest` |
+| | 第一财经·头条 | `/yicai/headline` |
 | | 香港01·即时 | `/hk01/latest` |
-| | 21 财经·热点 | `/21caijing/channel/热点` |
-| 全球 | 路透社·商业财经 | `/reuters/business` |
-| | 彭博社·市场 | `/bloomberg/markets` |
-| | WSJ·经济 | `/wsj/en-us/economy` |
+| | 雪球·热门帖子 | `/xueqiu/hots` |
+| 全球 | 彭博社·市场 | `/bloomberg/markets` |
+| | 彭博社·加密 | `/bloomberg/crypto` |
 | | CoinDesk·最新 | `/coindesk/news` |
+
+2026-11-07 首轮真实运行（128 条 / 12 个源可用）换掉了四条**在机房 IP 上取不到**的源，理由都写在
+各自的 `note` 里：WSJ 经济标着 `antiCrawler`、路透商业被 Cloudflare 挡住、证券时报快讯与 21 财经热点
+返回 0 条。替换挑的是同域名下已验证能用的路由（华尔街见闻 A 股、第一财经头条、格隆汇日热文）和一个
+新域名（雪球热帖）。CoinDesk 暂时保留观察——清单里的 `sources_failed` 每轮都会记下失败的源。
 
 这些路由都按 RSSHub 仓库 `lib/routes/<namespace>/…` 里的 `route.path` 核对过（namespace 拼在路径前面）。
 注意 **namespace 是目录名，不是 `namespace.ts` 里的 `name`**：注册代码按顶层目录拼路径
@@ -167,6 +173,10 @@ https://rsshub.rss.tips, https://rsshub.isrss.com, https://rsshub.cups.moe, http
 之后和字模式一样：每 60 秒只拉一次几百字节的清单，`generated` 变了才重下 EPUB 并从头打开；
 新的一天下的是新文件（`octopus004-news-<n>.epub`），旧文件自动清掉，报告那本
 （`octopus004-report-<n>.epub`）互不影响。两份书各自记 `sig`，所以来回切模式不会重复下载。
+
+地址填 `raw.githubusercontent.com` 时，连不上会自动改试 jsDelivr 镜像；也可以在同一个框里写多个地址
+（空格或逗号分隔），插件按顺序试。菜单 → **Check URLs (network)** 会逐个地址给结果，用来判断这台
+设备当前哪条线路通。详见 README「地址连不上时」。
 
 `Status` 里分别显示当前来源的清单地址、书名、是否打开，以及 `Data:` ——新闻那边是**最新一条新闻的
 发布时间**（`data_time_kind: item`），比「文件生成时间」更能说明这份日报新不新。

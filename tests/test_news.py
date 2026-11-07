@@ -333,6 +333,8 @@ class BuildTest(unittest.TestCase):
             self.assertEqual(manifest["items"], 13)
             self.assertEqual(manifest["sources_ok"], 1)
             self.assertEqual(manifest["sources_total"], 2)
+            # 失败源也写进清单：清单是提交到仓库的，第二天能看出哪条源是常死。
+            self.assertEqual(manifest["sources_failed"], ["COINDESK"])
             self.assertEqual(manifest["doc"], "news.epub")
             self.assertEqual(manifest["data_time"], "2026-11-07T09:00:00Z")
             self.assertEqual(manifest["data_time_kind"], "item")

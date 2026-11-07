@@ -25,6 +25,8 @@ local lfs = require("libs/libkoreader-lfs")
 local _ = require("gettext")
 local dir = (debug.getinfo(1, "S").source:match("^@(.+)$") or ""):match("(.*/)" ) or "./"
 local Wake = dofile(dir .. "wake.lua")
+-- 地址映射与错误翻译：GitHub raw 连不上时自动改试 jsDelivr 之类的镜像。
+local Net = dofile(dir .. "net.lua")
 local Screen = Device.screen
 local DEFAULT_URL = "https://k-macao.github.io/004/kindle.txt"
 local MAX_BYTES = 2 * 1024 * 1024
@@ -202,12 +204,12 @@ end
 
 -- Single HTTPS entry point: strict cap, no redirects, never disables TLS checks.
 -- Returns body, error, status_code, response_headers.
-function Report:httpGet(url, max_bytes, extra_headers)
+function Report:httpGet(url, max_bytes, extra_headers, timeout)
     if type(url) ~= "string" or not url:match("^https://") then return nil, "URL must use HTTPS", nil end
     local ca = dataDir() .. "/ca-bundle.crt"
     if lfs.attributes(ca, "mode") ~= "file" then return nil, "KOReader CA bundle not found", nil end
     local https = require("ssl.https")
-    https.TIMEOUT = 25
+    https.TIMEOUT = timeout or 25
     local headers = { ["User-Agent"] = "KOReader-004/0.2", ["Cache-Control"] = "no-cache" }
     if extra_headers then
         for k, v in pairs(extra_headers) do headers[k] = v end
@@ -254,11 +256,54 @@ function Report:httpGet(url, max_bytes, extra_headers)
     return table.concat(chunks), nil, code, response_headers
 end
 
+-- 设置里可以写多个地址（空格/逗号分隔），每个再展开成镜像；用户写的先试，镜像兜底。
+-- 返回的 `attempts` 记着每个地址失败的原因，状态页据此告诉用户卡在哪一层。
+function Report:urlCandidates(configured)
+    return Net.candidates(configured)
+end
+
+function Report:httpGetAny(urls, max_bytes, extra_headers)
+    local attempts = {}
+    for _, url in ipairs(urls or {}) do
+        local body, err, code, response_headers = self:httpGet(Net.bust(url), max_bytes, extra_headers)
+        attempts[#attempts + 1] = { url = url, err = err, code = code, headers = response_headers }
+        if body then
+            self.last_attempts = attempts
+            self.last_via = url
+            return body, nil, url, attempts, code
+        end
+        -- 304 是「没变」，不是失败：继续换镜像只会白下一遍全文。
+        if code == 304 then
+            self.last_attempts = attempts
+            self.last_via = url
+            return nil, err, url, attempts, 304
+        end
+    end
+    self.last_attempts = attempts
+    if #attempts == 0 then
+        return nil, "没有可用的地址", nil, attempts
+    end
+    -- 只列前两个失败原因，加上一句人话提示；4 个镜像全列出来会把状态页撑爆。
+    local parts = {}
+    for index = 1, math.min(#attempts, 2) do
+        parts[#parts + 1] = string.format("%s → %s", attempts[index].url,
+            tostring(attempts[index].err))
+    end
+    local summary = table.concat(parts, "；")
+    if #attempts > 2 then summary = summary .. string.format("；另 %d 个地址也失败", #attempts - 2) end
+    return nil, summary .. "（" .. tostring(Net.hint(attempts[1].err)) .. "）", nil, attempts
+end
+
 -- Text mode: download the plain-text report, keep the last good copy on failure.
 function Report:fetchText()
+    local urls = self:urlCandidates(self.settings.url)
     local headers = {}
-    if self.settings.etag and self:readCache() then headers["If-None-Match"] = self.settings.etag end
-    local body, err, code, response_headers = self:httpGet(self.settings.url, MAX_BYTES, headers)
+    local first = urls[1]
+    -- ETag 是按地址发的：换成镜像后旧的 ETag 无效，干脆不发，让服务器直接给全文。
+    if self.settings.etag and first and self.settings.etag_url == first and self:readCache() then
+        headers["If-None-Match"] = self.settings.etag
+    end
+    local body, err, used, attempts, code = self:httpGetAny(urls, MAX_BYTES, headers)
     if not body then
         if code == 304 then
             local cached = self:readCache()
@@ -276,14 +321,17 @@ function Report:fetchText()
     if not written or not closed or not os.rename(temp, self.cache_path) then
         os.remove(temp); return nil, "Cannot save cache"
     end
+    local response_headers = attempts and attempts[#attempts] and attempts[#attempts].headers
     self.settings.etag = response_headers and (response_headers.etag or response_headers.ETag) or nil
+    self.settings.etag_url = used
     return body, nil, true
 end
 
 -- Image mode: a JSON manifest lists device-sized page images.
 function Report:fetchManifest()
-    if self.settings.image_url == "" then return nil, "Set the image manifest URL first" end
-    local body, err = self:httpGet(self.settings.image_url, MANIFEST_MAX)
+    local urls = self:urlCandidates(self.settings.image_url)
+    if #urls == 0 then return nil, "Set the image manifest URL first" end
+    local body, err = self:httpGetAny(urls, MANIFEST_MAX)
     if not body then return nil, err end
     local decoded
     local ok = pcall(function()
@@ -343,12 +391,12 @@ end
 
 function Report:fetchDocManifest(spec)
     spec = spec or self:docSpec()
-    local manifest_url = self.settings[spec.manifest] or ""
-    if manifest_url == "" then
+    local urls = self:urlCandidates(self.settings[spec.manifest] or "")
+    if #urls == 0 then
         return nil, (spec.manifest == "news_url" and "Set the news manifest URL first"
             or "Set the EPUB manifest URL first")
     end
-    local body, err = self:httpGet(manifest_url, MANIFEST_MAX)
+    local body, err, used = self:httpGetAny(urls, MANIFEST_MAX)
     if not body then return nil, err end
     local decoded
     local ok = pcall(function() decoded = require("rapidjson").decode(body) end)
@@ -357,6 +405,8 @@ function Report:fetchDocManifest(spec)
     if type(decoded.generated) ~= "string" or decoded.generated == "" then
         return nil, "Manifest has no generated stamp"
     end
+    -- 清单可能来自镜像：EPUB 的相对路径要以真正成功的那个地址为基准。
+    decoded.base = used
     return decoded
 end
 
@@ -532,9 +582,9 @@ function Report:refreshDoc(kind)
         self:turnDocPage(spec)
         return
     end
-    local url = resolveURL(self.settings[spec.manifest], manifest.doc)
+    local url = resolveURL(manifest.base or self.settings[spec.manifest], manifest.doc)
     if not url:match("^https://") then error("Document URL is not HTTPS") end
-    local body, download_error = self:httpGet(url, DOC_MAX)
+    local body, download_error = self:httpGetAny(self:urlCandidates(url), DOC_MAX)
     if not body then error(download_error) end
     if #body < 512 or body:sub(1, 2) ~= "PK" then error("Downloaded file is not an EPUB") end
     -- A fresh file name every version: KOReader then opens it at page 1 instead
@@ -633,6 +683,24 @@ local function beijing(epoch, fmt)
     return os.date("!" .. fmt, epoch + BEIJING_OFFSET)
 end
 
+-- 逐个地址单独试一遍（短超时），把结果摊在屏幕上：设备链路上到底哪个地址可用。
+function Report:diagnose()
+    local spec = self:docSpec()
+    local urls = self:urlCandidates(self.settings[spec.manifest] or "")
+    if #urls == 0 then self:note("Fill the manifest URL first"); return end
+    local lines = { "Manifest: " .. tostring(self.settings[spec.manifest]) }
+    for _, url in ipairs(urls) do
+        local started = os.time()
+        local body, err = self:httpGet(Net.bust(url), MANIFEST_MAX, nil, 10)
+        local spent = os.time() - started
+        local status = body and string.format("OK %d B", #body)
+            or string.format("%s (%ds)", tostring(err), spent)
+        lines[#lines + 1] = url:gsub("^https://", "") .. "\n  " .. status
+    end
+    lines[#lines + 1] = "Tap Refresh now to retry."
+    self:note(table.concat(lines, "\n"))
+end
+
 function Report:status()
     local mode = self.wake:mode(true) == "rtc" and "hardware wake" or "awake timer"
     local checked = self.last_check and (beijing(self.last_check, "%Y-%m-%d %H:%M:%S") .. " (Beijing)") or "never"
@@ -682,6 +750,10 @@ function Report:status()
     if self:isBookMode() then
         page = "\n" .. spec.label .. ": " .. tostring(self.settings[spec.file_name] or "-")
             .. (self:docIsOpen(spec) and " (open)" or " (closed)")
+        if self.last_attempts and #self.last_attempts > 1 then
+            page = page .. string.format("\n  tried %d URLs, ok: %s", #self.last_attempts,
+                tostring((self.last_via or "-"):gsub("^https://", "")))
+        end
     elseif self:isImageMode() then
         page = "\nPage " .. tostring(self.page_index or 0) .. "/" .. tostring(self.page_count or 0)
         local pw, ph
@@ -717,7 +789,17 @@ function Report:setURL(kind)
         buttons = { { { text = "Cancel", callback = function() UIManager:close(dialog) end },
             { text = "Save", callback = function()
                 local url = dialog:getInputText():match("^%s*(.-)%s*$")
-                if url ~= "" and not url:match("^https://") then self:note("HTTPS URL required"); return end
+                if url ~= "" then
+                    -- 可以写多个地址（空格/逗号分隔）：第一个不通会依次试后面的和镜像。
+                    local pieces = 0
+                    for piece in url:gmatch("[^%s,;]+") do
+                        pieces = pieces + 1
+                        if not piece:match("^https://") then
+                            self:note("Every URL must be HTTPS"); return
+                        end
+                    end
+                    if pieces == 0 then self:note("HTTPS URL required"); return end
+                end
                 self.settings[spec.key] = url
                 -- clear 已经是这个来源自己的 sig 键，换 URL 就等于作废旧缓存。
                 self.settings[spec.clear] = nil
@@ -794,6 +876,7 @@ function Report:addToMainMenu(items)
           end,
           callback = function() self:setURL("image") end },
         { text = "Status", callback = function() self:status() end },
+        { text = "Check URLs (network)", callback = function() self:diagnose() end },
     } }
 end
 

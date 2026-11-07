@@ -68,13 +68,14 @@ SOURCES = [
         "note": "jin10/index.ts 的 path /:important?，不带参数＝全部快讯；带 1 只要重要快讯。",
     },
     {
-        "key": "STCN_KX",
-        "name": "证券时报 · 快讯",
+        "key": "WSCN_A",
+        "name": "华尔街见闻 · A 股快讯",
         "group": "flash",
         "lang": "zh",
-        "route": "/stcn/article/list/kx",
-        "site": "stcn.com",
-        "note": "stcn/kx.ts 的 path /article/list/kx，证券时报快讯（A 股公告与监管动向）。",
+        "route": "/wallstreetcn/live/a-stock",
+        "site": "wallstreetcn.com",
+        "note": "wallstreetcn/live.tsx 的 category=a-stock。原来这里是证券时报快讯（/stcn/article/list/kx），"
+                "实测返回 0 条，换成同一命名空间里A股频道——同域名其它路由都正常。",
     },
     {
         "key": "THS_NEWS",
@@ -132,6 +133,16 @@ SOURCES = [
         "note": "gelonghui/home.ts 的 path /home/:tag?，默认 tag=web_home_page＝推荐。",
     },
     {
+        "key": "GELONGHUI_HOT",
+        "name": "格隆汇 · 日热文",
+        "group": "depth",
+        "lang": "zh",
+        "route": "/gelonghui/hot-article",
+        "site": "gelonghui.com",
+        "note": "gelonghui/hot-article.ts 的 path /hot-article/:type?，默认 day。原来这里是路透商业"
+                "（/reuters/business），Cloudflare 挡机房 IP，换成同域名已验证的中文源。",
+    },
+    {
         "key": "YICAI_LATEST",
         "name": "第一财经 · 最新",
         "group": "depth",
@@ -139,6 +150,16 @@ SOURCES = [
         "route": "/yicai/latest",
         "site": "yicai.com",
         "note": "yicai/latest.ts 的 path /latest，第一财经最新成稿。",
+    },
+    {
+        "key": "YICAI_HEAD",
+        "name": "第一财经 · 头条",
+        "group": "depth",
+        "lang": "zh",
+        "route": "/yicai/headline",
+        "site": "yicai.com",
+        "note": "yicai/headline.ts 的 path /headline。原来这里是 WSJ 经济（/wsj/en-us/economy），"
+                "该路由标着 antiCrawler、机房 IP 必挂，换成同域名已验证可用的中文源。",
     },
     {
         "key": "HK01",
@@ -150,23 +171,25 @@ SOURCES = [
         "note": "hk01/latest.ts 的 path /latest，港股与香港政经的即时报道。",
     },
     {
-        "key": "CAIJING21",
-        "name": "21 财经 · 热点",
+        "key": "XUEQIU_HOTS",
+        "name": "雪球 · 热门帖子",
         "group": "depth",
         "lang": "zh",
-        "route": "/21caijing/channel/热点",
-        "site": "21jingji.com",
-        "note": "21caijing/channel.ts 的 path /channel/:name{.+}?，name 是中文频道名（抓取时按 URL 编码）。",
+        "route": "/xueqiu/hots",
+        "site": "xueqiu.com",
+        "note": "xueqiu/hots.ts 的 path /hots，雪球热门帖子。原来这里是 21 财经热点"
+                "（/21caijing/channel/热点），实测 0 条——中文频道参数对不上。",
     },
     # ---------------- 三、全球市场与加密 ----------------
     {
-        "key": "REUTERS",
-        "name": "路透社 · 商业财经",
+        "key": "BLOOMBERG_CRYPTO",
+        "name": "彭博社 · 加密",
         "group": "global",
         "lang": "en",
-        "route": "/reuters/business",
-        "site": "reuters.com",
-        "note": "reuters/common.tsx 的 path /:category/:topic?，category=business。",
+        "route": "/bloomberg/crypto",
+        "site": "bloomberg.com",
+        "note": "bloomberg/index.ts 的 site=crypto。原来的路透商业在这里返回 0 条，而彭博这条线上"
+                "已经证明可用（markets 每天满额）。",
     },
     {
         "key": "BLOOMBERG",
@@ -178,22 +201,14 @@ SOURCES = [
         "note": "bloomberg/index.ts 的 path /:site?，site=markets（站点表见路由说明）。",
     },
     {
-        "key": "WSJ_ECON",
-        "name": "WSJ · 经济",
-        "group": "global",
-        "lang": "en",
-        "route": "/wsj/en-us/economy",
-        "site": "wsj.com",
-        "note": "wsj/news.ts 的 path /:lang/:category?，lang=en-us、category=economy。",
-    },
-    {
         "key": "COINDESK",
         "name": "CoinDesk · 最新",
         "group": "global",
         "lang": "en",
         "route": "/coindesk/news",
         "site": "coindesk.com",
-        "note": "coindesk/news.ts 的 path /news，加密市场的基准新闻源。",
+        "note": "coindesk/news.ts 的 path /news。2026-11-07 首轮返回 0 条（上游多半拦机房 IP），"
+                "先留着观察：清单里的 sources_failed 会记录它是否持续失败。",
     },
 ]
 
