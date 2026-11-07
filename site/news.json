@@ -1,17 +1,28 @@
 {
-  "generated": "2026-11-07T14:51:05+00:00",
+  "generated": "2026-11-07T14:58:42+00:00",
   "doc": "news.epub",
   "title": "004 新闻订阅",
-  "chars": 31089,
-  "bytes": 37988,
-  "sections": 3,
-  "items": 142,
-  "sources_ok": 16,
-  "sources_total": 18,
+  "chars": 34051,
+  "bytes": 42989,
+  "sections": 4,
+  "items": 150,
+  "sources_ok": 17,
+  "sources_total": 23,
   "sources_failed": [
     "YICAI_HEAD",
-    "COINDESK"
+    "COINDESK",
+    "GOV_ZHENGCE",
+    "MFA_FYRBT",
+    "AEON_PHIL",
+    "PSYCHE_IDEAS"
   ],
+  "english": 10,
+  "zh_added": 10,
+  "zh_missing": 0,
+  "instances_used": {
+    "https://rsshub.rss.tips": 23,
+    "https://rsshub.isrss.com": 131
+  },
   "data_time": "2026-11-07T14:35:47Z",
   "data_time_kind": "item",
   "source": "RSSHub"
