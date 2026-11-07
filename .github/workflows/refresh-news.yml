@@ -1,0 +1,98 @@
+name: Refresh daily news
+
+# 每天 07:00 北京时间（UTC 前一天 23:00）抓一轮 RSSHub 财经新闻，生成独立的一本书：
+# site/news.epub + 清单 site/news.json + 纯文本 site/news.txt，然后提交推送。
+# 设备端把 Display mode 切到「News subscription」、新闻清单 URL 指向 site/news.json
+# 即可；插件只在清单里的 generated 变了时才重下，所以一天只会下一本新书。
+#
+# 与小时级报告（refresh-epub.yml）完全分开：报告失败不影响新闻，新闻失败也不动
+# 报告的产物。新闻抓不到足够的条目时这一步直接失败——宁可设备上还是昨天的日报，
+# 也不要推送一份空书。
+on:
+  schedule:
+    # 07:00 Asia/Shanghai。GitHub 的 cron 只认 UTC。
+    - cron: "0 23 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-news
+  cancel-in-progress: false
+
+env:
+  MIN_ITEMS: "10"
+  MAX_ITEMS: "150"
+  # 公共 RSSHub 实例，逗号分隔。rsshub.app 对 Actions 出口 IP 常回 403，
+  # 所以排最后；自建实例请放在最前面（见 README「每日新闻」一节）。
+  RSSHUB_BASE: "https://rsshub.rss.tips,https://rsshub.isrss.com,https://rsshub.cups.moe,https://rsshub.app"
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 跑测试（解析、去重、时间窗、排版规则）
+        run: python -m unittest discover -s tests
+
+      - name: 抓一轮 RSSHub 新闻
+        run: python tools/fetch_news.py --out news_data.json --min-items "$MIN_ITEMS"
+
+      - name: 生成日报 EPUB + 清单 + 纯文本
+        run: >-
+          python tools/build_news.py --data news_data.json --out site
+          --min-items "$MIN_ITEMS" --max-items "$MAX_ITEMS"
+
+      - name: 产物自检（条目数、分节、文件可读、标题不空）
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import pathlib
+          import sys
+          import zipfile
+
+          minimum = int(os.environ.get("MIN_ITEMS", "10"))
+          manifest_path = pathlib.Path("site/news.json")
+          manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+          problems = []
+          if int(manifest.get("items") or 0) < minimum:
+              problems.append(f"条目只有 {manifest.get('items')} 条，少于下限 {minimum}")
+          if not manifest.get("doc") or not pathlib.Path("site", manifest["doc"]).is_file():
+              problems.append("清单指向的 EPUB 不存在")
+          if not pathlib.Path("site/news.txt").is_file():
+              problems.append("缺少纯文本")
+          if problems:
+              print("；".join(problems), file=sys.stderr)
+              raise SystemExit(1)
+          with zipfile.ZipFile(pathlib.Path("site", manifest["doc"])) as book:
+              page = book.read("OEBPS/report.xhtml").decode("utf-8")
+          sections = page.count("<h2 ")
+          articles = page.count("<article")
+          if sections < 1 or articles < minimum:
+              print(f"排版异常：分节 {sections}、条目 {articles}", file=sys.stderr)
+              raise SystemExit(1)
+          print(f"自检通过：{manifest['items']} 条 / {sections} 节 / {articles} 个条目 / "
+                f"{manifest['bytes']} 字节 / 数据时间 {manifest.get('data_time') or '未知'}")
+          PY
+
+      - name: 提交并推送
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add site/news.epub site/news.json site/news.txt site/news_seen.json
+          stamp=$(python -c "import json;print(json.load(open('site/news.json'))['generated'])")
+          items=$(python -c "import json;print(json.load(open('site/news.json'))['items'])")
+          git commit --allow-empty -m "chore(news): 每日新闻订阅 ${items} 条（更新于 ${stamp}）"
+          # 定时运行时 HEAD 是默认分支；手动跑时是游离 HEAD，两种都要能推。
+          git push origin "HEAD:refs/heads/${GITHUB_REF_NAME}"

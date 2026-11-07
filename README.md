@@ -61,10 +61,38 @@ python tools/render_report.py --out site
 URL** 填 `site/report.json` 的地址即可。详步骤、机型参数、切页规则和限制见
 [docs/kindle-graphic.md](docs/kindle-graphic.md)。
 
+## 每日新闻订阅（RSSHub）
+
+报告是「每小时的判断」，新闻是「每天一次的读报」。第二本书独立生成、独立刷新：
+
+```sh
+python tools/fetch_news.py --out news_data.json      # 抓一轮 RSSHub 新闻
+python tools/build_news.py --data news_data.json --out site
+```
+
+产出 `site/news.epub`（按「快讯 / 深度 / 全球」分节，每天一本）、清单 `site/news.json` 和
+`site/news.txt`。源目录在 `tools/news_sources.py`，17 条 RSSHub 路由（财联社电报、华尔街见闻、
+金十、证券时报快讯、同花顺、第一财经、新浪股市滚动、财新、格隆汇、香港01、21 财经、路透、彭博、
+WSJ、CoinDesk 等），挑的都是 004 那 49 条之外的站点，路由按 RSSHub 仓库里的 `route.path` 核对过。
+
+分工很明确：**抓取只负责按路由取回并归一化**（`news_data.json`），**排版只负责判断与生成**
+（例子不足 10 条、乱码超标就退出码 1、不覆盖旧产物）。一层是纯数据、一层是纯文档，排错了不用重抓。
+
+每天 07:00（北京时间）由 `.github/workflows/refresh-news.yml` 自动跑：跑测试 → 抓取 → 生成 →
+产物自检 → 提交推送。`rsshub.app` 对 Actions 出口 IP 常回 403，所以默认先试 `rsshub.rss.tips` /
+`rsshub.isrss.com` / `rsshub.cups.moe`，`RSSHUB_BASE` 环境变量可以换成自建实例；同一实例连续失败
+3 次就跳过，单源失败不影响别的源。跨天不重复：`site/news_seen.json` 记着最近 7 天推过的标题指纹，
+昨天 20:00 的稿子今天不会再出现一次。
+
+设备端：菜单 → **004 Report** → **News manifest URL** 填 `site/news.json`，**Display mode →
+News subscription**。之后和字模式一样——每 60 秒只拉几百字节的清单，`generated` 变了才重下 EPUB
+并从头打开，新书用新文件名，报告那本与新闻那本各自缓存、互不覆盖。详见
+[docs/kindle-news.md](docs/kindle-news.md)。
+
 ## 2. Kindle 安装与使用
 
 1. 已越狱的 Kindle 安装并启动 KOReader。将 `octopus004.koplugin` 文件夹完整复制到 `koreader/plugins/`，重启 KOReader。部署方式见 [docs/kindle-ssh.md](docs/kindle-ssh.md)：USB 直连用 `tools/kindle-usb.sh`（Windows 用 `tools/kindle-usb.ps1`；`--install` / `-Install` 直接拷入，无需 SSH），联网用 `tools/deploy-plugin.sh`（KOReader 自带 SSH 服务，默认端口 2222，无需另装 usbnet）。
-2. Tools → **004 Report** → 按显示模式填地址：**Report URL**（纯文本）、**EPUB manifest URL**（字模式）或 **Image manifest URL**（截图），再用 **Display mode** 选 text / epub / page images。选择 **Show report** 开始。
+2. Tools → **004 Report** → 按显示模式填地址：**Report URL**（纯文本）、**EPUB manifest URL**（字模式）、**News manifest URL**（每日新闻）或 **Image manifest URL**（截图），再用 **Display mode** 选 text / epub / news / page images。选择 **Show report** 开始。
 3. 每 60 秒检查一次报告并翻到下一页，末页回到首页。点击屏幕可手动翻页、立即刷新、查看状态或停止。停止会恢复原有屏保设置。
 4. 有硬件唤醒时尝试使用 KOReader 唤醒管理器；否则保持设备唤醒并使用软件计时。是否支持取决于 Oasis 1 的 KOReader 构建。Wi-Fi 保持开启；一分钟联网和翻页会增加耗电。
 

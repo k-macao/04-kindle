@@ -34,6 +34,19 @@ local PAGES_TOTAL_MAX = 64 * 1024 * 1024
 local MAX_PAGES = 60
 local DOC_MAX = 8 * 1024 * 1024
 local DOC_PREFIX = "octopus004-report-"
+-- 每日新闻是第二本书：同一个下载/校验/翻页/清理流程，换一套设置键与前缀，
+-- 两份文档互不覆盖（各自的 sig 变了才重下，各自的旧文件各自清）。
+local NEWS_PREFIX = "octopus004-news-"
+local DOC_KINDS = {
+    doc  = { manifest = "doc_url",  sig = "doc_sig",  seq = "doc_seq",  file = "doc_file",
+             file_name = "doc_file_name", opened_at = "doc_opened_at", prefix = DOC_PREFIX,
+             data_time = "data_time", data_time_kind = "data_time_kind",
+             label = "EPUB" },
+    news = { manifest = "news_url", sig = "news_sig", seq = "news_seq", file = "news_file",
+             file_name = "news_file_name", opened_at = "news_opened_at", prefix = NEWS_PREFIX,
+             data_time = "news_data_time", data_time_kind = "news_data_time_kind",
+             label = "NEWS" },
+}
 local INTERVAL = 60
 local WIFI_WAIT = 90
 -- 设备上显示的时间统一为北京时间（UTC+8），与设备本地时区无关。
@@ -64,6 +77,7 @@ function Report:init()
     if self.settings.image_url == nil then self.settings.image_url = "" end
     if self.settings.display == nil then self.settings.display = "text" end
     if self.settings.doc_url == nil then self.settings.doc_url = "" end
+    if self.settings.news_url == nil then self.settings.news_url = "" end
     if self.settings.enabled == nil then self.settings.enabled = false end
     self.wake = Wake.new({ Device = Device, UIManager = UIManager, logger = logger })
     self.refresh_task = function() self:refresh(false) end
@@ -84,10 +98,16 @@ function Report:note(text) UIManager:show(InfoMessage:new{ text = text, timeout 
 
 function Report:isImageMode() return self.settings.display == "image" end
 function Report:isDocMode() return self.settings.display == "doc" end
+function Report:isNewsMode() return self.settings.display == "news" end
+-- 两种 EPUB 来源共用同一套「下载书 → 交给阅读器」的流程。
+function Report:isBookMode() return self:isDocMode() or self:isNewsMode() end
+function Report:docKind() return self:isNewsMode() and "news" or "doc" end
+function Report:docSpec() return DOC_KINDS[self:docKind()] end
 
 local function displayName(mode)
     if mode == "image" then return "page images" end
     if mode == "doc" then return "epub" end
+    if mode == "news" then return "news" end
     return "text"
 end
 
@@ -142,7 +162,7 @@ end
 function Report:start()
     self.settings.enabled = true; self:save(); self:holdScreen()
     if self.wake:mode(true) == "awake" then self.wake:hold_awake() end
-    if self:isDocMode() then
+    if self:isBookMode() then
         -- the reader shows the document; this widget stays out of the way
     elseif self:isImageMode() then
         if not self.dashboard and self:hasPage(self.page_index) then self:showPage(false) end
@@ -321,9 +341,14 @@ function Report:downloadPages(manifest)
     return #manifest.pages
 end
 
-function Report:fetchDocManifest()
-    if self.settings.doc_url == "" then return nil, "Set the EPUB manifest URL first" end
-    local body, err = self:httpGet(self.settings.doc_url, MANIFEST_MAX)
+function Report:fetchDocManifest(spec)
+    spec = spec or self:docSpec()
+    local manifest_url = self.settings[spec.manifest] or ""
+    if manifest_url == "" then
+        return nil, (spec.manifest == "news_url" and "Set the news manifest URL first"
+            or "Set the EPUB manifest URL first")
+    end
+    local body, err = self:httpGet(manifest_url, MANIFEST_MAX)
     if not body then return nil, err end
     local decoded
     local ok = pcall(function() decoded = require("rapidjson").decode(body) end)
@@ -391,7 +416,7 @@ function Report:refresh(interactive)
             if self.dashboard then UIManager:setDirty(self.dashboard, "full") end
         end
         self.wake:kindle_hold(false)
-        if error_message and (interactive or self:isImageMode() or self:isDocMode()) then
+        if error_message and (interactive or self:isImageMode() or self:isBookMode()) then
             if interactive or self.last_notified_error ~= error_message then
                 self:note("004: " .. error_message)
                 self.last_notified_error = error_message
@@ -403,7 +428,7 @@ function Report:refresh(interactive)
         self.next_due = os.time() + INTERVAL
         self.wake:schedule(INTERVAL, self.refresh_task, self.wake:mode(true))
         -- Keep Wi-Fi on: reconnecting every minute is slow and may miss cycles.
-        if self.wake:mode(true) == "rtc" and not interactive and not self:isDocMode() then
+        if self.wake:mode(true) == "rtc" and not interactive and not self:isBookMode() then
             self.wake:sleep_now()
         end
     end
@@ -412,7 +437,7 @@ function Report:refresh(interactive)
     local ok = NetworkMgr:turnOnWifiAndWaitForConnection(function()
         if gen ~= self.gen then return end
         local success, err = pcall(function()
-            if self:isDocMode() then self:refreshDoc()
+            if self:isBookMode() then self:refreshDoc(self:docKind())
             elseif self:isImageMode() then self:refreshImage()
             else self:refreshText() end
         end)
@@ -451,19 +476,19 @@ end
 -- EPUB ("字模式"): the report is downloaded as a book and handed to KOReader's
 -- own reader, so crengine does the typography and every font/margin setting the
 -- device already has applies.
-function Report:docPath(name)
-    return dataDir() .. "/" .. (name or self.settings.doc_file_name or (DOC_PREFIX .. "1.epub"))
+function Report:docPath(spec, name)
+    return dataDir() .. "/" .. (name or self.settings[spec.file_name] or (spec.prefix .. "1.epub"))
 end
 
-function Report:docIsOpen()
+function Report:docIsOpen(spec)
     local current = self.ui and self.ui.document and self.ui.document.file
-    return current ~= nil and current == self.settings.doc_file
+    return current ~= nil and current == self.settings[(spec or self:docSpec()).file]
 end
 
-function Report:turnDocPage()
-    if not self:docIsOpen() then return end
+function Report:turnDocPage(spec)
+    if not self:docIsOpen(spec) then return end
     -- Give the freshly opened book a full interval before the first turn.
-    local opened = tonumber(self.settings.doc_opened_at)
+    local opened = tonumber(self.settings[spec.opened_at])
     if opened and os.time() - opened < INTERVAL - 5 then return end
     local doc, view = self.ui.document, self.ui.view
     if not doc or not view or not view.state then return end
@@ -479,43 +504,44 @@ function Report:turnDocPage()
     end
 end
 
-function Report:openDoc(path)
-    self.settings.doc_file = path
-    self.settings.doc_opened_at = os.time()
+function Report:openDoc(spec, path)
+    self.settings[spec.file] = path
+    self.settings[spec.opened_at] = os.time()
     self:save()
     -- showReader is documented as the only safe way to build a new ReaderUI
     -- instance; it closes the current one, so our widget instance is replaced.
     require("apps/reader/readerui"):showReader(path)
 end
 
-function Report:refreshDoc()
-    local manifest, err = self:fetchDocManifest()
+function Report:refreshDoc(kind)
+    local spec = DOC_KINDS[kind or "doc"] or DOC_KINDS.doc
+    local manifest, err = self:fetchDocManifest(spec)
     if not manifest then error(err) end
     local sig = manifest.generated
-    if type(manifest.data_time) == "string" then self.settings.data_time = manifest.data_time end
+    if type(manifest.data_time) == "string" then self.settings[spec.data_time] = manifest.data_time end
     -- 精度跟着时间一起存：正文只给到交易日时，清单里的 00:00:00 是补出来的，
     -- 不是真实时刻，显示和算年龄都要区别对待。
     if type(manifest.data_time_kind) == "string" then
-        self.settings.data_time_kind = manifest.data_time_kind
+        self.settings[spec.data_time_kind] = manifest.data_time_kind
     end
-    local current = self.settings.doc_file
+    local current = self.settings[spec.file]
     local have = current and lfs.attributes(current, "mode") == "file"
     self.last_check = os.time()
-    if sig == tostring(self.settings.doc_sig or "") and have then
+    if sig == tostring(self.settings[spec.sig] or "") and have then
         self:save()
-        self:turnDocPage()
+        self:turnDocPage(spec)
         return
     end
-    local url = resolveURL(self.settings.doc_url, manifest.doc)
+    local url = resolveURL(self.settings[spec.manifest], manifest.doc)
     if not url:match("^https://") then error("Document URL is not HTTPS") end
     local body, download_error = self:httpGet(url, DOC_MAX)
     if not body then error(download_error) end
     if #body < 512 or body:sub(1, 2) ~= "PK" then error("Downloaded file is not an EPUB") end
     -- A fresh file name every version: KOReader then opens it at page 1 instead
     -- of resuming the previous position.
-    local seq = (tonumber(self.settings.doc_seq) or 0) + 1
-    local name = string.format("%s%d.epub", DOC_PREFIX, seq)
-    local target = self:docPath(name)
+    local seq = (tonumber(self.settings[spec.seq]) or 0) + 1
+    local name = string.format("%s%d.epub", spec.prefix, seq)
+    local target = self:docPath(spec, name)
     local temp = target .. ".tmp"
     local f = io.open(temp, "wb")
     if not f then error("Cannot write document cache") end
@@ -524,20 +550,20 @@ function Report:refreshDoc()
     if not wrote or not closed or not os.rename(temp, target) then
         os.remove(temp); error("Cannot save document")
     end
-    self.settings.doc_seq = seq
-    self.settings.doc_file_name = name
-    self.settings.doc_sig = sig
-    self:pruneDocs(name)
+    self.settings[spec.seq] = seq
+    self.settings[spec.file_name] = name
+    self.settings[spec.sig] = sig
+    self:pruneDocs(name, spec.prefix)
     self:save()
-    self:openDoc(target)
+    self:openDoc(spec, target)
 end
 
-function Report:pruneDocs(keep)
+function Report:pruneDocs(keep, prefix)
     local dir = dataDir()
     local ok, iter, state = pcall(lfs.dir, dir)
     if not ok or type(iter) ~= "function" then return end
     for entry in iter, state do
-        if type(entry) == "string" and entry:sub(1, #DOC_PREFIX) == DOC_PREFIX
+        if type(entry) == "string" and prefix and entry:sub(1, #prefix) == prefix
                 and entry ~= keep then
             os.remove(dir .. "/" .. entry)
         end
@@ -611,9 +637,17 @@ function Report:status()
     local mode = self.wake:mode(true) == "rtc" and "hardware wake" or "awake timer"
     local checked = self.last_check and (beijing(self.last_check, "%Y-%m-%d %H:%M:%S") .. " (Beijing)") or "never"
     local data = ""
-    local stamp = tostring(self.settings.data_time or "")
+    local spec = self:docSpec()
+    -- 不能写成 `a and b or c`：新闻那边还没有数据时间时 b 是 nil，会回落到报告的时间。
+    local stamp_setting, kind_setting
+    if self:isBookMode() then
+        stamp_setting, kind_setting = self.settings[spec.data_time], self.settings[spec.data_time_kind]
+    else
+        stamp_setting, kind_setting = self.settings.data_time, self.settings.data_time_kind
+    end
+    local stamp = tostring(stamp_setting or "")
     if stamp ~= "" then
-        local date_only = self.settings.data_time_kind == "date"
+        local date_only = kind_setting == "date"
         local then_time = isoSeconds(stamp)
         -- 只到日期时按当天 23:59:59 UTC 起算：报告当天晚上不该被显示成 stale。
         if date_only and then_time then then_time = then_time + 86399 end
@@ -637,17 +671,17 @@ function Report:status()
         end
     end
     local source
-    if self:isDocMode() then
-        source = "epub: " .. tostring(self.settings.doc_url)
+    if self:isBookMode() then
+        source = (self:isNewsMode() and "news: " or "epub: ") .. tostring(self.settings[spec.manifest])
     elseif self:isImageMode() then
         source = "images: " .. tostring(self.settings.image_url)
     else
         source = "text: " .. self.settings.url
     end
     local page = ""
-    if self:isDocMode() then
-        page = "\nEPUB: " .. tostring(self.settings.doc_file_name or "-")
-            .. (self:docIsOpen() and " (open)" or " (closed)")
+    if self:isBookMode() then
+        page = "\n" .. spec.label .. ": " .. tostring(self.settings[spec.file_name] or "-")
+            .. (self:docIsOpen(spec) and " (open)" or " (closed)")
     elseif self:isImageMode() then
         page = "\nPage " .. tostring(self.page_index or 0) .. "/" .. tostring(self.page_count or 0)
         local pw, ph
@@ -670,6 +704,8 @@ local URL_KINDS = {
               title = "004 page manifest HTTPS URL" },
     doc   = { key = "doc_url",   clear = "doc_sig",
               title = "004 EPUB manifest HTTPS URL" },
+    news  = { key = "news_url",  clear = "news_sig",
+              title = "004 daily news manifest HTTPS URL" },
 }
 
 function Report:setURL(kind)
@@ -683,8 +719,8 @@ function Report:setURL(kind)
                 local url = dialog:getInputText():match("^%s*(.-)%s*$")
                 if url ~= "" and not url:match("^https://") then self:note("HTTPS URL required"); return end
                 self.settings[spec.key] = url
+                -- clear 已经是这个来源自己的 sig 键，换 URL 就等于作废旧缓存。
                 self.settings[spec.clear] = nil
-                if kind == "doc" then self.settings.doc_sig = nil end
                 self:save()
                 UIManager:close(dialog)
             end } } },
@@ -699,7 +735,7 @@ function Report:setDisplay(mode)
         UIManager:close(self.dashboard)
         self.dashboard, self.box, self.header, self.page_widget = nil, nil, nil, nil
     end
-    if self:isDocMode() then
+    if self:isBookMode() then
         self:refresh(true)
     elseif not self:isImageMode() then
         local cached = self:readCache()
@@ -719,6 +755,7 @@ function Report:chooseDisplay()
     dialog = ButtonDialog:new{ buttons = {
         { { text = "Text report", callback = function() pick("text") end } },
         { { text = "EPUB (styled)", callback = function() pick("doc") end } },
+        { { text = "News subscription", callback = function() pick("news") end } },
         { { text = "Page images", callback = function() pick("image") end } },
     } }
     UIManager:show(dialog)
@@ -748,6 +785,10 @@ function Report:addToMainMenu(items)
               return "EPUB manifest URL: " .. (self.settings.doc_url ~= "" and self.settings.doc_url or "(not set)")
           end,
           callback = function() self:setURL("doc") end },
+        { text_func = function()
+              return "News manifest URL: " .. (self.settings.news_url ~= "" and self.settings.news_url or "(not set)")
+          end,
+          callback = function() self:setURL("news") end },
         { text_func = function()
               return "Image manifest URL: " .. (self.settings.image_url ~= "" and self.settings.image_url or "(not set)")
           end,
