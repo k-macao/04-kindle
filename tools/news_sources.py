@@ -21,7 +21,9 @@
     key     稳定的短标识（提交信息、日志、--only 都用它）
     name    设备上显示的名字
     group   GROUPS 里的分组键
-    route   RSSHub 完整路由（以 / 开头，不含实例域名）
+    route   RSSHub 完整路由（以 / 开头，不含实例域名）——与 feed 二选一
+    feed    站点自己的原生 RSS 绝对地址（RSSHub 没有这条路由时才用）——与 route 二选一
+    site    站点域名，只用于「这条源挂了，去问 Radar 该换哪个路由」（tools/radar_discover.py）
     lang    zh / en，仅用于排序与文档说明
     note    这条源是什么、为什么值得每天看
 """
@@ -44,6 +46,7 @@ SOURCES = [
         "group": "flash",
         "lang": "zh",
         "route": "/cls/telegraph",
+        "site": "cls.cn",
         "note": "财联社电报（RSSHub lib/routes/cls/telegraph.tsx，path /telegraph/:category?），A 股盘中最重要的快讯源。",
     },
     {
@@ -52,6 +55,7 @@ SOURCES = [
         "group": "flash",
         "lang": "zh",
         "route": "/wallstreetcn/live/global",
+        "site": "wallstreetcn.com",
         "note": "wallstreetcn/live.tsx 的 path /live/:category?，category=global 是「要闻」频道。",
     },
     {
@@ -60,6 +64,7 @@ SOURCES = [
         "group": "flash",
         "lang": "zh",
         "route": "/jin10",
+        "site": "jin10.com",
         "note": "jin10/index.ts 的 path /:important?，不带参数＝全部快讯；带 1 只要重要快讯。",
     },
     {
@@ -68,6 +73,7 @@ SOURCES = [
         "group": "flash",
         "lang": "zh",
         "route": "/stcn/article/list/kx",
+        "site": "stcn.com",
         "note": "stcn/kx.ts 的 path /article/list/kx，证券时报快讯（A 股公告与监管动向）。",
     },
     {
@@ -76,6 +82,7 @@ SOURCES = [
         "group": "flash",
         "lang": "zh",
         "route": "/10jqka/realtimenews",
+        "site": "10jqka.com.cn",
         "note": "10jqka/realtimenews.ts 的 path /realtimenews/:tag?，同花顺 7×24 快讯。",
     },
     {
@@ -84,6 +91,7 @@ SOURCES = [
         "group": "flash",
         "lang": "zh",
         "route": "/yicai/brief",
+        "site": "yicai.com",
         "note": "yicai/brief.ts 的 path /brief，第一财经每日简报式短稿。",
     },
     {
@@ -92,6 +100,7 @@ SOURCES = [
         "group": "flash",
         "lang": "zh",
         "route": "/sina/rollnews/2517",
+        "site": "sina.com.cn",
         "note": "sina/rollnews.ts 的 path /rollnews/:lid?，lid=2517 是「股市」频道（表见路由说明）。",
     },
     # ---------------- 二、中文财经深度 ----------------
@@ -101,6 +110,7 @@ SOURCES = [
         "group": "depth",
         "lang": "zh",
         "route": "/wallstreetcn/news/global",
+        "site": "wallstreetcn.com",
         "note": "wallstreetcn/news.ts 的 path /news/:category?，比快讯长的成稿，适合夜读。",
     },
     {
@@ -109,6 +119,7 @@ SOURCES = [
         "group": "depth",
         "lang": "zh",
         "route": "/caixin/latest",
+        "site": "caixin.com",
         "note": "caixin/latest.ts 的 path /latest，财新网最新稿件（部分付费墙，只给摘要）。",
     },
     {
@@ -117,6 +128,7 @@ SOURCES = [
         "group": "depth",
         "lang": "zh",
         "route": "/gelonghui/home",
+        "site": "gelonghui.com",
         "note": "gelonghui/home.ts 的 path /home/:tag?，默认 tag=web_home_page＝推荐。",
     },
     {
@@ -125,6 +137,7 @@ SOURCES = [
         "group": "depth",
         "lang": "zh",
         "route": "/yicai/latest",
+        "site": "yicai.com",
         "note": "yicai/latest.ts 的 path /latest，第一财经最新成稿。",
     },
     {
@@ -133,6 +146,7 @@ SOURCES = [
         "group": "depth",
         "lang": "zh",
         "route": "/hk01/latest",
+        "site": "hk01.com",
         "note": "hk01/latest.ts 的 path /latest，港股与香港政经的即时报道。",
     },
     {
@@ -141,6 +155,7 @@ SOURCES = [
         "group": "depth",
         "lang": "zh",
         "route": "/21caijing/channel/热点",
+        "site": "21jingji.com",
         "note": "21caijing/channel.ts 的 path /channel/:name{.+}?，name 是中文频道名（抓取时按 URL 编码）。",
     },
     # ---------------- 三、全球市场与加密 ----------------
@@ -150,6 +165,7 @@ SOURCES = [
         "group": "global",
         "lang": "en",
         "route": "/reuters/business",
+        "site": "reuters.com",
         "note": "reuters/common.tsx 的 path /:category/:topic?，category=business。",
     },
     {
@@ -158,6 +174,7 @@ SOURCES = [
         "group": "global",
         "lang": "en",
         "route": "/bloomberg/markets",
+        "site": "bloomberg.com",
         "note": "bloomberg/index.ts 的 path /:site?，site=markets（站点表见路由说明）。",
     },
     {
@@ -166,6 +183,7 @@ SOURCES = [
         "group": "global",
         "lang": "en",
         "route": "/wsj/en-us/economy",
+        "site": "wsj.com",
         "note": "wsj/news.ts 的 path /:lang/:category?，lang=en-us、category=economy。",
     },
     {
@@ -174,6 +192,7 @@ SOURCES = [
         "group": "global",
         "lang": "en",
         "route": "/coindesk/news",
+        "site": "coindesk.com",
         "note": "coindesk/news.ts 的 path /news，加密市场的基准新闻源。",
     },
 ]
@@ -193,8 +212,13 @@ def catalog_errors():
         if source.get("group") not in GROUP_LABELS:
             problems.append(f"{key}: 分组 {source.get('group')!r} 不在 GROUPS 里")
         route = source.get("route") or ""
-        if not route.startswith("/") or " " in route or "//" in route:
+        feed = source.get("feed") or ""
+        if bool(route) == bool(feed):
+            problems.append(f"{key}: route（RSSHub 路由）与 feed（原生 RSS）必须二选一")
+        if route and (not route.startswith("/") or " " in route or "//" in route):
             problems.append(f"{key}: 路由不像条完整路径：{route!r}")
+        if feed and not feed.startswith("https://"):
+            problems.append(f"{key}: 原生 feed 必须是 HTTPS 绝对地址：{feed!r}")
         if not source.get("name"):
             problems.append(f"{key}: 缺少显示名")
     return problems

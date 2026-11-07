@@ -61,6 +61,10 @@ python tools/build_news.py --data news_data.json --out site
 `/21caijing/channel/热点`（目录），不是 `/21财经/…`（显示名）。
 挑源的思路是**优先补 004 那 49 条没有的**，而且优先「站点本身没有原生 RSS、或原生 RSS 常被墙」的站。
 
+每条源还带一个 `site`（站点域名），只用于「这条源抓不到时去问 RSSHub Radar 该换哪条路由」；
+没有 RSSHub 路由、但站点自带 RSS 的，用 `feed` 直接写原生地址（`route` 与 `feed` 二选一，
+目录自检会拦）。
+
 加一条新源：
 
 1. 在 RSSHub 仓库里找到路由（`lib/routes/<namespace>/<file>.ts` 的 `route.path`），拼上 namespace
@@ -71,7 +75,48 @@ python tools/build_news.py --data news_data.json --out site
 
 `python -m unittest tests.test_news` 里的 `CatalogTest` 会检查 key 唯一、分组存在、路由像完整路径。
 
-## 3. 实例回退与限制
+## 3. 找不到路由：用 RSSHub Radar
+
+RSSHub Radar 是 RSSHub 官方的浏览器扩展，回答「这个站有没有 RSS、对应的 RSSHub 路由是什么」。
+它的规则就是每条路由的 `radar` 字段，由实例的 API 汇总：
+
+```
+GET {实例}/api/radar/rules/{domain}     单个域名（推荐，省流量）
+GET {实例}/api/radar/rules              全部规则
+```
+
+形状（`lib/api/radar/rules/utils.ts` 生成）：`{域名: {"_name": 站名, 子域|".": [{title, target, source, docs}]}}`，
+`target` 就是能拼到实例后面的路由，`source` 是站点上的对应路径。
+
+**手工找**
+
+```sh
+python tools/radar_discover.py https://www.hexun.com/
+python tools/radar_discover.py https://www.hexun.com/ --emit-source   # 直接给可粘贴的源条目
+python tools/radar_discover.py https://www.hexun.com/ --json          # 机器可读
+python tools/radar_discover.py https://a.com/ --rules ./radar_rules.json   # 用本地快照，不打网络
+```
+
+顺序与扩展一致——**先规则、后原生**：
+
+1. `www.hexun.com` → 先找 `hexun.com` 下的 `www` 子域规则，没有再退到 `"."`；
+2. 没有规则就抓页面找 `<link rel="alternate" type="application/rss+xml|atom+xml|feed+json">`
+   ——站点自己的 RSS。没有 RSSHub 路由的站，往往靠这一条，写进目录时用 `feed` 字段。
+
+**自动旁注**：`fetch_news.py` 的某个源彻底失败时，会顺手问一次
+`{第一个实例}/api/radar/rules/{该源的 site}`，把建议写进日志与 `news_data.json` 的
+`sources[].radar`：
+
+```
+⚠️ WSCN_LIVE    华尔街见闻 · 要闻快讯     未取到  ...  HTTP Error 404
+   Radar 建议：/wallstreetcn/live/:category?（实时快讯）
+```
+
+它**只给建议、不自动换源**：`target` 里带 `:param` 的要人定默认值，原生 feed 也要看一眼是不是
+全站流。确认后改 `tools/news_sources.py`，跑 `python -m unittest tests.test_news` 即完成加源。
+Radar 的 API 也不通时（比如实例整体挂了）这一行就不出现，抓取照常按失败处理。
+
+## 4. 实例回退与限制
 
 公共实例按顺序试，默认顺序（也可用 `RSSHUB_BASE` 环境变量覆盖，逗号分隔）：
 
@@ -90,7 +135,7 @@ https://rsshub.rss.tips, https://rsshub.isrss.com, https://rsshub.cups.moe, http
 - 部分上游本身要登录（401）或改版（404），这类源会持续出现在 `sources` 的 `error` 里——那是在提醒
   你换路由，不是程序坏了。
 
-## 4. 去重
+## 5. 去重
 
 两层：
 
@@ -102,7 +147,7 @@ https://rsshub.rss.tips, https://rsshub.isrss.com, https://rsshub.cups.moe, http
 乱码标题（`锟斤拷`、`□□□`、`æ–‡` 这类）在抓取和排版两层都会被丢掉——沿用报告那边
 `tools/build_epub.py` 的 `is_garbled` / `garbled_ratio`，不另立一套规则。
 
-## 5. 自动发布
+## 6. 自动发布
 
 `.github/workflows/refresh-news.yml`：
 
@@ -112,7 +157,7 @@ https://rsshub.rss.tips, https://rsshub.isrss.com, https://rsshub.cups.moe, http
 - 任何一步失败就**不推送**：抓不到足够的条目时旧日报保持原样，设备不会拿到空书；
 - 与小时级报告完全隔离（`concurrency: refresh-news`），报告失败不影响新闻，新闻失败也不动报告产物。
 
-## 6. 设备端
+## 7. 设备端
 
 1. 菜单 → **004 Report** → **News manifest URL** 填 `site/news.json` 的地址
    （例如 `https://k-macao.github.io/04-kindle/site/news.json`，以实际发布地址为准）；
@@ -126,12 +171,13 @@ https://rsshub.rss.tips, https://rsshub.isrss.com, https://rsshub.cups.moe, http
 `Status` 里分别显示当前来源的清单地址、书名、是否打开，以及 `Data:` ——新闻那边是**最新一条新闻的
 发布时间**（`data_time_kind: item`），比「文件生成时间」更能说明这份日报新不新。
 
-## 7. 排错
+## 8. 排错
 
 | 现象 | 先看什么 |
 | --- | --- |
 | 日报没更新 | Actions 运行日志：`fetch_news.py` 打印的每源一行 `✅ / ⚠️`；`sources` 里的 `error` |
 | 只剩几个源有稿 | 实例被限流/403：换 `RSSHUB_BASE`（自建实例最稳） |
+| 某条源一直 404/401 | 看日志里的 `Radar 建议`；也可以 `python tools/radar_discover.py <站点域名>` 自己查 |
 | 条目少得异常 | 是不是刚手动跑过一次？`site/news_seen.json` 把已推条目挡掉了，`--no-seen` 可重抓 |
 | 设备一直不更新 | 清单 URL 是否指向 `site/news.json`；`Status` 里的 `generated` 与网页上的是否一致 |
 | 书里出现站壳/乱码 | 先看是哪条源：`build_news.py` 只做粗筛（标题与摘要），正文质量取决于上游 RSS |

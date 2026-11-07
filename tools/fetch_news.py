@@ -18,6 +18,11 @@
   把一轮抓取拖死。
 - 单源失败不影响其它源；全部失败或有效条目少于 `--min-items` 时退出码 1，
   让工作流别推送一份空日报。
+- 某个源彻底失败时，顺手用 **RSSHub Radar** 问一次「这个域名该用哪条路由」
+  （`{实例}/api/radar/rules/{domain}`，见 tools/radar_discover.py），把建议写进日志与
+  `sources[].radar`。只给建议、不自动换源：换哪条要人确认。
+
+源可以走 RSSHub 路由（`route`），也可以直接是站点原生 RSS（`feed`，RSSHub 没有这条路由时）。
 
 输出（news_data.json）只是中间产物，不进 Git：
 
@@ -43,6 +48,7 @@ from xml.etree import ElementTree
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import news_sources  # noqa: E402
+import radar_discover  # noqa: E402  源挂了就去问 Radar 该换哪个路由
 from build_epub import is_garbled  # noqa: E402  乱码标题不进日报
 
 # 004 的 rss_feeds.py 里探活过的实例，顺序＝优先级。
@@ -228,11 +234,15 @@ def save_seen(path, seen, items, now=None, days=7):
 
 
 def collect(sources=None, instances=None, timeout=15, max_age_hours=24,
-            per_source=12, trip_after=3, now=None, fetch=None, log=print, seen=None):
+            per_source=12, trip_after=3, now=None, fetch=None, log=print, seen=None,
+            radar_base=None):
     """抓一轮，返回 (items, source_reports)。fetch(url, timeout) 可注入，便于离线测试。
 
     `seen` 是之前推过的标题指纹（见 load_seen）：命中的条目不再进今天的日报，
     否则 24 小时时间窗会把昨天的同一批稿子再推一遍。
+
+    `radar_base` 给了就在**某个源彻底失败时**去问 RSSHub Radar「这个域名该用哪条路由」，
+    结果只写进日志和报告的 `radar` 字段，不会自动换源——发现的事要人确认。
     """
     fetch = fetch or http_get
     now = now or datetime.now(timezone.utc)
@@ -246,21 +256,27 @@ def collect(sources=None, instances=None, timeout=15, max_age_hours=24,
 
     for source in sources:
         key = source["key"]
+        feed = source.get("feed") or ""
         report = {"key": key, "name": source["name"], "group": source["group"],
-                  "route": source["route"], "ok": False, "count": 0,
-                  "instance": "", "error": ""}
+                  "route": source.get("route") or "", "feed": feed, "ok": False, "count": 0,
+                  "instance": "", "via": "feed" if feed else "instance", "error": "",
+                  "radar": []}
         errors = []
-        for instance in instances:
-            if dead.get(instance, 0) >= trip_after:
-                continue
-            url = route_url(instance, source["route"])
+        # 原生 RSS 只有一条地址，没有「换实例」这回事；RSSHub 路由才按实例回退。
+        candidates = ([(None, feed)] if feed else
+                      [(instance, route_url(instance, source["route"]))
+                       for instance in instances if dead.get(instance, 0) < trip_after])
+        for instance, url in candidates:
+            label = instance or "native feed"
             try:
                 items = parse_feed(fetch(url, timeout), source)
             except (URLError, OSError, ValueError, ElementTree.ParseError) as exc:
-                errors.append(f"{instance}: {exc}")
-                dead[instance] = dead.get(instance, 0) + 1
+                errors.append(f"{label}: {exc}")
+                if instance:
+                    dead[instance] = dead.get(instance, 0) + 1
                 continue
-            dead[instance] = 0
+            if instance:
+                dead[instance] = 0
             fresh = []
             for item in items:
                 moment = item.pop("_moment")
@@ -274,7 +290,7 @@ def collect(sources=None, instances=None, timeout=15, max_age_hours=24,
             fresh.sort(key=lambda item: item["_moment"] or now, reverse=True)
             fresh = fresh[:per_source]
             if not fresh:
-                errors.append(f"{instance}: 解析出 {len(items)} 条，时间窗内 0 条")
+                errors.append(f"{label}: 解析出 {len(items)} 条，时间窗内 0 条")
                 continue
             taken = 0
             for item in fresh:
@@ -292,13 +308,19 @@ def collect(sources=None, instances=None, timeout=15, max_age_hours=24,
                 item["_moment"] = moment
                 known[identity] = item
                 taken += 1
-            report.update(ok=True, count=taken, instance=instance)
+            report.update(ok=True, count=taken, instance=instance or "", via="feed" if feed else "instance")
             note = "" if taken else "（时间窗内都是已推过或重复的）"
-            log(f"  ✅ {key:12} {source['name']:18} {taken:2} 条{note}  ({instance})")
+            log(f"  ✅ {key:12} {source['name']:18} {taken:2} 条{note}  ({label})")
             break
         else:
             report["error"] = "；".join(errors[:3]) or "所有实例都跳过（连续失败过多）"
-            log(f"  ⚠️ {key:12} {source['name']:18} 未取到  {report['error']}")
+            hint = ""
+            if radar_base and source.get("site"):
+                report["radar"] = radar_discover.suggest_routes(
+                    source["site"], fetch=fetch, base=radar_base, timeout=min(timeout, 8))
+                if report["radar"]:
+                    hint = "　Radar 建议：" + " / ".join(report["radar"])
+            log(f"  ⚠️ {key:12} {source['name']:18} 未取到  {report['error']}{hint}")
         reports.append(report)
 
     items = sorted(known.values(), key=lambda item: item["_moment"] or now, reverse=True)
@@ -308,7 +330,8 @@ def collect(sources=None, instances=None, timeout=15, max_age_hours=24,
 
 
 def fetch_news(sources=None, instances=None, timeout=15, max_age_hours=24,
-               per_source=12, trip_after=3, now=None, log=print, fetch=None, seen=None):
+               per_source=12, trip_after=3, now=None, log=print, fetch=None, seen=None,
+               radar_base=None):
     """collect() 的便捷包装：返回可写盘的 JSON 结构。
 
     `fetch` 可注入（测试里用假报文），默认真联网。
@@ -317,7 +340,7 @@ def fetch_news(sources=None, instances=None, timeout=15, max_age_hours=24,
     items, reports = collect(sources=sources, instances=instances, timeout=timeout,
                              max_age_hours=max_age_hours, per_source=per_source,
                              trip_after=trip_after, now=now, log=log, fetch=fetch,
-                             seen=seen)
+                             seen=seen, radar_base=radar_base)
     return {
         "generated": now.isoformat(timespec="seconds"),
         "instances": list(instances or DEFAULT_INSTANCES),
@@ -352,6 +375,10 @@ def parse_args(argv=None):
     ap.add_argument("--seen-days", type=float, default=7,
                     help="指纹记多久（默认 7 天）")
     ap.add_argument("--no-seen", action="store_true", help="不读也不写指纹（重抓全量）")
+    ap.add_argument("--radar-base", default=None,
+                    help="RSSHub Radar 的 API 实例（默认用第一个抓取实例）")
+    ap.add_argument("--no-radar", action="store_true",
+                    help="源失败时不去问 Radar 该换哪条路由")
     return ap.parse_args(argv)
 
 
@@ -376,18 +403,24 @@ def main(argv=None):
     instances = [part.strip() for part in str(raw_instances).split(",") if part.strip()]
     instances = instances or list(DEFAULT_INSTANCES)
 
+    radar_base = None if args.no_radar else (args.radar_base or instances[0])
     seen = {} if args.no_seen else load_seen(args.seen, days=args.seen_days)
     print(f"抓取 {len(sources)} 个 RSSHub 源（实例 {len(instances)} 个，"
           f"已推过 {len(seen)} 条不再收）…")
     payload = fetch_news(sources=sources, instances=instances, timeout=args.timeout,
                          max_age_hours=args.max_age_hours, per_source=args.per_source,
-                         trip_after=args.trip_after, seen=seen)
+                         trip_after=args.trip_after, seen=seen, radar_base=radar_base)
     ok_sources = sum(1 for report in payload["sources"] if report["ok"])
     total = len(payload["items"])
     target = Path(args.out)
     target.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
                       encoding="utf-8")
     print(f"完成：{total} 条 / {ok_sources} 个源可用 → {target}")
+    suggestions = [report for report in payload["sources"] if report.get("radar")]
+    if suggestions:
+        print("Radar 给了几条替换建议（确认后改 tools/news_sources.py）：")
+        for report in suggestions:
+            print(f"  · {report['key']}（{report['name']}）→ {' / '.join(report['radar'])}")
     if not args.no_seen and total:
         save_seen(args.seen, seen, payload["items"], days=args.seen_days)
     if total < args.min_items:
