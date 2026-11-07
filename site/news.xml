@@ -4,19 +4,36 @@
     <title>004 每日财经新闻聚合</title>
     <link>https://github.com/k-macao/04-kindle</link>
     <atom:link href="https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news.xml" rel="self" type="application/rss+xml"/>
-    <description>每天 07:00（北京时间）从 RSSHub 抓取并合并的财经、政治与哲学思想新闻，英文条目附中文译文，本次 101 条。</description>
+    <description>每天 07:00（北京时间）从 RSSHub 抓取并合并的财经、政治与哲学思想新闻，英文条目附中文译文，本次 150 条。</description>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 07 Nov 2026 15:28:40 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 07 Nov 2026 15:36:46 +0000</lastBuildDate>
     <generator>04-kindle tools/build_feed.py</generator>
     <ttl>60</ttl>
     <item>
       <title>《财新周刊》第1230期</title>
       <link>https://weekly.caixin.com/2026/cw1230/</link>
       <guid isPermaLink="true">https://weekly.caixin.com/2026/cw1230/</guid>
-      <pubDate>Sat, 07 Nov 2026 15:26:28 +0000</pubDate>
+      <pubDate>Sat, 07 Nov 2026 15:35:20 +0000</pubDate>
       <category>中文财经深度</category>
       <source url="https://weekly.caixin.com">财新周刊</source>
       <description>封面报道 Cover Story “蓝色海啸”扑向特朗普 美国中期选举成为对特朗普的公投，共和党大败动摇其权力根基，任期进入更难预测的下半场 财新观察 Opinion 促进消费与投资良性互动 积极构建消费长效增长机制，推动居民“能消费、敢消费、愿消费” 时事 Current Affairs 职业打假转向 文｜财新周刊 周泰来 冯奕铭 治理恶意索赔和保护正当打假行为，应当如何平衡？ 联合国秘书长遴选陷胶着 文｜财新周刊 王克柔 联合国秘书…</description>
+    </item>
+    <item>
+      <title>波兰克拉科夫枪击事件致2死10伤</title>
+      <link>jin10:index:20261107232605506800</link>
+      <guid isPermaLink="true">jin10:index:20261107232605506800</guid>
+      <pubDate>Sat, 07 Nov 2026 15:26:05 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>金十数据11月7日讯，波兰媒体7日援引当地消防部门消息报道，波兰克拉科夫当天发生枪击事件，已造成2人死亡、10人受伤。</description>
+    </item>
+    <item>
+      <title>伊朗议员：美国已无发动战争的新选项，相关威胁更多是出于国内政治需要</title>
+      <link>jin10:index:20261107232534241800</link>
+      <guid isPermaLink="true">jin10:index:20261107232534241800</guid>
+      <pubDate>Sat, 07 Nov 2026 15:25:34 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
     </item>
     <item>
       <title>扎哈罗娃：西方国家无意顾及俄方关切 持续挑动局势升级</title>
@@ -96,6 +113,15 @@
       <description>“十五五”期间上海加快国际航运中心建设，抓住由规模领先迈向能级跃升的最佳窗口期。 本期的节目呈现的是“2026北外滩国际航运论坛·夜话”的精彩内容。主题为“御浪而行：穿越潮汐的航运力量”。来自港口运营、船舶技术、金融保险、政策研究等航运业的权威专家：中国港口协会秘书长丁莉、中国船级社原社长孙峰、中国太保总经理助理上海航运保险协会原会长徐峰、上海国际航运研究中心秘书长张婕姝和第一财经主持人李欣，深入探讨上海如何加快国际航运中心建设，寻找穿…</description>
     </item>
     <item>
+      <title>进博会美妆日化齐发新品或新投资 国际品牌彰显对中国市场重视</title>
+      <link>https://www.caixin.com/2026-11-07/102502309.html</link>
+      <guid isPermaLink="true">https://www.caixin.com/2026-11-07/102502309.html</guid>
+      <pubDate>Sat, 07 Nov 2026 14:58:40 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://caixin.com">财新 · 最新</source>
+      <description>雅诗兰黛与阿里云签署AI合作，欧莱雅集团宣布少数股权投资中国生物材料公司柏垠生物，资生堂中国与海南启研干细胞抗衰老医院达成战略合作意向 【财新网】 进博会一直以来是海外美妆、日化企业在中国品牌推广、新品首发的重要阵地。在11月5日至10日举办的第九届中国国际进口博览会（下称“进博会”）上，参展的美妆日化企业推出了多款新品以及多项新投资、新合作。 全球第一大美妆集团欧莱雅连续第九年参展进博会，是进博会的“全勤生”。欧莱雅集团CEO(首席执…</description>
+    </item>
+    <item>
       <title>意大利外长称因挺乌遭亲俄黑客泄露个人资料</title>
       <link>https://www.zaobao.com.sg/news/world/story20261107-9964681</link>
       <guid isPermaLink="true">https://www.zaobao.com.sg/news/world/story20261107-9964681</guid>
@@ -159,13 +185,13 @@
 原文：German Defense Minister Boris Pistorius expects a decision on the formation of a new air combat partnership to jointly build a next-generation fighter jet by the end of March 2027, following the scrapping of the Franco-G…</description>
     </item>
     <item>
-      <title>欧洲央行行长拉加德：不能保证12月一定行动 但当前事态仍与预期一致</title>
-      <link>jin10:index:20261107223038058800</link>
-      <guid isPermaLink="true">jin10:index:20261107223038058800</guid>
-      <pubDate>Sat, 07 Nov 2026 14:30:38 +0000</pubDate>
+      <title>伯克希尔哈撒韦第三季度回购规模翻倍，利润下降</title>
+      <link>https://finance.sina.com.cn/stock/usstock/c/2026-11-07/doc-inixxqmu8008769.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/stock/usstock/c/2026-11-07/doc-inixxqmu8008769.shtml</guid>
+      <pubDate>Sat, 07 Nov 2026 14:31:38 +0000</pubDate>
       <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>金十数据11月7日讯，被问到有人指出欧洲央行在此前面对能源冲击到俄乌冲突时反应迟缓。欧洲央行行长拉加德表示，这并非欧洲独有的问题，而是我们所有人面临的问题。进一步被问及从这次事件中吸取的教训，以及是否认为在任何次生影响显现之前，有必要提高利率时，拉加德称，我认为我们近期经历并仍在经历的是巨大的不确定性、不可预测性、我们所熟知的世界格局的瓦解、贸易中断、供应链中断，以及对安全而非效率的过度关注——所有这些都在彻底改变经济参与者的运作环境。…</description>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>伯克希尔哈撒韦 周六表示，由于运营利润和整体利润受到冲击，公司在第三季度加快了股票回购步伐。 该公司回购了价值96亿美元的股票。这超过第二季度45亿美元回购规模的两倍，并使公司2026年迄今为止的回购总额达到约144亿美元。 回购大幅增加之际，伯克希尔的运营利润——即来自全资子公司的利润——同比下降，原因是其保险业务利润回落。 伯克希尔运营利润总计127.05亿美元，较上年同期的134.85亿美元下降5.8%。保险承保利润同比骤降43%…</description>
     </item>
     <item>
       <title>美军拟设立特遣部队限制伊朗陆路贸易</title>
@@ -214,6 +240,15 @@
       <description>红果平台播出的短剧《持械入宋》持续维持观看热度，这部8月21日上线的AI真人短剧，两个多月连更十季约1000集，截至11月6日，全网累计播放量已达120亿。11月7日，该剧总策划张汉生接受第一财经记者独家专访，表示团队无一人科班出身，自称“草台班子”，并揭秘了这部爆款短剧的制作过程。更现场、更财经，一探究竟！</description>
     </item>
     <item>
+      <title>显卡价格连涨11个交易日后急跌，华强北显卡半天一个价 | 据央视财经，显卡是主要用于图形渲染的硬件，如今也广泛用于AI算力运算。此前受海外停产传闻刺激...</title>
+      <link>https://www.yicai.com/brief/103430998.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/brief/103430998.html</guid>
+      <pubDate>Sat, 07 Nov 2026 14:25:26 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://yicai.com">第一财经 · 简报</source>
+      <description>据央视财经，显卡是主要用于图形渲染的硬件，如今也广泛用于AI算力运算。此前受海外停产传闻刺激，RTX 50系列显卡开启连续上涨，一口气连涨11个交易日。从10月28日开始，行情突然掉头向下。RTX 5080从最高近2万元，跌到1.6万元，价格回调两成。有商户告诉记者：“代理商、商户提前囤货，导致价格发生了很大浮动，甚至早上跟下午价格都变动很大。”尽管价格有所回落，但目前主流显卡RTX 50系列均价仍是建议零售价的1.7倍，之前较大的价格…</description>
+    </item>
+    <item>
       <title>Economy and Democracy Drove the Blue Wave｜中文：经济和民主推动了蓝色浪潮</title>
       <link>https://www.bloomberg.com/news/videos/2026-11-07/economy-and-democracy-drove-the-blue-wave-video</link>
       <guid isPermaLink="true">https://www.bloomberg.com/news/videos/2026-11-07/economy-and-democracy-drove-the-blue-wave-video</guid>
@@ -222,6 +257,32 @@
       <source url="https://bloomberg.com">彭博社 · 市场</source>
       <description>中文：罗格斯大学(Rutgers University)的阿什利·科宁(Ashley Koning)在《彭博本周末》(Bloomberg This Weekend)上表示，负担能力、对民主的担忧和政府腐败促使选民转向民主党，拉丁裔、年轻人和我……
 原文：On Bloomberg This Weekend, Rutgers University's Ashley Koning says affordability, concerns about democracy and government corruption helped drive voters toward Democrats, with significant shifts among Latino, young and i…</description>
+    </item>
+    <item>
+      <title>显卡价格连涨11个交易日后急跌 华强北显卡半天一个价</title>
+      <link>https://www.cls.cn/detail/2528148</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2528148</guid>
+      <pubDate>Sat, 07 Nov 2026 14:18:28 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+      <description>【显卡价格连涨11个交易日后急跌 华强北显卡半天一个价】财联社11月7日电，显卡是主要用于图形渲染的硬件，如今也广泛用于AI算力运算。此前受海外停产传闻刺激，RTX 50系列显卡开启连续上涨，一口气连涨11个交易日。从10月28日开始，行情突然掉头向下。RTX 5080从最高近2万元，跌到1.6万元，价格回调两成。有商户告诉记者：“代理商、商户提前囤货，导致价格发生了很大浮动，甚至早上跟下午价格都变动很大。”尽管价格有所回落，但目前主流…</description>
+    </item>
+    <item>
+      <title>泽连斯基：乌仍严重缺乏“爱国者”防空系统拦截弹</title>
+      <link>https://news.10jqka.com.cn/20261107/c681579748.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261107/c681579748.shtml</guid>
+      <pubDate>Sat, 07 Nov 2026 14:10:11 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>乌克兰总统泽连斯基7日表示，俄军在当天的袭击中发射36枚导弹，乌方仅成功拦截4枚。乌方目前仍严重缺乏“爱国者”防空系统拦截弹，并表示正在各个层面寻求加快拦截弹交付，已向美方传递相关信息。（央视新闻）</description>
+    </item>
+    <item>
+      <title>【电报解读】国家发改委要求支持“六网协同”新场景培育打造！机构称算力基础设施建设有望为电网扩容、新型配电及高可靠供电设备带来“增量需求”，这家公司称产...</title>
+      <link>https://www.cls.cn/detail/2528136</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2528136</guid>
+      <pubDate>Sat, 07 Nov 2026 14:09:13 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
     </item>
     <item>
       <title>日本组“捍卫战士”精锐战队 阻击黑客巩固网络安全</title>
@@ -252,6 +313,15 @@
       <description>当地时间11月7日，据西班牙最新统计，过去七天近5000名非法移民乘船抵达加那利群岛，大部分集中登陆耶罗岛；仅过去24小时各港口接纳超1100名获救人员，当地民防与救援部门称接待和安置能力已逼近极限。今年7月底，一则西班牙边境政策错误信息在社交媒体传播，致约8万人以泅渡等方式从摩洛哥偷渡至西班牙北非飞地休达，约百人溺亡，大多数非法越境者已返回摩洛哥。（CCTV国际时讯）</description>
     </item>
     <item>
+      <title>民主党在美国中期选举中获胜，伊朗战争升级的风险仍然很高</title>
+      <link>https://finance.sina.com.cn/stock/usstock/c/2026-11-07/doc-inixxqmw4775783.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/stock/usstock/c/2026-11-07/doc-inixxqmw4775783.shtml</guid>
+      <pubDate>Sat, 07 Nov 2026 14:02:57 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>分析人士称，尽管本周人们越来越希望民主党在中期选举中的决定性胜利将结束冲突，但美国和伊朗正滑向新一轮战争。 在副总统JD·万斯公开将共和党的惨败归咎于战争后，原油价格在过去五个交易日内下跌超过16%。万斯的言论引发了人们对政府内部是否仍有支持继续与伊朗冲突的疑问。 分析人士称，民主党计划利用其在国会两院的舒适多数通过一项战争权力决议，要求总统唐纳德·特朗普结束战争。但中东紧张局势自选举以来并未缓和，而且民主党要到1月才宣誓就职。 RBC…</description>
+    </item>
+    <item>
       <title>消息人士：数千名叙利亚士兵将部署至沙特与也门 抗击胡塞武装</title>
       <link>https://www.zaobao.com.sg/news/world/story20261107-9964541</link>
       <guid isPermaLink="true">https://www.zaobao.com.sg/news/world/story20261107-9964541</guid>
@@ -261,6 +331,15 @@
       <description>沙特阿拉伯积极争取国际力量协助击退也门胡塞武装之际，多名也门官员透露，数千名叙利亚士兵即将部署至沙特阿拉伯和也门，其中部分人员已经抵达当地。 法新社星期六（11月7日）引述多名匿名也门官员报道了这个消息。 三名独立的也门军方消息人士和一名国防官员说，目前已有数百名叙利亚士兵部署在沙特与也门边境两侧。 来自也门总统府和国防部的另外两名消息人士补充说，接下来还将有数千名士兵陆续部署到位，以协助抗击胡塞武装。 另一方面，由胡塞武装控制的媒体于…</description>
     </item>
     <item>
+      <title>美中央司令部成立特遣队 阻止伊朗通过陆路运输先进武器 | 据央视新闻，当地时间11月7日，美国中央司令部司令库珀下令成立一支名为“铁门”（Task Force I...</title>
+      <link>https://www.yicai.com/brief/103430994.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/brief/103430994.html</guid>
+      <pubDate>Sat, 07 Nov 2026 14:00:26 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://yicai.com">第一财经 · 简报</source>
+      <description>据央视新闻，当地时间11月7日，美国中央司令部司令库珀下令成立一支名为“铁门”（Task Force Iron Gate）的特遣队，旨在配合美国政府正在开展的相关行动，阻止伊朗通过陆路运输先进武器及其他物资。据介绍，该特遣队由约20名文职及军事人员组成，驻扎在美国佛罗里达州坦帕市。这支新成立的特遣队将与美国其他政府机构展开协调合作，阻止先进武器系统、军民两用技术、受制裁物资及“非法资金”通过伊朗陆地边境和里海进行跨境流动。</description>
+    </item>
+    <item>
       <title>特斯拉赛博越野旅行车将逐步停产 特斯拉将增产赛博出租车</title>
       <link>https://news.10jqka.com.cn/20261107/c681579727.shtml</link>
       <guid isPermaLink="true">https://news.10jqka.com.cn/20261107/c681579727.shtml</guid>
@@ -268,6 +347,43 @@
       <category>中文财经快讯</category>
       <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
       <description>美国电动汽车制造商特斯拉首席执行官埃隆·马斯克6日在社交媒体平台宣布，将于2027年年中前后逐步停止生产赛博越野旅行车（Cybertruck），把产能用于增产赛博出租车（Cybercab）。（新华国际）</description>
+    </item>
+    <item>
+      <title>Berkshire Makes Record $9.6 Billion Buyback｜中文：伯克希尔回购创纪录的 96 亿美元</title>
+      <link>https://www.bloomberg.com/news/videos/2026-11-07/berkshire-makes-record-9-6-billion-buyback-video</link>
+      <guid isPermaLink="true">https://www.bloomberg.com/news/videos/2026-11-07/berkshire-makes-record-9-6-billion-buyback-video</guid>
+      <pubDate>Sat, 07 Nov 2026 14:00:16 +0000</pubDate>
+      <category>全球市场与要闻</category>
+      <source url="https://bloomberg.com">彭博社 · 市场</source>
+      <description>中文：在彭博社本周末，彭博资讯高级保险分析师 Matthew Palazola 详细分析了伯克希尔哈撒韦公司第三季度业绩，包括创纪录的 96 亿美元股票回购和疲软的保险业务……
+原文：On Bloomberg This Weekend, Bloomberg Intelligence Senior Insurance Analyst Matthew Palazola breaks down Berkshire Hathaway's third-quarter results, including a record $9.6 billion in share buybacks and weaker insurance e…</description>
+    </item>
+    <item>
+      <title>朱忠明会见国际商会国际仲裁院秘书长亚历山大·费萨斯</title>
+      <link>https://www.yicai.com/news/103430991.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/news/103430991.html</guid>
+      <pubDate>Sat, 07 Nov 2026 13:59:38 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://yicai.com">第一财经 · 最新</source>
+      <description>上海市市长朱忠明今天（11月7日）会见了国际商会国际仲裁院秘书长亚历山大·费萨斯一行。 朱忠明说，作为中国最大的经济中心城市，上海持续打造市场化、法治化、国际化的一流营商环境。仲裁等法律服务业是上海营商环境建设的重要组成部分，近年来，上海仲裁服务能级和质效不断提升，已跻身全球十大最受欢迎仲裁地。我们将围绕打造面向全球的亚太仲裁中心，大力推动仲裁体制机制改革创新、业务对外开放、发展环境优化。国际商会是全球最大的非政府间国际经济组织，国际仲…</description>
+    </item>
+    <item>
+      <title>伊拉克外长警告称中东地区或再陷战火 | 据央视新闻，当地时间7日，伊拉克外长侯赛因在接受媒体采访时表示，当前局势表明中东地区或将重新爆发战争。侯赛...</title>
+      <link>https://www.yicai.com/brief/103430992.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/brief/103430992.html</guid>
+      <pubDate>Sat, 07 Nov 2026 13:59:29 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://yicai.com">第一财经 · 简报</source>
+      <description>据央视新闻，当地时间7日，伊拉克外长侯赛因在接受媒体采访时表示，当前局势表明中东地区或将重新爆发战争。侯赛因指出，伊拉克由于霍尔木兹海峡石油出口停滞已损失了约600亿美元，在与美国和伊朗达成协议后，伊拉克恢复通过霍尔木兹海峡出口石油。</description>
+    </item>
+    <item>
+      <title>2026“侨连五洲·沪上进博”主题活动举行，王灵桂朱忠明出席并致辞</title>
+      <link>https://www.yicai.com/news/103430990.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/news/103430990.html</guid>
+      <pubDate>Sat, 07 Nov 2026 13:58:40 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://yicai.com">第一财经 · 最新</source>
+      <description>2026“侨连五洲·沪上进博”主题活动今天（11月7日）举行。中国侨联主席王灵桂，上海市委副书记、市长朱忠明出席并致辞。 王灵桂说，进博会是中国构建新发展格局的窗口、推动高水平开放的平台、全球共享的国际公共产品。中国侨联连续六年在进博会框架下打造“侨连五洲·沪上进博”特色品牌，让侨的优势与进博会平台深度结合，逐步成为集资源汇聚、创新展示、人文交流于一体的综合性侨界开放合作平台。今年活动以“融通中外 共享新机”为主题，让侨的网络进一步织密…</description>
     </item>
     <item>
       <title>Turkey Arrests Former Regulatory Executive in Growing Fund Probe｜中文：土耳其在Growing Fund Probe中逮捕了前监管高管</title>
@@ -290,6 +406,59 @@
 原文：Haitian officials said they had killed a major gang leader in the capital as private mercenaries and at least 2,000 El Salvadoran troops join the fight to regain control of the troubled Caribbean nation.</description>
     </item>
     <item>
+      <title>美中央司令部成立特遣队 阻止伊朗通过陆路运输先进武器</title>
+      <link>https://news.10jqka.com.cn/20261107/c681579657.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261107/c681579657.shtml</guid>
+      <pubDate>Sat, 07 Nov 2026 13:50:53 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>当地时间11月7日，美国中央司令部司令库珀下令成立名为“铁门”（Task Force Iron Gate）的特遣队，旨在配合美国政府正在开展的相关行动，阻止伊朗通过陆路运输先进武器及其他物资。该特遣队由约20名文职及军事人员组成，驻扎在美国佛罗里达州坦帕市。（央视新闻）</description>
+    </item>
+    <item>
+      <title>伊拉克石油部：将遵守OPEC+431万桶/日的产量水平</title>
+      <link>https://www.cls.cn/detail/2528143</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2528143</guid>
+      <pubDate>Sat, 07 Nov 2026 13:48:32 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+      <description>【伊拉克石油部：将遵守OPEC+431万桶/日的产量水平】财联社11月7日电，伊拉克石油部称，将遵守OPEC+431万桶/日的产量水平，提高产量上限需经OPEC+一致同意，将继续努力争取明年提高产量。</description>
+    </item>
+    <item>
+      <title>伊拉克石油部：将遵守OPEC+431万桶/日的产量水平。 提高产量上限需经OPEC+一致同意。 将继续努力争取明年提高产量。</title>
+      <link>https://wallstreetcn.com/livenews/3196431</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196431</guid>
+      <pubDate>Sat, 07 Nov 2026 13:47:44 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+    </item>
+    <item>
+      <title>民生银行的小微生意，换了一批客人</title>
+      <link>https://wallstreetcn.com/articles/3785462</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/articles/3785462</guid>
+      <pubDate>Sat, 07 Nov 2026 13:44:08 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
+      <description>11月3日，惠誉将民生银行长期外币发行人主体评级从BBB-上调至BBB，展望稳定。政府支持评级一同上调，衡量银行独立信用实力的生存力评级，维持在“bb-”。 两个评级一升一平，理由已经写明：惠誉认为，政府在国内系统重要性银行承压时提供特别支持的意愿在增强；民生自身的信用实力，得到的仍是“维持”。 这次上调，发生在一份利润继续下滑的三季报之后。 前三季度，民生营收同比增加20.45亿元，信用减值损失却多了74.29亿元，归母净利润下降14…</description>
+    </item>
+    <item>
+      <title>伊拉克外长警告称中东地区或再陷战火</title>
+      <link>https://news.10jqka.com.cn/20261107/c681579603.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261107/c681579603.shtml</guid>
+      <pubDate>Sat, 07 Nov 2026 13:44:07 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>当地时间7日，伊拉克外长侯赛因在接受媒体采访时表示，当前局势表明中东地区或将重新爆发战争。他指出，伊拉克因霍尔木兹海峡石油出口停滞已损失约600亿美元；在与美国和伊朗达成协议后，伊拉克恢复通过霍尔木兹海峡出口石油。他表示，美国已正式要求关闭除两个口岸外伊拉克与伊朗的所有边境口岸；伊拉克已通知伊朗，接受与其发展联盟友好关系，但拒绝其干涉伊拉克事务，有迹象表明存在外部势力利用伊拉克领土攻击邻国。（央视新闻）</description>
+    </item>
+    <item>
+      <title>英伟达CEO黄仁勋之女据悉取消原定韩国之行</title>
+      <link>https://finance.sina.com.cn/stock/usstock/c/2026-11-07/doc-inixxqms4477783.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/stock/usstock/c/2026-11-07/doc-inixxqms4477783.shtml</guid>
+      <pubDate>Sat, 07 Nov 2026 13:40:15 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>据消息人士周六透露，英伟达公司高级总监、首席执行官黄仁勋之女黄敏珊原定的韩国之行已被突然取消。 黄敏珊原计划于周日访问韩国，出席将于周一和周二在首尔COEX展览中心举行的“英伟达人工智能日首尔2026”活动，并与韩国政府官员会面。 但消息人士称，由于“家庭原因”，她的行程被突然取消，但未透露具体细节。 .appendQr_wrap{border:1px solid #E6E6E6;padding:8px;} .appendQr_norm…</description>
+    </item>
+    <item>
       <title>Miller Elevation Sets Up Clash With Democrats｜中文：米勒高地与民主党人发生冲突</title>
       <link>https://www.bloomberg.com/news/videos/2026-11-07/miller-elevation-sets-up-clash-with-democrats-video</link>
       <guid isPermaLink="true">https://www.bloomberg.com/news/videos/2026-11-07/miller-elevation-sets-up-clash-with-democrats-video</guid>
@@ -309,6 +478,60 @@
       <description>加沙地带遭遇连场暴雨，各地营地中数以万计的难民帐篷被淹，不仅避难所被冲毁，毯子和床垫也被浸湿。由于燃料短缺及设备受损，当地市政和民防也无力应对这场暴风雨。 路透社星期六（11月7日）引述由哈马斯管理的加沙政府媒体办公室报道，在过去12个小时内，至少有7万顶帐篷被洪水淹没，数万名流离失所的民众受影响，并造成人员受伤，所幸目前尚无人员死亡的报告。 加沙民防部门透露，当局已接到1500通来自流离失所居民的求救电话。此外，有三栋废弃房屋在暴雨中…</description>
     </item>
     <item>
+      <title>周六重大事件汇总 | 【时事新闻】</title>
+      <link>https://www.yicai.com/brief/103430989.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/brief/103430989.html</guid>
+      <pubDate>Sat, 07 Nov 2026 13:33:10 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://yicai.com">第一财经 · 简报</source>
+      <description>【时事新闻】</description>
+    </item>
+    <item>
+      <title>国金证券：核心蓝筹股的估值水平已经处于历史偏低水平</title>
+      <link>https://wallstreetcn.com/livenews/3196430</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196430</guid>
+      <pubDate>Sat, 07 Nov 2026 13:31:48 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+      <description>国金证券首席策略官、副所长牟一凌接受券商中国记者采访时表示，9月中下旬以来，A股市场表现承压，外部不确定性加剧是本轮回调的核心扰动。当前核心蓝筹股的估值水平已经处于历史偏低水平，尤其成长类大盘蓝筹性价比凸显。 对于AI产业，牟一凌表示，随着国产替代的加速，本轮中国AI产业的发展具备明显的自主可控性。在未来海外AI产业发展预期发生波动时，国产替代相关的科技板块有望成为全球成长资金的避风港。（证券时报）</description>
+    </item>
+    <item>
+      <title>国金证券牟一凌：核心蓝筹股的估值水平已经处于历史偏低水平</title>
+      <link>https://finance.sina.com.cn/jjxw/2026-11-07/doc-inixxqmw4763809.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/jjxw/2026-11-07/doc-inixxqmw4763809.shtml</guid>
+      <pubDate>Sat, 07 Nov 2026 13:30:53 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>炒股就看 金麒麟分析师研报 ，权威，专业，及时，全面，助您挖掘潜力主题机会！ 人民财讯11月7日电， 国金证券 首席策略官、副所长牟一凌接受券商中国记者采访时表示，9月中下旬以来，A股市场表现承压，外部不确定性加剧是本轮回调的核心扰动。当前核心蓝筹股的估值水平已经处于历史偏低水平，尤其成长类大盘蓝筹性价比凸显。 对于AI产业，牟一凌表示，随着国产替代的加速，本轮中国AI产业的发展具备明显的自主可控性。在未来海外AI产业发展预期发生波动时…</description>
+    </item>
+    <item>
+      <title>周汉民：上海要成为中企全球化的首选服务地，不只是出发地</title>
+      <link>https://www.yicai.com/news/103430987.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/news/103430987.html</guid>
+      <pubDate>Sat, 07 Nov 2026 13:30:46 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://yicai.com">第一财经 · 最新</source>
+      <description>“我强烈建议，应当支持符合条件的中国企业在上海建设全球运营中心、国际业务总部或区域管理中心，整合投资决策、国际采购、海外营销、知识产权管理和全球风险控制等职能。” 11月7日，第九届进博会期间举行的在“重构与共生——中国企业全球化发展大会暨《跨越山海｜2026中国企业全球化报告》发布会”上，全国政协常委、上海公共外交协会会长周汉民强调说，这是上海应该具备的形象和能力。 周汉民表示，上海要有勇气、有能力，建设成为中国企业全球化的首选服务地…</description>
+    </item>
+    <item>
+      <title>Wall Street Strategists Call Stock Rout a Fresh Reason to Buy｜中文：华尔街策略师称股市暴跌是买入的新理由</title>
+      <link>https://www.bloomberg.com/news/articles/2026-11-07/wall-street-strategists-call-stock-rout-a-fresh-reason-to-buy</link>
+      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-07/wall-street-strategists-call-stock-rout-a-fresh-reason-to-buy</guid>
+      <pubDate>Sat, 07 Nov 2026 13:30:00 +0000</pubDate>
+      <category>全球市场与要闻</category>
+      <source url="https://bloomberg.com">彭博社 · 市场</source>
+      <description>中文：许多华尔街策略师寄希望于美国中期选举后的短期抛售，为投资者提供折价购买股票的机会
+原文：A slew of Wall Street strategists were banking on a short-term selloff following the US midterm elections to give investors an opportunity to buy stocks at a discount.</description>
+    </item>
+    <item>
+      <title>美国将成立工作组限制伊朗使用陆路通道和里海。（路透）</title>
+      <link>https://wallstreetcn.com/livenews/3196429</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196429</guid>
+      <pubDate>Sat, 07 Nov 2026 13:28:41 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+    </item>
+    <item>
       <title>白宫首席顾问：特朗普不会因选举失利而调整经济政策</title>
       <link>https://www.zaobao.com.sg/news/world/story20261107-9964274</link>
       <guid isPermaLink="true">https://www.zaobao.com.sg/news/world/story20261107-9964274</guid>
@@ -316,6 +539,16 @@
       <category>政治与政策</category>
       <source url="https://zaobao.com">联合早报 · 国际</source>
       <description>（亚特兰大/华盛顿综合电）美国总统 特朗普 的首席经济顾问哈塞特表明，虽然共和党在中期选举中失利，但白宫不会因此重新调整经济政策。 白宫国家经济委员会主任哈塞特星期五（11月6日）接受彭博电视访问时说，特朗普政府的经济政策奏效，无须改变。他认为，民主党在选举中获胜并不表示选民否定特朗普的供给侧政策，这些措施让12万美国民众投入到新厂房的建设。 哈塞特说，特朗普确实担心“他凝聚的正面动力如今可能被取得更大权力的民主党翻转”。但他相信，民主…</description>
+    </item>
+    <item>
+      <title>By The Way: Headlines You May Have Missed｜中文：顺便说一句：您可能错过的头条新闻</title>
+      <link>https://www.bloomberg.com/news/videos/2026-11-07/by-the-way-headlines-you-may-have-missed-video</link>
+      <guid isPermaLink="true">https://www.bloomberg.com/news/videos/2026-11-07/by-the-way-headlines-you-may-have-missed-video</guid>
+      <pubDate>Sat, 07 Nov 2026 13:25:55 +0000</pubDate>
+      <category>全球市场与要闻</category>
+      <source url="https://bloomberg.com">彭博社 · 市场</source>
+      <description>中文：看电影时何时撒尿、带 PTO 玩 GTA、无视鹅肝禁令以及孩子们喜欢爸爸妈妈的音乐的指南：与 Lisa Mateo、David Gura 和 Christina Ruffini 一起了解您可能会遇到的头条新闻摘要……
+原文：The guide for when to pee during movies, taking PTO to play GTA, ignoring the Foie Gras ban, and kids loving their mom and dad's music: Join Lisa Mateo, David Gura and Christina Ruffini for a roundup of headlines you may…</description>
     </item>
     <item>
       <title>Russia Upgrades Its Delegation for US-Led Ukraine Peace Talks in Abu Dhabi｜中文：俄罗斯代表团在阿布扎比升级参加美国主导的乌克兰和平谈判</title>
@@ -328,6 +561,31 @@
 原文：Russia is sending a higher-level team to US-mediated talks with Ukraine in Abu Dhabi than to previous rounds, hinting at an openness to more substantive negotiations after months of diplomatic deadlock.</description>
     </item>
     <item>
+      <title>英伟达CEO女儿取消原定访韩计划。（韩联社）</title>
+      <link>https://wallstreetcn.com/livenews/3196428</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196428</guid>
+      <pubDate>Sat, 07 Nov 2026 13:25:06 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+    </item>
+    <item>
+      <title>财联社11月7日电，伯克希尔哈撒韦称，截至9月30日，公司股权投资总公允价值的65%集中于Alphabet、美国运通、苹果、美国银行和可口可乐。</title>
+      <link>https://www.cls.cn/detail/2528141</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2528141</guid>
+      <pubDate>Sat, 07 Nov 2026 13:24:02 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+    </item>
+    <item>
+      <title>伯克希尔哈撒韦：截至9月30日，股权投资公允价值总额的65%集中于Alphabet、美国运通、苹果、美国银行及可口可乐。 截至10月28日，第四季度回购了相当于约2,554股...</title>
+      <link>https://wallstreetcn.com/livenews/3196427</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196427</guid>
+      <pubDate>Sat, 07 Nov 2026 13:21:48 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+      <description>伯克希尔哈撒韦：截至9月30日，股权投资公允价值总额的65%集中于Alphabet、美国运通、苹果、美国银行及可口可乐。 截至10月28日，第四季度回购了相当于约2,554股A类股的股份。</description>
+    </item>
+    <item>
       <title>特朗普委任新幕僚长 司法部高层纷离职</title>
       <link>https://www.zaobao.com.sg/news/world/story20261107-9964255</link>
       <guid isPermaLink="true">https://www.zaobao.com.sg/news/world/story20261107-9964255</guid>
@@ -335,6 +593,33 @@
       <category>政治与政策</category>
       <source url="https://zaobao.com">联合早报 · 国际</source>
       <description>（华盛顿综合电） 美国中期选举 刚结束，总统 特朗普 就对核心团队进行重大人事调整， 任命亲信米勒（Stephen Miller）接替怀尔斯，出任白宫幕僚长。 特朗普周五（11月6日）在社交媒体发文，形容米勒是“我最信任的顾问之一”，同时赞扬怀尔斯工作表现非常出色。特朗普说，这一人事变动下周一（9日）生效。 米勒（41岁）是特朗普政府强硬移民政策的主要推手，长期主张扩大总统权力。数名白宫官员说，擢升以言辞尖锐、态度强硬著称的米勒，可能预…</description>
+    </item>
+    <item>
+      <title>US Jobs Surge Raises Odds of December Fed Hike｜中文：美国就业激增增加美联储12月加息的可能性</title>
+      <link>https://www.bloomberg.com/news/videos/2026-11-07/us-jobs-surge-raises-odds-of-december-fed-hike-video</link>
+      <guid isPermaLink="true">https://www.bloomberg.com/news/videos/2026-11-07/us-jobs-surge-raises-odds-of-december-fed-hike-video</guid>
+      <pubDate>Sat, 07 Nov 2026 13:16:33 +0000</pubDate>
+      <category>全球市场与要闻</category>
+      <source url="https://bloomberg.com">彭博社 · 市场</source>
+      <description>中文：彭博经济首席美国经济学家安娜·王 (Anna Wong) 在《彭博本周末》上表示，10 月份令人惊讶的强劲就业报告显示，招聘范围扩大到白领、制造业和运输业岗位，加强了……
+原文：On Bloomberg This Weekend, Bloomberg Economics Chief US Economist Anna Wong says October's surprisingly strong jobs report showed hiring broadening into white collar, manufacturing and transportation jobs, strengthening…</description>
+    </item>
+    <item>
+      <title>伯克希尔哈撒韦第三季度加快股票回购，营业利润下滑</title>
+      <link>https://finance.sina.com.cn/stock/usstock/c/2026-11-07/doc-inixxqmu7983187.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/stock/usstock/c/2026-11-07/doc-inixxqmu7983187.shtml</guid>
+      <pubDate>Sat, 07 Nov 2026 13:15:18 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>伯克希尔哈撒韦 公司周六公布，受保险承保业绩下滑影响，其第三季度营业利润有所下降，并表示当季回购了96亿美元的股票。 此次回购是伯克希尔今年早些时候回购的48亿美元股票之外的额外回购。 季度营业利润从上年同期的134.9亿美元下降5.8%，至127.1亿美元，相当于每股A类股约8954美元。 净利润下降28%至221.1亿美元，其中包含总部位于内布拉斯加州奥马哈市的伯克希尔公司目前仍持有的股票未实现损益。 该公司第三季度营收增长11%，…</description>
+    </item>
+    <item>
+      <title>伯克希尔哈撒韦：截至9月底，现金储备较上一季度有所增加，达到3774亿美元。</title>
+      <link>https://wallstreetcn.com/livenews/3196426</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196426</guid>
+      <pubDate>Sat, 07 Nov 2026 13:08:58 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
     </item>
     <item>
       <title>Democrats Could Reshape Trump's Foreign Policy｜中文：民主党人可能会重塑特朗普的外交政策</title>
@@ -347,6 +632,15 @@
 原文：On Bloomberg This Weekend, Bloomberg Economics' Chris Kennedy examines how the Democratic takeover of Congress could constrain parts of President Donald Trump's foreign policy, including through spending decisions, Ukrai…</description>
     </item>
     <item>
+      <title>2499元“推不倒”智能指环遭质疑，品牌店铺已下架产品</title>
+      <link>https://finance.sina.com.cn/jjxw/2026-11-07/doc-inixxqmu7979214.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/jjxw/2026-11-07/doc-inixxqmu7979214.shtml</guid>
+      <pubDate>Sat, 07 Nov 2026 13:05:05 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>近日，一款售价2499元、被宣传为“ 人戴上后不容易被推倒”的智能指环引发广泛热议。 根据多家媒体报道，该 指环名为“即沃智能指环”，关联企业为分享在线（杭州）科技有限公司（简称“分享在线”）。微信搜索后会出现“即沃分享在线店”店铺，店铺的经营者即是分享在线。该店铺销售名为“即沃Kring01智能指环”的产品，售价为2499元。 11月7日晚，界面新闻查询微信“即沃分享在线店”店铺发现，该店铺已暂无商品，店铺信息则显示售出25件商品。在…</description>
+    </item>
+    <item>
       <title>美国务卿鲁比奥整顿国务院纪律 收紧控制权</title>
       <link>https://www.zaobao.com.sg/news/world/story20261107-9964425</link>
       <guid isPermaLink="true">https://www.zaobao.com.sg/news/world/story20261107-9964425</guid>
@@ -356,12 +650,283 @@
       <description>多名知情人士透露，美国国务卿 鲁比奥 近期正在加强对国务院的控制，并在会议上告诫高级官员所有人必须各司其职、严守本分，避免任何可能引发利益冲突的行为。分析认为，随着特朗普政府民望日益低迷，这是共和党主要人物正试图与本届政府拉开距离。 路透社星期六（11月7日）引述四名匿名知情人士报道，鲁比奥是在上周、即共和党在星期二（11月3日）中期选举失利之前，向高级官员传达的上述信息。 一名知情人士说，这场20多人的会议有多名助理国务卿出席，鲁比奥…</description>
     </item>
     <item>
+      <title>伯克希尔哈撒韦：第三季度营业利润为127.1亿美元，同比下降5.8%。 第三季度净利润221.1亿美元，同比下降28%。 第三季度保险承保经营收益13.5亿美元，同比下降43%...</title>
+      <link>https://wallstreetcn.com/livenews/3196425</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196425</guid>
+      <pubDate>Sat, 07 Nov 2026 13:02:31 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+      <description>伯克希尔哈撒韦：第三季度营业利润为127.1亿美元，同比下降5.8%。 第三季度净利润221.1亿美元，同比下降28%。 第三季度保险承保经营收益13.5亿美元，同比下降43%。 第三季度保险投资经营收益27.3亿美元，同比下降14%。 第三季度净投资收益为94.07亿美元，去年同期为173.11亿美元。 第三季度回购约96亿美元股份。</description>
+    </item>
+    <item>
+      <title>伯克希尔Q3净利润大降28%，投资收益缩水近半，回购创年内单季新高，现金升至3774亿美元 | 财报见闻</title>
+      <link>https://wallstreetcn.com/articles/3785460</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/articles/3785460</guid>
+      <pubDate>Sat, 07 Nov 2026 13:02:31 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
+      <description>伯克希尔·哈撒韦三季度净利润大幅下滑，保险业务承压与投资收益减少成为主要拖累。不过，公司在本季度显著加大股票回购力度，单季回购规模创年内新高，现金储备也进一步攀升至3774亿美元。 当地时间11月7日，伯克希尔公布第三季度业绩。公司营业利润为127.05亿美元，同比下降5.8%； 净利润为221.12亿美元，同比下降28.2%。 其中，投资收益合计约94.07亿美元，较去年同期的173.11亿美元下降约45.7%，缩水近一半。 保险业务…</description>
+    </item>
+    <item>
+      <title>Berkshire Hathaway’s Operating Earnings Fall, Buybacks Rise｜中文：伯克希尔哈撒韦公司的营业利润下降，回购增加</title>
+      <link>https://www.bloomberg.com/news/articles/2026-11-07/berkshire-hathaway-s-operating-earnings-fall-buybacks-rise</link>
+      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-07/berkshire-hathaway-s-operating-earnings-fall-buybacks-rise</guid>
+      <pubDate>Sat, 07 Nov 2026 13:01:21 +0000</pubDate>
+      <category>全球市场与要闻</category>
+      <source url="https://bloomberg.com">彭博社 · 市场</source>
+      <description>中文：总部位于内布拉斯加州奥马哈的伯克希尔哈撒韦公司周六在一份声明中表示，第三季度营业利润降至 127 亿美元，同比下降 5.8%
+原文：Berkshire Hathaway Inc.’s operating earnings fell to $12.7 billion in the third quarter, a 5.8% decline from a year earlier, the Omaha, Nebraska-based conglomerate said Saturday in a statement.</description>
+    </item>
+    <item>
+      <title>伯克希尔哈撒韦：第三季度营业利润为127.1亿美元，同比下降5.8% | Wind数据显示，伯克希尔哈撒韦第三季度营业利润为127.1亿美元，同比下降5.8%。</title>
+      <link>https://www.yicai.com/brief/103430985.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/brief/103430985.html</guid>
+      <pubDate>Sat, 07 Nov 2026 13:00:48 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://yicai.com">第一财经 · 简报</source>
+      <description>Wind数据显示，伯克希尔哈撒韦第三季度营业利润为127.1亿美元，同比下降5.8%。</description>
+    </item>
+    <item>
+      <title>【电视精编版】浦东-阿曼双向投融资推介活动丨陆家嘴金融沙龙</title>
+      <link>https://www.yicai.com/news/103429386.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/news/103429386.html</guid>
+      <pubDate>Sat, 07 Nov 2026 13:00:00 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://yicai.com">第一财经 · 最新</source>
+      <description>当前，中国与阿曼经贸往来持续升温，上海浦东作为我国对外开放的前沿窗口，不少企业正把目光投向阿曼市场。阿曼正处于加快推进”2040愿景”、实现经济多元化的关键阶段，在能源转型、基础设施、先进制造、矿业、医疗健康、数字经济等领域释放出大量投资机遇。但在项目落地的实际推进当中，大家依然有很多亟待厘清的核心问题：阿曼这片市场，到底蕴藏着哪些值得中国企业重点布局、长期深耕的产业机会？当我们的企业走出国门赴阿曼投资经营，从市场准入、项目建设到本地运…</description>
+    </item>
+    <item>
+      <title>Crypto’s Trump-Fueled Washington Boom Reaches Its Endgame｜中文：特朗普推动的华盛顿加密货币繁荣已达到尾声</title>
+      <link>https://www.bloomberg.com/news/articles/2026-11-07/crypto-s-trump-fueled-washington-boom-reaches-its-endgame</link>
+      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-07/crypto-s-trump-fueled-washington-boom-reaches-its-endgame</guid>
+      <pubDate>Sat, 07 Nov 2026 13:00:00 +0000</pubDate>
+      <category>全球市场与要闻</category>
+      <source url="https://bloomberg.com">彭博社 · 市场</source>
+      <description>中文：加密货币在华盛顿的非凡政治好运突然停止了。随着民主党在中期选举中大获全胜后将控制国会，该行业面临着更严格的规则和限制的前景……
+原文：Crypto’s extraordinary run of political good fortune in Washington has come to an abrupt halt. With Democrats set to control Congress following their midterm sweep, the industry faces the prospect of tougher rules and cl…</description>
+    </item>
+    <item>
+      <title>伯克希尔哈撒韦第三季度营业利润为127.1亿美元，同比下降5.8%</title>
+      <link>https://news.10jqka.com.cn/20261107/c681579184.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261107/c681579184.shtml</guid>
+      <pubDate>Sat, 07 Nov 2026 12:58:29 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>伯克希尔哈撒韦公司第三季度营业利润为127.1亿美元，同比下降5.8%；第三季度归属于股东的净利润为221.12亿美元，上年同期为307.96亿美元；第三季度每股A类等效普通股净收益为15,502美元；第三季度净投资收益为94.07亿美元，去年同期为173.11亿美元。截至9月30日，公司第三季度现金持仓为3569亿美元；现金储备较上一季度有所增加，达到3774亿美元，再创新高。公司第三季度回购了96亿美元股票。</description>
+    </item>
+    <item>
+      <title>伯克希尔哈撒韦：第三季度营业利润为127.1亿美元 公司第三季度回购了96亿美元股票</title>
+      <link>https://www.cls.cn/detail/2528135</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2528135</guid>
+      <pubDate>Sat, 07 Nov 2026 12:57:48 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+      <description>【伯克希尔哈撒韦：第三季度营业利润为127.1亿美元 公司第三季度回购了96亿美元股票】财联社11月7日电，伯克希尔哈撒韦公司第三季度营收为1056.47亿美元，去年同期为949.72亿美元；第三季度营业利润为127.1亿美元，同比下降5.8%；第三季度归属于股东的净利润为221.12亿美元，上年同期为307.96亿美元；第三季度每股A类等效普通股净收益为15,502美元；第三季度净投资收益为94.07亿美元，去年同期为173.11亿美…</description>
+    </item>
+    <item>
+      <title>天津发布重污染天气橙色预警 9日20时启动Ⅱ级响应</title>
+      <link>https://news.10jqka.com.cn/20261107/c681579161.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261107/c681579161.shtml</guid>
+      <pubDate>Sat, 07 Nov 2026 12:55:43 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>据天津市重污染天气应对指挥部办公室消息，预计从11月9日下午起天津将出现一次重污染过程。经天津市人民政府批准，天津市重污染天气应对指挥部发布重污染天气橙色预警，从11月9日20时起启动Ⅱ级响应。强制性减排措施包括：重点行业按环境绩效等级停止涉气排放生产线或主要产排污环节，停止使用国五及以下排放标准运输车辆或停止公路运输；施工工地停止土石方作业、建筑拆除、喷涂粉刷等施工作业，停止使用国五及以下排放标准运输车辆（特种车辆、危险化学品车辆等除…</description>
+    </item>
+    <item>
+      <title>中国国新，严正声明</title>
+      <link>https://news.10jqka.com.cn/20261107/c681579128.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261107/c681579128.shtml</guid>
+      <pubDate>Sat, 07 Nov 2026 12:52:45 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>11月7日，中国国新公众号发布声明称，近期“恒耘能源科技（北京）中心（有限合伙）”将我司下属企业国新控股（上海）有限公司假冒为其投资主体进行市场主体登记，谨在此提示：一、我司及关联方与上述实体或关联方不存在任何股权隶属、投资或者业务合作等关系，也没有与上述实体或者其关联方签订任何协议，我司或关联方不知悉且没有参与上述实体或关联方开展的任何活动，该等活动均与我司及关联方无任何关系，我司及关联方对该等活动不承担任何责任。二、我司及关联方从未…</description>
+    </item>
+    <item>
+      <title>国家海洋预报台发布海浪和风暴潮黄色警报 | 据央视新闻，记者从自然资源部获悉，国家海洋预报台今天（7日）下午发布海浪和风暴潮黄色警报。海浪方面：受...</title>
+      <link>https://www.yicai.com/brief/103430983.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/brief/103430983.html</guid>
+      <pubDate>Sat, 07 Nov 2026 12:52:23 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://yicai.com">第一财经 · 简报</source>
+      <description>据央视新闻，记者从自然资源部获悉，国家海洋预报台今天（7日）下午发布海浪和风暴潮黄色警报。海浪方面：受冷空气和低压的共同影响，预计11月7日夜间到8日下午，渤海将出现3到3.8米的大浪区；山东北部近岸海域将出现2.5到3.5米的大浪，该近岸海域海浪预警级别为黄色。</description>
+    </item>
+    <item>
+      <title>【电报解读】平均成功率91%！苹果研究团队披露机器人“大脑”进展，分析师看好人形机器人大小脑融合在即，或迎“GPT时刻”，快速梳理机器人大小脑相关标的（附表...</title>
+      <link>https://www.cls.cn/detail/2528130</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2528130</guid>
+      <pubDate>Sat, 07 Nov 2026 12:51:19 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+    </item>
+    <item>
+      <title>下周财经日历 | 11月9日-11月15日</title>
+      <link>https://www.yicai.com/brief/103430981.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/brief/103430981.html</guid>
+      <pubDate>Sat, 07 Nov 2026 12:39:53 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://yicai.com">第一财经 · 简报</source>
+      <description>11月9日-11月15日</description>
+    </item>
+    <item>
+      <title>国家海洋预报台发布海浪和风暴潮黄色警报</title>
+      <link>https://news.10jqka.com.cn/20261107/c681578990.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261107/c681578990.shtml</guid>
+      <pubDate>Sat, 07 Nov 2026 12:37:19 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>国家海洋预报台7日下午发布海浪和风暴潮黄色警报。受冷空气和低压影响，预计11月7日夜间到8日下午，渤海将出现3到3.8米大浪区，山东北部近岸海域将出现2.5到3.5米大浪，预警级别为黄色；7日傍晚至8日夜间，渤海湾和莱州湾将出现100到180厘米风暴增水，山东半岛北部沿海将出现40到70厘米风暴增水，河北沧州和山东滨州风暴潮预警级别为黄色。请相关船只注意安全、回港避风，沿海单位提前采取防浪避浪措施，做好防御准备。（央视新闻）</description>
+    </item>
+    <item>
+      <title>10月以来市场震荡调整，基金投顾逆势加仓A股</title>
+      <link>https://wallstreetcn.com/livenews/3196424</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196424</guid>
+      <pubDate>Sat, 07 Nov 2026 12:22:52 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+      <description>今年10月以来，市场震荡调整，基金投顾逆势加仓A股。据券商统计，A股资产是10月基金投顾组合加仓最多的资产，且这种低位布局的倾向11月以来还在延续。记者获悉，在10月以来的市场波动中，资金逆势流入部分基金投顾机构的组合。 开源证券数据显示，今年10月，基金投顾组合主动增配A股、黄金、新兴市场等资产，主动减配债券、货币及现金、美股等资产，反映主理人在大类资产层面对风险敞口的结构性再平衡。其中，A股在10月出现了震荡调整，基金投顾对其增配比…</description>
+    </item>
+    <item>
+      <title>AI进化速递丨DeepSeek又崩了，官方回应 | ①IMF总裁：各国央行需考量AI驱动增长或放缓；</title>
+      <link>https://www.yicai.com/brief/103430952.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/brief/103430952.html</guid>
+      <pubDate>Sat, 07 Nov 2026 12:19:48 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://yicai.com">第一财经 · 简报</source>
+      <description>①IMF总裁：各国央行需考量AI驱动增长或放缓；</description>
+    </item>
+    <item>
+      <title>马斯克再抛惊人目标：明年SpaceX年化收入5000亿美、星链计算机同步上天，Terafab芯片产能瞄准一太瓦</title>
+      <link>https://wallstreetcn.com/articles/3785451</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/articles/3785451</guid>
+      <pubDate>Sat, 07 Nov 2026 12:18:53 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
+      <description>马斯克又给AI产业描绘了一幅惊人的增长蓝图。 当地时间周五，第33届Baron Investment Conference（巴伦投资大会）举行虚拟炉边访谈，时长约七十分钟。主持人为Baron Capital创始人Ron Baron，埃隆·马斯克远程连线出席。 在访谈中，马斯克给出一系列重磅预测： SpaceX今年12月年化收入预计突破1000亿美元，明年12月年化经常性收入有望超5000亿美元；Terafab目标年产一太瓦芯片，相当于明…</description>
+    </item>
+    <item>
+      <title>财新调查｜10月CPI同比涨幅或小幅回落 PPI同比有望进一步冲高</title>
+      <link>https://economy.caixin.com/2026-11-07/102502290.html</link>
+      <guid isPermaLink="true">https://economy.caixin.com/2026-11-07/102502290.html</guid>
+      <pubDate>Sat, 07 Nov 2026 12:16:03 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://caixin.com">财新 · 最新</source>
+      <description>国庆假期带动服务价格阶段性上涨，不过金价回落、终端消费需求仍偏弱，当月核心CPI同比增速或回落；国际输入性因素依然是PPI上涨的核心动力 2026年10月22日，江苏淮安，市民在生活超市购物消费。图：视觉中国 【财新网】 食品价格不振或是10月居民消费价格指数（CPI）的主要拖累；国际油价延续9月上涨态势，将继续带动当月工业生产者出厂价格指数（PPI）大幅上涨，但非石油原材料价格可能走弱。 财新近日对11家国内外机构的调查显示，经济学家…</description>
+    </item>
+    <item>
+      <title>民主党大胜，AI数据中心的输家叙事里藏着谁的机会？</title>
+      <link>https://wallstreetcn.com/member/articles/3785165</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/member/articles/3785165</guid>
+      <pubDate>Sat, 07 Nov 2026 12:15:12 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
+      <description>美国中期选举结果让AI数据中心再次站到政策争议的风口。居民电价、电网扩容和社区反对，可能使新建项目面临更严格的审批。但当公共电网越来越难以满足数据中心建设需求，企业自行解决电力供应的意愿也会增强。即使数据中心建设总量放缓，自备电渗透率仍有机会提高，现场发电设备与既有电力接入资产可能迎来新的价值重估。 一、发生了什么？——民主党大胜，AI数据中心为何突然成为输家？ 1. 一场选举，改变了市场对AI基础设施的预期： 美国2026年中期选举出…</description>
+    </item>
+    <item>
+      <title>高盛：AI跌的比预期惨跌多了，仍预期“圣诞行情”</title>
+      <link>https://wallstreetcn.com/charts/41960145</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/charts/41960145</guid>
+      <pubDate>Sat, 07 Nov 2026 12:12:29 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
+      <description>高盛交易主管表示，选举后AI数据中心交易回调超预期、估值大幅压缩，但估值已降至低位且前方有积极催化剂，后续关注宏观数据、资本市场和12月FOMC，并对年末“圣诞老人行情”持谨慎乐观态度。</description>
+    </item>
+    <item>
+      <title>伊朗革命卫队称已解除导弹射程限制 | 据新华社，伊朗伊斯兰革命卫队发言人7日说，已解除了伊朗导弹的射程限制，伊朗能在一场“不对称战争”中打击敌人“...</title>
+      <link>https://www.yicai.com/brief/103430949.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/brief/103430949.html</guid>
+      <pubDate>Sat, 07 Nov 2026 12:07:48 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://yicai.com">第一财经 · 简报</source>
+      <description>据新华社，伊朗伊斯兰革命卫队发言人7日说，已解除了伊朗导弹的射程限制，伊朗能在一场“不对称战争”中打击敌人“预想不到的地点”。伊朗学生通讯社报道，革命卫队领导人近日强调需要对任何程度或种类的威胁立即予以有效回击而不受地理因素限制，革命卫队发言人侯赛因·穆赫比当天在记者会上回应说：“伊朗的导弹射程限制已经解除。然而，我们必须在实际行动中展现这样的能力。我们的职责是在战场上展现这类能力。”“我们在打一场不对称战争。我们能打击敌人永远预想不到…</description>
+    </item>
+    <item>
+      <title>台风“查帕卡”强度逐渐加强 未来对我国海区无影响 | 据央视新闻，今年第32号台风“查帕卡”（热带风暴级，中文名：查帕卡；英文名：Cempaka；名字来源：...</title>
+      <link>https://www.yicai.com/brief/103430947.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/brief/103430947.html</guid>
+      <pubDate>Sat, 07 Nov 2026 12:07:08 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://yicai.com">第一财经 · 简报</source>
+      <description>据央视新闻，今年第32号台风“查帕卡”（热带风暴级，中文名：查帕卡；英文名：Cempaka；名字来源：马来西亚；意义：以其芬芳的花闻名的植物）于今天（11月7日）下午2点钟在西北太平洋洋面生成，下午5点钟其中心位于美国关岛北偏西方向大约760公里的洋面上。预计“查帕卡”将以每小时30公里的速度向西偏北方向移动，强度逐渐加强。未来“查帕卡”对我国海区无影响。</description>
+    </item>
+    <item>
       <title>天元神机论：运气推演与神穴调控的精神心理体系</title>
       <link>https://www.aisixiang.com/data/185269.html</link>
       <guid isPermaLink="true">https://www.aisixiang.com/data/185269.html</guid>
       <pubDate>Sat, 07 Nov 2026 12:07:00 +0000</pubDate>
       <category>哲学与思想</category>
       <source url="https://aisixiang.com">爱思想 · 最近更新</source>
+    </item>
+    <item>
+      <title>新西兰议会选举初步计票结果：执政党国家党胜出 | 据央视新闻，当地时间11月8日凌晨，新西兰议会选举初步计票结果显示，当前执政党国家党在7日举行的议会...</title>
+      <link>https://www.yicai.com/brief/103430944.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/brief/103430944.html</guid>
+      <pubDate>Sat, 07 Nov 2026 12:06:32 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://yicai.com">第一财经 · 简报</source>
+      <description>据央视新闻，当地时间11月8日凌晨，新西兰议会选举初步计票结果显示，当前执政党国家党在7日举行的议会选举中胜出，由国家党、行动党和新西兰优先党组成的执政联盟合计获得过半议席，三党有望继续联合执政。</description>
+    </item>
+    <item>
+      <title>化债之外，更要管住预算外融资</title>
+      <link>https://finance.sina.com.cn/jjxw/2026-11-07/doc-inixxkcw8083243.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/jjxw/2026-11-07/doc-inixxkcw8083243.shtml</guid>
+      <pubDate>Sat, 07 Nov 2026 12:05:57 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>地方债务治理，既关系财政可持续，也关系金融稳定和宏观调控全局，是统筹发展和安全必须答好的重要命题。党的二十届四中全会强调，“提高防范化解重点领域风险能力，统筹推进房地产、地方政府债务、中小金融机构等风险有序化解，严防系统性风险”。近年来，我国部署实施了一系列有力举措，扎实推进一揽子化债方案，持续完善地方债务治理制度安排。经过多年治理，地方债务风险总体可控，违法违规无序举债的扩张势头得到遏制，不发生系统性风险的底线得到守住。 当前，预算内…</description>
+    </item>
+    <item>
+      <title>金融法二审稿亮相：新增金融消费者保护条款 强化互联网营销规范</title>
+      <link>https://finance.caixin.com/2026-11-07/102502284.html</link>
+      <guid isPermaLink="true">https://finance.caixin.com/2026-11-07/102502284.html</guid>
+      <pubDate>Sat, 07 Nov 2026 12:05:38 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://caixin.com">财新 · 最新</source>
+      <description>还新增一条涉及境外机构的准入型条款，把境外主体在境内提供金融产品和服务，从跨境监管协作事项提升为须经批准的行政许可事项 2026年11月6日，金融法（草案二次审议稿）公布，向社会征求意见。图：视觉中国 【财新网】 《金融法》立法工作又向前推进一步。2026年11月6日，金融法（草案二次审议稿）（下称“二审稿”）公布，向社会征求意见。 《金融法》是中国也是世界范围内第一部以金融为名的统领性法律，定位于金融法律体系中“1+X”的“1”，发挥…</description>
+    </item>
+    <item>
+      <title>德州大翻车！蓝潮压境下，AI算力如何重新定价？</title>
+      <link>https://wallstreetcn.com/member/articles/3785171</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/member/articles/3785171</guid>
+      <pubDate>Sat, 07 Nov 2026 12:04:55 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
+      <description>尽管目前美国中期选举开票尚未结束，但选情已基本尘埃落定：民主党横扫国会（蓝潮），共和党惨败。截至目前，民主、共和两党在参众两院席位分别为54:43、229:135，民主党在国会席位均已过半。 此次中期选举不仅使多个关键摇摆州全部翻蓝，连德克萨斯、堪萨斯、南卡罗来纳、俄亥俄及爱荷华等传统共和党深红铁票仓也被民主党逆转。特别是德州，民主党候选人历史性击败共和党资深政客，打破共和党在该州长达30多年的绝对统治。 计票初期，蓝潮预期升温曾压制A…</description>
+    </item>
+    <item>
+      <title>伊朗革命卫队称已解除导弹射程限制</title>
+      <link>https://wallstreetcn.com/livenews/3196423</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196423</guid>
+      <pubDate>Sat, 07 Nov 2026 12:03:43 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+      <description>伊朗伊斯兰革命卫队发言人7日说，已解除了伊朗导弹的射程限制，伊朗能在一场“不对称战争”中打击敌人“预想不到的地点”。 伊朗学生通讯社报道，革命卫队领导人近日强调需要对任何程度或种类的威胁立即予以有效回击而不受地理因素限制，革命卫队发言人侯赛因·穆赫比当天在记者会上回应说：“伊朗的导弹射程限制已经解除。然而，我们必须在实际行动中展现这样的能力。我们的职责是在战场上展现这类能力。”“我们在打一场不对称战争。我们能打击敌人永远预想不到的地点，…</description>
+    </item>
+    <item>
+      <title>10月中国黄金储备增加26吨 央行连续购金已满两年</title>
+      <link>https://finance.caixin.com/2026-11-07/102502280.html</link>
+      <guid isPermaLink="true">https://finance.caixin.com/2026-11-07/102502280.html</guid>
+      <pubDate>Sat, 07 Nov 2026 12:00:14 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://caixin.com">财新 · 最新</source>
+      <description>本轮中国增持黄金持续了24个月，黄金增持规模累计达到550万盎司，约合171吨，相当于超过1.3万块标准交割金锭 2026年11月7日，国家外汇管理局发布最新官方储备数据显示，截至10月末，中国官方持有黄金规模7830万盎司，较上月末增加83万盎司，约合26吨。图：视觉中国 【财新网】 最新出炉的官方储备数据显示，10月金价回落未减央行增持积极性，外汇储备小幅增加。 2026年11月7日，国家外汇管理局发布最新官方储备数据显示，截至10…</description>
+    </item>
+    <item>
+      <title>“最强”厄尔尼诺来了，今年会是暖冬吗？</title>
+      <link>https://finance.sina.com.cn/wm/2026-11-07/doc-inixxkcy4856917.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/wm/2026-11-07/doc-inixxkcy4856917.shtml</guid>
+      <pubDate>Sat, 07 Nov 2026 11:58:05 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>白天太阳一晒，暖得人想脱外套，刚脱下外套，冷空气又杀了个“回马枪”。进入秋冬换季，不少人都感觉气温像坐“过山车”。在这背后，一个遥远的“大家伙”正搅动着全球天气——有监测记录以来最强的一次厄尔尼诺事件，将对我国今冬明春气候产生明显影响。 厄尔尼诺到底是啥？它会让今年变成暖冬吗？这个冬天又该怎么过？带着这些问题，记者采访了相关专家。 厄尔尼诺到底是啥？它会怎样影响天气？ 河北省气候中心副主任张金龙介绍，厄尔尼诺是指赤道中东 太平洋 海表温…</description>
+    </item>
+    <item>
+      <title>台风“查帕卡”强度逐渐加强 未来对我国海区无影响</title>
+      <link>https://news.10jqka.com.cn/20261107/c681578622.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261107/c681578622.shtml</guid>
+      <pubDate>Sat, 07 Nov 2026 11:55:53 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>今年第32号台风“查帕卡”（热带风暴级）于11月7日下午2时在西北太平洋洋面生成，下午5时中心位于美国关岛北偏西约760公里洋面。预计其将以每小时30公里的速度向西偏北方向移动，强度逐渐加强，未来对我国海区无影响。（中国天气网）</description>
     </item>
     <item>
       <title>Polish Finance Minister Faults President for S&amp;P’s Negative View｜中文：波兰财政部长指责标普总裁持负面看法</title>
@@ -374,6 +939,15 @@
 原文：Poland’s finance minister blamed President Karol Nawrocki’s use of veto powers to block key legislation for contributing to S&amp;P Global Rating’s decision to lower its outlook on the country’s debt.</description>
     </item>
     <item>
+      <title>被年轻人遗忘的磁带，正在 AI 时代闷声发大财</title>
+      <link>https://wallstreetcn.com/articles/3785448</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/articles/3785448</guid>
+      <pubDate>Sat, 07 Nov 2026 11:50:44 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
+      <description>谁能想到，磁带竟然在 AI 时代迎来了第二春。 10 月 29 日，日本富士胶片宣布投资约 100 亿日元（约合人民币 4.22 亿元），计划在 2026 至 2028 财年扩建神奈川县小田原工厂，将数据存储磁带的产能提升至 2025 财年的五倍，重点生产最新一代 LTO Ultrium 10 磁带。 按照富士胶片的说法，这是近 20 年来针对 LTO 磁带专用设施规模最大的一笔投资，而推动扩产的主要原因，正是生成式 AI 带来的海量数…</description>
+    </item>
+    <item>
       <title>Xi’s Tightening China Grip Risks Less Innovation: New Economy｜中文：习近平紧缩中国握力风险较小创新：新经济</title>
       <link>https://www.bloomberg.com/news/newsletters/2026-11-07/xi-s-tightening-china-grip-risks-less-innovation-new-economy</link>
       <guid isPermaLink="true">https://www.bloomberg.com/news/newsletters/2026-11-07/xi-s-tightening-china-grip-risks-less-innovation-new-economy</guid>
@@ -382,6 +956,24 @@
       <source url="https://bloomberg.com">彭博社 · 经济</source>
       <description>中文：在中国共产党掌舵约14年后，他仍然专注于建立忠诚和服从
 原文：Some 14 years after taking the Chinese Communist Party’s helm, he remains focused on instituting loyalty and obedience.</description>
+    </item>
+    <item>
+      <title>也门遭沙特空袭致22死30伤 | 据央视新闻，也门胡塞武装当地时间7日表示，沙特主导的联军当天对也门萨那以东的巴尼哈希什地区发动空袭，造成多人伤亡。据...</title>
+      <link>https://www.yicai.com/brief/103430937.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/brief/103430937.html</guid>
+      <pubDate>Sat, 07 Nov 2026 11:44:23 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://yicai.com">第一财经 · 简报</source>
+      <description>据央视新闻，也门胡塞武装当地时间7日表示，沙特主导的联军当天对也门萨那以东的巴尼哈希什地区发动空袭，造成多人伤亡。据总台报道员7日中午消息，也门首都萨那传出战机飞过的声音和爆炸声。随后，巴尼哈希什地区的医院负责人透露，截至记者发稿时，该医院已接收22名遇难者和30名伤者。伤亡者包括妇女和儿童。截至目前，沙特方面对此暂无回应。</description>
+    </item>
+    <item>
+      <title>也门遭沙特空袭致22死30伤</title>
+      <link>https://wallstreetcn.com/livenews/3196422</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196422</guid>
+      <pubDate>Sat, 07 Nov 2026 11:44:14 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+      <description>也门胡塞武装当地时间7日表示，沙特主导的联军当天对也门萨那以东的巴尼哈希什地区发动空袭，造成多人伤亡。据总台报道员7日中午消息，也门首都萨那传出战机飞过的声音和爆炸声。随后，巴尼哈希什地区的医院负责人透露，截至记者发稿时，该医院已接收22名遇难者和30名伤者。伤亡者包括妇女和儿童。截至目前，沙特方面对此暂无回应。 (央视新闻)</description>
     </item>
     <item>
       <title>把作风建设融入日常抓在经常</title>
@@ -420,6 +1012,24 @@
       <description>新西兰胶着的国会大选 初步计票结果出炉，国家党执政联盟斩获67个席位，以微弱多数优势保住继续执政的地位，也使总理拉克森有望开启第二个执政任期。 综合新华社和路透社报道，新西兰选举委员会星期六（11月7日）晚间公布，在完成约95.5%的选票统计后，初步结果显示，国家党、行动党（ACT）和新西兰优先党在议会中共斩获67个席位，以微弱多数优势保住继续执政的地位。 拉克森（Christopher Luxon）随后发表讲话说，从目前的数据来看，国…</description>
     </item>
     <item>
+      <title>多家银行公告赎回优先股，合计规模超2025年全年</title>
+      <link>https://wallstreetcn.com/livenews/3196419</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196419</guid>
+      <pubDate>Sat, 07 Nov 2026 11:25:13 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · A 股快讯</source>
+      <description>2026年以来，8家银行公告已赎回或即将赎回优先股，合计规模达1855亿元，超过2025年全年境内银行优先股赎回规模。业内人士介绍，近期大量优先股进入可赎回窗口期，同时永续债发行成本下降，银行通过“赎旧换新”来降低资本补充成本，也就是赎回较高成本的优先股，接续为利率更低的永续债。据悉，优先股是相对于普通股的一种股份类别，作为银行补充资本的重要工具，核心特征是在利润分配和剩余财产分配上优先于普通股。（央视财经）</description>
+    </item>
+    <item>
+      <title>美股大跌：有哪些原因？对A股有何影响？</title>
+      <link>https://opinion.caixin.com/2026-11-07/102502276.html</link>
+      <guid isPermaLink="true">https://opinion.caixin.com/2026-11-07/102502276.html</guid>
+      <pubDate>Sat, 07 Nov 2026 11:21:00 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://caixin.com">财新 · 最新</source>
+      <description>本轮冲击对A股究竟是短期情绪扰动还是趋势性压力需要综合研判，有必要持续分析美国AI监管演化、美伊局势走向与国内政策节奏等核心变量 当地时间2026年11月6日，美国纽约证券交易所交易大厅。图：IC photo 2026年11月5日，美股大跌并波及全球股市，A股亦受影响。2026年11月5日，纳斯达克指数单日暴跌5.5%，标普500跌4.4%，道指跌3.4%，三大指数均创2025年4月以来（关税冲突）最大单日跌幅。美股AI硬件板块是“重灾…</description>
+    </item>
+    <item>
       <title>法学知识生产形态的复合三元结构</title>
       <link>https://www.aisixiang.com/data/185272.html</link>
       <guid isPermaLink="true">https://www.aisixiang.com/data/185272.html</guid>
@@ -429,6 +1039,33 @@
       <description>一、问题与进路 历经数十年发展，我国法学领域的知识生产为法治实践提供了丰富的智识支撑。但是，知识供给与实践需求之间仍存在一定的落差，尤其是法学知识类型的单一化理解与我国法治实践的多层次需求之间的矛盾比较突出。近年来，伴随法学学科体系建设的推进，社会治理法学、纪检监察学、党内法规学、数字法学、涉外法治等新兴学科应运而生。学科发展的新态势，直接引发有关法学学科体系及知识体系的讨论。如果仍沿用传统法律部门划分的学科框架，部分新兴学科难以被纳入…</description>
     </item>
     <item>
+      <title>万兴科技：万兴剧厂海外版ReelMate AI已开启公测</title>
+      <link>https://wallstreetcn.com/livenews/3196418</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196418</guid>
+      <pubDate>Sat, 07 Nov 2026 11:20:44 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · A 股快讯</source>
+      <description>万兴科技在机构调研时表示，公司在今年3月正式推出新产品万兴剧厂，产品初期聚焦2D漫剧创作，后续逐步拓展至AI真人短剧、AI广告剧、海外AI仿真人剧、AI电影等多元化内容形态，目前产品定位为AI驱动的一站式精品影视内容创作平台，打通剧本创作、分镜生成、素材制作、后期剪辑与团队协作全流程AI影视创作闭环，客户复购率超过85%，以三季度数据年化测算ARR已突破500万美元。目前，万兴剧厂海外版ReelMate AI已开启公测，赋能海外AI短剧…</description>
+    </item>
+    <item>
+      <title>Arista财报解读：为什么它交出了不一样的答卷？</title>
+      <link>https://wallstreetcn.com/member/articles/3785155</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/member/articles/3785155</guid>
+      <pubDate>Sat, 07 Nov 2026 11:15:47 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
+      <description>当"AI 硬件股"在一周内被市场系统性下调估值时，一家交换机公司用一份"指引高于共识12.8%"的财报，把盘后股价推高了12%。高盛统计，这是本轮AI调整行情中第一次出现业绩与股价脱钩，Arista是那个显著的例外。它由三个结构性错配造成的。 第一，市场把Arista当作"AI 资本开支的高贝塔代理"，但它2026年AI收入占比只有26.3%，三成以上的收入来自与AI无关的园区与传统云网络。 第二，市场焦虑的核心已从"需求是否存在"切换…</description>
+    </item>
+    <item>
+      <title>伊朗称一艘油轮在霍尔木兹海峡东部海域起火</title>
+      <link>https://finance.sina.com.cn/jjxw/2026-11-07/doc-inixxkcu4555338.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/jjxw/2026-11-07/doc-inixxkcu4555338.shtml</guid>
+      <pubDate>Sat, 07 Nov 2026 11:12:32 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>.ct_hqimg {margin: 10px 0;} .hqimg_wrapper {text-align: center;} .hqimg_related {position: relative; height: 37px; overflow: hidden; background-color: #f6f6f6; text-align: center; font-size: 0; } .hqimg_related span {lin…</description>
+    </item>
+    <item>
       <title>刑事速裁程序的实践困境与二元化模式</title>
       <link>https://www.aisixiang.com/data/185271.html</link>
       <guid isPermaLink="true">https://www.aisixiang.com/data/185271.html</guid>
@@ -436,6 +1073,24 @@
       <category>哲学与思想</category>
       <source url="https://aisixiang.com">爱思想 · 最近更新</source>
       <description>我国 2018年正式确立的刑事速裁程序，自2014年6月起探索并于2016年9月与认罪认罚从宽制度合并试点，其适用率在认罪认罚案件的一审程序中曾高达70%。随着2019年“两高三部”《关于适用认罪认罚从宽制度的指导意见》（以下简称《认罪认罚指导意见》）对罪责刑相适应与证据裁判等原则的强调，尤其是对法院实质化审查的制度强化，该程序适用率在认罪认罚案件一审程序中骤降至27.6%，在全部案件的一审程序中占比更低至22.96%。“两高三部”20…</description>
+    </item>
+    <item>
+      <title>鬼故事不断。。超级富豪坚定看好四巨头</title>
+      <link>https://www.gelonghui.com/p/7335058</link>
+      <guid isPermaLink="true">https://www.gelonghui.com/p/7335058</guid>
+      <pubDate>Sat, 07 Nov 2026 11:05:15 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://gelonghui.com">格隆汇 · 推荐</source>
+      <description>信息量很大 最近坏消息追着AI杀。。。 一觉醒来，全世界都在疯传微软抛售甲骨文算力。同时加息又像鬼一样缠上来——10月非农数据全面超预期，12月加息概率飙到85%。于是"AI回报忧虑"与"加息威胁"两座大山同时压向市场。 周五美股虽反弹，但纳指涨1%、标普500仅涨0.3%、道指跌0.5%，反弹力度一般，领涨的是周四暴跌的芯片股，AI算力租赁涨幅明显回落，甲骨文一度转跌。 恐慌的引爆点是彭博一则报道：微软近几个月开始逐步关闭租用甲骨文的…</description>
+    </item>
+    <item>
+      <title>见闻历11.11限时大促！随日历附赠千元知识礼包，送什么都不如送“搞钱的智慧”</title>
+      <link>https://wallstreetcn.com/articles/3782813</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/articles/3782813</guid>
+      <pubDate>Sat, 07 Nov 2026 11:03:30 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
+      <description>风险提示及免责条款 市场有风险，投资需谨慎。本文不构成个人投资建议，也未考虑到个别用户特殊的投资目标、财务状况或需要。用户应考虑本文中的任何意见、观点或结论是否符合其特定状况。据此投资，责任自负。</description>
     </item>
     <item>
       <title>伊朗称一艘油轮在霍尔木兹海峡起火停航</title>
@@ -456,6 +1111,15 @@
       <description>一、正当防卫社会伦理限制的实践困境 正当防卫的社会伦理限制（ Sozialethische Einschr?nkungen）是大陆法系刑法理论的重要议题，旨在为特殊场景下防卫权的限缩提供法理依据。但我国司法实践呈现出明显的本土化特征。一方面，家庭内部防卫限制与传统家庭伦理中的家长惩戒观念存在紧张关系；另一方面，司法实践已将“防卫人具有重大过错”作为限缩防卫权的独立依据，并呈现出宽泛适用的趋势。域外理论难以完全解释我国实务立场，有必要构建…</description>
     </item>
     <item>
+      <title>存储巨头，跌到底了吗？</title>
+      <link>https://www.gelonghui.com/p/7335002</link>
+      <guid isPermaLink="true">https://www.gelonghui.com/p/7335002</guid>
+      <pubDate>Sat, 07 Nov 2026 10:46:20 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://gelonghui.com">格隆汇 · 推荐</source>
+      <description>市场还在害怕什么? 这几个月 来 ，如果手上拿着存储赛道的仓位，大概很难静下心看基本面。 6 月底至今，全球 主要存储股较 年内 高点 已然腰斩 ，弹性最高的日韩龙头普回撤 接近 70% ， 美股 的 闪迪、 希捷、西部数据跌幅超过 60% ，韧性更强的美光也 回撤了 40% 以上。 国内标的同样惨烈，多数核心标的累计回撤超七成；就连上市首日市值登顶 A 股的长鑫科技，较高点也回撤超 30% ，市值蒸发超万 亿元 。 当然，不少标的即便…</description>
+    </item>
+    <item>
       <title>立足国内大循环推进高水平对外开放</title>
       <link>https://www.aisixiang.com/data/185268.html</link>
       <guid isPermaLink="true">https://www.aisixiang.com/data/185268.html</guid>
@@ -463,6 +1127,24 @@
       <category>哲学与思想</category>
       <source url="https://aisixiang.com">爱思想 · 最近更新</source>
       <description>提高把握开放主动权的能力 高水平对外开放不是简单扩大贸易投资规模，而是更高质量、更深层次融入全球经济体系，建立在强大国内经济体系基础之上。国内产业体系完备、市场体系健全、创新能力突出，才能有效应对外部冲击，提升对外开放的自主性。把握开放主动权的能力强，主要表现在以下方面。 在国家安全、关键领域不受制于人。在芯片、高端装备制造、能源资源、粮食安全等领域，保持自主发展能力，构建备份系统与替代方案，避免因地缘政治冲突、贸易摩擦等外部因素，导致…</description>
+    </item>
+    <item>
+      <title>最早唱空AI硬件的Citrini，现在怎么看AI？</title>
+      <link>https://www.gelonghui.com/p/7334971</link>
+      <guid isPermaLink="true">https://www.gelonghui.com/p/7334971</guid>
+      <pubDate>Sat, 07 Nov 2026 10:38:41 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://gelonghui.com">格隆汇 · 推荐</source>
+      <description>蓝色浪潮让答案更加指向AI应用 上周美股的行业表现很有代表性，通信服务上涨 4.89%，可选消费上涨1.91%。金融上涨1.15%，科技和能源分别下跌8.23%、11.97%。 上周美股行业资金迁移 数据来源： Futu、S&amp;P行业ETF；数据截至2026年11月6日 这一轮调整带着明显的政策折价。 美国中期选举民主党横扫两院，得州翻蓝，数据中心重镇的建设推迟，成本上升，然后电价保护、清洁能源要求和审批节重 重加码。 CI TRINI提…</description>
+    </item>
+    <item>
+      <title>又一A股公司，遭证监会立案！</title>
+      <link>https://finance.sina.com.cn/wm/2026-11-07/doc-inixxcvy8181027.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/wm/2026-11-07/doc-inixxcvy8181027.shtml</guid>
+      <pubDate>Sat, 07 Nov 2026 10:34:05 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>登录新浪财经APP 搜索【信披】查看更多考评等级 来源：央视财经 凤凰航运 （000520） 11月7日发布公告， 公司于11月6日收到中国证监会下发的《立案告知书》 ，因涉嫌信息披露违法违规，根据相关法律法规，中国证监会决定对公司立案。 公告称， 立案调查期间，公司将积极配合中国证监会的调查工作，并严格按照相关法律法规和监管要求及时履行信息披露义务 。 截至公告披露日，公司各项经营活动均正常开展 ，公司董事和高级管理人员目前均正常履职…</description>
     </item>
     <item>
       <title>伤阳调神论——学生心理健康的治未病辨证纲领</title>
@@ -497,12 +1179,30 @@
       <source url="https://aisixiang.com">爱思想 · 最近更新</source>
     </item>
     <item>
+      <title>一年规模飙五倍！怪不得股价暴涨</title>
+      <link>https://www.gelonghui.com/p/7334893</link>
+      <guid isPermaLink="true">https://www.gelonghui.com/p/7334893</guid>
+      <pubDate>Sat, 07 Nov 2026 10:24:21 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://gelonghui.com">格隆汇 · 推荐</source>
+      <description>钱被谁赚走了? 这几天股市行情，简直把 “ AI+ 短剧”的风口直接吹成了台风眼。 浙文影业豪取五连板，芒果超媒五天涨幅拉破 50% ，资金用真金白银砸出了极强的赚钱效应。 盘面躁动的背后，是产业端数据的全面爆发。 据 DataEye 统计， AI 漫剧用户规模从 2025 年的 1.2 亿狂飙至 2026 上半年的突破 6 亿大关，一年疯涨 5 倍；更震撼的是，红果短剧的月活甚至越过了 AI 原生应用豆包。 当爆发式的终端需求遇上算力…</description>
+    </item>
+    <item>
       <title>理解主义：后现代道德体系的构筑逻辑</title>
       <link>https://www.aisixiang.com/data/185264.html</link>
       <guid isPermaLink="true">https://www.aisixiang.com/data/185264.html</guid>
       <pubDate>Sat, 07 Nov 2026 10:22:00 +0000</pubDate>
       <category>哲学与思想</category>
       <source url="https://aisixiang.com">爱思想 · 最近更新</source>
+    </item>
+    <item>
+      <title>当前市场更像1998年！高盛：这次没有美联储降息兜底</title>
+      <link>https://www.gelonghui.com/p/7334864</link>
+      <guid isPermaLink="true">https://www.gelonghui.com/p/7334864</guid>
+      <pubDate>Sat, 07 Nov 2026 10:19:20 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://gelonghui.com">格隆汇 · 推荐</source>
+      <description>几个关键疑问悬而未决 市场正就历史先例展开激烈辩论：这究竟是类似于1998年长期资本管理公司（LTCM）危机的流动性冲击，还是类似2000年互联网泡沫破裂的前兆？ 高盛Delta One交易主管Rich Privorotsky倾向前者，但他也承认，最终答案尚未出现。 周四，纳斯达克单日重挫5.5%，费城半导体指数暴跌12%，标普500下跌4.4%，创下2025年4月以来最大单日跌幅。高盛波动性恐慌指数当日触及9.3分（满分10分），VV…</description>
     </item>
     <item>
       <title>伊朗外长与12国外长通话讨论地区局势</title>
@@ -512,6 +1212,24 @@
       <category>政治与政策</category>
       <source url="https://zaobao.com">联合早报 · 国际</source>
       <description>伊朗外长阿拉格齐在过去两天内，分别与12国外长通话，讨论地区和国际局势 新华社报道，阿拉格齐星期六（11月7日）的社交媒体发文说，他在过去48小时内，分别与阿曼、埃及、约旦、沙特阿拉伯、卡塔尔、塞浦路斯、土耳其、科威特、阿联酋、突尼斯、伊拉克和巴基斯坦12国外长通电话。 阿拉格齐在这些通话中，阐述了伊朗的原则立场，强调必须尊重各国国家主权，停止侵略和威胁，避免外部势力进行破坏性干涉。他同时强调，地区国家有责任防止不安全局势进一步升级。…</description>
+    </item>
+    <item>
+      <title>暴雪黄色预警持续！8省份有大到暴雪，局地特大暴雪</title>
+      <link>https://finance.sina.com.cn/jjxw/2026-11-07/doc-inixxcvy8170759.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/jjxw/2026-11-07/doc-inixxcvy8170759.shtml</guid>
+      <pubDate>Sat, 07 Nov 2026 10:10:51 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>中央气象台11月7日18时继续发布 暴雪黄色预警 ： 预计11月7日20时至8日20时，北京西部和北部、天津北部、河北北部、辽宁西部和南部、内蒙古东南部、山西东北部以及甘肃中西部、青海东北部等地部分地区有大到暴雪，其中，辽宁西部、河北东北部等地部分地区有大暴雪，局地特大暴雪（30~32毫米）。上述部分地区新增积雪深度5~15厘米，局地可达20厘米以上。 .appendQr_wrap{border:1px solid #E6E6E6;pa…</description>
+    </item>
+    <item>
+      <title>Apollo拟豪掷750亿美元采购AI芯片，规模远超任何一家Neocloud</title>
+      <link>https://wallstreetcn.com/articles/3785447</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/articles/3785447</guid>
+      <pubDate>Sat, 07 Nov 2026 10:07:24 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
+      <description>私募巨头Apollo Global Management正以前所未有的规模押注AI芯片市场，其两笔待完成的芯片交易合计金额高达750亿美元，不仅远超最大neocloud CoreWeave自2023年以来累计270亿美元的芯片融资规模，更是排名第二的竞争对手的逾10倍。 据The Information最新报道， SpaceX宣布将租用价值400亿美元的英伟达Vera Rubin芯片，而Apollo将通过旗下子公司购入这批芯片后再租赁给…</description>
     </item>
     <item>
       <title>Charting the Global Economy: Job Growth in US Tops All Forecasts｜中文：描绘全球经济：美国就业增长高于所有预测</title>
@@ -524,6 +1242,15 @@
 原文：Employment growth in the US last month exceeded all projections, the jobless rate fell and worker pay rose as solid economic activity bolstered the labor market.</description>
     </item>
     <item>
+      <title>第七届世界媒体峰会先导片《AI赋能，共赴新程》正式发布</title>
+      <link>https://wallstreetcn.com/livenews/3196402</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196402</guid>
+      <pubDate>Sat, 07 Nov 2026 09:57:10 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · A 股快讯</source>
+      <description>第七届世界媒体峰会先导片《AI赋能，共赴新程》11月7日正式发布。影片融合实景拍摄、历史影像与AIGC生成画面，以人工智能时代媒体发展与全球媒体合作为切入点，围绕“技术如何改变媒体、媒体如何坚守新闻本质、全球媒体如何携手应对新时代挑战”展开表达。影片将新华社建社95周年、第七届世界媒体峰会与人工智能时代媒体的新使命融为一体，展现全球媒体携手应对技术变革、共同守护新闻价值、共同开创未来的愿景。（新华社）</description>
+    </item>
+    <item>
       <title>美国悬赏2000万美元征集伊朗核计划情报</title>
       <link>https://www.zaobao.com.sg/news/world/story20261107-9963563</link>
       <guid isPermaLink="true">https://www.zaobao.com.sg/news/world/story20261107-9963563</guid>
@@ -531,6 +1258,24 @@
       <category>政治与政策</category>
       <source url="https://zaobao.com">联合早报 · 国际</source>
       <description>（华盛顿综合电）美军周五（11月6日）宣布悬赏2000万美元（约2565万新元），征集有关伊朗核计划的情报。与此同时，美军对伊朗发动新一轮军事打击。 美军中央司令部在社交媒体平台X发文说，任何人若提供有关伊朗核设施、设备和科研人员等的情报，除了可获得高额奖金，也可获得重新安置，以确保人身安全。 这项悬赏通过 美国国务院 的“为正义悬赏”（Reward for Justice）计划发布。 国务院周五发声明说，伊朗未遵守对国际原子能机构作出…</description>
+    </item>
+    <item>
+      <title>事关中国汽车工业，马斯克最新表态</title>
+      <link>https://wallstreetcn.com/articles/3785446</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/articles/3785446</guid>
+      <pubDate>Sat, 07 Nov 2026 09:33:48 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
+      <description>当地时间11月6日，特斯拉公司首席执行官马斯克接受投资者罗恩·巴伦采访时表示，他热爱中国，并高度评价中国汽车工业的竞争力。 “中国令人惊叹。顺便说一句，我爱中国。去那里旅行令人深受鼓舞，”马斯克在采访中说。 马斯克指出，在上海生产的特斯拉Model Y是中国最畅销的电动汽车，实现这一成绩“并不容易，因为中国汽车公司非常厉害。” 这不是马斯克第一次点赞中国。此前他也曾公开表示“中国的魅力无以言表！”“中国制造业底蕴深厚，中国的AI大模型非…</description>
+    </item>
+    <item>
+      <title>中奥企业家委员会首次会议在京举行</title>
+      <link>https://wallstreetcn.com/livenews/3196399</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196399</guid>
+      <pubDate>Sat, 07 Nov 2026 09:31:56 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · A 股快讯</source>
+      <description>11月6日，商务部与奥地利联邦经济、能源和旅游部在北京共同主办中国—奥地利企业家委员会首次会议。王文涛部长与哈特曼斯多费尔部长出席会议并致辞，中奥两国政经界代表100余人参会。王文涛表示，今年是中奥建交55周年，在两国领导人战略引领下，中奥双方秉持开放包容理念，推动双边经贸合作取得丰硕成果。双方共同成立中奥企业家委员会，将为两国经济界搭建双向奔赴的桥梁，推动中国“十五五”规划和奥地利《工业战略2035》深入对接。期待双方企业用好企委会机…</description>
     </item>
     <item>
       <title>Kyiv Faces Russian Missile Barrage, Naftogaz Facilities Damaged｜中文：基辅面临俄罗斯导弹炮击， Naftogaz设施受损</title>
@@ -541,6 +1286,24 @@
       <source url="https://bloomberg.com">彭博社 · 政治</source>
       <description>中文：乌克兰首都和基辅周边地区一夜之间面临另一次俄罗斯导弹袭击，目标是能源设施和桥梁，至少有一名平民死亡，数人受伤
 原文：Ukraine’s capital and the region surrounding Kyiv faced another Russian missile barrage overnight targeting energy facilities and bridges, with at least one civilian killed and several injured.</description>
+    </item>
+    <item>
+      <title>王仰晨与若干美术家的过从｜收藏</title>
+      <link>https://mini.caixin.com/2026-11-07/102502222.html</link>
+      <guid isPermaLink="true">https://mini.caixin.com/2026-11-07/102502222.html</guid>
+      <pubDate>Sat, 07 Nov 2026 09:07:47 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://caixin.com">财新 · 最新</source>
+      <description>依据王仰晨存书画作品、书信和日记整理，归纳介绍他与若干美术家的关联 本文依据王仰晨存书画作品、书信和日记整理，归纳介绍他与若干美术家的关联。其中鲁迅像占到四幅，是因为组织、出版鲁迅作品和《鲁迅全集》是他历时长达十年的工作。其中某些作品是唐泽霖代为索得，他们是上世纪40年代相识的新知书店同事，深爱鲁迅也无二致（参见《 唐泽霖转赠曹聚仁签〈鲁迅年谱〉|收藏 》）。 * 张谔（1910—1995）江苏宿迁人，漫画家、新中国美术事业奠基人之一。…</description>
+    </item>
+    <item>
+      <title>四名萨公民遇袭失踪后 萨尔瓦多强人总统出兵海地</title>
+      <link>https://international.caixin.com/2026-11-07/102502219.html</link>
+      <guid isPermaLink="true">https://international.caixin.com/2026-11-07/102502219.html</guid>
+      <pubDate>Sat, 07 Nov 2026 09:02:23 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://caixin.com">财新 · 最新</source>
+      <description>特朗普称，支持布克尔“采取你认为必要的行动” 当地时间2026年10月31日，海地太子港，萨尔瓦多军队车辆在街头巡逻。图：视觉中国 【财新网】 近来，被视为拉美强硬治安路线风向标、自称“世界最酷独裁者”的中美洲国家萨尔瓦多总统纳伊布·布克尔，将该国安全力量投向帮派暴力猖獗的加勒比地区国家海地，在当地部署了超2000名士兵。 当地时间11月4日，布克尔在社交平台X上发布视频，显示萨尔瓦多全副武装的士兵在海地街头巡逻，受到当地民众的欢迎。他…</description>
     </item>
     <item>
       <title>伊朗外长强调不受外部干预情况下建立区域安全机制必要性</title>
@@ -572,373 +1335,32 @@
 原文：Pablo Hernández de Cos, one of two candidates in the running to replace Christine Lagarde as president of the European Central Bank, signaled that monetary policy-makers should remain attentive to inflation risks emergin…</description>
     </item>
     <item>
-      <title>美国多名国会议员说将推动撤销不合理关税政策</title>
-      <link>https://wallstreetcn.com/livenews/3196369</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196369</guid>
-      <pubDate>Sat, 07 Nov 2026 07:38:52 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 港股快讯</source>
-      <description>11月7日消息，鉴于美国选民对高生活成本和高通胀反应强烈，随着民主党在中期选举中取得压倒性胜利，多名民主党籍国会议员表示将致力于推动撤销现行的不合理关税政策。尽管这些民主党籍国会议员表达了推动撤销不合理关税措施的意愿，但也有分析认为，虽然民主党在中期选举中获得国会参议院和众议院的控制权，但美国总统特朗普可以通过对国会立法行使否决权等进行有效制衡，现有关税措施短期内或难以出现实质性松动。（新华社）</description>
-    </item>
-    <item>
-      <title>Czech Premier Blasts Central Bank Rate Hike as ‘Scandalous’｜中文：捷克总理抨击央行加息为“丑闻</title>
-      <link>https://www.bloomberg.com/news/articles/2026-11-07/czech-premier-blasts-central-bank-rate-hike-as-scandalous</link>
-      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-07/czech-premier-blasts-central-bank-rate-hike-as-scandalous</guid>
-      <pubDate>Sat, 07 Nov 2026 07:31:05 +0000</pubDate>
-      <category>政治与政策</category>
-      <source url="https://bloomberg.com">彭博社 · 政治</source>
-      <description>中文：在本周加息后，捷克总理安德烈·巴比斯(Andrej Babis)加大了对捷克央行的公开批评力度，称央行的决定“绝对是可耻的” ，并表示这将伤害众议院……
-原文：Czech Prime Minister Andrej Babis stepped up his public criticism of the country’s central bank following this week’s interest-rate hike, calling the board’s decision “absolutely scandalous” and saying it will hurt house…</description>
-    </item>
-    <item>
-      <title>Finland Considers Ukraine-Style Tank Barriers as Russia Rearms｜中文：随着俄罗斯的重建，芬兰认为乌克兰式坦克壁垒</title>
-      <link>https://www.bloomberg.com/news/articles/2026-11-07/finland-considers-ukraine-style-tank-barriers-as-russia-rearms</link>
-      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-07/finland-considers-ukraine-style-tank-barriers-as-russia-rearms</guid>
-      <pubDate>Sat, 07 Nov 2026 07:00:03 +0000</pubDate>
-      <category>政治与政策</category>
-      <source url="https://bloomberg.com">彭博社 · 政治</source>
-      <description>中文：在乌克兰，反坦克障碍减缓了袭击者的速度。现在，芬兰希望看到这些建筑在恶劣的北方天气下如何运作
-原文：In Ukraine, anti-tank obstacles have slowed the attacker. Now Finland wants to see how such structures would fare in harsh northern weather.</description>
-    </item>
-    <item>
-      <title>香港证监会收紧误导性称衔，降低投资者误判风险</title>
-      <link>https://wallstreetcn.com/livenews/3196364</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196364</guid>
-      <pubDate>Sat, 07 Nov 2026 06:32:43 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 港股快讯</source>
-      <description>11月6日，香港证券及期货事务监察委员会发表咨询总结，就进一步限制不受规管的机构使用具误导性的名称以保障投资者，相关修订建议获市场广泛支持。香港证监会表示，将扩大受限制称衔清单，并建立更快更新清单的机制，同时把监管覆盖延伸至虚拟资产领域，从源头减少投资者因机构名称产生误判，夯实投资者保护防线。 本次咨询于2025年6月启动，咨询期内共收到9份意见书，回应者普遍支持扩大《证券及期货条例》下现有的受限制称衔清单，并认同在《打击洗钱及恐怖分子…</description>
-    </item>
-    <item>
-      <title>New Zealand Government Holds Narrow Lead in Election Nailbiter｜中文：新西兰政府在选举Nailbiter中保持狭隘领先地位</title>
-      <link>https://www.bloomberg.com/news/articles/2026-11-07/counting-begins-in-new-zealand-election-that-s-too-close-to-call</link>
-      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-07/counting-begins-in-new-zealand-election-that-s-too-close-to-call</guid>
-      <pubDate>Sat, 07 Nov 2026 06:08:21 +0000</pubDate>
-      <category>政治与政策</category>
-      <source url="https://bloomberg.com">彭博社 · 政治</source>
-      <description>中文：新西兰的中右翼执政联盟在激烈的选举中取得狭隘的领先地位后，有一条重新掌权的道路
-原文：New Zealand’s center-right governing coalition has a path to return to power after taking a narrow lead in a closely fought election.</description>
-    </item>
-    <item>
-      <title>LA Port Strike Threat Deferred Again as Labor Talks Drag On｜中文：由于劳工谈判拖延，洛杉矶港口罢工威胁再次推迟</title>
-      <link>https://www.bloomberg.com/news/articles/2026-11-07/la-port-strike-threat-deferred-again-as-labor-talks-drag-on</link>
-      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-07/la-port-strike-threat-deferred-again-as-labor-talks-drag-on</guid>
-      <pubDate>Sat, 07 Nov 2026 06:00:27 +0000</pubDate>
-      <category>全球市场与要闻</category>
-      <source url="https://bloomberg.com">彭博社 · 经济</source>
-      <description>中文：雇主表示，代表美国最繁忙港口约250名安全工作人员的工会同意继续就新的劳动合同进行为期两周的谈判
-原文：The union representing about 250 security workers at the US’s busiest ports agreed to continue negotiations on a new labor contract for two more weeks, their employers said.</description>
-    </item>
-    <item>
-      <title>太古可口可乐中国发布“致胜2035”十年战略</title>
-      <link>https://wallstreetcn.com/livenews/3196356</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196356</guid>
-      <pubDate>Sat, 07 Nov 2026 04:35:52 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 港股快讯</source>
-      <description>11月6日，太古可口可乐中国在第九届进博会上发布面向中国市场的“致胜2035”十年战略，以“创新行稳”为核心主张，围绕消费者驱动、以客户为中心、以人为本、扎根社区四大举措布局未来十年。太古可口可乐大中华区首席执行官金忆表示，公司在中国市场跑通的有效做法，未来均有机会为中国饮料行业提供借鉴样本。 自2023年承诺未来十年在华投资超120亿元以来，郑州、昆山、广州新厂已陆续投产，海南新厂预计2027年底投产，加速兑现投资承诺。截至2025年…</description>
-    </item>
-    <item>
-      <title>卡塔尔首相：调解努力仍在继续，以防止局势失控。即便在中期选举之后，美国政府仍愿意寻求解决方案。（半岛电视台）</title>
-      <link>https://wallstreetcn.com/livenews/3196343</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196343</guid>
-      <pubDate>Sat, 07 Nov 2026 03:13:08 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 港股快讯</source>
-    </item>
-    <item>
-      <title>特朗普称美国是霍尔木兹海峡占领者</title>
-      <link>https://wallstreetcn.com/livenews/3196323</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196323</guid>
-      <pubDate>Sat, 07 Nov 2026 02:09:34 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 港股快讯</source>
-      <description>当地时间11月6日晚，美国总统特朗普在回答记者有关“美军是否袭击了伊朗南部格什姆岛”的提问时证实，美军对伊朗进行了小规模打击，“干掉了伊朗小型防空装置”。 特朗普还坚持认为对伊朗的军事行动“不算战争”，并称美国应该算是“占领者”，因为美国控制着霍尔木兹海峡。 据伊朗媒体报道，今天（11月7日）凌晨，2枚导弹击中了伊朗南部格什姆岛，目前尚无关于受损情况的官方信息。（CCTV国际时讯）</description>
-    </item>
-    <item>
-      <title>中国10月外汇储备 34051.8亿美元，前值 34002.5亿美元。</title>
-      <link>https://wallstreetcn.com/livenews/3196315</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196315</guid>
-      <pubDate>Sat, 07 Nov 2026 02:00:42 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 港股快讯</source>
-    </item>
-    <item>
-      <title>商务部回应“美首次以涉古巴为由制裁中企”：敦促美方尽快纠正错误做法</title>
-      <link>https://wallstreetcn.com/livenews/3196294</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196294</guid>
-      <pubDate>Sat, 07 Nov 2026 01:20:18 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 港股快讯</source>
-      <description>商务部新闻发言人就美制裁中国企业答记者问。 问：美东时间11月5日，美国务院宣布制裁两家中国企业。有消息称，这是美首次以涉古巴为由对中国企业实施制裁。请问中方对此有何评论？ 答：我们注意到有关情况。美方以涉及第三方为由，对中国企业采取单边制裁，违反国际法和国际关系基本准则，中方对此坚决反对。 近期，美方升级对中方制裁打压，密集出台多项歧视性限制措施，严重损害中国企业权益，背离两国元首达成的重要共识，破坏中美经贸关系稳定。中方敦促美方尽快…</description>
-    </item>
-    <item>
-      <title>特朗普称美方对伊朗实施“小型打击”</title>
-      <link>https://wallstreetcn.com/livenews/3196288</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196288</guid>
-      <pubDate>Sat, 07 Nov 2026 00:50:16 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 港股快讯</source>
-      <description>美国总统特朗普6日对媒体说，美方对伊朗实施了“小型打击”，摧毁伊朗制造的“一个小型防空装置”。 据伊朗塔斯尼姆通讯社早前报道，根据初步报告，两枚导弹击中了伊朗格什姆岛。（新华社）</description>
-    </item>
-    <item>
-      <title>特朗普被告知再袭伊朗时间窗口有限</title>
-      <link>https://wallstreetcn.com/livenews/3196283</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196283</guid>
-      <pubDate>Sat, 07 Nov 2026 00:44:15 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 港股快讯</source>
-      <description>当地时间11月6日，据美国方面消息，两名美国官员透露，特朗普政府部分顾问已告知特朗普，重新对伊朗展开大规模军事行动的“时间窗口正在缩小”，建议其在明年1月民主党控制的新一届国会就职前采取行动。这意味着特朗普需要在未来数周内作出决定。 消息称，美方目前在中东地区部署超过5万名军人、20多艘舰艇及200多架飞机——长期维持如此大规模的军事部署正影响美军战备能力，也是军事行动时间窗口有限的原因之一。当地时间11月5日，特朗普的国家安全团队向其…</description>
-    </item>
-    <item>
-      <title>伊朗媒体：格什姆岛遭导弹袭击 一架美无人机被击落</title>
-      <link>https://wallstreetcn.com/livenews/3196280</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196280</guid>
-      <pubDate>Sat, 07 Nov 2026 00:36:38 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 港股快讯</source>
-      <description>据伊朗塔斯尼姆通讯社7日报道，根据初步报告，两枚导弹击中了伊朗格什姆岛。伊朗军方向媒体证实，一架美军MQ－9无人机在格什姆岛上空被伊朗防空系统击落。 塔斯尼姆通讯社当天凌晨报道说，格什姆岛上空传来了战斗机的轰鸣声，引起了一些市民的担忧。随后该媒体报道说，根据初步报告，两枚导弹击中了伊朗格什姆岛。 几乎同时，伊朗伊斯兰共和国广播电视台报道说，一名知情人士表示，格什姆岛发生两起爆炸。目前尚未收到人员伤亡报告。 伊朗军方稍后向媒体证实，在格什…</description>
-    </item>
-    <item>
-      <title>US Job Gains May Be Spreading From AI Buildout to Implementation｜中文：美国就业增长可能从人工智能建设蔓延到实施</title>
-      <link>https://www.bloomberg.com/news/articles/2026-11-06/us-job-gains-may-be-spreading-from-ai-buildout-to-implementation</link>
-      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-06/us-job-gains-may-be-spreading-from-ai-buildout-to-implementation</guid>
-      <pubDate>Fri, 06 Nov 2026 20:40:32 +0000</pubDate>
-      <category>全球市场与要闻</category>
-      <source url="https://bloomberg.com">彭博社 · 经济</source>
-      <description>中文：与人工智能实施相关的白领咨询工作可能会加入与数据中心建设相关的蓝领建筑和制造业工作，作为美国就业增长的驱动力
-原文：White-collar consulting jobs tied to AI implementation may be joining blue-collar construction and manufacturing jobs tied to the data center buildout as a driver of US employment growth.</description>
-    </item>
-    <item>
-      <title>US Consumer Credit Surges by Most in Nearly Four Years｜中文：近四年来美国消费信贷大幅增长</title>
-      <link>https://www.bloomberg.com/news/articles/2026-11-06/us-consumer-credit-surges-by-most-in-nearly-four-years</link>
-      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-06/us-consumer-credit-surges-by-most-in-nearly-four-years</guid>
-      <pubDate>Fri, 06 Nov 2026 20:06:48 +0000</pubDate>
-      <category>全球市场与要闻</category>
-      <source url="https://bloomberg.com">彭博社 · 经济</source>
-      <description>中文：在信用卡余额上升和非循环信贷增加的推动下，美国消费者借款在9月份实现了近四年来的最大增幅
-原文：US consumer borrowing jumped in September by the most in nearly four years, boosted by a run-up in credit card balances and higher non-revolving credit.</description>
-    </item>
-    <item>
-      <title>Fed’s Daly Says More Rate Hikes Likely Needed to Tame Prices｜中文：美联储的戴利表示可能需要更多的加息来抑制价格</title>
-      <link>https://www.bloomberg.com/news/articles/2026-11-06/fed-s-daly-says-more-rate-increases-likely-needed-to-tame-prices</link>
-      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-06/fed-s-daly-says-more-rate-increases-likely-needed-to-tame-prices</guid>
-      <pubDate>Fri, 06 Nov 2026 18:24:52 +0000</pubDate>
-      <category>全球市场与要闻</category>
-      <source url="https://bloomberg.com">彭博社 · 经济</source>
-      <description>中文：旧金山联邦储备银行(Federal Reserve Bank of San Francisco)行长玛丽·戴利(Mary Daly)表示，可能需要进一步加息来抑制通货膨胀，但现在就知道需要加息多少还为时过早
-原文：Federal Reserve Bank of San Francisco President Mary Daly said more interest-rate increases are likely to be needed to tame inflation, but it’s too soon to know how much higher rates will need to go.</description>
-    </item>
-    <item>
-      <title>Bessent, Greer Raise Concerns on China Trade Deal Compliance｜中文：贝森特、格里尔提出对中国贸易协议合规性的担忧</title>
-      <link>https://www.bloomberg.com/news/articles/2026-11-06/bessent-greer-raise-concerns-on-china-trade-deal-actions</link>
-      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-06/bessent-greer-raise-concerns-on-china-trade-deal-actions</guid>
-      <pubDate>Fri, 06 Nov 2026 17:53:42 +0000</pubDate>
-      <category>全球市场与要闻</category>
-      <source url="https://bloomberg.com">彭博社 · 经济</source>
-      <description>中文：美国财政部长斯科特·贝森特（ Scott Bessent ）和美国贸易代表贾米森·格里尔（ Jamieson Greer ）与中国副总理何立峰（ He Lifeng ）进行了交谈，对北京最近的行动以及履行承诺的重要性提出了担忧
-原文：Treasury Secretary Scott Bessent and US Trade Representative Jamieson Greer spoke with China’s Vice Premier He Lifeng, raising concerns about Beijing’s recent actions and the importance of implementing commitments made a…</description>
-    </item>
-    <item>
-      <title>BOJ’s Ueda Says Unclear How Long 2% Inflation Rate Will Remain｜中文：日本央行上田表示不清楚2%的通货膨胀率将持续多久</title>
-      <link>https://www.bloomberg.com/news/articles/2026-11-06/boj-s-ueda-says-unclear-how-long-2-inflation-rate-will-remain</link>
-      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-06/boj-s-ueda-says-unclear-how-long-2-inflation-rate-will-remain</guid>
-      <pubDate>Fri, 06 Nov 2026 17:16:33 +0000</pubDate>
-      <category>全球市场与要闻</category>
-      <source url="https://bloomberg.com">彭博社 · 经济</source>
-      <description>中文：日本央行行长上田和夫表示，尽管日本的通货膨胀率已达到政策制定者的目标，但目前尚不清楚它将在那里停留多长时间，并表示它尚未成为更广泛的日本央行的一部分
-原文：Bank of Japan Governor Kazuo Ueda said that while his nation’s inflation rate has reached policymakers’ target, it’s unclear how long it will stay there, and indicated it hasn’t yet become embedded among the broader Japa…</description>
-    </item>
-    <item>
-      <title>Dutchman and Spaniard in Two-Horse Race for ECB Presidency｜中文：荷兰人和西班牙人竞选欧洲央行行长</title>
-      <link>https://www.bloomberg.com/news/articles/2026-11-06/knot-and-de-cos-are-the-only-two-candidates-for-ecb-president</link>
-      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-06/knot-and-de-cos-are-the-only-two-candidates-for-ecb-president</guid>
-      <pubDate>Fri, 06 Nov 2026 16:17:47 +0000</pubDate>
-      <category>全球市场与要闻</category>
-      <source url="https://bloomberg.com">彭博社 · 经济</source>
-      <description>中文：欧洲央行行长克里斯蒂娜·拉加德（ Christine Lagarde ）的继任者可能由荷兰人克拉斯·诺特（ Klaas Knot ）和西班牙人巴勃罗·埃尔南德斯·德科斯（ Pablo Hernand
-原文：The choice for European Central Bank President Christine Lagarde’s successor probably comes down to Dutchman Klaas Knot and Spaniard Pablo Hernandez de Cos.</description>
-    </item>
-    <item>
-      <title>2026年11月6日外交部发言人郭嘉昆主持例行记者会（2026-11-06）</title>
-      <link>https://www.mfa.gov.cn/web/wjdt_674879/fyrbt_674889/202611/t20261106_12054906.shtml</link>
-      <guid isPermaLink="true">https://www.mfa.gov.cn/web/wjdt_674879/fyrbt_674889/202611/t20261106_12054906.shtml</guid>
-      <pubDate>Fri, 06 Nov 2026 11:03:00 +0000</pubDate>
-      <category>政治与政策</category>
-      <source url="https://mfa.gov.cn">外交部 · 发言人表态</source>
-      <description>经中国和加拿大双方商定，第二次中加经济财金战略对话将于11月9日在加拿大举行。中共中央政治局委员、国务院副总理、中加经济财金战略对话中方牵头人何立峰与对话加方牵头人、加财政部长商鹏飞、国际贸易部长西杜将共同主持对话。 澎湃新闻记者：昨天，第九届中国国际进口博览会暨虹桥国际经济论坛在上海开幕。本周三，第140届广交会也在广州圆满闭幕。有媒体评论称，两场重量级展会接棒举行，展现出中国既是世界工厂也是世界市场，既是“超级卖家”也是“超级买家”…</description>
-    </item>
-    <item>
-      <title>国家统计局职能配置、内设机构和人员编制规定</title>
-      <link>https://www.gov.cn/zhengce/202611/content_7085350.htm</link>
-      <guid isPermaLink="true">https://www.gov.cn/zhengce/202611/content_7085350.htm</guid>
-      <pubDate>Fri, 06 Nov 2026 08:43:00 +0000</pubDate>
-      <category>政治与政策</category>
-      <source url="https://www.gov.cn">中国政府网 · 最新政策</source>
-      <description>第一条 为了规范国家统计局的职能配置、内设机构和人员编制，推进机构、职能、权限、程序、责任法定化，根据《中国共产党机构编制工作条例》和党中央对统计工作的有关要求，制定本规定。 第二条 国家统计局是国务院直属机构，为副部级。 第三条 本规定确定的主要职责、机构设置、人员编制等，是国家统计局机构职责权限、人员配备和工作运行的基本依据。 第四条 国家统计局负责贯彻落实党中央关于统计工作的方针政策和决策部署，在履行职责过程中坚持党中央对统计工作…</description>
-    </item>
-    <item>
-      <title>Methodical/mercurial｜中文：有条不紊/多变</title>
-      <link>https://aeon.co/essays/welcome-to-the-mixed-up-joyful-world-of-audhd</link>
-      <guid isPermaLink="true">https://aeon.co/essays/welcome-to-the-mixed-up-joyful-world-of-audhd</guid>
-      <pubDate>Thu, 05 Nov 2026 11:00:00 +0000</pubDate>
-      <category>哲学与思想</category>
-      <source url="https://aeon.co">Aeon · 哲学</source>
-      <description>中文：Claudia Schwartz/Unsplash Sarah Hendrickx是一位AuDHD作家、演讲者、自由撰稿人和前诊断师。她的最新著作《AuDHD完整指南》将于2026年11月出版。她以前的书我……
-原文：Photo by Claudia Schwartz/Unsplash Sarah Hendrickx is an AuDHD author, speaker, freelance writer and former diagnostician. Her latest book The Complete Guide to AuDHD is forthcoming in November 2026. Her previous books i…</description>
-    </item>
-    <item>
-      <title>国务院关于辽宁等9省区国家级自然保护区和国家级风景名胜区整合优化方案的批复</title>
-      <link>https://www.gov.cn/zhengce/content/202611/content_7085109.htm</link>
-      <guid isPermaLink="true">https://www.gov.cn/zhengce/content/202611/content_7085109.htm</guid>
-      <pubDate>Thu, 05 Nov 2026 10:00:00 +0000</pubDate>
-      <category>政治与政策</category>
-      <source url="https://www.gov.cn">中国政府网 · 最新政策</source>
-      <description>国务院关于辽宁等9省区国家级自然保护区 和国家级风景名胜区整合优化方案的批复 国函〔2026〕113号 自然资源部、生态环境部、国家林草局： 《自然资源部、生态环境部关于报请批准辽宁等9省区国家级自然保护区和国家级风景名胜区整合优化方案的请示》（自然资发〔2026〕137号）收悉。现批复如下： 一、原则同意辽宁、吉林、江苏、广东、四川、西藏、甘肃、宁夏、新疆等9省区国家级自然保护区和国家级风景名胜区整合优化方案，请认真组织实施。整合优化…</description>
-    </item>
-    <item>
-      <title>2026年11月5日外交部发言人郭嘉昆主持例行记者会（2026-11-05）</title>
-      <link>https://www.mfa.gov.cn/web/wjdt_674879/fyrbt_674889/202611/t20261105_12053880.shtml</link>
-      <guid isPermaLink="true">https://www.mfa.gov.cn/web/wjdt_674879/fyrbt_674889/202611/t20261105_12053880.shtml</guid>
-      <pubDate>Thu, 05 Nov 2026 09:17:00 +0000</pubDate>
-      <category>政治与政策</category>
-      <source url="https://mfa.gov.cn">外交部 · 发言人表态</source>
-      <description>总台CGTN记者：我们注意到，澜沧江—湄公河合作第十一次外长会昨天成功举行。这是澜湄合作首次领导人会议召开十周年之际举行的重要会议。发言人能否进一步介绍情况？ 郭嘉昆：11月4日上午，王毅外长同泰国副总理兼外长西哈萨在北京共同主持澜湄合作第十一次外长会。澜湄六国梳理合作成果，总结成功经验，一致认为十年来澜湄合作势头强劲，已构建起全方位、多层级、宽领域的合作格局，取得可感可及的普惠成果。澜湄国家命运联系更紧密，发展动能更充沛，安全屏障更牢…</description>
-    </item>
-    <item>
-      <title>国务院办公厅关于2027年部分节假日安排的通知</title>
-      <link>https://www.gov.cn/zhengce/content/202611/content_7085101.htm</link>
-      <guid isPermaLink="true">https://www.gov.cn/zhengce/content/202611/content_7085101.htm</guid>
-      <pubDate>Thu, 05 Nov 2026 09:00:00 +0000</pubDate>
-      <category>政治与政策</category>
-      <source url="https://www.gov.cn">中国政府网 · 最新政策</source>
-      <description>国务院办公厅关于2027年 部分节假日安排的通知 国办发明电〔2026〕10号 各省、自治区、直辖市人民政府，国务院各部委、各直属机构： 经国务院批准，现将2027年元旦、春节、清明节、劳动节、端午节、中秋节和国庆节放假调休日期的具体安排通知如下。 一、元旦： 1月1日（周五）至3日（周日）放假，共3天。 二、春节： 2月5日（农历除夕、周五）至13日（农历正月初八、周六）放假调休，共9天。1月31日（周日）、2月14日（周日）上班。…</description>
-    </item>
-    <item>
-      <title>国务院关于修改和废止部分行政法规的决定</title>
-      <link>https://www.gov.cn/zhengce/content/202611/content_7085098.htm</link>
-      <guid isPermaLink="true">https://www.gov.cn/zhengce/content/202611/content_7085098.htm</guid>
-      <pubDate>Thu, 05 Nov 2026 09:00:00 +0000</pubDate>
-      <category>政治与政策</category>
-      <source url="https://www.gov.cn">中国政府网 · 最新政策</source>
-      <description>中华人民共和国国务院令 第851号 《国务院关于修改和废止部分行政法规的决定》已经2026年10月16日国务院第99次常务会议通过，现予公布，自公布之日起施行。 总理 李强 2026年10月29日 国务院关于修改和废止部分行政法规的决定 为贯彻落实党中央关于整治形式主义为基层减负的决策部署，精简优化现有行政法规有关基层编制专项规划的规定，防范纠治规划编制中的形式主义，切实为基层减负，并贯彻落实党和国家机构改革精神，与《中华人民共和国生态…</description>
-    </item>
-    <item>
-      <title>Believing and thinking｜中文：相信和思考</title>
-      <link>https://aeon.co/essays/the-psychology-of-separating-church-and-state</link>
-      <guid isPermaLink="true">https://aeon.co/essays/the-psychology-of-separating-church-and-state</guid>
-      <pubDate>Tue, 03 Nov 2026 11:00:00 +0000</pubDate>
-      <category>哲学与思想</category>
-      <source url="https://aeon.co">Aeon · 哲学</source>
-      <description>中文：美国缅因州弗莱堡。摄影： Andrew Lichtenstein/Corbis/Getty Images Neil Van Leeuwen ，佛罗里达州立大学哲学教授，专攻思维和认知科学哲学。他是一个……
-原文：Fryeburg, Maine, US. Photo by Andrew Lichtenstein/Corbis/Getty Images Neil Van Leeuwen is professor of philosophy at Florida State University, where he specialises in philosophy of mind and cognitive science. He is the a…</description>
-    </item>
-    <item>
-      <title>That feeling of values crumbling has a name: civic grief｜中文：那种价值观崩溃的感觉有一个名字：公民悲伤</title>
-      <link>https://psyche.co/ideas/that-feeling-of-values-crumbling-has-a-name-civic-grief</link>
-      <guid isPermaLink="true">https://psyche.co/ideas/that-feeling-of-values-crumbling-has-a-name-civic-grief</guid>
-      <pubDate>Tue, 03 Nov 2026 11:00:00 +0000</pubDate>
-      <category>哲学与思想</category>
-      <source url="https://psyche.co">Psyche · Ideas</source>
-      <description>中文：如果阅读或观看新闻感觉不像是随时了解情况，而更像是每天的恐怖或心碎，那么您并不孤单。我们中的许多人都怀着一种思乡之情。当我们公布的真相……时，就会发生这种情况
-原文：If reading or watching the news feels less like staying informed and more like a daily horror or heartbreak, you’re not alone. Many of us are carrying a kind of civic homesickness. It’s what happens when the truths we pr…</description>
-    </item>
-    <item>
-      <title>Jo Marchant: In search of now｜中文：Jo Marchant ：在寻找现在</title>
-      <link>https://aeon.co/videos/always-with-us-yet-ever-elusive-on-the-knottiness-of-now</link>
-      <guid isPermaLink="true">https://aeon.co/videos/always-with-us-yet-ever-elusive-on-the-knottiness-of-now</guid>
-      <pubDate>Mon, 02 Nov 2026 11:01:00 +0000</pubDate>
-      <category>哲学与思想</category>
-      <source url="https://aeon.co">Aeon · 哲学</source>
-      <description>中文：皇家学会（ Royal Institution ）的视频“现在”的含义可能看起来相当明显：当然，这是您此时此刻正在经历的意识状态。但正如英国科学作家Jo Marchant在本次演讲中详细介绍的那样……
-原文：Video by the Royal Institution The meaning of ‘now’ might seem rather obvious: it’s the state of awareness you’re experiencing at this very moment, of course. But as the UK science writer Jo Marchant details in this talk…</description>
-    </item>
-    <item>
-      <title>How psychology’s classic studies misled us about the self｜中文：心理学的经典研究如何误导我们关于自我</title>
-      <link>https://psyche.co/ideas/its-time-to-ditch-the-empty-self-view-of-human-psychology</link>
-      <guid isPermaLink="true">https://psyche.co/ideas/its-time-to-ditch-the-empty-self-view-of-human-psychology</guid>
-      <pubDate>Mon, 02 Nov 2026 11:00:00 +0000</pubDate>
-      <category>哲学与思想</category>
-      <source url="https://psyche.co">Psyche · Ideas</source>
-      <description>中文：想象一下，一个生物在各个方面都与人类相似，只是它没有持久的内在自我。这个假设物种的行为--我们称之为真空人--将不是由他们的私人信仰驱动的……
-原文：Imagine a creature that is like humans in every way, except that it has no enduring inner self. The behaviour of this hypothetical species – which we will call Homo vacuus – would be driven not by their private beliefs a…</description>
-    </item>
-    <item>
-      <title>《财新周刊》第1229期</title>
-      <link>https://weekly.caixin.com/2026/cw1229/</link>
-      <guid isPermaLink="true">https://weekly.caixin.com/2026/cw1229/</guid>
-      <pubDate>Sun, 01 Nov 2026 16:00:00 +0000</pubDate>
+      <title>韩国的“自主 AI”，绕不开中国模型</title>
+      <link>https://www.gelonghui.com/p/7334175</link>
+      <guid isPermaLink="true">https://www.gelonghui.com/p/7334175</guid>
+      <pubDate>Sat, 07 Nov 2026 08:14:40 +0000</pubDate>
       <category>中文财经深度</category>
-      <source url="https://weekly.caixin.com">财新周刊</source>
-      <description>封面报道 Cover Story 重估科技股 AI泡沫论持续一年后，全球科技股震荡回调，是价值回归还是信心考验？ 最赚钱“AI实验室”IPO揭幕 财新观察 Opinion 建设生育友好型社会如何持续发力 以滴水穿石的耐心持续推进，在婚嫁、养育、教育等每一个环节久久为功 周刊导播 {{周刊导播｜重估科技股、竞逐亚洲金融中心、付费求职灰色生意 时事 Current Affairs 卢拉逆风翻盘 文｜财新周刊 侯吴婷 路尘 这一结果不仅打破民…</description>
+      <source url="https://gelonghui.com">格隆汇 · 推荐</source>
+      <description>韩国今年新增模型一半都用中国模型当底座 韩国民间智库Rockbridge Network Korea于10月下旬发布调查报告《中国人工智能在韩国是如何被使用的》，作者是汉阳大学经营学教授崔成镇。 报告显示，2023年的时候，中国AI模型在韩国几乎无人问津。可2026年1月到8月期间，韩国新增的AI模型当中，有将近50%是来自于中国AI。 此外，这个趋势还在加剧，崔成镇认为，到了2027年时，这个数字将会达到70%-90%。 01 韩国A…</description>
     </item>
     <item>
-      <title>中共中央关于持之以恒推进全面从严治党若干重大问题的决定</title>
-      <link>https://www.gov.cn/zhengce/202611/content_7084690.htm</link>
-      <guid isPermaLink="true">https://www.gov.cn/zhengce/202611/content_7084690.htm</guid>
-      <pubDate>Sun, 01 Nov 2026 07:37:00 +0000</pubDate>
-      <category>政治与政策</category>
-      <source url="https://www.gov.cn">中国政府网 · 最新政策</source>
-      <description>新华社北京11月1日电 中共中央关于持之以恒推进全面从严治党若干重大问题的决定 （2026年10月29日中国共产党第二十届中央委员会第五次全体会议通过） 中国共产党第二十届中央委员会第五次全体会议总结新时代全面从严治党伟大成就和宝贵经验，分析当前和今后一个时期管党治党、兴党强党面临的形势和任务，就持之以恒推进全面从严治党若干重大问题作出如下决定。 一、持之以恒推进全面从严治党的重要性紧迫性和总体要求 （一）中国共产党为人民而生、因人民而…</description>
+      <title>Trafigura Snaps Up Copper in Asia as China Faces Supply Crunch｜中文：中国面临供应紧缩，托克在亚洲抢购铜</title>
+      <link>https://www.bloomberg.com/news/articles/2026-11-07/trafigura-snaps-up-copper-in-asia-as-china-faces-supply-crunch</link>
+      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-07/trafigura-snaps-up-copper-in-asia-as-china-faces-supply-crunch</guid>
+      <pubDate>Sat, 07 Nov 2026 08:00:21 +0000</pubDate>
+      <category>全球市场与要闻</category>
+      <source url="https://bloomberg.com">彭博社 · 市场</source>
+      <description>中文：由于当地供应不足，托克集团一直在购买大量铜，以促进对亚洲的销售，加剧了对金属的争夺，将现货货物的区域溢价推至历史新高
+原文：Trafigura Group has been buying large volumes of copper to boost sales into Asia as local supplies run low, adding to a scramble for metal that’s pushed regional premiums for spot cargoes to record highs.</description>
     </item>
     <item>
-      <title>Why we see faces in unexpected places, and what it says about us｜中文：为什么我们在意想不到的地方看到面孔，以及它对我们的影响</title>
-      <link>https://psyche.co/videos/why-we-see-faces-in-unexpected-places-and-what-it-says-about-us?channel=ideas</link>
-      <guid isPermaLink="true">https://psyche.co/videos/why-we-see-faces-in-unexpected-places-and-what-it-says-about-us?channel=ideas</guid>
-      <pubDate>Fri, 30 Oct 2026 10:01:00 +0000</pubDate>
-      <category>哲学与思想</category>
-      <source url="https://psyche.co">Psyche · Ideas</source>
-      <description>中文：几个世纪以来，人们报告说在不太可能的地方看到了熟悉的形状–首先是面孔–从云层和大理石到带有耶稣形象的吐司片。在这段视频中， Mary McGillivray是一位数字……
-原文：Across the centuries, people have reported seeing familiar shapes – above all, faces – in unlikely places, from clouds and marble to slices of toast bearing the image of Jesus. In this video, Mary McGillivray, a digital…</description>
-    </item>
-    <item>
-      <title>In praise of the dilettante｜中文：赞美业余爱好者</title>
-      <link>https://aeon.co/essays/why-the-dilettante-is-the-anti-hero-of-our-over-optimised-age</link>
-      <guid isPermaLink="true">https://aeon.co/essays/why-the-dilettante-is-the-anti-hero-of-our-over-optimised-age</guid>
-      <pubDate>Fri, 30 Oct 2026 10:00:00 +0000</pubDate>
-      <category>哲学与思想</category>
-      <source url="https://aeon.co">Aeon · 哲学</source>
-      <description>中文：让·科克托（ Jean Cocteau ） ，诗人、艺术家、电影制片人， 1948年由菲利普·哈尔斯曼（ Philippe Halsman ）拍Magnum Photos Jay Miller是北卡罗来纳州沃伦威尔逊学院的哲学副教授。为什么，在所有人中，击败……
-原文：Jean Cocteau, poet, artist, filmmaker, photographed in 1948 by Philippe Halsman. Courtesy Magnum Photos Jay Miller is associate professor of philosophy at Warren Wilson College in North Carolina. Why, of all people, defe…</description>
-    </item>
-    <item>
-      <title>When giving up teaches you more than persevering ever could｜中文：当放弃教会你比坚持不懈更重要</title>
-      <link>https://psyche.co/ideas/when-giving-up-teaches-you-more-than-persevering-ever-could</link>
-      <guid isPermaLink="true">https://psyche.co/ideas/when-giving-up-teaches-you-more-than-persevering-ever-could</guid>
-      <pubDate>Thu, 29 Oct 2026 10:00:00 +0000</pubDate>
-      <category>哲学与思想</category>
-      <source url="https://psyche.co">Psyche · Ideas</source>
-      <description>中文：经过三年和20多次拒绝，我问自己一个棘手的问题：我应该放弃吗？证据似乎很清楚。美国大学不想让我成为哲学研究生。整个世界都在讲述……
-原文：After three years and more than 20 rejections, I asked myself a difficult question: should I give up? The evidence seemed clear. American universities did not want me as a philosophy graduate student. The world was telli…</description>
-    </item>
-    <item>
-      <title>On Japan’s Shinkansen trains, pork buns split reality in two｜中文：在日本的新干线列车上，猪肉包子将现实一分为二</title>
-      <link>https://psyche.co/ideas/on-japans-shinkansen-trains-pork-buns-split-reality-in-two</link>
-      <guid isPermaLink="true">https://psyche.co/ideas/on-japans-shinkansen-trains-pork-buns-split-reality-in-two</guid>
-      <pubDate>Tue, 27 Oct 2026 10:00:00 +0000</pubDate>
-      <category>哲学与思想</category>
-      <source url="https://psyche.co">Psyche · Ideas</source>
-      <description>中文：每天，日本的高速新干线铁路网络在大阪和东京之间运送大约50万名乘客。乘客从登上火车开始他们的旅程，在找到指定的座位后，安顿下来……
-原文：Each day, Japan’s high-speed Shinkansen rail network carries roughly half a million passengers between Osaka and Tokyo. Passengers begin their journey by boarding the train and, after finding their assigned seat, settlin…</description>
-    </item>
-    <item>
-      <title>Everyone says they have anxiety. Clinical anxiety is different｜中文：每个人都说他们有焦虑症。临床焦虑不同</title>
-      <link>https://psyche.co/ideas/everyone-says-they-have-anxiety-clinical-anxiety-is-different</link>
-      <guid isPermaLink="true">https://psyche.co/ideas/everyone-says-they-have-anxiety-clinical-anxiety-is-different</guid>
-      <pubDate>Mon, 26 Oct 2026 10:00:00 +0000</pubDate>
-      <category>哲学与思想</category>
-      <source url="https://psyche.co">Psyche · Ideas</source>
-      <description>中文：您可能已经注意到，曾经仅在治疗师办公室范围内使用的术语现在被不假思索地用于描述仅仅是不舒服的体验。一辆汽车适得其反，有人说它有‘…
-原文：You’ve probably noticed that terms once used only within the confines of a therapist’s office are now deployed unthinkingly to describe experiences that are merely uncomfortable. A car backfires and someone says it has ‘…</description>
-    </item>
-    <item>
-      <title>《财新周刊》第1228期</title>
-      <link>https://weekly.caixin.com/2026/cw1228/</link>
-      <guid isPermaLink="true">https://weekly.caixin.com/2026/cw1228/</guid>
-      <pubDate>Sun, 25 Oct 2026 16:00:00 +0000</pubDate>
+      <title>美国10月非农点评：K型在收敛</title>
+      <link>https://www.gelonghui.com/p/7334013</link>
+      <guid isPermaLink="true">https://www.gelonghui.com/p/7334013</guid>
+      <pubDate>Sat, 07 Nov 2026 07:44:23 +0000</pubDate>
       <category>中文财经深度</category>
-      <source url="https://weekly.caixin.com">财新周刊</source>
-      <description>封面报道 Cover Story 动荡法兰西 极左翼为示威喝彩，极右翼要求对其强硬，两边都有收获，谁付出代价？ 财新观察 Opinion 更好维护中小投资者权益 持续强化依法从严监管，通过大力推进多层次市场建设，促进市场整体发育成熟 周刊导播 周刊导播｜动荡法兰西、长聘不稳了、人民币升值之后 法国从校园抗议走向街头骚乱，谁在收获选票，谁来解决困局；高校教师闯过非升即走，为何仍难安稳；人民币升值约9%，出口企业怎样应对 时事 Curren…</description>
+      <source url="https://gelonghui.com">格隆汇 · 推荐</source>
+      <description>10月非农就业数据“供需双旺”，失业率回落 核心观点 核心观点： 10月非农就业数据“供需双旺”，失业率回落。需求端，非农就业增长趋势确认触底反弹、就业扩散指数改善、强周期性数据趋势向好；供给端，劳动参与率进一步修复 。数据公布后，市场交易美国增长预期的改善，近期因AI交易大幅调整而来的增长预期的下修有所缓和。总体来看，近期美国AI产业的“供需双弱”与10月非农的“供需双旺”形成鲜明对比， 美国经济呈现出K型收敛的迹象，这在一定程度加剧…</description>
     </item>
   </channel>
 </rss>
