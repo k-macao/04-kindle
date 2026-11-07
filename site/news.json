@@ -1,16 +1,14 @@
 {
-  "generated": "2026-11-07T15:14:31+00:00",
+  "generated": "2026-11-07T15:16:25+00:00",
   "doc": "news.epub",
   "title": "004 新闻订阅",
   "chars": 35173,
-  "bytes": 41581,
+  "bytes": 41582,
   "sections": 5,
   "items": 150,
   "sources_ok": 24,
-  "sources_total": 25,
-  "sources_failed": [
-    "AISIXIANG_REC"
-  ],
+  "sources_total": 24,
+  "sources_failed": [],
   "english": 26,
   "zh_added": 26,
   "zh_missing": 0,
@@ -36,9 +34,7 @@
       "note": ""
     }
   },
-  "sources_error": {
-    "AISIXIANG_REC": "https://rsshub.isrss.com: 解析出 29 条，14 天窗口内 0 条；https://rsshub.cups.moe: 解析出 29 条，14 天窗口内 0 条；https://rsshub.app: HTTP Error 403: Forbidden"
-  },
+  "sources_error": {},
   "data_time": "2026-11-08T16:00:00Z",
   "data_time_kind": "item",
   "source": "RSSHub"
