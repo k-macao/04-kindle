@@ -331,6 +331,26 @@ class CollectTest(unittest.TestCase):
         self.assertEqual([item["title"] for item in items], ["较早的一条新闻", "较新的一条新闻"])
 
 
+class FutureDateTest(unittest.TestCase):
+    """有的路由把日期解析到未来（财新周刊的期号日期），不能让它霸占「最新」。"""
+
+    def collect(self, published):
+        return fetch_news.collect(
+            sources=[source()], instances=["https://rsshub.app"],
+            fetch=feed_fetch({"/cls/telegraph": rss_with(["时间跑偏的一条新闻"], published=published)}),
+            now=NOW, log=lambda *_: None)
+
+    def test_future_item_is_clamped_to_now(self):
+        items, reports = self.collect("Sun, 08 Nov 2026 15:00:00 +0800")   # NOW 之后一天多
+        self.assertEqual(items[0]["published"], "2026-11-07T03:00:00Z")
+        self.assertEqual(reports[0].get("clamped"), 1)
+
+    def test_small_clock_skew_is_left_alone(self):
+        items, reports = self.collect("Sat, 07 Nov 2026 11:30:00 +0800")   # 只比现在晚半小时
+        self.assertEqual(items[0]["published"], "2026-11-07T03:30:00Z")
+        self.assertNotIn("clamped", reports[0])
+
+
 class SourceWindowTest(unittest.TestCase):
     """政策/哲学类源更新稀疏：单源放宽时间窗，否则「解析出 30 条、收 0 条」。"""
 

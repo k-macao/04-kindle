@@ -63,6 +63,9 @@ DEFAULT_INSTANCES = (
     "https://rsshub.cups.moe",
 )
 USER_AGENT = "004-kindle-news/1.0"
+# 有些路由把日期解析成未来（财新周刊的期号日期会跑到 25 小时后），这类条目会霸占
+# 「最新一条」的位置、把整份 feed 的排序带歪。超过这个容差就按「生成时间」记。
+FUTURE_TOLERANCE_HOURS = 6
 MAX_BYTES = 4 * 1024 * 1024
 SUMMARY_MAX = 220
 TITLE_MAX = 160
@@ -330,13 +333,20 @@ def collect(sources=None, instances=None, timeout=15, max_age_hours=24,
                 continue
             if instance:
                 dead[instance] = 0
+            future_limit = now + timedelta(hours=FUTURE_TOLERANCE_HOURS)
             fresh = []
+            clamped = 0
             for item in items:
                 moment = item.pop("_moment")
                 if moment is not None and moment < source_horizon:
                     continue
                 if is_garbled(item["title"]):
                     continue
+                if moment is not None and moment > future_limit:
+                    # 时间在未来的条目：内容留着，时间按「现在」记，别让它排到最前面。
+                    moment = now
+                    item["published"] = now.isoformat().replace("+00:00", "Z")
+                    clamped += 1
                 item["published"] = item["published"] or ""
                 item["_moment"] = moment
                 fresh.append(item)
@@ -363,7 +373,11 @@ def collect(sources=None, instances=None, timeout=15, max_age_hours=24,
                 item["_moment"] = moment
                 known[identity] = item
                 taken += 1
-            report.update(ok=True, count=taken, instance=instance or "", via="feed" if feed else "instance")
+            report.update(ok=True, count=taken, instance=instance or "",
+                          via="feed" if feed else "instance")
+            if clamped:
+                report["clamped"] = clamped
+                log(f"    · {key}：{clamped} 条时间在未来的条目，已按生成时间记")
             note = "" if taken else "（时间窗内都是已推过或重复的）"
             log(f"  ✅ {key:12} {source['name']:18} {taken:2} 条{note}  ({label})")
             break
