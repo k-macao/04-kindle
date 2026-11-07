@@ -103,7 +103,7 @@ NetNewsWire / Feedly / Reeder / Inoreader 之类的阅读器。设备上如果 `
 | | 格隆汇·推荐 | `/gelonghui/home` |
 | | 格隆汇·日热文 | `/gelonghui/hot-article` |
 | | 第一财经·最新 | `/yicai/latest` |
-| | 明报·经济 | `/mingpao/pns/s00004` |
+| | 财新周刊 | `/caixin/weekly` |
 | 全球 | 彭博社·市场 | `/bloomberg/markets` |
 | | 彭博社·加密 | `/bloomberg/crypto` |
 | | 彭博社·经济 | `/bloomberg/economics` |
@@ -113,7 +113,7 @@ NetNewsWire / Feedly / Reeder / Inoreader 之类的阅读器。设备上如果 `
 | | 彭博社·政治 | `/bloomberg/politics` |
 | 思想 | Aeon·哲学 | `/aeon/category/philosophy` |
 | | Psyche·Ideas | `/psyche/type/ideas` |
-| | 明报·观点 | `/mingpao/pns/s00012` |
+| | 爱思想·推荐排行 | `/aisixiang/toplist/11` |
 | | 爱思想·最近更新 | `/aisixiang/toplist/10` |
 
 2026-11-07 首轮真实运行（128 条 / 12 个源可用）换掉了四条**在机房 IP 上取不到**的源，理由都写在
@@ -135,8 +135,9 @@ Playwright，必挂），一并换成港股快讯——**加源前先看路由�
   在公共实例上回 503，也换掉。反复 503 的都是「要现抓很多页」的路由（即时新闻、Espresso），
   而同命名空间里较轻的路由正常（明报 pns 版、彭博各频道）——**换源优先挑「同命名空间里已经跑通
   的那条」**，比试新站点稳。
-- 第五轮定下来：深度＝明报·经济（`pns/s00004`）；全球＝彭博经济；政治＝彭博政治 + 中文官方口径；
-  思想＝Aeon、Psyche、明报·观点（每日明报评论版）、爱思想。
+- 第五轮定下来：全球＝彭博经济；政治＝彭博政治 + 中文官方口径；深度＝财新周刊（明报这个命名空间
+  在公共实例上不稳：即时版与经济版 503、观点版报 XML 语法错误，全组放弃）；思想＝Aeon、Psyche、
+  爱思想的「最近更新」与「推荐排行」。
 
 清单里的 `sources_failed` / `sources_error` / `instances_probe` 每轮都会记下失败源、具体报错
 和实例探活结果——不用翻 CI 日志也能判断是 403、超时，还是真的没更新。
