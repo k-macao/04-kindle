@@ -76,13 +76,17 @@ python tools/build_news.py --data news_data.json --out site
 WSJ、CoinDesk 等），挑的都是 004 那 49 条之外的站点，路由按 RSSHub 仓库里的 `route.path` 核对过。
 
 分工很明确：**抓取只负责按路由取回并归一化**（`news_data.json`），**排版只负责判断与生成**
-（例子不足 10 条、乱码超标就退出码 1、不覆盖旧产物）。一层是纯数据、一层是纯文档，排错了不用重抓。
+（条目不足 10 条、乱码超标就退出码 1、不覆盖旧产物）。一层是纯数据、一层是纯文档，排错了不用重抓。
 
 每天 07:00（北京时间）由 `.github/workflows/refresh-news.yml` 自动跑：跑测试 → 抓取 → 生成 →
 产物自检 → 提交推送。`rsshub.app` 对 Actions 出口 IP 常回 403，所以默认先试 `rsshub.rss.tips` /
 `rsshub.isrss.com` / `rsshub.cups.moe`，`RSSHUB_BASE` 环境变量可以换成自建实例；同一实例连续失败
 3 次就跳过，单源失败不影响别的源。跨天不重复：`site/news_seen.json` 记着最近 7 天推过的标题指纹，
 昨天 20:00 的稿子今天不会再出现一次。
+
+找不到路由的站点，用 **RSSHub Radar** 的规则去发现（`tools/radar_discover.py`：先查实例的
+`/api/radar/rules/{域名}`，没有规则就找站点自带 RSS）；抓取时哪条源挂了，日志里会直接给出 Radar
+建议的替换路由，但**不会自动换源**——确认后才改目录。
 
 设备端：菜单 → **004 Report** → **News manifest URL** 填 `site/news.json`，**Display mode →
 News subscription**。之后和字模式一样——每 60 秒只拉几百字节的清单，`generated` 变了才重下 EPUB
