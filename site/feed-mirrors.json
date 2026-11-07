@@ -1,0 +1,77 @@
+{
+  "checked": "2026-11-07T15:40:18+00:00",
+  "ok": 7,
+  "total": 7,
+  "results": [
+    {
+      "url": "https://k-macao.github.io/04-kindle/site/news.xml",
+      "ok": true,
+      "status": 200,
+      "bytes": 142866,
+      "items": 150,
+      "error": "",
+      "key": "pages",
+      "label": "GitHub Pages"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news.xml",
+      "ok": true,
+      "status": 200,
+      "bytes": 142866,
+      "items": 150,
+      "error": "",
+      "key": "raw",
+      "label": "raw.githubusercontent.com"
+    },
+    {
+      "url": "https://github.com/k-macao/04-kindle/releases/download/news-feed/news.xml",
+      "ok": true,
+      "status": 200,
+      "bytes": 142866,
+      "items": 150,
+      "error": "",
+      "key": "release",
+      "label": "GitHub Release 资产"
+    },
+    {
+      "url": "https://cdn.jsdelivr.net/gh/k-macao/04-kindle@main/site/news.xml",
+      "ok": true,
+      "status": 200,
+      "bytes": 142866,
+      "items": 150,
+      "error": "",
+      "key": "jsdelivr",
+      "label": "jsDelivr（Cloudflare）"
+    },
+    {
+      "url": "https://fastly.jsdelivr.net/gh/k-macao/04-kindle@main/site/news.xml",
+      "ok": true,
+      "status": 200,
+      "bytes": 142866,
+      "items": 150,
+      "error": "",
+      "key": "jsdelivr-fastly",
+      "label": "jsDelivr（Fastly）"
+    },
+    {
+      "url": "https://gcore.jsdelivr.net/gh/k-macao/04-kindle@main/site/news.xml",
+      "ok": true,
+      "status": 200,
+      "bytes": 142866,
+      "items": 150,
+      "error": "",
+      "key": "jsdelivr-gcore",
+      "label": "jsDelivr（Gcore）"
+    },
+    {
+      "url": "https://testingcf.jsdelivr.net/gh/k-macao/04-kindle@main/site/news.xml",
+      "ok": true,
+      "status": 200,
+      "bytes": 142866,
+      "items": 150,
+      "error": "",
+      "key": "jsdelivr-testingcf",
+      "label": "jsDelivr（TestingCF）"
+    }
+  ]
+}
