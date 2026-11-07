@@ -102,6 +102,29 @@ class CheckTest(unittest.TestCase):
         self.assertIn("不是 feed", result["error"])
 
 
+class DefaultFetchTest(unittest.TestCase):
+    """CLI 一路传下来的 fetch 是 None，不能把默认的 http_get 顶掉（踩过：直接 TypeError）。"""
+
+    def test_none_falls_back_to_module_http_get(self):
+        calls = []
+
+        def fake_http_get(url, timeout=15):
+            calls.append(url)
+            return RSS.encode()
+
+        original = check_feed_urls.http_get
+        try:
+            check_feed_urls.http_get = fake_http_get
+            result = check_feed_urls.check("https://a.example/news.xml", fetch=None)
+            self.assertTrue(result["ok"])
+            self.assertEqual(calls, ["https://a.example/news.xml"])
+            results = check_feed_urls.check_all(
+                (("one", "第一", "https://a.example/news.xml"),), fetch=None, log=None)
+            self.assertEqual(len(results), 1)
+        finally:
+            check_feed_urls.http_get = original
+
+
 class CheckAllTest(unittest.TestCase):
     def test_every_entry_is_checked_and_labelled(self):
         urls = (("one", "第一", "https://one.example/news.xml"),
@@ -134,6 +157,25 @@ class CliTest(unittest.TestCase):
     def test_failure_exits_one(self):
         code = check_feed_urls.main(["--only", "raw"], fetch=fetch_of({}))
         self.assertEqual(code, 1)
+
+    def test_internal_error_still_writes_report(self):
+        folder = Path(tempfile.mkdtemp())
+        target = folder / "feed.json"
+        original = check_feed_urls.check_all
+
+        def boom(*args, **kwargs):
+            raise RuntimeError("模拟崩溃")
+
+        try:
+            check_feed_urls.check_all = boom
+            code = check_feed_urls.main(["--only", "raw", "--write", str(target)])
+        finally:
+            check_feed_urls.check_all = original
+        self.assertEqual(code, 1)
+        payload = json.loads(target.read_text(encoding="utf-8"))
+        self.assertEqual(payload["ok"], 0)
+        self.assertEqual(payload["results"][0]["key"], "internal")
+        self.assertIn("模拟崩溃", payload["results"][0]["error"])
 
     def test_custom_url_is_checked(self):
         folder = Path(tempfile.mkdtemp())

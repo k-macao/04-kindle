@@ -77,8 +77,12 @@ def count_items(payload):
     return len([node for node in root.iter() if node.tag.rsplit("}", 1)[-1] == "entry"])
 
 
-def check(url, fetch=http_get, timeout=15):
-    """取一条地址，返回 {url, ok, status, bytes, items, error}。"""
+def check(url, fetch=None, timeout=15):
+    """取一条地址，返回 {url, ok, status, bytes, items, error}。
+
+    `fetch` 传 None 就用 `http_get`——CLI 一路传下来的是 None，别让 None 把默认值顶掉。
+    """
+    fetch = fetch or http_get
     try:
         payload = fetch(url, timeout)
     except HTTPError as exc:
@@ -98,7 +102,8 @@ def check(url, fetch=http_get, timeout=15):
             "error": ""}
 
 
-def check_all(urls=FEED_URLS, fetch=http_get, timeout=15, log=None):
+def check_all(urls=FEED_URLS, fetch=None, timeout=15, log=None):
+    fetch = fetch or http_get
     results = []
     for key, label, url in urls:
         result = check(url, fetch=fetch, timeout=timeout)
@@ -140,7 +145,15 @@ def main(argv=None, fetch=None):
         urls.append((f"custom-{len(urls)}", "自定地址", extra))
 
     print(f"核对 {len(urls)} 条地址…")
-    results = check_all(urls, fetch=fetch, timeout=args.timeout, log=print)
+    try:
+        results = check_all(urls, fetch=fetch, timeout=args.timeout, log=print)
+    except Exception as exc:                      # noqa: BLE001  兜底：崩了也要留下可读结果
+        # 脚本自己出错时也要写出一份 JSON：工作流只靠这个文件判断「哪条地址不可用」，
+        # 没有文件的话那一步会连带失败，反而看不出真正原因。
+        print(f"核对脚本出错：{type(exc).__name__}: {exc}", file=sys.stderr)
+        results = [{"key": "internal", "label": "核对脚本", "url": "", "ok": False,
+                    "status": 0, "bytes": 0, "items": 0,
+                    "error": f"{type(exc).__name__}: {exc}"}]
     stats = summary(results)
     print(f"可用 {stats['ok']}/{stats['checked']} 条")
     if args.write:
