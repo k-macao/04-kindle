@@ -6,36 +6,33 @@
     <atom:link href="https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news-test.xml" rel="self" type="application/rss+xml"/>
     <description>每天 07:00（北京时间）从 RSSHub 抓取并合并的财经、政治与哲学思想新闻，英文条目附中文译文，本次 3 条。</description>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 07 Nov 2026 16:14:38 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 07 Nov 2026 16:23:31 +0000</lastBuildDate>
     <generator>04-kindle tools/build_feed.py</generator>
     <ttl>60</ttl>
     <item>
       <title>《财新周刊》第1230期</title>
       <link>https://weekly.caixin.com/2026/cw1230/</link>
       <guid isPermaLink="true">https://weekly.caixin.com/2026/cw1230/</guid>
-      <pubDate>Sat, 07 Nov 2026 16:12:05 +0000</pubDate>
+      <pubDate>Sat, 07 Nov 2026 16:21:15 +0000</pubDate>
       <category>中文财经深度</category>
       <source url="https://weekly.caixin.com">财新周刊</source>
       <description>封面报道 Cover Story “蓝色海啸”扑向特朗普 美国中期选举成为对特朗普的公投，共和党大败动摇其权力根基，任期进入更难预测的下半场 财新观察 Opin…</description>
     </item>
     <item>
-      <title>岳麓情结与湖湘文化</title>
-      <link>https://www.aisixiang.com/data/185280.html</link>
-      <guid isPermaLink="true">https://www.aisixiang.com/data/185280.html</guid>
-      <pubDate>Sat, 07 Nov 2026 16:08:00 +0000</pubDate>
-      <category>哲学与思想</category>
-      <source url="https://aisixiang.com">爱思想 · 最近更新</source>
-      <description>各位校友、郑校长及来自母校湖南师大的各位师长，各位嘉宾：上午好！（掌声） 当年在旧金山湾区启动湖南师大北美校友会的筹备，只是出于偶然中的自然，我不觉得那是特别重…</description>
+      <title>据俄新社：俄罗斯国防部表示，联盟-2.1B运载火箭搭载卫星在普列谢茨克航天发射场成功发射。</title>
+      <link>https://flash.jin10.com/detail/20261108002015348800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261108002015348800</guid>
+      <pubDate>Sat, 07 Nov 2026 16:20:15 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
     </item>
     <item>
-      <title>Senate Plan to Fast-Track Energy Projects Headed for a Showdown｜中文：参议院快速推进能源项目的计划即将摊牌</title>
-      <link>https://www.bloomberg.com/news/articles/2026-11-07/senate-plan-to-fast-track-energy-projects-headed-for-a-showdown</link>
-      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-07/senate-plan-to-fast-track-energy-projects-headed-for-a-showdown</guid>
-      <pubDate>Sat, 07 Nov 2026 16:00:00 +0000</pubDate>
-      <category>政治与政策</category>
-      <source url="https://bloomberg.com">彭博社 · 政治</source>
-      <description>中文：经过十多年的失败开始后，华盛顿的立法者即将推进一项法案，改革拜占庭体系，以批准电网现代化、建设人工智能和……所需的项目
-原文：After more tha…</description>
+      <title>伊朗大使：俄向伊输气超级项目在莫斯科会谈中获审议</title>
+      <link>https://flash.jin10.com/detail/20261108001954415800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261108001954415800</guid>
+      <pubDate>Sat, 07 Nov 2026 16:19:54 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
     </item>
   </channel>
 </rss>
