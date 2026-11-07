@@ -220,6 +220,16 @@ class GuardTest(unittest.TestCase):
                                        min_items=1, max_items=5)
         self.assertEqual(info["items"], 5)
 
+    def test_info_lists_failed_sources_with_reason(self):
+        data = payload(12)
+        data["sources"] = [{"key": "CLS", "ok": True},
+                           {"key": "COINDESK", "ok": False, "error": "HTTP 503: Service Unavailable"}]
+        info, _path = build_feed.build(data, Path(tempfile.mkdtemp()), now=NOW)
+        self.assertEqual(info["sources_ok"], 1)
+        self.assertEqual(info["sources_total"], 2)
+        self.assertEqual(info["sources_failed"][0][0], "COINDESK")
+        self.assertIn("503", info["sources_failed"][0][1])
+
     def test_info_counts_sources(self):
         data = payload(count=6)
         data["items"].append({**data["items"][0], "title": "另一条来自财新的新闻",

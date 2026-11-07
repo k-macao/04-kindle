@@ -172,9 +172,15 @@ def build(payload, out_dir, min_items=10, max_items=build_news.MAX_ITEMS, now=No
     target = out / "news.xml"
     target.write_text(xml, encoding="utf-8")
     newest = fetch_news.parse_published(items[0].get("published") or "")
+    reports = payload.get("sources") or []
     info = {
         "file": target.name,
         "items": len(items),
+        "sources_ok": sum(1 for report in reports if report.get("ok")),
+        "sources_total": len(reports),
+        # 失败源连同报错一起返回：工作流只出 xml、不写 news.json，日志是唯一的诊断入口。
+        "sources_failed": [(report.get("key"), (report.get("error") or "")[:120])
+                           for report in reports if not report.get("ok")],
         "zh": sum(1 for item in items if build_news.normalize(str(item.get("title_zh") or ""))),
         "bytes": target.stat().st_size,
         "built": rfc822(now),
@@ -208,7 +214,12 @@ def main(argv=None):
         print(f"生成失败：{exc}", file=sys.stderr)
         return 1
     print(f"完成：聚合 RSS {info['items']} 条（其中 {info['zh']} 条附中文译文）/ "
-          f"{info['sources']} 个源 / {info['bytes'] / 1024:.0f} KiB → {path}")
+          f"{info['sources']} 个源供稿 / {info['bytes'] / 1024:.0f} KiB → {path}")
+    if info["sources_total"] and info["sources_failed"]:
+        print(f"源：{info['sources_ok']}/{info['sources_total']} 可用，失败 "
+              f"{len(info['sources_failed'])} 条：")
+        for key, error in info["sources_failed"]:
+            print(f"  · {key}: {error}")
     print(f"订阅地址：{args.self_url}")
     mirror = jsdelivr_url(args.self_url)
     if mirror:
