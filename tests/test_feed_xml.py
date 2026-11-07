@@ -101,7 +101,7 @@ class ItemContentTest(unittest.TestCase):
 
     def test_category_is_the_group_label(self):
         self.assertEqual(self.one().findtext("category"), "中文财经快讯")
-        self.assertEqual(self.one(group="global").findtext("category"), "全球市场与加密")
+        self.assertEqual(self.one(group="global").findtext("category"), "全球市场与要闻")
 
     def test_link_is_the_guid_when_present(self):
         item = self.one()
@@ -145,7 +145,7 @@ class ChinesePairingTest(unittest.TestCase):
         info, root = self.build(data)
         items = root.findall("./channel/item")
         item = next(node for node in items if "Fed cuts" in (node.findtext("title") or ""))
-        self.assertIn("美联储降息 25 个基点", item.findtext("title"))
+        self.assertIn("中文：美联储降息 25 个基点", item.findtext("title"))
         self.assertIn("中文：美联储第二次下调利率", item.findtext("description"))
         self.assertIn("原文：The Fed lowered rates", item.findtext("description"))
         self.assertEqual(info["zh"], 1)

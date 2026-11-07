@@ -40,7 +40,7 @@
 GROUPS = [
     ("flash", "中文财经快讯"),
     ("depth", "中文财经深度"),
-    ("global", "全球市场与加密"),
+    ("global", "全球市场与要闻"),
     ("politics", "政治与政策"),
     ("thought", "哲学与思想"),
 ]
@@ -160,13 +160,15 @@ SOURCES = [
         "note": "yicai/latest.ts 的 path /latest，第一财经最新成稿。",
     },
     {
-        "key": "HK01",
-        "name": "香港01 · 即时",
+        "key": "MINGPAO_ECO",
+        "name": "明报 · 即时经济",
         "group": "depth",
         "lang": "zh",
-        "route": "/hk01/latest",
-        "site": "hk01.com",
-        "note": "hk01/latest.ts 的 path /latest，港股与香港政经的即时报道。",
+        "route": "/mingpao/ins/s00002",
+        "site": "news.mingpao.com",
+        "note": "mingpao/index.tsx 的 path /:type?/:category?，type=ins（即时）＋category=s00002（经济，"
+                "表见路由说明）。原来这里是香港01 即时（/hk01/latest）——它的列表混着娱乐稿，"
+                "实测抓到「璀璨之城大结局｜吴卓羲…」这种明星八卦，与财经政治无关，换掉。",
     },
     {
         "key": "WSCN_HK",
@@ -179,7 +181,7 @@ SOURCES = [
                 "（/xueqiu/hots），那条路由标着 requirePuppeteer: true——公共实例没有 Playwright，"
                 "必然取不到。",
     },
-    # ---------------- 三、全球市场与加密 ----------------
+    # ---------------- 三、全球市场与要闻 ----------------
     {
         "key": "BLOOMBERG_CRYPTO",
         "name": "彭博社 · 加密",
@@ -200,15 +202,15 @@ SOURCES = [
         "note": "bloomberg/index.ts 的 path /:site?，site=markets（站点表见路由说明）。",
     },
     {
-        "key": "APNEWS_BIZ",
-        "name": "AP News · 商业",
+        "key": "ECONOMIST_ESPRESSO",
+        "name": "经济学人 · Espresso",
         "group": "global",
         "lang": "en",
-        "route": "/apnews/rss/business",
-        "site": "apnews.com",
-        "note": "apnews/rss.ts 的 path /rss/:category?，直接转 AP 自带的官方 RSS（category 取站点 "
-                "URL 第一段，business 是商业）。原来这里是 CoinDesk（/coindesk/news），三轮都是"
-                "超时 / 503，换成上游自己就提供 RSS 的源——这类源最不容易挂。",
+        "route": "/economist/espresso",
+        "site": "economist.com",
+        "note": "economist/espresso.ts 的 path /espresso＝《经济学人》每日简报（The World in Brief），"
+                "英文条目自动附中文。原来这里是 CoinDesk（连挂三轮）→ AP News 商业（公共实例回 503），"
+                "两条都换掉。",
     },
     # ---------------- 四、政治与政策 ----------------
     {
@@ -266,6 +268,18 @@ SOURCES = [
         "max_age_hours": 336,
         "note": "psyche/type.ts 的 path /type/:type，type=ideas＝短篇思想随笔（Aeon 姊妹刊）。"
                 "英文条目自动附中文。",
+    },
+    {
+        "key": "MINGPAO_VIEW",
+        "name": "明报 · 观点",
+        "group": "thought",
+        "lang": "zh",
+        "route": "/mingpao/pns/s00012",
+        "site": "news.mingpao.com",
+        # 每日评论版，一天几篇但常隔天才有新稿。
+        "max_age_hours": 168,
+        "note": "mingpao/index.tsx 的 type=pns（每日明报）＋category=s00012（观点）。香港报纸的社评与"
+                "名家评论，中文语境里最接近「政治哲学随笔」的日常读物。",
     },
     {
         "key": "AISIXIANG",
