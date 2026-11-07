@@ -28,6 +28,9 @@
     feed    站点自己的原生 RSS 绝对地址（RSSHub 没有这条路由时才用）——与 route 二选一
     site    站点域名，只用于「这条源挂了，去问 Radar 该换哪个路由」（tools/radar_discover.py）
     lang    zh / en：标 en 的条目会被 tools/translate_news.py 自动补中文译文
+    max_age_hours  可选的单源时间窗（默认用全局 --max-age-hours 的 24 小时）。政策文件、
+                   哲学随笔本来就是周更甚至月更，用 24 小时窗口只会「解析出 30 条、收 0 条」；
+                   放宽窗口后靠 site/news_seen.json 的标题指纹保证不重复推。
     note    这条源是什么、为什么值得每天看
 """
 
@@ -157,16 +160,6 @@ SOURCES = [
         "note": "yicai/latest.ts 的 path /latest，第一财经最新成稿。",
     },
     {
-        "key": "YICAI_HEAD",
-        "name": "第一财经 · 头条",
-        "group": "depth",
-        "lang": "zh",
-        "route": "/yicai/headline",
-        "site": "yicai.com",
-        "note": "yicai/headline.ts 的 path /headline。原来这里是 WSJ 经济（/wsj/en-us/economy），"
-                "该路由标着 antiCrawler、机房 IP 必挂，换成同域名已验证可用的中文源。",
-    },
-    {
         "key": "HK01",
         "name": "香港01 · 即时",
         "group": "depth",
@@ -207,14 +200,15 @@ SOURCES = [
         "note": "bloomberg/index.ts 的 path /:site?，site=markets（站点表见路由说明）。",
     },
     {
-        "key": "COINDESK",
-        "name": "CoinDesk · 最新",
+        "key": "APNEWS_BIZ",
+        "name": "AP News · 商业",
         "group": "global",
         "lang": "en",
-        "route": "/coindesk/news",
-        "site": "coindesk.com",
-        "note": "coindesk/news.ts 的 path /news。2026-11-07 首轮返回 0 条（上游多半拦机房 IP），"
-                "先留着观察：清单里的 sources_failed 会记录它是否持续失败。",
+        "route": "/apnews/rss/business",
+        "site": "apnews.com",
+        "note": "apnews/rss.ts 的 path /rss/:category?，直接转 AP 自带的官方 RSS（category 取站点 "
+                "URL 第一段，business 是商业）。原来这里是 CoinDesk（/coindesk/news），三轮都是"
+                "超时 / 503，换成上游自己就提供 RSS 的源——这类源最不容易挂。",
     },
     # ---------------- 四、政治与政策 ----------------
     {
@@ -224,6 +218,8 @@ SOURCES = [
         "lang": "zh",
         "route": "/gov/zhengce/zuixin",
         "site": "www.gov.cn",
+        # 政策文件不是天天发：实测一次能解析 20 条，但 24 小时窗口里 0 条。
+        "max_age_hours": 168,
         "note": "gov/zhengce/zuixin.ts 的 path /zuixin（handler 复用 index.ts），国务院政策原文，"
                 "是判断「政策往哪走」的一手材料。",
     },
@@ -234,6 +230,7 @@ SOURCES = [
         "lang": "zh",
         "route": "/gov/mfa/wjdt/fyrbt",
         "site": "mfa.gov.cn",
+        "max_age_hours": 72,
         "note": "gov/mfa/wjdt.ts 的 path /wjdt/:category?，category=fyrbt＝发言人表态（表见路由说明），"
                 "国际政治的官方口径。",
     },
@@ -255,6 +252,7 @@ SOURCES = [
         "lang": "en",
         "route": "/aeon/category/philosophy",
         "site": "aeon.co",
+        "max_age_hours": 336,
         "note": "aeon/category.ts 的 path /category/:category，category=philosophy。长文思想随笔，"
                 "英文条目由 translate_news.py 自动附中文。",
     },
@@ -265,8 +263,22 @@ SOURCES = [
         "lang": "en",
         "route": "/psyche/type/ideas",
         "site": "psyche.co",
+        "max_age_hours": 336,
         "note": "psyche/type.ts 的 path /type/:type，type=ideas＝短篇思想随笔（Aeon 姊妹刊）。"
                 "英文条目自动附中文。",
+    },
+    {
+        "key": "AISIXIANG",
+        "name": "爱思想 · 最近更新",
+        "group": "thought",
+        "lang": "zh",
+        "route": "/aisixiang/toplist/10",
+        "site": "aisixiang.com",
+        # 学术随笔更新稀疏，给一周窗口。
+        "max_age_hours": 168,
+        "note": "aisixiang/toplist.ts 的 path /toplist/:id?/:period?，id=10＝最近更新文章"
+                "（表见路由说明：文章点击排行 1 / 最近更新文章 10 / 文章推荐排行 11）。"
+                "中文思想与学术圈的主要阵地，哲学/政治哲学的成篇文章都在这儿。",
     },
 ]
 
@@ -294,6 +306,9 @@ def catalog_errors():
             problems.append(f"{key}: 原生 feed 必须是 HTTPS 绝对地址：{feed!r}")
         if not source.get("name"):
             problems.append(f"{key}: 缺少显示名")
+        window = source.get("max_age_hours")
+        if window is not None and (not isinstance(window, (int, float)) or window <= 0):
+            problems.append(f"{key}: max_age_hours 必须是正数：{window!r}")
     return problems
 
 

@@ -331,6 +331,47 @@ class CollectTest(unittest.TestCase):
         self.assertEqual([item["title"] for item in items], ["较早的一条新闻", "较新的一条新闻"])
 
 
+class SourceWindowTest(unittest.TestCase):
+    """政策/哲学类源更新稀疏：单源放宽时间窗，否则「解析出 30 条、收 0 条」。"""
+
+    OLD = "Mon, 02 Nov 2026 02:00:00 +0800"      # 5 天前，全局 24 小时窗口外
+
+    def collect(self, max_age_hours, global_hours=24):
+        return fetch_news.collect(
+            sources=[{**source(), **({"max_age_hours": max_age_hours}
+                                     if max_age_hours else {})}],
+            instances=["https://rsshub.app"],
+            fetch=feed_fetch({"/cls/telegraph": rss_with(["五天前的一条政策文件"], published=self.OLD)}),
+            now=NOW, max_age_hours=global_hours, log=lambda *_: None)
+
+    def test_global_window_drops_it(self):
+        items, reports = self.collect(None)
+        self.assertEqual(items, [])
+        self.assertIn("24 小时窗口内 0 条", reports[0]["error"])
+
+    def test_source_window_keeps_it(self):
+        items, _reports = self.collect(168)
+        self.assertEqual([item["title"] for item in items], ["五天前的一条政策文件"])
+
+
+class CatalogWindowTest(unittest.TestCase):
+    def test_bad_max_age_hours_is_rejected(self):
+        broken = {**source(), "max_age_hours": -3}
+        original = news_sources.SOURCES
+        try:
+            news_sources.SOURCES = original + [broken]
+            problems = news_sources.catalog_errors()
+        finally:
+            news_sources.SOURCES = original
+        self.assertTrue(any("max_age_hours" in problem for problem in problems))
+
+    def test_shipped_catalog_has_sane_windows(self):
+        for item in news_sources.SOURCES:
+            window = item.get("max_age_hours")
+            if window is not None:
+                self.assertGreater(window, 24, item["key"])
+
+
 class SeenFileTest(unittest.TestCase):
     def test_round_trip_and_expiry(self):
         with tempfile.TemporaryDirectory() as folder:

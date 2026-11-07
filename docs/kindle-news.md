@@ -103,24 +103,35 @@ NetNewsWire / Feedly / Reeder / Inoreader 之类的阅读器。设备上如果 `
 | | 格隆汇·推荐 | `/gelonghui/home` |
 | | 格隆汇·日热文 | `/gelonghui/hot-article` |
 | | 第一财经·最新 | `/yicai/latest` |
-| | 第一财经·头条 | `/yicai/headline` |
 | | 香港01·即时 | `/hk01/latest` |
 | 全球 | 彭博社·市场 | `/bloomberg/markets` |
 | | 彭博社·加密 | `/bloomberg/crypto` |
-| | CoinDesk·最新 | `/coindesk/news` |
+| | AP News·商业 | `/apnews/rss/business` |
 | 政治 | 中国政府网·最新政策 | `/gov/zhengce/zuixin` |
 | | 外交部·发言人表态 | `/gov/mfa/wjdt/fyrbt` |
 | | 联合早报·国际 | `/zaobao/realtime/world` |
 | 思想 | Aeon·哲学 | `/aeon/category/philosophy` |
 | | Psyche·Ideas | `/psyche/type/ideas` |
+| | 爱思想·最近更新 | `/aisixiang/toplist/10` |
 
 2026-11-07 首轮真实运行（128 条 / 12 个源可用）换掉了四条**在机房 IP 上取不到**的源，理由都写在
 各自的 `note` 里：WSJ 经济标着 `antiCrawler`、路透商业被 Cloudflare 挡住、证券时报快讯与 21 财经热点
 返回 0 条。替换挑的是同域名下已验证能用的路由（华尔街见闻 A 股、第一财经头条、格隆汇日热文）和一个
 和华尔街见闻港股快讯。第二批运行又发现 雪球热帖 的 `requirePuppeteer: true`（公共实例没有
 Playwright，必挂），一并换成港股快讯——**加源前先看路由的 `features`**：`requirePuppeteer`、
-`requireConfig`、`antiCrawler` 这三种在公共实例上基本都取不到。CoinDesk 与第一财经头条暂时保留
-观察——清单里的 `sources_failed` 每轮都会记下失败的源。
+`requireConfig`、`antiCrawler` 这三种在公共实例上基本都取不到。
+
+2026-11-07 第三轮（加了政治与思想两组源之后）清单里出现了新教训：
+
+- **「解析出 N 条、时间窗内 0 条」不等于源坏了**。政策文件、哲学随笔本来就是周更甚至月更，
+  全局 24 小时窗口把它们整条滤掉。现在每条源可以单独写 `max_age_hours`（中国政府网 168、
+  外交部 72、Aeon/Psyche 336、爱思想 168），放宽后靠 `news_seen.json` 的标题指纹保证不重复推。
+- **CoinDesk 连挂三轮**（超时 / 503），换成 AP News 自带的官方 RSS（`/apnews/rss/business`）——
+  上游本身就提供 RSS 的源最不容易挂。
+- 第一财经头条能解析出 30 条但全部在窗口外（接口回的是老稿），与「第一财经·最新」重复，删掉。
+
+清单里的 `sources_failed` / `sources_error` / `instances_probe` 每轮都会记下失败源、具体报错
+和实例探活结果——不用翻 CI 日志也能判断是 403、超时，还是真的没更新。
 
 这些路由都按 RSSHub 仓库 `lib/routes/<namespace>/…` 里的 `route.path` 核对过（namespace 拼在路径前面）。
 注意 **namespace 是目录名，不是 `namespace.ts` 里的 `name`**：注册代码按顶层目录拼路径

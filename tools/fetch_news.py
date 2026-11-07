@@ -299,7 +299,6 @@ def collect(sources=None, instances=None, timeout=15, max_age_hours=24,
         instances = probe_instances(instances, fetch=fetch, timeout=min(timeout, 8), log=log,
                                     notes=probe_notes)
     sources = list(sources if sources is not None else news_sources.SOURCES)
-    horizon = now - timedelta(hours=max_age_hours)
     seen_titles = dict(seen or {})
     known = {}
     reports = []
@@ -308,6 +307,9 @@ def collect(sources=None, instances=None, timeout=15, max_age_hours=24,
     for source in sources:
         key = source["key"]
         feed = source.get("feed") or ""
+        # 单源时间窗：政策、哲学类更新稀疏，全局 24 小时会把它们整条滤掉。
+        source_horizon = now - timedelta(hours=float(source.get("max_age_hours")
+                                                     or max_age_hours))
         report = {"key": key, "name": source["name"], "group": source["group"],
                   "route": source.get("route") or "", "feed": feed, "ok": False, "count": 0,
                   "instance": "", "via": "feed" if feed else "instance", "error": "",
@@ -331,7 +333,7 @@ def collect(sources=None, instances=None, timeout=15, max_age_hours=24,
             fresh = []
             for item in items:
                 moment = item.pop("_moment")
-                if moment is not None and moment < horizon:
+                if moment is not None and moment < source_horizon:
                     continue
                 if is_garbled(item["title"]):
                     continue
@@ -341,7 +343,9 @@ def collect(sources=None, instances=None, timeout=15, max_age_hours=24,
             fresh.sort(key=lambda item: item["_moment"] or now, reverse=True)
             fresh = fresh[:per_source]
             if not fresh:
-                errors.append(f"{label}: 解析出 {len(items)} 条，时间窗内 0 条")
+                span = (f"{float(source.get('max_age_hours') or max_age_hours) / 24:.0f} 天"
+                        if source.get("max_age_hours") else f"{max_age_hours:g} 小时")
+                errors.append(f"{label}: 解析出 {len(items)} 条，{span}窗口内 0 条")
                 continue
             taken = 0
             for item in fresh:
