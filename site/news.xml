@@ -6,9 +6,18 @@
     <atom:link href="https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news.xml" rel="self" type="application/rss+xml"/>
     <description>每天 07:00（北京时间）从 RSSHub 抓取并合并的财经、政治与哲学思想新闻，英文条目附中文译文，本次 150 条。</description>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 07 Nov 2026 15:12:21 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 07 Nov 2026 15:14:31 +0000</lastBuildDate>
     <generator>04-kindle tools/build_feed.py</generator>
     <ttl>60</ttl>
+    <item>
+      <title>《财新周刊》第1230期</title>
+      <link>https://weekly.caixin.com/2026/cw1230/</link>
+      <guid isPermaLink="true">https://weekly.caixin.com/2026/cw1230/</guid>
+      <pubDate>Sun, 08 Nov 2026 16:00:00 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://weekly.caixin.com">财新周刊</source>
+      <description>封面报道 Cover Story “蓝色海啸”扑向特朗普 美国中期选举成为对特朗普的公投，共和党大败动摇其权力根基，任期进入更难预测的下半场 财新观察 Opinion 促进消费与投资良性互动 积极构建消费长效增长机制，推动居民“能消费、敢消费、愿消费” 时事 Current Affairs 职业打假转向 文｜财新周刊 周泰来 冯奕铭 治理恶意索赔和保护正当打假行为，应当如何平衡？ 联合国秘书长遴选陷胶着 文｜财新周刊 王克柔 联合国秘书…</description>
+    </item>
     <item>
       <title>How the Iran War Is Making Alaskans Both Richer and Poorer｜中文：伊朗战争如何使阿拉斯加人变得既富有又贫穷</title>
       <link>https://www.bloomberg.com/news/videos/2026-11-07/inside-alaska-s-oil-paradox-video</link>
@@ -1355,16 +1364,6 @@
       <source url="https://bloomberg.com">彭博社 · 政治</source>
       <description>中文：在本周加息后，捷克总理安德烈·巴比斯(Andrej Babis)加大了对捷克央行的公开批评力度，称央行的决定“绝对是可耻的” ，并表示这将伤害众议院……
 原文：Czech Prime Minister Andrej Babis stepped up his public criticism of the country’s central bank following this week’s interest-rate hike, calling the board’s decision “absolutely scandalous” and saying it will hurt house…</description>
-    </item>
-    <item>
-      <title>Finland Considers Ukraine-Style Tank Barriers as Russia Rearms｜中文：随着俄罗斯的重建，芬兰认为乌克兰式坦克壁垒</title>
-      <link>https://www.bloomberg.com/news/articles/2026-11-07/finland-considers-ukraine-style-tank-barriers-as-russia-rearms</link>
-      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-07/finland-considers-ukraine-style-tank-barriers-as-russia-rearms</guid>
-      <pubDate>Sat, 07 Nov 2026 07:00:03 +0000</pubDate>
-      <category>政治与政策</category>
-      <source url="https://bloomberg.com">彭博社 · 政治</source>
-      <description>中文：在乌克兰，反坦克障碍减缓了袭击者的速度。现在，芬兰希望看到这些建筑在恶劣的北方天气下如何运作
-原文：In Ukraine, anti-tank obstacles have slowed the attacker. Now Finland wants to see how such structures would fare in harsh northern weather.</description>
     </item>
   </channel>
 </rss>

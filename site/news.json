@@ -1,23 +1,22 @@
 {
-  "generated": "2026-11-07T15:12:21+00:00",
+  "generated": "2026-11-07T15:14:31+00:00",
   "doc": "news.epub",
   "title": "004 新闻订阅",
-  "chars": 35211,
-  "bytes": 41501,
+  "chars": 35173,
+  "bytes": 41581,
   "sections": 5,
   "items": 150,
-  "sources_ok": 23,
+  "sources_ok": 24,
   "sources_total": 25,
   "sources_failed": [
-    "MINGPAO_ECO",
-    "MINGPAO_VIEW"
+    "AISIXIANG_REC"
   ],
-  "english": 27,
-  "zh_added": 27,
+  "english": 26,
+  "zh_added": 26,
   "zh_missing": 0,
   "instances_used": {
-    "https://rsshub.rss.tips": 121,
-    "https://rsshub.isrss.com": 78
+    "https://rsshub.rss.tips": 125,
+    "https://rsshub.isrss.com": 77
   },
   "instances_probe": {
     "https://rsshub.app": {
@@ -38,10 +37,9 @@
     }
   },
   "sources_error": {
-    "MINGPAO_ECO": "https://rsshub.rss.tips: The read operation timed out；https://rsshub.isrss.com: HTTP Error 503: Service Unavailable；https://rsshub.cups.moe: The read operation timed out",
-    "MINGPAO_VIEW": "https://rsshub.isrss.com: HTTP Error 503: Service Unavailable；https://rsshub.cups.moe: XML 解析失败：syntax error: line 1, column 0；https://rsshub.app: HTTP Error 403: Forbidden"
+    "AISIXIANG_REC": "https://rsshub.isrss.com: 解析出 29 条，14 天窗口内 0 条；https://rsshub.cups.moe: 解析出 29 条，14 天窗口内 0 条；https://rsshub.app: HTTP Error 403: Forbidden"
   },
-  "data_time": "2026-11-07T15:04:03Z",
+  "data_time": "2026-11-08T16:00:00Z",
   "data_time_kind": "item",
   "source": "RSSHub"
 }
