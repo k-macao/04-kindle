@@ -9,7 +9,8 @@
     site/news.epub   单文件 EPUB 3，按「快讯 / 深度 / 全球」分节，条目＝标题 + 来源与
                      北京时间 + 一句摘要
     site/news.json   清单：{"generated", "doc", "title", "chars", "bytes", "sections",
-                            "items", "sources_ok", "sources_total", "data_time", ...}
+                            "items", "sources_ok", "sources_total", "sources_failed",
+                            "data_time", ...}
     news.txt         同一份内容的纯文本（设备文本模式可以直接读它）
 
 清单里的 `doc` 与 `generated` 是插件那套 EPUB 流程要的字段：`generated` 变了才会重下，
@@ -213,6 +214,7 @@ def build(payload, out_dir, min_items=10, max_items=MAX_ITEMS, now=None):
                        sections=sections, data_time=data_time or None,
                        data_time_kind="item" if data_time else None,
                        style=NEWS_STYLE_CSS)
+    failed = [report.get("key") for report in reports if not report.get("ok")]
     manifest = {
         "generated": now.isoformat(timespec="seconds"),
         "doc": "news.epub",
@@ -223,6 +225,8 @@ def build(payload, out_dir, min_items=10, max_items=MAX_ITEMS, now=None):
         "items": len(items),
         "sources_ok": sources_ok,
         "sources_total": sources_total,
+        # 哪些源这轮没取到：写进提交过的清单里，第二天就能看出是偶发还是常死。
+        "sources_failed": failed,
         "data_time": data_time,
         "data_time_kind": "item" if data_time else "",
         "source": "RSSHub",

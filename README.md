@@ -71,9 +71,12 @@ python tools/build_news.py --data news_data.json --out site
 ```
 
 产出 `site/news.epub`（按「快讯 / 深度 / 全球」分节，每天一本）、清单 `site/news.json` 和
-`site/news.txt`。源目录在 `tools/news_sources.py`，17 条 RSSHub 路由（财联社电报、华尔街见闻、
-金十、证券时报快讯、同花顺、第一财经、新浪股市滚动、财新、格隆汇、香港01、21 财经、路透、彭博、
-WSJ、CoinDesk 等），挑的都是 004 那 49 条之外的站点，路由按 RSSHub 仓库里的 `route.path` 核对过。
+`site/news.txt`。源目录在 `tools/news_sources.py`，18 条 RSSHub 路由（财联社电报、华尔街见闻的要闻与
+A 股快讯、金十、同花顺、第一财经的简报/最新/头条、新浪股市滚动、财新、格隆汇的推荐与日热文、香港01、
+雪球热帖、彭博的市场与加密、CoinDesk），挑的都是 004 那 49 条之外的站点，路由按 RSSHub 仓库里的
+`route.path` 核对过。英文大站（路透、WSJ）实测在机房 IP 上取不到（Cloudflare / `antiCrawler`），
+已经换成同域名下能用的中文源；换掉的原因写在目录的 `note` 里，清单里的 `sources_failed` 会记录
+每轮失败的源，持续失败就该换。
 
 分工很明确：**抓取只负责按路由取回并归一化**（`news_data.json`），**排版只负责判断与生成**
 （条目不足 10 条、乱码超标就退出码 1、不覆盖旧产物）。一层是纯数据、一层是纯文档，排错了不用重抓。
@@ -101,7 +104,26 @@ News subscription**。之后和字模式一样——每 60 秒只拉几百字节
 4. 有硬件唤醒时尝试使用 KOReader 唤醒管理器；否则保持设备唤醒并使用软件计时。是否支持取决于 Oasis 1 的 KOReader 构建。Wi-Fi 保持开启；一分钟联网和翻页会增加耗电。
 
 请求失败时保留并轮播本地上次成功内容；文本模式顶部显示 `OFFLINE / CACHED`，图片模式整屏无状态栏，
-失败会弹一次提示、详情见菜单 `Status`；状态菜单可查看错误和最近成功检查时间。成功检查时间不是源数据时间，报告开头的转换时间也不是源数据时间，数据新鲜度以报告正文中的行情/采集时间为准。KOReader 退出、关机、网络故障或系统休眠等可能中断刷新。屏幕上的内容可能是旧的，不能用于需要实时数据的决策。
+失败会弹一次提示、详情见菜单 `Status`；状态菜单可查看错误和最近成功检查时间。
+
+### 地址连不上时（`network failure`）
+
+本仓库没有开 GitHub Pages，公开可取的只有
+`https://raw.githubusercontent.com/<owner>/<repo>/<ref>/<path>`——这个域名在部分网络里会被拦，
+设备上就只显示一句 `network failure`。插件现在：
+
+- **自动换镜像**：`raw.githubusercontent.com/…` 会先试
+  `https://<owner>.github.io/<repo>/<path>`（仓库开了 Pages 才有；它和你读 004 报告用的是同一个域名，
+  没开时只是一次很快的 404），再试 `cdn.jsdelivr.net` / `fastly.jsdelivr.net` / `gcore.jsdelivr.net` /
+  `testingcf.jsdelivr.net` 上的同一份文件（`https://<cdn>/gh/<owner>/<repo>@<ref>/<path>`）；
+  反过来填 jsDelivr / Pages 地址时也会回退到 raw。清单和 EPUB 都走这条路，正文的相对路径以
+  **真正成功**的那个地址为基准；
+- **一个框填多个地址**：空格、逗号、分号或换行分隔，按顺序试，全部失败才报错；
+- **说清楚卡在哪**：状态页与弹窗给出每个地址的失败原因和一句提示（DNS 被拦 / 超时 / TLS 证书 / HTTP 4xx）；
+- **菜单 → Check URLs (network)**：用 10 秒超时把每个候选地址单独试一遍，直接告诉你这台设备上
+  哪个地址能用（jsDelivr 会缓存分支内容，自动刷新会带一个每分钟变化的查询串尽量绕开）。
+
+网络恢复后下一次 60 秒的检查会自动重试，不需要重启 KOReader。成功检查时间不是源数据时间，报告开头的转换时间也不是源数据时间，数据新鲜度以报告正文中的行情/采集时间为准。KOReader 退出、关机、网络故障或系统休眠等可能中断刷新。屏幕上的内容可能是旧的，不能用于需要实时数据的决策。
 
 ## 内容范围
 
