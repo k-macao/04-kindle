@@ -1,24 +1,23 @@
 {
-  "generated": "2026-11-07T15:08:46+00:00",
+  "generated": "2026-11-07T15:12:21+00:00",
   "doc": "news.epub",
   "title": "004 新闻订阅",
-  "chars": 33394,
-  "bytes": 41136,
+  "chars": 35211,
+  "bytes": 41501,
   "sections": 5,
   "items": 150,
-  "sources_ok": 22,
-  "sources_total": 24,
+  "sources_ok": 23,
+  "sources_total": 25,
   "sources_failed": [
     "MINGPAO_ECO",
-    "ECONOMIST_ESPRESSO"
+    "MINGPAO_VIEW"
   ],
-  "english": 12,
-  "zh_added": 12,
+  "english": 27,
+  "zh_added": 27,
   "zh_missing": 0,
   "instances_used": {
-    "https://rsshub.rss.tips": 101,
-    "https://rsshub.isrss.com": 74,
-    "https://rsshub.cups.moe": 11
+    "https://rsshub.rss.tips": 121,
+    "https://rsshub.isrss.com": 78
   },
   "instances_probe": {
     "https://rsshub.app": {
@@ -39,8 +38,8 @@
     }
   },
   "sources_error": {
-    "MINGPAO_ECO": "https://rsshub.rss.tips: The read operation timed out；https://rsshub.isrss.com: HTTP Error 503: Service Unavailable；https://rsshub.cups.moe: HTTP Error 503: Service Unavailable",
-    "ECONOMIST_ESPRESSO": "https://rsshub.rss.tips: The read operation timed out；https://rsshub.isrss.com: HTTP Error 503: Service Unavailable；https://rsshub.cups.moe: HTTP Error 503: Service Unavailable"
+    "MINGPAO_ECO": "https://rsshub.rss.tips: The read operation timed out；https://rsshub.isrss.com: HTTP Error 503: Service Unavailable；https://rsshub.cups.moe: The read operation timed out",
+    "MINGPAO_VIEW": "https://rsshub.isrss.com: HTTP Error 503: Service Unavailable；https://rsshub.cups.moe: XML 解析失败：syntax error: line 1, column 0；https://rsshub.app: HTTP Error 403: Forbidden"
   },
   "data_time": "2026-11-07T15:04:03Z",
   "data_time_kind": "item",

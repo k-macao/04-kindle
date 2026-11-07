@@ -6,7 +6,7 @@
     <atom:link href="https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news.xml" rel="self" type="application/rss+xml"/>
     <description>每天 07:00（北京时间）从 RSSHub 抓取并合并的财经、政治与哲学思想新闻，英文条目附中文译文，本次 150 条。</description>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 07 Nov 2026 15:08:46 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 07 Nov 2026 15:12:21 +0000</lastBuildDate>
     <generator>04-kindle tools/build_feed.py</generator>
     <ttl>60</ttl>
     <item>
@@ -27,6 +27,36 @@
       <category>中文财经深度</category>
       <source url="https://yicai.com">第一财经 · 最新</source>
       <description>“十五五”期间上海加快国际航运中心建设，抓住由规模领先迈向能级跃升的最佳窗口期。 本期的节目呈现的是“2026北外滩国际航运论坛·夜话”的精彩内容。主题为“御浪而行：穿越潮汐的航运力量”。来自港口运营、船舶技术、金融保险、政策研究等航运业的权威专家：中国港口协会秘书长丁莉、中国船级社原社长孙峰、中国太保总经理助理上海航运保险协会原会长徐峰、上海国际航运研究中心秘书长张婕姝和第一财经主持人李欣，深入探讨上海如何加快国际航运中心建设，寻找穿…</description>
+    </item>
+    <item>
+      <title>Texas and Georgia Enter a New Political Era｜中文：德克萨斯州和佐治亚州进入新的政治时代</title>
+      <link>https://www.bloomberg.com/news/videos/2026-11-07/texas-and-georgia-enter-a-new-political-era-video</link>
+      <guid isPermaLink="true">https://www.bloomberg.com/news/videos/2026-11-07/texas-and-georgia-enter-a-new-political-era-video</guid>
+      <pubDate>Sat, 07 Nov 2026 14:55:20 +0000</pubDate>
+      <category>政治与政策</category>
+      <source url="https://bloomberg.com">彭博社 · 政治</source>
+      <description>中文：在《彭博本周末》（ Bloomberg This Weekend ）上，《纽约时报》德克萨斯州政治记者劳伦·麦高伊（ Lauren McGaughy ）和《亚特兰大日报-宪法》华盛顿分社社长蒂亚·米切尔（ Tia Mitche
+原文：On Bloomberg This Weekend, New York Times Texas political correspondent Lauren McGaughy and Atlanta Journal-Constitution Washington Bureau Chief Tia Mitchell examine Democratic gains that transformed the political landsc…</description>
+    </item>
+    <item>
+      <title>ECB’s Lagarde Says Inflation Likely to Stay High in Near Future｜中文：欧洲央行的拉加德表示，通货膨胀可能在不久的将来保持高位</title>
+      <link>https://www.bloomberg.com/news/articles/2026-11-07/ecb-s-lagarde-says-inflation-likely-to-stay-high-in-near-future</link>
+      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-07/ecb-s-lagarde-says-inflation-likely-to-stay-high-in-near-future</guid>
+      <pubDate>Sat, 07 Nov 2026 14:52:20 +0000</pubDate>
+      <category>全球市场与要闻</category>
+      <source url="https://bloomberg.com">彭博社 · 经济</source>
+      <description>中文：欧洲央行行长克里斯蒂娜·拉加德（ Christine Lagarde ）告诉日本报纸《读卖新闻》（ Yomiuri Shimbun ） ，通货膨胀可能在不久的将来保持高位，并补充说，到目前为止，第二轮的影响并不比预期的更糟糕
+原文：Inflation is likely to remain high in the near future, European Central Bank President Christine Lagarde told the Japanese newspaper Yomiuri Shimbun, adding that second-round effects so far are no worse than anticipated.</description>
+    </item>
+    <item>
+      <title>Germany Sees Fighter Jet Decision by March, Minister Tells Funke｜中文：德国在3月前看到战斗机的决定，部长告诉Funke</title>
+      <link>https://www.bloomberg.com/news/articles/2026-11-07/germany-sees-fighter-jet-decision-by-march-minister-tells-funke</link>
+      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-07/germany-sees-fighter-jet-decision-by-march-minister-tells-funke</guid>
+      <pubDate>Sat, 07 Nov 2026 14:43:24 +0000</pubDate>
+      <category>政治与政策</category>
+      <source url="https://bloomberg.com">彭博社 · 政治</source>
+      <description>中文：德国国防部长鲍里斯·皮斯托瑞斯（ Boris Pistorius ）预计，在Franco-G报废后，将在2027年3月底之前决定建立新的空战伙伴关系，共同建造下一代战斗机……
+原文：German Defense Minister Boris Pistorius expects a decision on the formation of a new air combat partnership to jointly build a next-generation fighter jet by the end of March 2027, following the scrapping of the Franco-G…</description>
     </item>
     <item>
       <title>伯克希尔哈撒韦第三季度回购规模翻倍，利润下降</title>
@@ -172,6 +202,16 @@
       <description>日本 政府决定投入100亿日元（约8100万新元），组建中央抗黑客团队，全面应对日益猖獗的网络攻击。 日本政府认为，随着 人工智能 （AI） 技术快速发展，网络攻击的性质也在迅速变化，必须据此加强防范，保护金融机构等关键基础设施，避免社会和经济活动陷入瘫痪。 日本首相 高市早苗 星期五（11月6日）召开网络安全阁僚会议，指示负责网络安全保障事务的数码部长古川俊治修订《网络应对能力强化法》，加强各项网安措施。 她在会上强调，要汇集政府与民…</description>
     </item>
     <item>
+      <title>US Launches Effort to Disrupt Land Routes Iran Uses to Ship Arms｜中文：美国开始破坏伊朗用于运送武器的陆路路线</title>
+      <link>https://www.bloomberg.com/news/articles/2026-11-07/us-launches-effort-to-disrupt-land-routes-iran-uses-to-ship-arms</link>
+      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-07/us-launches-effort-to-disrupt-land-routes-iran-uses-to-ship-arms</guid>
+      <pubDate>Sat, 07 Nov 2026 14:05:02 +0000</pubDate>
+      <category>政治与政策</category>
+      <source url="https://bloomberg.com">彭博社 · 政治</source>
+      <description>中文：美国军方表示，它正在建立一个特别单位，以帮助封锁伊朗用于运输先进武器和其他材料的路线
+原文：The US military said it’s creating a special unit to help block routes Iran uses to transport advanced weapons and other materials.</description>
+    </item>
+    <item>
       <title>美联储收紧政策但长债收益率却在回落，金价何时才能重拾升势？</title>
       <link>jin10:index:20261107220338753800</link>
       <guid isPermaLink="true">jin10:index:20261107220338753800</guid>
@@ -272,6 +312,16 @@
 原文：Turkish authorities arrested the former deputy chairman of the country’s markets regulator, state-run Anadolu Agency reported on Saturday, the latest executive to be caught up in a widening fund scandal.</description>
     </item>
     <item>
+      <title>Haiti Kills Gang Chief as El Salvador, Mercenaries Add Pressure｜中文：海地杀害萨尔瓦多帮派首领，雇佣军增加压力</title>
+      <link>https://www.bloomberg.com/news/articles/2026-11-07/haiti-kills-gang-chief-as-el-salvador-merceneries-add-pressure</link>
+      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-07/haiti-kills-gang-chief-as-el-salvador-merceneries-add-pressure</guid>
+      <pubDate>Sat, 07 Nov 2026 13:52:16 +0000</pubDate>
+      <category>政治与政策</category>
+      <source url="https://bloomberg.com">彭博社 · 政治</source>
+      <description>中文：海地官员说，他们在首都杀死了一名主要的帮派头目，作为私人雇佣军，至少有2000名萨尔瓦多军队参加了重新控制这个陷入困境的加勒比国家的战斗
+原文：Haitian officials said they had killed a major gang leader in the capital as private mercenaries and at least 2,000 El Salvadoran troops join the fight to regain control of the troubled Caribbean nation.</description>
+    </item>
+    <item>
       <title>美中央司令部成立特遣队 阻止伊朗通过陆路运输先进武器</title>
       <link>https://news.10jqka.com.cn/20261107/c681579657.shtml</link>
       <guid isPermaLink="true">https://news.10jqka.com.cn/20261107/c681579657.shtml</guid>
@@ -331,6 +381,16 @@
       <category>中文财经快讯</category>
       <source url="https://sina.com.cn">新浪 · 股市滚动</source>
       <description>据消息人士周六透露，英伟达公司高级总监、首席执行官黄仁勋之女黄敏珊原定的韩国之行已被突然取消。 黄敏珊原计划于周日访问韩国，出席将于周一和周二在首尔COEX展览中心举行的“英伟达人工智能日首尔2026”活动，并与韩国政府官员会面。 但消息人士称，由于“家庭原因”，她的行程被突然取消，但未透露具体细节。 .appendQr_wrap{border:1px solid #E6E6E6;padding:8px;} .appendQr_norm…</description>
+    </item>
+    <item>
+      <title>Miller Elevation Sets Up Clash With Democrats｜中文：米勒高地与民主党人发生冲突</title>
+      <link>https://www.bloomberg.com/news/videos/2026-11-07/miller-elevation-sets-up-clash-with-democrats-video</link>
+      <guid isPermaLink="true">https://www.bloomberg.com/news/videos/2026-11-07/miller-elevation-sets-up-clash-with-democrats-video</guid>
+      <pubDate>Sat, 07 Nov 2026 13:39:46 +0000</pubDate>
+      <category>政治与政策</category>
+      <source url="https://bloomberg.com">彭博社 · 政治</source>
+      <description>中文：在《彭博本周末》（ Bloomberg This Weekend ）上，《权力的平衡》（ Balance of Power ）杂志的乔·马蒂厄（ Joe Mathieu ）讨论了唐纳德·特朗普（ Donald Trump ）总统对斯蒂芬·米勒（ Stephen Miller ）的提升，以及白宫对新
+原文：On Bloomberg This Weekend, Balance of Power's Joe Mathieu discusses President Donald Trump's elevation of Stephen Miller and what it signals about the White House's approach to a newly Democratic Congress. Mathieu tells…</description>
     </item>
     <item>
       <title>联合国人道主义事务协调办公室：加沙的紧急物资储备不足以满足受雨灾影响者的需求，必须立即允许冬季物资入境。</title>
@@ -448,6 +508,16 @@
 原文：The guide for when to pee during movies, taking PTO to play GTA, ignoring the Foie Gras ban, and kids loving their mom and dad's music: Join Lisa Mateo, David Gura and Christina Ruffini for a roundup of headlines you may…</description>
     </item>
     <item>
+      <title>Russia Upgrades Its Delegation for US-Led Ukraine Peace Talks in Abu Dhabi｜中文：俄罗斯代表团在阿布扎比升级参加美国主导的乌克兰和平谈判</title>
+      <link>https://www.bloomberg.com/news/articles/2026-11-07/russia-upgrades-its-delegation-for-us-led-ukraine-peace-talks-in-abu-dhabi</link>
+      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-07/russia-upgrades-its-delegation-for-us-led-ukraine-peace-talks-in-abu-dhabi</guid>
+      <pubDate>Sat, 07 Nov 2026 13:25:27 +0000</pubDate>
+      <category>政治与政策</category>
+      <source url="https://bloomberg.com">彭博社 · 政治</source>
+      <description>中文：与前几轮谈判相比，俄罗斯将派遣一支更高级别的团队参加美国在阿布扎比与乌克兰举行的谈判，这暗示在经历了数月的外交僵局后，俄罗斯将对更实质性的谈判持开放态度
+原文：Russia is sending a higher-level team to US-mediated talks with Ukraine in Abu Dhabi than to previous rounds, hinting at an openness to more substantive negotiations after months of diplomatic deadlock.</description>
+    </item>
+    <item>
       <title>英伟达CEO女儿取消原定访韩计划。（韩联社）</title>
       <link>https://wallstreetcn.com/livenews/3196428</link>
       <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196428</guid>
@@ -507,6 +577,16 @@
       <pubDate>Sat, 07 Nov 2026 13:08:58 +0000</pubDate>
       <category>中文财经快讯</category>
       <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+    </item>
+    <item>
+      <title>Democrats Could Reshape Trump's Foreign Policy｜中文：民主党人可能会重塑特朗普的外交政策</title>
+      <link>https://www.bloomberg.com/news/videos/2026-11-07/democrats-could-reshape-trump-s-foreign-policy-video</link>
+      <guid isPermaLink="true">https://www.bloomberg.com/news/videos/2026-11-07/democrats-could-reshape-trump-s-foreign-policy-video</guid>
+      <pubDate>Sat, 07 Nov 2026 13:07:28 +0000</pubDate>
+      <category>政治与政策</category>
+      <source url="https://bloomberg.com">彭博社 · 政治</source>
+      <description>中文：在《彭博本周末》（ Bloomberg This Weekend ）上，彭博经济学（ Bloomberg Economics ）的克里斯·肯尼迪（ Chris Kennedy ）探讨了民主党接管国会可能如何制约唐纳德·特朗普（ Donald Trump ）总统的部分外交政策，包括通
+原文：On Bloomberg This Weekend, Bloomberg Economics' Chris Kennedy examines how the Democratic takeover of Congress could constrain parts of President Donald Trump's foreign policy, including through spending decisions, Ukrai…</description>
     </item>
     <item>
       <title>2499元“推不倒”智能指环遭质疑，品牌店铺已下架产品</title>
@@ -806,6 +886,16 @@
       <description>今年第32号台风“查帕卡”（热带风暴级）于11月7日下午2时在西北太平洋洋面生成，下午5时中心位于美国关岛北偏西约760公里洋面。预计其将以每小时30公里的速度向西偏北方向移动，强度逐渐加强，未来对我国海区无影响。（中国天气网）</description>
     </item>
     <item>
+      <title>Polish Finance Minister Faults President for S&amp;P’s Negative View｜中文：波兰财政部长指责标普总裁持负面看法</title>
+      <link>https://www.bloomberg.com/news/articles/2026-11-07/polish-finance-minister-faults-president-for-s-p-s-negative-view</link>
+      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-07/polish-finance-minister-faults-president-for-s-p-s-negative-view</guid>
+      <pubDate>Sat, 07 Nov 2026 11:51:21 +0000</pubDate>
+      <category>政治与政策</category>
+      <source url="https://bloomberg.com">彭博社 · 政治</source>
+      <description>中文：波兰财政部长指责波兰总统卡罗尔·纳罗茨基（ Karol Nawrocki ）使用否决权阻止关键立法，导致标准普尔全球评级（ S&amp;P Global Rating ）决定降低对该国债务的前景
+原文：Poland’s finance minister blamed President Karol Nawrocki’s use of veto powers to block key legislation for contributing to S&amp;P Global Rating’s decision to lower its outlook on the country’s debt.</description>
+    </item>
+    <item>
       <title>被年轻人遗忘的磁带，正在 AI 时代闷声发大财</title>
       <link>https://wallstreetcn.com/articles/3785448</link>
       <guid isPermaLink="true">https://wallstreetcn.com/articles/3785448</guid>
@@ -813,6 +903,16 @@
       <category>中文财经深度</category>
       <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
       <description>谁能想到，磁带竟然在 AI 时代迎来了第二春。 10 月 29 日，日本富士胶片宣布投资约 100 亿日元（约合人民币 4.22 亿元），计划在 2026 至 2028 财年扩建神奈川县小田原工厂，将数据存储磁带的产能提升至 2025 财年的五倍，重点生产最新一代 LTO Ultrium 10 磁带。 按照富士胶片的说法，这是近 20 年来针对 LTO 磁带专用设施规模最大的一笔投资，而推动扩产的主要原因，正是生成式 AI 带来的海量数…</description>
+    </item>
+    <item>
+      <title>Xi’s Tightening China Grip Risks Less Innovation: New Economy｜中文：习近平紧缩中国握力风险较小创新：新经济</title>
+      <link>https://www.bloomberg.com/news/newsletters/2026-11-07/xi-s-tightening-china-grip-risks-less-innovation-new-economy</link>
+      <guid isPermaLink="true">https://www.bloomberg.com/news/newsletters/2026-11-07/xi-s-tightening-china-grip-risks-less-innovation-new-economy</guid>
+      <pubDate>Sat, 07 Nov 2026 11:45:01 +0000</pubDate>
+      <category>全球市场与要闻</category>
+      <source url="https://bloomberg.com">彭博社 · 经济</source>
+      <description>中文：在中国共产党掌舵约14年后，他仍然专注于建立忠诚和服从
+原文：Some 14 years after taking the Chinese Communist Party’s helm, he remains focused on instituting loyalty and obedience.</description>
     </item>
     <item>
       <title>也门遭沙特空袭致22死30伤 | 据央视新闻，也门胡塞武装当地时间7日表示，沙特主导的联军当天对也门萨那以东的巴尼哈希什地区发动空袭，造成多人伤亡。据...</title>
@@ -1089,6 +1189,16 @@
       <description>私募巨头Apollo Global Management正以前所未有的规模押注AI芯片市场，其两笔待完成的芯片交易合计金额高达750亿美元，不仅远超最大neocloud CoreWeave自2023年以来累计270亿美元的芯片融资规模，更是排名第二的竞争对手的逾10倍。 据The Information最新报道， SpaceX宣布将租用价值400亿美元的英伟达Vera Rubin芯片，而Apollo将通过旗下子公司购入这批芯片后再租赁给…</description>
     </item>
     <item>
+      <title>Charting the Global Economy: Job Growth in US Tops All Forecasts｜中文：描绘全球经济：美国就业增长高于所有预测</title>
+      <link>https://www.bloomberg.com/news/articles/2026-11-07/charting-the-global-economy-job-growth-in-us-tops-all-forecasts</link>
+      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-07/charting-the-global-economy-job-growth-in-us-tops-all-forecasts</guid>
+      <pubDate>Sat, 07 Nov 2026 10:00:00 +0000</pubDate>
+      <category>全球市场与要闻</category>
+      <source url="https://bloomberg.com">彭博社 · 经济</source>
+      <description>中文：上个月美国的就业增长超过了所有预测，失业率下降，工人工资上涨，因为稳健的经济活动支撑了劳动力市场
+原文：Employment growth in the US last month exceeded all projections, the jobless rate fell and worker pay rose as solid economic activity bolstered the labor market.</description>
+    </item>
+    <item>
       <title>第七届世界媒体峰会先导片《AI赋能，共赴新程》正式发布</title>
       <link>https://wallstreetcn.com/livenews/3196402</link>
       <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196402</guid>
@@ -1134,6 +1244,16 @@
       <description>11月6日，商务部与奥地利联邦经济、能源和旅游部在北京共同主办中国—奥地利企业家委员会首次会议。王文涛部长与哈特曼斯多费尔部长出席会议并致辞，中奥两国政经界代表100余人参会。王文涛表示，今年是中奥建交55周年，在两国领导人战略引领下，中奥双方秉持开放包容理念，推动双边经贸合作取得丰硕成果。双方共同成立中奥企业家委员会，将为两国经济界搭建双向奔赴的桥梁，推动中国“十五五”规划和奥地利《工业战略2035》深入对接。期待双方企业用好企委会机…</description>
     </item>
     <item>
+      <title>Kyiv Faces Russian Missile Barrage, Naftogaz Facilities Damaged｜中文：基辅面临俄罗斯导弹炮击， Naftogaz设施受损</title>
+      <link>https://www.bloomberg.com/news/articles/2026-11-07/kyiv-faces-russian-missile-barrage-hits-saratov-oil-refinery</link>
+      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-07/kyiv-faces-russian-missile-barrage-hits-saratov-oil-refinery</guid>
+      <pubDate>Sat, 07 Nov 2026 09:21:06 +0000</pubDate>
+      <category>政治与政策</category>
+      <source url="https://bloomberg.com">彭博社 · 政治</source>
+      <description>中文：乌克兰首都和基辅周边地区一夜之间面临另一次俄罗斯导弹袭击，目标是能源设施和桥梁，至少有一名平民死亡，数人受伤
+原文：Ukraine’s capital and the region surrounding Kyiv faced another Russian missile barrage overnight targeting energy facilities and bridges, with at least one civilian killed and several injured.</description>
+    </item>
+    <item>
       <title>王仰晨与若干美术家的过从｜收藏</title>
       <link>https://mini.caixin.com/2026-11-07/102502222.html</link>
       <guid isPermaLink="true">https://mini.caixin.com/2026-11-07/102502222.html</guid>
@@ -1159,6 +1279,26 @@
       <category>中文财经快讯</category>
       <source url="https://wallstreetcn.com">华尔街见闻 · 港股快讯</source>
       <description>当地时间7日，伊朗外长阿拉格齐表示，过去48小时内，其分别与阿曼、埃及、约旦、沙特、卡塔尔、巴基斯坦等12个国家外长通电话，回顾并交换了对最新地区和国际局势发展以及美以不断升级其行动所带来的后果的意见。在这些磋商中，其阐述了伊朗的原则立场，并强调必须尊重各国主权，停止侵略和威胁，避免破坏性的外国干预，以及地区各国在防止不安全局势蔓延方面所承担的责任。 阿拉格齐强调，伊朗有捍卫主权和国家安全的合法权利，并强调了在不受外部势力干预的情况下建…</description>
+    </item>
+    <item>
+      <title>China’s NDRC Flags Weak Demand as Challenge for Nation’s Economy｜中文：中国发改委将需求疲软标记为国家经济面临的挑战</title>
+      <link>https://www.bloomberg.com/news/articles/2026-11-07/china-s-ndrc-flags-weak-demand-as-challenge-for-nation-s-economy</link>
+      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-07/china-s-ndrc-flags-weak-demand-as-challenge-for-nation-s-economy</guid>
+      <pubDate>Sat, 07 Nov 2026 08:45:02 +0000</pubDate>
+      <category>全球市场与要闻</category>
+      <source url="https://bloomberg.com">彭博社 · 经济</source>
+      <description>中文：根据周五的一份声明，在政策制定者研究明年的措施时，中国的经济规划机构将疲软的需求标记为对该国的挑战
+原文：China’s economic planning agency flagged weak demand as a challenge for the country as policymakers study measures for next year, according to a statement Friday.</description>
+    </item>
+    <item>
+      <title>ECB Candidate de Cos Says Vigilance Needed on Inflation Risks｜中文：欧洲央行候选人de Cos表示需要对通胀风险保持警惕</title>
+      <link>https://www.bloomberg.com/news/articles/2026-11-07/ecb-candidate-de-cos-says-vigilance-needed-on-inflation-risks</link>
+      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-07/ecb-candidate-de-cos-says-vigilance-needed-on-inflation-risks</guid>
+      <pubDate>Sat, 07 Nov 2026 08:30:32 +0000</pubDate>
+      <category>全球市场与要闻</category>
+      <source url="https://bloomberg.com">彭博社 · 经济</source>
+      <description>中文：巴勃罗·埃尔南德斯·德科斯（ Pablo Hernández de Cos ）是接替克里斯蒂娜·拉加德（ Christine Lagarde ）担任欧洲央行行长的两位候选人之一，他表示，货币政策制定者应继续关注通胀风险的出现……
+原文：Pablo Hernández de Cos, one of two candidates in the running to replace Christine Lagarde as president of the European Central Bank, signaled that monetary policy-makers should remain attentive to inflation risks emergin…</description>
     </item>
     <item>
       <title>韩国的“自主 AI”，绕不开中国模型</title>
@@ -1207,147 +1347,24 @@
       <description>分别来自国防动员系统、海军和武警部队；2023年至今已有50名来自解放军和武警部队的全国人大代表被罢免或辞职 张弓（图左）、郭建军（图右）。 【财新网】 11月6日，十四届全国人大常委会第二十五次会议在京闭幕。常委会公告显示，四名解放军少将辞去全国人大代表职务。这是2023年以来首次有来自军方的全国人大代表辞职。在此之前，已有46名来自军方的全国人大代表被罢免。 新华社发布的全国人大常委会公告〔十四届〕第二十号显示，中央军委国防动员部选…</description>
     </item>
     <item>
-      <title>香港证监会收紧误导性称衔，降低投资者误判风险</title>
-      <link>https://wallstreetcn.com/livenews/3196364</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196364</guid>
-      <pubDate>Sat, 07 Nov 2026 06:32:43 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 港股快讯</source>
-      <description>11月6日，香港证券及期货事务监察委员会发表咨询总结，就进一步限制不受规管的机构使用具误导性的名称以保障投资者，相关修订建议获市场广泛支持。香港证监会表示，将扩大受限制称衔清单，并建立更快更新清单的机制，同时把监管覆盖延伸至虚拟资产领域，从源头减少投资者因机构名称产生误判，夯实投资者保护防线。 本次咨询于2025年6月启动，咨询期内共收到9份意见书，回应者普遍支持扩大《证券及期货条例》下现有的受限制称衔清单，并认同在《打击洗钱及恐怖分子…</description>
+      <title>Czech Premier Blasts Central Bank Rate Hike as ‘Scandalous’｜中文：捷克总理抨击央行加息为“丑闻</title>
+      <link>https://www.bloomberg.com/news/articles/2026-11-07/czech-premier-blasts-central-bank-rate-hike-as-scandalous</link>
+      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-07/czech-premier-blasts-central-bank-rate-hike-as-scandalous</guid>
+      <pubDate>Sat, 07 Nov 2026 07:31:05 +0000</pubDate>
+      <category>政治与政策</category>
+      <source url="https://bloomberg.com">彭博社 · 政治</source>
+      <description>中文：在本周加息后，捷克总理安德烈·巴比斯(Andrej Babis)加大了对捷克央行的公开批评力度，称央行的决定“绝对是可耻的” ，并表示这将伤害众议院……
+原文：Czech Prime Minister Andrej Babis stepped up his public criticism of the country’s central bank following this week’s interest-rate hike, calling the board’s decision “absolutely scandalous” and saying it will hurt house…</description>
     </item>
     <item>
-      <title>抢AI算力的微软，接连砍单！</title>
-      <link>https://www.gelonghui.com/p/7333475</link>
-      <guid isPermaLink="true">https://www.gelonghui.com/p/7333475</guid>
-      <pubDate>Sat, 07 Nov 2026 06:07:23 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://gelonghui.com">格隆汇 · 推荐</source>
-      <description>变得挑剔了 据彭博社引述知情人士，微软已决定不再续签与甲骨文的AI算力租赁合同，并于近几个月逐步关闭此前租用的计算资源。这是微软对价值数十亿美元的云合作伙伴关系进行重新评估的一部分。 消息一度导致甲骨文周五股价下跌约5%，最终收涨0.82%，报116.1美元。微软则收报530.61美元，跌0.99%。 就在前一天，彭博还披露微软正在收紧对Nscale、Nebius、IREN等一批"新云"服务商的合作。 把两件事连起来看，一个更大的信号浮…</description>
-    </item>
-    <item>
-      <title>记者手记｜“诚实但不幸”的创业者出路何在</title>
-      <link>https://finance.caixin.com/2026-11-07/102502202.html</link>
-      <guid isPermaLink="true">https://finance.caixin.com/2026-11-07/102502202.html</guid>
-      <pubDate>Sat, 07 Nov 2026 06:02:23 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://caixin.com">财新 · 最新</source>
-      <description>企业家精神之宝贵，是社会的财富。如何给“诚实但不幸”的创业者以重新上路的机会？ 中国执行信息公开网的数据显示，截至目前，“失信”被执行人的数量已有878万余人。图：视觉中国 【财新网】 个人破产制度有一个美好的愿景和初心，就是挽救“诚实但不幸”的创业者。中国执行信息公开网的数据显示，截至目前，“失信”被执行人的数量已有878万余人。 失信者当前的社会处境如何？从社会而言，如何分辨“诚实却不幸”与恶意逃废债，对两类人群分别对待？企业家精神…</description>
-    </item>
-    <item>
-      <title>一周天下｜美国中期大选引发连锁反应、法国近60万人上街抗议</title>
-      <link>https://photos.caixin.com/2026-11-07/102502186.html</link>
-      <guid isPermaLink="true">https://photos.caixin.com/2026-11-07/102502186.html</guid>
-      <pubDate>Sat, 07 Nov 2026 06:01:06 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://caixin.com">财新 · 最新</source>
-    </item>
-    <item>
-      <title>为何如今科技巨头都在选择跨币种融资？</title>
-      <link>https://www.gelonghui.com/p/7333172</link>
-      <guid isPermaLink="true">https://www.gelonghui.com/p/7333172</guid>
-      <pubDate>Sat, 07 Nov 2026 05:11:00 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://gelonghui.com">格隆汇 · 推荐</source>
-      <description>跨币种发债有望成为科技企业优化资本结构的长期趋势 11月3日，美国财政部国债借款咨询委员会在季度会议上聚焦科技债供给对固定收益市场的影响，科技企业债券供给变化正成为海外债券市场愈发重要的议题。在此背景下，11月首周再度迎来年内科技债发行高峰，部分巨头也开始同步拓展欧元等跨币种债券融资，以扩大债券投资者基础、分散融资渠道，并参考美元债与欧元债信用利差分化，进一步优化整体融资安排。同时，欧元融资也有助于匹配其欧洲经营业务及资本支出需求。展望…</description>
-    </item>
-    <item>
-      <title>太古可口可乐中国发布“致胜2035”十年战略</title>
-      <link>https://wallstreetcn.com/livenews/3196356</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196356</guid>
-      <pubDate>Sat, 07 Nov 2026 04:35:52 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 港股快讯</source>
-      <description>11月6日，太古可口可乐中国在第九届进博会上发布面向中国市场的“致胜2035”十年战略，以“创新行稳”为核心主张，围绕消费者驱动、以客户为中心、以人为本、扎根社区四大举措布局未来十年。太古可口可乐大中华区首席执行官金忆表示，公司在中国市场跑通的有效做法，未来均有机会为中国饮料行业提供借鉴样本。 自2023年承诺未来十年在华投资超120亿元以来，郑州、昆山、广州新厂已陆续投产，海南新厂预计2027年底投产，加速兑现投资承诺。截至2025年…</description>
-    </item>
-    <item>
-      <title>Why India’s Stock Markets Hold a Session on Diwali: Explainer｜中文：为什么印度股市在排灯节举行交易：解释者</title>
-      <link>https://www.bloomberg.com/news/articles/2026-11-07/why-india-s-stock-markets-hold-a-session-on-diwali-explainer</link>
-      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-07/why-india-s-stock-markets-hold-a-session-on-diwali-explainer</guid>
-      <pubDate>Sat, 07 Nov 2026 04:30:00 +0000</pubDate>
-      <category>全球市场与要闻</category>
-      <source url="https://bloomberg.com">彭博社 · 市场</source>
-      <description>中文：印度股市将于周日以特别缩短的交易时段开盘，因为该国正在庆祝该国最大的节日排灯节，从而保持了从手写账本和忙碌的转变中幸存下来的传统……
-原文：India’s stock markets will open for a special shortened session on Sunday as the country celebrates Diwali, its biggest festival, keeping alive a tradition that has survived the shift from handwritten ledgers and bustlin…</description>
-    </item>
-    <item>
-      <title>【CCI快报】：中国大宗商品指数周跌4.63% 燃料油领跌19.26%</title>
-      <link>https://database.caixin.com/2026-11-07/102502141.html</link>
-      <guid isPermaLink="true">https://database.caixin.com/2026-11-07/102502141.html</guid>
-      <pubDate>Sat, 07 Nov 2026 03:54:44 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://caixin.com">财新 · 最新</source>
-      <description>地缘溢价集中回吐，燃油跌幅超过原油，价格大幅下挫</description>
-    </item>
-    <item>
-      <title>重估AI：“Not Even the End of the Beginning”</title>
-      <link>https://opinion.caixin.com/2026-11-07/102502140.html</link>
-      <guid isPermaLink="true">https://opinion.caixin.com/2026-11-07/102502140.html</guid>
-      <pubDate>Sat, 07 Nov 2026 03:52:24 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://caixin.com">财新 · 最新</source>
-      <description>要搞清楚的，是产业逻辑出了根本性的问题，还是市场对这个逻辑愿意支付的价格发生了变化。或者说，大家对未来的判断没有变，但市场对未来兑现的时间、成本和风险的定价变了 当地时间2026年10月29日，美国加利福尼亚州弗农，一座正在建设的数据中心。图：视觉中国 秋天开始，我回到了纽约，市场在10月也进入了财报季。我一向直觉很准，预感觉得总有哪里会出点问题。这AI Trade就跟做任何交易一样，从来没有可能从开始到结束完全顺顺利利不出任何问题，在…</description>
-    </item>
-    <item>
-      <title>北京：支持企业面向基础硬件、基础软件、工业软件、网络安全等领域开展自主攻关</title>
-      <link>https://www.gelonghui.com/p/7332699</link>
-      <guid isPermaLink="true">https://www.gelonghui.com/p/7332699</guid>
-      <pubDate>Sat, 07 Nov 2026 03:43:25 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://gelonghui.com">格隆汇 · 推荐</source>
-      <description>支持超节点服务器、AI终端、超级智能体、量子计算云平台、下一代移动通信等新技术新产品 北京经济技术开发区管理委员会印发《北京经济技术开发区关于加快建设开源开放信创产业高地的若干措施》的通知。 其中提到， 支持企业面向基础硬件、基础软件、工业软件、网络安全等领域开展自主攻关；聚焦通用人工智能“极基础+极应用”，支持企业在算法理论、软件框架、智算芯片、新型算力集群，以及软件智能、工业智能、数据智能、具身智能等方向创新突破；加快布局量子计算、…</description>
-    </item>
-    <item>
-      <title>检察公益诉讼法出台 要求不得干预和替代行政机关履职</title>
-      <link>https://china.caixin.com/2026-11-07/102502125.html</link>
-      <guid isPermaLink="true">https://china.caixin.com/2026-11-07/102502125.html</guid>
-      <pubDate>Sat, 07 Nov 2026 03:41:20 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://caixin.com">财新 · 最新</source>
-      <description>《检察公益诉讼法》自2027年1月1日起施行。其规定，检察院办理公益诉讼案件，应当遵守法定程序，坚持必要审慎，不得干预和替代行政机关依法履行职责 11月6日，第十四届全国人大常委会第二十五次会议表决通过《检察公益诉讼法》，自2027年1月1日起施行。图：视觉中国 【财新网】 检察公益诉讼有了专门法律。11月6日，第十四届全国人大常委会第二十五次会议表决通过《检察公益诉讼法》，自2027年1月1日起施行。该法明确，检察院办理公益诉讼案件，…</description>
-    </item>
-    <item>
-      <title>卡塔尔首相：调解努力仍在继续，以防止局势失控。即便在中期选举之后，美国政府仍愿意寻求解决方案。（半岛电视台）</title>
-      <link>https://wallstreetcn.com/livenews/3196343</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196343</guid>
-      <pubDate>Sat, 07 Nov 2026 03:13:08 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 港股快讯</source>
-    </item>
-    <item>
-      <title>传台积电进军DRAM！</title>
-      <link>https://www.gelonghui.com/p/7332215</link>
-      <guid isPermaLink="true">https://www.gelonghui.com/p/7332215</guid>
-      <pubDate>Sat, 07 Nov 2026 02:15:14 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://gelonghui.com">格隆汇 · 推荐</source>
-      <description>台积电可能要做的，不是传统DRAM 11月6日，一则有关台积电可能进军DRAM市场的消息，引起了半导体行业的关注。据The Information报道，台积电已经开始研究生产一种新型存储芯片——3D DRAM，而这一计划据称与英伟达的需求有关。如果这项计划最终落地，意味着全球最大的晶圆代工厂，可能要与三星、SK海力士和美光这三家传统DRAM巨头展开直接竞争。 消息传出后，台积电股价一度上涨超过6%。在AI基础设施建设持续推高存储需求、D…</description>
-    </item>
-    <item>
-      <title>央行连续第24个月增持黄金</title>
-      <link>https://www.gelonghui.com/p/7332192</link>
-      <guid isPermaLink="true">https://www.gelonghui.com/p/7332192</guid>
-      <pubDate>Sat, 07 Nov 2026 02:11:13 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://gelonghui.com">格隆汇 · 推荐</source>
-      <description>继续狂买黄金 11月7日，央行数据显示，中国10月末黄金储备报7830万盎司，较9月末的7747万盎司增加83万盎司。 这是央行连续第24个月增持黄金 ，单月增持量为2024年11月重启购金以来最高。 国际金价走势上，10月30日现货黄金下探3870美元/盎司，创2025年10月初以来新低。10月累跌6.79%。 世界黄金协会发布的2026年三季度《全球黄金需求趋势》报告显示，三季度，各央行及其他官方机构黄金储备净增321吨，同比增长4…</description>
-    </item>
-    <item>
-      <title>特朗普称美国是霍尔木兹海峡占领者</title>
-      <link>https://wallstreetcn.com/livenews/3196323</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196323</guid>
-      <pubDate>Sat, 07 Nov 2026 02:09:34 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 港股快讯</source>
-      <description>当地时间11月6日晚，美国总统特朗普在回答记者有关“美军是否袭击了伊朗南部格什姆岛”的提问时证实，美军对伊朗进行了小规模打击，“干掉了伊朗小型防空装置”。 特朗普还坚持认为对伊朗的军事行动“不算战争”，并称美国应该算是“占领者”，因为美国控制着霍尔木兹海峡。 据伊朗媒体报道，今天（11月7日）凌晨，2枚导弹击中了伊朗南部格什姆岛，目前尚无关于受损情况的官方信息。（CCTV国际时讯）</description>
-    </item>
-    <item>
-      <title>美国考虑放宽部分受制裁油轮限制，以缓解运费及油价压力</title>
-      <link>https://www.gelonghui.com/p/7332019</link>
-      <guid isPermaLink="true">https://www.gelonghui.com/p/7332019</guid>
-      <pubDate>Sat, 07 Nov 2026 02:01:08 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://gelonghui.com">格隆汇 · 日热文</source>
-      <description>托克集团（Trafigura）、维多集团（Vitol）、摩科瑞能源集团（Mercuria）及阿布扎比国家石油公司（ADNOC）至少四家企业正与美国政府磋商 据外媒，托克集团（Trafigura）、维多集团（Vitol）、摩科瑞能源集团（Mercuria）及阿布扎比国家石油公司（ADNOC）至少四家企业正与美国政府磋商，申请购买或租赁部分因参与非法石油运输而被列入美国制裁名单的油轮，以缓解全球油轮运力短缺并降低运输成本。 相关磋商涉及目前…</description>
+      <title>Finland Considers Ukraine-Style Tank Barriers as Russia Rearms｜中文：随着俄罗斯的重建，芬兰认为乌克兰式坦克壁垒</title>
+      <link>https://www.bloomberg.com/news/articles/2026-11-07/finland-considers-ukraine-style-tank-barriers-as-russia-rearms</link>
+      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-07/finland-considers-ukraine-style-tank-barriers-as-russia-rearms</guid>
+      <pubDate>Sat, 07 Nov 2026 07:00:03 +0000</pubDate>
+      <category>政治与政策</category>
+      <source url="https://bloomberg.com">彭博社 · 政治</source>
+      <description>中文：在乌克兰，反坦克障碍减缓了袭击者的速度。现在，芬兰希望看到这些建筑在恶劣的北方天气下如何运作
+原文：In Ukraine, anti-tank obstacles have slowed the attacker. Now Finland wants to see how such structures would fare in harsh northern weather.</description>
     </item>
   </channel>
 </rss>
