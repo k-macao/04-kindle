@@ -9,11 +9,12 @@
 而且不区分原生 RSS 与 RSSHub 路由。这里要的是**只含新闻**的每日订阅文档，所以直接
 按 tools/news_sources.py 里的路由去 RSSHub 实例取。
 
-实例与回退（与 004 的 rss_feeds.py 同一套经验）：
+实例与回退：
 
-- `rsshub.app` 对 GitHub Actions 的出口 IP 常直接回 403，所以默认挂一串公共实例
-  按顺序回退（rsshub.app 排最后）；`RSSHUB_BASE` 环境变量（逗号分隔）可覆盖，
-  自建实例优先填最前面。
+- **先接官方实例 `rsshub.app`**，再挂一串公共镜像按顺序回退；`RSSHUB_BASE` 环境变量
+  （逗号分隔）可覆盖，自建实例优先填最前面。
+- 开工前对官方实例探一次活（`/healthz`）：它今天对机房 IP 回 403，就别让 23 个源
+  轮流撞 403，直接把官方实例挪到队尾当兜底，日志里写清楚为什么（`probe_instances`）。
 - 同一实例连续失败达 `--trip-after` 次就不再试它，避免 49 源 × N 实例的 403 风暴
   把一轮抓取拖死。
 - 单源失败不影响其它源；全部失败或有效条目少于 `--min-items` 时退出码 1，
@@ -40,7 +41,7 @@ import unicodedata
 from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
-from urllib.error import URLError
+from urllib.error import HTTPError, URLError
 from urllib.parse import quote
 from urllib.request import Request, urlopen
 from xml.etree import ElementTree
@@ -51,14 +52,15 @@ import news_sources  # noqa: E402
 import radar_discover  # noqa: E402  源挂了就去问 Radar 该换哪个路由
 from build_epub import is_garbled  # noqa: E402  乱码标题不进日报
 
-# 004 的 rss_feeds.py 里探活过的实例，顺序＝优先级。
-# rsshub.app 对 GitHub Actions 的出口 IP 常直接回 403（004 的 CI 记录过），所以放到最后；
-# 自建实例请用 RSSHUB_BASE 放在最前面。
+# 顺序＝优先级：官方实例第一，然后是 004 里探活过的公共镜像。
+# rsshub.app 对机房出口 IP 有时回 403（004 的 CI 记录过），遇到就用 probe_instances
+# 把它挪到最后当兜底——「先接官方」和「官方挂了也能出报」两件事不冲突。
+OFFICIAL_INSTANCE = "https://rsshub.app"
 DEFAULT_INSTANCES = (
+    OFFICIAL_INSTANCE,
     "https://rsshub.rss.tips",
     "https://rsshub.isrss.com",
     "https://rsshub.cups.moe",
-    "https://rsshub.app",
 )
 USER_AGENT = "004-kindle-news/1.0"
 MAX_BYTES = 4 * 1024 * 1024
@@ -71,6 +73,43 @@ SPACE_RE = re.compile(r"[\s\u3000]+")
 # ---------------------------------------------------------------------------
 # 取回与解析
 # ---------------------------------------------------------------------------
+
+
+HEALTH_PATH = "/healthz"
+
+
+def probe_instance(instance, fetch=None, timeout=8):
+    """探一次实例：/healthz 能取回东西就算活。返回 (可用?, 说明)。
+
+    只有 403/429 与网络错误才算「不可用」——404 之类说明这个实例没实现 /healthz，
+    不能据此判定它取不到 feed；探活只是省几个必然失败的请求，不是硬门槛。
+    """
+    fetch = fetch or http_get
+    try:
+        fetch(instance.rstrip("/") + HEALTH_PATH, timeout)
+    except HTTPError as exc:                     # HTTPError 是 URLError 的子类，先接住
+        if exc.code in (401, 403, 429):
+            return False, f"HTTP {exc.code}"
+        return True, f"HTTP {exc.code}（探活路径不可用，按可用处理）"
+    except (URLError, OSError, ValueError) as exc:
+        return False, str(exc)
+    return True, ""
+
+
+def probe_instances(instances, fetch=None, timeout=8, log=print):
+    """探活并把不通的实例挪到队尾（不删，留着兜底）。返回新的实例顺序。"""
+    fetch = fetch or http_get
+    alive, dead = [], []
+    for instance in instances:
+        ok, note = probe_instance(instance, fetch=fetch, timeout=timeout)
+        if ok:
+            alive.append(instance)
+            if note:
+                log(f"  · 实例 {instance} 探活：{note}")
+        else:
+            dead.append(instance)
+            log(f"  · 实例 {instance} 探活失败（{note}），排到队尾兜底")
+    return alive + dead
 
 
 def route_url(instance, route):
@@ -235,7 +274,7 @@ def save_seen(path, seen, items, now=None, days=7):
 
 def collect(sources=None, instances=None, timeout=15, max_age_hours=24,
             per_source=12, trip_after=3, now=None, fetch=None, log=print, seen=None,
-            radar_base=None):
+            radar_base=None, probe=False):
     """抓一轮，返回 (items, source_reports)。fetch(url, timeout) 可注入，便于离线测试。
 
     `seen` 是之前推过的标题指纹（见 load_seen）：命中的条目不再进今天的日报，
@@ -243,10 +282,15 @@ def collect(sources=None, instances=None, timeout=15, max_age_hours=24,
 
     `radar_base` 给了就在**某个源彻底失败时**去问 RSSHub Radar「这个域名该用哪条路由」，
     结果只写进日志和报告的 `radar` 字段，不会自动换源——发现的事要人确认。
+
+    `probe` 为真时先探活各实例，把 403 的（如机房 IP 下的 rsshub.app）挪到队尾。
+    默认关（库函数保持「给什么实例就用什么」），命令行默认开。
     """
     fetch = fetch or http_get
     now = now or datetime.now(timezone.utc)
     instances = list(instances or DEFAULT_INSTANCES)
+    if probe and len(instances) > 1:
+        instances = probe_instances(instances, fetch=fetch, timeout=min(timeout, 8), log=log)
     sources = list(sources if sources is not None else news_sources.SOURCES)
     horizon = now - timedelta(hours=max_age_hours)
     seen_titles = dict(seen or {})
@@ -331,7 +375,7 @@ def collect(sources=None, instances=None, timeout=15, max_age_hours=24,
 
 def fetch_news(sources=None, instances=None, timeout=15, max_age_hours=24,
                per_source=12, trip_after=3, now=None, log=print, fetch=None, seen=None,
-               radar_base=None):
+               radar_base=None, probe=False):
     """collect() 的便捷包装：返回可写盘的 JSON 结构。
 
     `fetch` 可注入（测试里用假报文），默认真联网。
@@ -340,10 +384,16 @@ def fetch_news(sources=None, instances=None, timeout=15, max_age_hours=24,
     items, reports = collect(sources=sources, instances=instances, timeout=timeout,
                              max_age_hours=max_age_hours, per_source=per_source,
                              trip_after=trip_after, now=now, log=log, fetch=fetch,
-                             seen=seen, radar_base=radar_base)
+                             seen=seen, radar_base=radar_base, probe=probe)
+    # 哪个实例真的供了稿：写进清单，一眼能看出官方实例这轮通没通。
+    used = {}
+    for report in reports:
+        if report.get("ok") and report.get("instance"):
+            used[report["instance"]] = used.get(report["instance"], 0) + report.get("count", 0)
     return {
         "generated": now.isoformat(timespec="seconds"),
         "instances": list(instances or DEFAULT_INSTANCES),
+        "instances_used": used,
         "sources": reports,
         "items": items,
     }
@@ -379,6 +429,8 @@ def parse_args(argv=None):
                     help="RSSHub Radar 的 API 实例（默认用第一个抓取实例）")
     ap.add_argument("--no-radar", action="store_true",
                     help="源失败时不去问 Radar 该换哪条路由")
+    ap.add_argument("--no-probe", action="store_true",
+                    help="不先探活实例（默认为官方实例 rsshub.app 探一次，403 就排到队尾）")
     return ap.parse_args(argv)
 
 
@@ -407,15 +459,23 @@ def main(argv=None):
     seen = {} if args.no_seen else load_seen(args.seen, days=args.seen_days)
     print(f"抓取 {len(sources)} 个 RSSHub 源（实例 {len(instances)} 个，"
           f"已推过 {len(seen)} 条不再收）…")
+    if instances and instances[0].rstrip("/") == OFFICIAL_INSTANCE:
+        print(f"官方实例优先：{OFFICIAL_INSTANCE}（探活失败会自动回退到镜像）")
     payload = fetch_news(sources=sources, instances=instances, timeout=args.timeout,
                          max_age_hours=args.max_age_hours, per_source=args.per_source,
-                         trip_after=args.trip_after, seen=seen, radar_base=radar_base)
+                         trip_after=args.trip_after, seen=seen, radar_base=radar_base,
+                         probe=not args.no_probe)
     ok_sources = sum(1 for report in payload["sources"] if report["ok"])
     total = len(payload["items"])
     target = Path(args.out)
     target.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
                       encoding="utf-8")
     print(f"完成：{total} 条 / {ok_sources} 个源可用 → {target}")
+    used = payload.get("instances_used") or {}
+    if used:
+        print("实例供稿：" + " / ".join(f"{name} {count} 条"
+                                       for name, count in sorted(used.items(),
+                                                                 key=lambda pair: -pair[1])))
     suggestions = [report for report in payload["sources"] if report.get("radar")]
     if suggestions:
         print("Radar 给了几条替换建议（确认后改 tools/news_sources.py）：")

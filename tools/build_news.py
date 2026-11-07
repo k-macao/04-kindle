@@ -6,8 +6,9 @@
 
 产出：
 
-    site/news.epub   单文件 EPUB 3，按「快讯 / 深度 / 全球」分节，条目＝标题 + 来源与
-                     北京时间 + 一句摘要
+    site/news.epub   单文件 EPUB 3，按「快讯 / 深度 / 全球 / 政治与政策 / 哲学与思想」
+                     分节，条目＝标题 + 来源与北京时间 + 一句摘要；英文条目在标题下
+                     多一行中文译文（tools/translate_news.py 补的 title_zh / summary_zh）
     site/news.json   清单：{"generated", "doc", "title", "chars", "bytes", "sections",
                             "items", "sources_ok", "sources_total", "sources_failed",
                             "data_time", ...}
@@ -32,6 +33,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import news_sources  # noqa: E402
+import translate_news  # noqa: E402  英文条目有没有中文译文，按同一套判断
 from build_epub import (BEIJING, garbled_ratio, normalize, parse_data_time,  # noqa: E402
                         write_epub)
 
@@ -81,6 +83,15 @@ p.meta {
 p.sum {
   font-size: 0.9em;
   margin: 0;
+}
+p.zh {
+  font-size: 0.95em;
+  margin: 0 0 0.15em;
+}
+p.sum.orig {
+  font-size: 0.85em;
+  color: #444444;
+  margin-top: 0.15em;
 }
 p.lead {
   font-size: 0.82em;
@@ -156,10 +167,18 @@ def render_body(items, generated_text, sources_ok, sources_total):
             meta = " · ".join(part for part in (source, stamp) if part)
             parts.append('<article class="news">')
             parts.append(f"<h3>{html_mod.escape(item['title'])}</h3>")
+            title_zh = normalize(str(item.get("title_zh") or ""))
+            if title_zh:
+                parts.append(f'<p class="zh">{html_mod.escape("中文：" + title_zh)}</p>')
             if meta:
                 parts.append(f'<p class="meta">{meta}</p>')
             summary = normalize(str(item.get("summary") or ""))
-            if summary and summary != item["title"]:
+            summary_zh = normalize(str(item.get("summary_zh") or ""))
+            if summary_zh and summary_zh != title_zh:
+                parts.append(f'<p class="sum">{html_mod.escape("中文摘要：" + summary_zh)}</p>')
+                if summary and summary != item["title"]:
+                    parts.append(f'<p class="sum orig">{html_mod.escape(summary)}</p>')
+            elif summary and summary != item["title"]:
                 parts.append(f'<p class="sum">{html_mod.escape(summary)}</p>')
             parts.append("</article>")
     return "\n".join(parts)
@@ -174,8 +193,16 @@ def render_text(items, generated_text, sources_ok, sources_total):
             stamp = beijing_stamp(item.get("published"))
             source = str(item.get("source_name") or item.get("source") or "")
             lines.append(f"[{stamp}] {item['title']}　{source}".rstrip())
+            title_zh = normalize(str(item.get("title_zh") or ""))
+            if title_zh:
+                lines.append("　中文：" + title_zh)
             summary = normalize(str(item.get("summary") or ""))
-            if summary and summary != item["title"]:
+            summary_zh = normalize(str(item.get("summary_zh") or ""))
+            if summary_zh and summary_zh != title_zh:
+                lines.append("　中文摘要：" + summary_zh)
+                if summary and summary != item["title"]:
+                    lines.append("　原文：" + summary)
+            elif summary and summary != item["title"]:
                 lines.append("　" + summary)
         lines.append("")
     return "\n".join(lines).rstrip() + "\n"
@@ -215,6 +242,11 @@ def build(payload, out_dir, min_items=10, max_items=MAX_ITEMS, now=None):
                        data_time_kind="item" if data_time else None,
                        style=NEWS_STYLE_CSS)
     failed = [report.get("key") for report in reports if not report.get("ok")]
+    # 英文条目有没有配上中文：翻译接口全挂时这里会变多，清单里看得见。
+    english = [item for item in items if translate_news.needs_translation(item)]
+    zh_added = sum(1 for item in items if normalize(str(item.get("title_zh") or "")))
+    zh_missing = sum(1 for item in english
+                     if not normalize(str(item.get("title_zh") or "")))
     manifest = {
         "generated": now.isoformat(timespec="seconds"),
         "doc": "news.epub",
@@ -227,6 +259,11 @@ def build(payload, out_dir, min_items=10, max_items=MAX_ITEMS, now=None):
         "sources_total": sources_total,
         # 哪些源这轮没取到：写进提交过的清单里，第二天就能看出是偶发还是常死。
         "sources_failed": failed,
+        # 英文条目数 / 配上中文的条数 / 还没配上的条数（翻译接口挂了会涨）
+        "english": len(english),
+        "zh_added": zh_added,
+        "zh_missing": zh_missing,
+        "instances_used": payload.get("instances_used") or {},
         "data_time": data_time,
         "data_time_kind": "item" if data_time else "",
         "source": "RSSHub",

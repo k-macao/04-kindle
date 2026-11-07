@@ -1,29 +1,55 @@
 # 每日新闻订阅（RSSHub）
 
-每天 **07:00（北京时间）** 生成一本只含新闻的 EPUB，和小时级报告分开存放、分开刷新：
+每天 **07:00（北京时间）** 抓一轮 RSSHub（财经 / 政治 / 哲学思想），生成一本只含新闻的 EPUB、
+一份聚合 RSS，和小时级报告分开存放、分开刷新：
 
 | 文件 | 内容 | 谁用 |
 | --- | --- | --- |
-| `site/news.epub` | 当天的新闻，按「快讯 / 深度 / 全球」分节 | 插件「News subscription」模式 |
+| `site/news.epub` | 当天的新闻，按「快讯 / 深度 / 全球 / 政治与政策 / 哲学与思想」分节 | 插件「News subscription」模式 |
 | `site/news.json` | 清单：`generated`、`doc`、条目数、源可用数、最新一条的时间 | 插件每 60 秒只拉这个 |
 | `site/news.txt` | 同一份内容的纯文本 | 文本模式或自己看 |
 | `site/news.xml` | **聚合 RSS**：所有源合成一个标准 feed | 任何 RSS 阅读器 / KOReader 新闻下载器 |
 | `site/news_seen.json` | 最近 7 天推过的标题指纹 | 抓取时跨天去重，不进书 |
+| `site/news_zh_cache.json` | 英文标题/摘要的中文译文缓存 | 重译同一句英文时直接命中，省额度、译文稳定 |
 
 抓的是 [RSSHub](https://github.com/DIYgod/RSSHub) 的公开路由，**不重排 004 的报告页**：报告页每小时才刷，
 而且只渲染当次抓到的条目，拿不到「这条新闻来自哪个源、原文在哪」。
 
-## 1. 三条命令
+## 1. 四条命令
 
 ```sh
-python tools/fetch_news.py --out news_data.json          # 抓一轮，写到 news_data.json（不进 Git）
+python tools/fetch_news.py --out news_data.json               # 抓一轮，写到 news_data.json（不进 Git）
+python tools/translate_news.py --data news_data.json \
+       --cache site/news_zh_cache.json                        # 英文条目补中文（就地写回）
 python tools/build_news.py --data news_data.json --out site   # 日报：EPUB + 清单 + 纯文本
 python tools/build_feed.py --data news_data.json --out site   # 聚合 RSS：site/news.xml
 ```
 
+实例顺序＝优先级：**官方 `rsshub.app` 第一**，后面 `rsshub.rss.tips` / `rsshub.isrss.com` /
+`rsshub.cups.moe` 兜底。抓取脚本开工前先探一次 `/healthz`：官方实例对机房 IP 回 403 时
+（004 的 CI 记过这事）把它挪到队尾当兜底，日志写「探活失败（HTTP 403），排到队尾」。
+所以**先接官方**和**官方挂了也能出报**两件事同时成立；`RSSHUB_BASE`（逗号分隔）可覆盖，
+自建实例放最前面。
+
 `news_data.json` 是中间产物：抓取和排版分开，排版可以离线反复调。`news_data.json` 里每条是
-`{title, link, published, summary, source, group, lang}`，`sources` 里记着每个源这次用的实例、
-抓到几条、失败原因——出问题先看这里。
+`{title, link, published, summary, source, group, lang}`（英译中之后多 `title_zh` / `summary_zh`），
+`sources` 里记着每个源这次用的实例、抓到几条、失败原因，`instances_used` 记着哪个实例供了多少条
+——出问题先看这里。
+
+## 1.1 英文条目自动附中文
+
+`translate_news.py` 是唯一另需联网的一步，规矩是：
+
+- **只翻英文**：源标了 `lang: en`，或者标题里一个汉字都没有、字母占一半以上；
+- **三家免费接口按顺序回退**：Google `translate_a/single` → Lingva 镜像 → MyMemory，
+  回的字符串里没有汉字就算失败、换下一家；
+- **结果落 `site/news_zh_cache.json`**：键是文本指纹，同一句英文只翻一次；条目超过 6000 条
+  或放置超过 120 天自动清掉；
+- **翻译接口全挂也照样出报**：这一步在工作流里 `continue-on-error: true`，`news.json` 的
+  `english` / `zh_added` / `zh_missing` 会如实记下有几条没配上中文，下一轮补齐；
+- 渲染时中英并列：EPUB 标题下多一行「中文：…」，摘要译在原文之上；聚合 RSS 的标题写成
+  `English Title｜中文标题`，摘要是「中文：… 原文：…」——阅读器的列表页只显示标题，
+  译文不接在标题上等于没翻。
 
 `build_news.py` 的规矩：
 
@@ -45,8 +71,8 @@ https://cdn.jsdelivr.net/gh/k-macao/04-kindle@main/site/news.xml   ← raw 不�
 （仓库如果以后开了 GitHub Pages，同一份文件也会出现在
 `https://k-macao.github.io/04-kindle/site/news.xml`。）
 
-- 一个 `<item>`＝标题、原文链接、`pubDate`（RFC822/UTC）、分类（快讯/深度/全球）、
-  `<source url="站点">来源名</source>`、一句摘要；
+- 一个 `<item>`＝标题、原文链接、`pubDate`（RFC822/UTC）、分类、`<source url="站点">来源名</source>`、
+  一句摘要；**英文条目标题后面接中文**（`English Title｜中文标题`），摘要为「中文：… 原文：…」；
 - `guid` 用原文链接（`isPermaLink="true"`），没有链接的用标题指纹 `urn:004:news:<hash>`——
   同一条新闻在读者端不会因为每天重发而重复；
 - `lastBuildDate` 是本次生成时间，`ttl` = 60 分钟；
@@ -60,7 +86,7 @@ NetNewsWire / Feedly / Reeder / Inoreader 之类的阅读器。设备上如果 `
 
 ## 2. 源目录
 
-源写在 `tools/news_sources.py`，18 条：
+源写在 `tools/news_sources.py`，23 条，五个分组：
 
 | 分组 | 源 | RSSHub 路由 |
 | --- | --- | --- |
@@ -82,6 +108,11 @@ NetNewsWire / Feedly / Reeder / Inoreader 之类的阅读器。设备上如果 `
 | 全球 | 彭博社·市场 | `/bloomberg/markets` |
 | | 彭博社·加密 | `/bloomberg/crypto` |
 | | CoinDesk·最新 | `/coindesk/news` |
+| 政治 | 中国政府网·最新政策 | `/gov/zhengce/zuixin` |
+| | 外交部·发言人表态 | `/gov/mfa/wjdt/fyrbt` |
+| | 联合早报·国际 | `/zaobao/realtime/world` |
+| 思想 | Aeon·哲学 | `/aeon/category/philosophy` |
+| | Psyche·Ideas | `/psyche/type/ideas` |
 
 2026-11-07 首轮真实运行（128 条 / 12 个源可用）换掉了四条**在机房 IP 上取不到**的源，理由都写在
 各自的 `note` 里：WSJ 经济标着 `antiCrawler`、路透商业被 Cloudflare 挡住、证券时报快讯与 21 财经热点

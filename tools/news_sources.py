@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""每日新闻订阅源的目录：走 RSSHub 路由的财经新闻源。
+"""每日新闻订阅源的目录：走 RSSHub 路由的财经 / 政治 / 哲学思想源。
 
 为什么自己建目录，而不是只读 004 页面上的 05 节：
 
@@ -27,7 +27,7 @@
     route   RSSHub 完整路由（以 / 开头，不含实例域名）——与 feed 二选一
     feed    站点自己的原生 RSS 绝对地址（RSSHub 没有这条路由时才用）——与 route 二选一
     site    站点域名，只用于「这条源挂了，去问 Radar 该换哪个路由」（tools/radar_discover.py）
-    lang    zh / en，仅用于排序与文档说明
+    lang    zh / en：标 en 的条目会被 tools/translate_news.py 自动补中文译文
     note    这条源是什么、为什么值得每天看
 """
 
@@ -38,6 +38,8 @@ GROUPS = [
     ("flash", "中文财经快讯"),
     ("depth", "中文财经深度"),
     ("global", "全球市场与加密"),
+    ("politics", "政治与政策"),
+    ("thought", "哲学与思想"),
 ]
 GROUP_LABELS = {key: label for key, label in GROUPS}
 
@@ -213,6 +215,58 @@ SOURCES = [
         "site": "coindesk.com",
         "note": "coindesk/news.ts 的 path /news。2026-11-07 首轮返回 0 条（上游多半拦机房 IP），"
                 "先留着观察：清单里的 sources_failed 会记录它是否持续失败。",
+    },
+    # ---------------- 四、政治与政策 ----------------
+    {
+        "key": "GOV_ZHENGCE",
+        "name": "中国政府网 · 最新政策",
+        "group": "politics",
+        "lang": "zh",
+        "route": "/gov/zhengce/zuixin",
+        "site": "www.gov.cn",
+        "note": "gov/zhengce/zuixin.ts 的 path /zuixin（handler 复用 index.ts），国务院政策原文，"
+                "是判断「政策往哪走」的一手材料。",
+    },
+    {
+        "key": "MFA_FYRBT",
+        "name": "外交部 · 发言人表态",
+        "group": "politics",
+        "lang": "zh",
+        "route": "/gov/mfa/wjdt/fyrbt",
+        "site": "mfa.gov.cn",
+        "note": "gov/mfa/wjdt.ts 的 path /wjdt/:category?，category=fyrbt＝发言人表态（表见路由说明），"
+                "国际政治的官方口径。",
+    },
+    {
+        "key": "ZAOBAO_WORLD",
+        "name": "联合早报 · 国际",
+        "group": "politics",
+        "lang": "zh",
+        "route": "/zaobao/realtime/world",
+        "site": "zaobao.com",
+        "note": "zaobao/realtime.ts 的 path /realtime/:section?，section=world＝国际。"
+                "中文视角的亚洲与国际政治，跟内地媒体的选题互补。",
+    },
+    # ---------------- 五、哲学与思想 ----------------
+    {
+        "key": "AEON_PHIL",
+        "name": "Aeon · 哲学",
+        "group": "thought",
+        "lang": "en",
+        "route": "/aeon/category/philosophy",
+        "site": "aeon.co",
+        "note": "aeon/category.ts 的 path /category/:category，category=philosophy。长文思想随笔，"
+                "英文条目由 translate_news.py 自动附中文。",
+    },
+    {
+        "key": "PSYCHE_IDEAS",
+        "name": "Psyche · Ideas",
+        "group": "thought",
+        "lang": "en",
+        "route": "/psyche/type/ideas",
+        "site": "psyche.co",
+        "note": "psyche/type.ts 的 path /type/:type，type=ideas＝短篇思想随笔（Aeon 姊妹刊）。"
+                "英文条目自动附中文。",
     },
 ]
 

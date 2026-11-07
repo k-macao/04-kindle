@@ -5,6 +5,7 @@
 
 import json
 import sys
+from urllib.error import HTTPError
 import tempfile
 import unittest
 import zipfile
@@ -99,6 +100,67 @@ class CatalogTest(unittest.TestCase):
     def test_routes_are_unique(self):
         routes = [item["route"] for item in news_sources.SOURCES]
         self.assertEqual(len(routes), len(set(routes)))
+
+
+class ProbeTest(unittest.TestCase):
+    """官方实例探活：403 就排到队尾兜底，不删；404 说明实例没实现 /healthz，按可用处理。"""
+
+    @staticmethod
+    def fetch(mapping):
+        def fetch(url, timeout=8):
+            for fragment, payload in mapping.items():
+                if fragment in url:
+                    if isinstance(payload, Exception):
+                        raise payload
+                    return payload.encode() if isinstance(payload, str) else payload
+            raise HTTPError(url, 404, "Not Found", {}, None)
+        return fetch
+
+    def test_official_goes_last_when_forbidden(self):
+        forbidden = HTTPError("https://rsshub.app/healthz", 403, "Forbidden", {}, None)
+        order = fetch_news.probe_instances(
+            ["https://rsshub.app", "https://mirror.example"],
+            fetch=self.fetch({"rsshub.app/healthz": forbidden, "mirror.example": "OK"}),
+            log=lambda *_: None)
+        self.assertEqual(order, ["https://mirror.example", "https://rsshub.app"])
+
+    def test_official_stays_first_when_healthy(self):
+        order = fetch_news.probe_instances(
+            ["https://rsshub.app", "https://mirror.example"],
+            fetch=self.fetch({"rsshub.app/healthz": "OK", "mirror.example": "OK"}),
+            log=lambda *_: None)
+        self.assertEqual(order, ["https://rsshub.app", "https://mirror.example"])
+
+    def test_missing_health_path_is_not_a_failure(self):
+        ok, note = fetch_news.probe_instance("https://mirror.example", fetch=self.fetch({}))
+        self.assertTrue(ok)
+        self.assertIn("404", note)
+
+    def test_offline_instance_moves_back(self):
+        order = fetch_news.probe_instances(
+            ["https://dead.example", "https://alive.example"],
+            fetch=self.fetch({"dead.example/healthz": OSError("timed out"),
+                              "alive.example": "OK"}),
+            log=lambda *_: None)
+        self.assertEqual(order, ["https://alive.example", "https://dead.example"])
+
+    def test_collect_probes_only_when_asked(self):
+        calls = []
+
+        def fetch(url, timeout=8):
+            calls.append(url)
+            return RSS_TWO.encode()
+
+        fetch_news.collect(sources=[source()],
+                           instances=["https://a.example", "https://b.example"],
+                           fetch=fetch, now=NOW, log=lambda *_: None)
+        self.assertFalse(any(url.endswith("/healthz") for url in calls))
+
+        calls.clear()
+        fetch_news.collect(sources=[source()],
+                           instances=["https://a.example", "https://b.example"],
+                           fetch=fetch, now=NOW, log=lambda *_: None, probe=True)
+        self.assertTrue(any(url.endswith("/healthz") for url in calls))
 
 
 class ParseFeedTest(unittest.TestCase):
@@ -362,6 +424,25 @@ class BuildTest(unittest.TestCase):
             self.assertIn("新闻订阅", page)
             self.assertIn("article", style)          # 新闻版式替换了报告 CSS
             self.assertIn(".meta", style)
+
+    def test_english_items_carry_chinese(self):
+        data = self.payload()
+        data["items"][0].update({"lang": "en", "title": "Fed cuts rates by 25bp",
+                                 "summary": "The Fed lowered rates.",
+                                 "title_zh": "美联储降息 25 个基点",
+                                 "summary_zh": "美联储下调利率。"})
+        with tempfile.TemporaryDirectory() as folder:
+            manifest, paths = build_news.build(data, Path(folder) / "site",
+                                               min_items=5, now=NOW)
+            text = paths["text"].read_text(encoding="utf-8")
+            with zipfile.ZipFile(paths["epub"]) as book:
+                page = book.read("OEBPS/report.xhtml").decode("utf-8")
+        self.assertIn("美联储降息 25 个基点", text)
+        self.assertIn("美联储降息 25 个基点", page)
+        self.assertIn("原文：The Fed lowered rates.", text)
+        self.assertEqual(manifest["english"], 2)      # 第二条源标 en
+        self.assertEqual(manifest["zh_added"], 1)
+        self.assertEqual(manifest["zh_missing"], 1)
 
     def test_too_few_items_refuses_to_build(self):
         with tempfile.TemporaryDirectory() as folder:

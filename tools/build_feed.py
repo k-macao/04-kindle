@@ -9,8 +9,10 @@
 
 约定：
 
-- 一条新闻 = `<item>`：标题、原文链接、发布时间（RFC822）、分类（快讯/深度/全球）、
-  来源（RSS 2.0 的 `<source url="站点">名称</source>`）和一句摘要；
+- 一条新闻 = `<item>`：标题、原文链接、发布时间（RFC822）、分类、来源（RSS 2.0 的
+  `<source url="站点">名称</source>`）和一句摘要；
+- **英文条目中英并列**：`tools/translate_news.py` 补过 `title_zh` 的，标题写成
+  `English Title｜中文标题`，摘要有译文时写「中文：… 原文：…」，读者不必点进原文；
 - `guid` 用原文链接（`isPermaLink="true"`），没有链接的用标题指纹的
   `urn:004:news:<hash>`——同一个链接在读者端不会重复出现；
 - `lastBuildDate` 是这次生成的时间，`ttl` 建议阅读器每小时回来看一次；
@@ -80,7 +82,10 @@ def group_label(key):
 
 def item_xml(item, names, sites):
     """一条新闻对应一个 <item>；缺什么就省什么，不写空标签。"""
-    title = xml_text(item["title"])
+    # 英文条目把中文接在标题后面：阅读器的列表页只显示标题，译文必须在这里才看得见。
+    title_zh = build_news.normalize(str(item.get("title_zh") or ""))
+    shown = f"{item['title']}｜{title_zh}" if title_zh else item["title"]
+    title = xml_text(shown)
     link = (item.get("link") or "").strip()
     guid_value = link or ("urn:004:news:" + fetch_news.title_hash(item["title"]))
     permalink = "true" if link else "false"
@@ -104,8 +109,16 @@ def item_xml(item, names, sites):
                        else "      <source>")
         parts.append(f"{source_open}{xml_text(name)}</source>")
     summary = build_news.normalize(str(item.get("summary") or ""))
-    if summary and summary != item["title"]:
-        parts.append(f"      <description>{xml_text(summary)}</description>")
+    summary_zh = build_news.normalize(str(item.get("summary_zh") or ""))
+    description = ""
+    if summary_zh and summary_zh != title_zh:
+        description = "中文：" + summary_zh
+        if summary and summary != item["title"]:
+            description += "\n原文：" + summary
+    elif summary and summary != item["title"]:
+        description = summary
+    if description and description != shown:
+        parts.append(f"      <description>{xml_text(description)}</description>")
     parts.append("    </item>")
     return "\n".join(parts)
 
@@ -115,8 +128,8 @@ def render(items, now, title=FEED_TITLE, self_url=DEFAULT_SELF_URL, site_url=DEF
     names = {source["key"]: source["name"] for source in news_sources.SOURCES}
     sites = {source["key"]: source.get("site") or "" for source in news_sources.SOURCES}
     stamp = rfc822(now)
-    description = (f"每天 07:00（北京时间）从 RSSHub 抓取并合并的财经新闻，"
-                   f"本次 {len(items)} 条。")
+    description = (f"每天 07:00（北京时间）从 RSSHub 抓取并合并的财经、政治与哲学思想新闻，"
+                   f"英文条目附中文译文，本次 {len(items)} 条。")
     head = [
         '<?xml version="1.0" encoding="utf-8"?>',
         '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">',
@@ -162,6 +175,7 @@ def build(payload, out_dir, min_items=10, max_items=build_news.MAX_ITEMS, now=No
     info = {
         "file": target.name,
         "items": len(items),
+        "zh": sum(1 for item in items if build_news.normalize(str(item.get("title_zh") or ""))),
         "bytes": target.stat().st_size,
         "built": rfc822(now),
         "newest": rfc822(newest),
@@ -193,8 +207,8 @@ def main(argv=None):
     except (OSError, ValueError, json.JSONDecodeError) as exc:
         print(f"生成失败：{exc}", file=sys.stderr)
         return 1
-    print(f"完成：聚合 RSS {info['items']} 条 / {info['sources']} 个源 / "
-          f"{info['bytes'] / 1024:.0f} KiB → {path}")
+    print(f"完成：聚合 RSS {info['items']} 条（其中 {info['zh']} 条附中文译文）/ "
+          f"{info['sources']} 个源 / {info['bytes'] / 1024:.0f} KiB → {path}")
     print(f"订阅地址：{args.self_url}")
     mirror = jsdelivr_url(args.self_url)
     if mirror:
