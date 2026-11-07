@@ -161,14 +161,17 @@ SOURCES = [
     },
     {
         "key": "MINGPAO_ECO",
-        "name": "明报 · 即时经济",
+        "name": "明报 · 经济",
         "group": "depth",
         "lang": "zh",
-        "route": "/mingpao/ins/s00002",
+        "route": "/mingpao/pns/s00004",
         "site": "news.mingpao.com",
-        "note": "mingpao/index.tsx 的 path /:type?/:category?，type=ins（即时）＋category=s00002（经济，"
-                "表见路由说明）。原来这里是香港01 即时（/hk01/latest）——它的列表混着娱乐稿，"
-                "实测抓到「璀璨之城大结局｜吴卓羲…」这种明星八卦，与财经政治无关，换掉。",
+        # 每日明报的经济版，一天一批。
+        "max_age_hours": 168,
+        "note": "mingpao/index.tsx 的 path /:type?/:category?，type=pns（每日明报）＋category=s00004"
+                "（经济）。原来这里是香港01 即时（/hk01/latest）——列表混着娱乐稿（抓到「璀璨之城"
+                "大结局｜吳卓羲…」）；换成明报即时经济（ins/s00002）后公共实例一直 503，而同路由的"
+                "每日明报版（pns）正常，所以改用 pns。",
     },
     {
         "key": "WSCN_HK",
@@ -202,15 +205,15 @@ SOURCES = [
         "note": "bloomberg/index.ts 的 path /:site?，site=markets（站点表见路由说明）。",
     },
     {
-        "key": "ECONOMIST_ESPRESSO",
-        "name": "经济学人 · Espresso",
+        "key": "BLOOMBERG_ECON",
+        "name": "彭博社 · 经济",
         "group": "global",
         "lang": "en",
-        "route": "/economist/espresso",
-        "site": "economist.com",
-        "note": "economist/espresso.ts 的 path /espresso＝《经济学人》每日简报（The World in Brief），"
-                "英文条目自动附中文。原来这里是 CoinDesk（连挂三轮）→ AP News 商业（公共实例回 503），"
-                "两条都换掉。",
+        "route": "/bloomberg/economics",
+        "site": "bloomberg.com",
+        "note": "bloomberg/index.ts 的 site=economics（站点表见路由说明）。这一组原来试过 CoinDesk"
+                "（连挂三轮）、AP News 商业（503）、经济学人 Espresso（503）；彭博这个命名空间已经"
+                "有两条稳定在跑，就留在这儿。",
     },
     # ---------------- 四、政治与政策 ----------------
     {
@@ -245,6 +248,16 @@ SOURCES = [
         "site": "zaobao.com",
         "note": "zaobao/realtime.ts 的 path /realtime/:section?，section=world＝国际。"
                 "中文视角的亚洲与国际政治，跟内地媒体的选题互补。",
+    },
+    {
+        "key": "BLOOMBERG_POLITICS",
+        "name": "彭博社 · 政治",
+        "group": "politics",
+        "lang": "en",
+        "route": "/bloomberg/politics",
+        "site": "bloomberg.com",
+        "note": "bloomberg/index.ts 的 site=politics。英文的国际政经报道，条目自动附中文；"
+                "和中文的官方口径（政府网/外交部）并排看，能对出温差。",
     },
     # ---------------- 五、哲学与思想 ----------------
     {

@@ -86,7 +86,7 @@ NetNewsWire / Feedly / Reeder / Inoreader 之类的阅读器。设备上如果 `
 
 ## 2. 源目录
 
-源写在 `tools/news_sources.py`，24 条，五个分组：
+源写在 `tools/news_sources.py`，25 条，五个分组：
 
 | 分组 | 源 | RSSHub 路由 |
 | --- | --- | --- |
@@ -103,13 +103,14 @@ NetNewsWire / Feedly / Reeder / Inoreader 之类的阅读器。设备上如果 `
 | | 格隆汇·推荐 | `/gelonghui/home` |
 | | 格隆汇·日热文 | `/gelonghui/hot-article` |
 | | 第一财经·最新 | `/yicai/latest` |
-| | 明报·即时经济 | `/mingpao/ins/s00002` |
+| | 明报·经济 | `/mingpao/pns/s00004` |
 | 全球 | 彭博社·市场 | `/bloomberg/markets` |
 | | 彭博社·加密 | `/bloomberg/crypto` |
-| | 经济学人·Espresso | `/economist/espresso` |
+| | 彭博社·经济 | `/bloomberg/economics` |
 | 政治 | 中国政府网·最新政策 | `/gov/zhengce/zuixin` |
 | | 外交部·发言人表态 | `/gov/mfa/wjdt/fyrbt` |
 | | 联合早报·国际 | `/zaobao/realtime/world` |
+| | 彭博社·政治 | `/bloomberg/politics` |
 | 思想 | Aeon·哲学 | `/aeon/category/philosophy` |
 | | Psyche·Ideas | `/psyche/type/ideas` |
 | | 明报·观点 | `/mingpao/pns/s00012` |
@@ -130,9 +131,12 @@ Playwright，必挂），一并换成港股快讯——**加源前先看路由�
 - **CoinDesk 连挂三轮**（超时 / 503），换成 AP News 自带的官方 RSS（`/apnews/rss/business`）——
   上游本身就提供 RSS 的源最不容易挂。
 - 第一财经头条能解析出 30 条但全部在窗口外（接口回的是老稿），与「第一财经·最新」重复，删掉。
-- 第四轮：香港01 即时的列表混着娱乐稿（抓到「璀璨之城大结局｜吳卓羲…」），换成明报即时·经济；
-  AP News 商业在公共实例上回 503，换成《经济学人》Espresso；思想组补上明报·观点（每日明报评论版）——
-  中文语境里最接近「政治哲学随笔」的日常读物。
+- 第四轮：香港01 即时的列表混着娱乐稿（抓到「璀璨之城大结局｜吳卓羲…」），换掉；AP News 商业
+  在公共实例上回 503，也换掉。反复 503 的都是「要现抓很多页」的路由（即时新闻、Espresso），
+  而同命名空间里较轻的路由正常（明报 pns 版、彭博各频道）——**换源优先挑「同命名空间里已经跑通
+  的那条」**，比试新站点稳。
+- 第五轮定下来：深度＝明报·经济（`pns/s00004`）；全球＝彭博经济；政治＝彭博政治 + 中文官方口径；
+  思想＝Aeon、Psyche、明报·观点（每日明报评论版）、爱思想。
 
 清单里的 `sources_failed` / `sources_error` / `instances_probe` 每轮都会记下失败源、具体报错
 和实例探活结果——不用翻 CI 日志也能判断是 403、超时，还是真的没更新。
