@@ -1,15 +1,21 @@
-name: Refresh daily news
+name: Refresh daily news RSS
 
 # 每天 07:00 北京时间（UTC 前一天 23:00）抓一轮 RSSHub 新闻（财经 / 政治 / 哲学思想），
-# 生成独立的一本书：site/news.epub + 清单 site/news.json + 纯文本 site/news.txt，
 # 英文条目自动配中文译文（site/news_zh_cache.json 是译文缓存，跟着仓库走），
-# 再合成一个聚合 RSS site/news.xml（任何阅读器都能订阅），然后一起提交推送。
-# 设备端把 Display mode 切到「News subscription」、新闻清单 URL 指向 site/news.json
-# 即可；插件只在清单里的 generated 变了时才重下，所以一天只会下一本新书。
+# 只合成一个聚合 RSS：site/news.xml，然后提交推送。
 #
-# 与小时级报告（refresh-epub.yml）完全分开：报告失败不影响新闻，新闻失败也不动
-# 报告的产物。新闻抓不到足够的条目时这一步直接失败——宁可设备上还是昨天的日报，
-# 也不要推送一份空书。
+# 订阅地址（任何阅读器都能用，含 KOReader 的新闻下载器／NetNewsWire／Feedly）：
+#   https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news.xml
+#   https://cdn.jsdelivr.net/gh/k-macao/04-kindle@main/site/news.xml   （raw 不通时用）
+#
+# **这个工作流只生成 xml**：日报 EPUB、清单、纯文本（site/news.epub、news.json、news.txt）
+# 不再由它产出，仓库里也不再保留那三个文件——要做那本书时手动跑：
+#   python tools/fetch_news.py --out news_data.json
+#   python tools/translate_news.py --data news_data.json --cache site/news_zh_cache.json
+#   python tools/build_news.py --data news_data.json --out site
+#
+# 与小时级报告（refresh-epub.yml）完全分开：报告失败不影响新闻，新闻失败也不动报告的产物。
+# 条目不足下限、xml 解析不过时不提交——宁可读者手上还是上一份 feed，也不发布一份空 feed。
 on:
   schedule:
     # 07:00 Asia/Shanghai。GitHub 的 cron 只认 UTC。
@@ -23,7 +29,6 @@ on:
       - ".github/workflows/refresh-news.yml"
       - "tools/fetch_news.py"
       - "tools/news_sources.py"
-      - "tools/build_news.py"
       - "tools/build_feed.py"
       - "tools/radar_discover.py"
       - "tools/translate_news.py"
@@ -58,34 +63,28 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: 跑测试（解析、去重、时间窗、排版规则）
+      - name: 跑测试（解析、去重、时间窗、源目录、英译中、feed 结构）
         run: python -m unittest discover -s tests
 
-      # 定时/手动（日报模式）会写标题指纹，保证一天只推一次不重复；
-      # 改代码触发的运行（push）用 --no-seen：既不读也不写指纹，
-      # 免得把当天还没到 07:00 的条目「提前吃掉」，日报就只剩零头。
+      # 定时/手动会写标题指纹，保证同一条新闻不会天天重复；改代码触发的运行（push）用
+      # --no-seen：既不读也不写指纹，免得把当天还没到 07:00 的条目「提前吃掉」。
       - name: 抓一轮 RSSHub 新闻
         run: |
           set -euo pipefail
           args=(--out news_data.json --min-items "$MIN_ITEMS")
           if [ "${{ github.event_name }}" = "push" ]; then
             args+=(--no-seen)
-            echo "push 触发：本次不读写标题指纹，按完整 24 小时窗口生成"
+            echo "push 触发：本次不读写标题指纹，按完整时间窗生成"
           fi
           python tools/fetch_news.py "${args[@]}"
 
-      # 英文条目补中文。翻译接口（Google → Lingva → MyMemory）全挂也不该挡住出报，
-      # 所以这一步允许失败：清单里的 zh_missing 会如实记下有几条没配上中文。
+      # 英文条目补中文。翻译接口（Google → Lingva → MyMemory）全挂也不该挡住出 feed，
+      # 所以这一步允许失败：feed 自检会把「还没配上中文」的条数打出来。
       - name: 英文条目补中文译文
         continue-on-error: true
         run: >-
           python tools/translate_news.py --data news_data.json
           --cache site/news_zh_cache.json --max-items 80 --strict
-
-      - name: 生成日报 EPUB + 清单 + 纯文本
-        run: >-
-          python tools/build_news.py --data news_data.json --out site
-          --min-items "$MIN_ITEMS" --max-items "$MAX_ITEMS"
 
       - name: 生成聚合 RSS（site/news.xml）
         run: >-
@@ -93,58 +92,73 @@ jobs:
           --min-items "$MIN_ITEMS" --max-items "$MAX_ITEMS"
           --self-url "$FEED_SELF_URL"
 
-      - name: 产物自检（条目数、分节、RSS 可解析、文件可读）
+      - name: 产物自检（xml 可解析、条目数、guid、中文配对、self 地址）
         run: |
           python - <<'PY'
-          import json
           import os
           import pathlib
+          import re
           import sys
-          import zipfile
-
-          minimum = int(os.environ.get("MIN_ITEMS", "10"))
           from xml.etree import ElementTree
 
-          manifest_path = pathlib.Path("site/news.json")
-          manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+          minimum = int(os.environ.get("MIN_ITEMS", "10"))
+          self_url = os.environ.get("FEED_SELF_URL", "")
+          path = pathlib.Path("site/news.xml")
+          cjk = re.compile(r"[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]")
           problems = []
-          if int(manifest.get("items") or 0) < minimum:
-              problems.append(f"条目只有 {manifest.get('items')} 条，少于下限 {minimum}")
-          if not manifest.get("doc") or not pathlib.Path("site", manifest["doc"]).is_file():
-              problems.append("清单指向的 EPUB 不存在")
-          if not pathlib.Path("site/news.txt").is_file():
-              problems.append("缺少纯文本")
-          feed_path = pathlib.Path("site/news.xml")
-          feed_items = 0
-          if not feed_path.is_file():
-              problems.append("缺少聚合 RSS")
-          else:
-              try:
-                  feed_root = ElementTree.fromstring(feed_path.read_bytes())
-                  feed_items = len(feed_root.findall("./channel/item"))
-              except ElementTree.ParseError as exc:
-                  problems.append(f"聚合 RSS 解析失败：{exc}")
-              else:
-                  if feed_items < minimum:
-                      problems.append(f"聚合 RSS 只有 {feed_items} 条，少于下限 {minimum}")
+
+          if not path.is_file():
+              print("缺少 site/news.xml", file=sys.stderr)
+              raise SystemExit(1)
+          try:
+              root = ElementTree.fromstring(path.read_bytes())
+          except ElementTree.ParseError as exc:
+              print(f"聚合 RSS 解析失败：{exc}", file=sys.stderr)
+              raise SystemExit(1)
+
+          channel = root.find("channel")
+          items = channel.findall("item") if channel is not None else []
+          if not items:
+              problems.append("feed 里一条 item 都没有")
+          if len(items) < minimum:
+              problems.append(f"只有 {len(items)} 条，少于下限 {minimum}")
+
+          link = channel.find("{http://www.w3.org/2005/Atom}link") if channel is not None else None
+          if link is None:
+              problems.append("缺少 <atom:link rel=\"self\">")
+          elif self_url and link.get("href") != self_url:
+              problems.append(f"self 地址不对：{link.get('href')}")
+
+          guids = set()
+          for item in items:
+              title = item.findtext("title") or ""
+              guid = item.findtext("guid") or ""
+              if not title:
+                  problems.append("有条目缺标题")
+              if not guid:
+                  problems.append(f"条目缺 guid：{title[:24]}")
+              elif guid in guids:
+                  problems.append(f"guid 重复：{guid}")
+              guids.add(guid)
+              if item.findtext("pubDate") is None:
+                  problems.append(f"条目缺 pubDate：{title[:24]}")
+
+          titles = [item.findtext("title") or "" for item in items]
+          paired = [title for title in titles if "｜中文：" in title]
+          # 标题里一个汉字都没有＝英文条目，没配上中文就是翻译这轮没跑通。
+          untranslated = [title for title in titles if not cjk.search(title)]
+          if untranslated:
+              print(f"提示：{len(untranslated)} 条英文标题还没配上中文"
+                    f"（如「{untranslated[0][:40]}」），下一轮会补", file=sys.stderr)
           if problems:
               print("；".join(problems), file=sys.stderr)
               raise SystemExit(1)
-          with zipfile.ZipFile(pathlib.Path("site", manifest["doc"])) as book:
-              page = book.read("OEBPS/report.xhtml").decode("utf-8")
-          sections = page.count("<h2 ")
-          articles = page.count("<article")
-          if sections < 1 or articles < minimum:
-              print(f"排版异常：分节 {sections}、条目 {articles}", file=sys.stderr)
-              raise SystemExit(1)
-          english = int(manifest.get("english") or 0)
-          zh_missing = int(manifest.get("zh_missing") or 0)
-          if zh_missing:
-              print(f"提示：{zh_missing}/{english} 条英文还没配上中文（翻译接口这轮不通）",
-                    file=sys.stderr)
-          print(f"自检通过：{manifest['items']} 条 / {sections} 节 / {articles} 个条目 / "
-                f"{manifest['bytes']} 字节 / 数据时间 {manifest.get('data_time') or '未知'} / "
-                f"RSS {feed_items} 条 / 英文 {english} 条中 {english - zh_missing} 条有中文")
+
+          print(f"自检通过：{len(items)} 条 / {path.stat().st_size} 字节 / "
+                f"{len(guids)} 个唯一 guid / 中英并列 {len(paired)} 条 / "
+                f"英文未译 {len(untranslated)} 条 / 最新一条 "
+                f"{(items[0].findtext('pubDate') if items else '无')}")
+          print(f"订阅地址：{self_url}")
           PY
 
       - name: 提交并推送
@@ -152,11 +166,16 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add site/news.epub site/news.json site/news.txt site/news.xml \
-                  site/news_seen.json site/news_zh_cache.json
-          stamp=$(python -c "import json;print(json.load(open('site/news.json'))['generated'])")
-          items=$(python -c "import json;print(json.load(open('site/news.json'))['items'])")
-          zh=$(python -c "import json;print(json.load(open('site/news.json')).get('zh_added',0))")
-          git commit --allow-empty -m "chore(news): 每日新闻订阅 ${items} 条（英文附中文 ${zh} 条）+ 聚合 RSS（更新于 ${stamp}）"
+          # 只提交 feed 本体与两个状态文件：标题指纹（跨天去重）和译文缓存。
+          git add site/news.xml site/news_seen.json site/news_zh_cache.json
+          read -r items paired built <<<"$(python - <<'PY'
+          from xml.etree import ElementTree
+          root = ElementTree.parse("site/news.xml").getroot()
+          items = root.findall("./channel/item")
+          paired = sum(1 for item in items if "｜中文：" in (item.findtext("title") or ""))
+          print(len(items), paired, root.findtext("channel/lastBuildDate"))
+          PY
+          )"
+          git commit --allow-empty -m "chore(news): 聚合 RSS ${items} 条（中英并列 ${paired} 条，${built}）"
           # 定时运行时 HEAD 是默认分支；手动跑时是游离 HEAD，两种都要能推。
           git push origin "HEAD:refs/heads/${GITHUB_REF_NAME}"

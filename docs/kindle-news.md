@@ -1,28 +1,40 @@
-# 每日新闻订阅（RSSHub）
+# 每日新闻聚合 RSS（RSSHub）
 
-每天 **07:00（北京时间）** 抓一轮 RSSHub（财经 / 政治 / 哲学思想），生成一本只含新闻的 EPUB、
-一份聚合 RSS，和小时级报告分开存放、分开刷新：
+每天 **07:00（北京时间）** 抓一轮 RSSHub（财经 / 政治 / 哲学思想），英文条目自动配中文，
+合成**一个标准 RSS**：`site/news.xml`。任何阅读器（KOReader 的新闻下载器、NetNewsWire、
+Feedly、Reeder…）直接订阅，不需要插件、不需要清单：
+
+```
+https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news.xml
+https://cdn.jsdelivr.net/gh/k-macao/04-kindle@main/site/news.xml   ← raw 不通时用这个
+```
 
 | 文件 | 内容 | 谁用 |
 | --- | --- | --- |
-| `site/news.epub` | 当天的新闻，按「快讯 / 深度 / 全球市场与要闻 / 政治与政策 / 哲学与思想」分节 | 插件「News subscription」模式 |
-| `site/news.json` | 清单：`generated`、`doc`、条目数、源可用数、最新一条的时间 | 插件每 60 秒只拉这个 |
-| `site/news.txt` | 同一份内容的纯文本 | 文本模式或自己看 |
-| `site/news.xml` | **聚合 RSS**：所有源合成一个标准 feed | 任何 RSS 阅读器 / KOReader 新闻下载器 |
-| `site/news_seen.json` | 最近 7 天推过的标题指纹 | 抓取时跨天去重，不进书 |
+| `site/news.xml` | **聚合 RSS**：所有源合成一个标准 feed，英文条目中英并列 | 阅读器订阅、KOReader 新闻下载器 |
+| `site/news_seen.json` | 最近 7 天推过的标题指纹 | 抓取时跨天去重，不进 feed |
 | `site/news_zh_cache.json` | 英文标题/摘要的中文译文缓存 | 重译同一句英文时直接命中，省额度、译文稳定 |
+
+> 工作流**只生成 xml**。日报 EPUB / 清单 / 纯文本（`site/news.epub`、`site/news.json`、
+> `site/news.txt`）不再自动产出，仓库里也不再保留——`tools/build_news.py` 还在，需要那本书时
+> 手动跑（见下面「做那本 EPUB」）。
 
 抓的是 [RSSHub](https://github.com/DIYgod/RSSHub) 的公开路由，**不重排 004 的报告页**：报告页每小时才刷，
 而且只渲染当次抓到的条目，拿不到「这条新闻来自哪个源、原文在哪」。
 
-## 1. 四条命令
+## 1. 三条命令
 
 ```sh
 python tools/fetch_news.py --out news_data.json               # 抓一轮，写到 news_data.json（不进 Git）
 python tools/translate_news.py --data news_data.json \
        --cache site/news_zh_cache.json                        # 英文条目补中文（就地写回）
-python tools/build_news.py --data news_data.json --out site   # 日报：EPUB + 清单 + 纯文本
 python tools/build_feed.py --data news_data.json --out site   # 聚合 RSS：site/news.xml
+```
+
+做那本 EPUB（可选，工作流不再做）：
+
+```sh
+python tools/build_news.py --data news_data.json --out site   # site/news.epub + news.json + news.txt
 ```
 
 实例顺序＝优先级：**官方 `rsshub.app` 第一**，后面 `rsshub.rss.tips` / `rsshub.isrss.com` /
@@ -45,13 +57,19 @@ python tools/build_feed.py --data news_data.json --out site   # 聚合 RSS：sit
   回的字符串里没有汉字就算失败、换下一家；
 - **结果落 `site/news_zh_cache.json`**：键是文本指纹，同一句英文只翻一次；条目超过 6000 条
   或放置超过 120 天自动清掉；
-- **翻译接口全挂也照样出报**：这一步在工作流里 `continue-on-error: true`，`news.json` 的
-  `english` / `zh_added` / `zh_missing` 会如实记下有几条没配上中文，下一轮补齐；
-- 渲染时中英并列：EPUB 标题下多一行「中文：…」，摘要译在原文之上；聚合 RSS 的标题写成
-  `English Title｜中文标题`，摘要是「中文：… 原文：…」——阅读器的列表页只显示标题，
-  译文不接在标题上等于没翻。
+- **翻译接口全挂也照样出 feed**：这一步在工作流里 `continue-on-error: true`，feed 自检会打出
+  「还有几条英文标题没配上中文」，下一轮补齐；
+- 渲染时中英并列：RSS 标题写成 `English Title｜中文：译文`，摘要是「中文：… 原文：…」——
+  阅读器的列表页只显示标题，译文不接在标题上等于没翻；EPUB（手动生成时）标题下多一行「中文：…」。
 
-`build_news.py` 的规矩：
+抓取时的三个时间约定：
+
+- **单源时间窗**：源可以写 `max_age_hours`（政策、哲学类默认放宽到 3～14 天）；
+- **未来时间**：超过 6 小时的时间戳一律按「生成时间」记（财新周刊的期号日期跑到 25 小时后，
+  否则它会一直霸占「最新一条」、把排序带歪）；
+- **跨天去重**：`news_seen.json` 记着最近 7 天推过的标题指纹。
+
+`build_news.py`（可选，手动跑那本书时）的规矩：
 
 - 一条新闻 = 标题 + `来源 · 北京时间` + 最多一句摘要。摘要是 RSS 的 `description` / `summary`
   去掉标签后的文字，和前一句相同就不重复出；
@@ -61,7 +79,7 @@ python tools/build_feed.py --data news_data.json --out site   # 聚合 RSS：sit
 
 ### 聚合 RSS（`site/news.xml`）
 
-同一个 `news_data.json` 还能合成一份**标准 RSS 2.0**——不装插件、不用清单，任何阅读器都能订：
+`build_feed.py` 把 `news_data.json` 合成一份**标准 RSS 2.0**——不装插件、不用清单，任何阅读器都能订：
 
 ```
 https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news.xml
@@ -72,7 +90,7 @@ https://cdn.jsdelivr.net/gh/k-macao/04-kindle@main/site/news.xml   ← raw 不�
 `https://k-macao.github.io/04-kindle/site/news.xml`。）
 
 - 一个 `<item>`＝标题、原文链接、`pubDate`（RFC822/UTC）、分类、`<source url="站点">来源名</source>`、
-  一句摘要；**英文条目标题后面接中文**（`English Title｜中文标题`），摘要为「中文：… 原文：…」；
+  一句摘要；**英文条目标题后面接中文**（`English Title｜中文：译文`），摘要为「中文：… 原文：…」；
 - `guid` 用原文链接（`isPermaLink="true"`），没有链接的用标题指纹 `urn:004:news:<hash>`——
   同一条新闻在读者端不会因为每天重发而重复；
 - `lastBuildDate` 是本次生成时间，`ttl` = 60 分钟；
@@ -236,27 +254,26 @@ https://rsshub.rss.tips, https://rsshub.isrss.com, https://rsshub.cups.moe, http
 
 ## 6. 自动发布
 
-`.github/workflows/refresh-news.yml`：
+`.github/workflows/refresh-news.yml`（**只出 xml**）：
 
 - `cron: "0 23 * * *"`（UTC）= 每天 07:00 北京时间；也可以手动 `workflow_dispatch`；
-- 流程：跑测试 → `fetch_news.py` → `build_news.py` → 产物自检（条目数、分节数、EPUB 可读、
-  清单指向的文件存在）→ 提交推送 `site/news.epub`、`site/news.json`、`site/news.txt`、`site/news_seen.json`；
-- 任何一步失败就**不推送**：抓不到足够的条目时旧日报保持原样，设备不会拿到空书；
-- 与小时级报告完全隔离（`concurrency: refresh-news`），报告失败不影响新闻，新闻失败也不动报告产物；
-- 另外，改了抓取/排版/源的代码（`tools/*news*`、`build_feed.py`、本工作流）也会跑一次：
-  这种运行带 `--no-seen`，按完整 24 小时窗口生成、也不写标题指纹，免得把当天还没到 07:00 的
-  条目提前吃掉。
+- 流程：跑测试 → `fetch_news.py` → `translate_news.py` → `build_feed.py` → feed 自检
+  （xml 可解析、条目数达标、guid 不缺不重、`atom:link rel="self"` 对得上）→ 提交推送
+  `site/news.xml` + `site/news_seen.json` + `site/news_zh_cache.json`；
+- 任何一步失败就**不推送**：抓不到足够条目、xml 解析不过时，读者手上还是上一份 feed；
+- 与小时级报告完全隔离（`concurrency: refresh-news`），报告失败不影响 feed，feed 失败也不动报告产物；
+- 改了抓取/翻译/feed 的代码（`tools/fetch_news.py`、`news_sources.py`、`build_feed.py`、
+  `radar_discover.py`、`translate_news.py`、本工作流）也会跑一次：这种运行带 `--no-seen`，
+  按完整时间窗生成、也不写标题指纹，免得把当天还没到 07:00 的条目提前吃掉。
 
-## 7. 设备端
+## 7. 订阅方式
 
-1. 菜单 → **004 Report** → **News manifest URL** 填 `site/news.json` 的地址
-   （例如 `https://k-macao.github.io/04-kindle/site/news.json`，以实际发布地址为准）；
-2. **Display mode → News subscription**；
-3. **Show report** 开始。
-
-之后和字模式一样：每 60 秒只拉一次几百字节的清单，`generated` 变了才重下 EPUB 并从头打开；
-新的一天下的是新文件（`octopus004-news-<n>.epub`），旧文件自动清掉，报告那本
-（`octopus004-report-<n>.epub`）互不影响。两份书各自记 `sig`，所以来回切模式不会重复下载。
+- **KOReader**：工具 → **新闻下载器**（News downloader），把上面的 raw 地址粘进 `Download settings`
+  的 feed 列表，然后「下载新闻」；
+- **其它阅读器**：NetNewsWire / Feedly / Reeder / Inoreader 里直接加这个 feed 地址；
+- **插件**：`News subscription` 模式读的是 `site/news.json`，工作流已不再生成它。想继续用那个模式，
+  就手动跑 `build_news.py`（见「做那本 EPUB」）并自己提交 `site/news.epub`、`site/news.json`、
+  `site/news.txt`，再在菜单 → **004 Report** → **News manifest URL** 填清单地址。
 
 地址填 `raw.githubusercontent.com` 时，连不上会自动改试 jsDelivr 镜像；也可以在同一个框里写多个地址
 （空格或逗号分隔），插件按顺序试。菜单 → **Check URLs (network)** 会逐个地址给结果，用来判断这台
@@ -269,9 +286,9 @@ https://rsshub.rss.tips, https://rsshub.isrss.com, https://rsshub.cups.moe, http
 
 | 现象 | 先看什么 |
 | --- | --- |
-| 日报没更新 | Actions 运行日志：`fetch_news.py` 打印的每源一行 `✅ / ⚠️`；`sources` 里的 `error` |
+| feed 没更新 | Actions 运行日志：`fetch_news.py` 每源一行 `✅ / ⚠️`，`build_feed.py` 末尾会列出失败源与报错 |
 | 只剩几个源有稿 | 实例被限流/403：换 `RSSHUB_BASE`（自建实例最稳） |
 | 某条源一直 404/401 | 看日志里的 `Radar 建议`；也可以 `python tools/radar_discover.py <站点域名>` 自己查 |
 | 条目少得异常 | 是不是刚手动跑过一次？`site/news_seen.json` 把已推条目挡掉了，`--no-seen` 可重抓 |
-| 设备一直不更新 | 清单 URL 是否指向 `site/news.json`；`Status` 里的 `generated` 与网页上的是否一致 |
-| 书里出现站壳/乱码 | 先看是哪条源：`build_news.py` 只做粗筛（标题与摘要），正文质量取决于上游 RSS |
+| 阅读器一直不更新 | feed 地址是否用 `raw.githubusercontent.com`（连不上换 jsDelivr）；`channel/lastBuildDate` 是不是今天 |
+| 有条目质量差 | 先看是哪条源：抓取只做粗筛（标题、乱码、时间窗），正文质量取决于上游 RSS |
