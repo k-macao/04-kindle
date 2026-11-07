@@ -206,16 +206,40 @@ jobs:
       # 设备上「内容下载失败」时，先看这份表就知道是地址不对还是那台设备的线路不通。
       - name: 核对对外地址（多入口）
         continue-on-error: true
-        run: >-
-          python tools/check_feed_urls.py --write site/feed-mirrors.json
-          --timeout 20
+        run: |
+          set -uo pipefail
+          rm -f site/feed-mirrors.log
+          # 有地址不通时脚本会返回 1，这是正常结果，不是错误；真正的异常会带 Traceback。
+          if ! python tools/check_feed_urls.py --write site/feed-mirrors.json \
+                 --timeout 20 > site/feed-mirrors.log 2>&1; then
+            echo "核对脚本退出码非 0：有地址不通，结果见下"
+          fi
+          cat site/feed-mirrors.log || true
+          { echo '### 对外地址核对'; echo '```'; cat site/feed-mirrors.log; echo '```'; } \
+            >> "$GITHUB_STEP_SUMMARY" || true
+          if grep -q "Traceback" site/feed-mirrors.log 2>/dev/null; then
+            echo "::error::核对脚本抛异常，日志留在 site/feed-mirrors.log"
+          else
+            rm -f site/feed-mirrors.log
+          fi
+          test -f site/feed-mirrors.json
 
       - name: 提交镜像核对结果
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add site/feed-mirrors.json
+          if [ -f site/feed-mirrors.json ]; then
+            git add site/feed-mirrors.json
+          else
+            echo "::error::核对脚本没有产出 site/feed-mirrors.json"
+          fi
+          # 只有核对脚本抛异常时才会留下日志，正常轮次里它不存在，顺手把旧的从索引里去掉。
+          if [ -f site/feed-mirrors.log ]; then
+            git add site/feed-mirrors.log
+          else
+            git rm --cached -q site/feed-mirrors.log 2>/dev/null || true
+          fi
           if git diff --cached --quiet; then
             echo "镜像表没有变化，跳过提交"
             exit 0
@@ -223,4 +247,8 @@ jobs:
           ok=$(python -c "import json;print(json.load(open('site/feed-mirrors.json'))['ok'])")
           total=$(python -c "import json;print(json.load(open('site/feed-mirrors.json'))['total'])")
           git commit -m "chore(news): 对外地址核对 ${ok}/${total} 可用"
-          git push origin "HEAD:refs/heads/${GITHUB_REF_NAME}"
+          if ! git push origin "HEAD:refs/heads/${GITHUB_REF_NAME}"; then
+            # 并发运行（手动 + 定时）时远端可能又往前走了一步，rebase 再推一次。
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+            git push origin "HEAD:refs/heads/${GITHUB_REF_NAME}"
+          fi
