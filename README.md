@@ -112,10 +112,12 @@ https://cdn.jsdelivr.net/gh/k-macao/04-kindle@main/site/news.xml             ←
 不用重抓。
 
 每天 07:00（北京时间）由 `.github/workflows/refresh-news.yml` 自动跑：跑测试 → 抓取 → 英译中 →
-合成 xml → 自检（可解析、条数、guid、中文配对、self 地址）→ 只提交 `site/news.xml` 与两个状态文件。实例顺序是**官方 `rsshub.app` 第一**，后面 `rsshub.rss.tips` /
-`rsshub.isrss.com` / `rsshub.cups.moe` 兜底；开工前先探一次 `/healthz`，官方实例对机房 IP 回 403
-时自动排到队尾（日志会写原因），`RSSHUB_BASE` 可换成自建实例；同一实例连续失败 3 次就跳过，
-单源失败不影响别的源。跨天不重复：`site/news_seen.json` 记着最近 7 天推过的标题指纹，
+合成 xml → 自检（可解析、条数、guid、中文配对、self 地址）→ 只提交 `site/news.xml` 与三个状态文件。
+每个源有五层退路，任何一层成功就停：**源站直连接口 → RSSHub 官方 `rsshub.app` → RSSHub 镜像
+（`rsshub.rss.tips` / `rsshub.isrss.com` / `rsshub.cups.moe`）→ 站点原生 RSS → RSS-Bridge 公共实例代取**。
+开工前先探一次 `/healthz`，官方实例对机房 IP 回 403 时自动排到队尾（日志会写原因），`RSSHUB_BASE`
+可换成自建实例；同一实例连续失败 3 次就跳过，单源失败不影响别的源。每轮的「哪个源靠哪一层活着」
+写进 `site/source-health.json`，也贴在 Actions 步骤摘要里。详见 `docs/kindle-news.md` 第 0 节。跨天不重复：`site/news_seen.json` 记着最近 7 天推过的标题指纹，
 昨天 20:00 的稿子今天不会再出现一次。
 
 找不到路由的站点，用 **RSSHub Radar** 的规则去发现（`tools/radar_discover.py`：先查实例的

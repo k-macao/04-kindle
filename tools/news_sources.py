@@ -26,6 +26,9 @@
     group   GROUPS 里的分组键
     route   RSSHub 完整路由（以 / 开头，不含实例域名）——与 feed 二选一
     feed    站点自己的原生 RSS 绝对地址（RSSHub 没有这条路由时才用）——与 route 二选一
+    direct  可选：源站直连抓取器（tools/direct_feeds.py），`"名字"` 或 `"名字:参数"`。
+            有它的时候抓取顺序是「直连 → RSSHub 官方 → RSSHub 镜像 → 原生 RSS →
+            RSS-Bridge 代取」，任何一层成功就停；route / feed 仍然要留，当后面几跳的退路
     site    站点域名，只用于「这条源挂了，去问 Radar 该换哪个路由」（tools/radar_discover.py）
     lang    zh / en：标 en 的条目会被 tools/translate_news.py 自动补中文译文
     max_age_hours  可选的单源时间窗（默认用全局 --max-age-hours 的 24 小时）。政策文件、
@@ -54,6 +57,7 @@ SOURCES = [
         "group": "flash",
         "lang": "zh",
         "route": "/cls/telegraph",
+        "direct": "cls",
         "site": "cls.cn",
         "note": "财联社电报（RSSHub lib/routes/cls/telegraph.tsx，path /telegraph/:category?），A 股盘中最重要的快讯源。",
     },
@@ -63,6 +67,7 @@ SOURCES = [
         "group": "flash",
         "lang": "zh",
         "route": "/wallstreetcn/live/global",
+        "direct": "wallstreetcn:global",
         "site": "wallstreetcn.com",
         "note": "wallstreetcn/live.tsx 的 path /live/:category?，category=global 是「要闻」频道。",
     },
@@ -72,6 +77,7 @@ SOURCES = [
         "group": "flash",
         "lang": "zh",
         "route": "/jin10",
+        "direct": "jin10",
         "site": "jin10.com",
         "note": "jin10/index.ts 的 path /:important?，不带参数＝全部快讯；带 1 只要重要快讯。",
     },
@@ -81,6 +87,7 @@ SOURCES = [
         "group": "flash",
         "lang": "zh",
         "route": "/wallstreetcn/live/a-stock",
+        "direct": "wallstreetcn:a-stock",
         "site": "wallstreetcn.com",
         "note": "wallstreetcn/live.tsx 的 category=a-stock。原来这里是证券时报快讯（/stcn/article/list/kx），"
                 "实测返回 0 条，换成同一命名空间里A股频道——同域名其它路由都正常。",
@@ -305,6 +312,7 @@ def catalog_errors():
     """目录自检：键唯一、分组存在、路由像条完整路径。返回问题列表（空即通过）。"""
     problems = []
     seen = set()
+    direct_names = news_sources_direct_names()
     for source in SOURCES:
         key = source.get("key")
         if not key or key in seen:
@@ -322,10 +330,33 @@ def catalog_errors():
             problems.append(f"{key}: 原生 feed 必须是 HTTPS 绝对地址：{feed!r}")
         if not source.get("name"):
             problems.append(f"{key}: 缺少显示名")
+        direct = source.get("direct") or ""
+        if direct:
+            name = str(direct).partition(":")[0].strip()
+            if name not in direct_names:
+                problems.append(f"{key}: direct {direct!r} 不是已知抓取器"
+                                f"（可选 {', '.join(direct_names)}）")
         window = source.get("max_age_hours")
         if window is not None and (not isinstance(window, (int, float)) or window <= 0):
             problems.append(f"{key}: max_age_hours 必须是正数：{window!r}")
     return problems
+
+
+def news_sources_direct_names():
+    """直连抓取器的名字（延迟导入，免得 news_sources 与 direct_feeds 互相套住）。"""
+    import direct_feeds
+    return direct_feeds.names()
+
+
+# RSS-Bridge（github.com/RSS-Bridge/rss-bridge）的公共实例：与 RSSHub 是两个完全不同的
+# 代码库、不同的维护者、不同的机房。它不生成新闻，只负责「代你去取一条 feed」——
+# 当 GitHub 的出口 IP 被源站挡住时，这第三条路常常还能走通。
+# 名单来自官方 docs/01_General/06_Public_Hosts.md，只挑长期在线的三个。
+RSS_BRIDGE_INSTANCES = (
+    "https://rss-bridge.org/bridge01",
+    "https://rss-bridge.flossboxin.org.in",
+    "https://rss.nixnet.services",
+)
 
 
 def group_label(key):

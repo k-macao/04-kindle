@@ -71,15 +71,41 @@ jobs:
 
       # 定时/手动会写标题指纹，保证同一条新闻不会天天重复；改代码触发的运行（push）用
       # --no-seen：既不读也不写指纹，免得把当天还没到 07:00 的条目「提前吃掉」。
-      - name: 抓一轮 RSSHub 新闻
+      #
+      # 每个源按 --providers 的顺序依次试，任何一层成功就停：
+      #   直连源站接口 → RSSHub 官方 → RSSHub 镜像 → 站点原生 RSS → RSS-Bridge 代取
+      # 结果写进 site/source-health.json（进 Git），贴进 $GITHUB_STEP_SUMMARY。
+      - name: 抓一轮新闻（多层退路：直连 / RSSHub / 镜像 / 原生 RSS / RSS-Bridge）
         run: |
           set -euo pipefail
-          args=(--out news_data.json --min-items "$MIN_ITEMS")
+          args=(--out news_data.json --min-items "$MIN_ITEMS"
+                --providers direct,rsshub,mirror,native,bridge
+                --health site/source-health.json)
           if [ "${{ github.event_name }}" = "push" ]; then
             args+=(--no-seen)
             echo "push 触发：本次不读写标题指纹，按完整时间窗生成"
           fi
           python tools/fetch_news.py "${args[@]}"
+          python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json
+          import pathlib
+
+          health = json.loads(pathlib.Path("site/source-health.json").read_text(encoding="utf-8"))
+          summary = health["summary"]
+          print("### 源健康表\n")
+          print(f"**{summary['ok']}/{summary['total']} 个源可用**，"
+                f"{summary['items']} 条；按层："
+                + " / ".join(f"`{k}` {v}" for k, v in sorted(summary["by_provider"].items(),
+                                                            key=lambda kv: -kv[1])))
+          print("\n| 源 | 结果 | 在哪一层 | 条数 | 前几跳 |")
+          print("| --- | --- | --- | --- | --- |")
+          for source in health["sources"]:
+              attempts = source.get("attempts") or []
+              failed = [f"{a['provider']}×" for a in attempts if not a["ok"]]
+              mark = "✅" if source["ok"] else "⚠️"
+              print(f"| {source['key']} {source['name']} | {mark} | "
+                    f"{source['provider'] or '—'} | {source['count']} | {' '.join(failed) or '—'} |")
+          PY
 
       # 英文条目补中文。翻译接口（Google → Lingva → MyMemory）全挂也不该挡住出 feed，
       # 所以这一步允许失败：feed 自检会把「还没配上中文」的条数打出来。
@@ -185,8 +211,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           # 只提交 feed 本体与两个状态文件：标题指纹（跨天去重）和译文缓存。
+          # 只提交 feed 本体、标题指纹、译文缓存，以及本轮的源健康表。
           git add site/news.xml site/news-lite.xml site/news-test.xml \
-                  site/news_seen.json site/news_zh_cache.json
+                  site/news_seen.json site/news_zh_cache.json site/source-health.json
           read -r items paired built <<<"$(python - <<'PY'
           from xml.etree import ElementTree
           root = ElementTree.parse("site/news.xml").getroot()

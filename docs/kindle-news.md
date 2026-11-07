@@ -28,6 +28,37 @@ https://cdn.jsdelivr.net/gh/k-macao/04-kindle@main/site/news.xml            ← 
 抓的是 [RSSHub](https://github.com/DIYgod/RSSHub) 的公开路由，**不重排 004 的报告页**：报告页每小时才刷，
 而且只渲染当次抓到的条目，拿不到「这条新闻来自哪个源、原文在哪」。
 
+## 0. 一个源，五层退路
+
+抓取不是一个源打一次就完事：**每个源按下面的顺序试，任何一层成功就停**。越靠前越接近源站，
+越靠后越绕——但不绕的那几层先挂了的时候，只有后面几层能救场。
+
+| 顺序 | 层 | 是什么 | 谁维护 |
+| --- | --- | --- | --- |
+| 1 | `direct` | **源站自己的接口**：金十 `flash-api.jin10.com/get_flash_list`、财联社 `www.cls.cn/api/cache`、华尔街见闻 `api-one.wallstcn.com/apiv1/content/lives` | 站点自己（`tools/direct_feeds.py` 解析） |
+| 2 | `rsshub` | RSSHub 官方实例 `rsshub.app` | DIYgod/RSSHub |
+| 3 | `mirror` | RSSHub 公共镜像 `rsshub.rss.tips` / `rsshub.isrss.com` / `rsshub.cups.moe` | 各镜像主人 |
+| 4 | `native` | 站点自己的原生 RSS（目录里 `feed` 字段） | 站点自己 |
+| 5 | `bridge` | **RSS-Bridge 公共实例代取**：`FeedMerge` 只做转发，让第三方机房去取我们取不到的那条 feed | RSS-Bridge/rss-bridge（另一个代码库、另一批机房） |
+
+为什么要第 5 层：RSSHub 和 RSS-Bridge 是**两个完全不同的项目**，实例、机房、维护者都不重叠。
+GitHub 的出口 IP 被某个源站 403 时，让 `rss-bridge.org` 代取常常还能拿到。名单取自官方
+`docs/01_General/06_Public_Hosts.md`，只挑长期在线的几个。
+
+命令行：
+
+```sh
+python tools/fetch_news.py --providers direct,rsshub,mirror,native,bridge \
+       --health site/source-health.json
+```
+
+- `--providers` 就是这张表的顺序，可以只留几层（例如 `--providers rsshub,mirror` 复现旧行为）；
+- `bridge` 是别人的公共服务，**库函数默认不开**，命令行默认开——按需再打，别天天白用人家带宽；
+- 日志里降级成功会多一行 `↳ 退路：direct=HTTP Error 403；rsshub=timed out`，`sources[]` 里
+  每条源都有 `provider` / `attempts`，说明是哪一层给的稿、前几层为什么不行；
+- `site/source-health.json` 把这张表整轮存下来（进 Git，工作流贴进步骤摘要）：哪个源最近一直靠
+  第 5 层活着，一眼就能看出来——那说明该给它补一条更靠前的路，或者换源。
+
 ## 1. 三条命令
 
 ```sh
@@ -362,9 +393,9 @@ https://rsshub.rss.tips, https://rsshub.isrss.com, https://rsshub.cups.moe, http
 `.github/workflows/refresh-news.yml`（**只出 xml**）：
 
 - `cron: "0 23 * * *"`（UTC）= 每天 07:00 北京时间；也可以手动 `workflow_dispatch`；
-- 流程：跑测试 → `fetch_news.py` → `translate_news.py` → `build_feed.py` → feed 自检
+- 流程：跑测试 → `fetch_news.py`（五层退路 + 源健康表）→ `translate_news.py` → `build_feed.py` → feed 自检
   （xml 可解析、条目数达标、guid 不缺不重、`atom:link rel="self"` 对得上）→ 提交推送
-  `site/news.xml` + `site/news_seen.json` + `site/news_zh_cache.json`；
+  `site/news.xml` + `site/news_seen.json` + `site/news_zh_cache.json` + `site/source-health.json`；
 - 任何一步失败就**不推送**：抓不到足够条目、xml 解析不过时，读者手上还是上一份 feed；
 - 与小时级报告完全隔离（`concurrency: refresh-news`），报告失败不影响 feed，feed 失败也不动报告产物；
 - 改了抓取/翻译/feed 的代码（`tools/fetch_news.py`、`news_sources.py`、`build_feed.py`、
@@ -392,7 +423,8 @@ https://rsshub.rss.tips, https://rsshub.isrss.com, https://rsshub.cups.moe, http
 | 现象 | 先看什么 |
 | --- | --- |
 | feed 没更新 | Actions 运行日志：`fetch_news.py` 每源一行 `✅ / ⚠️`，`build_feed.py` 末尾会列出失败源与报错 |
-| 只剩几个源有稿 | 实例被限流/403：换 `RSSHUB_BASE`（自建实例最稳） |
+| 只剩几个源有稿 | 先看 `site/source-health.json`：哪个源靠哪一层活着；实例被限流/403 就换 `RSSHUB_BASE`（自建实例最稳） |
+| 某个源天天靠 `bridge` 才拿到 | 说明前四层对它都不可用：给它补一条 `direct` 抓取器（`tools/direct_feeds.py`），或换源 |
 | 某条源一直 404/401 | 看日志里的 `Radar 建议`；也可以 `python tools/radar_discover.py <站点域名>` 自己查 |
 | 条目少得异常 | 是不是刚手动跑过一次？`site/news_seen.json` 把已推条目挡掉了，`--no-seen` 可重抓 |
 | 阅读器一直不更新 | feed 地址是否用 `raw.githubusercontent.com`（连不上换 jsDelivr）；`channel/lastBuildDate` 是不是今天 |
