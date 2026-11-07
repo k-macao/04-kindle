@@ -67,6 +67,7 @@ NetNewsWire / Feedly / Reeder / Inoreader 之类的阅读器。设备上如果 `
 | 快讯 | 财联社·电报 | `/cls/telegraph` |
 | | 华尔街见闻·要闻快讯 | `/wallstreetcn/live/global` |
 | | 华尔街见闻·A 股快讯 | `/wallstreetcn/live/a-stock` |
+| | 华尔街见闻·港股快讯 | `/wallstreetcn/live/hk-stock` |
 | | 金十数据 | `/jin10` |
 | | 同花顺·实时财经新闻 | `/10jqka/realtimenews` |
 | | 第一财经·简报 | `/yicai/brief` |
@@ -78,7 +79,6 @@ NetNewsWire / Feedly / Reeder / Inoreader 之类的阅读器。设备上如果 `
 | | 第一财经·最新 | `/yicai/latest` |
 | | 第一财经·头条 | `/yicai/headline` |
 | | 香港01·即时 | `/hk01/latest` |
-| | 雪球·热门帖子 | `/xueqiu/hots` |
 | 全球 | 彭博社·市场 | `/bloomberg/markets` |
 | | 彭博社·加密 | `/bloomberg/crypto` |
 | | CoinDesk·最新 | `/coindesk/news` |
@@ -86,7 +86,10 @@ NetNewsWire / Feedly / Reeder / Inoreader 之类的阅读器。设备上如果 `
 2026-11-07 首轮真实运行（128 条 / 12 个源可用）换掉了四条**在机房 IP 上取不到**的源，理由都写在
 各自的 `note` 里：WSJ 经济标着 `antiCrawler`、路透商业被 Cloudflare 挡住、证券时报快讯与 21 财经热点
 返回 0 条。替换挑的是同域名下已验证能用的路由（华尔街见闻 A 股、第一财经头条、格隆汇日热文）和一个
-新域名（雪球热帖）。CoinDesk 暂时保留观察——清单里的 `sources_failed` 每轮都会记下失败的源。
+和华尔街见闻港股快讯。第二批运行又发现 雪球热帖 的 `requirePuppeteer: true`（公共实例没有
+Playwright，必挂），一并换成港股快讯——**加源前先看路由的 `features`**：`requirePuppeteer`、
+`requireConfig`、`antiCrawler` 这三种在公共实例上基本都取不到。CoinDesk 与第一财经头条暂时保留
+观察——清单里的 `sources_failed` 每轮都会记下失败的源。
 
 这些路由都按 RSSHub 仓库 `lib/routes/<namespace>/…` 里的 `route.path` 核对过（namespace 拼在路径前面）。
 注意 **namespace 是目录名，不是 `namespace.ts` 里的 `name`**：注册代码按顶层目录拼路径

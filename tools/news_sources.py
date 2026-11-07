@@ -15,6 +15,9 @@
 - 想加源：优先选「站点没有原生 RSS、或原生 RSS 常被墙」的站点，把完整路由写进
   SOURCES，跑 `python tools/fetch_news.py --only KEY` 验一条；抓不到就说明路由或
   站点变了，换实例或换路由，别留一条永远失败的源。
+- **加源前先看路由的 `features`**：`requirePuppeteer: true`（如 `/xueqiu/hots`）在公共实例上
+  必然失败，`requireConfig: true`（要 cookie/密钥）也一样；`antiCrawler: true`（如 WSJ）
+  在机房 IP 上基本取不到。这三种都别写进来，除非你自建实例并且配好了对应依赖。
 
 字段说明：
 
@@ -171,14 +174,15 @@ SOURCES = [
         "note": "hk01/latest.ts 的 path /latest，港股与香港政经的即时报道。",
     },
     {
-        "key": "XUEQIU_HOTS",
-        "name": "雪球 · 热门帖子",
-        "group": "depth",
+        "key": "WSCN_HK",
+        "name": "华尔街见闻 · 港股快讯",
+        "group": "flash",
         "lang": "zh",
-        "route": "/xueqiu/hots",
-        "site": "xueqiu.com",
-        "note": "xueqiu/hots.ts 的 path /hots，雪球热门帖子。原来这里是 21 财经热点"
-                "（/21caijing/channel/热点），实测 0 条——中文频道参数对不上。",
+        "route": "/wallstreetcn/live/hk-stock",
+        "site": "wallstreetcn.com",
+        "note": "wallstreetcn/live.tsx 的 category=hk-stock，港股盘中快讯。原来这里是雪球热帖"
+                "（/xueqiu/hots），那条路由标着 requirePuppeteer: true——公共实例没有 Playwright，"
+                "必然取不到。",
     },
     # ---------------- 三、全球市场与加密 ----------------
     {

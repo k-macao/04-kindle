@@ -79,7 +79,7 @@ https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news.xml
 https://cdn.jsdelivr.net/gh/k-macao/04-kindle@main/site/news.xml     ← raw 不通时用这个
 ```源目录在 `tools/news_sources.py`，18 条 RSSHub 路由（财联社电报、华尔街见闻的要闻与
 A 股快讯、金十、同花顺、第一财经的简报/最新/头条、新浪股市滚动、财新、格隆汇的推荐与日热文、香港01、
-雪球热帖、彭博的市场与加密、CoinDesk），挑的都是 004 那 49 条之外的站点，路由按 RSSHub 仓库里的
+彭博的市场与加密、CoinDesk），挑的都是 004 那 49 条之外的站点，路由按 RSSHub 仓库里的
 `route.path` 核对过。英文大站（路透、WSJ）实测在机房 IP 上取不到（Cloudflare / `antiCrawler`），
 已经换成同域名下能用的中文源；换掉的原因写在目录的 `note` 里，清单里的 `sources_failed` 会记录
 每轮失败的源，持续失败就该换。
