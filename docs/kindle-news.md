@@ -86,7 +86,7 @@ NetNewsWire / Feedly / Reeder / Inoreader 之类的阅读器。设备上如果 `
 
 ## 2. 源目录
 
-源写在 `tools/news_sources.py`，25 条，五个分组：
+源写在 `tools/news_sources.py`，24 条，五个分组：
 
 | 分组 | 源 | RSSHub 路由 |
 | --- | --- | --- |
@@ -113,7 +113,6 @@ NetNewsWire / Feedly / Reeder / Inoreader 之类的阅读器。设备上如果 `
 | | 彭博社·政治 | `/bloomberg/politics` |
 | 思想 | Aeon·哲学 | `/aeon/category/philosophy` |
 | | Psyche·Ideas | `/psyche/type/ideas` |
-| | 爱思想·推荐排行 | `/aisixiang/toplist/11` |
 | | 爱思想·最近更新 | `/aisixiang/toplist/10` |
 
 2026-11-07 首轮真实运行（128 条 / 12 个源可用）换掉了四条**在机房 IP 上取不到**的源，理由都写在
@@ -137,7 +136,8 @@ Playwright，必挂），一并换成港股快讯——**加源前先看路由�
   的那条」**，比试新站点稳。
 - 第五轮定下来：全球＝彭博经济；政治＝彭博政治 + 中文官方口径；深度＝财新周刊（明报这个命名空间
   在公共实例上不稳：即时版与经济版 503、观点版报 XML 语法错误，全组放弃）；思想＝Aeon、Psyche、
-  爱思想的「最近更新」与「推荐排行」。
+  爱思想·最近更新。爱思想的「推荐排行」（`toplist/11`）也试过：29 条全是常青旧文，14 天窗口内 0 条，
+  不适合日报，删掉。
 
 清单里的 `sources_failed` / `sources_error` / `instances_probe` 每轮都会记下失败源、具体报错
 和实例探活结果——不用翻 CI 日志也能判断是 403、超时，还是真的没更新。

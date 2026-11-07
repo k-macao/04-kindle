@@ -282,17 +282,6 @@ SOURCES = [
                 "英文条目自动附中文。",
     },
     {
-        "key": "AISIXIANG_REC",
-        "name": "爱思想 · 推荐排行",
-        "group": "thought",
-        "lang": "zh",
-        "route": "/aisixiang/toplist/11",
-        "site": "aisixiang.com",
-        "max_age_hours": 336,
-        "note": "aisixiang/toplist.ts 的 id=11＝文章推荐排行（编辑推荐，比「最近更新」更耐读）。"
-                "思想组原来这里是明报观点（公共实例 503 / XML 语法错误），换回已经跑通的爱思想命名空间。",
-    },
-    {
         "key": "AISIXIANG",
         "name": "爱思想 · 最近更新",
         "group": "thought",
@@ -303,7 +292,9 @@ SOURCES = [
         "max_age_hours": 168,
         "note": "aisixiang/toplist.ts 的 path /toplist/:id?/:period?，id=10＝最近更新文章"
                 "（表见路由说明：文章点击排行 1 / 最近更新文章 10 / 文章推荐排行 11）。"
-                "中文思想与学术圈的主要阵地，哲学/政治哲学的成篇文章都在这儿。",
+                "中文思想与学术圈的主要阵地，哲学/政治哲学的成篇文章都在这儿。"
+                "推荐排行（id=11）也试过：29 条全是旧文，14 天窗口内 0 条——编辑推荐是常青稿，"
+                "不适合放进日报，删掉。",
     },
 ]
 
