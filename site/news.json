@@ -1,27 +1,22 @@
 {
-  "generated": "2026-11-07T15:01:23+00:00",
+  "generated": "2026-11-07T15:05:04+00:00",
   "doc": "news.epub",
   "title": "004 新闻订阅",
-  "chars": 34053,
-  "bytes": 42994,
-  "sections": 4,
+  "chars": 32953,
+  "bytes": 42067,
+  "sections": 5,
   "items": 150,
-  "sources_ok": 17,
+  "sources_ok": 22,
   "sources_total": 23,
   "sources_failed": [
-    "YICAI_HEAD",
-    "COINDESK",
-    "GOV_ZHENGCE",
-    "MFA_FYRBT",
-    "AEON_PHIL",
-    "PSYCHE_IDEAS"
+    "APNEWS_BIZ"
   ],
-  "english": 10,
-  "zh_added": 10,
+  "english": 8,
+  "zh_added": 8,
   "zh_missing": 0,
   "instances_used": {
-    "https://rsshub.rss.tips": 76,
-    "https://rsshub.isrss.com": 78
+    "https://rsshub.rss.tips": 91,
+    "https://rsshub.isrss.com": 92
   },
   "instances_probe": {
     "https://rsshub.app": {
@@ -42,12 +37,7 @@
     }
   },
   "sources_error": {
-    "YICAI_HEAD": "https://rsshub.isrss.com: 解析出 30 条，时间窗内 0 条；https://rsshub.cups.moe: 解析出 30 条，时间窗内 0 条；https://rsshub.app: HTTP Error 403: Forbidden",
-    "COINDESK": "https://rsshub.isrss.com: The read operation timed out；https://rsshub.cups.moe: HTTP Error 503: Service Unavailable；https://rsshub.app: HTTP Error 403: Forbidden",
-    "GOV_ZHENGCE": "https://rsshub.isrss.com: 解析出 20 条，时间窗内 0 条；https://rsshub.cups.moe: 解析出 20 条，时间窗内 0 条；https://rsshub.app: HTTP Error 403: Forbidden",
-    "MFA_FYRBT": "https://rsshub.isrss.com: 解析出 35 条，时间窗内 0 条；https://rsshub.cups.moe: 解析出 35 条，时间窗内 0 条",
-    "AEON_PHIL": "https://rsshub.isrss.com: 解析出 24 条，时间窗内 0 条；https://rsshub.cups.moe: 解析出 24 条，时间窗内 0 条",
-    "PSYCHE_IDEAS": "https://rsshub.isrss.com: 解析出 29 条，时间窗内 0 条；https://rsshub.cups.moe: 解析出 29 条，时间窗内 0 条"
+    "APNEWS_BIZ": "https://rsshub.isrss.com: HTTP Error 503: Service Unavailable；https://rsshub.cups.moe: HTTP Error 503: Service Unavailable；https://rsshub.app: HTTP Error 403: Forbidden"
   },
   "data_time": "2026-11-07T14:35:47Z",
   "data_time_kind": "item",
