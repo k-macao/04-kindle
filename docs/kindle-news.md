@@ -51,6 +51,13 @@ python tools/build_feed.py --data news_data.json --out site   # 聚合 RSS：sit
   `English Title｜中文标题`，摘要是「中文：… 原文：…」——阅读器的列表页只显示标题，
   译文不接在标题上等于没翻。
 
+抓取时的三个时间约定：
+
+- **单源时间窗**：源可以写 `max_age_hours`（政策、哲学类默认放宽到 3～14 天）；
+- **未来时间**：超过 6 小时的时间戳一律按「生成时间」记（财新周刊的期号日期跑到 25 小时后，
+  否则它会一直霸占「最新一条」、把排序带歪），修正条数写进 `news.json` 的 `future_clamped`；
+- **跨天去重**：`news_seen.json` 记着最近 7 天推过的标题指纹。
+
 `build_news.py` 的规矩：
 
 - 一条新闻 = 标题 + `来源 · 北京时间` + 最多一句摘要。摘要是 RSS 的 `description` / `summary`
