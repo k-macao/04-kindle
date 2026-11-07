@@ -1,7 +1,8 @@
 name: Refresh daily news
 
 # 每天 07:00 北京时间（UTC 前一天 23:00）抓一轮 RSSHub 财经新闻，生成独立的一本书：
-# site/news.epub + 清单 site/news.json + 纯文本 site/news.txt，然后提交推送。
+# site/news.epub + 清单 site/news.json + 纯文本 site/news.txt，再合成一个聚合 RSS
+# site/news.xml（任何阅读器都能订阅），然后一起提交推送。
 # 设备端把 Display mode 切到「News subscription」、新闻清单 URL 指向 site/news.json
 # 即可；插件只在清单里的 generated 变了时才重下，所以一天只会下一本新书。
 #
@@ -13,6 +14,17 @@ on:
     # 07:00 Asia/Shanghai。GitHub 的 cron 只认 UTC。
     - cron: "0 23 * * *"
   workflow_dispatch:
+  # 改了抓取/排版/源的代码就顺手跑一次：既验证改动，也让 site/news.xml 立刻更新。
+  # 只匹配这些文件，提交产物（site/**）不会触发，不会自激。
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/refresh-news.yml"
+      - "tools/fetch_news.py"
+      - "tools/news_sources.py"
+      - "tools/build_news.py"
+      - "tools/build_feed.py"
+      - "tools/radar_discover.py"
 
 permissions:
   contents: write
@@ -27,6 +39,8 @@ env:
   # 公共 RSSHub 实例，逗号分隔。rsshub.app 对 Actions 出口 IP 常回 403，
   # 所以排最后；自建实例请放在最前面（见 README「每日新闻」一节）。
   RSSHUB_BASE: "https://rsshub.rss.tips,https://rsshub.isrss.com,https://rsshub.cups.moe,https://rsshub.app"
+  # 这份聚合 RSS 的公开地址（写进 feed 的 <atom:link rel="self">，阅读器据此判断来源）。
+  FEED_SELF_URL: "https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news.xml"
 
 jobs:
   refresh:
@@ -52,7 +66,13 @@ jobs:
           python tools/build_news.py --data news_data.json --out site
           --min-items "$MIN_ITEMS" --max-items "$MAX_ITEMS"
 
-      - name: 产物自检（条目数、分节、文件可读、标题不空）
+      - name: 生成聚合 RSS（site/news.xml）
+        run: >-
+          python tools/build_feed.py --data news_data.json --out site
+          --min-items "$MIN_ITEMS" --max-items "$MAX_ITEMS"
+          --self-url "$FEED_SELF_URL"
+
+      - name: 产物自检（条目数、分节、RSS 可解析、文件可读）
         run: |
           python - <<'PY'
           import json
@@ -62,6 +82,8 @@ jobs:
           import zipfile
 
           minimum = int(os.environ.get("MIN_ITEMS", "10"))
+          from xml.etree import ElementTree
+
           manifest_path = pathlib.Path("site/news.json")
           manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
           problems = []
@@ -71,6 +93,19 @@ jobs:
               problems.append("清单指向的 EPUB 不存在")
           if not pathlib.Path("site/news.txt").is_file():
               problems.append("缺少纯文本")
+          feed_path = pathlib.Path("site/news.xml")
+          feed_items = 0
+          if not feed_path.is_file():
+              problems.append("缺少聚合 RSS")
+          else:
+              try:
+                  feed_root = ElementTree.fromstring(feed_path.read_bytes())
+                  feed_items = len(feed_root.findall("./channel/item"))
+              except ElementTree.ParseError as exc:
+                  problems.append(f"聚合 RSS 解析失败：{exc}")
+              else:
+                  if feed_items < minimum:
+                      problems.append(f"聚合 RSS 只有 {feed_items} 条，少于下限 {minimum}")
           if problems:
               print("；".join(problems), file=sys.stderr)
               raise SystemExit(1)
@@ -82,7 +117,8 @@ jobs:
               print(f"排版异常：分节 {sections}、条目 {articles}", file=sys.stderr)
               raise SystemExit(1)
           print(f"自检通过：{manifest['items']} 条 / {sections} 节 / {articles} 个条目 / "
-                f"{manifest['bytes']} 字节 / 数据时间 {manifest.get('data_time') or '未知'}")
+                f"{manifest['bytes']} 字节 / 数据时间 {manifest.get('data_time') or '未知'} / "
+                f"RSS {feed_items} 条")
           PY
 
       - name: 提交并推送
@@ -90,9 +126,9 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add site/news.epub site/news.json site/news.txt site/news_seen.json
+          git add site/news.epub site/news.json site/news.txt site/news.xml site/news_seen.json
           stamp=$(python -c "import json;print(json.load(open('site/news.json'))['generated'])")
           items=$(python -c "import json;print(json.load(open('site/news.json'))['items'])")
-          git commit --allow-empty -m "chore(news): 每日新闻订阅 ${items} 条（更新于 ${stamp}）"
+          git commit --allow-empty -m "chore(news): 每日新闻订阅 ${items} 条 + 聚合 RSS（更新于 ${stamp}）"
           # 定时运行时 HEAD 是默认分支；手动跑时是游离 HEAD，两种都要能推。
           git push origin "HEAD:refs/heads/${GITHUB_REF_NAME}"

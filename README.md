@@ -70,8 +70,14 @@ python tools/fetch_news.py --out news_data.json      # 抓一轮 RSSHub 新闻
 python tools/build_news.py --data news_data.json --out site
 ```
 
-产出 `site/news.epub`（按「快讯 / 深度 / 全球」分节，每天一本）、清单 `site/news.json` 和
-`site/news.txt`。源目录在 `tools/news_sources.py`，18 条 RSSHub 路由（财联社电报、华尔街见闻的要闻与
+产出 `site/news.epub`（按「快讯 / 深度 / 全球」分节，每天一本）、清单 `site/news.json`、
+`site/news.txt`，以及**聚合 RSS** `site/news.xml`——后者是标准 RSS 2.0，任何阅读器（含 KOReader
+的新闻下载器）都能直接订阅：
+
+```
+https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news.xml
+https://cdn.jsdelivr.net/gh/k-macao/04-kindle@main/site/news.xml     ← raw 不通时用这个
+```源目录在 `tools/news_sources.py`，18 条 RSSHub 路由（财联社电报、华尔街见闻的要闻与
 A 股快讯、金十、同花顺、第一财经的简报/最新/头条、新浪股市滚动、财新、格隆汇的推荐与日热文、香港01、
 雪球热帖、彭博的市场与加密、CoinDesk），挑的都是 004 那 49 条之外的站点，路由按 RSSHub 仓库里的
 `route.path` 核对过。英文大站（路透、WSJ）实测在机房 IP 上取不到（Cloudflare / `antiCrawler`），
