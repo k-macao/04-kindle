@@ -7,16 +7,18 @@
 | `site/news.epub` | 当天的新闻，按「快讯 / 深度 / 全球」分节 | 插件「News subscription」模式 |
 | `site/news.json` | 清单：`generated`、`doc`、条目数、源可用数、最新一条的时间 | 插件每 60 秒只拉这个 |
 | `site/news.txt` | 同一份内容的纯文本 | 文本模式或自己看 |
+| `site/news.xml` | **聚合 RSS**：所有源合成一个标准 feed | 任何 RSS 阅读器 / KOReader 新闻下载器 |
 | `site/news_seen.json` | 最近 7 天推过的标题指纹 | 抓取时跨天去重，不进书 |
 
 抓的是 [RSSHub](https://github.com/DIYgod/RSSHub) 的公开路由，**不重排 004 的报告页**：报告页每小时才刷，
 而且只渲染当次抓到的条目，拿不到「这条新闻来自哪个源、原文在哪」。
 
-## 1. 两条命令
+## 1. 三条命令
 
 ```sh
-python tools/fetch_news.py --out news_data.json     # 抓一轮，写到 news_data.json（不进 Git）
-python tools/build_news.py --data news_data.json --out site
+python tools/fetch_news.py --out news_data.json          # 抓一轮，写到 news_data.json（不进 Git）
+python tools/build_news.py --data news_data.json --out site   # 日报：EPUB + 清单 + 纯文本
+python tools/build_feed.py --data news_data.json --out site   # 聚合 RSS：site/news.xml
 ```
 
 `news_data.json` 是中间产物：抓取和排版分开，排版可以离线反复调。`news_data.json` 里每条是
@@ -30,6 +32,31 @@ python tools/build_news.py --data news_data.json --out site
 - 按目录分组顺序分节，**空组跳过、序号顺排**（所以某天没深度稿时不会出现「一、… 三、…」）；
 - 少于 `--min-items`（默认 10）条、或者正文乱码占比超过 2% → 退出码 1，**不覆盖旧产物**：
   宁可设备上还是昨天的日报，也不推一份空书。
+
+### 聚合 RSS（`site/news.xml`）
+
+同一个 `news_data.json` 还能合成一份**标准 RSS 2.0**——不装插件、不用清单，任何阅读器都能订：
+
+```
+https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news.xml
+https://cdn.jsdelivr.net/gh/k-macao/04-kindle@main/site/news.xml   ← raw 不通时用这个
+```
+
+（仓库如果以后开了 GitHub Pages，同一份文件也会出现在
+`https://k-macao.github.io/04-kindle/site/news.xml`。）
+
+- 一个 `<item>`＝标题、原文链接、`pubDate`（RFC822/UTC）、分类（快讯/深度/全球）、
+  `<source url="站点">来源名</source>`、一句摘要；
+- `guid` 用原文链接（`isPermaLink="true"`），没有链接的用标题指纹 `urn:004:news:<hash>`——
+  同一条新闻在读者端不会因为每天重发而重复；
+- `lastBuildDate` 是本次生成时间，`ttl` = 60 分钟；
+- 正文先删掉 XML 1.0 不允许的控制字符再转义，`&`、`<`、引号都不会破坏文件；
+  生成后立刻用解析器自检，解析不过就不发布；
+- 条目少于 `--min-items`（默认 10）时退出码 1，不覆盖上一份。
+
+订阅方式：KOReader 的 **新闻下载器**（News downloader）里添加上面的地址；或者把它丢给
+NetNewsWire / Feedly / Reeder / Inoreader 之类的阅读器。设备上如果 `raw.githubusercontent.com`
+连不上，用 jsDelivr 那条，或者把仓库 Pages 打开后换成 gh.io 的地址。
 
 ## 2. 源目录
 
