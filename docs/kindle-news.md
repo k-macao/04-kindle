@@ -56,6 +56,9 @@ python tools/build_news.py --data news_data.json --out site
 | | CoinDesk·最新 | `/coindesk/news` |
 
 这些路由都按 RSSHub 仓库 `lib/routes/<namespace>/…` 里的 `route.path` 核对过（namespace 拼在路径前面）。
+注意 **namespace 是目录名，不是 `namespace.ts` 里的 `name`**：注册代码按顶层目录拼路径
+（`lib/registry-dev.ts` 的 `/${name}${key}`），`name` 只是文档上的显示名——21 财经是
+`/21caijing/channel/热点`（目录），不是 `/21财经/…`（显示名）。
 挑源的思路是**优先补 004 那 49 条没有的**，而且优先「站点本身没有原生 RSS、或原生 RSS 常被墙」的站。
 
 加一条新源：

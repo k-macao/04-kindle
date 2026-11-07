@@ -9,6 +9,9 @@
   `path` 都按官方 `lib/routes/<namespace>/…` 里的 `route.path` 核对过；`route` 是
   拼上 namespace 后的完整路径（例如 `lib/routes/cls/telegraph.tsx` 的
   `path: '/telegraph/:category?'` → `/cls/telegraph`）。
+- **namespace 是目录名，不是 `namespace.ts` 里的 `name`**：注册代码按顶层目录拼路径
+  （`lib/registry-dev.ts` 的 `/${name}${key}`），`name` 只是文档上的显示名。所以
+  21 财经是 `/21caijing/channel/热点`（目录），不是 `/21财经/…`（显示名）。
 - 想加源：优先选「站点没有原生 RSS、或原生 RSS 常被墙」的站点，把完整路由写进
   SOURCES，跑 `python tools/fetch_news.py --only KEY` 验一条；抓不到就说明路由或
   站点变了，换实例或换路由，别留一条永远失败的源。
