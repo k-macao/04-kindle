@@ -6,37 +6,39 @@
     <atom:link href="https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news-test.xml" rel="self" type="application/rss+xml"/>
     <description>每天 07:00（北京时间）从 RSSHub 抓取并合并的财经、政治与哲学思想新闻，英文条目附中文译文，本次 3 条。</description>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 08 Nov 2026 11:41:35 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 08 Nov 2026 14:45:57 +0000</lastBuildDate>
     <generator>04-kindle tools/build_feed.py</generator>
     <ttl>60</ttl>
     <item>
-      <title>财联社11月8日电，海湾国家签署铁路网项目协议。</title>
-      <link>https://www.cls.cn/detail/2528313</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2528313</guid>
-      <pubDate>Sun, 08 Nov 2026 11:40:32 +0000</pubDate>
+      <title>沙特阿美在首都利雅得的办公楼遇袭 受到轻微损伤</title>
+      <link>https://finance.sina.com.cn/stock/usstock/c/2026-11-08/doc-inixzxsn6833330.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/stock/usstock/c/2026-11-08/doc-inixzxsn6833330.shtml</guid>
+      <pubDate>Sun, 08 Nov 2026 14:38:44 +0000</pubDate>
       <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-      <description>AI 线索分析：线索：标题称“海湾国家签署铁路网项目协议”，发布时间为2026-11-08，来源为CLS；摘要为空。事实：报道仅明确海湾国家签署了一项铁路网项目协议，未说明参与国家、协议金额、线路范围或签署主体。推断：海湾国家可能在推进跨境铁路互联互通，但具体合作层级与项目规模无法确认。影响：可能涉及海湾地区交通基建、物流与工程承包领域，但受影响主体与条件线索有限。验证：需等待官方协议文本、参与国名单、项目里程与投资额等后续披露。</description>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>沙特阿美位于利雅得的办公室周日遭到袭击。目前沙特正面临来自伊朗支持的也门胡塞武装的新一轮打击。 据沙特能源部和官方的沙特通讯社称，这家沙特国有石油巨头的一栋行政…
+
+AI 线索分析：线索：标题称沙特阿美利雅得办公楼遇袭并受轻微损伤；摘要称沙特能源部和沙特通讯社表示行政办公楼因坠落弹片轻微损坏、无人员伤亡，并提及胡塞武装新一轮打击及此前宰赫兰总部、谢巴油田等设施遇袭。事实：报道明确说利雅得阿卜杜拉国王金融区办公楼因弹片轻微损坏、无伤亡，该地区约一个月来实行远程办公，近几周针对沙特阿美基础设施的袭击不止一例。推断：袭击可能与伊朗支持的胡塞武装行动相关，但报道用“可能”表述，具体责任与袭击方式线索有限。影响：可能影响沙特阿美办公运营、能源基础设施安全预期及地区安全风险关注，实际影响取决于后续袭击是否持续。验证：可观察沙特官方后续通报、胡塞武装表态、沙特阿美设施运营公告及地区安全事件频率。</description>
     </item>
     <item>
-      <title>伊朗议员：对美国的让步并不能保证其对伊朗的敌意会就此终结</title>
-      <link>https://flash.jin10.com/detail/20261108193610485800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261108193610485800</guid>
-      <pubDate>Sun, 08 Nov 2026 11:36:10 +0000</pubDate>
+      <title>美国CPI前瞻：核心CPI或明显降温，野村仍押12月加息</title>
+      <link>https://flash.jin10.com/detail/20261108223501998800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261108223501998800</guid>
+      <pubDate>Sun, 08 Nov 2026 14:35:02 +0000</pubDate>
       <category>中文财经快讯</category>
       <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>AI 线索分析：线索：标题为伊朗议员表态，称对美让步不能保证美国敌意终结；摘要为空。事实：报道仅呈现一名伊朗议员的公开表态，未提供姓名、场合或具体政策背景。推断：伊朗国内对美缓和或谈判存在保留意见，但该议员立场是否代表官方政策无法确认。影响：可能影响美伊谈判氛围与伊朗国内政治讨论，但条件与范围线索有限。验证：需观察伊朗官方表态、议会决议及美伊接触进展；目前缺少验证材料。</description>
+      <description>AI 线索分析：线索：标题提及美国CPI前瞻、核心CPI或明显降温、野村仍押12月加息；摘要为空。事实：报道仅标题给出上述信号，未提供具体数据、时间或野村论据。推断：标题暗示市场预期核心通胀降温与野村加息判断存在分歧，但无摘要支撑，无法确认细节。影响：可能影响利率预期相关讨论，但缺乏数据无法判断具体主体与条件。验证：线索有限，需等待CPI实际数据、野村报告原文及美联储官员表态。</description>
     </item>
     <item>
-      <title>俄罗斯空袭导致乌克兰数十万人断电</title>
-      <link>https://www.zaobao.com.sg/news/world/story20261108-9967206</link>
-      <guid isPermaLink="true">https://www.zaobao.com.sg/news/world/story20261108-9967206</guid>
-      <pubDate>Sun, 08 Nov 2026 11:28:02 +0000</pubDate>
-      <category>政治与政策</category>
-      <source url="https://zaobao.com">联合早报 · 国际</source>
-      <description>乌克兰当地官员和一家能源供应商星期天（11月8日）说，俄罗斯袭击乌克兰能源基础设施，导致第聂伯罗彼得罗夫斯克州和哈尔科夫州数十万户家庭断电。 法新社报道，能源公…
+      <title>国泰海通：白酒股价调整充分 估值和机构持仓均处于历史偏底部位置</title>
+      <link>https://www.cls.cn/detail/2528345</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2528345</guid>
+      <pubDate>Sun, 08 Nov 2026 14:35:01 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+      <description>【国泰海通：白酒股价调整充分 估值和机构持仓均处于历史偏底部位置 】财联社11月8日电，国泰海通发布研报指出，白酒股价调整充分，估值和机构持仓均处于历史偏底部位…
 
-AI 线索分析：线索：标题称俄空袭致乌克兰数十万人断电；摘要提到第聂伯罗彼得罗夫斯克州超过60万居民断电、哈尔科夫州遭无人机袭击，能源公司DTEK称正抢修。事实：报道明确俄袭击乌能源基础设施，导致两州数十万户家庭断电，抢修因袭击持续而复杂。推断：能源设施持续受袭可能加剧乌供电不稳定与抢修难度，但具体损毁程度与恢复时间未明。影响：可能影响当地居民供电、能源公司与应急部门，条件取决于后续袭击频率。验证：可观察DTEK与乌官员的恢复供电通报、袭击频次及设施损毁评估。</description>
+AI 线索分析：线索：国泰海通研报称白酒股价调整充分，估值和机构持仓处于历史偏底部；摘要给出白酒板块PETTM 23.1X、2005年以来36.2%分位，食饮行业26Q3基金持仓比例2.2%、环比Q2抬升但仍处历史低位。事实：报道明确给出上述估值分位与基金持仓数据，并称食品饮料板块自2021年起连续6年下跌。推断：研报认为估值修复尚有空间，属机构观点而非已发生事实；低持仓与低估值可能构成修复条件，但不保证股价上行。影响：可能影响白酒及食品饮料板块的市场关注与资金配置讨论。验证：可观察后续基金季报持仓变化、板块估值分位及白酒企业业绩数据。</description>
     </item>
   </channel>
 </rss>
