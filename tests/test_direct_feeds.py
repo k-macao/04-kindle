@@ -198,6 +198,23 @@ class ProgramChainTest(unittest.TestCase):
         self.assertIn("bridge=FeedMerge", bridge[0]["url"])
         self.assertIn("rsshub.app%2Fcls%2Ftelegraph", bridge[0]["url"])
 
+    def test_bridge_also_wraps_the_last_mirror(self):
+        """官方超时、镜像报 5xx 时，让第三方再去试一次镜像地址——这才是最后一条退路的意义。"""
+        candidates = fetch_news.source_candidates(
+            self.source(), ["https://rsshub.app", "https://m1.example", "https://m2.example"],
+            ("bridge",), dead={}, trip_after=3,
+            bridge_instances=("https://rss-bridge.org/bridge01",))
+        wrapped = [c["url"] for c in candidates if c["provider"] == "bridge"]
+        self.assertEqual(len(wrapped), 2)          # 官方 + 最后一个镜像（中间的 m1 不重复包）
+        self.assertTrue(any("rsshub.app" in url for url in wrapped))
+        self.assertTrue(any("m2.example" in url for url in wrapped))
+
+    def test_bridge_targets_are_not_duplicated(self):
+        candidates = fetch_news.source_candidates(
+            self.source(), ["https://rsshub.app"], ("bridge",), dead={}, trip_after=3,
+            bridge_instances=("https://rss-bridge.org/bridge01",))
+        self.assertEqual(len(candidates), 1)
+
     def test_direct_success_stops_the_chain(self):
         calls = []
         fetch = fake_fetch({"flash-api.jin10.com": JIN10_JSON}, calls)
