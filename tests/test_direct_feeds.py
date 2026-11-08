@@ -350,6 +350,13 @@ class WorkflowTest(unittest.TestCase):
         self.assertIn("--health site/source-health.json", self.text)
         self.assertIn("site/source-health.json", self.text.split("git add", 1)[1])
 
+    def test_deepseek_analysis_runs_before_feed_build_and_cache_is_committed(self):
+        analyze = self.text.index("tools/analyze_news.py")
+        build = self.text.index("生成聚合 RSS（site/news.xml）")
+        self.assertLess(analyze, build)
+        self.assertIn("secrets.DEEPSEEK_API_KEY", self.text)
+        self.assertIn("site/news_analysis_cache.json", self.text.split("git add", 1)[1])
+
     def test_cli_rejects_unknown_layer(self):
         argv = fetch_news.parse_args(["--providers", "direct,瞎写的层"])
         self.assertIn("瞎写的层", argv.providers)      # 解析这一层不做判断，main 才校验
