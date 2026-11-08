@@ -6,35 +6,34 @@
     <atom:link href="https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news-test.xml" rel="self" type="application/rss+xml"/>
     <description>每天 07:00（北京时间）从 RSSHub 抓取并合并的财经、政治与哲学思想新闻，英文条目附中文译文，本次 3 条。</description>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 08 Nov 2026 09:00:49 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 08 Nov 2026 09:23:05 +0000</lastBuildDate>
     <generator>04-kindle tools/build_feed.py</generator>
     <ttl>60</ttl>
     <item>
-      <title>《财新周刊》第1230期</title>
-      <link>https://weekly.caixin.com/2026/cw1230/</link>
-      <guid isPermaLink="true">https://weekly.caixin.com/2026/cw1230/</guid>
-      <pubDate>Sun, 08 Nov 2026 08:58:44 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://weekly.caixin.com">财新周刊</source>
-      <description>封面报道 Cover Story “蓝色海啸”扑向特朗普 美国中期选举成为对特朗普的公投，共和党大败动摇其权力根基，任期进入更难预测的下半场 财新观察 Opin…</description>
-    </item>
-    <item>
-      <title>全面从严治党关键在从严治吏</title>
-      <link>https://www.aisixiang.com/data/185308.html</link>
-      <guid isPermaLink="true">https://www.aisixiang.com/data/185308.html</guid>
-      <pubDate>Sun, 08 Nov 2026 08:57:00 +0000</pubDate>
-      <category>哲学与思想</category>
-      <source url="https://aisixiang.com">爱思想 · 最近更新</source>
-      <description>党的二十届五中全会立足中国式现代化建设全局，深刻总结新时代全面从严治党宝贵经验，对持之以恒推进全面从严治党作出系统性战略部署，明确提出“全面从严治党关键在从严治…</description>
-    </item>
-    <item>
-      <title>华新建材：拟约16.42亿美元收购巴西CSN CIMENTOS 99.99%股权 | 华新建材公告，公司拟以预估约90.337亿巴西雷亚尔(约16.42亿美元)收购巴西国家钢铁公司持...</title>
-      <link>https://www.yicai.com/brief/103431274.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/brief/103431274.html</guid>
-      <pubDate>Sun, 08 Nov 2026 08:56:39 +0000</pubDate>
+      <title>华新建材：拟约16.42亿美元收购巴西国家钢铁水泥公司99.99%股权</title>
+      <link>https://flash.jin10.com/detail/20261108172003732800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261108172003732800</guid>
+      <pubDate>Sun, 08 Nov 2026 09:20:03 +0000</pubDate>
       <category>中文财经快讯</category>
-      <source url="https://yicai.com">第一财经 · 简报</source>
-      <description>华新建材公告，公司拟以预估约90.337亿巴西雷亚尔(约16.42亿美元)收购巴西国家钢铁公司持有的CSN CIMENTOS 99.99%股权。标的公司为巴西第…</description>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>金十数据11月8日讯，华新建材11月8日公告，在协定的企业价值为127亿巴西雷亚尔（相当于约23.085亿美元）基础上，公司拟以预估约90.337亿巴西雷亚尔（…</description>
+    </item>
+    <item>
+      <title>市场消息：欧盟接近达成协议，将在英国脱欧后将其碳市场与欧盟体系挂钩。</title>
+      <link>https://flash.jin10.com/detail/20261108171857176800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261108171857176800</guid>
+      <pubDate>Sun, 08 Nov 2026 09:18:57 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+    </item>
+    <item>
+      <title>沙特阿美位于利雅得的办公楼周日遭到袭击</title>
+      <link>https://flash.jin10.com/detail/20261108171812906800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261108171812906800</guid>
+      <pubDate>Sun, 08 Nov 2026 09:18:12 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>金十数据11月8日讯，沙特阿美位于利雅得的办公楼周日遭到袭击，这是沙特与也门胡塞武装之间冲突再度升级的最新迹象。沙特国家通讯社周日援引官方消息称，这家石油巨头的…</description>
     </item>
   </channel>
 </rss>
