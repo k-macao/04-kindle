@@ -6,34 +6,39 @@
     <atom:link href="https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news-test.xml" rel="self" type="application/rss+xml"/>
     <description>每天 07:00（北京时间）从 RSSHub 抓取并合并的财经、政治与哲学思想新闻，英文条目附中文译文，本次 3 条。</description>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 08 Nov 2026 10:55:20 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 08 Nov 2026 11:37:56 +0000</lastBuildDate>
     <generator>04-kindle tools/build_feed.py</generator>
     <ttl>60</ttl>
     <item>
-      <title>国泰海通策略：美国中期选举落地 建议均衡配置</title>
-      <link>https://finance.sina.com.cn/stock/2026-11-08/doc-inixzpaw7219620.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/2026-11-08/doc-inixzpaw7219620.shtml</guid>
-      <pubDate>Sun, 08 Nov 2026 10:51:47 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>来源： 国泰海通 我们构建了由“战略性资产配置（SAA）—战术性资产配置（TAA）—重大事件审议调整”构 成的 国泰海通 大类资产配置框架，以作为投资决策的整体…</description>
+      <title>《财新周刊》第1230期</title>
+      <link>https://weekly.caixin.com/2026/cw1230/</link>
+      <guid isPermaLink="true">https://weekly.caixin.com/2026/cw1230/</guid>
+      <pubDate>Sun, 08 Nov 2026 16:00:00 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://weekly.caixin.com">财新周刊</source>
+      <description>封面报道 Cover Story “蓝色海啸”扑向特朗普 美国中期选举成为对特朗普的公投，共和党大败动摇其权力根基，任期进入更难预测的下半场 财新观察 Opin…
+
+AI 线索分析：线索：标题为《财新周刊》第1230期，摘要列出封面报道“蓝色海啸”扑向特朗普、财新观察促消费、金融利率调控“换锚”、光伏触底等栏目；事实：报道称美国中期选举成为对特朗普的公投，共和党大败动摇其权力根基，并称央行常态化开展隔夜逆回购操作；推断：该期内容将美国选举结果与中国货币政策操作、光伏行业状况并列为观察重点，但摘要未给出具体数据或因果论证；影响：可能涉及美国政治风险预期、中国利率调控框架与光伏行业主体，具体影响取决于后续政策与市场反应；验证：需查阅该期全文及央行公开市场操作公告，目前摘要信息有限。</description>
     </item>
     <item>
-      <title>美国佐治亚州州长布莱恩·坎普正考虑参加2028年总统竞选。坎普也在考虑参加2028年的参议员竞选。（华盛顿邮报）</title>
-      <link>https://wallstreetcn.com/livenews/3196474</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196474</guid>
-      <pubDate>Sun, 08 Nov 2026 10:50:40 +0000</pubDate>
+      <title>伊朗革命卫队发言人：我们对霍尔木兹海峡的控制已在全球范围内产生明显影响</title>
+      <link>https://flash.jin10.com/detail/20261108192638363800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261108192638363800</guid>
+      <pubDate>Sun, 08 Nov 2026 11:26:38 +0000</pubDate>
       <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>AI 线索分析：线索：标题为伊朗革命卫队发言人称对霍尔木兹海峡的控制已在全球范围内产生明显影响，摘要为空；事实：报道仅转述该发言人的表态，未提供具体措施、时间或影响数据；推断：该表态可能指向海峡通行与能源运输的地缘风险，但线索有限，无法确认实际控制变化；影响：可能涉及原油运输、航运与地区安全相关主体，条件是该表态对应实质行动；验证：需观察霍尔木兹海峡通行数据、相关方后续声明及权威媒体报道，目前缺少验证材料。</description>
     </item>
     <item>
-      <title>中信建投：本周行情属于典型的超跌技术性修复 趋势性反转的基础尚不牢固</title>
-      <link>https://www.cls.cn/detail/2528302</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2528302</guid>
-      <pubDate>Sun, 08 Nov 2026 10:46:13 +0000</pubDate>
+      <title>中信建投：维持对北美算力和国产AI算力产业链长期看好</title>
+      <link>https://www.cls.cn/detail/2528309</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2528309</guid>
+      <pubDate>Sun, 08 Nov 2026 11:26:09 +0000</pubDate>
       <category>中文财经快讯</category>
       <source url="https://cls.cn">财联社 · 电报</source>
-      <description>【中信建投：本周行情属于典型的超跌技术性修复 趋势性反转的基础尚不牢固】财联社11月8日电，中信建投研报指出，本周行情属于典型的超跌技术性修复，趋势性反转的基础…</description>
+      <description>【中信建投：维持对北美算力和国产AI算力产业链长期看好】财联社11月8日电，中信建投证券发布通信行业2027年度投资策略报告称，大模型商业化在2026年快速扩张…
+
+AI 线索分析：线索：中信建投通信行业2027年度策略报告称，截至2026年9月底OpenAI和Anthropic两家ARR合计约1240亿美元，北美四大CSP厂商2026年三季度合计资本开支约2087亿美元、同比增长84.2%，并提及RSI与AI编程；事实：报道明确给出上述机构预测与数据，并称维持对北美算力和国产AI算力产业链长期看好；推断：资本开支高增长与模型商业化扩张被该机构视为算力需求支撑，但属券商观点而非已实现事实；影响：可能涉及北美CSP、AI模型公司及国产算力产业链，条件是其资本开支与收入趋势延续；验证：可跟踪CSP后续财报资本开支、OpenAI与Anthropic收入披露及算力订单数据。</description>
     </item>
   </channel>
 </rss>
