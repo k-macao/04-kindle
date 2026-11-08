@@ -6,31 +6,32 @@
     <atom:link href="https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news-test.xml" rel="self" type="application/rss+xml"/>
     <description>每天 07:00（北京时间）从 RSSHub 抓取并合并的财经、政治与哲学思想新闻，英文条目附中文译文，本次 3 条。</description>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 07 Nov 2026 16:23:31 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 08 Nov 2026 02:14:50 +0000</lastBuildDate>
     <generator>04-kindle tools/build_feed.py</generator>
     <ttl>60</ttl>
     <item>
-      <title>《财新周刊》第1230期</title>
-      <link>https://weekly.caixin.com/2026/cw1230/</link>
-      <guid isPermaLink="true">https://weekly.caixin.com/2026/cw1230/</guid>
-      <pubDate>Sat, 07 Nov 2026 16:21:15 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://weekly.caixin.com">财新周刊</source>
-      <description>封面报道 Cover Story “蓝色海啸”扑向特朗普 美国中期选举成为对特朗普的公投，共和党大败动摇其权力根基，任期进入更难预测的下半场 财新观察 Opin…</description>
+      <title>报道：美国民主党参议员拟推出援乌法案，呼吁更换美方谈判代表、管控星链与星盾系统</title>
+      <link>https://finance.sina.com.cn/stock/usstock/c/2026-11-08/doc-inixyrxh7536879.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/stock/usstock/c/2026-11-08/doc-inixyrxh7536879.shtml</guid>
+      <pubDate>Sun, 08 Nov 2026 02:12:38 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>美国民主党参议员理查德・布卢门撒尔11月7日表示，他将提出支持乌克兰的法案，呼吁华盛顿指派新的谈判人员参与和平谈判，并敦促国会基于公共利益对星链、星盾系统实施管…</description>
     </item>
     <item>
-      <title>据俄新社：俄罗斯国防部表示，联盟-2.1B运载火箭搭载卫星在普列谢茨克航天发射场成功发射。</title>
-      <link>https://flash.jin10.com/detail/20261108002015348800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261108002015348800</guid>
-      <pubDate>Sat, 07 Nov 2026 16:20:15 +0000</pubDate>
+      <title>暴雨侵袭加沙约7万顶帐篷被淹</title>
+      <link>https://flash.jin10.com/detail/20261108100903415800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261108100903415800</guid>
+      <pubDate>Sun, 08 Nov 2026 02:09:03 +0000</pubDate>
       <category>中文财经快讯</category>
       <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>金十数据11月8日讯，当地时间11月7日，巴勒斯坦加沙地带遭暴雨侵袭，加沙地带政府媒体办公室当天发表声明称，过去12小时内强降雨带来的洪水导致当地约7万顶流离失…</description>
     </item>
     <item>
-      <title>伊朗大使：俄向伊输气超级项目在莫斯科会谈中获审议</title>
-      <link>https://flash.jin10.com/detail/20261108001954415800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261108001954415800</guid>
-      <pubDate>Sat, 07 Nov 2026 16:19:54 +0000</pubDate>
+      <title>中央组织部负责人就党的二十一大代表选举工作答新华社记者问。</title>
+      <link>https://flash.jin10.com/detail/20261108100545018800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261108100545018800</guid>
+      <pubDate>Sun, 08 Nov 2026 02:05:45 +0000</pubDate>
       <category>中文财经快讯</category>
       <source url="https://jin10.com">金十数据 · 快讯</source>
     </item>
