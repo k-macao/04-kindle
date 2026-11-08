@@ -4,1146 +4,607 @@
     <title>004 每日财经新闻聚合</title>
     <link>https://github.com/k-macao/04-kindle</link>
     <atom:link href="https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news.xml" rel="self" type="application/rss+xml"/>
-    <description>每天 07:00（北京时间）从 RSSHub 抓取并合并的财经、政治与哲学思想新闻，英文条目附中文译文，本次 133 条。</description>
+    <description>每天 07:00（北京时间）从 RSSHub 抓取并合并的财经、政治与哲学思想新闻，英文条目附中文译文，本次 73 条。</description>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 08 Nov 2026 09:23:04 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 08 Nov 2026 10:55:20 +0000</lastBuildDate>
     <generator>04-kindle tools/build_feed.py</generator>
     <ttl>60</ttl>
     <item>
-      <title>华新建材：拟约16.42亿美元收购巴西国家钢铁水泥公司99.99%股权</title>
-      <link>https://flash.jin10.com/detail/20261108172003732800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261108172003732800</guid>
-      <pubDate>Sun, 08 Nov 2026 09:20:03 +0000</pubDate>
+      <title>国泰海通策略：美国中期选举落地 建议均衡配置</title>
+      <link>https://finance.sina.com.cn/stock/2026-11-08/doc-inixzpaw7219620.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/stock/2026-11-08/doc-inixzpaw7219620.shtml</guid>
+      <pubDate>Sun, 08 Nov 2026 10:51:47 +0000</pubDate>
       <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>金十数据11月8日讯，华新建材11月8日公告，在协定的企业价值为127亿巴西雷亚尔（相当于约23.085亿美元）基础上，公司拟以预估约90.337亿巴西雷亚尔（相当于约16.42亿美元）的价格，收购COMPANHIA SIDERÚRGICA NACIONAL（巴西国家钢铁公司）持有的 CSN CIMENTOS BRASIL S.A.（巴西国家钢铁水泥公司）99.99%的股权。此次交易价格较巴西国家钢铁水泥公司截至2025年12月31日的…</description>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>来源： 国泰海通 我们构建了由“战略性资产配置（SAA）—战术性资产配置（TAA）—重大事件审议调整”构 成的 国泰海通 大类资产配置框架，以作为投资决策的整体指引。 基于该框架，我们认为在美国中期选举落地，国际地缘政治局势与AI产业前景存在不确定性的背景下， 建议 11月11月均衡配置，侧重资产内部结构分化，超配中国国债与美国国债，标配A股、美股、商品。 建议2026年11月权益配置权重为45.00%：标配A股（7.50%），标配美股…</description>
     </item>
     <item>
-      <title>市场消息：欧盟接近达成协议，将在英国脱欧后将其碳市场与欧盟体系挂钩。</title>
-      <link>https://flash.jin10.com/detail/20261108171857176800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261108171857176800</guid>
-      <pubDate>Sun, 08 Nov 2026 09:18:57 +0000</pubDate>
+      <title>美国佐治亚州州长布莱恩·坎普正考虑参加2028年总统竞选。坎普也在考虑参加2028年的参议员竞选。（华盛顿邮报）</title>
+      <link>https://wallstreetcn.com/livenews/3196474</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196474</guid>
+      <pubDate>Sun, 08 Nov 2026 10:50:40 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+    </item>
+    <item>
+      <title>中信建投：本周行情属于典型的超跌技术性修复 趋势性反转的基础尚不牢固</title>
+      <link>https://www.cls.cn/detail/2528302</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2528302</guid>
+      <pubDate>Sun, 08 Nov 2026 10:46:13 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+      <description>【中信建投：本周行情属于典型的超跌技术性修复 趋势性反转的基础尚不牢固】财联社11月8日电，中信建投研报指出，本周行情属于典型的超跌技术性修复，趋势性反转的基础尚不牢固。市场内生修复动力仍偏弱，对政策托底资金依赖度较高，且外围美股科技股波动的扰动仍在，预计指数底部磨底过程或仍有反复。后续反弹持续性需重点观察量能放大水平、稳市资金托底力度，以及产业政策催化的落地情况。配置上，可围绕国产替代、光伏新能源等方向布局弹性，高股息资产可作为底仓平…</description>
+    </item>
+    <item>
+      <title>AI辅助设计禽流感疫苗动物实验获进展 | 据新华社，英国剑桥大学日前发布公报说，该校团队借助人工智能（AI）设计的一种新型广谱禽流感疫苗，在动物实验中...</title>
+      <link>https://www.yicai.com/brief/103431348.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/brief/103431348.html</guid>
+      <pubDate>Sun, 08 Nov 2026 10:46:05 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://yicai.com">第一财经 · 简报</source>
+      <description>据新华社，英国剑桥大学日前发布公报说，该校团队借助人工智能（AI）设计的一种新型广谱禽流感疫苗，在动物实验中对多种禽流感病毒变异株展现出防护效力。这款候选疫苗由剑桥大学与其衍生企业共同研发。研究人员收集全球监测项目记录的禽流感病毒基因序列数据，利用AI工具整合分析，设计出一系列包含这类病毒共同抗原特征的“超级抗原”。抗原是疫苗中能够触发机体免疫反应的成分。团队经细胞测试筛选后，将选定抗原用于疫苗并开展动物实验。</description>
+    </item>
+    <item>
+      <title>特朗普邀UFC老板出任白宫发言人，对方或已婉拒</title>
+      <link>https://wallstreetcn.com/articles/3785489</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/articles/3785489</guid>
+      <pubDate>Sun, 08 Nov 2026 10:45:38 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
+      <description>当地时间周六，美国总统特朗普在其社交媒体平台Truth Social上发文，宣布已向终极格斗冠军赛（UFC）首席执行官达纳·怀特（Dana White）提供白宫新闻发言人一职。 我很高兴地宣布，伟大的达纳·怀特——一位勇猛的格斗者和战士——已被提供美国新闻发言人一职。 他随帖附上六名UFC格斗手的照片，并点名要求怀特带上这些“助手”一同上任。“我们需要这些人来对抗疯狂的左派。达纳将会是一位与众不同的新闻发言人。达纳，请接受这份工作！”白…</description>
+    </item>
+    <item>
+      <title>英国海上贸易行动办公室：收到了一份关于霍尔木兹海峡事件的延迟报告。一艘油轮的公司安全官报告称，该船在驶离霍尔木兹海峡期间</title>
+      <link>https://flash.jin10.com/detail/20261108184453148800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261108184453148800</guid>
+      <pubDate>Sun, 08 Nov 2026 10:44:53 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>英国海上贸易行动办公室：收到了一份关于霍尔木兹海峡事件的延迟报告。一艘油轮的公司安全官报告称，该船在驶离霍尔木兹海峡期间遭到不明弹体击中。全体船员均安全无恙，目前尚未接到任何环境影响的报告。</description>
+    </item>
+    <item>
+      <title>张亚勤追问大模型护城河，姚顺雨回应</title>
+      <link>https://finance.sina.com.cn/stock/2026-11-08/doc-inixzpay3992235.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/stock/2026-11-08/doc-inixzpay3992235.shtml</guid>
+      <pubDate>Sun, 08 Nov 2026 10:44:15 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>本文字数：2410，阅读时长大约4分钟 作者 | 第一财经 刘佳 大模型的领先优势3到6个月就会发生变化，OpenAI、Anthropic、DeepSeek、腾讯等AI公司，靠什么真正留住用户？ 在2026未来科学大奖的一场对话中，中国工程院外籍院士张亚勤向腾讯首席AI科学家姚顺雨抛出了一个尖锐的商业问题，模型公司的护城河究竟是什么？ 姚顺雨的回答是，AI护城河更多存在于产品层，而不是模型层。真正难以替代的，不一定是最聪明的模型，而是能…</description>
+    </item>
+    <item>
+      <title>一台能顶好几台！9米长“巨无霸”亮相进博会 海外厂商开始包圆方案 中国制造底气变了｜一探</title>
+      <link>https://www.yicai.com/video/103431347.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/video/103431347.html</guid>
+      <pubDate>Sun, 08 Nov 2026 10:44:02 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://yicai.com">第一财经 · 最新</source>
+      <description>第九届进博会现场，一台9米长的奥地利工业“巨无霸”吸引了不少目光：只需一次装卡，就能完成通常需要多台机床配合的复杂加工。不过，比机器性能更值得关注的，是客户需求的变化。第一财经记者在展台了解到，当下，中国客户采购高端装备，越来越看重配套服务和长期技术支持。从“买台机器”到“买套方案”，采购逻辑的转变，折射出中国制造持续升级的信号。跟着记者走进技术装备展区，看看这台“巨无霸”背后，中国的制造业生意正在怎么变？更现场、更财经，一探究竟！</description>
+    </item>
+    <item>
+      <title>SpaceX计划于11月中旬进行第15次星舰测试发射</title>
+      <link>https://flash.jin10.com/detail/20261108184142645800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261108184142645800</guid>
+      <pubDate>Sun, 08 Nov 2026 10:41:42 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>金十数据11月8日讯，SpaceX(SPCX.O)称，在获得监管部门批准的前提下，SpaceX计划最早于11月13日（周五）发射星舰。此次发射窗口持续75分钟，将于美国中部时间下午4时45分（北京时间11月14日（周六）早上6时45分）开启。SpaceX称，此次飞行计划首次尝试让星舰和超重型助推器均返回发射场，并通过捕获装置回收。</description>
+    </item>
+    <item>
+      <title>马斯克主宰美国AI走向？</title>
+      <link>https://wallstreetcn.com/charts/41960148</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/charts/41960148</guid>
+      <pubDate>Sun, 08 Nov 2026 10:41:31 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
+      <description>马斯克之所以能主宰美国AI走向，正是因为在全美数据中心审批被冻结的当下，他手中死死握着决定AI公司生死的算力资源，直接坐稳了绝对‘包租公’的霸主地位。 一旦他按下那项90天终止条款的“核按钮”，不仅能以两到三倍的现货天价重新收割AI巨头，更将彻底洗牌美国的AI格局。 这不仅是他主宰美国AI走向的杀手锏，更是他敢断言SpaceX明年12月收入将达到5000亿美元的真正底气所在！</description>
+    </item>
+    <item>
+      <title>腾讯反弹，段永平：还拿着</title>
+      <link>https://finance.sina.com.cn/stock/s/2026-11-08/doc-inixzpaw7213422.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/stock/s/2026-11-08/doc-inixzpaw7213422.shtml</guid>
+      <pubDate>Sun, 08 Nov 2026 10:37:02 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>炒股就看 金麒麟分析师研报 ，权威，专业，及时，全面，助您挖掘潜力主题机会！ 10月底以来，恒生科技指数迎来反弹，腾讯罕见五连阳。有网友问知名投资人段永平是否还持有腾讯，段永平回复称：“拿着呢”。 从港股科技指数表现看，在过去一年的震荡调整之后，近期反弹行情能否持续，备受投资者关注。 段永平最新动向 近日，有网友询问段永平是否还持有腾讯，段永平回复称，自己还拿着。不过，段永平表示，不加杠杆、不借钱炒股很重要，买好公司也很重要。 11月2…</description>
+    </item>
+    <item>
+      <title>美国SpaceX公司称将于11月中旬进行第15次星舰测试发射</title>
+      <link>https://www.cls.cn/detail/2528300</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2528300</guid>
+      <pubDate>Sun, 08 Nov 2026 10:34:07 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+      <description>【美国SpaceX公司称将于11月中旬进行第15次星舰测试发射】财联社11月8日电，SpaceX公司网站称，该公司将于11月中旬进行第15次星舰（Starship）测试发射，此次发射电将史上首次测试飞行期间回收火箭系统及其超重型V3助推器。</description>
+    </item>
+    <item>
+      <title>伊朗革命卫队：第三艘油轮违规油轮在霍尔木兹海峡爆炸</title>
+      <link>https://flash.jin10.com/detail/20261108183404189800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261108183404189800</guid>
+      <pubDate>Sun, 08 Nov 2026 10:34:04 +0000</pubDate>
       <category>中文财经快讯</category>
       <source url="https://jin10.com">金十数据 · 快讯</source>
     </item>
     <item>
-      <title>沙特阿美位于利雅得的办公楼周日遭到袭击</title>
-      <link>https://flash.jin10.com/detail/20261108171812906800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261108171812906800</guid>
+      <title>Poland’s Deadliest Shooting in Years Deepens Political Divide｜中文：波兰多年来最严重的枪击事件加深了政治分歧</title>
+      <link>https://www.bloomberg.com/news/articles/2026-11-08/poland-s-deadliest-shooting-in-years-deepens-political-divide</link>
+      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-08/poland-s-deadliest-shooting-in-years-deepens-political-divide</guid>
+      <pubDate>Sun, 08 Nov 2026 10:31:48 +0000</pubDate>
+      <category>政治与政策</category>
+      <source url="https://bloomberg.com">彭博社 · 政治</source>
+      <description>中文：波兰数十年来最严重的枪击事件让该国陷入震动，并在日益加深的政治分歧中寻找答案
+原文：Poland’s deadliest shooting in decades left the country shaken and searching for answers among its deepening political divisions.</description>
+    </item>
+    <item>
+      <title>1. 下令司法部彻查民主党“敲诈勒索”，指控其滥用弹劾与监禁威胁 ——特朗普发文，指责民主党人威胁弹劾美国司法部长等官员</title>
+      <link>https://flash.jin10.com/detail/20261108182831188800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261108182831188800</guid>
+      <pubDate>Sun, 08 Nov 2026 10:28:31 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>1. 下令司法部彻查民主党“敲诈勒索”，指控其滥用弹劾与监禁威胁 ——特朗普发文，指责民主党人威胁弹劾美国司法部长等官员，并扬言对他们采取其他惩罚措施。特朗普称，民主党人自己也承认缺乏相关理由，而遭到威胁的人并未实施、甚至没有考虑过任何可能构成弹劾理由的行为。他将此称为“最高级别的敲诈勒索”，并要求追究相关人员的责任。 2. 邀请UFC总裁达纳·怀特担任白宫新闻秘书 ——特朗普表示，已邀请UFC总裁达纳·怀特担任美国新闻秘书，怀特表示，…</description>
+    </item>
+    <item>
+      <title>港股AI产业链新股密集“破发”，中际旭创基石投资者浮亏超百亿</title>
+      <link>https://www.yicai.com/news/103431322.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/news/103431322.html</guid>
+      <pubDate>Sun, 08 Nov 2026 10:27:10 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://yicai.com">第一财经 · 最新</source>
+      <description>全球AI行情持续降温之际，港股的科技新股上周集体刷新上市以来新低，大比例破发使得高瓴、淡马锡等基石投资人的账面浮亏规模水涨船高。 据第一财经记者统计，2026年以来完成H股发行的40家A+H公司中，截至11月6日收盘已有34家港股跌破发行价，占比约85%。“破发”重灾区集中在AI硬件链条，覆盖光模块、PCB、存储芯片、MLCC等细分领域。 按六个月禁售期测算，6月5日以来上市、基石股份尚未解禁的21家公司中19家港股已经破发，账面合计浮…</description>
+    </item>
+    <item>
+      <title>医疗器械龙头三季报出炉！上市以来前三季营收首次破百亿，净利润同比走低，现金流由正转负</title>
+      <link>https://finance.sina.com.cn/stock/s/2026-11-08/doc-inixzpas7015613.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/stock/s/2026-11-08/doc-inixzpas7015613.shtml</guid>
+      <pubDate>Sun, 08 Nov 2026 10:24:06 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>炒股就看 金麒麟分析师研报 ，权威，专业，及时，全面，助您挖掘潜力主题机会！ 红星资本局11月8日消息 近日，医疗器械龙头 联影医疗 （688271.SH）发布2026年三季报，前三季度营业收入105.80亿元，同比增长19.43%，上市以来首次突破百亿元；归母净利润10.35亿元，同比下降7.60%。 从单季度表现看，第三季度营收35.29亿元，同比增长24.12%；归母净利润1.38亿元，同比增长13%；扣非净利润1.16亿元，同比…</description>
+    </item>
+    <item>
+      <title>达瑞电子：模组化是公司向更高附加值环节延伸的重要方向</title>
+      <link>https://www.yicai.com/news/103431330.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/news/103431330.html</guid>
+      <pubDate>Sun, 08 Nov 2026 10:23:14 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://yicai.com">第一财经 · 最新</source>
+      <description>有投资者向达瑞电子提问：公司轻量化、液冷板块是否已有模组产品供应客户？达瑞电子11月8日在互动平台表示，公司轻量化板块目前以碳纤、玻纤复合材料精密结构件为主，热管理板块以水冷板、散热片等散热核心部件为主。公司当前供应的精密结构件与散热核心部件虽以零部件形态交付，但并非普通单一结构件，其在精密加工、良率控制、快速上量以及客户认证上具有较高门槛，是影响整机性能与可靠性的关键部件之一，也是公司向模组化延伸的能力基础。模组化是公司提升单客户价值…</description>
+    </item>
+    <item>
+      <title>达瑞电子：模组化是公司向更高附加值环节延伸的重要方向 | 有投资者向达瑞电子提问：公司轻量化、液冷板块是否已有模组产品供应客户？达瑞电子11月8日在...</title>
+      <link>https://www.yicai.com/brief/103431329.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/brief/103431329.html</guid>
+      <pubDate>Sun, 08 Nov 2026 10:23:12 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://yicai.com">第一财经 · 简报</source>
+      <description>有投资者向达瑞电子提问：公司轻量化、液冷板块是否已有模组产品供应客户？达瑞电子11月8日在互动平台表示，公司轻量化板块目前以碳纤、玻纤复合材料精密结构件为主，热管理板块以水冷板、散热片等散热核心部件为主。公司当前供应的精密结构件与散热核心部件虽以零部件形态交付，但并非普通单一结构件，其在精密加工、良率控制、快速上量以及客户认证上具有较高门槛，是影响整机性能与可靠性的关键部件之一，也是公司向模组化延伸的能力基础。模组化是公司提升单客户价值…</description>
+    </item>
+    <item>
+      <title>风范股份：河北产融集团拟间接持有公司30.08%股份 成为间接控股股东 | 风范股份公告，唐山市国资委拟将其持有的唐控发展集团98.47802%股权无偿划转至河北...</title>
+      <link>https://www.yicai.com/brief/103431327.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/brief/103431327.html</guid>
+      <pubDate>Sun, 08 Nov 2026 10:22:57 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://yicai.com">第一财经 · 简报</source>
+      <description>风范股份公告，唐山市国资委拟将其持有的唐控发展集团98.47802%股权无偿划转至河北产融集团，从而使得河北产融集团间接持有公司30.08%的股份，成为公司的间接控股股东。河北产融集团为唐山市国资委100%持股的国有独资企业。此次无偿划转，不涉及支付对价，不会导致公司控股股东和实控人发生变化，公司控股股东仍为唐山工控，实控人仍为唐山市国资委。此次收购符合免于发出要约情形，已获唐山市人民政府批复。</description>
+    </item>
+    <item>
+      <title>机构论后市丨A股在指数层面将迎来量价温和回升的反弹 | 沪指本周累计涨1.39%，深成指涨3.16%，创业板指涨2.14%，科创综指涨5.28%。A股后市怎么走？看看机...</title>
+      <link>https://www.yicai.com/brief/103431326.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/brief/103431326.html</guid>
+      <pubDate>Sun, 08 Nov 2026 10:22:34 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://yicai.com">第一财经 · 简报</source>
+      <description>沪指本周累计涨1.39%，深成指涨3.16%，创业板指涨2.14%，科创综指涨5.28%。A股后市怎么走？看看机构怎么说：</description>
+    </item>
+    <item>
+      <title>机构论后市丨A股在指数层面将迎来量价温和回升的反弹</title>
+      <link>https://www.yicai.com/news/103431318.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/news/103431318.html</guid>
+      <pubDate>Sun, 08 Nov 2026 10:20:52 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://yicai.com">第一财经 · 最新</source>
+      <description>沪指本周累计涨1.39%，深成指涨3.16%，创业板指涨2.14%，科创综指涨5.28%。A股后市怎么走？看看机构怎么说： ①国金证券：部分业绩韧性与边际改善信号已经出现，建议从宏观+行业两条线上寻找防御配置线索 国金证券表示，考虑到中国资产内生的稳定性依然牢固，叠加近期维稳政策力度的加强，中国资产的吸引力正在加强。AI减速下资本成本下降之路已经清晰，前半段冲击来自于资本回报的同步下降，后半段全球将迎来机遇。部分业绩韧性与边际改善信号已…</description>
+    </item>
+    <item>
+      <title>朱一明，投了梁文锋</title>
+      <link>https://finance.sina.com.cn/wm/2026-11-08/doc-inixzpas7014320.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/wm/2026-11-08/doc-inixzpas7014320.shtml</guid>
+      <pubDate>Sun, 08 Nov 2026 10:20:45 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>炒股就看 金麒麟分析师研报 ，权威，专业，及时，全面，助您挖掘潜力主题机会！ 记者丨何己派 编辑丨姜诗蔷 梁文锋有了一位硬核投资人——朱一明。 10月底，消息称，长鑫存储及其董事长朱一明，参与DeepSeek第二轮融资。一起抢到额度的，还有腾讯、 宁德时代 、 中国移动 、 中信证券 等巨头。 芯片大佬朱一明，在投资圈闯荡已久。 朱一明 图/ 长鑫科技 他参与设立的石溪资本，有“科创板收割机”之称，成立于2015年，由朱一明实控的 兆易…</description>
+    </item>
+    <item>
+      <title>阿联酋如约赴进博：骆驼奶来了，硬科技也来了</title>
+      <link>https://www.yicai.com/news/103431320.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/news/103431320.html</guid>
+      <pubDate>Sun, 08 Nov 2026 10:20:35 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://yicai.com">第一财经 · 最新</source>
+      <description>即便中东局势纷繁复杂，但阿联酋依然如约而至，来到第九届中国国际进口博览会（下称“进博会”）。 走进阿联酋国家馆，有多家投资和金融机构的摊位，但对于普通观众来说，对来自阿联酋的骆驼奶显然更感兴趣，纷纷上前试喝。艾因农产公司首席执行官（CEO）哈桑·萨菲（Hassan Safi）向第一财经记者表示，正加快开拓海外市场，而中国是重要方向。 与此同时，更多阿联酋的科技和资本密集型企业，也在积极开拓中国市场，他们更期待融入中国的技术和供应链，加强…</description>
+    </item>
+    <item>
+      <title>中央气象台发布寒潮蓝色预警</title>
+      <link>https://news.10jqka.com.cn/20261108/c681582200.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261108/c681582200.shtml</guid>
+      <pubDate>Sun, 08 Nov 2026 10:13:50 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>中央气象台11月8日18时继续发布寒潮蓝色预警：受寒潮影响，预计，2026年11月8日20时至10日08时，西北地区东南部、黄淮大部、江淮、江汉、江南、西南地区南部、华南等地将降温6～10℃，其中，湖北东部、安徽中南部、江苏北部和西南部、浙江、江西、福建西部和北部、四川西南部、云南东部和北部、广东、广西东部等地的部分地区降温10～12℃，局地降温可达14℃以上；11月10日早晨，最低温度0℃线将南压至陕西南部到华北南部至黄淮东南部一带。</description>
+    </item>
+    <item>
+      <title>AI辅助设计禽流感疫苗动物实验获进展</title>
+      <link>https://news.10jqka.com.cn/20261108/c681582161.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261108/c681582161.shtml</guid>
+      <pubDate>Sun, 08 Nov 2026 10:04:31 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>英国剑桥大学日前发布公报说，该校团队借助人工智能（AI）设计的一种新型广谱禽流感疫苗，在动物实验中对多种禽流感病毒变异株展现出防护效力。这款候选疫苗由剑桥大学与其衍生企业共同研发。研究人员收集全球监测项目记录的禽流感病毒基因序列数据，利用AI工具整合分析，设计出一系列包含这类病毒共同抗原特征的“超级抗原”。抗原是疫苗中能够触发机体免疫反应的成分。团队经细胞测试筛选后，将选定抗原用于疫苗并开展动物实验。实验显示，接种新疫苗的小鼠和雪貂在受…</description>
+    </item>
+    <item>
+      <title>首期中国—新加坡高级官员交流项目成功举办</title>
+      <link>https://flash.jin10.com/detail/20261108180256914800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261108180256914800</guid>
+      <pubDate>Sun, 08 Nov 2026 10:02:56 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>金十数据11月8日讯，11月1日—7日，首期中国—新加坡高级官员交流项目在中国举办。中央组织部秘书长戴建营、商务部副部长兼中华人民共和国国际贸易谈判副代表凌激、新加坡驻华大使陈海泉出席启动环节并致辞，新加坡公共服务署人力发展司高级司长何颂廉作为交流项目代表发言。凌激指出，中新全方位高质量的前瞻性伙伴关系持续发展，双边贸易投资合作稳步推进，两国领导人提出打造数字经济、绿色发展等领域标志性成果。双方通过多层级合作机制共同落实，希望双方代表拓…</description>
+    </item>
+    <item>
+      <title>以色列国防部长卡茨：针对伊朗的行动任务尚未完成。</title>
+      <link>https://flash.jin10.com/detail/20261108180033540800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261108180033540800</guid>
+      <pubDate>Sun, 08 Nov 2026 10:00:33 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+    </item>
+    <item>
+      <title>以色列国防部长卡茨：伊朗正试图重启其获取核武器的努力，同时还进行着其他严重威胁以色列安全的行动。我们绝不能接受这些威胁。</title>
+      <link>https://flash.jin10.com/detail/20261108175940107800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261108175940107800</guid>
+      <pubDate>Sun, 08 Nov 2026 09:59:40 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+    </item>
+    <item>
+      <title>高盛：铜价承压之际，实物供应却在持续收紧...</title>
+      <link>https://flash.jin10.com/detail/20261108175824777800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261108175824777800</guid>
+      <pubDate>Sun, 08 Nov 2026 09:58:24 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+    </item>
+    <item>
+      <title>国际原子能机构：驻扎波罗热核电站的工作组获悉，该电站目前的燃料储备足以维持少量应急柴油发电机运行两周。</title>
+      <link>https://flash.jin10.com/detail/20261108175609970800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261108175609970800</guid>
+      <pubDate>Sun, 08 Nov 2026 09:56:09 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+    </item>
+    <item>
+      <title>把根扎深，向新生长：进博会上的五粮液答案</title>
+      <link>https://www.yicai.com/news/103431315.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/news/103431315.html</guid>
+      <pubDate>Sun, 08 Nov 2026 09:55:27 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://yicai.com">第一财经 · 最新</source>
+      <description>申江潮涌，万商云集。11月的上海，第九届中国国际进口博览会如约而至，五粮液连续第九年赴这场“进博之约”。在11月6日下午举行的虹桥国际经济论坛分论坛上，五粮液股份公司副董事长、总经理华涛受邀以《把根扎深，向新而生——白酒行业新周期下的新供给与新增长》为题发表演讲，向外界展示了作为白酒行业龙头，五粮液在新消费时代推动行业转型的新思考。 寒冬里的深根 白酒行业近年来正处于深度调整期。国家统计局数据显示，今年上半年规模以上企业白酒产量同比下降…</description>
+    </item>
+    <item>
+      <title>大连英博队获2026赛季中超联赛冠军 | 据新华社，11月8日，在辽宁大连举行的2026赛季中国足球超级联赛第30轮比赛中，大连英博队主场战胜天津津门虎队，夺...</title>
+      <link>https://www.yicai.com/brief/103431313.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/brief/103431313.html</guid>
+      <pubDate>Sun, 08 Nov 2026 09:54:38 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://yicai.com">第一财经 · 简报</source>
+      <description>据新华社，11月8日，在辽宁大连举行的2026赛季中国足球超级联赛第30轮比赛中，大连英博队主场战胜天津津门虎队，夺得本赛季联赛冠军。</description>
+    </item>
+    <item>
+      <title>国际原子能机构：目前尚不清楚最近一次断连的原因和位置。</title>
+      <link>https://flash.jin10.com/detail/20261108175307731800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261108175307731800</guid>
+      <pubDate>Sun, 08 Nov 2026 09:53:07 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+    </item>
+    <item>
+      <title>国际原子能机构：该核电站与唯一剩余的外部供电线路——费罗斯普拉夫纳-1号线路——的连接于今天凌晨中断。</title>
+      <link>https://flash.jin10.com/detail/20261108175249235800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261108175249235800</guid>
+      <pubDate>Sun, 08 Nov 2026 09:52:49 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+    </item>
+    <item>
+      <title>美国中期选举结果将如何影响美元走势？｜全球贸易观察</title>
+      <link>https://www.yicai.com/news/103431312.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/news/103431312.html</guid>
+      <pubDate>Sun, 08 Nov 2026 09:52:27 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://yicai.com">第一财经 · 最新</source>
+      <description>美国中期选举结果一度短暂拖累美元走势。在面对“近几个月来支撑美元走强的因素是否依旧会存在”这一问题时，全球金融科技平台Ebury市场策略主管瑞安（Matthew Ryan）认为，民主党全面掌控国会将对美元构成轻微看跌的影响，但这并非货币市场方向性转变的直接原因，“关键因素在于财政政策”。 瑞安对第一财经记者表示，建议不要过度解读美元最初的剧烈波动，这不会改变外汇市场的格局。“我们最终认为，美元的下行空间将十分有限。”他称，主要原因包括中…</description>
+    </item>
+    <item>
+      <title>中期选举之后，纳斯达克可以抄底吗？</title>
+      <link>https://wallstreetcn.com/articles/3785487</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/articles/3785487</guid>
+      <pubDate>Sun, 08 Nov 2026 09:49:04 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
+      <description>无奈的共和党总统 一位不能连任的共和党总统，因为中东战争等原因，在中期选举中失去参众两院。民主党大胜，拿下了一些传统的共和党大本营州，跃跃欲试，准备拿内阁成员们开刀。这位总统，无奈中首先牺牲国防部长，让国防部长第一个辞职。 这个总统不是特朗普。他是小布什。 故事不是如今，是二十年前。 2006年11月8日，小布什宣布国防部长拉姆斯菲尔德离任，已经进入第二任期后半程的小布什，自此面临更大的执政阻力。 华尔街认为，“僵局是好事”。 保德信分…</description>
+    </item>
+    <item>
+      <title>中国移动与智谱（Z.ai）正式签署合作协议</title>
+      <link>https://www.cls.cn/detail/2528290</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2528290</guid>
+      <pubDate>Sun, 08 Nov 2026 09:46:45 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+      <description>【中国移动与智谱（Z.ai）正式签署合作协议】财联社11月8日电，中国移动与智谱（Z.ai）正式签署合作协议，双方围绕国产算力、大模型服务和AI商业化展开深度合作。智谱GLM系列模型将接入移动云MaaS平台，合作覆盖从底层算力供给、模型服务到商业化分发的完整产业链。</description>
+    </item>
+    <item>
+      <title>【风口研报·公司】"AI+广告"平台AppLovin四天暴涨70%，公司同样抢先迈向AI营销新阶段，近百个Agent已进入真实工作流+累计服务超过1万家企业；另有公司作为稀缺中立第三方云厂商，拐点初现</title>
+      <link>https://www.cls.cn/detail/2528228</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2528228</guid>
+      <pubDate>Sun, 08 Nov 2026 09:46:32 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+    </item>
+    <item>
+      <title>晚间公告丨11月8日这些公告有看头</title>
+      <link>https://www.yicai.com/news/103431310.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/news/103431310.html</guid>
+      <pubDate>Sun, 08 Nov 2026 09:45:23 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://yicai.com">第一财经 · 最新</source>
+      <description>【品大事】 华新建材：拟约16.42亿美元收购巴西CSN CIMENTOS 99.99%股权 华新建材公告，公司拟以预估约90.337亿巴西雷亚尔(约16.42亿美元)收购巴西国家钢铁公司持有的CSN CIMENTOS 99.99%股权。标的公司为巴西第二大水泥生产商，拥有7家窑线工厂及6家粉磨站，水泥总产能达1,700万吨/年（约占21%的市场份额），石灰石储量约22亿吨，产品主要服务巴西东北和东南两大关键市场，具备高于行业平均水平的…</description>
+    </item>
+    <item>
+      <title>IPO周报：深交所下半年新增受理“破冰”，沁恒微从科创板转战创业板募资增近六成</title>
+      <link>https://www.yicai.com/news/103431277.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/news/103431277.html</guid>
+      <pubDate>Sun, 08 Nov 2026 09:43:15 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://yicai.com">第一财经 · 最新</source>
+      <description>11月2日～11月8日当周，在有传闻称IPO要暂停之际，深交所新增受理了1单IPO申请，打破了下半年以来“零受理”的局面，另有1家企业注册生效；北交所则有2家拟上市企业过会；此外，下周沪深交易所将共有3家拟IPO企业上会审核。 11月4日，深交所新增受理了南京沁恒微电子股份有限公司（下称“沁恒微”）的IPO申请，这是今年下半年以来深交所新增受理的首单IPO申请，也是同期沪深北交易所新增受理的第七单IPO申请。 沁恒微曾申报科创板IPO，…</description>
+    </item>
+    <item>
+      <title>女首富1270亿元身家背后，蓝思科技正在经历一场转型手术</title>
+      <link>https://finance.sina.com.cn/stock/s/2026-11-08/doc-inixzpaw7190627.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/stock/s/2026-11-08/doc-inixzpaw7190627.shtml</guid>
+      <pubDate>Sun, 08 Nov 2026 09:41:34 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>炒股就看 金麒麟分析师研报 ，权威，专业，及时，全面，助您挖掘潜力主题机会！ 来源：尺度商业 文 | 张佳儒 编辑 | 刘振涛 周群飞以1270亿元身家，登顶中国女首富。但另一组数字，让这个“登顶”变得不那么值得庆祝。 10月27日，《2026胡润百富榜》发布， 蓝思科技 创始人周群飞以1270亿元身家，时隔11年，再次坐上中国女首富的位置。 蓝思科技为人熟知的身份是“果链巨头”。近几年，公司正加码智能汽车座舱、AI服务器液冷、AI眼镜…</description>
+    </item>
+    <item>
+      <title>沙特能源部消息人士称阿美石油大楼受损 无人员伤亡</title>
+      <link>https://news.10jqka.com.cn/20261108/c681582078.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261108/c681582078.shtml</guid>
+      <pubDate>Sun, 08 Nov 2026 09:40:24 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>总台记者当地时间8日获悉，沙特能源部一位官方消息人士称，沙特阿美石油公司位于利雅得的一栋行政大楼当日遭到“袭击企图”。当日的袭击导致建筑物被碎片击中，造成一定损坏，无人员伤亡。 居住在利雅得金融中心的目击者称，沙特阿美石油公司大楼受损，被炸出明显缺口。另有目击者称，大楼冒出白烟。(央视新闻)</description>
+    </item>
+    <item>
+      <title>中国移动与智谱正式签署合作协议</title>
+      <link>https://news.10jqka.com.cn/20261108/c681582072.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261108/c681582072.shtml</guid>
+      <pubDate>Sun, 08 Nov 2026 09:38:48 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>记者获悉，近日，中国移动与智谱（Z.ai）正式签署合作协议，双方围绕国产算力、大模型服务和AI商业化展开深度合作。智谱GLM系列模型将接入移动云MaaS平台，合作覆盖从底层算力供给、模型服务到商业化分发的完整产业链。（人民财讯）</description>
+    </item>
+    <item>
+      <title>和美药业延迟港股上市：曾拟募资8.6亿港元 4个月亏3125万</title>
+      <link>https://finance.sina.com.cn/stock/s/2026-11-08/doc-inixzpaw7189774.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/stock/s/2026-11-08/doc-inixzpaw7189774.shtml</guid>
+      <pubDate>Sun, 08 Nov 2026 09:38:41 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>炒股就看 金麒麟分析师研报 ，权威，专业，及时，全面，助您挖掘潜力主题机会！ 来源：雷递 雷递网 雷建平 11月8日 赣州和美药业股份有限公司（简称：“和美药业”，股票代码：“00054”）日前宣布延迟上市，和美药业原计划2026年11月9日在港交所上市。 2026年11月4日，和美药业就已宣布，鉴于现行市况，现决定延迟全球发售及上市。 有关国际发售的国际包销协议将不会订立，因此有关香港公开发售的香港包销协 议将不会成为无条件。 和美药…</description>
+    </item>
+    <item>
+      <title>今年前10个月国开行发放制造业贷款超4800亿元 | 据央视新闻，记者今天（8日）从国家开发银行了解到，今年以来，国开行综合运用多元化金融产品，为制造业...</title>
+      <link>https://www.yicai.com/brief/103431304.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/brief/103431304.html</guid>
+      <pubDate>Sun, 08 Nov 2026 09:35:38 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://yicai.com">第一财经 · 简报</source>
+      <description>据央视新闻，记者今天（8日）从国家开发银行了解到，今年以来，国开行综合运用多元化金融产品，为制造业企业提供覆盖技术研发、产能建设、日常经营的全周期投融资支持。1—10月，共发放制造业贷款超4800亿元，主要支持了传统产业改造升级、新兴产业培育壮大以及未来产业前瞻布局，有力助推了制造业高质量发展。</description>
+    </item>
+    <item>
+      <title>美股暴跌后，“木头姐”：市场越担忧我越乐观，牛市未完</title>
+      <link>https://wallstreetcn.com/articles/3785486</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/articles/3785486</guid>
+      <pubDate>Sun, 08 Nov 2026 09:35:22 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
+      <description>本周美股AI交易重挫、纳斯达克综合指数跌入调整区间之际，ARK Invest掌门人Cathie Wood选择逆势加仓。 11月6日周五，Cathie Wood接受CNBC采访时表示，投资者的普遍担忧非但没有动摇她的信心，反而强化了她对牛市延续的判断。 市场越担忧，我越乐观，因为这往往意味着牛市更具持续性。我不认为这轮牛市已经脱轨。 周五科技股出现小幅反弹，但市场情绪仍然脆弱。Wood认为，当前的波动是技术革命进程中“前进两步、后退一步”…</description>
+    </item>
+    <item>
+      <title>借一场季候风，与香港重逢｜城市</title>
+      <link>https://mini.caixin.com/2026-11-08/102502462.html</link>
+      <guid isPermaLink="true">https://mini.caixin.com/2026-11-08/102502462.html</guid>
+      <pubDate>Sun, 08 Nov 2026 09:34:41 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://caixin.com">财新 · 最新</source>
+      <description>The Weeknd 在香港启德主场馆演唱新歌《Hong Kong》，歌里响起王菲的粤语人声，采样自她 1993 年的《季候风》。旧日声音与眼前香港叠在一起，仿佛回到那个年代 “这次季候风，吹得格外凶。”不久前，The Weeknd 在香港启德主场馆演唱新歌《Hong Kong》，屏幕映着香港街景，歌里响起一段王菲的粤语人声，采样自她 1993 年的《季候风》。旧日的声音与眼前的香港叠在一起，仿佛带人回到那个黄金年代。 儿时向往的是镜头…</description>
+    </item>
+    <item>
+      <title>千亿PCB龙头，分红大动作</title>
+      <link>https://finance.sina.com.cn/stock/2026-11-08/doc-inixzpaw7187816.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/stock/2026-11-08/doc-inixzpaw7187816.shtml</guid>
+      <pubDate>Sun, 08 Nov 2026 09:34:20 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>深南电路 11月8日晚间公告称，公司收到控股股东深天科技控股出具的2026年度现金分红提议函，建议公司在符合利润分配条件、未发生超出既定计划的重大投资或重大现金支出需求，且不影响公司持续经营和长期发展的前提下， 公司2026年度现金分红总额（包括可视同现金分红的回购股份金额等）不低于当年归属于上市公司股东的净利润的35% 。具体方案将结合公司经营情况按规定履行审议程序后确定。 中国证券报记者梳理发现，近年来，深南电路分红比例一直较高。公…</description>
+    </item>
+    <item>
+      <title>上财教授杨健：AI冲击下全球价值链将告别单极主导，迎来多极并存与分层竞争</title>
+      <link>https://news.10jqka.com.cn/20261108/c681582063.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261108/c681582063.shtml</guid>
+      <pubDate>Sun, 08 Nov 2026 09:32:21 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>11月8日，在2026进博会上海会议活动“智能制造与电子消费研讨会”上，上海财经大学数字经济研究院执行副院长、实践教授杨健指出，在人工智能的冲击下，全球价值链将告别单极主导，演变为由技术自主、地缘安全与数字要素共同塑造的全新格局，呈现出“多极并存、分层竞争、规则双轨、收益分化”的特征。 在“多极并存”方面，杨健分析称，美国主导底层算力与基础模型；欧盟侧重AI治理；日韩聚焦精密制造；中国则依托完整制造业体系，主攻产业落地与数字中间品。 在…</description>
+    </item>
+    <item>
+      <title>大连英博队获2026赛季中超联赛冠军</title>
+      <link>https://news.10jqka.com.cn/20261108/c681582061.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261108/c681582061.shtml</guid>
+      <pubDate>Sun, 08 Nov 2026 09:32:04 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>11月8日，在辽宁大连举行的2026赛季中国足球超级联赛第30轮比赛中，大连英博队主场战胜天津津门虎队，夺得本赛季联赛冠军。(央视新闻)</description>
+    </item>
+    <item>
+      <title>阿联酋海岸警卫队称从阿曼湾一起火货船上救出22人 | 据央视新闻，阿联酋方面8日消息，阿联酋海岸警卫队当天宣布从阿曼湾一艘发生火灾的货船上救出全部22...</title>
+      <link>https://www.yicai.com/brief/103431296.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/brief/103431296.html</guid>
+      <pubDate>Sun, 08 Nov 2026 09:31:23 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://yicai.com">第一财经 · 简报</source>
+      <description>据央视新闻，阿联酋方面8日消息，阿联酋海岸警卫队当天宣布从阿曼湾一艘发生火灾的货船上救出全部22名船员，获救人员身体状况稳定。</description>
+    </item>
+    <item>
+      <title>越赚钱越跌！又一被错杀的赛道</title>
+      <link>https://www.gelonghui.com/p/7337544</link>
+      <guid isPermaLink="true">https://www.gelonghui.com/p/7337544</guid>
+      <pubDate>Sun, 08 Nov 2026 09:31:02 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://gelonghui.com">格隆汇 · 推荐</source>
+      <description>戴维斯双击将至？ 近一年来，游戏板块呈现出一种奇怪的反差。 随着2026年三季度业绩披露完毕，整个游戏板块季度收入925.22亿元，同比增长5.11%，自研出海增长15.6%，看上去一切都在向好。 然而，在营收温和增长的同时，14家A股样本公司三季度扣非净利润47.4亿元，同比下滑6.3%，22家公司单季净利润更是接近腰斩。 更矛盾的是市场的反应—— 业绩高增的世纪华通、巨人网络被资金冷落，而深陷亏损的尾部公司却逆势狂欢。 作为一个营收…</description>
+    </item>
+    <item>
+      <title>欧盟认定TikTok推荐机制有危害 若不解决将被罚款</title>
+      <link>https://www.caixin.com/2026-11-08/102502456.html</link>
+      <guid isPermaLink="true">https://www.caixin.com/2026-11-08/102502456.html</guid>
+      <pubDate>Sun, 08 Nov 2026 09:24:17 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://caixin.com">财新 · 最新</source>
+      <description>欧盟称，TikTok的推荐系统存在所谓的“兔子洞效应”（rabbit‑hole effect），通过持续推送同质化内容，用户越刷越深陷其中、难以脱身 欧盟称，TikTok的推荐系统存在所谓的“兔子洞效应”（rabbit‑hole effect），通过持续推送同质化内容，用户越来越深陷其中、难以脱身。图：视觉中国 【财新网】 当地时间11月6日，欧盟委员会初步认定，TikTok推荐机制因让用户“越刷越想刷”而违反《数字服务法案》（DSA）…</description>
+    </item>
+    <item>
+      <title>白宫办公厅副主任沃尔特斯被曝将离职 | 据央视新闻，美国方面7日消息，白宫办公厅副主任理查德·沃尔特斯将离职。</title>
+      <link>https://www.yicai.com/brief/103431286.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/brief/103431286.html</guid>
+      <pubDate>Sun, 08 Nov 2026 09:22:54 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://yicai.com">第一财经 · 简报</source>
+      <description>据央视新闻，美国方面7日消息，白宫办公厅副主任理查德·沃尔特斯将离职。</description>
+    </item>
+    <item>
+      <title>英国大曼彻斯特经贸团探路中国市场 看好机遇但落地仍需耐心</title>
+      <link>https://www.caixin.com/2026-11-08/102502451.html</link>
+      <guid isPermaLink="true">https://www.caixin.com/2026-11-08/102502451.html</guid>
+      <pubDate>Sun, 08 Nov 2026 09:21:55 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://caixin.com">财新 · 最新</source>
+      <description>中国是大曼彻斯特第三大贸易伙伴，大曼彻斯特有超过6000家企业与中国开展贸易往来 大曼彻斯特代表团在第九届进博会英国Heritage Pavillion展台前合影。图：新华社 【财新网】 “我们会研究，明年以更大的规模来参展”，在11月5日至10日举办的第九届中国国际进口博览会（下称“进博会”）上，大曼彻斯特商业促进中心执行董事Janine Smith (施雅灵)在接受财新专访时表示，参观进博会后，既感受到了展会的规模，也看到了其高效的…</description>
+    </item>
+    <item>
+      <title>欧盟接近达成协议，将在英国脱欧后将其碳市场与欧盟体系挂钩</title>
+      <link>https://news.10jqka.com.cn/20261108/c681582022.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261108/c681582022.shtml</guid>
+      <pubDate>Sun, 08 Nov 2026 09:18:23 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>欧盟接近达成协议，将在英国脱欧后将其碳市场与欧盟体系挂钩。（财联社）</description>
+    </item>
+    <item>
+      <title>欧盟与英国即将达成协议，在脱欧后重新链接碳市场</title>
+      <link>https://finance.sina.com.cn/stock/usstock/c/2026-11-08/doc-inixzhuu7122740.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/stock/usstock/c/2026-11-08/doc-inixzhuu7122740.shtml</guid>
       <pubDate>Sun, 08 Nov 2026 09:18:12 +0000</pubDate>
       <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>金十数据11月8日讯，沙特阿美位于利雅得的办公楼周日遭到袭击，这是沙特与也门胡塞武装之间冲突再度升级的最新迹象。沙特国家通讯社周日援引官方消息称，这家石油巨头的行政办公楼遭遇袭击未遂，碎片造成有限损坏。事件没有造成人员伤亡。沙特阿美办公室位于阿卜杜拉国王金融区。该金融区近一个月来一直关闭，员工改为远程办公。周日的事件是沙特阿美在沙特境内的基础设施接连遭袭的最新一起。此前，沙特阿美位于宰赫兰的总部也在10月遭到袭击。这次袭击也可能是自10…</description>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>欧盟与英国正就链接双方碳排放交易体系达成最终协议，此举将提升市场流动性，并最终为企业节省数百万欧元的碳边境税。 该协议计划在本月晚些时候举行的一次重要峰会上宣布。届时将允许碳配额在两个排放交易体系中进行跨境交易，这距离英国在脱欧后启动自己的总量管制与交易体系已过去近六年。据知情人士透露，谈判代表已就排放上限、供应控制和免费配额等细节达成一致。目前唯一悬而未决的问题是对金融衍生品的处理方式。 欧盟碳市场是该地区实现减排目标的关键手段。该市…</description>
     </item>
     <item>
-      <title>世运电路：拟以集中竞价交易方式回购股份，回购金额不低于2亿元且不超过3亿元，价格上限55元/股，用于员工持股计划或股权激</title>
-      <link>https://wallstreetcn.com/livenews/3196469</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196469</guid>
+      <title>风范股份：河北产融集团拟间接持有公司30.08%股份 成为间接控股股东</title>
+      <link>https://www.cls.cn/detail/2528285</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2528285</guid>
       <pubDate>Sun, 08 Nov 2026 09:18:04 +0000</pubDate>
       <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · A 股快讯</source>
-      <description>世运电路：拟以集中竞价交易方式回购股份，回购金额不低于2亿元且不超过3亿元，价格上限55元/股，用于员工持股计划或股权激励，期限自董事会审议通过之日起不超过6个月。</description>
-    </item>
-    <item>
-      <title>财联社11月8日电，欧盟接近达成协议，将在英国脱欧后将其碳市场与欧盟体系挂钩。</title>
-      <link>https://www.cls.cn/detail/2528284</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2528284</guid>
-      <pubDate>Sun, 08 Nov 2026 09:16:10 +0000</pubDate>
-      <category>中文财经快讯</category>
       <source url="https://cls.cn">财联社 · 电报</source>
+      <description>【风范股份：河北产融集团拟间接持有公司30.08%股份 成为间接控股股东】财联社11月8日电，风范股份(601700.SH)披露收购报告书，唐山市国资委拟将其持有的唐控发展集团98.47802%股权无偿划转至河北产融集团，从而使得河北产融集团间接持有上市公司30.08%的股份，成为上市公司的间接控股股东。河北产融集团为唐山市国资委100%持股的国有独资企业。本次无偿划转，不涉及支付对价，不会导致上市公司控股股东和实际控制人发生变化，上市…</description>
     </item>
     <item>
-      <title>英国海上贸易行动办公室：收到一份关于阿曼哈萨布西北方向8海里处发生一起事件的延迟报告。有关当局报告称，该油轮发生火灾，船</title>
-      <link>https://flash.jin10.com/detail/20261108171545137800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261108171545137800</guid>
-      <pubDate>Sun, 08 Nov 2026 09:15:45 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>英国海上贸易行动办公室：收到一份关于阿曼哈萨布西北方向8海里处发生一起事件的延迟报告。有关当局报告称，该油轮发生火灾，船员已全部撤离。</description>
-    </item>
-    <item>
-      <title>德企欲研发“无限射程”太空导弹</title>
-      <link>https://www.cls.cn/detail/2528283</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2528283</guid>
-      <pubDate>Sun, 08 Nov 2026 09:14:38 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-      <description>【德企欲研发“无限射程”太空导弹】财联社11月8日电，一家德国科技企业正在研发一款“全球无限射程”天基武器，理论上它可以打击俄罗斯境内任意目标。这款武器被称为轨道精确纵深打击（PODS）系统，包含一枚常规弹头，该弹头会从卫星上发射，并且装载在带有防护层的再入飞行器内，避免下落过程中因大气摩擦被烧毁。这种具有创新性的作战能力由德国阿特莫斯太空货物公司研发。这家公司最初成立的目的是帮助客户把货物送入太空，用于生物医药研究。 (参考消息)</description>
-    </item>
-    <item>
-      <title>【财联社早知道】全球物理智能开源平台Hitch Open发布，机构称物理AI由技术验证进入连续产业验证窗口，它已构建物理AI数据基座，为具身训练与世界模型训练提供全链路基础设施支撑</title>
-      <link>https://www.cls.cn/detail/2528151</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2528151</guid>
-      <pubDate>Sun, 08 Nov 2026 09:12:53 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-    </item>
-    <item>
-      <title>白宫办公厅副主任沃尔特斯被曝将离职</title>
-      <link>https://www.cls.cn/detail/2528280</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2528280</guid>
-      <pubDate>Sun, 08 Nov 2026 09:06:04 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-      <description>【白宫办公厅副主任沃尔特斯被曝将离职】财联社11月8日电，据美国方面7日消息，白宫办公厅副主任理查德·沃尔特斯将离职。有消息称，沃尔特斯已于6日递交辞呈。沃尔特斯是即将卸任的白宫办公厅主任苏茜·怀尔斯最亲近的政治助手之一。他的离职意味着即将接任白宫办公厅主任的斯蒂芬·米勒团队将接手更多核心职责。美国共和党在中期选举中遭遇惨败。美国总统特朗普6日宣布，白宫办公厅副主任米勒将从9日起接替怀尔斯，出任白宫办公厅主任。</description>
-    </item>
-    <item>
-      <title>今年前10个月国开行发放制造业贷款超4800亿元</title>
-      <link>https://flash.jin10.com/detail/20261108170538445800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261108170538445800</guid>
-      <pubDate>Sun, 08 Nov 2026 09:05:38 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>金十数据11月8日讯，从国家开发银行了解到，今年以来，国开行综合运用多元化金融产品，为制造业企业提供覆盖技术研发、产能建设、日常经营的全周期投融资支持。1—10月，共发放制造业贷款超4800亿元，主要支持了传统产业改造升级、新兴产业培育壮大以及未来产业前瞻布局，有力助推了制造业高质量发展。国开行产业与科创业务部负责人表示，下一步，国开行将锚定智能化、绿色化、融合化方向，强化职能定位，优化综合金融服务，聚焦重点领域、薄弱环节，服务国家重大…</description>
-    </item>
-    <item>
-      <title>加息预期未消，高盛却预计美联储将重启短债购买？</title>
-      <link>https://flash.jin10.com/detail/20261108170358622800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261108170358622800</guid>
-      <pubDate>Sun, 08 Nov 2026 09:03:58 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-    </item>
-    <item>
-      <title>据伊朗媒体Fars News：伊朗革命卫队发言人表示，美国无法实现其经济封锁目标，也无法切断德黑兰与邻国的联系。</title>
-      <link>https://flash.jin10.com/detail/20261108170036851800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261108170036851800</guid>
-      <pubDate>Sun, 08 Nov 2026 09:00:36 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-    </item>
-    <item>
-      <title>全面从严治党关键在从严治吏</title>
-      <link>https://www.aisixiang.com/data/185308.html</link>
-      <guid isPermaLink="true">https://www.aisixiang.com/data/185308.html</guid>
-      <pubDate>Sun, 08 Nov 2026 08:57:00 +0000</pubDate>
-      <category>哲学与思想</category>
-      <source url="https://aisixiang.com">爱思想 · 最近更新</source>
-      <description>党的二十届五中全会立足中国式现代化建设全局，深刻总结新时代全面从严治党宝贵经验，对持之以恒推进全面从严治党作出系统性战略部署，明确提出“全面从严治党关键在从严治吏”的重大要求，深刻揭示了治党与治吏的辩证关系。 干部队伍是党的执政骨干、事业发展中坚，从严治吏既是全面从严治党的核心抓手，也是锻造过硬执政队伍、护航“十五五”时期高质量发展的根本保障。新征程上，贯彻落实全面从严治党战略部署，必须牢牢抓住从严治吏这个关键，把严的基调贯穿干部队伍建…</description>
-    </item>
-    <item>
-      <title>华新建材：拟约16.42亿美元收购巴西CSN CIMENTOS 99.99%股权 | 华新建材公告，公司拟以预估约90.337亿巴西雷亚尔(约16.42亿美元)收购巴西国家钢铁公司持...</title>
-      <link>https://www.yicai.com/brief/103431274.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/brief/103431274.html</guid>
-      <pubDate>Sun, 08 Nov 2026 08:56:39 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://yicai.com">第一财经 · 简报</source>
-      <description>华新建材公告，公司拟以预估约90.337亿巴西雷亚尔(约16.42亿美元)收购巴西国家钢铁公司持有的CSN CIMENTOS 99.99%股权。标的公司为巴西第二大水泥生产商，拥有7家窑线工厂及6家粉磨站，水泥总产能达1,700万吨/年（约占21%的市场份额），石灰石储量约22亿吨，产品主要服务巴西东北和东南两大关键市场，具备高于行业平均水平的产能、技术和运营表现。本项目若成功实施，是公司乃至中国水泥企业将首次进入巴西水泥市场。本次交易…</description>
-    </item>
-    <item>
-      <title>世运电路：拟2亿元至3亿元回购股份用于员工持股计划或股权激励 | 世运电路公告，公司拟以自有资金或自筹资金通过集中竞价交易方式回购股份，回购金额不低...</title>
-      <link>https://www.yicai.com/brief/103431272.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/brief/103431272.html</guid>
-      <pubDate>Sun, 08 Nov 2026 08:55:33 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://yicai.com">第一财经 · 简报</source>
-      <description>世运电路公告，公司拟以自有资金或自筹资金通过集中竞价交易方式回购股份，回购金额不低于2亿元且不超过3亿元，回购价格不高于55元/股，回购股份将用于员工持股计划或股权激励。回购期限自董事会审议通过之日起不超过6个月。</description>
-    </item>
-    <item>
-      <title>美媒称白宫办公厅副主任沃尔特斯将离职</title>
-      <link>https://news.10jqka.com.cn/20261108/c681581891.shtml</link>
-      <guid isPermaLink="true">https://news.10jqka.com.cn/20261108/c681581891.shtml</guid>
-      <pubDate>Sun, 08 Nov 2026 08:55:17 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
-      <description>据美国阿克西奥斯新闻网站7日报道，白宫办公厅副主任理查德·沃尔特斯将离职。报道说，沃尔特斯已于6日递交辞呈。沃尔特斯是即将卸任的白宫办公厅主任苏茜·怀尔斯最亲近的政治助手之一。他的离职意味着即将接任白宫办公厅主任的斯蒂芬·米勒团队将接手更多核心职责。(新华社)</description>
-    </item>
-    <item>
-      <title>坚持以党的政治建设为统领</title>
-      <link>https://www.aisixiang.com/data/185309.html</link>
-      <guid isPermaLink="true">https://www.aisixiang.com/data/185309.html</guid>
-      <pubDate>Sun, 08 Nov 2026 08:54:00 +0000</pubDate>
-      <category>哲学与思想</category>
-      <source url="https://aisixiang.com">爱思想 · 最近更新</source>
-      <description>政治问题在任何时候都是根本性问题，政治建设在新时代党的建设新的伟大工程中居于突出重要位置。《中共中央关于持之以恒推进全面从严治党若干重大问题的决定》指出，持之以恒推进全面从严治党，坚持以党的政治建设为统领。准确把握其中的内涵要义，有必要首先梳理习近平总书记在理论上和实践上的溯源理路，进而深刻领会、充分发挥讲政治这个我们党一以贯之的政治优势，不断加强和改进党的政治建设，回答好全面从严治党的根本性问题，进而推动党的建设高质量发展，以大党之治…</description>
-    </item>
-    <item>
-      <title>东吴证券：关注AI下游和低位价值方向</title>
-      <link>https://finance.sina.com.cn/stock/2026-11-08/doc-inixzhva4081868.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/2026-11-08/doc-inixzhva4081868.shtml</guid>
-      <pubDate>Sun, 08 Nov 2026 08:53:09 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>来源： 东吴证券 股份有限公司 我们在11月4日的金股报告中给出观点“修复窗口开启”，中选结果落地和海内外财报的扰动期收官、外部不确定性持续收敛，海外虽因AI 叙事逆风、地缘局势悬念和中选超预期的“蓝潮”（传统红州翻蓝）而出现Riskoff，但A 股市场在10 月的调整中已经率先完成风险释放，再叠加国内稳市政策持续加码呵护市场信心、缓解流动性层面压力，我们认为行情有望自缩量避险逐步切换至量价温和回升。从本周市场表现来看，多数重要宽基指数…</description>
-    </item>
-    <item>
-      <title>黎巴嫩研究员：外部支持未能帮助沙特扭转也门战局</title>
-      <link>https://flash.jin10.com/detail/20261108165256648800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261108165256648800</guid>
-      <pubDate>Sun, 08 Nov 2026 08:52:56 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-    </item>
-    <item>
-      <title>论法秩序统一中行刑衔接的梗阻与调适</title>
-      <link>https://www.aisixiang.com/data/185307.html</link>
-      <guid isPermaLink="true">https://www.aisixiang.com/data/185307.html</guid>
-      <pubDate>Sun, 08 Nov 2026 08:52:00 +0000</pubDate>
-      <category>哲学与思想</category>
-      <source url="https://aisixiang.com">爱思想 · 最近更新</source>
-      <description>一、问题的提出 党的二十届三中全会对完善行刑衔接机制提出明确要求。2026年1月1日起新修订的《治安管理处罚法》施行，行刑衔接相应问题的解决，关系中央精神落实、关系法律实施效果，更凸显重要意义。当前，该制度在顺畅运转，取得良好效果的同时，实践中一些案例也体现出制度运行存在争议。试举两个案例：①案例一：交通肇事行刑反向衔接案件中，肇事机动车驾驶人的机动车驾驶证是否应当吊销案：行为人甲因交通肇事致一人死亡，负事故主要责任，因其系过失犯罪，有…</description>
-    </item>
-    <item>
-      <title>以色列总统授权埃森科特组阁 令内塔尼亚胡执政地位迎重大考验</title>
-      <link>https://finance.sina.com.cn/stock/usstock/c/2026-11-08/doc-inixzhuw3764416.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/usstock/c/2026-11-08/doc-inixzhuw3764416.shtml</guid>
-      <pubDate>Sun, 08 Nov 2026 08:51:48 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>以色列大选挑战者加迪·埃森科特将率先获得组阁权，这使他距离终结内塔尼亚胡创纪录的总理任期又近了一步。 以色列总统伊萨克·赫尔佐格办公室发布声明称，埃森科特将于周日正式获得组阁提名。他将有最多六周时间争取拿下议会120席中的多数以组建执政联盟。若组阁失败，任务很可能重回内塔尼亚胡手中，后者目前仍以看守总理身份继续执掌政权。 尽管在10月27日的投票中，双方阵营均未获得过半数席位，但埃森科特的提名得到了多数党派支持。这位中间派前以军将领表示…</description>
-    </item>
-    <item>
-      <title>超越所有权保留的名实之争</title>
-      <link>https://www.aisixiang.com/data/185306.html</link>
-      <guid isPermaLink="true">https://www.aisixiang.com/data/185306.html</guid>
-      <pubDate>Sun, 08 Nov 2026 08:51:00 +0000</pubDate>
-      <category>哲学与思想</category>
-      <source url="https://aisixiang.com">爱思想 · 最近更新</source>
-      <description>示例1：甲乙订立一份紫砂壶买卖合同，合同约定，甲应于某日将紫砂壶交付于乙，乙则应在交付时立即支付价款，不支付价款的，所有权不移转。后来，甲按约将紫砂壶交付于乙，但乙并未按约支付价款。 示例2：甲乙订立一份紫砂壶买卖合同，合同约定，甲应于某日将紫砂壶交付于乙，乙则应在未来两年内按月分期支付价款，共24期，在乙付清价款前，甲保留所有权。后来，甲按约将紫砂壶交付于乙，但乙并未按约支付价款。 示例3：甲乙订立一份紫砂壶买卖合同，合同约定，甲应于…</description>
-    </item>
-    <item>
-      <title>合同拘束力的正当性基础：为惯例主义辩护</title>
-      <link>https://www.aisixiang.com/data/185305.html</link>
-      <guid isPermaLink="true">https://www.aisixiang.com/data/185305.html</guid>
-      <pubDate>Sun, 08 Nov 2026 08:49:00 +0000</pubDate>
-      <category>哲学与思想</category>
-      <source url="https://aisixiang.com">爱思想 · 最近更新</source>
-      <description>《中华人民共和国民法典》（以下简称《民法典》）第465条规定“依法成立的合同，受法律保护。......对当事人具有法律约束力”，学说上称之为合同严守原则或合同神圣原则，即合同具有拘束力。在违约责任方面，债权人的继续履行请求权与期待利益损害赔偿请求权旨在从债权人救济的层面实现合同的拘束力。 在私法理论中，从来就不缺少对合同拘束力原则的反思与质疑。例如，费希特认为，一方或双方未履行的合同不具有拘束力。自然法学者特奥多尔·施马尔茨（Theod…</description>
-    </item>
-    <item>
-      <title>法秩序统一视角下合同保全的理论重构</title>
-      <link>https://www.aisixiang.com/data/185304.html</link>
-      <guid isPermaLink="true">https://www.aisixiang.com/data/185304.html</guid>
-      <pubDate>Sun, 08 Nov 2026 08:48:00 +0000</pubDate>
-      <category>哲学与思想</category>
-      <source url="https://aisixiang.com">爱思想 · 最近更新</source>
-      <description>债务人对自身财产的处分自由，是私法自治的核心要义，债权人若欲“侵入”债务人的财产管理，必须具备充分理据，这不仅要求实体法上债权的真实存在，亦须满足程序法上关于侵入合法性的证明流程。换言之，即使是“上帝视角”下的真实债权人，在通过必要程序确证侵入的合法性以前，亦无法径自侵入债务人的财产管理。 有两种价值可为债权人的这种侵入提供合法性支持。一是保护私益的价值，即债权人为实现“自身的特定债权”（以下简称“特定债权”）而侵入，诉讼保全和强制执行…</description>
-    </item>
-    <item>
-      <title>世运电路：拟2亿元至3亿元回购股份用于员工持股计划或股权激励</title>
-      <link>https://www.cls.cn/detail/2528277</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2528277</guid>
-      <pubDate>Sun, 08 Nov 2026 08:47:57 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-      <description>【世运电路：拟2亿元至3亿元回购股份用于员工持股计划或股权激励】财联社11月8日电，世运电路(603920.SH)公告称，公司拟以自有资金或自筹资金通过集中竞价交易方式回购股份，回购金额不低于2亿元且不超过3亿元，回购价格不高于55元/股，回购股份将用于员工持股计划或股权激励。回购期限自董事会审议通过之日起不超过6个月。</description>
-    </item>
-    <item>
-      <title>沙特确认有人企图袭击沙特阿美大楼 称仅造成有限损失</title>
-      <link>https://flash.jin10.com/detail/20261108164724310800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261108164724310800</guid>
-      <pubDate>Sun, 08 Nov 2026 08:47:24 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>金十数据11月8日讯，据沙特国家电视台：沙特能源部称，有人企图袭击利雅得的沙特阿美大楼。能源部消息人士表示，有碎片落在建筑物上，未造成人员伤亡，目前仅造成有限的实质性损失。</description>
-    </item>
-    <item>
-      <title>申万宏源2027年A股投资策略概要：构建“第二阶段上涨”</title>
-      <link>https://finance.sina.com.cn/stock/2026-11-08/doc-inixzhuy7303203.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/2026-11-08/doc-inixzhuy7303203.shtml</guid>
-      <pubDate>Sun, 08 Nov 2026 08:47:22 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>来源：上海申银万国证券研究所有限公司 一、2026 年上涨和调整波段，资金供需特征对称：上涨波段，存量博弈下的极端分化，赛道基正循环四两拨千斤；调整波段，各类资金普遍减仓四面楚歌，对配置类资金和绝对收益资金减仓的担忧，驱动资金负循环。中短期资金供需平衡恢复条件改善。但赛道基和配置类资金算力链高仓位，长期尚未出清。 新产业 趋势、一定程度的调仓换仓、政策制度调整，才是长期出清的条件。 二、当下海外资产配置环境逆风，但转机可能来自沃什货币政…</description>
-    </item>
-    <item>
-      <title>华新建材：拟约16.42亿美元收购巴西CSN CIMENTOS 99.99%股权</title>
-      <link>https://www.cls.cn/detail/2528276</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2528276</guid>
-      <pubDate>Sun, 08 Nov 2026 08:47:11 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-      <description>【华新建材：拟约16.42亿美元收购巴西CSN CIMENTOS 99.99%股权】财联社11月8日电，华新建材(600801.SH)公告称，公司拟以预估约90.337亿巴西雷亚尔(约16.42亿美元)收购巴西国家钢铁公司持有的CSN CIMENTOS 99.99%股权。此次交易价格较标的公司截至2025年12月31日的账面价值溢价约34.41%。标的公司为巴西第二大水泥生产商，拥有7家窑线工厂及6家粉磨站，水泥总产能达1,700万吨/…</description>
-    </item>
-    <item>
-      <title>封建帝国体制的法律表达：重思《威斯特伐利亚和约》</title>
-      <link>https://www.aisixiang.com/data/185303.html</link>
-      <guid isPermaLink="true">https://www.aisixiang.com/data/185303.html</guid>
-      <pubDate>Sun, 08 Nov 2026 08:47:00 +0000</pubDate>
-      <category>哲学与思想</category>
-      <source url="https://aisixiang.com">爱思想 · 最近更新</source>
-      <description>一、导言：作为帝国国内法的《威斯特伐利亚和约》 神圣罗马帝国皇帝费迪南三世及各帝国等级于1648年分别同法国、瑞典签署的《威斯特伐利亚和约》（以下简称《和约》）在欧洲历史上具有划时代的意义。作为对始于1517年宗教改革、基督教世界内部的长期教派纷争及其外溢即三十年战争的终战协定，《和约》不仅结束了欧洲大陆长达一个多世纪的武装冲突，而且据说开创了近代国际法的秩序观念，“包含诸多国际法概念，比如和平共处、主权国家平等......对国际法原则…</description>
-    </item>
-    <item>
-      <title>华阳股份：于家庄煤矿取得采矿许可证及不动产权证书，探转采完成</title>
-      <link>https://news.10jqka.com.cn/20261108/c681581853.shtml</link>
-      <guid isPermaLink="true">https://news.10jqka.com.cn/20261108/c681581853.shtml</guid>
-      <pubDate>Sun, 08 Nov 2026 08:46:19 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
-      <description>华阳股份公告，公司此前于2024年8月竞得晋中市寿阳县于家庄区块煤炭探矿权，2025年6月取得勘查许可证，2026年3月完成勘探报告评审备案。近日公司收到山西省自然资源厅颁发的于家庄煤矿采矿许可证及不动产权证书（采矿权），证载矿区面积73.17平方公里，有效期限2026年11月05日至2056年11月05日，标志该探矿权正式完成探转采，采矿权确权登记落地。</description>
-    </item>
-    <item>
-      <title>合议庭的逻辑：司法审判组织运作的法政治学考察</title>
-      <link>https://www.aisixiang.com/data/185293.html</link>
-      <guid isPermaLink="true">https://www.aisixiang.com/data/185293.html</guid>
-      <pubDate>Sun, 08 Nov 2026 08:46:00 +0000</pubDate>
-      <category>哲学与思想</category>
-      <source url="https://aisixiang.com">爱思想 · 最近更新</source>
-      <description>【摘要】 本文从法政治学出发，考察合议庭的组织逻辑。合议庭是法院的基本审判组织，谁进入合议庭、各占几席，看似只是程序安排，实则关乎国家权力与公民参与在司法场域中的相遇。本文考察《人民陪审员法》颁行当年三万余件一审行政诉讼案件中，案件疑难类型如何影响合议庭组织策略。研究发现，陪审员参审与否，与案件整体复杂疑难程度有关。在陪审员参审的情况下，合议庭组织具有明显的策略性。法律疑难案件倾向于法官占多数，倚重法律专业知识。社会疑难案件则相反，陪审…</description>
-    </item>
-    <item>
-      <title>九方智投控股于11月6日斥资232.75万港元回购9.59万股</title>
-      <link>https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-08/doc-inixzhuw3761056.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-08/doc-inixzhuw3761056.shtml</guid>
-      <pubDate>Sun, 08 Nov 2026 08:44:40 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>热点栏目 自选股 数据中心 行情中心 资金流向 模拟交易 客户端 九方智投控股（09636）发布公告，于2026年11月6日，该公司斥资232.75万港元回购9.59万股股份，每股回购价23.96-24.38港元。 .appendQr_wrap{border:1px solid #E6E6E6;padding:8px;} .appendQr_normal{float:left;} .appendQr_normal img{width:1…</description>
-    </item>
-    <item>
-      <title>【电报解读】2026年我国能源投资总额或达9400亿美元，机构称光伏单月装机同比连续转正，行业正由“规模红利”转向“收益红利”，这家公司与光伏头部组件企业建立了长期稳定的合作伙伴关系</title>
-      <link>https://www.cls.cn/detail/2528263</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2528263</guid>
-      <pubDate>Sun, 08 Nov 2026 08:44:27 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-    </item>
-    <item>
-      <title>奈雪的茶于11月6日斥资约19.12万港元回购27万股</title>
-      <link>https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-08/doc-inixzhuy7301167.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-08/doc-inixzhuy7301167.shtml</guid>
-      <pubDate>Sun, 08 Nov 2026 08:43:46 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>热点栏目 自选股 数据中心 行情中心 资金流向 模拟交易 客户端 奈雪的茶 （02150）发布公告，于2026年11月6日该公司斥资约19.12万港元回购27万股，回购价格为每股0.695至0.71港元。 .appendQr_wrap{border:1px solid #E6E6E6;padding:8px;} .appendQr_normal{float:left;} .appendQr_normal img{width:100px;…</description>
-    </item>
-    <item>
-      <title>风范股份：河北产融集团将间接控制公司30.08%股份</title>
-      <link>https://news.10jqka.com.cn/20261108/c681581838.shtml</link>
-      <guid isPermaLink="true">https://news.10jqka.com.cn/20261108/c681581838.shtml</guid>
-      <pubDate>Sun, 08 Nov 2026 08:42:52 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
-      <description>风范股份公告称，唐山市国资委将其持有的唐控发展集团98.47802%国有股权无偿划转至河北国信产融控股集团有限公司，本次无偿划转完成后，河北产融集团将通过唐控发展集团、天津产融控股及唐山工控间接控制公司30.08%股份。本次无偿划转已获唐山市人民政府批复，相关划转协议已签署，尚需履行后续相关程序。</description>
-    </item>
-    <item>
-      <title>兴业控股：绿金租赁前三季度净利润7258.32万元 同比减少9.12%</title>
-      <link>https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-08/doc-inixzhuu7111780.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-08/doc-inixzhuu7111780.shtml</guid>
-      <pubDate>Sun, 08 Nov 2026 08:42:35 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>热点栏目 自选股 数据中心 行情中心 资金流向 模拟交易 客户端 兴业控股 （00132）发布公告，绿金租赁截至2026年9月30日止9个月取得营业收入2.8亿元，同比减少1.89%；净利润7258.32万元，同比减少9.12%。 .appendQr_wrap{border:1px solid #E6E6E6;padding:8px;} .appendQr_normal{float:left;} .appendQr_normal img…</description>
-    </item>
-    <item>
-      <title>瀚天天成于11月6日斥资592.93万港元回购7.73万股</title>
-      <link>https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-08/doc-inixzhuw3759562.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-08/doc-inixzhuw3759562.shtml</guid>
-      <pubDate>Sun, 08 Nov 2026 08:41:47 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>热点栏目 自选股 数据中心 行情中心 资金流向 模拟交易 客户端 瀚天天成（02726）发布公告，该公司于2026年11月6日斥资592.93万港元回购7.73万股股份，每股回购价格为73.4-78港元。 .appendQr_wrap{border:1px solid #E6E6E6;padding:8px;} .appendQr_normal{float:left;} .appendQr_normal img{width:100px;…</description>
-    </item>
-    <item>
-      <title>阿联酋海岸警卫队称从阿曼湾一起火货船上救出22人</title>
-      <link>https://www.cls.cn/detail/2528275</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2528275</guid>
-      <pubDate>Sun, 08 Nov 2026 08:41:41 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-      <description>【阿联酋海岸警卫队称从阿曼湾一起火货船上救出22人】财联社11月8日电，阿联酋海岸警卫队当天宣布从阿曼湾一艘发生火灾的货船上救出全部22名船员，获救人员身体状况稳定。消息称，阿联酋海岸警卫队接到船员关于发生火灾的报告后，立即派出专业救援队伍展开行动。获救人员均来自阿拉伯国家。救援人员在提供必要的急救措施后，已将他们移交给有关部门。起火原因及船只受损情况尚未公布。</description>
-    </item>
-    <item>
-      <title>第一拖拉机股份于11月6日斥资62.48万港元回购7.8万股</title>
-      <link>https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-08/doc-inixzhva4075796.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-08/doc-inixzhva4075796.shtml</guid>
-      <pubDate>Sun, 08 Nov 2026 08:41:08 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>热点栏目 自选股 数据中心 行情中心 资金流向 模拟交易 客户端 第一拖拉机股份 （00038）发布公告，于2026年11月6日，该公司斥资62.48万港元回购7.8万股股份，每股回购价7.91-8.14港元。 .appendQr_wrap{border:1px solid #E6E6E6;padding:8px;} .appendQr_normal{float:left;} .appendQr_normal img{width:100…</description>
-    </item>
-    <item>
-      <title>越秀地产前10个月累计合同销售额约802.25亿元</title>
-      <link>https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-08/doc-inixzhuw3758969.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-08/doc-inixzhuw3758969.shtml</guid>
-      <pubDate>Sun, 08 Nov 2026 08:40:31 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>热点栏目 自选股 数据中心 行情中心 资金流向 模拟交易 客户端 越秀地产 （00123）公布，2026年10月，公司实现合同销售（连同合营企业及联营公司项目的合同销售）金额约为人民币122.07亿元，同比下降约0.7%，实现合同销售面积约为34.25万平方米，同比上升约 25.7%。 1-10月，公司累计合同销售（连同合营企业及联营公司项目的合同销售）金额约为人民币802.25亿元，同比下降约12.9%，累计合同销售面积约为 252.…</description>
-    </item>
-    <item>
-      <title>天伦燃气于11月6日耗资约50.28万港元回购35.45万股</title>
-      <link>https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-08/doc-inixzhuw3758578.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-08/doc-inixzhuw3758578.shtml</guid>
-      <pubDate>Sun, 08 Nov 2026 08:39:32 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>热点栏目 自选股 数据中心 行情中心 资金流向 模拟交易 客户端 天伦燃气 （01600）公布，2026年11月6日耗资约50.28万港元回购35.45万股股份。 .appendQr_wrap{border:1px solid #E6E6E6;padding:8px;} .appendQr_normal{float:left;} .appendQr_normal img{width:100px;} .appendQr_normal_tx…</description>
-    </item>
-    <item>
-      <title>海天味业于11月6日斥资722.95万港元回购27.5万股</title>
-      <link>https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-08/doc-inixzhuu7110107.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-08/doc-inixzhuu7110107.shtml</guid>
-      <pubDate>Sun, 08 Nov 2026 08:38:46 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>热点栏目 自选股 数据中心 行情中心 资金流向 模拟交易 客户端 海天味业（03288）发布公告，该公司于2026年11月6日斥资722.95万港元回购27.5万股股份，每股回购26.14-26.42港元；及斥资1075.07万元人民币回购30万股A股，每股回购价格为35.74-35.98元人民币。 .appendQr_wrap{border:1px solid #E6E6E6;padding:8px;} .appendQr_norma…</description>
-    </item>
-    <item>
-      <title>广汽集团10月汽车销量为14.37万辆</title>
-      <link>https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-08/doc-inixzhva4074376.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-08/doc-inixzhva4074376.shtml</guid>
-      <pubDate>Sun, 08 Nov 2026 08:37:54 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>热点栏目 自选股 数据中心 行情中心 资金流向 模拟交易 客户端 广汽集团 （02238）发布公告，广州汽车集团股份有限公司（本公司） 2026年10月汽车产量为15.41万辆，本年累计产量为131.7万辆；2026年10月汽车销量为14.37万辆，本年累计销量为128.49万辆。 .appendQr_wrap{border:1px solid #E6E6E6;padding:8px;} .appendQr_normal{float:l…</description>
-    </item>
-    <item>
-      <title>沙特主导的多国联军发言人图尔基·马利基：拦截并击落了一架由胡塞武装向南部地区发射的无人机。</title>
-      <link>https://flash.jin10.com/detail/20261108163543599800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261108163543599800</guid>
-      <pubDate>Sun, 08 Nov 2026 08:35:43 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-    </item>
-    <item>
-      <title>财联社11月8日电，沙特领导的联盟表示在南部地区拦截了一架无人机。</title>
-      <link>https://www.cls.cn/detail/2528274</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2528274</guid>
-      <pubDate>Sun, 08 Nov 2026 08:34:37 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-    </item>
-    <item>
-      <title>内塔尼亚胡指责埃森科特 以色列正直党发声明回击 | 据央视新闻，以色列总统发言人7日晚发表声明说，总统赫尔佐格将授权正直党领导人、以色列国防军前总参...</title>
-      <link>https://www.yicai.com/brief/103431265.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/brief/103431265.html</guid>
-      <pubDate>Sun, 08 Nov 2026 08:32:56 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://yicai.com">第一财经 · 简报</source>
-      <description>据央视新闻，以色列总统发言人7日晚发表声明说，总统赫尔佐格将授权正直党领导人、以色列国防军前总参谋长加迪·埃森科特组建新政府。围绕政府组建问题，以色列现任总理、领导利库德集团的内塔尼亚胡7日发表视频讲话，指责正直党领导人埃森科特。正直党方面当天则针对内塔尼亚胡的讲话，予以回击。</description>
-    </item>
-    <item>
-      <title>深圳华强北：显卡价格降了 外国人涌入华强北抢购显卡</title>
-      <link>https://news.10jqka.com.cn/20261108/c681581809.shtml</link>
-      <guid isPermaLink="true">https://news.10jqka.com.cn/20261108/c681581809.shtml</guid>
-      <pubDate>Sun, 08 Nov 2026 08:32:40 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
-      <description>近期，在深圳华强北，主流型号显卡的价格自10月中旬起出现大幅上涨，进入11月后又明显回落。主流显卡RTX 50系列在连涨11个交易日后，自10月28日起掉头向下。截至目前，RTX 5080最低价回落至1.6万元，较10月下旬约2万元的峰值回调约两成。有商户表示，代理商和商户提前预备囤货，导致价格大幅波动，甚至早上跟下午都不是一个价。尽管价格有所回落，但目前主流显卡RTX 50系列均价仍是建议零售价的1.7倍，之前较大的价格涨幅仍未消化。…</description>
-    </item>
-    <item>
-      <title>巨星农牧：10月商品肥猪销量27.77万头 同比下降39.28%</title>
-      <link>https://www.yicai.com/news/103431263.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/news/103431263.html</guid>
-      <pubDate>Sun, 08 Nov 2026 08:32:18 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://yicai.com">第一财经 · 最新</source>
-      <description>巨星农牧公告，公司2026年10月商品肥猪销售量27.77万头，同比下降39.28%；销售收入3.92亿元，销价10.11元/公斤。</description>
-    </item>
-    <item>
-      <title>巨星农牧：10月商品肥猪销量27.77万头 同比下降39.28% | 巨星农牧公告，公司2026年10月商品肥猪销售量27.77万头，同比下降39.28%；销售收入3.92亿元，销...</title>
-      <link>https://www.yicai.com/brief/103431262.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/brief/103431262.html</guid>
-      <pubDate>Sun, 08 Nov 2026 08:32:16 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://yicai.com">第一财经 · 简报</source>
-      <description>巨星农牧公告，公司2026年10月商品肥猪销售量27.77万头，同比下降39.28%；销售收入3.92亿元，销价10.11元/公斤。</description>
-    </item>
-    <item>
-      <title>百合股份：董事王文通未减持公司股份并提前终止减持计划</title>
-      <link>https://www.yicai.com/news/103431261.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/news/103431261.html</guid>
-      <pubDate>Sun, 08 Nov 2026 08:32:01 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://yicai.com">第一财经 · 最新</source>
-      <description>百合股份公告，公司董事、副总经理王文通决定提前终止减持股份计划。此次减持计划实施期间，王文通未减持所持公司股份。此前，王文通拟通过集中竞价交易方式，减持公司股份不超过31.84万股，即不超过公司总股本的0.5%。</description>
-    </item>
-    <item>
-      <title>百合股份：董事王文通未减持公司股份并提前终止减持计划 | 百合股份公告，公司董事、副总经理王文通决定提前终止减持股份计划。此次减持计划实施期间，王...</title>
-      <link>https://www.yicai.com/brief/103431260.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/brief/103431260.html</guid>
-      <pubDate>Sun, 08 Nov 2026 08:32:00 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://yicai.com">第一财经 · 简报</source>
-      <description>百合股份公告，公司董事、副总经理王文通决定提前终止减持股份计划。此次减持计划实施期间，王文通未减持所持公司股份。此前，王文通拟通过集中竞价交易方式，减持公司股份不超过31.84万股，即不超过公司总股本的0.5%。</description>
-    </item>
-    <item>
-      <title>酷哇科技计划明年发布社区机器狗 ，进军零售配送场景</title>
-      <link>https://news.10jqka.com.cn/20261108/c681581806.shtml</link>
-      <guid isPermaLink="true">https://news.10jqka.com.cn/20261108/c681581806.shtml</guid>
-      <pubDate>Sun, 08 Nov 2026 08:31:54 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
-      <description>城市具身智能全栈方案商酷哇科技首次亮相第九届进博会，展示了D0重载四足机器人与X1独角兽城市作业服务机器人，二者共享同一套端侧世界模型。其将自研双层智能体世界模型与城市服务场景结合，通过“一脑多态”架构驱动不同形态的机器人本体，推动具身智能进入市政环卫、末端配送等真实作业场景。记者获悉，在零售配送场景，酷哇科技还布局了社区配送机器狗D2，计划于2027年正式发布。（21世纪经济报道）</description>
-    </item>
-    <item>
-      <title>中国光谷2026年上半年地区生产总值达1893.57亿元</title>
-      <link>https://news.10jqka.com.cn/20261108/c681581805.shtml</link>
-      <guid isPermaLink="true">https://news.10jqka.com.cn/20261108/c681581805.shtml</guid>
-      <pubDate>Sun, 08 Nov 2026 08:31:47 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
-      <description>在上海举办的2026伟事达中国CEO峰会上，武汉东湖高新区（中国光谷）投资促进局相关负责人介绍，2025年东湖高新区地区生产总值3360亿元、同比增长6.3%；规上工业总产值突破4000亿元、位居武汉市第一。2026年上半年地区生产总值达1893.57亿元，同比增长14%。目前，光谷光电子信息产业规模达6600亿元，生命健康产业规模突破2200亿元，集聚高新技术企业6014家、上市企业72家。该负责人表示，光谷正依托科创资源，围绕光电子…</description>
-    </item>
-    <item>
-      <title>成都新一波消费券来了</title>
-      <link>https://www.cls.cn/detail/2528272</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2528272</guid>
-      <pubDate>Sun, 08 Nov 2026 08:30:13 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-      <description>【成都新一波消费券来了】财联社11月8日电，成都东部新区发布2026秋冬惠民消费券，2026年11月9日至2027年1月3日每日9:00-21:00均可领取。成都高新区2026年第四轮汽车消费补贴活动申请通道已开启。消费券面向成都市内消费者（系指抢券时手机GPS定位在成都市地域范围内的人员，下同）发放，用于领券者本人在成都东部新区内指定商户使用。</description>
-    </item>
-    <item>
-      <title>外交部部长助理蔡伟会见联合国日内瓦办事处总干事瓦罗瓦娅</title>
-      <link>https://news.10jqka.com.cn/20261108/c681581802.shtml</link>
-      <guid isPermaLink="true">https://news.10jqka.com.cn/20261108/c681581802.shtml</guid>
-      <pubDate>Sun, 08 Nov 2026 08:29:31 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
-      <description>2026年11月7日，外交部部长助理蔡伟会见来华访问的联合国日内瓦办事处总干事瓦罗瓦娅。(外交部网站)</description>
-    </item>
-    <item>
-      <title>日本大阪发生持刀伤人事件</title>
-      <link>https://news.10jqka.com.cn/20261108/c681581800.shtml</link>
-      <guid isPermaLink="true">https://news.10jqka.com.cn/20261108/c681581800.shtml</guid>
-      <pubDate>Sun, 08 Nov 2026 08:29:25 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
-      <description>据日本共同社8日报道，日本大阪府当天发生一起持刀伤人事件，造成1人受伤。报道说，事发于当地时间8日11时15分左右，地点是位于大阪市北区繁华商业区的一家书店，周边人流密集。一名男性店员在工作时，突然被人从背后持刀刺伤大腿。伤者随后被紧急送往医院救治，暂无生命危险。警方以涉嫌伤害罪，当场逮捕一名男性嫌疑人。据大阪府警方消息，嫌疑人与受害者并不相识，供述称“对整个社会怀有怨恨”。警方正在调查案件详细经过。(新华社)</description>
-    </item>
-    <item>
-      <title>合”你一起跑 未来“徽”更好——2026徽商银行合肥马拉松顺利收官</title>
-      <link>https://www.yicai.com/news/103431256.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/news/103431256.html</guid>
-      <pubDate>Sun, 08 Nov 2026 08:29:12 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://yicai.com">第一财经 · 最新</source>
-      <description>11月8日7：30，合肥骆岗公园人潮涌动、气氛热烈。徽商银行总冠名的2026合肥马拉松在骆岗公园鸣枪起跑。徽商银行行长孔庆龙，徽商银行合肥分行主要负责人出席开赛仪式。仪式上，徽商银行行长孔庆龙代表徽商银行与各位嘉宾共同为赛事鸣枪发令。3万名跑者迈开步伐，在奔跑中挑战自我，在赛道上感受合肥的城市活力。 本届赛事设置马拉松、半程马拉松两个项目。选手从骆岗公园出发，途经安徽省科技馆、渡江战役纪念馆、滨湖国家森林公园等城市地标，最终抵达融创乐园…</description>
-    </item>
-    <item>
-      <title>深南电路：控股股东提议2026年度现金分红总额不低于当年归母净利润35%</title>
-      <link>https://wallstreetcn.com/livenews/3196466</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196466</guid>
-      <pubDate>Sun, 08 Nov 2026 08:28:24 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · A 股快讯</source>
-      <description>深南电路公告，控股股东深天科技控股建议公司在符合利润分配条件、未发生超出既定计划的重大投资或重大现金支出需求，且不影响公司持续经营和长期发展的前提下，公司2026 年度现金分红总额（包括可视同现金分红的回购股份金额等）不低于当年归属于上市公司股东的净利润的 35%。具体利润分配方案将由公司结合自身经营情况并按照《公司章程》等规定履行审议程序后确定。</description>
-    </item>
-    <item>
-      <title>内塔尼亚胡指责埃森科特 以色列正直党发声明回击</title>
-      <link>https://news.10jqka.com.cn/20261108/c681581780.shtml</link>
-      <guid isPermaLink="true">https://news.10jqka.com.cn/20261108/c681581780.shtml</guid>
-      <pubDate>Sun, 08 Nov 2026 08:24:38 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
-      <description>以色列总统发言人7日晚发表声明称，总统赫尔佐格将授权正直党领导人、以军前总参谋长加迪·埃森科特组建新政府。内塔尼亚胡7日在讲话中指责埃森科特，称其组建的政府将从内部摧毁以色列，不会消除伊朗威胁、不会打击哈马斯，呼吁反对派与利库德集团组建“民族团结政府”。正直党随后声明反驳，称内塔尼亚胡是“分裂以色列社会的人”，埃森科特政府将只涵盖认同该党原则的政党和议员，包括认定哈马斯为“恐怖组织”并瓦解其军事和执政能力。（央视新闻）</description>
-    </item>
-    <item>
-      <title>从田间到展馆：美国豆农自发参加进博会背后的“算盘”</title>
-      <link>https://www.yicai.com/news/103431230.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/news/103431230.html</guid>
-      <pubDate>Sun, 08 Nov 2026 08:21:51 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://yicai.com">第一财经 · 最新</source>
-      <description>美国大豆基金会主席白瑞恩（Brent Gatton）、美国大豆出口协会主席麦可瑞（Mike McCranie）、美国印第安纳州大豆联盟董事克里斯托弗·埃克（Christopher Eck）以及伊利诺伊州大豆协会董事会成员兼副主席布雷迪·霍尔斯特（Brady Holst）第一次来到中国国际进口博览会（下称“进博会”）。 除了美国农产品贸易代表团成员的身份，他们身上还有一层更贴近土地的底色：他们世世代代都是农民，在美国的土地上种着玉米、大豆…</description>
-    </item>
-    <item>
-      <title>我国新一代光刻机模型亮相</title>
-      <link>https://wallstreetcn.com/livenews/3196465</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196465</guid>
-      <pubDate>Sun, 08 Nov 2026 08:16:21 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
-      <description>11月5日至10日，第九届中国国际进口博览会在上海举行。会上，一系列重磅科技亮相。上海微电子装备集团携自主研发的新一代前道干式扫描投影光刻机SSC800、SSB800（模型）亮相中国馆，展示我国前道光刻装备自主化的阶段性成果。据悉，目前国产前道干式光刻机成像性能已与国际同类领先产品水平相当，套刻精度、生产效率紧密追赶国际标杆。（上证报）</description>
-    </item>
-    <item>
-      <title>重大突破！我国新一代光刻机模型亮相</title>
-      <link>https://wallstreetcn.com/articles/3785483</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/articles/3785483</guid>
-      <pubDate>Sun, 08 Nov 2026 08:14:33 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
-      <description>11月5日至10日，第九届中国国际进口博览会在上海举行。会上，一系列重磅科技亮相。 上海微电子装备集团（简称“SMEE”）携自主研发的新一代前道干式扫描投影光刻机SSC800、SSB800（模型）亮相中国馆，展示我国前道光刻装备自主化的阶段性成果。 上证报记者 宋薇萍 摄 SMEE表示，本次展出的模型采用透明剖视设计，直观呈现整机光学光路与内部机电系统的链路布局。该平台为国产标准化前道光刻装备架构，适配I-line、KrF两类主流技术路…</description>
-    </item>
-    <item>
-      <title>韶能股份：拟1257万元投建运营智能集控中心建设项目二期</title>
-      <link>https://www.yicai.com/news/103431242.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/news/103431242.html</guid>
-      <pubDate>Sun, 08 Nov 2026 08:13:09 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://yicai.com">第一财经 · 最新</source>
-      <description>韶能股份公告，公司拟投资建设运营智能集控中心建设项目，项目计划分三期实施，全部建成后覆盖公司水电、生物质能发电、光伏等能源领域及能源管理系统。项目估算总投资4848.86万元，其中一期工程已完成建设并投入运行。近期公司拟实施二期工程，投资额1257万元。二期工程预计在2026年12月底投产，三期工程待定。</description>
-    </item>
-    <item>
-      <title>韶能股份：拟1257万元投建运营智能集控中心建设项目二期 | 韶能股份公告，公司拟投资建设运营智能集控中心建设项目，项目计划分三期实施，全部建成后覆盖...</title>
-      <link>https://www.yicai.com/brief/103431241.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/brief/103431241.html</guid>
-      <pubDate>Sun, 08 Nov 2026 08:13:08 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://yicai.com">第一财经 · 简报</source>
-      <description>韶能股份公告，公司拟投资建设运营智能集控中心建设项目，项目计划分三期实施，全部建成后覆盖公司水电、生物质能发电、光伏等能源领域及能源管理系统。项目估算总投资4848.86万元，其中一期工程已完成建设并投入运行。近期公司拟实施二期工程，投资额1257万元。二期工程预计在2026年12月底投产，三期工程待定。</description>
-    </item>
-    <item>
-      <title>上交所：沪市上市公司总市值超65万亿元 | 据央视新闻，上交所发布的最新数据显示，截至目前，沪市合计上市公司超2300家，总市值超65万亿元。其中，A股市...</title>
-      <link>https://www.yicai.com/brief/103431239.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/brief/103431239.html</guid>
-      <pubDate>Sun, 08 Nov 2026 08:10:11 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://yicai.com">第一财经 · 简报</source>
-      <description>据央视新闻，上交所发布的最新数据显示，截至目前，沪市合计上市公司超2300家，总市值超65万亿元。其中，A股市值超千亿的头部上市公司近百家，合计市值超34.8万亿元。沪市头部公司中，科技制造企业在人工智能、集成电路、先进制造等领域加快成长，成为资本市场高质量发展的重要力量。</description>
-    </item>
-    <item>
-      <title>扎波罗热核电站再次失去外部供电</title>
-      <link>https://www.yicai.com/news/103431237.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/news/103431237.html</guid>
-      <pubDate>Sun, 08 Nov 2026 08:09:26 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://yicai.com">第一财经 · 最新</source>
-      <description>据央视新闻，由俄方控制的扎波罗热核电站11月8日通过其官方社交账号通报，为核电站提供外部供电的330千伏“铁合金-1”线路，因受损触发保护装置断开。核电站已启用备用柴油发电机供电。工作人员正在监控参数并全面采取安全措施。目前，扎波罗热核电站厂区及观测区辐射水平正常。</description>
-    </item>
-    <item>
-      <title>扎波罗热核电站再次失去外部供电 | 据央视新闻，由俄方控制的扎波罗热核电站11月8日通过其官方社交账号通报，为核电站提供外部供电的330千伏“铁合金-1”...</title>
-      <link>https://www.yicai.com/brief/103431236.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/brief/103431236.html</guid>
-      <pubDate>Sun, 08 Nov 2026 08:09:24 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://yicai.com">第一财经 · 简报</source>
-      <description>据央视新闻，由俄方控制的扎波罗热核电站11月8日通过其官方社交账号通报，为核电站提供外部供电的330千伏“铁合金-1”线路，因受损触发保护装置断开。核电站已启用备用柴油发电机供电。工作人员正在监控参数并全面采取安全措施。目前，扎波罗热核电站厂区及观测区辐射水平正常。</description>
-    </item>
-    <item>
-      <title>上交所：沪市上市公司总市值超65万亿元</title>
-      <link>https://www.cls.cn/detail/2528266</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2528266</guid>
-      <pubDate>Sun, 08 Nov 2026 08:08:28 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-      <description>【上交所：沪市上市公司总市值超65万亿元】财联社11月8日电，上交所发布的最新数据显示，截至目前，沪市合计上市公司超2300家，总市值超65万亿元。其中，A股市值超千亿的头部上市公司近百家，合计市值超34.8万亿元。沪市头部公司中，科技制造企业在人工智能、集成电路、先进制造等领域加快成长，成为资本市场高质量发展的重要力量。 (央视新闻)</description>
-    </item>
-    <item>
-      <title>未来两年“战斗到底”还是“极限谈判”？白宫人事频繁更迭，“坡脚”特朗普摆出“强硬姿态”</title>
-      <link>https://wallstreetcn.com/articles/3785481</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/articles/3785481</guid>
-      <pubDate>Sun, 08 Nov 2026 08:08:00 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
-      <description>共和党在中期选举中遭遇历史性惨败后，特朗普非但没有向选民释放的不满信号妥协，反而在一周之内完成了一轮强硬色彩鲜明的人事洗牌——以强硬派干将Stephen Miller取代Susie Wiles出任白宫幕僚长，并公开邀请UFC总裁Dana White担任新闻秘书。这一系列动作，向外界传递出一个清晰信号：在剩余两年任期内，特朗普摆出“强硬姿态”。 Miller的晋升被多名前特朗普政府官员和共和党人士解读为一次对民主党的“宣战”。 前白宫幕僚…</description>
-    </item>
-    <item>
-      <title>【风口研报·行业】美国本土AI资本开支放缓不影响国内半导体产业化加速，龙头企业订单增长二阶导有望持续向上，形成跨年度的增长接续；全球鱼油价格较低位上涨167%，这家公司10万吨替代油脂释放在即</title>
-      <link>https://www.cls.cn/detail/2528237</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2528237</guid>
-      <pubDate>Sun, 08 Nov 2026 08:07:17 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-    </item>
-    <item>
-      <title>天安新材：拟2.5亿元收购嘉万光62.5%股权 完善新经济产业投资布局</title>
-      <link>https://www.yicai.com/news/103431234.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/news/103431234.html</guid>
-      <pubDate>Sun, 08 Nov 2026 08:01:45 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://yicai.com">第一财经 · 最新</source>
-      <description>天安新材公告，公司筹划以增资及股权转让的方式，收购深圳市嘉万光通信有限公司（简称“嘉万光”）62.5%股权。以嘉万光100%股权的整体估值4亿元为基础作价，此次交易金额合计2.5亿元，交易完成后，嘉万光将成为公司控股子公司。天安新材称，公司目前主营业务为高分子复合饰面材料、建筑陶瓷和整装交付服务，近年来，公司在保证主业稳定发展的前提下，积极寻找转型方向。嘉万光主要从事无源光器件产品及电信光缆、机箱等产品的研发、生产与销售。此次收购有利于…</description>
-    </item>
-    <item>
-      <title>天安新材：拟2.5亿元收购嘉万光62.5%股权 完善新经济产业投资布局 | 天安新材公告，公司筹划以增资及股权转让的方式，收购深圳市嘉万光通信有限公司（简...</title>
-      <link>https://www.yicai.com/brief/103431233.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/brief/103431233.html</guid>
-      <pubDate>Sun, 08 Nov 2026 08:01:43 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://yicai.com">第一财经 · 简报</source>
-      <description>天安新材公告，公司筹划以增资及股权转让的方式，收购深圳市嘉万光通信有限公司（简称“嘉万光”）62.5%股权。以嘉万光100%股权的整体估值4亿元为基础作价，此次交易金额合计2.5亿元，交易完成后，嘉万光将成为公司控股子公司。天安新材称，公司目前主营业务为高分子复合饰面材料、建筑陶瓷和整装交付服务，近年来，公司在保证主业稳定发展的前提下，积极寻找转型方向。嘉万光主要从事无源光器件产品及电信光缆、机箱等产品的研发、生产与销售。此次收购有利于…</description>
-    </item>
-    <item>
-      <title>上纬新材：消费级具身智能机器人产品“启元Q1”和“启元T1”下线1万台</title>
-      <link>https://www.yicai.com/news/103431232.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/news/103431232.html</guid>
-      <pubDate>Sun, 08 Nov 2026 08:01:26 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://yicai.com">第一财经 · 最新</source>
-      <description>上纬新材公告，于2026年9月20日正式对外发布消费级具身智能机器人产品“启元Q1”和“启元T1”。截至公告披露日，公司消费级具身智能机器人产能有序爬坡、良率表现良好，“启元Q1”和“启元T1”下线1万台。公司提示，该业务尚处初期阶段，存在产能爬坡、良率波动、市场推广不及预期等风险，目前营收占比低，尚不能预测对2026年度业绩影响。</description>
-    </item>
-    <item>
-      <title>上纬新材：消费级具身智能机器人产品“启元Q1”和“启元T1”下线1万台 | 上纬新材公告，于2026年9月20日正式对外发布消费级具身智能机器人产品“启元Q1”...</title>
-      <link>https://www.yicai.com/brief/103431231.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/brief/103431231.html</guid>
-      <pubDate>Sun, 08 Nov 2026 08:01:25 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://yicai.com">第一财经 · 简报</source>
-      <description>上纬新材公告，于2026年9月20日正式对外发布消费级具身智能机器人产品“启元Q1”和“启元T1”。截至公告披露日，公司消费级具身智能机器人产能有序爬坡、良率表现良好，“启元Q1”和“启元T1”下线1万台。公司提示，该业务尚处初期阶段，存在产能爬坡、良率波动、市场推广不及预期等风险，目前营收占比低，尚不能预测对2026年度业绩影响。</description>
-    </item>
-    <item>
-      <title>专访美中贸易全国委员会会长谭森：美企在华投资不再只为中国市场</title>
-      <link>https://www.yicai.com/news/103431197.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/news/103431197.html</guid>
-      <pubDate>Sun, 08 Nov 2026 08:01:05 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://yicai.com">第一财经 · 最新</source>
-      <description>关于中国国际进口博览会（下称“进博会”），有个容易被忽略的事实：尽管外部环境冷暖交织，在企业展中美国企业的参展面积是最大的。 据新华社报道，今年进博会美、德、英、法等国企业参展面积领跑，其中美国企业参展面积超过5万平方米，连续八届保持第一，较去年增加了1500平方米。 对此，美中贸易全国委员会（US-China Business Council）会长谭森（Sean Stein）在接受第一财经记者专访时解释道，进博会能够让企业在同一平台上…</description>
-    </item>
-    <item>
-      <title>健康优先如何落到“防未病”实处？医防融合求落地之问</title>
-      <link>https://www.yicai.com/news/103431214.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/news/103431214.html</guid>
-      <pubDate>Sun, 08 Nov 2026 08:00:38 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://yicai.com">第一财经 · 最新</source>
-      <description>健康优先的顶层设计已经明确，如何更好落地，则成为接下来的关键。 正在举行的第九届进博会期间，一场名为“从共识到共建：‘十五五’医防融合开新局”的论坛上，中华预防医学会副会长梁晓峰表示，“十五五”时期是我国迈向健康中国建设目标的关键阶段，坚持医防融合，系统推进乙肝等重点疾病的综合防治，健全成人预防接种服务与慢病管理体系，将成为推动公共卫生体系高质量发展、加快实现从“以治病为中心”向“以健康为中心”转变的重要支点。 在论坛上，多位专家提出，…</description>
-    </item>
-    <item>
-      <title>金陵药业：终止对常州四药制药有限公司投资意向</title>
-      <link>https://wallstreetcn.com/livenews/3196463</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196463</guid>
-      <pubDate>Sun, 08 Nov 2026 07:57:46 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · A 股快讯</source>
-      <description>金陵药业公告，自2026年4月13日向常州四药制药有限公司（以下简称“四药公司”）递交《投资意向函》以来，公司有序开展尽职调查、初步审计及资产评估、交易方案论证等工作，并与相关方就投资意向持续沟通、协商。近日，公司收到四药厂发出的《邀请函》，四药公司100%股权及四药厂部分土地、厂房资产拟以竞价方式出售。根据公司收到的《邀请函》及随函所附《竞价操作指引》等材料，结合前期已了解的情况，经审慎研究，公司决定不参加本次竞价活动，终止上述投资意…</description>
-    </item>
-    <item>
-      <title>巨星农牧：10月销售商品肥猪27.77万头，同比下降39.28%</title>
-      <link>https://wallstreetcn.com/livenews/3196462</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196462</guid>
-      <pubDate>Sun, 08 Nov 2026 07:51:15 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · A 股快讯</source>
-      <description>巨星农牧公告，10月商品肥猪销售收入3.92亿元，销售均价10.11元/公斤；1-10月累计销售商品肥猪347.96万头，累计销售收入47.69亿元。上述数据仅包含公司养殖业务的商品肥猪销售情况，未经审计。</description>
-    </item>
-    <item>
-      <title>深南电路：控股股东提议2026年度现金分红额不低于归母净利润35% | 深南电路公告，控股股东深天科技控股（深圳）有限公司建议，公司在符合利润分配条件、...</title>
-      <link>https://www.yicai.com/brief/103431228.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/brief/103431228.html</guid>
-      <pubDate>Sun, 08 Nov 2026 07:50:32 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://yicai.com">第一财经 · 简报</source>
-      <description>深南电路公告，控股股东深天科技控股（深圳）有限公司建议，公司在符合利润分配条件、未发生超出既定计划的重大投资或重大现金支出需求，且不影响公司持续经营和长期发展的前提下，公司2026年度现金分红总额（包括可视同现金分红的回购股份金额等）不低于当年归属于上市公司股东的净利润的35%。</description>
-    </item>
-    <item>
-      <title>长光华芯：董事长提议公司3000万元至6000万元回购股份 | 长光华芯公告，董事长闵大勇提议公司以3000万元至6000万元回购股份，用于股权激励、 员工持股...</title>
-      <link>https://www.yicai.com/brief/103431226.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/brief/103431226.html</guid>
-      <pubDate>Sun, 08 Nov 2026 07:50:14 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://yicai.com">第一财经 · 简报</source>
-      <description>长光华芯公告，董事长闵大勇提议公司以3000万元至6000万元回购股份，用于股权激励、 员工持股计划或减少公司注册资本。</description>
-    </item>
-    <item>
-      <title>长光华芯：公司董事长提议回购公司股份，回购股份的资金总额不低于人民币3,000万元（含），不超过人民币6,000万元（含</title>
-      <link>https://wallstreetcn.com/livenews/3196461</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196461</guid>
-      <pubDate>Sun, 08 Nov 2026 07:50:04 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · A 股快讯</source>
-      <description>长光华芯：公司董事长提议回购公司股份，回购股份的资金总额不低于人民币3,000万元（含），不超过人民币6,000万元（含），回购资金来源为自有资金和自筹资金。</description>
-    </item>
-    <item>
-      <title>和元生物：拟以集中竞价交易方式回购股份，资金总额不低于2500万元、不超过5000万元，价格上限9.00元/股，用于维护公司价值及股东权益</title>
-      <link>https://wallstreetcn.com/livenews/3196460</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196460</guid>
-      <pubDate>Sun, 08 Nov 2026 07:49:00 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · A 股快讯</source>
-      <description>和元生物公告，回购期限为自董事会审议通过本次回购方案之日起3个月内，预计回购277.78万股至555.56万股、占总股本0.43%至0.86%。 回购股份资金来源为公司自有资金和/或自筹资金（包括但不限于股票回购贷款），其中股票回购贷款资金公司已取得兴业银行股份有限公司上海分行出具的《贷款承诺函》，专项用于回购公司股份的贷款金额不超过人民币4,500万元，具体贷款事宜将以双方签订的贷款合同为准。</description>
-    </item>
-    <item>
-      <title>从预测市场到下一代交易所：400亿美元Kalshi明年冲刺IPO？</title>
-      <link>https://wallstreetcn.com/member/articles/3784927</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/member/articles/3784927</guid>
-      <pubDate>Sun, 08 Nov 2026 07:45:08 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
-      <description>近期，预测市场平台Kalshi完成G轮10亿美元融资，估值升至400亿美元，较今年5月F轮融资估值的220亿美元上涨约82%。随着估值迅速攀升，Kalshi已开始讨论IPO，最早或于2027年启动，但目前尚无明确上市时间表。 Kalshi成立于2018年，2021年获得美国商品期货交易委员会（CFTC）批准后正式运营，是美国首家受CFTC监管的事件合约交易所。其核心产品是围绕现实事件发行二元合约，用户可以交易某一事件是否发生，合约价格在…</description>
-    </item>
-    <item>
-      <title>英伟达大劫案！超7600万元AI芯片和硬件离奇失踪，嫌疑人尚未抓获</title>
-      <link>https://wallstreetcn.com/articles/3785482</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/articles/3785482</guid>
-      <pubDate>Sun, 08 Nov 2026 07:40:45 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
-      <description>据美国媒体6日报道，美国加利福尼亚州奥克兰市警方，目前正在调查一起涉及科技企业英伟达的货物被盗案件。 被盗物品为AI芯片和计算机硬件，价值高达1140万美元（约合7610万元人民币）。 分析人士表示，这可能是一起针对高科技企业精心策划的盗窃案。案情显示，一辆装载英伟达货物的卡车于今年8月29日从加州奥克兰出发，原定运往得克萨斯州沃思堡，提货流程符合原定安排，但卡车最终失联，受害人9月13日向警方报案。 警方追踪发现，卡车曾在途中多次停靠…</description>
-    </item>
-    <item>
-      <title>上纬新材：消费级具身智能机器人“启元Q1”“启元T1” 下线1万台</title>
-      <link>https://wallstreetcn.com/livenews/3196459</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196459</guid>
-      <pubDate>Sun, 08 Nov 2026 07:36:03 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
-      <description>上纬新材公告，2026年9月20日公司正式对外发布消费级具身智能机器人产品“启元Q1”和“启元T1”。截至公告披露日，公司消费级具身智能机器人产能有序爬坡、良率表现良好，“启元Q1”和“启元T1”下线10000台。公司营业收入主要来自新材料业务，消费级具身智能机器人实现营业收入占公司总营业收入比例较低，该业务目前仍处于规模化量产爬坡及商业化验证阶段，公司尚不能预测该业务对2026年度营收及盈利的影响情况。</description>
-    </item>
-    <item>
-      <title>沙特称拦截多枚导弹，利雅得市区传出多声巨响</title>
-      <link>https://wallstreetcn.com/livenews/3196457</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196457</guid>
-      <pubDate>Sun, 08 Nov 2026 07:31:04 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
-      <description>当地时间11月8日上午，沙特民防部门向首都利雅得发布潜在危险预警，随后利雅得市区传出多声巨响。民防部门此后宣布危险解除。当天，以沙特为首的多国联军发言人图尔基·马利基表示，防空部队拦截并摧毁了两枚由也门胡塞武装向利雅得发射的弹道导弹。随后，联军又宣布，在利雅得地区和沙特南部地区拦截并摧毁两枚巡航导弹。</description>
-    </item>
-    <item>
-      <title>美发布月球基地建设与核动力月球车发射新规划</title>
-      <link>https://wallstreetcn.com/livenews/3196456</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196456</guid>
-      <pubDate>Sun, 08 Nov 2026 07:20:48 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
-      <description>美国航空航天局7日宣布，已选定8家公司参与新一轮“月球商业运载服务计划”，并推进一款核动力月球车的研制，以助力月球基地建设。美国航空航天局当天在佛罗里达州肯尼迪航天中心举行的航空航天展会上发布了为期10年的新一轮“月球商业运载服务计划”合同框架，选定美国蓝色起源公司等8家公司参与美国航空航天局月球表面货物运送任务竞标，负责将科学载荷、技术设备及基础设施运送至月球表面。</description>
-    </item>
-    <item>
-      <title>为未来两年“激烈斗争”做准备！特朗普邀请“格斗联盟”UFC总裁出任白宫发言人</title>
-      <link>https://wallstreetcn.com/articles/3785475</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/articles/3785475</guid>
-      <pubDate>Sun, 08 Nov 2026 07:20:41 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
-      <description>特朗普正在为一场更具对抗性的政治战做准备。在白宫新闻秘书一职连续出现人事动荡之后，他将目光投向了一个出人意料的人选——UFC终极格斗冠军赛总裁达纳·怀特（Dana White）。 据 新华社 报道，美国总统特朗普7日在社交媒体上发文说，他已邀请美国终极格斗冠军赛总裁达纳·怀特担任白宫新闻秘书一职。特朗普说，达纳·怀特将会是一名“与众不同”的新闻秘书。美媒报道说，目前尚不清楚达纳·怀特是否接受了特朗普的邀请。 据媒体报道，特朗普周六在帖文…</description>
-    </item>
-    <item>
-      <title>共和党中选大败，币圈“好事到头”了？</title>
-      <link>https://wallstreetcn.com/articles/3785476</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/articles/3785476</guid>
-      <pubDate>Sun, 08 Nov 2026 07:17:01 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
-      <description>加密货币行业在华盛顿享受了两年的政治红利，如今随着民主党横扫国会中期选举，这一局面戛然而止。 据彭博11月7日报道，民主党赢得国会控制权后，加密行业将面临更严苛的立法条件、更密集的国会调查，以及对特朗普家族加密利益的深度审查。行业此前押注共和党换来的政策红利，正面临被重新定价的风险。 这一转折来得并不突然。今年9月，参议院未能推进《清晰法案》（Clarity Act）——这项本可为交易所和数字资产企业确立监管框架的立法，因特朗普的加密利…</description>
-    </item>
-    <item>
-      <title>历代诗歌鉴赏论浅谈</title>
-      <link>https://www.aisixiang.com/data/185302.html</link>
-      <guid isPermaLink="true">https://www.aisixiang.com/data/185302.html</guid>
-      <pubDate>Sun, 08 Nov 2026 07:15:00 +0000</pubDate>
-      <category>哲学与思想</category>
-      <source url="https://aisixiang.com">爱思想 · 最近更新</source>
-      <description>古代用专论来谈诗歌鉴赏，谈得比较全面的，当推刘勰《文心雕龙》的《知音》篇。他说： “观文者披文以入情，沿波讨源，虽幽必显。”“披文入情”，从阅读文辞进入作者的思想感情，这就是鉴赏。那又怎样“沿波讨源”呢？他称“将阅文情，先标六观”（六观说见下），也就是从文辞到事义，到音律，到奇正、通变，到风格，都要探讨。这样，鉴赏论就牵涉到好多方面，像音律、通变、风格都属于诗论的范围。不过诗论主要只谈创作，鉴赏主要谈鉴赏，各有侧重。那么谈到古代的诗歌鉴…</description>
-    </item>
-    <item>
-      <title>怎样提高对诗歌的欣赏力</title>
-      <link>https://www.aisixiang.com/data/185301.html</link>
-      <guid isPermaLink="true">https://www.aisixiang.com/data/185301.html</guid>
-      <pubDate>Sun, 08 Nov 2026 07:12:00 +0000</pubDate>
-      <category>哲学与思想</category>
-      <source url="https://aisixiang.com">爱思想 · 最近更新</source>
-      <description>怎样提高对诗歌的欣赏力？《文心雕龙 ·知音》说：“夫缀文者情动而辞发，观文者披文以入情，沿波讨源，虽幽必显。世远莫见其面，觇文辄见其心。”在这里，刘勰指出提高对诗歌欣赏力的关键，一是“入情”，是“见其心”；二是“沿波讨源”，使幽隐的显露。因为作者的创作，是由于“情动而辞发”，在“情动”中还含有他的“志”，是情志结合的。读者只看到作者的文辞，要通过文辞了解到作者的情和心，即作者的情志，才能提高欣赏力。作者的情志，不一定在诗里明白说出，这是…</description>
-    </item>
-    <item>
-      <title>古代诗歌欣赏</title>
-      <link>https://www.aisixiang.com/data/185300.html</link>
-      <guid isPermaLink="true">https://www.aisixiang.com/data/185300.html</guid>
-      <pubDate>Sun, 08 Nov 2026 07:11:00 +0000</pubDate>
-      <category>哲学与思想</category>
-      <source url="https://aisixiang.com">爱思想 · 最近更新</source>
-      <description>古代的诗歌，流传下来成为传诵的名篇，可以供我们欣赏。我们欣赏这些诗歌，可以从中获得美的享受，提高艺术鉴赏力，培养高尚的艺术趣味。那么怎样欣赏呢？这里谈几点粗略的意见。 第一，要对诗作全面的理解，真正了解诗歌的本意。了解了诗歌的本意才谈得到欣赏。如李商隐《柳》： “曾逐东风拂舞筵，乐游春苑断肠天。如何肯到清秋日，已带斜阳又带蝉！”就字面看，乐游苑是唐朝京中游乐的名胜区，春天那里设有舞筵。春风中的柳树，枝叶拂过舞筵，这正是柳条茂密的时候。为…</description>
-    </item>
-    <item>
-      <title>中国古代修辞学略说</title>
-      <link>https://www.aisixiang.com/data/185299.html</link>
-      <guid isPermaLink="true">https://www.aisixiang.com/data/185299.html</guid>
-      <pubDate>Sun, 08 Nov 2026 07:09:00 +0000</pubDate>
-      <category>哲学与思想</category>
-      <source url="https://aisixiang.com">爱思想 · 最近更新</source>
-      <description>现代的中国修辞学，可以说直到 20世纪30年代陈望道先生《修辞学发凡》的出版才真正成立。它成立虽晚，但是源远流长。在先秦时期已有了“修辞”这个说法，已讲到了修辞现象，有了赋、比、兴的修辞手法，但还没专谈修辞的。汉朝董仲舒《春秋繁露·深察名号》接触到词义问题，但不是专讲修辞。后汉王充《论衡》有《语增篇》、《艺增篇》，好像是专论夸饰的，但王充不懂夸饰，他把夸张说成是失实，是本着他“疾虚妄”来写的。因此，直到两汉，还没有专文谈修辞的。从先秦到…</description>
-    </item>
-    <item>
-      <title>美中贸易全国委员会会长：美企不希望看到贸易保护主义抬头</title>
-      <link>https://wallstreetcn.com/livenews/3196455</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196455</guid>
-      <pubDate>Sun, 08 Nov 2026 07:05:49 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
-      <description>在今年的虹桥国际论坛上，美中贸易全国委员会会长谭森接受了总台记者的采访。他表示，美国企业不希望看到贸易保护主义抬头。 美中贸易全国委员会会长谭森：我们喜欢贸易摩擦吗？当然不。我们喜欢关税吗？肯定也不。我们每年都会调研美国企业，问他们中国在自身全球战略、全球竞争力当中有多重要。你猜美国企业眼中中国在其全球战略里的重要性如何？结果是持续上升。双方合作不仅是在持续，而且统计数据显示合作规模在上升。这意味着我们的企业和中国企业总会找到方式对接、…</description>
-    </item>
-    <item>
-      <title>科技股遭血洗后，华尔街高呼“抄底”</title>
-      <link>https://www.gelonghui.com/p/7336818</link>
-      <guid isPermaLink="true">https://www.gelonghui.com/p/7336818</guid>
-      <pubDate>Sun, 08 Nov 2026 07:03:36 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://gelonghui.com">格隆汇 · 推荐</source>
-      <description>大摩称未来两至三周是加仓时机 美股科技股遭遇抛售后，华尔街策略师普遍将其视为调整带来的买入机会。 标普500指数周四下跌4.4%，纳斯达克100指数下跌6.4%；周五标普500虽反弹0.3%，但自中期选举结果公布以来仍累计下跌2.5%。市场主要担忧民主党胜选后，对数据中心建设及AI行业的监管可能收紧。 摩根士丹利首席美国股票策略师Mike Wilson表示：“未来两到三周是加仓的时机。”他维持标普500年底8000点的目标，较周五收盘价…</description>
-    </item>
-    <item>
-      <title>野村：“蓝色浪潮”冲击美国数据中心，中国AI反而受益</title>
-      <link>https://wallstreetcn.com/articles/3785477</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/articles/3785477</guid>
-      <pubDate>Sun, 08 Nov 2026 07:03:35 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
-      <description>美国民主党在中期选举中横扫国会两院，市场对美国数据中心建设前景的担忧随之升温。但野村证券认为，这场政治变局对中国AI经济的净影响，可能恰恰是正面的。 据追风交易台消息，该行经济学家Ting Lu和Jing Wang在11月6日发布的报告中指出， 民主党"蓝色浪潮"将通过加强监管、保护电价等手段拖慢美国数据中心扩张，进而触发全球AI芯片价格回落，并缓解中国企业在高端芯片获取上的压力。"我们预计中国AI经济整体将从美国的蓝色浪潮中显著受益。…</description>
-    </item>
-    <item>
-      <title>沙特首都金融区遭袭、阿美石油公司大楼受损，此前曾拦截也门胡塞的导弹</title>
-      <link>https://wallstreetcn.com/articles/3785478</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/articles/3785478</guid>
-      <pubDate>Sun, 08 Nov 2026 07:01:18 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
-      <description>据新华社援引法新社8日援引目击者消息说，沙特阿拉伯首都利雅得金融区遭到袭击，沙特阿美石油公司大楼受损。 另据CCTV国际时讯，沙特主导的多国联军11月8日表示拦截并摧毁了两枚也门胡塞武装向沙特首都利雅得发射的导弹。稍早前，沙特首都利雅得传出剧烈爆炸声，当地居民收到防空警报。 沙特称拦截多枚导弹，利雅得市区传出多声巨响 据央视，当地时间11月8日上午，沙特民防部门向首都利雅得发布潜在危险预警，随后利雅得市区传出多声巨响。民防部门此后宣布危…</description>
-    </item>
-    <item>
-      <title>沙特首都金融区遭袭，阿美石油公司大楼受损</title>
-      <link>https://wallstreetcn.com/livenews/3196454</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196454</guid>
-      <pubDate>Sun, 08 Nov 2026 06:59:48 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
-      <description>法新社8日援引目击者消息说，沙特阿拉伯首都利雅得金融区遭到袭击，沙特阿美石油公司大楼受损。（新华社）</description>
-    </item>
-    <item>
-      <title>2028年，哪个美国政客敢批准大型数据中心项目？</title>
-      <link>https://wallstreetcn.com/charts/41960147</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/charts/41960147</guid>
-      <pubDate>Sun, 08 Nov 2026 06:58:44 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
-      <description>David Sacks认为，由于批准数据中心项目已成为会遭到两党攻击的“政治毒药”，未来四年内没有任何有野心的政客敢冒险审批新项目，这将导致美国在消化完现有获批项目后，于2028年面临数据中心建设停滞和资本支出崩盘的严重危机。</description>
-    </item>
-    <item>
-      <title>沙特拦截胡塞武装四枚导弹 利雅得传爆炸巨响</title>
-      <link>https://www.zaobao.com.sg/news/world/story20261108-9966379</link>
-      <guid isPermaLink="true">https://www.zaobao.com.sg/news/world/story20261108-9966379</guid>
-      <pubDate>Sun, 08 Nov 2026 06:52:00 +0000</pubDate>
+      <title>外国人持日房产增 日本拟向海外业主征税</title>
+      <link>https://www.zaobao.com.sg/news/world/story20261108-9933768</link>
+      <guid isPermaLink="true">https://www.zaobao.com.sg/news/world/story20261108-9933768</guid>
+      <pubDate>Sun, 08 Nov 2026 09:17:39 +0000</pubDate>
       <category>政治与政策</category>
       <source url="https://zaobao.com">联合早报 · 国际</source>
-      <description>沙特阿拉伯领导的多国联军称，星期天（11月8日）拦截并摧毁也门胡塞武装朝沙特首都利雅得发射的两枚弹道导弹。 路透社记者说，沙特民防部门在爆炸声响起前不久，向利雅得地区发布安全警报。当局随后宣布危险已经解除。 多国联军过后又宣布，在利雅得及南部地区拦截并摧毁另外两枚巡航导弹。 另据法新社引述目击者报道，利雅得的金融区遭袭击，区内沙特石油公司沙特阿美（Saudi Aramco）的一栋办公大楼受损。 一名目击者说：“可以肯定的是，阿卜杜拉国王…</description>
+      <description>（东京讯）日本政府正考虑对在日本经营房地产租赁或停车场业务的海外居民征税，以应对外国人持有日本房地产增加的趋势，同时解决国内外经营者税收不公的问题。 日经亚洲报道，日本总务部计划把有关调整纳入政府与执政联盟正在制定的2027财年税制改革大纲，把由都道府县向特定行业经营者征收的个人事业税适用范围扩大至海外居民。 根据现行制度，个人事业税通常以上一年度的营业收入或房地产收入，扣除290万日元（约2万3500新元）经营者扣除额后，按5%的税率…</description>
     </item>
     <item>
-      <title>非农超预期，能否持续？</title>
-      <link>https://www.gelonghui.com/p/7336666</link>
-      <guid isPermaLink="true">https://www.gelonghui.com/p/7336666</guid>
-      <pubDate>Sun, 08 Nov 2026 06:33:19 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://gelonghui.com">格隆汇 · 推荐</source>
-      <description>美联储加息预期升温 美国10月非农大幅强于预期，时薪增速回升，失业率回落至4.1%，市场呈现“紧缩交易”。展望后续，美国就业改善的持续性如何、美联储12月加息是否已无悬念？ 一、热点思考：非农超预期，能否持续？——2026年10月美国就业数据点评 （一）概览：美国10月就业大超预期，美联储加息预期升温 10月美国非农远超预期，失业率回落至4.1%。 10月新增非农16.5万人，远超市场预期的7万人。8月、9月新增非农合计上修8.4万人。…</description>
-    </item>
-    <item>
-      <title>伊朗处决三名男子 指涉为美以执行任务</title>
-      <link>https://www.zaobao.com.sg/news/world/story20261108-9966267</link>
-      <guid isPermaLink="true">https://www.zaobao.com.sg/news/world/story20261108-9966267</guid>
-      <pubDate>Sun, 08 Nov 2026 06:31:28 +0000</pubDate>
-      <category>政治与政策</category>
-      <source url="https://zaobao.com">联合早报 · 国际</source>
-      <description>伊朗星期天处决三名男子，他们被指为美国和以色列执行任务，并参与今年1月反政府示威期间的武装骚乱。 路透社引述伊朗官方媒体报道，于星期天（11月8日）被处决的三人分别是迪奥班德（Hassan Dioband）、卡泽米（Hamid Kazemi）和赞加内（Reza Zanganeh）。 伊朗司法部门指控三人在卡拉季市使用枪械、手榴弹和汽油弹，纵火焚烧公共设施，并破坏一座变电站，导致部分地区停电。 司法部门说，迪奥班德涉嫌袭击公共财产及煽动暴…</description>
-    </item>
-    <item>
-      <title>上纬新材第10000台启元机器人下线</title>
-      <link>https://wallstreetcn.com/livenews/3196453</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196453</guid>
-      <pubDate>Sun, 08 Nov 2026 06:28:45 +0000</pubDate>
+      <title>天风证券：国常会部署稳市工作</title>
+      <link>https://finance.sina.com.cn/stock/2026-11-08/doc-inixzhuw3769243.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/stock/2026-11-08/doc-inixzhuw3769243.shtml</guid>
+      <pubDate>Sun, 08 Nov 2026 09:11:28 +0000</pubDate>
       <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
-      <description>11月8日，上纬新材启元机器人第10000台个人机器人正式下线。今年10月，启元机器人整机生产工厂正式量产，从5000台爬升到10000台仅用了14天。上纬新材启元机器人联席总裁、Q业务部总裁刘东方表示，当前启元机器人的月活超过98%，日均在线峰值超过40%，日均在线时长3小时，平均每位用户每天交互100多次。（证券时报）</description>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>来源： 天风证券股份有限公司 国内：央行加力实施股票回购增持再贷款政策，国常会部署稳市工作1）交运高频指标方面，地铁客运量指数回落。2）工业生产腾落指数回升，从分项上看，山东地炼、涤纶长丝、轮胎、纯碱回升，甲醇、唐山高炉回落。3）习近平同阿曼苏丹海赛姆会谈；何立峰同越共中央政治局委员、中央书记处书记、中央政策战略部部长阮青毅会谈；中国人民银行加力实施股票回购增持再贷款政策；丁薛祥出席第九届中国国际进口博览会开幕式并会见与会外方政要。11…</description>
     </item>
     <item>
-      <title>【商圈】NBA双子星库里与杜兰特“殊途同归” 职业生涯总收入均破10亿美元</title>
-      <link>https://database.caixin.com/2026-11-08/102502435.html</link>
-      <guid isPermaLink="true">https://database.caixin.com/2026-11-08/102502435.html</guid>
-      <pubDate>Sun, 08 Nov 2026 06:27:34 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://caixin.com">财新 · 最新</source>
-      <description>在与中国品牌李宁签下全新合约后，库里将成为史上首位单赛季总收入突破2亿美元的篮球运动员，连续两年登上《福布斯》NBA球员收入榜榜首。在2026年榜单上，杜兰特以约1.049亿美元的总收入位列第二 当地时间2026年4月5日，美国加利福尼亚州旧金山，休斯顿火箭队与金州勇士队在NBA常规赛第39轮比赛中对决，火箭队的凯文·杜兰特（7号）与勇士队的斯蒂芬·库里（30号）在比赛中交锋。图：IC photo</description>
-    </item>
-    <item>
-      <title>复合氧化锆： 即将迎来自己的“六氟化钨”时刻？全球高端粉体市场市场迎来6000吨硬缺口</title>
-      <link>https://wallstreetcn.com/member/articles/3782210</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/member/articles/3782210</guid>
-      <pubDate>Sun, 08 Nov 2026 06:17:58 +0000</pubDate>
+      <title>35岁不会写代码？这波 AI 红利，可能就轮到你了</title>
+      <link>https://wallstreetcn.com/articles/3784474</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/articles/3784474</guid>
+      <pubDate>Sun, 08 Nov 2026 09:00:35 +0000</pubDate>
       <category>中文财经深度</category>
       <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
-      <description>全球最大的高端氧化锆粉体供应商日本东曹因原料耗尽宣布暂停供货，全球高端粉体市场被撕开约 6000吨/年的刚性缺口。这一事件的形态与六氟化钨此前面临的产业状况高度相似：同样是管制上游原料、卡住海外高端产能、价格与国产份额同步提升。 但六氟化钨靠的是价格弹性（涨价最高约14倍）与不可替代的工艺地位；复合氧化锆的真正护城河不是价格，而是长达2年的客户认证周期，海外瓷块厂每换一次粉体，需要重做烧结曲线、批次稳定性测试，并在欧盟 CE 与美国 F…</description>
+      <description>今年以来，全球科技公司已宣布裁员近 20 万人。与此同时，有一个 AI 岗位的招聘需求却在爆发：美国的招聘广告三年涨了 30 多倍，薪资中位数约 19.5 万美元；国内相关职位的发布量一年涨了 21 倍。 OpenAI、Anthropic、微软、亚马逊、谷歌，几家巨头前后砸下近百亿美元，有的开新公司，有的建新部门，抢的都是这类人才。 最反常识的是：这个岗位最稀缺的本事，恰恰不是写代码。 Anthropic：培养 1 万个“把 AI 送进…</description>
     </item>
     <item>
-      <title>俄美乌三方会谈在即、特朗普会前密集斡旋，这次会迎来“大和解”吗？</title>
-      <link>https://wallstreetcn.com/articles/3785474</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/articles/3785474</guid>
-      <pubDate>Sun, 08 Nov 2026 06:17:40 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
-      <description>据 新华社 报道，俄罗斯总统新闻秘书佩斯科夫11月3日确认， 俄美乌三方围绕乌克兰问题的会谈将于11月10日至11日在阿联酋阿布扎比举行 。这是迄今为止各方就此次会谈时间和地点最为明确的官方表态。 据媒体报道，会谈前夕，特朗普展开密集外交斡旋。他在白宫单独会见了俄罗斯总统普京特使Kirill Dmitriev，并表示，乌克兰战争“接近解决”，预计即将达成的协议将是一份“大协议”（very big settlement），影响范围可能涵盖…</description>
-    </item>
-    <item>
-      <title>韩正访问格鲁吉亚</title>
-      <link>https://wallstreetcn.com/livenews/3196452</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196452</guid>
-      <pubDate>Sun, 08 Nov 2026 06:13:54 +0000</pubDate>
+      <title>又见A股跨界，603725，拟控股光通信企业！</title>
+      <link>https://finance.sina.com.cn/stock/zqgd/2026-11-08/doc-inixzhuy7307327.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/stock/zqgd/2026-11-08/doc-inixzhuy7307327.shtml</guid>
+      <pubDate>Sun, 08 Nov 2026 08:58:17 +0000</pubDate>
       <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
-      <description>当地时间11月6日至8日，应格鲁吉亚政府邀请，国家副主席韩正访问格鲁吉亚，在第比利斯分别会见格鲁吉亚总统卡韦拉什维利、总理科巴希泽。访格期间，韩正还同科巴希泽共同出席中国－格鲁吉亚工商界欢迎晚宴并致辞。韩正表示，中国坚持对外开放基本国策，坚定不移推动高质量发展，为包括格鲁吉亚在内的各国企业提供了广阔市场机遇。期待两国工商界继续发挥好桥梁纽带作用，把握机遇、深化对接，为中格全面战略伙伴关系发展贡献力量。（新华社）</description>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>炒股就看 金麒麟分析师研报 ，权威，专业，及时，全面，助您挖掘潜力主题机会！ 又有上市公司拟进行跨界并购！ 天安新材 （603725）11月8日晚公告，公司拟以增资及股权转让的方式取得深圳市嘉万光通信有限公司（简称嘉万光）62.5%股权，经初步测算，以嘉万光100%股权的整体估值4亿元为基础作价，本次增资及股权收购的金额合计2.5亿元。本次交易完成后，嘉万光将成为公司控股子公司，纳入公司合并报表范围。 具体来看，公司拟向嘉万光现金增资7…</description>
     </item>
     <item>
-      <title>“蓝色浪潮”重创科技信仰，AI交易何时企稳？未来如何演变？华尔街密集研判</title>
-      <link>https://wallstreetcn.com/articles/3785473</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/articles/3785473</guid>
-      <pubDate>Sun, 08 Nov 2026 06:00:34 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
-      <description>选举夜的结果，比多数人预期的更彻底。 民主党不仅拿下众议院和参议院，还在堪萨斯州（自1932年以来首次翻蓝）、南卡罗来纳州（自1998年以来首次）、得克萨斯州（自1994年以来首次）赢得参议院席位。这个胜利幅度，尤其是参议院的表现，“比预期更为显著”。 市场的反应是直接的。 巴克莱在11月6日的股票市场周报中写道：“历史性的蓝色浪潮加速了‘特朗普交易（ Trump交易 ）’的平仓，监管担忧重创AI板块。” 周三，标普500上涨1.6%，…</description>
-    </item>
-    <item>
-      <title>美德两国将于11月中旬就药品定价展开商讨。（Politico）</title>
-      <link>https://wallstreetcn.com/livenews/3196451</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196451</guid>
-      <pubDate>Sun, 08 Nov 2026 06:00:25 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
-    </item>
-    <item>
-      <title>印度电动三轮车销量激增 成全球最大市场</title>
-      <link>https://www.zaobao.com.sg/news/world/story20261108-9966168</link>
-      <guid isPermaLink="true">https://www.zaobao.com.sg/news/world/story20261108-9966168</guid>
-      <pubDate>Sun, 08 Nov 2026 05:54:19 +0000</pubDate>
+      <title>韩国首尔迎来首场降雪 比2025年提前26天</title>
+      <link>https://www.zaobao.com.sg/news/world/story20261108-9966853</link>
+      <guid isPermaLink="true">https://www.zaobao.com.sg/news/world/story20261108-9966853</guid>
+      <pubDate>Sun, 08 Nov 2026 08:57:24 +0000</pubDate>
       <category>政治与政策</category>
       <source url="https://zaobao.com">联合早报 · 国际</source>
-      <description>印度电动三轮车市场迅速发展，今年9月每售出两辆新三轮车，就有超过一辆是电动三轮车。随着电池价格下降、燃油成本上涨及政府补贴推动，印度已成为全球最大的电动三轮车市场。 法新社报道，在印度汽车制造商马恒达旗下Last Mile Mobility的工厂，平均每90秒就有一辆电动三轮车从生产线完成。工人与机器人忙着组装电池、车身及车轮，以满足不断增长的需求。 数据显示，印度9月新售三轮车中，电动车占比超过50%，有关占比远高于汽车的8.5%及电…</description>
+      <description>韩国气象厅说，首尔星期天（11月8日）迎来今年冬天的第一场降雪。 《韩国先驱报》报道，首尔钟路区松月洞的气象观测站于上午10时观测到今年首场降雪。此次初雪比2025年提早26天，也比历年平均日期提前12天。 首尔初雪的官方日期以气象观测站的观测结果为准，而不是以居民首次看到降雪的时间为准。 11月上旬降雪在首尔并非前所未有。2002年和2010年的首场降雪也发生在11月8日。自1973年有记录以来，首尔最早的初雪出现在1981年10月2…</description>
     </item>
     <item>
-      <title>Q3净利润大跌28%，伯克希尔反手砸96亿回购</title>
-      <link>https://www.gelonghui.com/p/7336143</link>
-      <guid isPermaLink="true">https://www.gelonghui.com/p/7336143</guid>
-      <pubDate>Sun, 08 Nov 2026 04:45:58 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://gelonghui.com">格隆汇 · 推荐</source>
-      <description>保险承保是主要拖累 11月7日， 伯克希尔·哈撒韦公司 交出了一份利润下滑的三季报。 受投资收益缩水、保险承保业务下滑拖累， 归属股东的净利润为221.12亿美元，同比下降28%。但在利润承压的同时，公司回购力度却大幅加码，单季回购达96亿美元。 账面利润缩水，实体业务撑住了 财报显示，第三季度， 伯克希尔 归属股东的净利润221.12亿美元，去年同期是307.96亿，降了28%。每股收益也跟着下来：A类股从21,413美元降到15,5…</description>
-    </item>
-    <item>
-      <title>3.7万亿美元的大崩盘，更多细节曝光！</title>
-      <link>https://www.gelonghui.com/p/7335933</link>
-      <guid isPermaLink="true">https://www.gelonghui.com/p/7335933</guid>
-      <pubDate>Sun, 08 Nov 2026 04:03:01 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://gelonghui.com">格隆汇 · 推荐</source>
-      <description>资金选择出现了明显分化 美股遭遇崩盘式抛售，11月5日美国股市蒸发约3.7万亿美元市值。 纳指暴跌5.5%，标普500跌4.4%，纳指100重挫6.4%，创2020年3月以来最大单日跌幅。此前美股最火热的AI板块成了重灾区，部分板块跌幅达到12%至15%。 更令人意外的是，前一天美股还在上涨，仅仅过了24小时，市场就突然变脸。 究竟发生了什么？ 华尔街"黑色星期四"这场3.7万亿美元的崩盘，更多细节曝光！ 11月6日，彭博社发表重磅报道…</description>
-    </item>
-    <item>
-      <title>日本静冈县地震已致20余人受伤</title>
-      <link>https://www.zaobao.com.sg/news/world/story20261108-9965922</link>
-      <guid isPermaLink="true">https://www.zaobao.com.sg/news/world/story20261108-9965922</guid>
-      <pubDate>Sun, 08 Nov 2026 04:02:54 +0000</pubDate>
-      <category>政治与政策</category>
-      <source url="https://zaobao.com">联合早报 · 国际</source>
-      <description>日本中部静冈县星期天凌晨发生5.7级地震，造成至少24人受伤，部分建筑物玻璃破裂，铁路服务一度受影响。日本气象厅未发布海啸警报。 据日本气象厅消息，地震发生于星期天（11月8日）当地时间凌晨1时04分（新加坡时间零时04分），震中位于静冈县西部，震源深度约40公里。邻近的爱知县知多市观测到震度5强的摇晃，东京及大阪也有震感。 共同社报道，静冈县至少三人受伤，爱知县则有20余人受伤，部分伤者是在避难过程中跌倒。 法新社引述当地媒体报道，两…</description>
-    </item>
-    <item>
-      <title>China Set to Lead World in Energy Investment in 2026, CCTV Says｜中文：中央电视台称，中国将在2026年引领世界能源投资</title>
-      <link>https://www.bloomberg.com/news/articles/2026-11-08/china-set-to-lead-world-in-energy-investment-in-2026-cctv-says</link>
-      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-08/china-set-to-lead-world-in-energy-investment-in-2026-cctv-says</guid>
-      <pubDate>Sun, 08 Nov 2026 04:02:33 +0000</pubDate>
+      <title>Aramco Riyadh Office Targeted in Attack, Causing Limited Damage｜中文：沙特阿美利雅得办事处遭到袭击，造成的损失有限</title>
+      <link>https://www.bloomberg.com/news/articles/2026-11-08/aramco-tower-in-riyadh-s-financial-hub-damaged-after-attack</link>
+      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-08/aramco-tower-in-riyadh-s-financial-hub-damaged-after-attack</guid>
+      <pubDate>Sun, 08 Nov 2026 08:54:58 +0000</pubDate>
       <category>全球市场与要闻</category>
       <source url="https://bloomberg.com">彭博社 · 市场</source>
-      <description>中文：根据中国企业改革与发展学会(China Enterprise Reform and Development Society)发布的《2026年全球能源转型报告》(Global Energy Transition Report 2026) ，中国预计将在2026年投资9400亿美元，是所有国家中投资最多的
-原文：China is expected to invest $940 billion in energy in 2026, the most by any country, according to the Global Energy Transition Report 2026 released by the China Enterprise Reform and Development Society, China Central Te…</description>
+      <description>中文：沙特阿美公司位于利雅得的办事处周日遭到袭击，该国与伊朗支持的也门胡塞武装的冲突再次升级
+原文：Saudi Aramco offices in Riyadh came under attack on Sunday in a fresh escalation in the kingdom’s conflict with the Iran-backed Houthis in Yemen.</description>
     </item>
     <item>
-      <title>巴拉圭检方正式起诉前总统 新总统承诺保障民众权益</title>
-      <link>https://www.zaobao.com.sg/news/world/story20261108-9965850</link>
-      <guid isPermaLink="true">https://www.zaobao.com.sg/news/world/story20261108-9965850</guid>
-      <pubDate>Sun, 08 Nov 2026 03:45:05 +0000</pubDate>
-      <category>政治与政策</category>
-      <source url="https://zaobao.com">联合早报 · 国际</source>
-      <description>巴拉圭公共检察官办公室星期六正式对前总统佩纳提起刑事诉讼，指控其涉嫌挪用公款并唆使其他政府官员违规金融操作，法院下令将他还押候审。 综合新华社和法新社报道，巴拉圭乌埃诺银行倒闭，引发近300万储户无法取回存款及大规模抗议。现年47岁的佩纳（Santiago Peña）原是巴拉圭历来最年轻的总统。他因与倒闭银行存在商业联系，星期五（6日）遭参议院弹劾罢免。 佩纳星期六（11月7日）在总检察长办公室接受了约3个小时的问讯。 检方认为，佩纳对…</description>
-    </item>
-    <item>
-      <title>China Raises Delegate Count to 2,360 for 2027 Party Congress｜中文：中国将2027年党代会的代表人数提高到2,360人</title>
-      <link>https://www.bloomberg.com/news/articles/2026-11-08/china-raises-delegate-count-to-2-360-for-2027-party-congress</link>
-      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-08/china-raises-delegate-count-to-2-360-for-2027-party-congress</guid>
-      <pubDate>Sun, 08 Nov 2026 03:29:25 +0000</pubDate>
-      <category>全球市场与要闻</category>
-      <source url="https://bloomberg.com">彭博社 · 市场</source>
-      <description>中文：新华社周日援引中国共产党组织部的话报道，中国为2027年共产党第21次全国代表大会规定了2360名代表的配额，比上次聚会增加了60名
-原文：China set a quota of 2,360 delegates for the Communist Party’s 21st national congress in 2027, 60 more than for the previous gathering, Xinhua News Agency reported Sunday, citing the party’s Organization Department.</description>
-    </item>
-    <item>
-      <title>酒标改了，酒色从未改变｜行走匈牙利⑥</title>
-      <link>https://mini.caixin.com/2026-11-08/102502399.html</link>
-      <guid isPermaLink="true">https://mini.caixin.com/2026-11-08/102502399.html</guid>
-      <pubDate>Sun, 08 Nov 2026 03:27:01 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://caixin.com">财新 · 最新</source>
-      <description>在匈牙利托卡伊，一座旧庄园、一张三百年前的名单与一杯甜酒 《行走匈牙利》“财新mini+”连载中，查看 已更新内容 贵族已经离开，庄园却没有空下来。 傍晚，我们住进匈牙利托卡伊塔尔卡尔（Tarcal）的安德拉什庄园酒店（Andrássy Kúria）。这座历史悠久的贵族庄园，如今经营着一家五星级酒店。前台、客房、浴袍和地下的仿洞穴泳池，把旧日贵族的住宅变成了现代旅人的落脚处。安德拉什这个姓氏仍留在酒店的名字里，也出现在菜单和宣传中；只是…</description>
-    </item>
-    <item>
-      <title>执法检查报告：建议设立农田耕地专项督察、探索县级粮食产销区划分</title>
-      <link>https://china.caixin.com/2026-11-08/102502394.html</link>
-      <guid isPermaLink="true">https://china.caixin.com/2026-11-08/102502394.html</guid>
-      <pubDate>Sun, 08 Nov 2026 03:14:51 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://caixin.com">财新 · 最新</source>
-      <description>《粮食安全保障法》执法检查发现，一些地方把高标准农田建设资金用于平衡预算、偿还地方债务等。建议参考中央环境保护督察，建立农田建设和耕地质量提升专项督察制度。建议重新评估当前形势下产销区划分标准，探索产销区划分下沉到县级层面的可能性 资料图：收割机在稻田中抢收成熟水稻。图：视觉中国 【财新网】 《粮食安全保障法》施行两年之际，全国人大常委会执法检查组检查该法实施情况，并于近日在十四届全国人大常委会第二十五次会议上提交报告。执法检查报告提到…</description>
-    </item>
-    <item>
-      <title>执法检查关注粮食收购发票问题 建议制定适配税收征管方式</title>
-      <link>https://china.caixin.com/2026-11-08/102502389.html</link>
-      <guid isPermaLink="true">https://china.caixin.com/2026-11-08/102502389.html</guid>
-      <pubDate>Sun, 08 Nov 2026 03:11:08 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://caixin.com">财新 · 最新</source>
-      <description>《粮食安全保障法》执法检查发现，粮食经纪人作为连接田间地头与购销市场的关键角色，在粮食购销中介业务中盈利较低但税收负担较重 执法检查报告建议，完善粮食收购发票管理制度。图：视觉中国 【财新网】 中国每年有1.4万斤粮食从19亿亩的田间地头，流通进入下一环节。早期这些粮食大部分由农户直接销售用粮企业，但近年来，按照全国人大常委执法检查组的话说，“当前粮食流通格局已彻底重构”，由此引发了新的问题。 日前举行的十四届全国人大会常委会第二十五次…</description>
-    </item>
-    <item>
-      <title>美国民主党掀“蓝色浪潮” 年轻人重燃政治希望</title>
-      <link>https://www.zaobao.com.sg/news/world/story20261108-9965693</link>
-      <guid isPermaLink="true">https://www.zaobao.com.sg/news/world/story20261108-9965693</guid>
-      <pubDate>Sun, 08 Nov 2026 02:55:42 +0000</pubDate>
-      <category>政治与政策</category>
-      <source url="https://zaobao.com">联合早报 · 国际</source>
-      <description>美国民主党在中期选举中大胜，年轻选民的支持成为关键，也带动社交媒体兴起“千禧世代乐观主义”怀旧潮，让人回想起2008年奥巴马当选总统时的乐观氛围。 法新社报道，紧身牛仔裤、猫头鹰项链等都是2000年代末至2010年代初的流行文化象征。如今，相关怀旧视频和贴文在社交媒体广泛传播，部分浏览量达数十万次。 对目前18岁至29岁的Z世代而言，星期二（11月3日）的选举胜利，让他们首次感受到上一代千禧世代在2008年奥巴马当选美国总统时的兴奋情绪…</description>
-    </item>
-    <item>
-      <title>首部涉外反腐专门法律出台 明确跨境企业廉洁合规义务</title>
-      <link>https://china.caixin.com/2026-11-08/102502384.html</link>
-      <guid isPermaLink="true">https://china.caixin.com/2026-11-08/102502384.html</guid>
-      <pubDate>Sun, 08 Nov 2026 02:25:52 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://caixin.com">财新 · 最新</source>
-      <description>《反跨境腐败法》经过两次审议后表决通过。全文共六章47条，内容集惩治、预防、反制于一体 《反跨境腐败法》第2条以列举方式界定“跨境腐败”，既包括到海外经营的的中国企业向外国官员行贿，也包括境外主体向中国公职人员行贿，还把外逃与资产转移纳入惩治范围。图：视觉中国 【财新网】 中国涉外反腐败有了专门立法。11月6日上午，十四届全国人大常委会第二十五次会议表决通过《反跨境腐败法》。该法自公布之日起施行。 这部法律共六章47条，依次为总则、机制…</description>
-    </item>
-    <item>
-      <title>新西兰两大阵营争夺执政权 中间派政党或成组阁关键</title>
-      <link>https://www.zaobao.com.sg/news/world/story20261108-9965454</link>
-      <guid isPermaLink="true">https://www.zaobao.com.sg/news/world/story20261108-9965454</guid>
-      <pubDate>Sun, 08 Nov 2026 01:57:42 +0000</pubDate>
-      <category>政治与政策</category>
-      <source url="https://zaobao.com">联合早报 · 国际</source>
-      <description>新西兰大选初步计票结果显示，总理卢克森领导的执政联盟以微弱优势取得国会过半议席，但仍有约14%的选票尚未点算，最终由谁执政可能要等到11月27日正式结果出炉后才能确定。 路透社报道，新西兰选举委员会星期天（11月8日）公布的初步结果显示，由国家党、行动党和新西兰优先党组成的执政联盟，预计在131席国会中赢得67席，仅比过半门槛的66席多一席。 不过，约占总票数14%的特别选票尚未点算，包括海外选民及在所属选区以外投票的选票。这类选票历来…</description>
-    </item>
-    <item>
-      <title>冰逸《象罔无形》：在山水本身之中重新找到山水画｜观展</title>
-      <link>https://mini.caixin.com/2026-11-08/102502362.html</link>
-      <guid isPermaLink="true">https://mini.caixin.com/2026-11-08/102502362.html</guid>
-      <pubDate>Sun, 08 Nov 2026 01:53:17 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://caixin.com">财新 · 最新</source>
-      <description>张颂仁把冰逸呈现为一个其作品整体上抵抗“新水墨”语法的人。它标志着海外推介逻辑的转变，转向推介一种既有类别无法完全吸收的独异艺术心智 在红砖美术馆，《冰逸：象罔无形》（Bingyi：Unseen Paintings）并不是一个容易进入的展览。 这场由闫士杰策展、亚当·索科尔（Adam Sokol）负责展览建筑设计的展览，占据九个展厅，呈现艺术家冰逸自2008年以来创作的七个大型项目。这是冰逸首个大型机构回顾展，围绕一个刻意令人不适的命题…</description>
-    </item>
-    <item>
-      <title>“平民逆袭”还是“家族托底”：当科举被量化分析</title>
-      <link>https://mini.caixin.com/2026-11-08/102502359.html</link>
-      <guid isPermaLink="true">https://mini.caixin.com/2026-11-08/102502359.html</guid>
-      <pubDate>Sun, 08 Nov 2026 01:46:56 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://caixin.com">财新 · 最新</source>
-      <description>“朝为田舍郎，暮登天子堂”，那种对科举的浪漫化想象需要被修正。科举的那扇门确实存在，但走进来的人，很少是孤身一人。他们身后，往往站着整个家族，几代人，和一张看不见的网 广东佛山，祖庙内展示科举制度下学员考试的情景。图：视觉中国 我读小学的时候，教室的墙壁上挂着这样的诗句：“朝为田舍郎，暮登天子堂。将相本无种，男儿当自强。”老师们经常拿这几句诗勉励我们，还有一些年纪比较大的老师在上思想品德课时，给我们讲吕蒙正、商辂这些传奇状元的故事。北宋…</description>
-    </item>
-    <item>
-      <title>Voters Punish Major Parties in Cliffhanger New Zealand Election｜中文：选民在Cliffhanger新西兰选举中惩罚主要政党</title>
-      <link>https://www.bloomberg.com/news/articles/2026-11-08/voters-punish-major-parties-in-cliffhanger-new-zealand-election</link>
-      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-08/voters-punish-major-parties-in-cliffhanger-new-zealand-election</guid>
-      <pubDate>Sun, 08 Nov 2026 01:34:22 +0000</pubDate>
+      <title>Erdogan Joins Azerbaijan Victory Celebrations in Sign of Thaw｜中文：埃尔多安参加阿塞拜疆胜利庆祝活动，迎接解冻迹象</title>
+      <link>https://www.bloomberg.com/news/articles/2026-11-08/erdogan-joins-azerbaijan-victory-celebrations-in-sign-of-thaw</link>
+      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-08/erdogan-joins-azerbaijan-victory-celebrations-in-sign-of-thaw</guid>
+      <pubDate>Sun, 08 Nov 2026 08:43:33 +0000</pubDate>
       <category>政治与政策</category>
       <source url="https://bloomberg.com">彭博社 · 政治</source>
-      <description>中文：新西兰的选举仍然太接近尾声，但选民已经对主要政党做出了决定性的裁决，让较小的竞争对手获得了有史以来最好的结果，并重塑了该国的政治格局
-原文：New Zealand’s election remains too close to call, but voters have already delivered a decisive verdict on the major parties, handing smaller rivals their best-ever results and reshaping the country’s political landscape.</description>
+      <description>中文：土耳其总统雷杰普·塔伊普·埃尔多安将于周日访问阿塞拜疆，参加纪念阿塞拜疆在与亚美尼亚长达 44 天的战争中获胜六周年的活动，这表明阿塞拜疆之间最近的紧张局势可能会有所缓解
+原文：Turkish President Recep Tayyip Erdogan is visiting Azerbaijan on Sunday for events marking the sixth anniversary of its victory in the 44-day war with Armenia, indicating a potential easing of recent tensions between the…</description>
     </item>
     <item>
-      <title>Eisenkot Gets Chance to Form Israeli Govt After Tight Vote｜中文：经过激烈投票，艾森科特有机会组建以色列政府</title>
-      <link>https://www.bloomberg.com/news/articles/2026-11-07/israel-president-to-give-eisenkot-a-chance-to-form-government</link>
-      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-07/israel-president-to-give-eisenkot-a-chance-to-form-government</guid>
-      <pubDate>Sat, 07 Nov 2026 19:33:30 +0000</pubDate>
-      <category>政治与政策</category>
-      <source url="https://bloomberg.com">彭博社 · 政治</source>
-      <description>中文：以色列选举挑战者加迪·艾森科特（ Gadi Eisenkot ）将首次尝试组建新政府，这使他更接近结束总理本雅明·内塔尼亚胡（ Benjamin Netanyahu ）创纪录的任期
-原文：Israeli election challenger Gadi Eisenkot will get the first attempt at forming a new government, putting him a step closer to ending Prime Minister Benjamin Netanyahu’s record tenure.</description>
-    </item>
-    <item>
-      <title>中共中央发出通知 部署党的二十一大代表选举工作</title>
-      <link>https://www.gov.cn/zhengce/202611/content_7085529.htm</link>
-      <guid isPermaLink="true">https://www.gov.cn/zhengce/202611/content_7085529.htm</guid>
-      <pubDate>Sat, 07 Nov 2026 02:25:00 +0000</pubDate>
-      <category>政治与政策</category>
-      <source url="https://www.gov.cn">中国政府网 · 最新政策</source>
-      <description>新华社北京11月7日电 党的二十届五中全会决定，党的二十一大于2027年下半年在北京召开。最近，中共中央印发了《关于党的二十一大代表选举工作的通知》，对二十一大代表选举工作作出全面部署。中央组织部近日召开会议，对这项工作作出具体安排。 党的二十一大，是我们党在基本实现社会主义现代化的关键时期、向第二个百年奋斗目标进军新征程上召开的一次十分重要的代表大会，是党和国家政治生活中的一件大事。认真做好二十一大代表选举工作，是开好大会的重要基础。…</description>
+      <title>美10月非农超预期推升加息概率，美债成本上升需求呈结构性变化---W45海外宏观脱水</title>
+      <link>https://wallstreetcn.com/member/articles/3785479</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/member/articles/3785479</guid>
+      <pubDate>Sun, 08 Nov 2026 07:05:40 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
+      <description>10月美国新增非农16.5万人远超预期7万人，失业率回落至4.1%，时薪环比回升至0.4%，市场演绎紧缩交易。专业商业服务业驱动就业改善，但可持续性需后续数据验证。就业市场不构成美联储加息约束，加息决策或更取决于通胀趋势。 美国联邦债务总额逼近41万亿美元，债务与GDP之比超过120%，2026财年预算赤字达1.992万亿美元。美债需求结构从官方转向私人、从价格不敏感转向价格敏感，付息压力在加息50个基点情形下仍可承受，当前利率已接近顶…</description>
     </item>
     <item>
       <title>Why we see faces in unexpected places, and what it says about us｜中文：为什么我们在意想不到的地方看到面孔，以及它对我们的影响</title>
