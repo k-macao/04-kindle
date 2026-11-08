@@ -76,6 +76,7 @@ ALL_PROVIDERS = ("direct", "rsshub", "mirror", "native", "bridge")
 VIA_BY_PROVIDER = {"native": "feed", "direct": "direct", "bridge": "bridge"}
 BRIDGE_LIMIT = 20
 BRIDGE_MAX_INSTANCES = 2
+BRIDGE_MAX_TARGETS = 3
 
 USER_AGENT = "004-kindle-news/1.0"
 # 有些路由把日期解析成未来（财新周刊的期号日期会跑到 25 小时后），这类条目会霸占
@@ -184,9 +185,17 @@ def source_candidates(source, instances, providers, dead, trip_after,
                 candidates.append({"provider": "native", "label": "native feed",
                                    "url": feed, "instance": "", "direct": ""})
         elif provider == "bridge":
-            targets = [url for url in (feed, *(url for _i, url in route_urls[:1])) if url]
+            # 让 RSS-Bridge 代取哪几条：原生 feed、官方实例的路由、以及**最后一个镜像**的路由。
+            # 最后那条最要紧——某一轮里官方超时、镜像报 5xx 的时候，让第三方机房再去试一次
+            # 镜像地址常常就成了；只包官方地址等于把这条退路浪费掉。
+            targets = []
+            for url in (feed,
+                        *(url for _i, url in route_urls[:1]),
+                        *(url for _i, url in route_urls[-1:])):
+                if url and url not in targets:
+                    targets.append(url)
             for base in list(bridge_instances)[:BRIDGE_MAX_INSTANCES]:
-                for target in targets[:2]:
+                for target in targets[:BRIDGE_MAX_TARGETS]:
                     label = base.replace("https://", "")
                     candidates.append({"provider": "bridge", "label": f"RSS-Bridge {label}",
                                        "url": bridge_url(base, target), "instance": "",
