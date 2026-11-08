@@ -60,12 +60,14 @@ python tools/fetch_news.py --providers direct,rsshub,mirror,native,bridge \
 - `site/source-health.json` 把这张表整轮存下来（进 Git，工作流贴进步骤摘要）：哪个源最近一直靠
   第 5 层活着，一眼就能看出来——那说明该给它补一条更靠前的路，或者换源。
 
-## 1. 三条命令
+## 1. 四条命令
 
 ```sh
 python tools/fetch_news.py --out news_data.json               # 抓一轮，写到 news_data.json（不进 Git）
 python tools/translate_news.py --data news_data.json \
        --cache site/news_zh_cache.json                        # 英文条目补中文（就地写回）
+DEEPSEEK_API_KEY=… python tools/analyze_news.py \
+       --data news_data.json --cache site/news_analysis_cache.json  # 每条生成线索链分析
 python tools/build_feed.py --data news_data.json --out site   # 聚合 RSS：site/news.xml
 ```
 
@@ -82,13 +84,14 @@ python tools/build_news.py --data news_data.json --out site   # site/news.epub +
 自建实例放最前面。
 
 `news_data.json` 是中间产物：抓取和排版分开，排版可以离线反复调。`news_data.json` 里每条是
-`{title, link, published, summary, source, group, lang}`（英译中之后多 `title_zh` / `summary_zh`），
+`{title, link, published, summary, source, group, lang}`（英译中之后多 `title_zh` / `summary_zh`，
+AI 分析之后多 `analysis` / `analysis_model`），
 `sources` 里记着每个源这次用的实例、抓到几条、失败原因，`instances_used` 记着哪个实例供了多少条
 ——出问题先看这里。
 
 ## 1.1 英文条目自动附中文
 
-`translate_news.py` 是唯一另需联网的一步，规矩是：
+`translate_news.py` 负责英文条目译中；后续 `analyze_news.py` 调用 DeepSeek 做逐条线索链分析。
 
 - **只翻英文**：源标了 `lang: en`，或者标题里一个汉字都没有、字母占一半以上；
 - **三家免费接口按顺序回退**：Google `translate_a/single` → Lingva 镜像 → MyMemory，
@@ -99,6 +102,18 @@ python tools/build_news.py --data news_data.json --out site   # site/news.epub +
   「还有几条英文标题没配上中文」，下一轮补齐；
 - 渲染时中英并列：RSS 标题写成 `English Title｜中文：译文`，摘要是「中文：… 原文：…」——
   阅读器的列表页只显示标题，译文不接在标题上等于没翻；EPUB（手动生成时）标题下多一行「中文：…」。
+
+## 1.2 每条新闻的 AI 线索分析
+
+发布前由 DeepSeek 对每条新闻写一段中文分析，并作为 RSS 正文的一部分；格式固定为
+**线索 → 事实 → 推断 → 影响 → 验证**。模型只看这条 RSS 的标题、摘要、来源与时间：不联网补事实，
+推断会明确标作推断；线索不足时也必须说明不足，不做无依据预测或买卖建议。
+
+- Actions 使用仓库 Secret **`DEEPSEEK_API_KEY`**，默认 DeepSeek `deepseek-chat`；密钥不进代码、不进日志。
+- 一批 5 条，请求间隔 1 秒；相同新闻按标题、摘要、来源、链接等字段命中
+  `site/news_analysis_cache.json`，避免每天为重复新闻重新计费。
+- **AI 服务失败、漏条或格式不全时，整轮停止且不推送 XML**；不会悄悄发布没有分析的条目。
+- `news-lite.xml` / `news-test.xml` 会保留完整分析链，只截短新闻摘要。
 
 抓取时的三个时间约定：
 
@@ -394,13 +409,15 @@ https://rsshub.rss.tips, https://rsshub.isrss.com, https://rsshub.cups.moe, http
 `.github/workflows/refresh-news.yml`（**只出 xml**）：
 
 - `cron: "0 23 * * *"`（UTC）= 每天 07:00 北京时间；也可以手动 `workflow_dispatch`；
-- 流程：跑测试 → `fetch_news.py`（五层退路 + 源健康表）→ `translate_news.py` → `build_feed.py` → feed 自检
+- 流程：跑测试 → `fetch_news.py`（五层退路 + 源健康表）→ `translate_news.py` →
+  DeepSeek 逐条线索分析 → `build_feed.py` → feed 自检
   （xml 可解析、条目数达标、guid 不缺不重、`atom:link rel="self"` 对得上）→ 提交推送
-  `site/news.xml` + `site/news_seen.json` + `site/news_zh_cache.json` + `site/source-health.json`；
-- 任何一步失败就**不推送**：抓不到足够条目、xml 解析不过时，读者手上还是上一份 feed；
+  `site/news.xml` + `site/news_seen.json` + `site/news_zh_cache.json` +
+  `site/news_analysis_cache.json` + `site/source-health.json`；
+- 任何一步失败就**不推送**：抓不到足够条目、DeepSeek 有条没分析、xml 解析不过时，读者手上还是上一份 feed；
 - 与小时级报告完全隔离（`concurrency: refresh-news`），报告失败不影响 feed，feed 失败也不动报告产物；
 - 改了抓取/翻译/feed 的代码（`tools/fetch_news.py`、`news_sources.py`、`build_feed.py`、
-  `radar_discover.py`、`translate_news.py`、本工作流）也会跑一次：这种运行带 `--no-seen`，
+  `radar_discover.py`、`translate_news.py`、`analyze_news.py`、本工作流）也会跑一次：这种运行带 `--no-seen`，
   按完整时间窗生成、也不写标题指纹，免得把当天还没到 07:00 的条目提前吃掉。
 
 ## 7. 订阅方式

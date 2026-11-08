@@ -13,6 +13,7 @@
   `<source url="站点">名称</source>`）和一句摘要；
 - **英文条目中英并列**：`tools/translate_news.py` 补过 `title_zh` 的，标题写成
   `English Title｜中文标题`，摘要有译文时写「中文：… 原文：…」，读者不必点进原文；
+- **每条新闻带 AI 线索分析**：`analysis` 字段按「线索→事实→推断→影响→验证」写入 RSS 正文；
 - `guid` 用原文链接（`isPermaLink="true"`），没有链接的用标题指纹的
   `urn:004:news:<hash>`——同一个链接在读者端不会重复出现；
 - `lastBuildDate` 是这次生成的时间，`ttl` 建议阅读器每小时回来看一次；
@@ -128,9 +129,15 @@ def item_xml(item, names, sites, desc_limit=None, fallback_link=DEFAULT_SITE_URL
             description += "\n原文：" + summary
     elif summary and summary != item["title"]:
         description = summary
+    # 精简版只截 RSS 摘要，不截 AI 线索链；验证点不能因小文件模式而丢失。
+    if description and desc_limit and len(description) > desc_limit:
+        description = description[:desc_limit].rstrip() + "…"
+    analysis = str(item.get("analysis") or "").strip()
+    if analysis:
+        # 保留线索→事实→推断→影响→验证各段，KOReader 会把 description 作为 RSS 正文。
+        analysis = " ".join(line.strip() for line in analysis.splitlines() if line.strip())
+        description += ("\n\n" if description else "") + "AI 线索分析：" + analysis
     if description and description != shown:
-        if desc_limit and len(description) > desc_limit:
-            description = description[:desc_limit].rstrip() + "…"
         parts.append(f"      <description>{xml_text(description)}</description>")
     parts.append("    </item>")
     return "\n".join(parts)

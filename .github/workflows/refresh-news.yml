@@ -35,6 +35,7 @@ on:
       - "tools/build_feed.py"
       - "tools/radar_discover.py"
       - "tools/translate_news.py"
+      - "tools/analyze_news.py"
 
 permissions:
   contents: write
@@ -115,6 +116,15 @@ jobs:
           python tools/translate_news.py --data news_data.json
           --cache site/news_zh_cache.json --max-items 80 --strict
 
+      # 每条新闻先做线索链分析；API Key 放在仓库 Actions Secret，不写入仓库。
+      # 任何一条分析缺失/格式不全都停止发布，避免推送「说是 AI 分析、实际没分析」的 feed。
+      - name: DeepSeek 为每条新闻生成线索分析
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+        run: >-
+          python tools/analyze_news.py --data news_data.json
+          --cache site/news_analysis_cache.json
+
       - name: 生成聚合 RSS（site/news.xml）
         run: >-
           python tools/build_feed.py --data news_data.json --out site
@@ -190,6 +200,10 @@ jobs:
                       problems.append(f"{name} 有条目没有绝对的 <link>：{item_link[:40] or '(缺)'}")
                   if not title.strip() or "\n" in title:
                       problems.append(f"{name} 的 <title> 为空或带换行：{title[:20]!r}")
+                  description = item.findtext("description") or ""
+                  required = ("AI 线索分析：", "线索：", "事实：", "推断：", "影响：", "验证：")
+                  if any(label not in description for label in required):
+                      problems.append(f"{name} 第 {len(guids)} 条缺少完整 AI 线索分析：{title[:20]}")
 
               titles = [item.findtext("title") or "" for item in items]
               paired = sum(1 for title in titles if "｜中文：" in title)
@@ -210,10 +224,10 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          # 只提交 feed 本体与两个状态文件：标题指纹（跨天去重）和译文缓存。
-          # 只提交 feed 本体、标题指纹、译文缓存，以及本轮的源健康表。
+          # 只提交 feed、标题指纹、译文缓存、AI 分析缓存与源健康表。
           git add site/news.xml site/news-lite.xml site/news-test.xml \
-                  site/news_seen.json site/news_zh_cache.json site/source-health.json
+                  site/news_seen.json site/news_zh_cache.json \
+                  site/news_analysis_cache.json site/source-health.json
           read -r items paired built <<<"$(python - <<'PY'
           from xml.etree import ElementTree
           root = ElementTree.parse("site/news.xml").getroot()

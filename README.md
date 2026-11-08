@@ -64,13 +64,15 @@ URL** 填 `site/report.json` 的地址即可。详步骤、机型参数、切页
 ## 每日新闻聚合 RSS（RSSHub）
 
 报告是「每小时的判断」，新闻是「每天一次的一条 feed」。抓一轮 RSSHub（财经 / 政治 / 哲学思想），
-英文条目自动配中文，合成**一个标准 RSS 2.0**：`site/news.xml`，任何阅读器（含 KOReader 的
-新闻下载器）都能直接订阅：
+英文条目自动配中文、每条附 DeepSeek 线索链分析，合成**一个标准 RSS 2.0**：`site/news.xml`，
+任何阅读器（含 KOReader 的新闻下载器）都能直接订阅：
 
 ```sh
 python tools/fetch_news.py --out news_data.json          # 抓一轮 RSSHub 新闻
 python tools/translate_news.py --data news_data.json \
        --cache site/news_zh_cache.json                   # 英文条目补中文
+DEEPSEEK_API_KEY=… python tools/analyze_news.py --data news_data.json \
+       --cache site/news_analysis_cache.json             # 每条新闻生成线索链分析
 python tools/build_feed.py --data news_data.json --out site   # → site/news.xml
 ```
 
@@ -112,12 +114,14 @@ https://cdn.jsdelivr.net/gh/k-macao/04-kindle@main/site/news.xml             ←
 不用重抓。
 
 每天 07:00（北京时间）由 `.github/workflows/refresh-news.yml` 自动跑：跑测试 → 抓取 → 英译中 →
-合成 xml → 自检（可解析、条数、guid、中文配对、self 地址）→ 只提交 `site/news.xml` 与三个状态文件。
+DeepSeek 按「线索→事实→推断→影响→验证」逐条分析 → 合成 xml → 自检（可解析、条数、guid、中文配对、AI 分析完整、self 地址）→ 提交 feed 与状态/分析缓存。
 每个源有五层退路，任何一层成功就停：**源站直连接口 → RSSHub 官方 `rsshub.app` → RSSHub 镜像
 （`rsshub.rss.tips` / `rsshub.isrss.com` / `rsshub.cups.moe`）→ 站点原生 RSS → RSS-Bridge 公共实例代取**。
 开工前先探一次 `/healthz`，官方实例对机房 IP 回 403 时自动排到队尾（日志会写原因），`RSSHUB_BASE`
 可换成自建实例；同一实例连续失败 3 次就跳过，单源失败不影响别的源。每轮的「哪个源靠哪一层活着」
-写进 `site/source-health.json`，也贴在 Actions 步骤摘要里。详见 `docs/kindle-news.md` 第 0 节。跨天不重复：`site/news_seen.json` 记着最近 7 天推过的标题指纹，
+写进 `site/source-health.json`，也贴在 Actions 步骤摘要里；AI 分析缓存写入
+`site/news_analysis_cache.json`，缺少 `DEEPSEEK_API_KEY` 或任一条分析失败就不推送。
+详见 `docs/kindle-news.md` 第 0、1.2 节。跨天不重复：`site/news_seen.json` 记着最近 7 天推过的标题指纹，
 昨天 20:00 的稿子今天不会再出现一次。
 
 找不到路由的站点，用 **RSSHub Radar** 的规则去发现（`tools/radar_discover.py`：先查实例的

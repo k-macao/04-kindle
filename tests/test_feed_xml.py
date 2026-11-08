@@ -158,6 +158,27 @@ class ItemContentTest(unittest.TestCase):
     def test_description_is_kept_when_it_adds_something(self):
         self.assertEqual(self.one().findtext("description"), "摘要一句")
 
+    def test_analysis_is_appended_to_rss_body(self):
+        chain = ("线索：政策公布；事实：文件列出新要求；推断：执行成本或变化；"
+                 "影响：相关行业需留意；验证：跟踪配套细则。")
+        item = self.one(analysis=chain)
+        self.assertIn("AI 线索分析：", item.findtext("description"))
+        for label in ("线索：", "事实：", "推断：", "影响：", "验证："):
+            self.assertIn(label, item.findtext("description"))
+
+    def test_lite_summary_limit_does_not_truncate_analysis(self):
+        chain = ("线索：明确的政策线索；事实：公告已发布；推断：执行环节可能变化；"
+                 "影响：行业参与者需观察；验证：等待实施细则。")
+        data = payload(count=1)
+        data["items"][0]["summary"] = "摘要内容" * 50
+        data["items"][0]["analysis"] = chain
+        folder = Path(tempfile.mkdtemp())
+        _info, path = build_feed.build(data, folder, now=NOW, min_items=1, desc_limit=20)
+        item = parse(path.read_text(encoding="utf-8")).find("./channel/item")
+        description = item.findtext("description")
+        self.assertIn("摘要内容" * 5 + "…", description)
+        self.assertIn(chain, description)
+
 
 class ChinesePairingTest(unittest.TestCase):
     """英文条目必须中英并列：阅读器列表页只显示标题，译文不接在标题上就等于没翻。"""
