@@ -53,6 +53,7 @@ python tools/fetch_news.py --providers direct,rsshub,mirror,native,bridge \
 ```
 
 - `--providers` 就是这张表的顺序，可以只留几层（例如 `--providers rsshub,mirror` 复现旧行为）；
+- **单个源下载失败（包括只收到半截响应）就记下错误并跳过该源，继续抓下一个源**；不会让一个坏源中断整轮。若最后总条数低于 10，工作流为保护旧 feed 仍会失败、不覆盖旧 XML；
 - `bridge` 是别人的公共服务，**库函数默认不开**，命令行默认开——按需再打，别天天白用人家带宽；
 - 日志里降级成功会多一行 `↳ 退路：direct=HTTP Error 403；rsshub=timed out`，`sources[]` 里
   每条源都有 `provider` / `attempts`，说明是哪一层给的稿、前几层为什么不行；

@@ -40,6 +40,7 @@ import sys
 import unicodedata
 from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
+from http.client import HTTPException
 from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.parse import quote, urlencode
@@ -451,7 +452,10 @@ def collect(sources=None, instances=None, timeout=15, max_age_hours=24,
                 else:
                     payload = fetch(candidate["url"], timeout)
                 items = parse_feed(payload, source)
-            except (URLError, OSError, ValueError, ElementTree.ParseError) as exc:
+            except (URLError, OSError, HTTPException, ValueError, ElementTree.ParseError) as exc:
+                # IncompleteRead（HTTP 回应传到一半被断开）是 HTTPException，不是 OSError；
+                # 也当作这一跳失败，继续试该源的下一条退路。所有退路都失败则跳过此源，
+                # 不能让一个半截响应中断整轮新闻扫描。
                 errors.append(f"{candidate['provider']}/{label}: {exc}")
                 report["attempts"].append({"provider": candidate["provider"],
                                            "label": label, "ok": False, "error": str(exc)[:160]})
