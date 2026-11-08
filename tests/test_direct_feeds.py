@@ -8,6 +8,7 @@ import json
 import sys
 import unittest
 from datetime import datetime, timezone
+from http.client import IncompleteRead
 from pathlib import Path
 from urllib.parse import urlparse
 from xml.etree import ElementTree
@@ -227,6 +228,29 @@ class ProgramChainTest(unittest.TestCase):
         self.assertEqual(reports[0]["via"], "direct")
         self.assertEqual(len(items), 2)
         self.assertEqual(len(calls), 1)             # 官方实例一次都没打
+
+    def test_partial_download_skips_source_and_continues_scanning(self):
+        """下载到一半会抛 IncompleteRead；该源失败就记下来，继续扫描其他源。"""
+        def fetch(url, timeout=15):
+            if "/broken" in url:
+                raise IncompleteRead(b"<rss><channel>", 256)
+            if "/healthy" in url:
+                return RSS_OK
+            raise AssertionError(f"unexpected URL: {url}")
+
+        sources = [
+            self.source(key="BROKEN", route="/broken"),
+            self.source(key="HEALTHY", route="/healthy"),
+        ]
+        items, reports = fetch_news.collect(
+            sources=sources, instances=["https://rsshub.app"], providers=("rsshub",),
+            fetch=fetch, now=NOW, max_age_hours=24, log=lambda *_: None)
+
+        self.assertEqual([report["key"] for report in reports], ["BROKEN", "HEALTHY"])
+        self.assertFalse(reports[0]["ok"])
+        self.assertIn("IncompleteRead", reports[0]["attempts"][0]["error"])
+        self.assertTrue(reports[1]["ok"])
+        self.assertEqual(len(items), 1)
 
     def test_direct_failure_falls_back_to_the_official_instance(self):
         fetch = fake_fetch({
