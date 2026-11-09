@@ -68,6 +68,16 @@ class FeedStructureTest(unittest.TestCase):
         self.assertEqual(len(root.findall("./channel/item")), info["items"])
         self.assertEqual(info["items"], 12)
 
+    def test_duplicate_article_links_are_emitted_once(self):
+        data = payload(count=3)
+        data["items"][1]["link"] = data["items"][0]["link"]
+        data["items"][1]["title"] = "同一文章的另一个标题版本"
+        info, _path, root = self.build(data, min_items=1)
+        items = root.findall("./channel/item")
+        guids = [item.findtext("guid") for item in items]
+        self.assertEqual(info["items"], 2)
+        self.assertEqual(len(guids), len(set(guids)))
+
     def test_items_are_newest_first(self):
         _info, _path, root = self.build()
         stamps = [parsedate_to_datetime(item.findtext("pubDate"))
@@ -288,6 +298,13 @@ class DeviceFieldGuardTest(unittest.TestCase):
 
     def test_good_item_passes(self):
         self.assertTrue(build_feed.check_device_fields(self.fields(self.good())))
+
+    def test_duplicate_guid_is_rejected(self):
+        xml = self.good().replace("</channel>",
+                                  "<item><title>另一条</title><link>https://a.example/2</link>"
+                                  "<guid>g</guid></item></channel>")
+        with self.assertRaisesRegex(ValueError, "<guid> 重复"):
+            build_feed.check_device_fields(self.fields(xml))
 
     def test_missing_link_is_rejected(self):
         xml = "<rss><channel><item><title>标题</title><guid>g</guid></item></channel></rss>"

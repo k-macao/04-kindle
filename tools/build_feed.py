@@ -89,6 +89,25 @@ def group_label(key):
     return news_sources.GROUP_LABELS.get(key, key or "")
 
 
+def guid_for_item(item):
+    """返回 RSS `<guid>` 的稳定值；有效链接相同就视为同一条新闻。"""
+    link = _absolute(item.get("link"))
+    return link or ("urn:004:news:" + fetch_news.title_hash(item.get("title") or ""))
+
+
+def dedupe_guid_items(items):
+    """按最终 guid 去重；同一上游文章被多个 RSS 路由重复推送时保留最新项。"""
+    unique = []
+    seen = set()
+    for item in items:
+        guid = guid_for_item(item)
+        if guid in seen:
+            continue
+        seen.add(guid)
+        unique.append(item)
+    return unique
+
+
 def item_xml(item, names, sites, desc_limit=None, fallback_link=DEFAULT_SITE_URL):
     """一条新闻对应一个 <item>；缺什么就省什么，不写空标签。"""
     # 英文条目把中文接在标题后面：阅读器的列表页只显示标题，译文必须在这里才看得见。
@@ -104,7 +123,7 @@ def item_xml(item, names, sites, desc_limit=None, fallback_link=DEFAULT_SITE_URL
     # `feed.link._attr`，缺 <link> 时它索引 nil 当场报错，整个 feed 停在中途
     # （「讀一半失敗」就是这么来的）。没有原文地址的条目退回站点首页，绝不写假地址。
     link = _absolute(item.get("link")) or _absolute("https://" + site if site else "") or fallback_link
-    guid_value = _absolute(item.get("link")) or ("urn:004:news:" + fetch_news.title_hash(item["title"]))
+    guid_value = guid_for_item(item)
     permalink = "true" if _absolute(item.get("link")) else "false"
     parts = ["    <item>",
              f"      <title>{title}</title>",
@@ -198,7 +217,12 @@ def check_device_fields(parsed_items):
       `<dc:title>`，抠不到就是 nil，`string.format` 当场抛错；
     - `guid` 必须有，阅读器靠它去重。
     """
+    seen_guids = set()
     for index, item in enumerate(parsed_items, start=1):
+        guid = (item.findtext("guid") or "").strip()
+        if guid in seen_guids:
+            raise ValueError(f"第 {index} 条的 <guid> 重复：{guid}")
+        seen_guids.add(guid)
         link = (item.findtext("link") or "").strip()
         if not _absolute(link):
             raise ValueError(f"第 {index} 条没有绝对的 <link>：{link!r}（设备会停在这里）")
@@ -217,7 +241,7 @@ def build(payload, out_dir, min_items=10, max_items=build_news.MAX_ITEMS, now=No
           filename="news.xml", desc_limit=None):
     """生成 site/news.xml，返回 (info, path)。条目不足或 XML 不自洽时抛 ValueError。"""
     now = now or datetime.now(timezone.utc)
-    items = build_news.prune(payload.get("items") or [], max_items)
+    items = dedupe_guid_items(build_news.prune(payload.get("items") or [], max_items))
     if len(items) < min_items:
         raise ValueError(f"有效条目 {len(items)} 条，少于下限 {min_items}")
     xml = render(items, now, title=title, self_url=self_url, site_url=site_url,
