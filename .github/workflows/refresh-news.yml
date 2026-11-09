@@ -155,6 +155,9 @@ jobs:
           import sys
           from xml.etree import ElementTree
 
+          sys.path.insert(0, "tools")
+          import build_feed
+
           cjk = re.compile(r"[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]")
           base = os.environ.get("FEED_SELF_URL", "")
           minimum = int(os.environ.get("MIN_ITEMS", "10"))
@@ -200,10 +203,10 @@ jobs:
                       problems.append(f"{name} 有条目没有绝对的 <link>：{item_link[:40] or '(缺)'}")
                   if not title.strip() or "\n" in title:
                       problems.append(f"{name} 的 <title> 为空或带换行：{title[:20]!r}")
-                  description = item.findtext("description") or ""
-                  required = ("AI 线索分析：", "线索：", "事实：", "推断：", "影响：", "验证：")
-                  if any(label not in description for label in required):
-                      problems.append(f"{name} 第 {len(guids)} 条缺少完整 AI 线索分析：{title[:20]}")
+              try:
+                  build_feed.check_analysis_fields(items)
+              except ValueError as exc:
+                  problems.append(f"{name} {exc}")
 
               titles = [item.findtext("title") or "" for item in items]
               paired = sum(1 for title in titles if "｜中文：" in title)

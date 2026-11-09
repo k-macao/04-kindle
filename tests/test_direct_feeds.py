@@ -357,6 +357,10 @@ class WorkflowTest(unittest.TestCase):
         self.assertIn("secrets.DEEPSEEK_API_KEY", self.text)
         self.assertIn("site/news_analysis_cache.json", self.text.split("git add", 1)[1])
 
+    def test_feed_self_check_uses_shared_analysis_guard(self):
+        self.assertIn("build_feed.check_analysis_fields(items)", self.text)
+        self.assertNotIn('"AI 线索分析：", "线索："', self.text)
+
     def test_cli_rejects_unknown_layer(self):
         argv = fetch_news.parse_args(["--providers", "direct,瞎写的层"])
         self.assertIn("瞎写的层", argv.providers)      # 解析这一层不做判断，main 才校验

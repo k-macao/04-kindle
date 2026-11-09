@@ -175,6 +175,20 @@ def render(items, now, title=FEED_TITLE, self_url=DEFAULT_SELF_URL, site_url=DEF
     return "\n".join(head + body + ["  </channel>", "</rss>", ""])
 
 
+ANALYSIS_REQUIRED_LABELS = ("AI 线索分析", "线索：", "事实：", "推断：", "影响：", "验证：")
+
+
+def check_analysis_fields(parsed_items):
+    """确保发布的每条 RSS description 都包含标题与完整线索链。"""
+    for index, item in enumerate(parsed_items, start=1):
+        description = item.findtext("description") or ""
+        missing = [label for label in ANALYSIS_REQUIRED_LABELS if label not in description]
+        if missing:
+            title = item.findtext("title") or "(无标题)"
+            raise ValueError(f"第 {index} 条缺少 AI 线索分析标签 {', '.join(missing)}：{title[:40]}")
+    return True
+
+
 def check_device_fields(parsed_items):
     """设备侧（KOReader 的新闻下载器）读这份 feed 时的硬要求，缺一条就整轮停在中途。
 
