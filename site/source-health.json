@@ -1,5 +1,5 @@
 {
-  "checked": "2026-11-08T14:40:30+00:00",
+  "checked": "2026-11-09T02:30:49+00:00",
   "providers": [
     "direct",
     "rsshub",
@@ -8,12 +8,14 @@
     "bridge"
   ],
   "summary": {
-    "ok": 24,
+    "ok": 10,
     "total": 24,
-    "items": 92,
+    "items": 102,
     "by_provider": {
       "direct": 4,
-      "mirror": 20
+      "mirror": 2,
+      "rsshub": 2,
+      "bridge": 2
     }
   },
   "sources": [
@@ -40,7 +42,7 @@
       "group": "flash",
       "ok": true,
       "provider": "direct",
-      "count": 5,
+      "count": 11,
       "error": "",
       "attempts": [
         {
@@ -57,7 +59,7 @@
       "group": "flash",
       "ok": true,
       "provider": "direct",
-      "count": 9,
+      "count": 12,
       "error": "",
       "attempts": [
         {
@@ -74,7 +76,7 @@
       "group": "flash",
       "ok": true,
       "provider": "direct",
-      "count": 0,
+      "count": 11,
       "error": "",
       "attempts": [
         {
@@ -88,52 +90,6 @@
     {
       "key": "THS_NEWS",
       "name": "同花顺 · 实时财经新闻",
-      "group": "flash",
-      "ok": true,
-      "provider": "mirror",
-      "count": 7,
-      "error": "",
-      "attempts": [
-        {
-          "provider": "rsshub",
-          "label": "https://rsshub.rss.tips",
-          "ok": false,
-          "error": "The read operation timed out"
-        },
-        {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
-          "ok": true,
-          "error": ""
-        }
-      ]
-    },
-    {
-      "key": "YICAI_BRIEF",
-      "name": "第一财经 · 简报",
-      "group": "flash",
-      "ok": true,
-      "provider": "mirror",
-      "count": 12,
-      "error": "",
-      "attempts": [
-        {
-          "provider": "rsshub",
-          "label": "https://rsshub.rss.tips",
-          "ok": false,
-          "error": "The read operation timed out"
-        },
-        {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
-          "ok": true,
-          "error": ""
-        }
-      ]
-    },
-    {
-      "key": "SINA_ROLL",
-      "name": "新浪 · 股市滚动",
       "group": "flash",
       "ok": true,
       "provider": "mirror",
@@ -155,19 +111,137 @@
       ]
     },
     {
-      "key": "WSCN_NEWS",
-      "name": "华尔街见闻 · 要闻文章",
-      "group": "depth",
+      "key": "YICAI_BRIEF",
+      "name": "第一财经 · 简报",
+      "group": "flash",
       "ok": true,
-      "provider": "mirror",
-      "count": 3,
+      "provider": "rsshub",
+      "count": 12,
       "error": "",
       "attempts": [
         {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
+          "provider": "rsshub",
+          "label": "https://rsshub.rss.tips",
           "ok": true,
           "error": ""
+        }
+      ]
+    },
+    {
+      "key": "SINA_ROLL",
+      "name": "新浪 · 股市滚动",
+      "group": "flash",
+      "ok": false,
+      "provider": "",
+      "count": 0,
+      "error": "rsshub/https://rsshub.rss.tips: The read operation timed out；mirror/https://rsshub.isrss.com: The read operation timed out；mirror/https://rsshub.cups.moe: XML 解析失败：syntax error: line 1, column 0",
+      "attempts": [
+        {
+          "provider": "rsshub",
+          "label": "https://rsshub.rss.tips",
+          "ok": false,
+          "error": "The read operation timed out"
+        },
+        {
+          "provider": "mirror",
+          "label": "https://rsshub.isrss.com",
+          "ok": false,
+          "error": "The read operation timed out"
+        },
+        {
+          "provider": "mirror",
+          "label": "https://rsshub.cups.moe",
+          "ok": false,
+          "error": "XML 解析失败：syntax error: line 1, column 0"
+        },
+        {
+          "provider": "mirror",
+          "label": "https://rsshub.app",
+          "ok": false,
+          "error": "HTTP Error 403: Forbidden"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.org/bridge01",
+          "ok": false,
+          "error": "HTTP Error 500: Internal Server Error"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.org/bridge01",
+          "ok": false,
+          "error": "HTTP Error 500: Internal Server Error"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.flossboxin.org.in",
+          "ok": false,
+          "error": "<urlopen error [Errno 101] Network is unreachable>"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.flossboxin.org.in",
+          "ok": false,
+          "error": "<urlopen error [Errno 101] Network is unreachable>"
+        }
+      ]
+    },
+    {
+      "key": "WSCN_NEWS",
+      "name": "华尔街见闻 · 要闻文章",
+      "group": "depth",
+      "ok": false,
+      "provider": "",
+      "count": 0,
+      "error": "rsshub/https://rsshub.rss.tips: The read operation timed out；mirror/https://rsshub.isrss.com: The read operation timed out；mirror/https://rsshub.cups.moe: XML 解析失败：syntax error: line 1, column 0",
+      "attempts": [
+        {
+          "provider": "rsshub",
+          "label": "https://rsshub.rss.tips",
+          "ok": false,
+          "error": "The read operation timed out"
+        },
+        {
+          "provider": "mirror",
+          "label": "https://rsshub.isrss.com",
+          "ok": false,
+          "error": "The read operation timed out"
+        },
+        {
+          "provider": "mirror",
+          "label": "https://rsshub.cups.moe",
+          "ok": false,
+          "error": "XML 解析失败：syntax error: line 1, column 0"
+        },
+        {
+          "provider": "mirror",
+          "label": "https://rsshub.app",
+          "ok": false,
+          "error": "HTTP Error 403: Forbidden"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.org/bridge01",
+          "ok": false,
+          "error": "HTTP Error 500: Internal Server Error"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.org/bridge01",
+          "ok": false,
+          "error": "HTTP Error 500: Internal Server Error"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.flossboxin.org.in",
+          "ok": false,
+          "error": "<urlopen error [Errno 101] Network is unreachable>"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.flossboxin.org.in",
+          "ok": false,
+          "error": "<urlopen error [Errno 101] Network is unreachable>"
         }
       ]
     },
@@ -176,13 +250,13 @@
       "name": "财新 · 最新",
       "group": "depth",
       "ok": true,
-      "provider": "mirror",
-      "count": 1,
+      "provider": "rsshub",
+      "count": 10,
       "error": "",
       "attempts": [
         {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
+          "provider": "rsshub",
+          "label": "https://rsshub.rss.tips",
           "ok": true,
           "error": ""
         }
@@ -194,12 +268,24 @@
       "group": "depth",
       "ok": true,
       "provider": "mirror",
-      "count": 2,
+      "count": 12,
       "error": "",
       "attempts": [
         {
+          "provider": "rsshub",
+          "label": "https://rsshub.rss.tips",
+          "ok": false,
+          "error": "The read operation timed out"
+        },
+        {
           "provider": "mirror",
           "label": "https://rsshub.isrss.com",
+          "ok": false,
+          "error": "The read operation timed out"
+        },
+        {
+          "provider": "mirror",
+          "label": "https://rsshub.cups.moe",
           "ok": true,
           "error": ""
         }
@@ -209,16 +295,52 @@
       "key": "GELONGHUI_HOT",
       "name": "格隆汇 · 日热文",
       "group": "depth",
-      "ok": true,
-      "provider": "mirror",
+      "ok": false,
+      "provider": "",
       "count": 0,
-      "error": "",
+      "error": "rsshub/https://rsshub.rss.tips: The read operation timed out；mirror/https://rsshub.cups.moe: XML 解析失败：syntax error: line 1, column 0；mirror/https://rsshub.app: HTTP Error 403: Forbidden",
       "attempts": [
         {
+          "provider": "rsshub",
+          "label": "https://rsshub.rss.tips",
+          "ok": false,
+          "error": "The read operation timed out"
+        },
+        {
           "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
-          "ok": true,
-          "error": ""
+          "label": "https://rsshub.cups.moe",
+          "ok": false,
+          "error": "XML 解析失败：syntax error: line 1, column 0"
+        },
+        {
+          "provider": "mirror",
+          "label": "https://rsshub.app",
+          "ok": false,
+          "error": "HTTP Error 403: Forbidden"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.org/bridge01",
+          "ok": false,
+          "error": "HTTP Error 500: Internal Server Error"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.org/bridge01",
+          "ok": false,
+          "error": "HTTP Error 500: Internal Server Error"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.flossboxin.org.in",
+          "ok": false,
+          "error": "<urlopen error [Errno 101] Network is unreachable>"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.flossboxin.org.in",
+          "ok": false,
+          "error": "<urlopen error [Errno 101] Network is unreachable>"
         }
       ]
     },
@@ -226,16 +348,46 @@
       "key": "YICAI_LATEST",
       "name": "第一财经 · 最新",
       "group": "depth",
-      "ok": true,
-      "provider": "mirror",
-      "count": 10,
-      "error": "",
+      "ok": false,
+      "provider": "",
+      "count": 0,
+      "error": "rsshub/https://rsshub.rss.tips: The read operation timed out；mirror/https://rsshub.cups.moe: XML 解析失败：syntax error: line 1, column 0；bridge/RSS-Bridge rss-bridge.org/bridge01: HTTP Error 500: Internal Server Error",
       "attempts": [
         {
+          "provider": "rsshub",
+          "label": "https://rsshub.rss.tips",
+          "ok": false,
+          "error": "The read operation timed out"
+        },
+        {
           "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
-          "ok": true,
-          "error": ""
+          "label": "https://rsshub.cups.moe",
+          "ok": false,
+          "error": "XML 解析失败：syntax error: line 1, column 0"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.org/bridge01",
+          "ok": false,
+          "error": "HTTP Error 500: Internal Server Error"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.org/bridge01",
+          "ok": false,
+          "error": "HTTP Error 500: Internal Server Error"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.flossboxin.org.in",
+          "ok": false,
+          "error": "<urlopen error [Errno 101] Network is unreachable>"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.flossboxin.org.in",
+          "ok": false,
+          "error": "<urlopen error [Errno 101] Network is unreachable>"
         }
       ]
     },
@@ -244,13 +396,19 @@
       "name": "财新周刊",
       "group": "depth",
       "ok": true,
-      "provider": "mirror",
+      "provider": "bridge",
       "count": 1,
       "error": "",
       "attempts": [
         {
           "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
+          "label": "https://rsshub.cups.moe",
+          "ok": false,
+          "error": "XML 解析失败：syntax error: line 1, column 0"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.org/bridge01",
           "ok": true,
           "error": ""
         }
@@ -260,16 +418,34 @@
       "key": "WSCN_HK",
       "name": "华尔街见闻 · 港股快讯",
       "group": "flash",
-      "ok": true,
-      "provider": "mirror",
+      "ok": false,
+      "provider": "",
       "count": 0,
-      "error": "",
+      "error": "bridge/RSS-Bridge rss-bridge.org/bridge01: HTTP Error 500: Internal Server Error；bridge/RSS-Bridge rss-bridge.org/bridge01: HTTP Error 500: Internal Server Error；bridge/RSS-Bridge rss-bridge.flossboxin.org.in: <urlopen error [Errno 101] Network is unreachable>",
       "attempts": [
         {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
-          "ok": true,
-          "error": ""
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.org/bridge01",
+          "ok": false,
+          "error": "HTTP Error 500: Internal Server Error"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.org/bridge01",
+          "ok": false,
+          "error": "HTTP Error 500: Internal Server Error"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.flossboxin.org.in",
+          "ok": false,
+          "error": "<urlopen error [Errno 101] Network is unreachable>"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.flossboxin.org.in",
+          "ok": false,
+          "error": "<urlopen error [Errno 101] Network is unreachable>"
         }
       ]
     },
@@ -277,16 +453,34 @@
       "key": "BLOOMBERG_CRYPTO",
       "name": "彭博社 · 加密",
       "group": "global",
-      "ok": true,
-      "provider": "mirror",
+      "ok": false,
+      "provider": "",
       "count": 0,
-      "error": "",
+      "error": "bridge/RSS-Bridge rss-bridge.org/bridge01: HTTP Error 500: Internal Server Error；bridge/RSS-Bridge rss-bridge.org/bridge01: HTTP Error 500: Internal Server Error；bridge/RSS-Bridge rss-bridge.flossboxin.org.in: <urlopen error [Errno 101] Network is unreachable>",
       "attempts": [
         {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
-          "ok": true,
-          "error": ""
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.org/bridge01",
+          "ok": false,
+          "error": "HTTP Error 500: Internal Server Error"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.org/bridge01",
+          "ok": false,
+          "error": "HTTP Error 500: Internal Server Error"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.flossboxin.org.in",
+          "ok": false,
+          "error": "<urlopen error [Errno 101] Network is unreachable>"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.flossboxin.org.in",
+          "ok": false,
+          "error": "<urlopen error [Errno 101] Network is unreachable>"
         }
       ]
     },
@@ -294,16 +488,34 @@
       "key": "BLOOMBERG",
       "name": "彭博社 · 市场",
       "group": "global",
-      "ok": true,
-      "provider": "mirror",
-      "count": 9,
-      "error": "",
+      "ok": false,
+      "provider": "",
+      "count": 0,
+      "error": "bridge/RSS-Bridge rss-bridge.org/bridge01: HTTP Error 500: Internal Server Error；bridge/RSS-Bridge rss-bridge.org/bridge01: HTTP Error 500: Internal Server Error；bridge/RSS-Bridge rss-bridge.flossboxin.org.in: <urlopen error [Errno 101] Network is unreachable>",
       "attempts": [
         {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
-          "ok": true,
-          "error": ""
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.org/bridge01",
+          "ok": false,
+          "error": "HTTP Error 500: Internal Server Error"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.org/bridge01",
+          "ok": false,
+          "error": "HTTP Error 500: Internal Server Error"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.flossboxin.org.in",
+          "ok": false,
+          "error": "<urlopen error [Errno 101] Network is unreachable>"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.flossboxin.org.in",
+          "ok": false,
+          "error": "<urlopen error [Errno 101] Network is unreachable>"
         }
       ]
     },
@@ -311,16 +523,34 @@
       "key": "BLOOMBERG_ECON",
       "name": "彭博社 · 经济",
       "group": "global",
-      "ok": true,
-      "provider": "mirror",
+      "ok": false,
+      "provider": "",
       "count": 0,
-      "error": "",
+      "error": "bridge/RSS-Bridge rss-bridge.org/bridge01: HTTP Error 500: Internal Server Error；bridge/RSS-Bridge rss-bridge.org/bridge01: HTTP Error 500: Internal Server Error；bridge/RSS-Bridge rss-bridge.flossboxin.org.in: <urlopen error [Errno 101] Network is unreachable>",
       "attempts": [
         {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
-          "ok": true,
-          "error": ""
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.org/bridge01",
+          "ok": false,
+          "error": "HTTP Error 500: Internal Server Error"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.org/bridge01",
+          "ok": false,
+          "error": "HTTP Error 500: Internal Server Error"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.flossboxin.org.in",
+          "ok": false,
+          "error": "<urlopen error [Errno 101] Network is unreachable>"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.flossboxin.org.in",
+          "ok": false,
+          "error": "<urlopen error [Errno 101] Network is unreachable>"
         }
       ]
     },
@@ -328,16 +558,34 @@
       "key": "GOV_ZHENGCE",
       "name": "中国政府网 · 最新政策",
       "group": "politics",
-      "ok": true,
-      "provider": "mirror",
+      "ok": false,
+      "provider": "",
       "count": 0,
-      "error": "",
+      "error": "bridge/RSS-Bridge rss-bridge.org/bridge01: HTTP Error 500: Internal Server Error；bridge/RSS-Bridge rss-bridge.org/bridge01: HTTP Error 500: Internal Server Error；bridge/RSS-Bridge rss-bridge.flossboxin.org.in: <urlopen error [Errno 101] Network is unreachable>",
       "attempts": [
         {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
-          "ok": true,
-          "error": ""
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.org/bridge01",
+          "ok": false,
+          "error": "HTTP Error 500: Internal Server Error"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.org/bridge01",
+          "ok": false,
+          "error": "HTTP Error 500: Internal Server Error"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.flossboxin.org.in",
+          "ok": false,
+          "error": "<urlopen error [Errno 101] Network is unreachable>"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.flossboxin.org.in",
+          "ok": false,
+          "error": "<urlopen error [Errno 101] Network is unreachable>"
         }
       ]
     },
@@ -345,16 +593,34 @@
       "key": "MFA_FYRBT",
       "name": "外交部 · 发言人表态",
       "group": "politics",
-      "ok": true,
-      "provider": "mirror",
+      "ok": false,
+      "provider": "",
       "count": 0,
-      "error": "",
+      "error": "bridge/RSS-Bridge rss-bridge.org/bridge01: HTTP Error 500: Internal Server Error；bridge/RSS-Bridge rss-bridge.org/bridge01: HTTP Error 500: Internal Server Error；bridge/RSS-Bridge rss-bridge.flossboxin.org.in: <urlopen error [Errno 101] Network is unreachable>",
       "attempts": [
         {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
-          "ok": true,
-          "error": ""
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.org/bridge01",
+          "ok": false,
+          "error": "HTTP Error 500: Internal Server Error"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.org/bridge01",
+          "ok": false,
+          "error": "HTTP Error 500: Internal Server Error"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.flossboxin.org.in",
+          "ok": false,
+          "error": "<urlopen error [Errno 101] Network is unreachable>"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.flossboxin.org.in",
+          "ok": false,
+          "error": "<urlopen error [Errno 101] Network is unreachable>"
         }
       ]
     },
@@ -363,13 +629,13 @@
       "name": "联合早报 · 国际",
       "group": "politics",
       "ok": true,
-      "provider": "mirror",
-      "count": 3,
+      "provider": "bridge",
+      "count": 10,
       "error": "",
       "attempts": [
         {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.org/bridge01",
           "ok": true,
           "error": ""
         }
@@ -379,16 +645,34 @@
       "key": "BLOOMBERG_POLITICS",
       "name": "彭博社 · 政治",
       "group": "politics",
-      "ok": true,
-      "provider": "mirror",
-      "count": 2,
-      "error": "",
+      "ok": false,
+      "provider": "",
+      "count": 0,
+      "error": "bridge/RSS-Bridge rss-bridge.org/bridge01: HTTP Error 500: Internal Server Error；bridge/RSS-Bridge rss-bridge.org/bridge01: HTTP Error 500: Internal Server Error；bridge/RSS-Bridge rss-bridge.flossboxin.org.in: <urlopen error [Errno 101] Network is unreachable>",
       "attempts": [
         {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
-          "ok": true,
-          "error": ""
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.org/bridge01",
+          "ok": false,
+          "error": "HTTP Error 500: Internal Server Error"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.org/bridge01",
+          "ok": false,
+          "error": "HTTP Error 500: Internal Server Error"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.flossboxin.org.in",
+          "ok": false,
+          "error": "<urlopen error [Errno 101] Network is unreachable>"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.flossboxin.org.in",
+          "ok": false,
+          "error": "<urlopen error [Errno 101] Network is unreachable>"
         }
       ]
     },
@@ -396,16 +680,34 @@
       "key": "AEON_PHIL",
       "name": "Aeon · 哲学",
       "group": "thought",
-      "ok": true,
-      "provider": "mirror",
-      "count": 1,
-      "error": "",
+      "ok": false,
+      "provider": "",
+      "count": 0,
+      "error": "bridge/RSS-Bridge rss-bridge.org/bridge01: HTTP Error 500: Internal Server Error；bridge/RSS-Bridge rss-bridge.org/bridge01: HTTP Error 500: Internal Server Error；bridge/RSS-Bridge rss-bridge.flossboxin.org.in: <urlopen error [Errno 101] Network is unreachable>",
       "attempts": [
         {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
-          "ok": true,
-          "error": ""
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.org/bridge01",
+          "ok": false,
+          "error": "HTTP Error 500: Internal Server Error"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.org/bridge01",
+          "ok": false,
+          "error": "HTTP Error 500: Internal Server Error"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.flossboxin.org.in",
+          "ok": false,
+          "error": "<urlopen error [Errno 101] Network is unreachable>"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.flossboxin.org.in",
+          "ok": false,
+          "error": "<urlopen error [Errno 101] Network is unreachable>"
         }
       ]
     },
@@ -413,16 +715,34 @@
       "key": "PSYCHE_IDEAS",
       "name": "Psyche · Ideas",
       "group": "thought",
-      "ok": true,
-      "provider": "mirror",
-      "count": 4,
-      "error": "",
+      "ok": false,
+      "provider": "",
+      "count": 0,
+      "error": "bridge/RSS-Bridge rss-bridge.org/bridge01: HTTP Error 500: Internal Server Error；bridge/RSS-Bridge rss-bridge.org/bridge01: HTTP Error 500: Internal Server Error；bridge/RSS-Bridge rss-bridge.flossboxin.org.in: <urlopen error [Errno 101] Network is unreachable>",
       "attempts": [
         {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
-          "ok": true,
-          "error": ""
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.org/bridge01",
+          "ok": false,
+          "error": "HTTP Error 500: Internal Server Error"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.org/bridge01",
+          "ok": false,
+          "error": "HTTP Error 500: Internal Server Error"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.flossboxin.org.in",
+          "ok": false,
+          "error": "<urlopen error [Errno 101] Network is unreachable>"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.flossboxin.org.in",
+          "ok": false,
+          "error": "<urlopen error [Errno 101] Network is unreachable>"
         }
       ]
     },
@@ -430,16 +750,34 @@
       "key": "AISIXIANG",
       "name": "爱思想 · 最近更新",
       "group": "thought",
-      "ok": true,
-      "provider": "mirror",
+      "ok": false,
+      "provider": "",
       "count": 0,
-      "error": "",
+      "error": "bridge/RSS-Bridge rss-bridge.org/bridge01: HTTP Error 500: Internal Server Error；bridge/RSS-Bridge rss-bridge.org/bridge01: HTTP Error 500: Internal Server Error；bridge/RSS-Bridge rss-bridge.flossboxin.org.in: <urlopen error [Errno 101] Network is unreachable>",
       "attempts": [
         {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
-          "ok": true,
-          "error": ""
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.org/bridge01",
+          "ok": false,
+          "error": "HTTP Error 500: Internal Server Error"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.org/bridge01",
+          "ok": false,
+          "error": "HTTP Error 500: Internal Server Error"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.flossboxin.org.in",
+          "ok": false,
+          "error": "<urlopen error [Errno 101] Network is unreachable>"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.flossboxin.org.in",
+          "ok": false,
+          "error": "<urlopen error [Errno 101] Network is unreachable>"
         }
       ]
     }

@@ -6,39 +6,37 @@
     <atom:link href="https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news-test.xml" rel="self" type="application/rss+xml"/>
     <description>每天 07:00（北京时间）从 RSSHub 抓取并合并的财经、政治与哲学思想新闻，英文条目附中文译文，本次 3 条。</description>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 08 Nov 2026 14:45:57 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 09 Nov 2026 02:37:55 +0000</lastBuildDate>
     <generator>04-kindle tools/build_feed.py</generator>
     <ttl>60</ttl>
     <item>
-      <title>沙特阿美在首都利雅得的办公楼遇袭 受到轻微损伤</title>
-      <link>https://finance.sina.com.cn/stock/usstock/c/2026-11-08/doc-inixzxsn6833330.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/usstock/c/2026-11-08/doc-inixzxsn6833330.shtml</guid>
-      <pubDate>Sun, 08 Nov 2026 14:38:44 +0000</pubDate>
+      <title>韩国首尔综指日内涨幅扩大至2%。</title>
+      <link>https://wallstreetcn.com/livenews/3196618</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3196618</guid>
+      <pubDate>Mon, 09 Nov 2026 02:30:22 +0000</pubDate>
       <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>沙特阿美位于利雅得的办公室周日遭到袭击。目前沙特正面临来自伊朗支持的也门胡塞武装的新一轮打击。 据沙特能源部和官方的沙特通讯社称，这家沙特国有石油巨头的一栋行政…
-
-AI 线索分析：线索：标题称沙特阿美利雅得办公楼遇袭并受轻微损伤；摘要称沙特能源部和沙特通讯社表示行政办公楼因坠落弹片轻微损坏、无人员伤亡，并提及胡塞武装新一轮打击及此前宰赫兰总部、谢巴油田等设施遇袭。事实：报道明确说利雅得阿卜杜拉国王金融区办公楼因弹片轻微损坏、无伤亡，该地区约一个月来实行远程办公，近几周针对沙特阿美基础设施的袭击不止一例。推断：袭击可能与伊朗支持的胡塞武装行动相关，但报道用“可能”表述，具体责任与袭击方式线索有限。影响：可能影响沙特阿美办公运营、能源基础设施安全预期及地区安全风险关注，实际影响取决于后续袭击是否持续。验证：可观察沙特官方后续通报、胡塞武装表态、沙特阿美设施运营公告及地区安全事件频率。</description>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+      <description>AI 线索分析：线索：标题称韩国首尔综指日内涨幅扩大至2%，发布时间为2026-11-09T02:30:22Z，来源WSCN_LIVE；摘要为空。事实：报道明确称首尔综指日内涨幅扩大至2%。推断：仅凭该条可确认指数涨幅这一市场信号，但无法从本条判断驱动因素；摘要为空，线索有限。影响：可能影响关注韩国股市的投资者情绪及指数相关产品，但具体传导条件不明。验证：需对照同一时段其他来源的指数点位、成分股表现及宏观消息，目前缺少验证材料。</description>
     </item>
     <item>
-      <title>美国CPI前瞻：核心CPI或明显降温，野村仍押12月加息</title>
-      <link>https://flash.jin10.com/detail/20261108223501998800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261108223501998800</guid>
-      <pubDate>Sun, 08 Nov 2026 14:35:02 +0000</pubDate>
+      <title>亚洲早盘铜价走高 但宏观因素令前景蒙阴</title>
+      <link>https://flash.jin10.com/detail/20261109103015249800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261109103015249800</guid>
+      <pubDate>Mon, 09 Nov 2026 02:30:15 +0000</pubDate>
       <category>中文财经快讯</category>
       <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>AI 线索分析：线索：标题提及美国CPI前瞻、核心CPI或明显降温、野村仍押12月加息；摘要为空。事实：报道仅标题给出上述信号，未提供具体数据、时间或野村论据。推断：标题暗示市场预期核心通胀降温与野村加息判断存在分歧，但无摘要支撑，无法确认细节。影响：可能影响利率预期相关讨论，但缺乏数据无法判断具体主体与条件。验证：线索有限，需等待CPI实际数据、野村报告原文及美联储官员表态。</description>
+      <description>金十数据11月9日讯，Dongwu Futures分析师写道，亚洲早盘交易中铜价走高，不过宏观逆风不断加剧，令前景蒙上阴影。他们称，在民主党在中期选举中横扫国会…
+
+AI 线索分析：线索：标题称亚洲早盘铜价走高但宏观因素令前景蒙阴；摘要引述Dongwu Futures分析师，提到民主党在中期选举中横扫国会后投资者重新评估美国关税前景、对监管趋严可能压制AI相关需求溢价的担忧加剧、铜精矿供应紧张且现货加工费低位、需求仍然疲软，短期铜价可能波动并偏弱。事实：报道明确给出上述分析师观点及铜价早盘走高、宏观逆风、供应紧张、需求疲软等表述。推断：由线索可推论铜价短期受宏观与需求预期压制，但“偏弱走势”属分析师判断而非已发生事实；摘要未给出具体价格与涨跌幅。影响：可能影响铜相关产业链、加工费谈判参与方及AI需求相关预期，条件取决于关税与监管进展。验证：可观察后续铜现货加工费、长期合约谈判结果、美国关税政策动向及铜价实际走势。</description>
     </item>
     <item>
-      <title>国泰海通：白酒股价调整充分 估值和机构持仓均处于历史偏底部位置</title>
-      <link>https://www.cls.cn/detail/2528345</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2528345</guid>
-      <pubDate>Sun, 08 Nov 2026 14:35:01 +0000</pubDate>
+      <title>韩国KOSPI指数日内涨幅达2.00%。</title>
+      <link>https://flash.jin10.com/detail/20261109103012895800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261109103012895800</guid>
+      <pubDate>Mon, 09 Nov 2026 02:30:12 +0000</pubDate>
       <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-      <description>【国泰海通：白酒股价调整充分 估值和机构持仓均处于历史偏底部位置 】财联社11月8日电，国泰海通发布研报指出，白酒股价调整充分，估值和机构持仓均处于历史偏底部位…
-
-AI 线索分析：线索：国泰海通研报称白酒股价调整充分，估值和机构持仓处于历史偏底部；摘要给出白酒板块PETTM 23.1X、2005年以来36.2%分位，食饮行业26Q3基金持仓比例2.2%、环比Q2抬升但仍处历史低位。事实：报道明确给出上述估值分位与基金持仓数据，并称食品饮料板块自2021年起连续6年下跌。推断：研报认为估值修复尚有空间，属机构观点而非已发生事实；低持仓与低估值可能构成修复条件，但不保证股价上行。影响：可能影响白酒及食品饮料板块的市场关注与资金配置讨论。验证：可观察后续基金季报持仓变化、板块估值分位及白酒企业业绩数据。</description>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>AI 线索分析：线索：标题称韩国KOSPI指数日内涨幅达2.00%，发布时间2026-11-09T02:30:12Z，来源JIN10；摘要为空。事实：报道明确称KOSPI日内涨幅达2.00%。推断：与同批条目相互印证韩国股市走强，但本条未提供点位与原因；摘要为空，线索有限。影响：可能影响韩国股市相关情绪与资金流向，具体条件不明。验证：需结合同批条目中的点位数据及后续行情确认，目前缺少独立验证材料。</description>
     </item>
   </channel>
 </rss>
