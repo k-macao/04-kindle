@@ -1,5 +1,5 @@
 {
-  "checked": "2026-11-09T04:23:17+00:00",
+  "checked": "2026-11-09T04:43:21+00:00",
   "providers": [
     "direct",
     "rsshub",
@@ -10,7 +10,7 @@
   "summary": {
     "ok": 23,
     "total": 24,
-    "items": 211,
+    "items": 167,
     "by_provider": {
       "direct": 4,
       "rsshub": 18,
@@ -58,7 +58,7 @@
       "group": "flash",
       "ok": true,
       "provider": "direct",
-      "count": 10,
+      "count": 9,
       "error": "",
       "attempts": [
         {
@@ -92,7 +92,7 @@
       "group": "flash",
       "ok": true,
       "provider": "rsshub",
-      "count": 11,
+      "count": 7,
       "error": "",
       "attempts": [
         {
@@ -143,7 +143,7 @@
       "group": "depth",
       "ok": true,
       "provider": "rsshub",
-      "count": 11,
+      "count": 12,
       "error": "",
       "attempts": [
         {
@@ -160,7 +160,7 @@
       "group": "depth",
       "ok": true,
       "provider": "rsshub",
-      "count": 12,
+      "count": 10,
       "error": "",
       "attempts": [
         {
@@ -177,7 +177,7 @@
       "group": "depth",
       "ok": true,
       "provider": "rsshub",
-      "count": 12,
+      "count": 5,
       "error": "",
       "attempts": [
         {
@@ -194,7 +194,7 @@
       "group": "depth",
       "ok": true,
       "provider": "rsshub",
-      "count": 8,
+      "count": 0,
       "error": "",
       "attempts": [
         {
@@ -211,7 +211,7 @@
       "group": "depth",
       "ok": true,
       "provider": "rsshub",
-      "count": 11,
+      "count": 12,
       "error": "",
       "attempts": [
         {
@@ -228,7 +228,7 @@
       "group": "depth",
       "ok": true,
       "provider": "rsshub",
-      "count": 2,
+      "count": 1,
       "error": "",
       "attempts": [
         {
@@ -245,7 +245,7 @@
       "group": "flash",
       "ok": true,
       "provider": "rsshub",
-      "count": 12,
+      "count": 10,
       "error": "",
       "attempts": [
         {
@@ -355,7 +355,7 @@
       "group": "politics",
       "ok": true,
       "provider": "rsshub",
-      "count": 5,
+      "count": 0,
       "error": "",
       "attempts": [
         {
@@ -372,7 +372,7 @@
       "group": "politics",
       "ok": true,
       "provider": "rsshub",
-      "count": 1,
+      "count": 0,
       "error": "",
       "attempts": [
         {
@@ -389,7 +389,7 @@
       "group": "politics",
       "ok": true,
       "provider": "rsshub",
-      "count": 12,
+      "count": 2,
       "error": "",
       "attempts": [
         {
@@ -405,13 +405,19 @@
       "name": "彭博社 · 政治",
       "group": "politics",
       "ok": true,
-      "provider": "rsshub",
+      "provider": "mirror",
       "count": 12,
       "error": "",
       "attempts": [
         {
           "provider": "rsshub",
           "label": "https://rsshub.rss.tips",
+          "ok": false,
+          "error": "The read operation timed out"
+        },
+        {
+          "provider": "mirror",
+          "label": "https://rsshub.isrss.com",
           "ok": true,
           "error": ""
         }
@@ -423,7 +429,7 @@
       "group": "thought",
       "ok": true,
       "provider": "rsshub",
-      "count": 4,
+      "count": 1,
       "error": "",
       "attempts": [
         {
@@ -439,19 +445,13 @@
       "name": "Psyche · Ideas",
       "group": "thought",
       "ok": true,
-      "provider": "mirror",
-      "count": 6,
+      "provider": "rsshub",
+      "count": 4,
       "error": "",
       "attempts": [
         {
           "provider": "rsshub",
           "label": "https://rsshub.rss.tips",
-          "ok": false,
-          "error": "The read operation timed out"
-        },
-        {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
           "ok": true,
           "error": ""
         }
