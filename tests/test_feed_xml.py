@@ -162,9 +162,11 @@ class ItemContentTest(unittest.TestCase):
         chain = ("线索：政策公布；事实：文件列出新要求；推断：执行成本或变化；"
                  "影响：相关行业需留意；验证：跟踪配套细则。")
         item = self.one(analysis=chain)
-        self.assertIn("AI 线索分析：", item.findtext("description"))
+        description = item.findtext("description")
+        self.assertIn("AI 线索分析", description)
+        self.assertEqual(description.count("<p>"), 7)  # 摘要、分析标题、五个线索环节
         for label in ("线索：", "事实：", "推断：", "影响：", "验证："):
-            self.assertIn(label, item.findtext("description"))
+            self.assertIn(f"<p>{label}", description)
 
     def test_lite_summary_limit_does_not_truncate_analysis(self):
         chain = ("线索：明确的政策线索；事实：公告已发布；推断：执行环节可能变化；"
@@ -176,8 +178,9 @@ class ItemContentTest(unittest.TestCase):
         _info, path = build_feed.build(data, folder, now=NOW, min_items=1, desc_limit=20)
         item = parse(path.read_text(encoding="utf-8")).find("./channel/item")
         description = item.findtext("description")
-        self.assertIn("摘要内容" * 5 + "…", description)
-        self.assertIn(chain, description)
+        self.assertIn("<p>" + "摘要内容" * 5 + "…</p>", description)
+        flattened = description.replace("<p>", "").replace("</p>", "")
+        self.assertIn(chain, flattened)
 
 
 class ChinesePairingTest(unittest.TestCase):
