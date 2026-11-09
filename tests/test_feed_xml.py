@@ -256,6 +256,26 @@ class EscapingTest(unittest.TestCase):
         self.assertIn("财经新闻", text)
 
 
+class AnalysisGuardTest(unittest.TestCase):
+    def item(self, analysis):
+        data = payload(count=1)
+        data["items"][0]["analysis"] = analysis
+        folder = Path(tempfile.mkdtemp())
+        _info, path = build_feed.build(data, folder, now=NOW, min_items=1)
+        return parse(path.read_text(encoding="utf-8")).find("./channel/item")
+
+    def test_new_paragraph_heading_passes_analysis_check(self):
+        analysis = ("线索：市场成交额变化；事实：指数早盘收涨；推断：风险偏好可能改善；"
+                    "影响：相关板块或受关注；验证：观察后续成交与行业数据。")
+        item = self.item(analysis)
+        self.assertTrue(build_feed.check_analysis_fields([item]))
+
+    def test_analysis_check_rejects_missing_clue(self):
+        item = self.item("线索：有线索，但遗漏其余环节。")
+        with self.assertRaisesRegex(ValueError, "第 1 条缺少 AI 线索分析标签"):
+            build_feed.check_analysis_fields([item])
+
+
 class DeviceFieldGuardTest(unittest.TestCase):
     """设备侧硬要求：缺一条就整轮停在中途（KOReader 索引 nil 报错）。"""
 
