@@ -23,6 +23,7 @@
 """
 
 import argparse
+import html as html_mod
 import json
 import re
 import sys
@@ -134,10 +135,16 @@ def item_xml(item, names, sites, desc_limit=None, fallback_link=DEFAULT_SITE_URL
         description = description[:desc_limit].rstrip() + "…"
     analysis = str(item.get("analysis") or "").strip()
     if analysis:
-        # 保留线索→事实→推断→影响→验证各段，KOReader 会把 description 作为 RSS 正文。
+        # 把摘要和五个线索环节逐段排版成 HTML；外层 XML 转义后，阅读器会在解析
+        # <description> 时还原这些段落标签，KOReader 打开条目时就不会挤成一整行。
         analysis = " ".join(line.strip() for line in analysis.splitlines() if line.strip())
-        description += ("\n\n" if description else "") + "AI 线索分析：" + analysis
-    if description and description != shown:
+        clue_parts = [part.strip() for part in re.split(
+            r"(?=(?:线索|事实|推断|影响|验证)：)", analysis) if part.strip()]
+        blocks = ([description] if description else []) + ["AI 线索分析"] + clue_parts
+        html_description = "".join(
+            f"<p>{html_mod.escape(block, quote=False)}</p>" for block in blocks)
+        parts.append(f"      <description>{xml_text(html_description)}</description>")
+    elif description and description != shown:
         parts.append(f"      <description>{xml_text(description)}</description>")
     parts.append("    </item>")
     return "\n".join(parts)
