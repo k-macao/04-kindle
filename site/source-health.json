@@ -1,5 +1,5 @@
 {
-  "checked": "2026-11-09T04:43:21+00:00",
+  "checked": "2026-11-10T04:32:44+00:00",
   "providers": [
     "direct",
     "rsshub",
@@ -8,13 +8,13 @@
     "bridge"
   ],
   "summary": {
-    "ok": 23,
+    "ok": 24,
     "total": 24,
-    "items": 167,
+    "items": 211,
     "by_provider": {
       "direct": 4,
-      "rsshub": 18,
-      "mirror": 1
+      "rsshub": 15,
+      "mirror": 5
     }
   },
   "sources": [
@@ -41,7 +41,7 @@
       "group": "flash",
       "ok": true,
       "provider": "direct",
-      "count": 12,
+      "count": 10,
       "error": "",
       "attempts": [
         {
@@ -58,7 +58,7 @@
       "group": "flash",
       "ok": true,
       "provider": "direct",
-      "count": 9,
+      "count": 10,
       "error": "",
       "attempts": [
         {
@@ -75,7 +75,7 @@
       "group": "flash",
       "ok": true,
       "provider": "direct",
-      "count": 8,
+      "count": 10,
       "error": "",
       "attempts": [
         {
@@ -92,7 +92,7 @@
       "group": "flash",
       "ok": true,
       "provider": "rsshub",
-      "count": 7,
+      "count": 10,
       "error": "",
       "attempts": [
         {
@@ -109,7 +109,7 @@
       "group": "flash",
       "ok": true,
       "provider": "rsshub",
-      "count": 12,
+      "count": 11,
       "error": "",
       "attempts": [
         {
@@ -126,7 +126,7 @@
       "group": "flash",
       "ok": true,
       "provider": "rsshub",
-      "count": 12,
+      "count": 11,
       "error": "",
       "attempts": [
         {
@@ -142,13 +142,19 @@
       "name": "华尔街见闻 · 要闻文章",
       "group": "depth",
       "ok": true,
-      "provider": "rsshub",
+      "provider": "mirror",
       "count": 12,
       "error": "",
       "attempts": [
         {
           "provider": "rsshub",
           "label": "https://rsshub.rss.tips",
+          "ok": false,
+          "error": "The read operation timed out"
+        },
+        {
+          "provider": "mirror",
+          "label": "https://rsshub.isrss.com",
           "ok": true,
           "error": ""
         }
@@ -160,7 +166,7 @@
       "group": "depth",
       "ok": true,
       "provider": "rsshub",
-      "count": 10,
+      "count": 12,
       "error": "",
       "attempts": [
         {
@@ -177,7 +183,7 @@
       "group": "depth",
       "ok": true,
       "provider": "rsshub",
-      "count": 5,
+      "count": 12,
       "error": "",
       "attempts": [
         {
@@ -194,7 +200,7 @@
       "group": "depth",
       "ok": true,
       "provider": "rsshub",
-      "count": 0,
+      "count": 10,
       "error": "",
       "attempts": [
         {
@@ -211,7 +217,7 @@
       "group": "depth",
       "ok": true,
       "provider": "rsshub",
-      "count": 12,
+      "count": 11,
       "error": "",
       "attempts": [
         {
@@ -245,7 +251,7 @@
       "group": "flash",
       "ok": true,
       "provider": "rsshub",
-      "count": 10,
+      "count": 7,
       "error": "",
       "attempts": [
         {
@@ -259,82 +265,6 @@
     {
       "key": "BLOOMBERG_CRYPTO",
       "name": "彭博社 · 加密",
-      "group": "global",
-      "ok": false,
-      "provider": "",
-      "count": 0,
-      "error": "rsshub/https://rsshub.rss.tips: HTTP Error 503: Service Unavailable；mirror/https://rsshub.isrss.com: HTTP Error 503: Service Unavailable；mirror/https://rsshub.cups.moe: HTTP Error 503: Service Unavailable",
-      "attempts": [
-        {
-          "provider": "rsshub",
-          "label": "https://rsshub.rss.tips",
-          "ok": false,
-          "error": "HTTP Error 503: Service Unavailable"
-        },
-        {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
-          "ok": false,
-          "error": "HTTP Error 503: Service Unavailable"
-        },
-        {
-          "provider": "mirror",
-          "label": "https://rsshub.cups.moe",
-          "ok": false,
-          "error": "HTTP Error 503: Service Unavailable"
-        },
-        {
-          "provider": "mirror",
-          "label": "https://rsshub.app",
-          "ok": false,
-          "error": "HTTP Error 403: Forbidden"
-        },
-        {
-          "provider": "bridge",
-          "label": "RSS-Bridge rss-bridge.org/bridge01",
-          "ok": false,
-          "error": "HTTP Error 503: Service Unavailable"
-        },
-        {
-          "provider": "bridge",
-          "label": "RSS-Bridge rss-bridge.org/bridge01",
-          "ok": false,
-          "error": "HTTP Error 500: Internal Server Error"
-        },
-        {
-          "provider": "bridge",
-          "label": "RSS-Bridge rss-bridge.flossboxin.org.in",
-          "ok": false,
-          "error": "<urlopen error [Errno 101] Network is unreachable>"
-        },
-        {
-          "provider": "bridge",
-          "label": "RSS-Bridge rss-bridge.flossboxin.org.in",
-          "ok": false,
-          "error": "<urlopen error [Errno 101] Network is unreachable>"
-        }
-      ]
-    },
-    {
-      "key": "BLOOMBERG",
-      "name": "彭博社 · 市场",
-      "group": "global",
-      "ok": true,
-      "provider": "rsshub",
-      "count": 12,
-      "error": "",
-      "attempts": [
-        {
-          "provider": "rsshub",
-          "label": "https://rsshub.rss.tips",
-          "ok": true,
-          "error": ""
-        }
-      ]
-    },
-    {
-      "key": "BLOOMBERG_ECON",
-      "name": "彭博社 · 经济",
       "group": "global",
       "ok": true,
       "provider": "rsshub",
@@ -350,12 +280,58 @@
       ]
     },
     {
+      "key": "BLOOMBERG",
+      "name": "彭博社 · 市场",
+      "group": "global",
+      "ok": true,
+      "provider": "mirror",
+      "count": 12,
+      "error": "",
+      "attempts": [
+        {
+          "provider": "rsshub",
+          "label": "https://rsshub.rss.tips",
+          "ok": false,
+          "error": "The read operation timed out"
+        },
+        {
+          "provider": "mirror",
+          "label": "https://rsshub.isrss.com",
+          "ok": true,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "key": "BLOOMBERG_ECON",
+      "name": "彭博社 · 经济",
+      "group": "global",
+      "ok": true,
+      "provider": "mirror",
+      "count": 12,
+      "error": "",
+      "attempts": [
+        {
+          "provider": "rsshub",
+          "label": "https://rsshub.rss.tips",
+          "ok": false,
+          "error": "The read operation timed out"
+        },
+        {
+          "provider": "mirror",
+          "label": "https://rsshub.isrss.com",
+          "ok": true,
+          "error": ""
+        }
+      ]
+    },
+    {
       "key": "GOV_ZHENGCE",
       "name": "中国政府网 · 最新政策",
       "group": "politics",
       "ok": true,
       "provider": "rsshub",
-      "count": 0,
+      "count": 1,
       "error": "",
       "attempts": [
         {
@@ -372,7 +348,7 @@
       "group": "politics",
       "ok": true,
       "provider": "rsshub",
-      "count": 0,
+      "count": 1,
       "error": "",
       "attempts": [
         {
@@ -389,7 +365,7 @@
       "group": "politics",
       "ok": true,
       "provider": "rsshub",
-      "count": 2,
+      "count": 12,
       "error": "",
       "attempts": [
         {
@@ -429,7 +405,7 @@
       "group": "thought",
       "ok": true,
       "provider": "rsshub",
-      "count": 1,
+      "count": 3,
       "error": "",
       "attempts": [
         {
@@ -445,13 +421,19 @@
       "name": "Psyche · Ideas",
       "group": "thought",
       "ok": true,
-      "provider": "rsshub",
-      "count": 4,
+      "provider": "mirror",
+      "count": 5,
       "error": "",
       "attempts": [
         {
           "provider": "rsshub",
           "label": "https://rsshub.rss.tips",
+          "ok": false,
+          "error": "The read operation timed out"
+        },
+        {
+          "provider": "mirror",
+          "label": "https://rsshub.isrss.com",
           "ok": true,
           "error": ""
         }
