@@ -114,7 +114,7 @@ jobs:
         continue-on-error: true
         run: >-
           python tools/translate_news.py --data news_data.json
-          --cache site/news_zh_cache.json --max-items 80 --strict
+          --cache site/news_zh_cache.json --max-items 10000 --strict
 
       # 每条新闻先做线索链分析；API Key 放在仓库 Actions Secret，不写入仓库。
       # 任何一条分析缺失/格式不全都停止发布，避免推送「说是 AI 分析、实际没分析」的 feed。

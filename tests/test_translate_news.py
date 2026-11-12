@@ -196,6 +196,17 @@ class PayloadTest(unittest.TestCase):
         self.assertEqual(stats["summary_translated"], 1)
         self.assertEqual(stats["failed"], 0)
 
+    def test_english_summary_with_chinese_title_is_translated(self):
+        payload = {"items": [{"title": "市场消息", "lang": "zh",
+                              "summary": "Markets rallied after the announcement."}]}
+        fetch = fake_fetch({"translate.googleapis.com": google_payload("市场上涨")})
+        stats = translate_news.translate_payload(payload, {}, fetch=fetch, log=None)
+        item = payload["items"][0]
+        self.assertNotIn("title_zh", item)
+        self.assertEqual(item["summary_zh"], "市场上涨")
+        self.assertEqual(stats["summary_translated"], 1)
+        self.assertEqual(len(fetch.calls), 1)
+
     def test_failed_translation_leaves_item_untouched(self):
         payload = {"items": [english_item()]}
         fetch = fake_fetch({"translate.googleapis.com": OSError("403"),
