@@ -103,11 +103,12 @@ https://cdn.jsdelivr.net/gh/k-macao/04-kindle@main/site/news.xml             ←
 已经换成同域名下能用的中文源；换掉的原因都写在目录的 `note` 里。`build_feed.py` 每次会在日志末尾
 列出这一轮的失败源与报错，持续失败就该换源。
 
-**英文条目自动附中文**：`tools/translate_news.py` 只翻英文（源标 `en`，或标题字母占一半以上），
+**英文条目自动附中文**：`tools/translate_news.py` 分别检测英文标题和摘要（即使标题是中文也会翻英文摘要），
 接口按 Google → Lingva → MyMemory 顺序回退，译文缓存在 `site/news_zh_cache.json`（同一句只翻
 一次）。feed 里标题写成 `English Title｜中文：译文`，摘要是「中文：… 原文：…」。
 翻译接口全挂也不挡出 feed——那一步在工作流里是 `continue-on-error`，自检会打出这轮还有几条
-英文标题没配上中文。
+英文标题没配上中文。这里翻译的是 RSS 中抓取到的标题和摘要（摘要最多 220 字符），
+不会抓取或翻译链接指向的完整文章；译文显示在 RSS 内容中，并非 KOReader 的划线备注。
 
 分工很明确：**抓取只负责按路由取回并归一化**（`news_data.json`），**合成只负责判断与输出**
 （条目不足 10 条、xml 不自洽就退出码 1、不覆盖旧 feed）。一层是纯数据、一层是纯文件，改了模板

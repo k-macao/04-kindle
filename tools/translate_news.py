@@ -243,14 +243,17 @@ def translate_payload(payload, cache=None, fetch=None, max_items=80, providers=P
     stats = {"english": 0, "translated": 0, "cached": 0, "failed": 0,
              "summary_translated": 0, "pending": 0}
     for item in payload.get("items") or []:
-        if not needs_translation(item):
+        title = str(item.get("title") or "")
+        summary = str(item.get("summary") or "")
+        title_needs_translation = needs_translation(item) and not has_cjk(title)
+        summary_needs_translation = looks_english(summary)
+        if not title_needs_translation and not summary_needs_translation:
             continue
         if stats["english"] >= max_items:
             stats["pending"] += 1
             continue
         stats["english"] += 1
-        title = str(item.get("title") or "")
-        if title:
+        if title and title_needs_translation:
             zh, by = translate_text(title, cache, fetch=fetch, providers=providers,
                                     timeout=timeout, delay=delay, log=log)
             if zh:
@@ -261,9 +264,8 @@ def translate_payload(payload, cache=None, fetch=None, max_items=80, providers=P
                     stats["translated"] += 1
             else:
                 stats["failed"] += 1
-        summary = str(item.get("summary") or "")
-        # 摘要只在它本身是英文时才翻：中文摘要不需要，也不该被当成英文送去翻译。
-        if summary and looks_english(summary) and summary != title:
+        # 标题是中文也可能带英文摘要；两者分别判断。
+        if summary_needs_translation and summary != title:
             zh, by = translate_text(summary, cache, fetch=fetch, providers=providers,
                                     timeout=timeout, delay=delay, log=log)
             if zh:
@@ -323,7 +325,7 @@ def main(argv=None, fetch=None):
                           encoding="utf-8")
     save_cache(args.cache, cache, limit=args.cache_limit)
     print(f"缓存 {len(cache)} 条 → {args.cache}")
-    if args.strict and stats["english"] and not (stats["translated"] or stats["cached"]):
+    if args.strict and stats["english"] and not (stats["translated"] or stats["cached"] or stats["summary_translated"]):
         print("一条都没翻成：翻译接口可能全挂了", file=sys.stderr)
         return 3
     return 0
