@@ -4,542 +4,551 @@
     <title>004 每日新闻聚合（精简）</title>
     <link>https://github.com/k-macao/04-kindle</link>
     <atom:link href="https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news-lite.xml" rel="self" type="application/rss+xml"/>
-    <description>每天 07:00（北京时间）从 RSSHub 抓取并合并的财经、政治与哲学思想新闻，英文条目附中文译文，本次 59 条。</description>
+    <description>每天 07:00（北京时间）从 RSSHub 抓取并合并的财经、政治与哲学思想新闻，英文条目附中文译文，本次 60 条。</description>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 12 Nov 2026 03:51:20 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 13 Nov 2026 03:30:12 +0000</lastBuildDate>
     <generator>04-kindle tools/build_feed.py</generator>
     <ttl>60</ttl>
     <item>
-      <title>刘永好谈农业AI与机器人：不是抢就业饭碗，是解决痛点让农业更进步</title>
-      <link>https://finance.sina.com.cn/tech/2026-11-12/doc-iniymwri1833681.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/tech/2026-11-12/doc-iniymwri1833681.shtml</guid>
-      <pubDate>Thu, 12 Nov 2026 03:41:53 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>&lt;p&gt;炒股就看 金麒麟分析师研报 ，权威，专业，及时，全面，助您挖掘潜力主题机会！ 11月12日消息，由中国光彩事业基金会、北京市工商业联合会、四川省工商业联合会担任指导单位，中国邮政储蓄银行、川商总会、 新希望 集团、四川省永好公益慈善基金会联合主办的第六届乡村振兴“村长班”正式开班…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称刘永好在乡村振兴“村长班”开班仪式上谈农业AI与机器人；摘要提到AI是全球增长主要动力之一、农业领域须用AI体系武装，并列出主办与指导单位。&lt;/p&gt;&lt;p&gt;事实：报道明确说刘永好讲了开班第一课，并作出上述表态；摘要未给出具体落地项目、投资金额或时间表。&lt;/p&gt;&lt;p&gt;推断：这是企业负责人在公开活动上的方向性表态，可能反映新希望集团对农业AI应用的关注，但表态不等于已形成业务计划。&lt;/p&gt;&lt;p&gt;影响：可能影响农业科技、农机与机器人相关领域的话题热度，条件是有后续具体合作或产品披露。&lt;/p&gt;&lt;p&gt;验证：可观察新希望集团或相关主办方后续是否发布农业AI项目、合作或投入信息；目前缺少可核验的执行细节。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>昆仑芯将于明年推出M300</title>
-      <link>https://wallstreetcn.com/livenews/3198794</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3198794</guid>
-      <pubDate>Thu, 12 Nov 2026 03:41:50 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
-      <description>&lt;p&gt;11月12日举办的百度世界2026上，昆仑芯介绍了下一步产品计划。目前，M100已如期上市，M300将于明年推出。其中，M100主打极致性价比；而作为旗舰款M300，则在算力、存储、互联等多个维度，实现了全方位能力跃升。到2028年，基于全新N架构的多颗芯片也将推向市场，精准匹配…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称昆仑芯将于明年推出M300；摘要称在百度世界2026上介绍产品计划，M100已如期上市，M300明年推出，2028年基于全新N架构的多颗芯片推向市场，李彦宏称昆仑芯是百度十多年投入的结果。&lt;/p&gt;&lt;p&gt;事实：报道明确给出M100已上市、M300明年推出、2028年N架构芯片计划，以及李彦宏对商业价值的评价。&lt;/p&gt;&lt;p&gt;推断：这显示百度在自研AI芯片上按代际推进产品路线，但摘要未披露M300具体算力指标、客户或量产规模。&lt;/p&gt;&lt;p&gt;影响：可能影响AI芯片、算力基础设施及百度相关业务预期，条件是产品按期推出并获得客户采用。&lt;/p&gt;&lt;p&gt;验证：可观察M300正式发布时的规格、量产与客户信息，以及2028年N架构芯片的进展；目前缺少性能与商业订单的验证材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>李彦宏对话杨元庆：AI变革踩过哪些坑，企业如何重构组织？</title>
-      <link>https://www.yicai.com/news/103437740.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/news/103437740.html</guid>
-      <pubDate>Thu, 12 Nov 2026 03:41:31 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://yicai.com">第一财经 · 最新</source>
-      <description>&lt;p&gt;“现在AI还是替代不了CEO出差。” 11月12日，在2026百度世界大会上，百度董事长李彦宏与联想集团董事长兼CEO杨元庆的对话，从一个轻松的话题开始。 刚从欧美出差回来的杨元庆说，AI替代不了与客户见面。李彦宏也表示，人与人之间的情感连接仍然非常重要。 但除了CEO出差，还有…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称李彦宏与杨元庆对话，谈AI变革踩过的坑与企业组织重构；摘要提到AI替代不了CEO出差、人与人情感连接仍重要，并提出员工使用AI后如何管理、企业应鼓励尝试还是集中规划等问题。&lt;/p&gt;&lt;p&gt;事实：报道明确说两人在2026百度世界大会对话，并给出上述观点与讨论议题；摘要未给出具体组织调整方案或结论。&lt;/p&gt;&lt;p&gt;推断：这反映两家科技企业高管对AI落地中组织与管理问题的公开讨论，但属于观点交流，不能据此认定已有管理变革落地。&lt;/p&gt;&lt;p&gt;影响：可能影响企业AI管理实践与组织变革讨论，涉及使用AI的企业和员工管理领域。&lt;/p&gt;&lt;p&gt;验证：可观察后续是否有企业公布AI使用规范、组织调整或相关案例；目前缺少具体措施与效果数据。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>李彦宏：现在的具身智能相当于2016年前后的无人驾驶</title>
-      <link>https://finance.sina.com.cn/tech/2026-11-12/doc-iniymwri1833061.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/tech/2026-11-12/doc-iniymwri1833061.shtml</guid>
-      <pubDate>Thu, 12 Nov 2026 03:41:13 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>&lt;p&gt;炒股就看 金麒麟分析师研报 ，权威，专业，及时，全面，助您挖掘潜力主题机会！ 新浪科技讯 11月12日上午消息，今日举办的百度世界2026大会开幕式上，百度创始人李彦宏对具身智能赛道发展阶段作出判断，称具身智能目前大约相当于2016年前后无人驾驶的发展水平。 李彦宏表示，无人驾驶…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称李彦宏说现在具身智能相当于2016年前后的无人驾驶；摘要称其在百度世界2026开幕式作出该判断，并提到无人驾驶行业关注点从安全舒适转向规模化落地。&lt;/p&gt;&lt;p&gt;事实：报道明确给出李彦宏对具身智能发展阶段的类比判断，以及无人驾驶关注点转变的说法；摘要未给出具身智能的具体技术指标或商业化数据。&lt;/p&gt;&lt;p&gt;推断：这是企业负责人对赛道阶段的定性判断，可能暗示具身智能仍处早期、距离规模化尚有距离，但类比本身不是可量化结论。&lt;/p&gt;&lt;p&gt;影响：可能影响具身智能与机器人领域的预期讨论，条件是后续出现技术成熟度或商业化进展证据。&lt;/p&gt;&lt;p&gt;验证：可观察具身智能企业的产品落地、规模化应用与行业标准进展；目前缺少支撑该阶段判断的量化材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>南极电商：公司目前不涉及短剧业务</title>
-      <link>https://www.cls.cn/detail/2532347</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2532347</guid>
-      <pubDate>Thu, 12 Nov 2026 03:41:10 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-      <description>&lt;p&gt;【南极电商：公司目前不涉及短剧业务】财联社11月12日电，有投资者向南极电商提问，AI短剧这么火爆，请问公司当时放弃发展短剧是什么原因？公司在互动平台回答表示，公司目前不涉及短剧业务。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称南极电商目前不涉及短剧业务；摘要称有投资者提问AI短剧火爆、公司当时放弃发展短剧的原因，公司在互动平台回答目前不涉及短剧业务。&lt;/p&gt;&lt;p&gt;事实：报道明确说南极电商在互动平台表示目前不涉及短剧业务；摘要未说明此前是否曾计划或放弃短剧业务的原因。&lt;/p&gt;&lt;p&gt;推断：公司对短剧业务作出明确否认，但投资者提问中“当时放弃”的说法未获公司确认，不能当作事实。&lt;/p&gt;&lt;p&gt;影响：可能影响市场对南极电商与短剧、AI短剧概念关联的预期，条件是后续公司披露相关业务规划。&lt;/p&gt;&lt;p&gt;验证：可观察公司后续公告或互动平台回复是否进一步说明短剧业务历史与规划；目前缺少公司确认“曾放弃短剧”的材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>民主党誓言揭露政府内部系统性腐败，但不急于推动第三次总统弹劾。特朗普家族、马斯克、获赦盟友都恐成为调查重点。白宫反手发出</title>
-      <link>https://xnews.jin10.com/details/235008</link>
-      <guid isPermaLink="true">https://xnews.jin10.com/details/235008</guid>
-      <pubDate>Thu, 12 Nov 2026 03:41:02 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>&lt;p&gt;民主党誓言揭露政府内部系统性腐败，但不急于推动第三次总统弹劾。特朗普家族、马斯克、获赦盟友都恐成为调查重点。白宫反手发出警告，特朗普下令调查民主党议员。点击查看&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题与摘要提到民主党誓言揭露政府内部系统性腐败、不急于推动第三次总统弹劾，特朗普家族、马斯克、获赦盟友可能成为调查重点，白宫发出警告，特朗普下令调查民主党议员。&lt;/p&gt;&lt;p&gt;事实：报道明确说民主党表示要揭露腐败但不急于弹劾，并列出潜在调查对象；白宫方面发出警告，特朗普下令调查民主党议员。&lt;/p&gt;&lt;p&gt;推断：这显示行政与立法部门之间可能进入相互调查的对抗态势，但具体调查范围、法律依据和进展均未说明。&lt;/p&gt;&lt;p&gt;影响：可能受影响的是美国政治与监管环境、涉及被点名个人及企业的声誉与合规风险，条件是有正式调查程序启动。&lt;/p&gt;&lt;p&gt;验证：后续可观察是否出现正式调查文件、传票或委员会行动；目前缺少具体证据材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>11月12日午间涨停分析</title>
-      <link>https://www.cls.cn/detail/2532346</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2532346</guid>
-      <pubDate>Thu, 12 Nov 2026 03:40:28 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-      <description>&lt;p&gt;【11月12日午间涨停分析】财联社11月12日电，今日午盘全市场共46股涨停，连板股总数17只，19股封板未遂，封板率为71%（不含ST股、退市股）。焦点股方面，短剧概念股文投控股17天10板，机器人概念股襄阳轴承16天9板，水产板块东方海洋17天9板，光伏概念股日出东方5连板。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：摘要给出11月12日午盘全市场46股涨停、连板股17只、19股封板未遂、封板率71%（不含ST股、退市股），并点名文投控股17天10板、襄阳轴承16天9板、东方海洋17天9板、日出东方5连板。&lt;/p&gt;&lt;p&gt;事实：报道明确列出上述涨停家数、封板率和个股连板天数。&lt;/p&gt;&lt;p&gt;推断：这些数据反映当日午盘短线资金集中于短剧、机器人、水产、光伏等概念，但摘要未提供驱动原因。&lt;/p&gt;&lt;p&gt;影响：可能受影响的是相关概念板块的交易情绪与波动，条件是该热度延续。&lt;/p&gt;&lt;p&gt;验证：后续可观察收盘涨停家数、封板率变化及上述个股是否继续连板；缺少基本面验证材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>英伟达领导层动荡 竞争对手或因此受益</title>
-      <link>https://flash.jin10.com/detail/20261112114026945800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261112114026945800</guid>
-      <pubDate>Thu, 12 Nov 2026 03:40:26 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>&lt;p&gt;金十数据11月12日讯，英伟达高层动荡令潜在受益者受到关注。在盘后交易中，AMD、博通和谷歌母公司Alphabet的股价纷纷上涨，市场押注这些公司有望从英伟达手中抢占业务份额。英伟达股价在盘后一度大跌9%，此前有报道称，公司董事会正准备罢免CEO黄仁勋。受此消息影响，AMD和股价…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：摘要称英伟达高层动荡，盘后英伟达一度大跌9%，此前有报道称董事会正准备罢免CEO黄仁勋；AMD和博通股价一度涨超3%，Alphabet涨0.3%。&lt;/p&gt;&lt;p&gt;事实：报道明确说存在英伟达董事会准备罢免CEO的报道，以及盘后股价和同业股价变动。&lt;/p&gt;&lt;p&gt;推断：市场可能押注AMD、博通、Alphabet从英伟达手中抢占份额，但罢免报道本身尚未被证实。&lt;/p&gt;&lt;p&gt;影响：可能受影响的是英伟达及其竞争对手、AI芯片供应链和相关投资者情绪，条件是领导层变动消息得到确认。&lt;/p&gt;&lt;p&gt;验证：后续可观察英伟达董事会正式公告、公司回应及股价走势；目前缺少公司官方确认材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>黄仁勋被爆出第二段婚外情：是桃色新闻还是政治操弄？</title>
-      <link>https://finance.sina.com.cn/roll/2026-11-12/doc-iniymwrm3892673.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/roll/2026-11-12/doc-iniymwrm3892673.shtml</guid>
-      <pubDate>Thu, 12 Nov 2026 03:39:42 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>&lt;p&gt;来源：政史新视界 11月8日，黄仁勋在英伟达官网发表公开信，承认对结婚41年的妻子不忠：“我的行为伤害了她和我们的孩子。我的所作所为没有任何借口。” 一封道歉信，如果是普通富豪的绯闻，热闹三天就散了。 但这一次不一样。道歉信同一天，英伟达董事会宣布启动独立调查；三个交易日内股价暴…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：摘要称黄仁勋11月8日在英伟达官网发表公开信承认对结婚41年的妻子不忠；同日英伟达董事会宣布启动独立调查；三个交易日内股价暴跌、市值一度蒸发约1900亿美元；股东集体诉讼提交加州联邦法院；特朗普表态“他不会有事”；《纽约时报》又爆出第二段婚外情。&lt;/p&gt;&lt;p&gt;事实：报道明确叙述上述公开信、董事会调查、股价与市值变动、诉讼及第二段婚外情报道。&lt;/p&gt;&lt;p&gt;推断：标题提出“桃色新闻还是政治操弄”的疑问，但摘要未提供政治操弄的证据，该关系仍属推测。&lt;/p&gt;&lt;p&gt;影响：可能受影响的是英伟达治理信誉、股价波动及股东诉讼进展，条件是调查与诉讼有实质推进。&lt;/p&gt;&lt;p&gt;验证：后续可观察董事会调查结论、诉讼文件及公司公告；目前缺少独立核实材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>4500亿搏杀！A50，突然异动！</title>
-      <link>https://finance.sina.com.cn/stock/roll/2026-11-12/doc-iniymwri1831182.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/roll/2026-11-12/doc-iniymwri1831182.shtml</guid>
-      <pubDate>Thu, 12 Nov 2026 03:39:03 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>&lt;p&gt;炒股就看 金麒麟分析师研报 ，权威，专业，及时，全面，助您挖掘潜力主题机会！ 流动性和叙事逻辑一个都不能少！ 今日早盘，A50突然直线拉升，涨幅一度超过1%。与此同时，A股半导体集体拉升（GPU表现尤其突出）， 寒武纪 、 燧原科技 、 盛合晶微 、 盛科通信 涨超10%， 通富…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：摘要称今日早盘A50直线拉升、涨幅一度超过1%；A股半导体集体拉升，GPU表现突出，寒武纪、燧原科技、盛合晶微、盛科通信涨超10%，通富微电一度涨停；芯片板块上午成交量突破4500亿元；AI应用大涨，鸿博股份涨停等。&lt;/p&gt;&lt;p&gt;事实：报道明确列出A50与半导体、AI应用板块的盘中涨幅和成交量数据。&lt;/p&gt;&lt;p&gt;推断：标题以“流动性和叙事逻辑”概括，暗示资金与题材共同推动，但摘要未给出具体流动性数据或政策消息。&lt;/p&gt;&lt;p&gt;影响：可能受影响的是半导体、GPU及AI应用相关板块的交易情绪，条件是行情延续。&lt;/p&gt;&lt;p&gt;验证：后续可观察收盘涨幅、成交量能否维持及是否有政策或产业消息印证；目前缺少驱动因素验证材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>ETF午盘：半导体ETF博时领涨3.78% 黄金股ETF永赢领跌3.68%</title>
-      <link>https://www.cls.cn/detail/2532339</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2532339</guid>
-      <pubDate>Thu, 12 Nov 2026 03:38:38 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-      <description>&lt;p&gt;【ETF午盘：半导体ETF博时领涨3.78% 黄金股ETF永赢领跌3.68%】财联社11月12日电，据财联社盯盘数据显示，ETF午间收盘，半导体ETF博时领涨3.78%，半导体设备ETF招商涨3.62%，科创增强ETF银华涨3.51%；黄金股ETF永赢领跌3.68%，黄金股ETF…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题与摘要列出ETF午间收盘涨跌幅，半导体ETF博时领涨3.78%，半导体设备ETF招商涨3.62%，科创增强ETF银华涨3.51%；黄金股ETF永赢领跌3.68%，黄金股ETF工银跌3.52%，黄金股ETF华夏跌3.44%。&lt;/p&gt;&lt;p&gt;事实：报道明确给出上述ETF午盘涨跌幅数据，来源为财联社盯盘数据。&lt;/p&gt;&lt;p&gt;推断：半导体相关ETF与黄金股相关ETF午间表现分化，但摘要未提供驱动原因，不能归因于具体事件。&lt;/p&gt;&lt;p&gt;影响：可能影响关注半导体与黄金股ETF的投资者情绪及当日申赎关注度，具体影响条件不明。&lt;/p&gt;&lt;p&gt;验证：需后续收盘数据、份额变动及资金流向数据验证；目前缺少涨跌原因材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>ETF两市成交额2562.81亿 同比减少29.05亿</title>
-      <link>https://www.cls.cn/detail/2532337</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2532337</guid>
-      <pubDate>Thu, 12 Nov 2026 03:38:32 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-      <description>&lt;p&gt;【ETF两市成交额2562.81亿 同比减少29.05亿】财联社11月12日电，据财联社盯盘数据显示，截至午间收盘，ETF两市成交额报2562.81亿元，较昨日此时减少29.05亿元。 分类型来看，股票型ETF成交额1125.95亿元，增加368.02亿元；债券型ETF成交额69…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：截至午间收盘，ETF两市成交额2562.81亿元，较昨日此时减少29.05亿元；股票型ETF成交额1125.95亿元，增加368.02亿元；债券型ETF成交额695.68亿元，减少567.28亿元；货币型ETF成交额141.22亿元，减少28.81亿元；商品型ETF成交额46.62亿元，增加8.80亿元；QDII型ETF摘要被截断。&lt;/p&gt;&lt;p&gt;事实：报道明确给出上述成交额及同比变化数据。&lt;/p&gt;&lt;p&gt;推断：总量小幅下降但结构分化明显，债券型ETF成交额大幅减少而股票型ETF大幅增加，可能反映午间资金在ETF类型间的配置变化，但摘要未说明原因。&lt;/p&gt;&lt;p&gt;影响：可能影响ETF市场流动性结构与相关产品关注度，条件取决于后续全天数据是否延续。&lt;/p&gt;&lt;p&gt;验证：需观察全天成交额、各类型ETF份额及资金净流入数据；QDII型数据缺失，线索有限。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>长株潭“十五五”：从基建互联转向利益共享，破解产业同构</title>
-      <link>https://www.yicai.com/news/103437610.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/news/103437610.html</guid>
-      <pubDate>Thu, 12 Nov 2026 03:37:25 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://yicai.com">第一财经 · 最新</source>
-      <description>&lt;p&gt;未来五年，长株潭一体化有望完成从“物理拼接”向“化学融合”的关键跨越。 《长株潭一体化发展“十五五”规划》（下称“规划”）近日正式对外发布。第一财经记者发现，不同于过去都市圈一体化侧重轨道交通、路网互通等硬件基建，这份规划把改革重心转向利益分配、要素规则与法治保障，试图破解困扰三…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称长株潭“十五五”从基建互联转向利益共享、破解产业同构；摘要称《长株潭一体化发展“十五五”规划》近日正式发布，改革重心转向利益分配、要素规则与法治保障，试图破解产业同构、招商内卷、行政壁垒难题。&lt;/p&gt;&lt;p&gt;事实：报道明确规划已发布及其改革方向表述。&lt;/p&gt;&lt;p&gt;推断：规划可能推动长株潭三市在利益分配与要素规则上建立协调机制，但摘要未给出具体政策条款与实施时间表，效果仍属推论。&lt;/p&gt;&lt;p&gt;影响：可能影响长株潭区域产业布局、招商竞争秩序及都市圈同城化进程，具体取决于后续配套细则。&lt;/p&gt;&lt;p&gt;验证：可观察三市后续出台的配套政策、利益共享机制文件及产业项目落地情况；目前缺少规划全文与量化目标材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>豆包工作接入Kimi、GLM、DeepSeek</title>
-      <link>https://www.yicai.com/news/103437774.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/news/103437774.html</guid>
-      <pubDate>Thu, 12 Nov 2026 03:36:46 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://yicai.com">第一财经 · 最新</source>
-      <description>&lt;p&gt;11月12日，豆包工作宣布产品更新，接入更多模型。豆包工作在豆包2.1 Lite和Pro两款自研模型之外，新增Kimi K3.1 Pro、GLM 5.3、DeepSeek V4.1 Flash等多款第三方模型。豆包工作是豆包推出的 AI Agent 办公产品，面向生产力场景，可围…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称豆包工作接入Kimi、GLM、DeepSeek；摘要称11月12日豆包工作宣布产品更新，在豆包2.1 Lite和Pro两款自研模型外，新增Kimi K3.1 Pro、GLM 5.3、DeepSeek V4.1 Flash等第三方模型，豆包工作为面向生产力场景的AI Agent办公产品。&lt;/p&gt;&lt;p&gt;事实：报道明确豆包工作产品更新并接入上述第三方模型。&lt;/p&gt;&lt;p&gt;推断：该产品从自研模型扩展至多模型接入，可能提升办公场景的模型选择灵活性，但摘要未披露接入方式、定价与性能对比。&lt;/p&gt;&lt;p&gt;影响：可能影响AI办公产品竞争格局及相关模型提供方的生态合作，具体影响条件不明。&lt;/p&gt;&lt;p&gt;验证：可观察豆包工作后续用户反馈、功能上线范围及合作方披露；目前缺少接入细节与商业条款材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>广电系统快速切入AI剧，探索新大屏商业模式</title>
-      <link>https://www.yicai.com/news/103437565.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/news/103437565.html</guid>
-      <pubDate>Thu, 12 Nov 2026 03:36:35 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://yicai.com">第一财经 · 最新</source>
-      <description>&lt;p&gt;在佛山做影视剧制作的阿爽（化名），今年3月起转向AI剧。他11月10日晚告诉第一财经记者，原来很难呈现的内容，现在借助AI工具都很容易实现。阿爽拍摄的影视剧之前曾进入过广电系统、上过电视，现在他承制AI剧的需求激增，宣发渠道更加灵活。 这只是AI剧产能扩张的一个侧面。对广电系统而…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称广电系统快速切入AI剧、探索新大屏商业模式；摘要称影视制作人阿爽今年3月起转向AI剧，承制AI剧需求激增、宣发渠道更灵活；提及芒果超媒、华数传媒、海看股份等公司，但摘要在此处截断。&lt;/p&gt;&lt;p&gt;事实：报道明确个别制作人转向AI剧及需求增加，并称广电系统关注大屏可持续商业回报，列出部分相关公司名称。&lt;/p&gt;&lt;p&gt;推断：AI剧产能扩张可能推动广电系统探索新的大屏商业模式，但摘要未提供具体公司投入规模与商业数据，关联程度仍属推论。&lt;/p&gt;&lt;p&gt;影响：可能影响广电及视频平台的内容生产模式与商业模式探索，具体取决于AI剧在大屏的落地效果。&lt;/p&gt;&lt;p&gt;验证：可观察相关公司后续公告、AI剧上线数量与大屏收视/收入数据；摘要截断，线索有限。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>如果Anthropic下周的上市顺利、股价上涨，那AI“一切照旧”，否则“一些公司会倒闭”</title>
-      <link>https://wallstreetcn.com/articles/3785778</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/articles/3785778</guid>
-      <pubDate>Thu, 12 Nov 2026 03:35:26 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
-      <description>&lt;p&gt;人工智能（AI）初创企业的估值正面临现实的考验。行业领军企业OpenAI和Anthropic下调估值预期的举动，加剧了风险投资界对初创企业估值全面回调的担忧，这也使得Anthropic即将到来的首次公开募股（IPO）成为决定整个AI行业走向的关键时刻。 据彭博11月12日报道，知…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称Anthropic下周上市，若顺利且股价上涨则AI“一切照旧”，否则“一些公司会倒闭”；摘要称OpenAI将目标估值从1.4万亿美元下调至1.25万亿美元、融资目标削减三分之一，并称Anthropic下调估值预期，Anthropic IPO被视为行业走向关键节点。&lt;/p&gt;&lt;p&gt;事实：报道明确提及OpenAI估值与融资目标下调、Anthropic下调估值预期，以及市场对AI初创估值回调的担忧；标题中的“下周上市”为报道表述。&lt;/p&gt;&lt;p&gt;推断：估值预期下调与IPO表现被报道方视为行业风险偏好的风向标，但“一些公司会倒闭”属标题引述的判断，非已发生事实。&lt;/p&gt;&lt;p&gt;影响：可能影响AI初创企业融资环境、风险投资情绪及同类企业估值预期，条件取决于Anthropic上市定价与首日表现。&lt;/p&gt;&lt;p&gt;验证：可观察Anthropic IPO定价、上市后股价、OpenAI融资最终规模及后续AI初创融资案例；摘要未提供Anthropic具体估值数字，线索有限。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>淡马锡罗锡德：中国资产对全球投资者具有吸引力</title>
-      <link>https://news.10jqka.com.cn/20261112/c681739590.shtml</link>
-      <guid isPermaLink="true">https://news.10jqka.com.cn/20261112/c681739590.shtml</guid>
-      <pubDate>Thu, 12 Nov 2026 03:35:20 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
-      <description>&lt;p&gt;11月12日，淡马锡首席投资官罗锡德在上交所国际投资者大会上表示，淡马锡在中国的投资占比约为17%，目前关注AI、科技、绿色投资、先进制造业等行业的投资机会。他认为中国资产对全球投资者具有吸引力，因为中国创新能力非常强。未来，淡马锡将继续建设性地参与中国资本市场的发展。（人民财讯…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：淡马锡首席投资官罗锡德11月12日在上交所国际投资者大会发言；淡马锡在中国的投资占比约17%；关注AI、科技、绿色投资、先进制造业；称中国资产对全球投资者有吸引力、中国创新能力强；将继续参与中国资本市场。&lt;/p&gt;&lt;p&gt;事实：上述发言内容与投资占比为报道明确信息。&lt;/p&gt;&lt;p&gt;推断：大型主权基金公开表态关注中国相关行业，可能被解读为外资情绪信号，但单一机构表态不足以证明整体资金流向。&lt;/p&gt;&lt;p&gt;影响：可能影响中国资本市场外资情绪及AI、科技、绿色、先进制造领域的关注度，条件取决于后续实际投资动作。&lt;/p&gt;&lt;p&gt;验证：可观察淡马锡后续披露的持仓与投资交易、其他国际投资者类似表态；报道未给出新增投资规模，线索有限。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>586GW变199GW：美国三分之二的AI数据中心计划只是PPT？</title>
-      <link>https://wallstreetcn.com/articles/3785784</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/articles/3785784</guid>
-      <pubDate>Thu, 12 Nov 2026 03:35:19 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
-      <description>&lt;p&gt;华尔街目前正沉浸在一种“错误”的恐慌情绪中：大选后的政治阻力（如各州的暂停建设令）将大幅削减美国AI数据中心的产能扩张。然而，基于Bernstein对北美8858个数据中心项目的最新卫星级逐月追踪与信用模型分析，市场完全找错了风险焦点。 Bernstein分析师Madison R…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称美国AI数据中心计划从586GW变为199GW、三分之二计划只是PPT；摘要称Bernstein对北美8858个数据中心项目做卫星级逐月追踪与信用模型分析，10月11日更新模型，结论为586GW中仅部分可信；并称市场恐慌焦点（大选后政治阻力、各州暂停建设令）找错了风险点。&lt;/p&gt;&lt;p&gt;事实：报道明确给出项目数量8858、模型更新日期及586GW至199GW的筛查结论，属Bernstein研究观点。&lt;/p&gt;&lt;p&gt;推断：若该筛查成立，则美国AI数据中心实际落地规模可能显著低于规划口径，风险焦点或从政策阻力转向项目可信度；但摘要未展开199GW的构成与判定标准。&lt;/p&gt;&lt;p&gt;影响：可能影响数据中心建设、电力需求预期及相关设备与算力投资判断，条件是该模型结论被后续开工数据印证。&lt;/p&gt;&lt;p&gt;验证：可观察数据中心实际开工、并网与资本开支数据，以及Bernstein完整报告方法；摘要截断，线索有限。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>从材料出发，科思创的绿色答卷</title>
-      <link>https://www.yicai.com/video/103437770.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/video/103437770.html</guid>
-      <pubDate>Thu, 12 Nov 2026 03:35:03 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://yicai.com">第一财经 · 最新</source>
-      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题为“从材料出发，科思创的绿色答卷”，来源第一财经，发布时间2026-11-12；摘要为空。&lt;/p&gt;&lt;p&gt;事实：报道仅提供标题，未提供正文事实。&lt;/p&gt;&lt;p&gt;推断：标题指向科思创在材料领域的绿色相关议题，但具体内容、数据与结论无法确认。&lt;/p&gt;&lt;p&gt;影响：无法判断受影响主体与领域，仅能推测与化工材料及绿色议题相关。&lt;/p&gt;&lt;p&gt;验证：需获取正文或公司披露材料；目前线索有限。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Why Bernstein Downgraded Nvidia Stock｜中文：伯恩斯坦为何下调英伟达股票评级</title>
-      <link>https://www.bloomberg.com/news/videos/2026-11-12/why-bernstein-downgraded-nvidia-stock-video</link>
-      <guid isPermaLink="true">https://www.bloomberg.com/news/videos/2026-11-12/why-bernstein-downgraded-nvidia-stock-video</guid>
-      <pubDate>Thu, 12 Nov 2026 03:34:15 +0000</pubDate>
-      <category>全球市场与要闻</category>
-      <source url="https://bloomberg.com">彭博社 · 市场</source>
-      <description>&lt;p&gt;中文：在谈到有关首席执行官黄仁勋（Jensen H.）的新报道出台后对英伟达（Nvidia）的前景展望之前，Bernstein Research董事总经理兼高级分析师Stacy Rasgon被问及为何他的团队在一份报告中表示他们“已经受够了”
-原文：Stacy Rasgon, M…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称Bernstein下调英伟达股票评级；摘要称Bernstein Research董事总经理兼高级分析师Stacy Rasgon被问及团队在报告中表示“已经受够了”，并提及有关CEO黄仁勋的新报道及英伟达前景展望。&lt;/p&gt;&lt;p&gt;事实：报道明确Bernstein下调英伟达评级，分析师在报告中表达“已经受够了”的立场；摘要未给出下调理由与目标价。&lt;/p&gt;&lt;p&gt;推断：评级下调反映该机构对英伟达看法转弱，但具体驱动因素（估值、报道事件或其他）在摘要中不明确，不能断定与黄仁勋相关报道存在因果。&lt;/p&gt;&lt;p&gt;影响：可能影响英伟达股价情绪与AI芯片板块关注度，条件取决于下调理由的实质内容。&lt;/p&gt;&lt;p&gt;验证：可观察Bernstein报告全文、目标价调整及英伟达后续财报与股价反应；摘要信息不完整，线索有限。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>金十图示：2026年11月12日（周四）富时中国A50指数成分股午盘收盘行情一览：半导体板块早盘走强，寒武纪大涨10%；</title>
-      <link>https://flash.jin10.com/detail/20261112113411899800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261112113411899800</guid>
-      <pubDate>Thu, 12 Nov 2026 03:34:11 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>&lt;p&gt;金十图示：2026年11月12日（周四）富时中国A50指数成分股午盘收盘行情一览：半导体板块早盘走强，寒武纪大涨10%；银行股走势分化。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题与摘要显示2026年11月12日富时中国A50成分股午盘行情，半导体板块早盘走强，寒武纪大涨10%，银行股走势分化。&lt;/p&gt;&lt;p&gt;事实：报道明确给出当日午盘半导体走强、寒武纪涨10%、银行股分化的行情描述。&lt;/p&gt;&lt;p&gt;推断：A50成分股内部当日呈现半导体强于银行的板块分化，但摘要未给出具体涨跌幅数据与原因。&lt;/p&gt;&lt;p&gt;影响：可能影响关注A50及半导体、银行板块的投资者情绪；具体影响程度需完整行情数据支持。&lt;/p&gt;&lt;p&gt;验证：可核对当日A50成分股完整涨跌幅、成交额及寒武纪收盘价；目前缺少驱动因素说明。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>【大佬持仓跟踪】芯片散热+服务器液冷，VC材料已完成北美大客户产品导入验证，热界面材料可满足GPU、ASIC等芯片封装散热需求，这家公司积极推进NPO液冷散热方案等产品的研发</title>
-      <link>https://www.cls.cn/detail/2532300</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2532300</guid>
-      <pubDate>Thu, 12 Nov 2026 03:32:44 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题提及芯片散热与服务器液冷、VC材料完成北美大客户产品导入验证、热界面材料可满足GPU/ASIC封装散热需求、推进NPO液冷散热方案研发，但未点名公司。&lt;/p&gt;&lt;p&gt;事实：报道称某公司VC材料已完成北美大客户产品导入验证，热界面材料可满足相关芯片封装散热需求，并推进NPO液冷方案研发。摘要为空，线索有限。&lt;/p&gt;&lt;p&gt;推断：该表述指向芯片散热材料环节的客户验证进展，但公司身份、验证规模与订单情况均未披露，不能据此推断业绩贡献。&lt;/p&gt;&lt;p&gt;影响：可能影响芯片散热/液冷材料相关产业链关注度，条件是该验证转化为批量供货。&lt;/p&gt;&lt;p&gt;验证：需确认公司名称、客户导入验证的具体阶段、是否形成订单及公司公告；目前缺少验证材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>云南：探索“中医药+人工智能”发展 推动中医智能辅助诊疗等技术应用</title>
-      <link>https://news.10jqka.com.cn/20261112/c681739459.shtml</link>
-      <guid isPermaLink="true">https://news.10jqka.com.cn/20261112/c681739459.shtml</guid>
-      <pubDate>Thu, 12 Nov 2026 03:32:43 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
-      <description>&lt;p&gt;云南省印发《云南省中医药振兴发展“十五五”规划》，提出强化中医药数智化赋能：推进各级中医医疗机构规范接入省级全民健康信息平台，促进中医药高质量数据集建设和数据安全合规流通利用；探索“中医药+人工智能”发展，推动中医智能辅助诊疗等技术应用，探索建立医疗机构中药饮片院内追溯体系，加快…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：云南省印发《云南省中医药振兴发展“十五五”规划》，提出推进中医医疗机构接入省级全民健康信息平台、建设中医药高质量数据集、探索“中医药+人工智能”、推动中医智能辅助诊疗、建设智慧中医医院与中医互联网医院、支持数智化装备及针灸推拿机器人等。&lt;/p&gt;&lt;p&gt;事实：报道明确列出上述规划内容与方向。&lt;/p&gt;&lt;p&gt;推断：政策层面释放中医药数智化与AI辅助诊疗的应用信号，但规划多为方向性表述，落地节奏与资金安排未明确。&lt;/p&gt;&lt;p&gt;影响：可能影响云南地区中医医疗机构、中医药信息化与智能诊疗设备相关领域，条件是真有配套项目落地。&lt;/p&gt;&lt;p&gt;验证：可跟踪后续省级平台接入进度、智慧中医医院试点名单及采购招标信息；目前缺少具体时间表与预算数据。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>午评：科创50指数半日涨2.35% 算力芯片股集体走强</title>
-      <link>https://www.cls.cn/detail/2532341</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2532341</guid>
-      <pubDate>Thu, 12 Nov 2026 03:32:33 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-      <description>&lt;p&gt;【午评：科创50指数半日涨2.35% 算力芯片股集体走强】财联社11月12日电，市场集体冲高回落，创业板指盘中再度回落，此前一度涨近2%。沪深两市半日成交额1.22万亿，较上个交易日放量2931亿。全市场超2900只个股下跌。盘面上，半导体产业链表现活跃，算力芯片天普股份3连板，…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：午评显示科创50指数半日涨2.35%，算力芯片股集体走强，天普股份3连板、寒武纪涨近10%、燧原科技涨超12%创上市新高；沪深两市半日成交额1.22万亿，较上日放量2931亿；全市场超2900只个股下跌；燃气、机器人、零售等板块亦有表现。&lt;/p&gt;&lt;p&gt;事实：报道明确给出上述指数、个股与成交数据。&lt;/p&gt;&lt;p&gt;推断：当日呈指数走强但个股普跌的结构性行情，资金集中于算力芯片等题材，但摘要未说明上涨原因。&lt;/p&gt;&lt;p&gt;影响：可能影响算力芯片板块及科创50相关产品关注度；普跌背景下赚钱效应有限。&lt;/p&gt;&lt;p&gt;验证：可核对收盘指数涨跌幅、成交额及个股连板情况；目前缺少资金流向与消息面驱动说明。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>ETF两市成交额报2563.02亿元，较昨日此时缩量29.37亿元</title>
-      <link>https://news.10jqka.com.cn/20261112/c681739439.shtml</link>
-      <guid isPermaLink="true">https://news.10jqka.com.cn/20261112/c681739439.shtml</guid>
-      <pubDate>Thu, 12 Nov 2026 03:32:20 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
-      <description>&lt;p&gt;截至目前，ETF两市成交额报2563.02亿元，较昨日此时缩量29.37亿元，分类型来看，股票型ETF成交额1173.4亿元，债券型ETF成交额695.74亿元，货币型ETF成交额141.23亿元，商品型ETF成交额46.62亿元，QDII型ETF成交额506.03亿元。其中，成…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：ETF两市成交额报2563.02亿元，较昨日此时缩量29.37亿元；股票型1173.4亿元、债券型695.74亿元、货币型141.23亿元、商品型46.62亿元、QDII型506.03亿元；成交额最高的非货币型ETF为中韩半导体ETF（513310）、科创50ETF（588000）、科创半导体ETF（588170），分别为166.23亿元等。&lt;/p&gt;&lt;p&gt;事实：报道明确给出上述ETF成交额及分类数据。&lt;/p&gt;&lt;p&gt;推断：ETF整体成交较昨日同期小幅缩量，但半导体与科创类ETF成交居前，与当日半导体板块活跃相呼应；缩量幅度有限，不宜过度解读。&lt;/p&gt;&lt;p&gt;影响：可能反映资金在半导体、科创方向ETF上的交易集中度上升，条件是该趋势延续。&lt;/p&gt;&lt;p&gt;验证：可跟踪全天ETF成交额、份额变化与资金净流入数据；目前缺少净申赎数据。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>肥胖未必不健康 专家吁弃单靠BMI诊断</title>
-      <link>https://www.zaobao.com.sg/news/world/story20261112-9985231</link>
-      <guid isPermaLink="true">https://www.zaobao.com.sg/news/world/story20261112-9985231</guid>
-      <pubDate>Thu, 12 Nov 2026 03:31:41 +0000</pubDate>
-      <category>政治与政策</category>
-      <source url="https://zaobao.com">联合早报 · 国际</source>
-      <description>&lt;p&gt;一项新研究指出，目前被诊断为肥胖的人群中，只有四分之一到三分之一真正处于健康不佳的状态。 这篇发表在《自然》（Nature）杂志上的研究主张改革现行的肥胖诊断标准，不再单一依赖身高体重指数（BMI）。 世界卫生组织估计，全球有超过10亿人受肥胖困扰，肥胖是二型糖尿病、心血管疾病、…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称“肥胖未必不健康”，摘要提到《自然》杂志新研究、现行肥胖诊断中仅四分之一到三分之一真正健康不佳、世卫组织估计全球超10亿人受肥胖困扰、专家提议将体脂与整体健康状况纳入诊断；&lt;/p&gt;&lt;p&gt;事实：报道明确说该研究主张改革现行肥胖诊断标准，不再单一依赖BMI，并探讨新框架对诊断率与临床治疗的实际影响；&lt;/p&gt;&lt;p&gt;推断：若新框架被采纳，部分当前被诊断为肥胖者可能不再被归为需要临床干预，诊断口径与治疗资源分配可能随之调整，但这仍属研究主张而非既定政策；&lt;/p&gt;&lt;p&gt;影响：可能影响肥胖诊断标准制定机构、临床诊疗路径、保险与公共卫生统计口径，条件是新框架获得专业机构认可并落地；&lt;/p&gt;&lt;p&gt;验证：可观察后续专业学会或卫生机构是否发布修订版诊断指南、相关临床研究是否复现该比例，目前缺少新框架具体诊断阈值与实施时间表。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>国债期货早盘收盘</title>
-      <link>https://flash.jin10.com/detail/20261112113128291800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261112113128291800</guid>
-      <pubDate>Thu, 12 Nov 2026 03:31:28 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>&lt;p&gt;2年期国债期货（TS）主力合约跌0.01%，5年期国债期货（TF）主力合约跌0.02%，10年期国债期货（T）主力合约涨0.01%，30年期国债期货（TL）主力合约跌0.08%。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：2年期、5年期、10年期、30年期国债期货主力合约早盘收盘分别跌0.01%、跌0.02%、涨0.01%、跌0.08%；&lt;/p&gt;&lt;p&gt;事实：报道仅给出上述四个期限主力合约的早盘收盘涨跌幅；&lt;/p&gt;&lt;p&gt;推断：期限间涨跌方向不一致，长端跌幅相对明显，但单日早盘数据不足以判断趋势或原因；&lt;/p&gt;&lt;p&gt;影响：可能涉及国债期货交易者与利率风险管理，条件是该走势在后续交易时段延续；&lt;/p&gt;&lt;p&gt;验证：需观察午盘及全天收盘数据、成交持仓变化，目前缺少驱动因素与资金流向信息。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>国内期货主力合约涨跌不一 苹果涨超3%</title>
-      <link>https://www.cls.cn/detail/2532340</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2532340</guid>
-      <pubDate>Thu, 12 Nov 2026 03:31:27 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-      <description>&lt;p&gt;【国内期货主力合约涨跌不一 苹果涨超3%】财联社11月12日电，国内期货主力合约涨跌不一，苹果涨超3%，乙二醇（EG）涨近3%，沪铝、鸡蛋、合成橡胶涨超2%，低硫燃料油（LU）、菜油、20号胶涨近2%。跌幅方面，集运欧线、焦煤跌近2%，沪金、铂、焦炭、铁矿石、沪银跌超1%。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：国内期货主力合约涨跌不一，苹果涨超3%、乙二醇涨近3%、沪铝鸡蛋合成橡胶涨超2%、低硫燃料油菜油20号胶涨近2%；集运欧线焦煤跌近2%，沪金铂焦炭铁矿石沪银跌超1%；&lt;/p&gt;&lt;p&gt;事实：报道明确列出上述品种早盘主力合约涨跌幅；&lt;/p&gt;&lt;p&gt;推断：商品板块间分化明显，农产品与部分化工品偏强、贵金属与黑色系偏弱，但摘要未给出原因；&lt;/p&gt;&lt;p&gt;影响：可能涉及相关品种产业链企业与期货交易者，条件是分化走势持续；&lt;/p&gt;&lt;p&gt;验证：需观察全天收盘、持仓与现货价格及供需消息，目前缺少涨跌驱动因素说明。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>股指期货早盘收盘</title>
-      <link>https://flash.jin10.com/detail/20261112113119949800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261112113119949800</guid>
-      <pubDate>Thu, 12 Nov 2026 03:31:19 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>&lt;p&gt;沪深300股指期货（IF）主力合约跌0.06%，上证50股指期货（IH）主力合约涨0.34%，中证500股指期货（IC）主力合约跌0.14%，中证1000股指期货（IM）主力合约跌0.27%。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：沪深300股指期货主力跌0.06%、上证50涨0.34%、中证500跌0.14%、中证1000跌0.27%；&lt;/p&gt;&lt;p&gt;事实：报道仅给出上述四个股指期货主力合约早盘收盘涨跌幅；&lt;/p&gt;&lt;p&gt;推断：大盘蓝筹与中小盘走势分化，上证50相对偏强，但早盘幅度较小，不足以判断市场方向；&lt;/p&gt;&lt;p&gt;影响：可能涉及股指期货与相关指数产品参与者，条件是该分化在后续时段延续；&lt;/p&gt;&lt;p&gt;验证：需观察午盘及全天收盘、基差与现货指数表现，目前缺少成交与资金面信息。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>ETF午评：半导体ETF领涨3.78%，黄金股ETF领跌3.68%</title>
-      <link>https://news.10jqka.com.cn/20261112/c681739387.shtml</link>
-      <guid isPermaLink="true">https://news.10jqka.com.cn/20261112/c681739387.shtml</guid>
-      <pubDate>Thu, 12 Nov 2026 03:31:01 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
-      <description>&lt;p&gt;ETF午间收盘涨跌不一，半导体ETF（159582）领涨3.78%，半导体设备ETF（561980）涨3.62%，科创增强ETF（588690）涨3.51%，黄金股ETF（517520）领跌3.68%，黄金股ETF（159315）跌3.52%，黄金股ETF（159562）跌3.4…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：半导体ETF（159582）领涨3.78%，半导体设备ETF涨3.62%，科创增强ETF涨3.51%；黄金股ETF（517520）领跌3.68%，另两只黄金股ETF分别跌3.52%、3.44%；&lt;/p&gt;&lt;p&gt;事实：报道明确列出上述ETF午间收盘涨跌幅；&lt;/p&gt;&lt;p&gt;推断：半导体与黄金股主题当日午间表现分化明显，但摘要未说明驱动原因；&lt;/p&gt;&lt;p&gt;影响：可能涉及相关主题ETF持有人与产品发行方，条件是分化持续至收盘；&lt;/p&gt;&lt;p&gt;验证：需观察全天收盘涨跌幅、份额与成交变化及相关行业消息，目前缺少原因与资金流向材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>上证指数早盘收报3688.05点，涨0.20%。 深证成指早盘收报11396.86点，涨0.06%。 创业板指早盘收报2</title>
-      <link>https://wallstreetcn.com/livenews/3198790</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3198790</guid>
-      <pubDate>Thu, 12 Nov 2026 03:31:00 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
-      <description>&lt;p&gt;上证指数早盘收报3688.05点，涨0.20%。 深证成指早盘收报11396.86点，涨0.06%。 创业板指早盘收报2573.52点，涨0.06%。 沪深300早盘收报4080.14点，涨0.11%。 科创50早盘收报1330.95点，涨2.35%。 中证500早盘收报6721…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题与摘要列出上证指数、深证成指、创业板指、沪深300、科创50、中证500、中证1000的早盘收盘点位与涨跌幅，其中科创50涨2.35%明显高于其他指数，中证1000跌0.06%；&lt;/p&gt;&lt;p&gt;事实：报道明确给出上述各指数早盘收报点位及涨跌幅；&lt;/p&gt;&lt;p&gt;推断：科创50相对强势、中证1000微跌，显示早盘指数间表现分化，但仅凭点位无法判断驱动因素；&lt;/p&gt;&lt;p&gt;影响：指数分化可能影响跟踪不同宽基的投资者情绪与板块轮动观察，具体影响需结合成交与个股数据；&lt;/p&gt;&lt;p&gt;验证：后续可观察午后各指数走势、成交额及个股涨跌家数是否延续分化。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>早盘收盘，国内期货主力合约涨跌不一。苹果涨超3%，乙二醇（EG）涨近3%，沪铝、鸡蛋、合成橡胶涨超2%，低硫燃料油（LU</title>
-      <link>https://flash.jin10.com/detail/20261112113056676800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261112113056676800</guid>
-      <pubDate>Thu, 12 Nov 2026 03:30:56 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>&lt;p&gt;早盘收盘，国内期货主力合约涨跌不一。苹果涨超3%，乙二醇（EG）涨近3%，沪铝、鸡蛋、合成橡胶涨超2%，低硫燃料油（LU）、菜油、20号胶涨近2%。跌幅方面，集运欧线、焦煤跌近2%，沪金、铂、焦炭、铁矿石、沪银跌超1%。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题与摘要列出国内期货主力合约早盘涨跌：苹果涨超3%、乙二醇涨近3%、沪铝/鸡蛋/合成橡胶涨超2%、低硫燃料油/菜油/20号胶涨近2%；集运欧线、焦煤跌近2%，沪金、铂、焦炭、铁矿石、沪银跌超1%；&lt;/p&gt;&lt;p&gt;事实：报道明确给出上述品种的涨跌幅方向与大致幅度；&lt;/p&gt;&lt;p&gt;推断：商品期货呈现农产品与部分化工偏强、黑色系与贵金属偏弱的格局，但摘要未提供原因；&lt;/p&gt;&lt;p&gt;影响：相关产业链与期货持仓者可能关注，具体影响取决于后续供需与宏观信息；&lt;/p&gt;&lt;p&gt;验证：后续可观察收盘涨跌幅、持仓与成交变化，目前缺少驱动因素材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>A股午评：科创50指数冲高回落涨2.35%，燃气、半导体、医疗服务板块涨幅居前</title>
-      <link>https://news.10jqka.com.cn/20261112/c681739385.shtml</link>
-      <guid isPermaLink="true">https://news.10jqka.com.cn/20261112/c681739385.shtml</guid>
-      <pubDate>Thu, 12 Nov 2026 03:30:51 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
-      <description>&lt;p&gt;A股三大指数早盘集体上涨，截至午盘，上证指数涨0.2%，深证成指涨0.06%，创业板指涨0.06%，北证50涨0.09%，科创50指数涨2.35%。全市场成交额12306亿元，较上日放量2953亿元，全市场超2900只个股下跌。板块题材上，燃气、半导体、医疗服务、光刻胶、CRO概…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称科创50冲高回落涨2.35%，燃气、半导体、医疗服务涨幅居前；摘要给出三大指数及北证50、科创50涨幅，全市场成交额12306亿元较上日放量2953亿元，超2900只个股下跌，并列出涨幅居前与跌幅居前板块及东方环宇、洪通燃气涨停等个股表现；&lt;/p&gt;&lt;p&gt;事实：报道明确上述指数涨幅、成交额放量、下跌个股数量、板块涨跌排名及部分个股涨停；&lt;/p&gt;&lt;p&gt;推断：指数上涨与多数个股下跌并存、成交放量，显示早盘结构性行情特征，资金集中于燃气、半导体、医疗服务等板块；&lt;/p&gt;&lt;p&gt;影响：板块轮动与市场情绪可能受影响，但个股层面分化明显；&lt;/p&gt;&lt;p&gt;验证：后续可观察午后成交额、涨跌家数变化及领涨板块能否持续。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>11月12日午间收评：科创50指数半日涨2.35%，算力芯片股集体走强</title>
-      <link>https://wallstreetcn.com/livenews/3198789</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3198789</guid>
-      <pubDate>Thu, 12 Nov 2026 03:30:48 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
-      <description>&lt;p&gt;1、市场早间冲高回落，三大指数小幅上涨。算力芯片股集体走强，燧原科技涨超12%，股价创上市以来新高，寒武纪涨近10%，盘中收复1000元关口。燃气股继续走强，东方环宇4连板，洪通燃气涨停。AI制药概念拉升，贝瑞基因涨停。零售、乳业等消费股活跃，阳光乳业、广百股份等涨停。下跌方面，…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称科创50半日涨2.35%、算力芯片股集体走强；摘要提到燧原科技涨超12%创上市新高、寒武纪涨近10%收复1000元关口、东方环宇4连板、洪通燃气涨停、贝瑞基因涨停、阳光乳业与广百股份涨停，AI漫剧概念下挫华策影视跌超8%，超3200股飘绿，半天成交1.23万亿，午间收盘沪指涨0.2%、深成指跌0.06%；&lt;/p&gt;&lt;p&gt;事实：报道明确上述个股与板块表现及成交数据；&lt;/p&gt;&lt;p&gt;推断：算力芯片与燃气等题材走强、AI漫剧概念走弱，市场呈题材分化与个股普跌并存的结构；&lt;/p&gt;&lt;p&gt;影响：相关题材板块及个股情绪可能受影响，但摘要未说明驱动原因；&lt;/p&gt;&lt;p&gt;验证：后续可观察算力芯片股午后能否维持强势、成交与涨跌家数变化，缺少消息面验证材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>荷兰合作银行：美联储独立性的回归“带飞”美元，上行趋势有望持续数月</title>
-      <link>https://flash.jin10.com/detail/20261112113032247800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261112113032247800</guid>
-      <pubDate>Thu, 12 Nov 2026 03:30:32 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称荷兰合作银行认为美联储独立性回归带动美元走强、上行趋势有望持续数月；摘要为空；&lt;/p&gt;&lt;p&gt;事实：报道仅转述该机构观点，未提供具体论据、数据或时间细节；&lt;/p&gt;&lt;p&gt;推断：该标题表达的是机构对美元走势的预测性判断，属观点而非已发生事实，线索有限；&lt;/p&gt;&lt;p&gt;影响：若该判断被市场关注，可能影响汇率相关预期，但缺少支撑材料；&lt;/p&gt;&lt;p&gt;验证：目前缺少摘要与具体论据，后续可观察美元指数实际走势及美联储相关表态。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>股指期货早盘收盘 主力合约多数下跌</title>
-      <link>https://news.10jqka.com.cn/20261112/c681739356.shtml</link>
-      <guid isPermaLink="true">https://news.10jqka.com.cn/20261112/c681739356.shtml</guid>
-      <pubDate>Thu, 12 Nov 2026 03:30:17 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
-      <description>&lt;p&gt;股指期货早盘收盘，主力合约多数下跌。沪深300股指期货(IF)主力合约跌0.06%，上证50股指期货(IH)主力合约涨0.34%，中证500股指期货(IC)主力合约跌0.14%，中证1000股指期货(IM)主力合约跌0.27%。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称股指期货早盘收盘主力合约多数下跌，摘要列出IF跌0.06%、IH涨0.34%、IC跌0.14%、IM跌0.27%；&lt;/p&gt;&lt;p&gt;事实：报道明确给出四个主力合约早盘收盘涨跌幅，其中IH上涨、其余三个下跌；&lt;/p&gt;&lt;p&gt;推断：仅凭单日早盘数据无法判断趋势，IH与其余合约方向分化可能反映不同市值风格表现差异，但属推论；&lt;/p&gt;&lt;p&gt;影响：关注股指期货及对应现货指数ETF的投资者可能受影响，具体影响需结合成交量和后续走势；&lt;/p&gt;&lt;p&gt;验证：可观察当日收盘涨跌幅、成交持仓变化及后续交易日是否延续分化。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>离岸人民币同业拆息利率多数回调</title>
-      <link>https://flash.jin10.com/detail/20261112113015800800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261112113015800800</guid>
-      <pubDate>Thu, 12 Nov 2026 03:30:15 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>&lt;p&gt;金十数据11月12日讯，离岸人民币香港银行同业拆息(CNH HIBOR)周四显示：要期限利率多数回落；其中两周期HIBOR跌至1.41667%，创9月23日以来新低。隔夜HIBOR涨至1.37515%，一周期的HIBOR小跌至1.40000%，一年期HIBOR小跌至1.78197…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称离岸人民币同业拆息利率多数回调，摘要显示两周期HIBOR跌至1.41667%创9月23日以来新低，隔夜HIBOR涨至1.37515%，一周及一年期小跌；&lt;/p&gt;&lt;p&gt;事实：报道明确列出各期限CNH HIBOR的具体数值及两周期创新低；&lt;/p&gt;&lt;p&gt;推断：多数期限利率回落可能反映离岸人民币资金面相对宽松，但隔夜利率上涨显示短端仍有波动，属推论；&lt;/p&gt;&lt;p&gt;影响：离岸人民币融资成本相关主体及跨境资金流动可能受影响，条件取决于利率是否持续回落；&lt;/p&gt;&lt;p&gt;验证：可观察后续CNH HIBOR各期限走势及与在岸利率的利差变化。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>日本政府被曝欲就“无核三原则”设“特例”</title>
-      <link>https://flash.jin10.com/detail/20261112112816927800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261112112816927800</guid>
-      <pubDate>Thu, 12 Nov 2026 03:28:16 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>&lt;p&gt;金十数据11月12日讯，据日本方面11日消息，围绕今年年内修订“安保三文件”，日本政府开始研究针对“无核三原则”中的“不运进核武器”这一原则写入例外情况，即如果日本政府判断出现需要搭载核武器的美国舰船停靠日本才能保障日本的安全的情况，则可以例外允许核武器进入日本。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称日本政府被曝欲就“无核三原则”设“特例”，摘要称围绕年内修订“安保三文件”，日本政府开始研究对“不运进核武器”原则写入例外情况；&lt;/p&gt;&lt;p&gt;事实：报道明确说这是据日本方面11日消息的“被曝”内容，属研究阶段，尚未成为正式政策；&lt;/p&gt;&lt;p&gt;推断：若例外条款落地，可能改变日本对核武器运进的政策约束，但当前仅为研究讨论，不能视为既定事实；&lt;/p&gt;&lt;p&gt;影响：日本安保政策、日美同盟及地区安全议题可能受影响，条件是该研究转化为正式修订内容；&lt;/p&gt;&lt;p&gt;验证：可观察“安保三文件”修订进程、日本政府正式表态及国会讨论情况，目前缺少官方确认材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>中国家电业一代领军人物倪润峰逝世，长虹拟于11月13日举办追思会</title>
-      <link>https://www.yicai.com/news/103437522.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/news/103437522.html</guid>
-      <pubDate>Thu, 12 Nov 2026 03:27:16 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://yicai.com">第一财经 · 最新</source>
-      <description>&lt;p&gt;11月12日，第一财经记者从有关方面了解到，长虹集团拟于11月13日举办倪润峰的追思会。 据长虹的官微，原四川长虹电子集团有限公司党委书记、董事局主席倪润峰因病医治无效，于2026年11月11日15时55分在绵阳市中心医院逝世，享年82岁。 一位从长虹退休的老员工向记者表示，消息…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称倪润峰逝世、长虹拟于11月13日举办追思会，摘要称记者从有关方面了解到追思会安排，官微称倪润峰于2026年11月11日15时55分在绵阳市中心医院逝世，享年82岁，并引述退休老员工和行业协会秘书长董敏的评价；&lt;/p&gt;&lt;p&gt;事实：报道明确给出逝世时间、地点、年龄及追思会拟举办日期，并提及倪润峰曾任中国电子视像行业协会第四届会长及三大功绩；&lt;/p&gt;&lt;p&gt;推断：作为长虹历史领军人物，其逝世可能引发对长虹企业传承与治理的关注，但报道未涉及公司经营安排，属推论；&lt;/p&gt;&lt;p&gt;影响：长虹集团、家电行业及相关人士可能受影响，具体经营影响线索有限；&lt;/p&gt;&lt;p&gt;验证：可观察长虹官方后续公告、追思会实际举办情况及公司治理层面是否有进一步信息。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>科创50ETF华夏成交额达100亿元</title>
-      <link>https://flash.jin10.com/detail/20261112112651890800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261112112651890800</guid>
-      <pubDate>Thu, 12 Nov 2026 03:26:51 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>&lt;p&gt;金十数据11月12日讯，临近午盘，宽基ETF整体成交额超600亿元，较昨日此时放量1.45倍，其中科创50ETF华夏（588000）成交额达100亿元，超越昨日全天成交（昨日全天为92.76亿元），创业板易方达（159915）、上证50ETF华夏（510050）、中证500ETF…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称科创50ETF华夏成交额达100亿元，摘要称临近午盘宽基ETF整体成交额超600亿元、较昨日此时放量1.45倍，科创50ETF华夏成交额超越昨日全天92.76亿元，另有9只热门宽基ETF同步放量；&lt;/p&gt;&lt;p&gt;事实：报道明确给出ETF成交额、放量倍数及对比昨日全天的数据；&lt;/p&gt;&lt;p&gt;推断：宽基ETF集体放量可能反映资金活跃度上升，但报道未说明资金流向方向，不能据此判断净申购或净赎回，属推论；&lt;/p&gt;&lt;p&gt;影响：相关ETF及成分股流动性可能受影响，条件取决于放量是否持续；&lt;/p&gt;&lt;p&gt;验证：可观察当日收盘ETF成交额、份额变化及后续交易日成交是否延续放量。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>摩根士丹利CIO调查：微软占企业生成式AI新增支出意向的30%，独立大模型厂商份额升至16%</title>
-      <link>https://flash.jin10.com/detail/20261112112648611800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261112112648611800</guid>
-      <pubDate>Thu, 12 Nov 2026 03:26:48 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称摩根士丹利CIO调查显示微软占企业生成式AI新增支出意向的30%，独立大模型厂商份额升至16%；摘要为空。&lt;/p&gt;&lt;p&gt;事实：报道仅给出上述两项调查数字，未说明样本量、调查时间、统计口径或“独立大模型厂商”的具体定义。&lt;/p&gt;&lt;p&gt;推断：该调查若成立，反映企业新增生成式AI预算仍偏向微软生态，同时独立模型厂商获得一定份额，但份额变化幅度与趋势无法从单条标题判断。&lt;/p&gt;&lt;p&gt;影响：可能涉及企业AI采购格局及微软与独立模型厂商的竞争关系，具体影响取决于调查口径与样本代表性。&lt;/p&gt;&lt;p&gt;验证：需查阅摩根士丹利原调查报告的样本、时间与分类标准；线索有限，摘要缺失，无法核验更多细节。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>科创50ETF华夏半日成交100亿元</title>
-      <link>https://news.10jqka.com.cn/20261112/c681739138.shtml</link>
-      <guid isPermaLink="true">https://news.10jqka.com.cn/20261112/c681739138.shtml</guid>
-      <pubDate>Thu, 12 Nov 2026 03:25:45 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
-      <description>&lt;p&gt;临近午盘，宽基ETF整体成交额超600亿元，较昨日此时放量1.45倍，其中科创50ETF华夏（588000）成交额达100亿元，超越昨日全天成交（昨日全天为92.76亿元），创业板易方达（159915）、上证50ETF华夏（510050）、中证500ETF南方（510500）等9…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：科创50ETF华夏（588000）半日成交100亿元，超过昨日全天92.76亿元；临近午盘宽基ETF整体成交额超600亿元，较昨日此时放量1.45倍；创业板易方达、上证50ETF华夏、中证500ETF南方等9只热门宽基ETF同步放量。&lt;/p&gt;&lt;p&gt;事实：报道明确给出上述成交额与放量倍数，属盘中数据。&lt;/p&gt;&lt;p&gt;推断：宽基ETF成交显著放大，显示当日相关ETF交易活跃度上升，但摘要未说明资金流向、涨跌方向及放量原因。&lt;/p&gt;&lt;p&gt;影响：可能涉及ETF流动性及相关宽基指数成分股交易活跃度，具体影响需结合申赎与价格数据。&lt;/p&gt;&lt;p&gt;验证：可核对交易所或基金公司公布的ETF成交与份额数据，以及午后成交是否延续；线索有限，无法判断放量驱动因素。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>中国计划未来五年严厉打击财务造假，怎么做？</title>
-      <link>https://www.yicai.com/news/103437341.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/news/103437341.html</guid>
-      <pubDate>Thu, 12 Nov 2026 03:25:44 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://yicai.com">第一财经 · 最新</source>
-      <description>&lt;p&gt;财务造假严重扰乱资本市场秩序、动摇投资者信心，近年来遭到政府严打，遏制财务造假效果初步显现，而未来五年这一打击力度会更大。 近日，财政部印发《会计改革与发展“十五五”规划》（下称《规划》），其中“十五五”时期一大重要工作就是严厉打击财务造假。 具体来说，《规划》要求，聚焦国计民生…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：财政部印发《会计改革与发展“十五五”规划》，要求聚焦国计民生重要行业和关键领域开展会计信息质量检查，以“清存量、遏增量”为目标，严打虚构经济业务、虚增利润粉饰报表、编制虚假财务会计报告等行为。&lt;/p&gt;&lt;p&gt;事实：报道明确未来五年将加大打击财务造假力度，并列出上述检查方向与查处对象。&lt;/p&gt;&lt;p&gt;推断：监管检查范围与力度可能扩大，会计信息质量要求趋严，但具体执行细则、处罚标准与时间表尚未在摘要中体现。&lt;/p&gt;&lt;p&gt;影响：可能涉及上市公司、会计师事务所及财务信息披露相关主体，实际影响取决于检查落地范围。&lt;/p&gt;&lt;p&gt;验证：可关注后续配套细则、检查名单及处罚案例披露；线索有限，摘要未提供具体行业清单与量化目标。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>刘海星：共同夯实中美建设性战略稳定关系基础</title>
-      <link>https://flash.jin10.com/detail/20261112112531459800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261112112531459800</guid>
-      <pubDate>Thu, 12 Nov 2026 03:25:31 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>&lt;p&gt;金十数据11月12日讯，11月12日，中共中央对外联络部部长刘海星在北京出席2026中美政党对话。刘海星在主旨讲话中表示，面向未来，中美应秉持相互尊重、和平共处、合作共赢的原则，一道探索新时代两个大国正确相处之道，共同努力夯实中美建设性战略稳定关系的基础。一是树立正确认知，加深对…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：11月12日中共中央对外联络部部长刘海星在北京出席2026中美政党对话并发表主旨讲话，提出树立正确认知、有效管控分歧等方向，共同夯实中美建设性战略稳定关系基础。&lt;/p&gt;&lt;p&gt;事实：报道明确活动时间、地点、人物及讲话要点，属官方表态。&lt;/p&gt;&lt;p&gt;推断：政党对话渠道释放稳定中美关系的沟通信号，但摘要未涉及具体成果、协议或后续安排。&lt;/p&gt;&lt;p&gt;影响：可能涉及中美双边沟通氛围与相关领域预期，实际影响取决于后续互动。&lt;/p&gt;&lt;p&gt;验证：可观察后续中美官方互动与对话成果披露；线索有限，摘要为讲话节选，未提供完整内容。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>福建：建设10个人工智能科研创新平台 立项10个人工智能方向技术创新重点攻关及产业化项目</title>
-      <link>https://www.cls.cn/detail/2532335</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2532335</guid>
-      <pubDate>Thu, 12 Nov 2026 03:25:30 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-      <description>&lt;p&gt;【福建：建设10个人工智能科研创新平台 立项10个人工智能方向技术创新重点攻关及产业化项目】财联社11月12日电，福建省人民政府办公厅印发《福建省推动“人工智能+”行动方案（2026—2028年）》。行动方案指出，“人工智能+”技术研发。推动人工智能深度赋能生物医药、能源材料等产…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：福建省人民政府办公厅印发《福建省推动“人工智能+”行动方案（2026—2028年）》，提出建设10个人工智能科研创新平台、立项10个人工智能方向技术创新重点攻关及产业化项目，支持企业与高校、科研院所共建人工智能赋能中心，围绕生物制造、海洋高新、新型材料研发、具身智能等开展联合攻关。&lt;/p&gt;&lt;p&gt;事实：报道明确政策文件名称、实施期限及上述数量目标与重点领域。&lt;/p&gt;&lt;p&gt;推断：地方层面推动AI与产业研发结合，可能带动相关平台建设与项目立项，但摘要未给出资金规模、责任主体与考核方式。&lt;/p&gt;&lt;p&gt;影响：可能涉及福建本地AI、生物医药、海洋与新材料等领域的企业及科研机构。&lt;/p&gt;&lt;p&gt;验证：可关注后续平台名单、项目立项公示及配套资金安排；线索有限，摘要为方案节选。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>创业板指转跌，此前一度涨近2%</title>
-      <link>https://news.10jqka.com.cn/20261112/c681739087.shtml</link>
-      <guid isPermaLink="true">https://news.10jqka.com.cn/20261112/c681739087.shtml</guid>
-      <pubDate>Thu, 12 Nov 2026 03:24:42 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
-      <description>&lt;p&gt;创业板指转跌，此前一度涨近2%，现跌0.18%。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题与摘要均称创业板指由涨近2%转为下跌0.18%；&lt;/p&gt;&lt;p&gt;事实：报道明确记录创业板指盘中先涨后跌、当前跌幅0.18%；&lt;/p&gt;&lt;p&gt;推断：指数日内波动加大，早盘涨幅被回吐，但仅凭单条快讯无法判断驱动因素；&lt;/p&gt;&lt;p&gt;影响：创业板相关指数基金与高波动成长股情绪可能受扰动，具体取决于后续走势；&lt;/p&gt;&lt;p&gt;验证：需观察收盘涨跌幅、成交额及后续同类快讯是否延续跌势。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>创业板指、深成指翻绿</title>
-      <link>https://www.cls.cn/detail/2532334</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2532334</guid>
-      <pubDate>Thu, 12 Nov 2026 03:23:55 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-      <description>&lt;p&gt;【创业板指、深成指翻绿】财联社11月12日电，创业板指、深成指双双回落翻绿，创业板指早盘一度拉升涨近2%，深成指一度拉升涨超1%。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：财联社称创业板指、深成指双双回落翻绿，创业板指早盘一度涨近2%，深成指一度涨超1%；&lt;/p&gt;&lt;p&gt;事实：报道明确两大指数均由涨转跌；&lt;/p&gt;&lt;p&gt;推断：回落具有跨指数同步性，可能反映盘中资金情绪转弱，但摘要未给出原因；&lt;/p&gt;&lt;p&gt;影响：深市成长类板块及跟踪这两大指数的产品可能承压，程度待确认；&lt;/p&gt;&lt;p&gt;验证：关注收盘数据、领跌板块及是否有后续解释性报道。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>伊朗称绝不放弃浓缩核材料</title>
-      <link>https://www.yicai.com/news/103437748.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/news/103437748.html</guid>
-      <pubDate>Thu, 12 Nov 2026 03:23:48 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://yicai.com">第一财经 · 最新</source>
-      <description>&lt;p&gt;据CCTV国际时讯，伊朗最高国家安全委员会秘书雷扎伊在黎巴嫩媒体11月11日发布的采访中表示，绝不允许任何浓缩核材料离开伊朗。 他指出，浓缩核材料有许多用途，伊朗正在设计核动力船舶和核动力潜艇，未来还可能建造小型模块化反应堆发电厂。雷扎伊还表示，伊朗将继续推进外交努力，并已提出7…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：伊朗最高国家安全委员会秘书雷扎伊称绝不允许浓缩核材料离开伊朗，提及核动力船舶、潜艇及小型模块化反应堆计划，并提出7项条件、称美方回应“具有欺骗性”；&lt;/p&gt;&lt;p&gt;事实：报道明确上述表态及“若美方满足条件将开放霍尔木兹海峡”的说法；&lt;/p&gt;&lt;p&gt;推断：伊美围绕核材料与霍尔木兹海峡的博弈仍在持续，谈判存在条件性，但报道未说明条件内容与时间表；&lt;/p&gt;&lt;p&gt;影响：可能涉及原油运输通道预期与中东地缘风险溢价，具体影响取决于后续进展；&lt;/p&gt;&lt;p&gt;验证：需观察美方正式回应、7项条件是否公开及霍尔木兹海峡实际通行状况，目前线索有限。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>创业板指回落翻绿，此前一度涨超1.8%。</title>
-      <link>https://wallstreetcn.com/livenews/3198786</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3198786</guid>
-      <pubDate>Thu, 12 Nov 2026 03:23:38 +0000</pubDate>
+      <title>受厄尔尼诺影响，巴西咖啡豆面临减产</title>
+      <link>https://wallstreetcn.com/livenews/3199538</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3199538</guid>
+      <pubDate>Fri, 13 Nov 2026 03:19:32 +0000</pubDate>
       <category>中文财经快讯</category>
       <source url="https://wallstreetcn.com">华尔街见闻 · A 股快讯</source>
-      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称创业板指回落翻绿、此前一度涨超1.8%，摘要为空；&lt;/p&gt;&lt;p&gt;事实：报道仅给出指数由涨转跌这一信息；&lt;/p&gt;&lt;p&gt;推断：与同日其他快讯方向一致，但缺少跌幅、成交等细节，线索有限；&lt;/p&gt;&lt;p&gt;影响：仅能提示创业板盘中情绪转弱，无法评估幅度；&lt;/p&gt;&lt;p&gt;验证：需补充摘要或收盘数据，目前缺少验证材料。&lt;/p&gt;</description>
+      <description>&lt;p&gt;受超强厄尔尼诺影响，近几个月，巴西东南部咖啡主产区出现反常的降雨与高温天气，打乱了咖啡树的生长节律。总台记者日前探访了巴西东南部米纳斯吉拉斯州的咖啡种植农场。当地农户表示，当地咖啡树花期零散、坐果困难，还面临病害风险。可以说，今年巴西咖啡的产量与品质面临双重考验。当地咖啡合作社首…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称巴西咖啡豆面临减产，摘要提到超强厄尔尼诺、东南部主产区反常降雨与高温、咖啡树花期零散坐果困难及病害风险，合作社高管称市场对2027年产量预期已受影响；摘要末尾“预计…”被截断。&lt;/p&gt;&lt;p&gt;事实：报道明确说厄尔尼诺打乱咖啡树生长节律，当地农户反映花期零散、坐果困难并面临病害风险，产量与品质面临双重考验，市场已开始警惕且2027年产量预期开始受影响。&lt;/p&gt;&lt;p&gt;推断：若异常天气持续，巴西咖啡供给可能收紧并传导至品质与价格预期，但摘要未给出具体减产幅度或价格数据。&lt;/p&gt;&lt;p&gt;影响：可能受影响的主体包括巴西咖啡种植户与合作社、咖啡贸易与加工企业、以巴西豆为原料的下游品牌；条件是该天气影响延续至下一产季。&lt;/p&gt;&lt;p&gt;验证：可观察后续巴西咖啡产区天气、官方或行业协会产量预估、出口数据及期货价格反应；目前缺少具体量化减产材料。&lt;/p&gt;</description>
     </item>
     <item>
-      <title>军工板块震荡拉升 航天南湖涨超10%</title>
-      <link>https://www.cls.cn/detail/2532326</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2532326</guid>
-      <pubDate>Thu, 12 Nov 2026 03:23:29 +0000</pubDate>
+      <title>马来西亚将评估购买的人工智能芯片是否已被再出口，考虑采取措施加强芯片出口管制。（彭博）</title>
+      <link>https://wallstreetcn.com/livenews/3199537</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3199537</guid>
+      <pubDate>Fri, 13 Nov 2026 03:19:11 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称马来西亚将评估购买的人工智能芯片是否已被再出口，并考虑采取措施加强芯片出口管制，来源标注为彭博；摘要为空。&lt;/p&gt;&lt;p&gt;事实：报道仅明确马来西亚将评估所购AI芯片是否被再出口，并考虑加强出口管制，未提供具体措施、时间表或涉及企业。&lt;/p&gt;&lt;p&gt;推断：若评估发现再出口情况，马来西亚可能收紧AI芯片转口监管，进而影响相关供应链流向，但线索有限，无法确认具体政策力度。&lt;/p&gt;&lt;p&gt;影响：可能受影响的主体包括在马来西亚采购或转运AI芯片的企业、上游芯片供应商及区域数据中心相关方；条件是相关管制措施落地。&lt;/p&gt;&lt;p&gt;验证：可观察马来西亚官方后续声明、出口管制细则及企业合规调整；目前缺少摘要与细节材料。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>英伟达更新黄仁勋简介</title>
+      <link>https://flash.jin10.com/detail/20261113111906695800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261113111906695800</guid>
+      <pubDate>Fri, 13 Nov 2026 03:19:06 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>&lt;p&gt;金十数据11月13日讯，英伟达官网更新管理层简介页面，临时CEO科莱特·克雷斯位列首位，黄仁勋则被放在了“创始人”一栏中。黄仁勋的个人简介页面也进行了更新，提到“黄仁勋于1993创立了英伟达，此前曾担任英伟达总裁兼首席执行官，以及董事会成员”。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：英伟达官网更新管理层简介页面，临时CEO科莱特·克雷斯位列首位，黄仁勋被放在“创始人”一栏，其个人简介称1993年创立英伟达、此前曾担任总裁兼首席执行官及董事会成员。&lt;/p&gt;&lt;p&gt;事实：报道明确说官网页面发生上述更新，并引述黄仁勋简介中“此前曾担任”的表述。&lt;/p&gt;&lt;p&gt;推断：页面措辞变化可能引发外界对公司管理层角色安排的解读，但报道未说明任何人事变动公告，不能据此认定黄仁勋已卸任或公司治理发生实质变化。&lt;/p&gt;&lt;p&gt;影响：可能受影响的主体为英伟达投资者、合作伙伴及关注公司治理的市场参与者；条件是后续有官方人事说明。&lt;/p&gt;&lt;p&gt;验证：可观察英伟达官方公告、监管文件及高管公开活动；目前缺少公司对页面更新原因的说明。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>微软谈服务中断：我们正尽可能实施基础设施容量优化，以协助支撑正在恢复上线地区的流量。 我们已监测了为改善服务可用性所实施</title>
+      <link>https://wallstreetcn.com/livenews/3199536</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3199536</guid>
+      <pubDate>Fri, 13 Nov 2026 03:18:31 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+      <description>&lt;p&gt;微软谈服务中断：我们正尽可能实施基础设施容量优化，以协助支撑正在恢复上线地区的流量。 我们已监测了为改善服务可用性所实施变更的状态，确认其效果未达预期。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：微软称正尽可能实施基础设施容量优化以支撑恢复上线地区的流量，并称已监测所实施变更的状态、确认效果未达预期。&lt;/p&gt;&lt;p&gt;事实：报道明确说微软正在做容量优化以协助恢复地区流量，且相关变更效果未达预期，表明服务中断仍在处理中。&lt;/p&gt;&lt;p&gt;推断：服务恢复可能慢于预期，容量优化措施尚未完全奏效，但摘要未说明中断范围、受影响地区或服务种类。&lt;/p&gt;&lt;p&gt;影响：可能受影响的主体包括使用微软云服务的客户及依赖其基础设施的业务；条件是中断持续。&lt;/p&gt;&lt;p&gt;验证：可观察微软后续状态页更新、恢复时间及是否发布根因说明；目前缺少中断规模与影响范围材料。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>中国政府中东问题特使翟隽会见也门总统领导委员会主席阿里米</title>
+      <link>https://news.10jqka.com.cn/20261113/c681787143.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261113/c681787143.shtml</guid>
+      <pubDate>Fri, 13 Nov 2026 03:16:22 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>&lt;p&gt;2026年11月12日，中国政府中东问题特使翟隽在利雅得应约会见也门总统领导委员会主席阿里米，双方就中也关系及当前地区局势交换意见。翟隽表示，中国同也门传统友好，建交70年来，两国关系保持平稳健康发展。近一段时间以来，也门和红海局势升温，中方对此深表关切。中方坚定支持也方维护主权…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：中国政府中东问题特使翟隽在利雅得应约会见也门总统领导委员会主席阿里米，双方就中也关系及地区局势交换意见；翟隽提到中也建交70年、也门和红海局势升温、中方深表关切，并支持也门主权独立统一领土完整及政治解决。&lt;/p&gt;&lt;p&gt;事实：报道明确说会见时间地点、双方议题及中方上述表态。&lt;/p&gt;&lt;p&gt;推断：此次会见显示中方在也门与红海局势升温背景下保持外交沟通，但摘要未提及具体成果或协议。&lt;/p&gt;&lt;p&gt;影响：可能受影响的主体包括中也双边关系、也门政治进程及红海航运相关方；条件是后续有跟进举措。&lt;/p&gt;&lt;p&gt;验证：可观察中方与也门方面后续声明、地区局势及外交接触进展；目前缺少会见成果细节材料。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>1. 中芯国际赵海军：三季度平均晶圆单价环比提升1.8%。 2. 黄仁勋辞任英伟达三职，美众议院寻求问询、司法部据报调查</title>
+      <link>https://flash.jin10.com/detail/20261113111618616800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261113111618616800</guid>
+      <pubDate>Fri, 13 Nov 2026 03:16:18 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>&lt;p&gt;1. 中芯国际赵海军：三季度平均晶圆单价环比提升1.8%。 2. 黄仁勋辞任英伟达三职，美众议院寻求问询、司法部据报调查英伟达。 3. 存储涨价潮仍将延续，产品需求现分化。 4. 消息称SK海力士HBM4良率已突破70%，与三星、美光竞争下一代内存市场。 5. 鸿海：芯片与存储供…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题列出7条半导体相关快讯，含中芯国际三季度平均晶圆单价环比提升1.8%、黄仁勋辞任英伟达三职及美众议院寻求问询、司法部据报调查、存储涨价延续且需求分化、SK海力士HBM4良率据称突破70%、鸿海称芯片与存储供应紧张且预计2027年需求持续超过供应、三星HBM工厂投产提前一年、长鑫DDR5颗粒升至32Gb；&lt;/p&gt;&lt;p&gt;事实：上述均为标题转述，摘要中长鑫条目被截断，黄仁勋辞任与调查细节、良率数据来源均未提供；&lt;/p&gt;&lt;p&gt;推断：多条信号共同指向存储与HBM供需偏紧、先进内存竞争加剧，但单价提升与涨价、良率、投产节奏之间的因果及幅度无法由现有文本确认；&lt;/p&gt;&lt;p&gt;影响：可能涉及晶圆代工、存储原厂、HBM供应链及下游整机厂商，具体取决于涨价持续性与良率兑现情况；&lt;/p&gt;&lt;p&gt;验证：需核对中芯国际财报口径、英伟达公告与监管文件、SK海力士良率官方披露、三星投产时间表及鸿海后续月度数据，目前线索有限。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>财联社11月13日电，微软就服务中断问题表示，已监控了为提升可维护性而实施的变更状态，并确认这些变更未按预期进行。</title>
+      <link>https://www.cls.cn/detail/2533511</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2533511</guid>
+      <pubDate>Fri, 13 Nov 2026 03:15:50 +0000</pubDate>
       <category>中文财经快讯</category>
       <source url="https://cls.cn">财联社 · 电报</source>
-      <description>&lt;p&gt;【军工板块震荡拉升 航天南湖涨超10%】财联社11月12日电，军工板块盘中震荡拉升，航天南湖涨超10%，国科军工、洪都航空、晨曦航空、航发科技、国睿科技等涨幅靠前。消息面上，中信建投研报指出，展望2027年，随着“十五五”规模化订单落地、军贸体系化出口推进，以及AI算力、商业航天…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：军工板块盘中拉升，航天南湖涨超10%，国科军工、洪都航空等涨幅靠前；中信建投研报提及2027年“十五五”订单、军贸出口及AI算力、商业航天、大飞机等民用需求；&lt;/p&gt;&lt;p&gt;事实：报道明确个股涨幅与研报观点并列呈现；&lt;/p&gt;&lt;p&gt;推断：板块异动与研报预期存在时间上的关联，但报道未证明研报是直接触发因素；&lt;/p&gt;&lt;p&gt;影响：军工板块及相关个股情绪可能受提振，持续性取决于订单与业绩兑现；&lt;/p&gt;&lt;p&gt;验证：关注后续板块成交、公司公告及订单落地信息，研报预测属机构观点而非既成事实。&lt;/p&gt;</description>
+      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称微软就服务中断表示已监控为提升可维护性而实施的变更状态，并确认这些变更未按预期进行；&lt;/p&gt;&lt;p&gt;事实：报道明确微软承认相关变更未达预期，但未说明受影响服务范围、时长与用户规模；&lt;/p&gt;&lt;p&gt;推断：此次中断可能与可维护性变更相关，但标题未直接建立因果，属推论；&lt;/p&gt;&lt;p&gt;影响：可能影响微软云服务用户与企业客户体验，程度取决于中断范围；&lt;/p&gt;&lt;p&gt;验证：需微软状态页公告、事后复盘报告及受影响服务清单，目前线索有限。&lt;/p&gt;</description>
     </item>
     <item>
-      <title>创业板指翻绿，此前一度涨超1.8%。</title>
-      <link>https://wallstreetcn.com/livenews/3198785</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3198785</guid>
-      <pubDate>Thu, 12 Nov 2026 03:23:21 +0000</pubDate>
+      <title>微软：正在确定可用来提高运力的替代工作流程，以应对持续存在的流量管理失衡问题。</title>
+      <link>https://flash.jin10.com/detail/20261113111546718800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261113111546718800</guid>
+      <pubDate>Fri, 13 Nov 2026 03:15:46 +0000</pubDate>
       <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
-      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称创业板指由涨超1.8%转为下跌，发布时间为2026-11-12T03:23:21Z，摘要为空；&lt;/p&gt;&lt;p&gt;事实：报道仅陈述创业板指盘中翻绿、此前一度涨超1.8%，未提供具体点位、成交额或原因；&lt;/p&gt;&lt;p&gt;推断：指数盘中先涨后跌显示短线波动加大，但无法据此判断趋势或驱动因素；&lt;/p&gt;&lt;p&gt;影响：可能影响关注创业板走势的投资者情绪，具体影响范围与条件缺少数据；&lt;/p&gt;&lt;p&gt;验证：需后续观察收盘涨跌幅、成交量及板块结构，目前缺少验证材料。&lt;/p&gt;</description>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称微软正在确定可用来提高运力的替代工作流程，以应对持续存在的流量管理失衡问题；&lt;/p&gt;&lt;p&gt;事实：报道明确微软承认存在持续性的流量管理失衡，并正在寻找替代工作流程提升运力；&lt;/p&gt;&lt;p&gt;推断：该表述与同期服务中断快讯可能相关，但标题未说明二者为同一事件，属推论；&lt;/p&gt;&lt;p&gt;影响：可能涉及微软云基础设施容量与流量调度，进而影响服务可用性；&lt;/p&gt;&lt;p&gt;验证：需微软官方事件说明、容量调整公告及后续中断频率变化，目前线索有限。&lt;/p&gt;</description>
     </item>
     <item>
-      <title>今年前9个月俄罗斯外贸顺差增长21.1%</title>
-      <link>https://news.10jqka.com.cn/20261112/c681738942.shtml</link>
-      <guid isPermaLink="true">https://news.10jqka.com.cn/20261112/c681738942.shtml</guid>
-      <pubDate>Thu, 12 Nov 2026 03:20:54 +0000</pubDate>
+      <title>A股AI漫剧概念涨势扩大，华是科技20cm涨停，续创历史新高，此前湖北广电、横店影视、文投控股涨停，幸福蓝海触及20cm</title>
+      <link>https://flash.jin10.com/detail/20261113111514057800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261113111514057800</guid>
+      <pubDate>Fri, 13 Nov 2026 03:15:14 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>&lt;p&gt;A股AI漫剧概念涨势扩大，华是科技20cm涨停，续创历史新高，此前湖北广电、横店影视、文投控股涨停，幸福蓝海触及20cm涨停，华智数媒、新炬网络、博纳影业涨幅靠前。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题与摘要列出华是科技20cm涨停并续创历史新高，湖北广电、横店影视、文投控股涨停，幸福蓝海触及20cm涨停，华智数媒、新炬网络、博纳影业涨幅靠前；&lt;/p&gt;&lt;p&gt;事实：报道明确AI漫剧概念当日涨势扩大及上述个股具体表现；&lt;/p&gt;&lt;p&gt;推断：资金短期集中流入该概念，但文本未提供驱动消息、公司业务关联度或基本面变化，概念与个股的实质关联属推论；&lt;/p&gt;&lt;p&gt;影响：涉及上述上市公司股价波动与板块情绪，条件为概念热度延续；&lt;/p&gt;&lt;p&gt;验证：需交易所龙虎榜、公司公告澄清及后续成交与涨停持续性数据，目前线索有限。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>微软就服务中断表示：公司已对为改善服务可用性而实施的调整措施进行监测，并确认这些措施未能达到预期效果。</title>
+      <link>https://flash.jin10.com/detail/20261113111501725800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261113111501725800</guid>
+      <pubDate>Fri, 13 Nov 2026 03:15:01 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称微软就服务中断表示已监测为改善服务可用性而实施的调整措施，并确认这些措施未能达到预期效果；&lt;/p&gt;&lt;p&gt;事实：报道明确微软承认调整措施未达预期，但未给出中断原因、影响范围与恢复时间；&lt;/p&gt;&lt;p&gt;推断：与id 6、id 7同属微软服务问题系列快讯，可能指向同一次事件的不同侧面，但标题未明示，属推论；&lt;/p&gt;&lt;p&gt;影响：可能影响微软服务可用性及客户信任，程度取决于中断规模；&lt;/p&gt;&lt;p&gt;验证：需微软官方状态更新、根因说明及后续可用性指标，目前线索有限。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>白银净多头仓位创一年新低，投机盘大溃败后看空情绪是否过度？</title>
+      <link>https://flash.jin10.com/detail/20261113111441051800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261113111441051800</guid>
+      <pubDate>Fri, 13 Nov 2026 03:14:41 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称白银净多头仓位创一年新低，并出现“投机盘大溃败”与“看空情绪是否过度”的设问；摘要为空。&lt;/p&gt;&lt;p&gt;事实：报道仅给出净多头仓位创一年新低这一信号，并以问句形式讨论看空情绪是否过度，未提供具体仓位数据、时间区间或价格变动。&lt;/p&gt;&lt;p&gt;推断：净多头下降反映投机性多头减少，但“溃败”程度与是否过度属标题表述，缺少数据支撑，不能据此判断价格方向。&lt;/p&gt;&lt;p&gt;影响：可能涉及白银期货持仓结构与贵金属市场情绪，具体影响取决于后续仓位与价格数据。&lt;/p&gt;&lt;p&gt;验证：需观察后续CFTC等持仓报告、白银价格与成交量；目前摘要为空，线索有限。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>韩国政府：若发生严重违反协议的情况，将暂停或吊销谷歌地图的出口许可。</title>
+      <link>https://flash.jin10.com/detail/20261113111435306800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261113111435306800</guid>
+      <pubDate>Fri, 13 Nov 2026 03:14:35 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：韩国政府表示，若发生严重违反协议的情况，将暂停或吊销谷歌地图的出口许可。&lt;/p&gt;&lt;p&gt;事实：报道明确韩国政府对谷歌地图出口许可设定条件性处置措施，触发条件为“严重违反协议”。&lt;/p&gt;&lt;p&gt;推断：这体现韩国对地图数据出口的监管约束，但协议内容、违规认定标准与时间表均未披露。&lt;/p&gt;&lt;p&gt;影响：可能涉及谷歌在韩地图服务及韩国地理信息监管，具体影响取决于是否出现违规认定。&lt;/p&gt;&lt;p&gt;验证：需观察韩国政府后续是否启动暂停或吊销程序、谷歌是否回应；目前缺少协议细节，线索有限。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>AI漫剧概念涨势扩大 华是科技20cm涨停续创历史新高</title>
+      <link>https://www.cls.cn/detail/2533496</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2533496</guid>
+      <pubDate>Fri, 13 Nov 2026 03:14:15 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+      <description>&lt;p&gt;【AI漫剧概念涨势扩大 华是科技20cm涨停续创历史新高】财联社11月13日电，AI漫剧概念日内涨势扩大，华是科技20cm涨停，续创历史新高，此前湖北广电、横店影视、文投控股涨停，幸福蓝海触及20cm涨停，华智数媒、新炬网络、博纳影业涨幅靠前。消息面上，抖音集团短剧版权中心面向具…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：AI漫剧概念日内涨势扩大，华是科技20cm涨停并续创历史新高，湖北广电、横店影视、文投控股涨停，幸福蓝海触及20cm涨停；消息面为抖音集团短剧版权中心开放互动剧与互动影游合作，提供IP资源、三种合作模式及单剧最高20万元保底激励。&lt;/p&gt;&lt;p&gt;事实：报道明确列出上述个股表现与抖音合作计划的具体内容。&lt;/p&gt;&lt;p&gt;推断：概念上涨与平台开放合作消息在时间上相关，但报道未证明因果关系，也未说明各公司实际参与程度。&lt;/p&gt;&lt;p&gt;影响：可能涉及短剧、漫剧、互动影游相关上市公司及内容平台合作方，影响程度取决于合作落地情况。&lt;/p&gt;&lt;p&gt;验证：可观察相关公司公告、合作签约与项目上线情况；当前仅有概念行情与平台政策，个股基本面验证材料有限。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>期货盯盘神器专属文章</title>
+      <link>https://flash.jin10.com/detail/20261113111412662800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261113111412662800</guid>
+      <pubDate>Fri, 13 Nov 2026 03:14:12 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>&lt;p&gt;市场深谈：2027年油价怎么走？Morningstar DBRS奥康纳认为，供应恢复但库存已经耗尽，市场经不起再一次供应中断。点击阅读。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题为“期货盯盘神器专属文章”，摘要提及Morningstar DBRS奥康纳对2027年油价的看法：供应恢复但库存已耗尽，市场经不起再一次供应中断。&lt;/p&gt;&lt;p&gt;事实：报道转述分析师观点，认为库存耗尽使市场对供应中断敏感。&lt;/p&gt;&lt;p&gt;推断：该观点指向油价对供应冲击的脆弱性，但属分析师判断而非已发生事实，且未给出价格预测数值。&lt;/p&gt;&lt;p&gt;影响：可能涉及原油期货与能源市场参与者，具体影响取决于实际供应中断与库存数据。&lt;/p&gt;&lt;p&gt;验证：需观察原油库存、供应中断事件及油价走势；目前为观点性内容，线索有限。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>段永平谈黄仁勋辞职：第一时间清空英伟达，大概率不会重回岗位，或以“影子CEO”回归</title>
+      <link>https://news.10jqka.com.cn/20261113/c681787011.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261113/c681787011.shtml</guid>
+      <pubDate>Fri, 13 Nov 2026 03:14:02 +0000</pubDate>
       <category>中文财经快讯</category>
       <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
-      <description>&lt;p&gt;俄罗斯中央银行11日公布的初步数据显示，今年前9个月俄罗斯外贸顺差为1035亿美元，同比增长21.1%；外贸总额为6069亿美元，同比增长16.3%。另据俄联邦海关署10日公布的初步数据，今年前9个月俄外贸顺差为1168亿美元，同比增长13.18%。其中出口占比最大的是能源原材料…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：俄央行初步数据显示前9个月外贸顺差1035亿美元、同比增21.1%，外贸总额6069亿美元、同比增16.3%；俄海关署初步数据为顺差1168亿美元、同比增13.18%；出口以能源原材料为主达1948亿美元、增14.3%，进口以机械设备和运输工具为主达1124亿美元、增16.1%；&lt;/p&gt;&lt;p&gt;事实：报道明确给出上述两组来源不同、口径不同的初步统计数据；&lt;/p&gt;&lt;p&gt;推断：两机构顺差数值存在差异，可能源于统计口径不同，报道未解释原因，不能据此断定哪组更准确；&lt;/p&gt;&lt;p&gt;影响：可能影响关注俄罗斯外贸、能源出口及相关商品市场的主体，但需注意数据为初步值；&lt;/p&gt;&lt;p&gt;验证：可等待俄央行与海关署后续修订数据及全年统计，核对口径差异。&lt;/p&gt;</description>
+      <description>&lt;p&gt;11月13日，段永平通过账号“大道无形我有型”回复网友提问。面对网友询问黄仁勋辞职对英伟达的冲击，段永平写道：“大概这是董事会最后的决定了。短期对英伟达的生意不会有影响，几年后就要看他们能不能找到好的CEO了。黄仁勋是个工作非常努力的人，同时对AI的前景也很有远见，要找到这样的人…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：段永平称在纽约时报报道后第一时间清空英伟达，认为短期生意不受影响、几年后要看能否找到好CEO，并称黄仁勋可能不重回岗位或以“影子CEO”回归。&lt;/p&gt;&lt;p&gt;事实：报道明确段永平的清仓表态及其对黄仁勋辞职影响的判断，但黄仁勋辞职本身及纽约时报报道内容未在摘要中展开。&lt;/p&gt;&lt;p&gt;推断：该表态反映部分投资者对英伟达管理层变动的长期治理担忧，但清仓属个人投资行为，不能等同于市场共识。&lt;/p&gt;&lt;p&gt;影响：可能涉及英伟达投资者情绪与公司治理讨论，实际经营影响取决于管理层安排。&lt;/p&gt;&lt;p&gt;验证：需核实黄仁勋辞职报道原文、英伟达官方公告及后续管理层变动；当前摘要未提供辞职事实细节，线索有限。&lt;/p&gt;</description>
     </item>
     <item>
-      <title>福建：促进模型和智能体创新发展 引导重点行业领域面向优势场景开发垂直模型</title>
-      <link>https://news.10jqka.com.cn/20261112/c681738885.shtml</link>
-      <guid isPermaLink="true">https://news.10jqka.com.cn/20261112/c681738885.shtml</guid>
-      <pubDate>Thu, 12 Nov 2026 03:20:14 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
-      <description>&lt;p&gt;福建省人民政府办公厅印发《福建省推动“人工智能+”行动方案（2026—2028年）》，提出促进模型和智能体创新发展，优化生成式人工智能大模型备案服务和安全评估机制，鼓励开展多模态、智能体、具身智能、海洋遥感分析算法攻关，引导重点行业领域面向优势场景开发垂直模型，培育60个以上行业…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：福建省印发《推动“人工智能+”行动方案（2026—2028年）》，提出优化生成式AI大模型备案服务和安全评估机制，鼓励多模态、智能体、具身智能、海洋遥感分析算法攻关，引导重点行业开发垂直模型，培育60个以上行业垂直模型，对优质项目和智能体项目依法依规给予补助或奖励；&lt;/p&gt;&lt;p&gt;事实：报道明确上述政策内容与量化目标；&lt;/p&gt;&lt;p&gt;推断：政策释放地方支持AI垂直模型和智能体发展的信号，但具体补助标准、申报条件未披露；&lt;/p&gt;&lt;p&gt;影响：可能影响福建本地AI企业、行业解决方案提供商及算力相关主体，实际效果取决于后续细则落地；&lt;/p&gt;&lt;p&gt;验证：可观察后续配套细则、项目遴选名单及补助资金安排。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>福建：加快构建“一核两区多点”的全省一体化算力网络协同发展布局</title>
-      <link>https://news.10jqka.com.cn/20261112/c681738872.shtml</link>
-      <guid isPermaLink="true">https://news.10jqka.com.cn/20261112/c681738872.shtml</guid>
-      <pubDate>Thu, 12 Nov 2026 03:19:59 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
-      <description>&lt;p&gt;福建省人民政府办公厅印发《福建省推动“人工智能+”行动方案（2026—2028年）》，提出强化智能算力支撑：围绕福州都市圈（含平潭）和厦漳泉都市圈建设城市级数据中心，加快构建“一核两区多点”的全省一体化算力网络协同发展布局；加快建设福建省国家算力互联互通区域节点，升级全省一体化算…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：同一行动方案提出围绕福州都市圈（含平潭）和厦漳泉都市圈建设城市级数据中心，构建“一核两区多点”全省一体化算力网络，建设福建省国家算力互联互通区域节点，升级算力资源公共服务平台并融入全国一体化算力网，推广算力租赁、服务采购，支持“算力券”，扩大普惠算力补助范围，探索绿电直连、算电协同；&lt;/p&gt;&lt;p&gt;事实：报道明确上述算力布局与支持措施；&lt;/p&gt;&lt;p&gt;推断：政策指向降低用算成本、提升算力普惠性，可能带动本地数据中心和算力服务需求，但投资规模与时间表未披露；&lt;/p&gt;&lt;p&gt;影响：可能影响福建数据中心、算力服务及绿电相关主体，条件取决于政策执行；&lt;/p&gt;&lt;p&gt;验证：可观察区域节点建设进度、算力券发放及绿电直连项目落地情况。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>豆包工作正式接入Kimi 3.1 Pro、GLM 5.3、DeepSeek V4.1 Flash等模型，并推出限时特惠计</title>
-      <link>https://wallstreetcn.com/livenews/3198784</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3198784</guid>
-      <pubDate>Thu, 12 Nov 2026 03:18:25 +0000</pubDate>
+      <title>进出口行发行1年期债券，规模130亿元，发行利率1.2774%，预期1.2700%，投标倍数2.87倍，边际倍数1.43</title>
+      <link>https://wallstreetcn.com/livenews/3199535</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3199535</guid>
+      <pubDate>Fri, 13 Nov 2026 03:14:00 +0000</pubDate>
       <category>中文财经快讯</category>
       <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
-      <description>&lt;p&gt;豆包工作正式接入Kimi 3.1 Pro、GLM 5.3、DeepSeek V4.1 Flash等模型，并推出限时特惠计划。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称豆包工作正式接入Kimi 3.1 Pro、GLM 5.3、DeepSeek V4.1 Flash等模型，并推出限时特惠计划，摘要仅重复该内容；&lt;/p&gt;&lt;p&gt;事实：报道明确接入的模型名称与限时特惠安排，但未披露合作方式、定价、适用范围及期限；&lt;/p&gt;&lt;p&gt;推断：多模型接入可能反映AI应用平台聚合第三方模型的趋势，但具体商业条款不明，不能推断对相关模型厂商收入的影响；&lt;/p&gt;&lt;p&gt;影响：可能影响使用豆包工作的企业用户及被接入模型的提供方，实际影响取决于特惠细则；&lt;/p&gt;&lt;p&gt;验证：需观察官方定价页面、接入范围公告及后续用户反馈，目前缺少验证材料。&lt;/p&gt;</description>
+      <description>&lt;p&gt;进出口行发行1年期债券，规模130亿元，发行利率1.2774%，预期1.2700%，投标倍数2.87倍，边际倍数1.43倍。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：进出口行发行1年期债券，规模130亿元，发行利率1.2774%，预期1.2700%，投标倍数2.87倍，边际倍数1.43倍；&lt;/p&gt;&lt;p&gt;事实：报道明确给出上述发行规模、利率、预期值及投标倍数、边际倍数；&lt;/p&gt;&lt;p&gt;推断：发行利率略高于预期，投标倍数显示需求尚可，但边际倍数表明尾部需求存在一定分化，这属于由数据支持的推论；&lt;/p&gt;&lt;p&gt;影响：可能影响进出口行相关债券定价及同类政策性金融债发行参考，条件是该数据被后续确认；&lt;/p&gt;&lt;p&gt;验证：可观察后续同类期限债券发行利率与投标倍数变化，以及官方发行结果公告。&lt;/p&gt;</description>
     </item>
     <item>
-      <title>华虹宏力盘中涨超6% 公司晶圆平均售价复苏已获确认</title>
-      <link>https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-12/doc-iniymwrc1219145.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-12/doc-iniymwrc1219145.shtml</guid>
-      <pubDate>Thu, 12 Nov 2026 03:18:21 +0000</pubDate>
+      <title>中国政府中东问题特使翟隽会见沙特外交大臣费萨尔</title>
+      <link>https://flash.jin10.com/detail/20261113111355356800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261113111355356800</guid>
+      <pubDate>Fri, 13 Nov 2026 03:13:55 +0000</pubDate>
       <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>&lt;p&gt;热点栏目 自选股 数据中心 行情中心 资金流向 模拟交易 客户端 华虹宏力 （01347）盘中涨超6%，截至发稿，股价上涨3.33%，现报77.65港元，成交额26.343亿港元。 美银证券发布研报称，华虹宏力晶圆平均售价复苏已获确认，盈利进入上升周期。该行指出，第三季晶圆平均售…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：华虹宏力盘中涨超6%，发稿时涨3.33%报77.65港元，成交额26.343亿港元；美银证券研报称晶圆平均售价复苏已获确认，第三季均价每片517美元，按季升11%、按年升14%，为过去十年最高按季增幅；管理层确认产能严重短缺，约50%订单未能满足。&lt;/p&gt;&lt;p&gt;事实：报道明确上述股价、成交额、研报数据及管理层关于订单未满足的表述。&lt;/p&gt;&lt;p&gt;推断：均价回升与产能短缺可能支持盈利进入上升周期的判断，但研报观点属机构分析，非公司财务确认。&lt;/p&gt;&lt;p&gt;影响：可能影响华虹宏力及其客户、半导体代工领域，条件为均价与产能利用率持续。&lt;/p&gt;&lt;p&gt;验证：后续可观察公司财报均价、产能利用率、订单交付及股价成交变化；研报完整内容与公司正式披露尚缺。&lt;/p&gt;</description>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>&lt;p&gt;金十数据11月13日讯，11月12日，中国政府中东问题特使翟隽在利雅得会见沙特外交大臣费萨尔，就中沙关系及当前中东局势进行深入交流。翟隽表示，近年来，在两国最高领导人战略引领下，中沙全面战略伙伴关系实现快速发展。当前，也门和红海局势升温，进一步冲击地区安全和发展。中方始终认为，冲…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：中国政府中东问题特使翟隽在利雅得会见沙特外交大臣费萨尔，就中沙关系及中东局势交流；摘要提及也门和红海局势升温，中方呼吁避免升级、通过对话谈判解决分歧；&lt;/p&gt;&lt;p&gt;事实：报道明确会见时间地点、双方身份及中方表态内容；&lt;/p&gt;&lt;p&gt;推断：会见反映中方在中东局势升温背景下加强外交沟通，但具体成果未披露，属推论；&lt;/p&gt;&lt;p&gt;影响：可能影响中沙关系及地区外交斡旋预期，条件是有后续联合声明或行动；&lt;/p&gt;&lt;p&gt;验证：可观察双方后续官方通稿、联合表态及也门和红海局势相关外交进展。&lt;/p&gt;</description>
     </item>
     <item>
-      <title>88%的员工挺他留任，董事会却在查他？黄仁勋的"员工民意"有多少含金量</title>
-      <link>https://finance.sina.com.cn/stock/usstock/c/2026-11-12/doc-iniymwrm3878915.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/usstock/c/2026-11-12/doc-iniymwrm3878915.shtml</guid>
-      <pubDate>Thu, 12 Nov 2026 03:16:56 +0000</pubDate>
+      <title>研究：到2080年代人形机器人或超100亿，并超过全球人口</title>
+      <link>https://flash.jin10.com/detail/20261113111234330800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261113111234330800</guid>
+      <pubDate>Fri, 13 Nov 2026 03:12:34 +0000</pubDate>
       <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>&lt;p&gt;近日，一条推文在社交平台上流传：英伟达接受调查的员工中，88%希望黄仁勋继续担任CEO，只有1%希望他下台。推文还补了一句：要是英伟达的员工反目，把让他们一半人成为百万富翁的那个人赶下台，那可就太离谱了。 调查到底说了什么？ 数字来自匿名职场社区Blind上的一项调查，样本为23…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：社交平台推文称英伟达接受调查员工中88%希望黄仁勋留任、1%希望其下台；数字来自匿名职场社区Blind调查，样本232名员工，结果为88%希望留任、11%希望主动辞职、1%希望董事会罢免。&lt;/p&gt;&lt;p&gt;事实：报道明确调查来源、样本量和比例，并指出这是小范围匿名调查。&lt;/p&gt;&lt;p&gt;推断：该调查不能代表英伟达全体员工或董事会立场，标题所问“含金量”指向样本代表性不足。&lt;/p&gt;&lt;p&gt;影响：可能影响公众对黄仁勋支持度与公司治理讨论的认知，条件是该调查被误读为全员民意。&lt;/p&gt;&lt;p&gt;验证：需观察英伟达官方或独立机构更大样本调查、董事会调查进展；目前缺少公司正式回应与调查方法细节。&lt;/p&gt;</description>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称研究认为到2080年代人形机器人或超100亿并超过全球人口；摘要为空，线索有限；&lt;/p&gt;&lt;p&gt;事实：报道仅标题给出该研究结论性表述，未提供研究机构、方法或数据来源；&lt;/p&gt;&lt;p&gt;推断：无法判断该预测的依据与可信度，只能视为一项远期研究观点，属推论；&lt;/p&gt;&lt;p&gt;影响：可能影响人形机器人产业长期叙事与市场预期，条件是该研究细节被披露；&lt;/p&gt;&lt;p&gt;验证：需查找原研究报告、发布机构及测算方法，目前缺少验证材料。&lt;/p&gt;</description>
     </item>
     <item>
-      <title>百度推出两款文心应用模型</title>
-      <link>https://wallstreetcn.com/livenews/3198783</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3198783</guid>
-      <pubDate>Thu, 12 Nov 2026 03:16:50 +0000</pubDate>
+      <title>COMEX黄金期货涨超1%</title>
+      <link>https://news.10jqka.com.cn/20261113/c681786884.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261113/c681786884.shtml</guid>
+      <pubDate>Fri, 13 Nov 2026 03:11:12 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>&lt;p&gt;COMEX黄金期货涨超1%，现报3925.2美元/盎司。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：COMEX黄金期货涨超1%，现报3925.2美元/盎司；&lt;/p&gt;&lt;p&gt;事实：报道明确给出涨幅与报价；&lt;/p&gt;&lt;p&gt;推断：仅凭单条快讯无法判断上涨原因，属线索有限；&lt;/p&gt;&lt;p&gt;影响：可能影响黄金相关资产及避险情绪观察，条件是涨幅持续；&lt;/p&gt;&lt;p&gt;验证：可观察后续COMEX黄金收盘价、成交量及其他贵金属同步走势。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>林清轩回应收购婴童护肤品牌咿儿润</title>
+      <link>https://www.cls.cn/detail/2533505</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2533505</guid>
+      <pubDate>Fri, 13 Nov 2026 03:10:54 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+      <description>&lt;p&gt;【林清轩回应收购婴童护肤品牌咿儿润】财联社11月13日电，有市场消息称国货美妆公司林清轩已完成对婴童护肤品牌咿儿润的收购。对此，林清轩回应称：“关于该收购事项，请以公司后续发布的正式公告为准，现阶段暂不便进一步回应。”咿儿润创立于2018年，主要聚焦婴幼儿敏感肌及皮肤屏障修护。…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：市场消息称林清轩已完成对婴童护肤品牌咿儿润的收购，林清轩回应称以公司后续正式公告为准，暂不便进一步回应；咿儿润创立于2018年，聚焦婴幼儿敏感肌及皮肤屏障修护；&lt;/p&gt;&lt;p&gt;事实：报道明确收购传闻、公司回应及咿儿润基本背景，但收购尚未被公司正式确认；&lt;/p&gt;&lt;p&gt;推断：公司回应未否认也未确认，收购事项仍待公告验证，属推论；&lt;/p&gt;&lt;p&gt;影响：可能影响林清轩品牌矩阵及婴童护肤赛道竞争格局，条件是收购最终落地；&lt;/p&gt;&lt;p&gt;验证：可观察林清轩后续正式公告、工商变更信息及咿儿润品牌运营变化。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>A股小家电板块短线拉升，富佳股份涨停，爱仕达、德昌股份、小熊电器、欧圣电气、倍轻松等纷纷走高。</title>
+      <link>https://flash.jin10.com/detail/20261113111041037800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261113111041037800</guid>
+      <pubDate>Fri, 13 Nov 2026 03:10:41 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称A股小家电板块短线拉升，富佳股份涨停，爱仕达、德昌股份、小熊电器、欧圣电气、倍轻松等走高；摘要为空。&lt;/p&gt;&lt;p&gt;事实：报道明确描述了小家电板块盘中短线拉升及富佳股份涨停，并列出多只个股走高。&lt;/p&gt;&lt;p&gt;推断：仅凭标题无法判断拉升原因、持续性和成交量，板块联动可能反映短线资金关注，但属推论。&lt;/p&gt;&lt;p&gt;影响：可能涉及小家电板块及相关个股的市场情绪，具体影响条件不明。&lt;/p&gt;&lt;p&gt;验证：需后续行情数据、成交量及公司公告；目前缺少摘要和原因说明，线索有限。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>小家电板块短线拉升，富佳股份涨停</title>
+      <link>https://news.10jqka.com.cn/20261113/c681786760.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261113/c681786760.shtml</guid>
+      <pubDate>Fri, 13 Nov 2026 03:09:12 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>&lt;p&gt;小家电板块短线拉升，富佳股份涨停，爱仕达、德昌股份、小熊电器、欧圣电气、倍轻松等纷纷走高。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题与摘要均称小家电板块短线拉升，富佳股份涨停，爱仕达、德昌股份、小熊电器、欧圣电气、倍轻松等走高。&lt;/p&gt;&lt;p&gt;事实：报道明确给出板块短线拉升、富佳股份涨停及多只个股走高。&lt;/p&gt;&lt;p&gt;推断：与id 20为同一盘中现象的不同来源描述，可能指向同一时段板块异动，但无原因和量能信息。&lt;/p&gt;&lt;p&gt;影响：可能影响小家电板块相关个股的短线交易情绪，持续性无法确认。&lt;/p&gt;&lt;p&gt;验证：可观察后续成交额、涨停封单及是否有公司或行业消息；目前缺少驱动因素材料。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>CPO板块持续下跌，联讯仪器跌超10%</title>
+      <link>https://news.10jqka.com.cn/20261113/c681786739.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261113/c681786739.shtml</guid>
+      <pubDate>Fri, 13 Nov 2026 03:08:53 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>&lt;p&gt;CPO板块持续下跌，联讯仪器跌超10%，天孚通信跌超9%，中石科技、中际旭创、新易盛纷纷下挫。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称CPO板块持续下跌，联讯仪器跌超10%；摘要称天孚通信跌超9%，中石科技、中际旭创、新易盛纷纷下挫。&lt;/p&gt;&lt;p&gt;事实：报道明确列出CPO板块持续下跌及多只个股具体跌幅。&lt;/p&gt;&lt;p&gt;推断：板块内多只个股同步下挫，可能反映板块层面的集中抛压，但报道未说明原因，属推论。&lt;/p&gt;&lt;p&gt;影响：可能涉及CPO及相关光通信个股的市场表现，是否扩散至其他板块无法判断。&lt;/p&gt;&lt;p&gt;验证：需后续行情、成交数据及公司公告；目前缺少下跌原因和基本面信息。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>黄仁勋下台，AI新玩家的“最大金主”也没了</title>
+      <link>https://wallstreetcn.com/articles/3785857</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/articles/3785857</guid>
+      <pubDate>Fri, 13 Nov 2026 03:07:13 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
+      <description>&lt;p&gt;黄仁勋的突然离职，不仅终结了英伟达一个时代，也令整个AI创业生态系统最重要的资金来源陷入深度不确定性。 过去三年，英伟达在黄仁勋主导下累计向AI初创企业、云计算提供商及前沿AI实验室投入逾1400亿美元，成为这一行业无可替代的“最大金主”。如今，随着这位创始人的出局，这条资金管道…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称黄仁勋下台、AI新玩家最大金主没了；摘要称其突然离职，英伟达过去三年累计向AI初创企业、云计算提供商及前沿AI实验室投入逾1400亿美元，消息公布后周四盘中一度跌近7%，过去两周累计跌幅超25%，并提及英伟达持股的新…（摘要截断）。&lt;/p&gt;&lt;p&gt;事实：报道明确描述黄仁勋离职、英伟达此前的AI投资规模、股价盘中及两周累计跌幅。&lt;/p&gt;&lt;p&gt;推断：报道将AI创业生态资金来源与黄仁勋个人去留关联，资金管道能否延续存在不确定性，市场正在重新定价；这些属报道中的判断与推论，离职原因及接任安排未提供。&lt;/p&gt;&lt;p&gt;影响：可能涉及英伟达、其持股的AI初创企业及依赖其资金的AI生态，具体条件取决于后续投资政策。&lt;/p&gt;&lt;p&gt;验证：需公司官方公告、接任者安排及后续投资动向；摘要截断，线索有限。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>湖北高技术产品出口连续8个月强劲增长</title>
+      <link>https://news.10jqka.com.cn/20261113/c681786581.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261113/c681786581.shtml</guid>
+      <pubDate>Fri, 13 Nov 2026 03:06:07 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>&lt;p&gt;据武汉海关消息，今年前10个月湖北省进出口总值7314.3亿元，同比增长7%。其中出口高技术产品1907.5亿元，增长111.5%，连续8个月保持强劲增长。集成电路、光纤光缆、生物医药及医疗仪器等新兴产品分别出口833.2亿元、113亿元、40亿元，分别增长289.4%、186.…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：武汉海关数据称前10个月湖北省进出口总值7314.3亿元，同比增长7%；出口高技术产品1907.5亿元，增长111.5%，连续8个月强劲增长；集成电路、光纤光缆、生物医药及医疗仪器分别出口833.2亿元、113亿元、40亿元，分别增长289.4%、186.7%、8.9%；锂离子蓄电池、电动汽车、风力发电机组及其零件分别增长104.4%、108.7%、190.5%。&lt;/p&gt;&lt;p&gt;事实：报道明确给出上述海关统计数值和增速。&lt;/p&gt;&lt;p&gt;推断：高技术及绿色产品出口高增长可能对湖北相关制造和出口企业形成支撑，但数据为同比增速，基数效应及可持续性未说明，属推论。&lt;/p&gt;&lt;p&gt;影响：可能涉及湖北集成电路、光通信、生物医药、锂电、电动汽车、风电等出口相关领域。&lt;/p&gt;&lt;p&gt;验证：可对照海关后续月度数据及企业出口订单；目前缺少分项基数与价格因素说明。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>湖南天雁：流体机电新业务部分项目进入批产或客户验证阶段</title>
+      <link>https://news.10jqka.com.cn/20261113/c681786521.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261113/c681786521.shtml</guid>
+      <pubDate>Fri, 13 Nov 2026 03:05:02 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>&lt;p&gt;湖南天雁在2026年第三季度业绩说明会上表示，公司流体机电新业务部分项目已进入批产或客户验证阶段，新业务收入贡献正在逐步提升。在技术能力建设方面，公司目前采取自主研发为主的策略，与客户业务合作情况以公司在指定信披媒体披露的公告为准。（人民财讯）&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称流体机电新业务部分项目进入批产或客户验证阶段；摘要称公司在2026年第三季度业绩说明会上作出上述表述，并称新业务收入贡献逐步提升、技术能力以自主研发为主、客户合作以指定信披媒体公告为准。&lt;/p&gt;&lt;p&gt;事实：报道明确提到项目阶段与收入贡献趋势，但未给出具体项目名称、客户、金额或批产规模。&lt;/p&gt;&lt;p&gt;推断：若批产与客户验证顺利推进，新业务对收入的边际贡献可能继续增加，但报道未提供量化数据，不能据此判断业绩弹性。&lt;/p&gt;&lt;p&gt;影响：可能影响公司新业务相关业务线及关注其转型进展的投资者；实际影响取决于后续订单落地与披露。&lt;/p&gt;&lt;p&gt;验证：后续可观察公司公告、定期报告中新业务收入拆分、客户验证转批产的具体进展；目前缺少项目明细与财务数据。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>国债期货走弱 30年期主力合约跌0.2%</title>
+      <link>https://news.10jqka.com.cn/20261113/c681786500.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261113/c681786500.shtml</guid>
+      <pubDate>Fri, 13 Nov 2026 03:04:21 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>&lt;p&gt;国债期货走弱，30年期主力合约盘中跌0.20%，现报117.750元。10年期跌0.07%，现报110.03元。5年期跌0.03%，现报106.765元。2年期跌0.01%，现报102.638元。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：30年期国债期货主力合约盘中跌0.20%，报117.750元；10年期跌0.07%，5年期跌0.03%，2年期跌0.01%。&lt;/p&gt;&lt;p&gt;事实：报道明确给出各期限主力合约的盘中跌幅与现价，显示长端跌幅大于短端。&lt;/p&gt;&lt;p&gt;推断：期限越长跌幅越大，可能反映市场对长端利率或供需的边际调整，但单日盘中数据不足以判断趋势。&lt;/p&gt;&lt;p&gt;影响：可能影响国债期货交易者及利率敏感型资产的短期情绪；具体影响取决于后续资金面与政策信号。&lt;/p&gt;&lt;p&gt;验证：后续可观察收盘涨跌幅、成交量与持仓变化，以及Shibor等资金利率走势；目前缺少驱动原因说明。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>国内生猪价下探8元/公斤！传统旺季反弹还是反转？</title>
+      <link>https://wallstreetcn.com/member/articles/3785795</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/member/articles/3785795</guid>
+      <pubDate>Fri, 13 Nov 2026 03:04:12 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
+      <description>&lt;p&gt;11月以来，生猪现货价格延续下行，二次探底特征进一步显现。截至目前，全国生猪均价降至8.5元/公斤，跌破今年4月以来低点，部分地区向8元/公斤继续下探。 Q4传统旺季表现不及市场预期，并未带来有效提振。10月双节后屠宰量环比下降，11月季节性增幅相对平淡，鲜销率维持低位，冻品库容…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：11月以来生猪现货价格延续下行，全国均价降至8.5元/公斤，跌破今年4月以来低点，部分地区向8元/公斤下探；10月双节后屠宰量环比下降，11月季节性增幅平淡，鲜销率低位，冻品库容率31%以上且同比偏高；自繁自养头均亏损深化。&lt;/p&gt;&lt;p&gt;事实：报道明确描述价格下行、旺季不旺及亏损加深，但摘要末尾亏损数据被截断。&lt;/p&gt;&lt;p&gt;推断：在供给端冻品库存偏高、需求端鲜销低迷的条件下，短期价格反弹动力可能不足，但报道本身以“反弹还是反转”设问，未给出确定结论。&lt;/p&gt;&lt;p&gt;影响：可能影响生猪养殖企业盈利、屠宰与冻品贸易环节；亏损持续可能影响后续产能决策。&lt;/p&gt;&lt;p&gt;验证：后续可观察生猪均价是否跌破8元/公斤、冻品库容率与屠宰量变化、能繁母猪存栏及企业亏损披露；目前缺少完整亏损幅度与产能数据。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>TrendForce：DDR5 16Gb (2Gx8) 4800/5600现货均价较上日持平</title>
+      <link>https://news.10jqka.com.cn/20261113/c681786381.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261113/c681786381.shtml</guid>
+      <pubDate>Fri, 13 Nov 2026 03:01:34 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>&lt;p&gt;TrendForce数据显示，11月13日内存颗粒DDR5 16Gb (2Gx8) 4800/5600现货均价较上日持平，DDR4 16Gb (2Gx8) 3200现货均价较上日下跌0.31%，DDR4 8Gb (1Gx8) 3200现货均价较上日下跌0.40%。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：TrendForce数据显示11月13日DDR5 16Gb(2Gx8) 4800/5600现货均价较上日持平；DDR4 16Gb(2Gx8) 3200跌0.31%，DDR4 8Gb(1Gx8) 3200跌0.40%。&lt;/p&gt;&lt;p&gt;事实：报道明确给出DDR5持平、DDR4两类规格下跌的现货均价日变动。&lt;/p&gt;&lt;p&gt;推断：DDR4现货价格延续小幅走弱而DDR5持平，可能反映不同代际产品供需差异，但单日数据不足以判断趋势。&lt;/p&gt;&lt;p&gt;影响：可能影响存储颗粒现货交易与相关模组成本预期；具体影响取决于后续报价连续性。&lt;/p&gt;&lt;p&gt;验证：后续可观察TrendForce连续多日现货均价、DDR5与DDR4价差变化；目前缺少成交量与库存数据。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>上海银行间同业拆放利率(Shibor)涨跌互现</title>
+      <link>https://news.10jqka.com.cn/20261113/c681786355.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261113/c681786355.shtml</guid>
+      <pubDate>Fri, 13 Nov 2026 03:01:18 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>&lt;p&gt;隔夜shibor报1.2970%，下跌3.50个基点；7天shibor报1.3810%，下跌1.56个基点；14天shibor报1.3830%，上涨1.50个基点；1月shibor报1.3800%，与前一交易日持平；3月shibor报1.4000%，与前一交易日持平。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：隔夜Shibor报1.2970%，跌3.50个基点；7天报1.3810%，跌1.56个基点；14天报1.3830%，涨1.50个基点；1月与3月分别报1.3800%、1.4000%，均持平。&lt;/p&gt;&lt;p&gt;事实：报道明确给出各期限Shibor报价及变动，显示短端隔夜与7天回落、14天小幅上行、中长期持平。&lt;/p&gt;&lt;p&gt;推断：短端利率回落而14天上行，可能反映跨期资金需求的边际变化，但单日数据不足以判断资金面趋势。&lt;/p&gt;&lt;p&gt;影响：可能影响短端资金成本与货币市场交易情绪；具体影响取决于后续公开市场操作与财政因素。&lt;/p&gt;&lt;p&gt;验证：后续可观察Shibor连续走势、银行间质押式回购利率及央行公开市场操作；目前缺少资金面驱动说明。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>隔夜SHIBOR报1.2970%，下降3.50个基点。 7天SHIBOR报1.3810%，下降1.56个基点。 3个月S</title>
+      <link>https://wallstreetcn.com/livenews/3199533</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3199533</guid>
+      <pubDate>Fri, 13 Nov 2026 03:01:00 +0000</pubDate>
       <category>中文财经快讯</category>
       <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
-      <description>&lt;p&gt;11月12日，在百度世界2026开幕式上，百度创始人李彦宏表示，大模型产业正在沿着两条路径发展：一是向上突破，推高智能上限；二是向实扎根，释放产业价值。“在大模型这两个发展方向上，我们都在向前推进。一方面，我们会持续投入，研发下一代更前沿的基础大模型。另一方面，我们会坚持‘模体并…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：11月12日百度世界2026开幕式上，李彦宏表示大模型沿“向上突破”和“向实扎根”两条路径发展，坚持“模体并行、协同进化”；百度发布文心闪电深度思考模型与文心一镜微表情大模型，同步上线百度智能云千帆平台，面向企业客户。&lt;/p&gt;&lt;p&gt;事实：报道明确发布时间、场合、两款模型名称、上线平台及企业客户定位。&lt;/p&gt;&lt;p&gt;推断：百度可能在应用层模型上强化深度思考与微表情能力，以拓展企业服务场景，但模型性能与定价未披露。&lt;/p&gt;&lt;p&gt;影响：可能影响百度智能云企业客户及AI应用模型竞争，条件为模型实际可用性与客户采纳。&lt;/p&gt;&lt;p&gt;验证：后续可观察千帆平台模型文档、定价、客户案例及第三方评测；目前缺少性能参数与商业条款。&lt;/p&gt;</description>
+      <description>&lt;p&gt;隔夜SHIBOR报1.2970%，下降3.50个基点。 7天SHIBOR报1.3810%，下降1.56个基点。 3个月SHIBOR报1.4000%，上涨0.00个基点。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：隔夜SHIBOR报1.2970%，下降3.50个基点；7天SHIBOR报1.3810%，下降1.56个基点；3个月SHIBOR报1.4000%，上涨0.00个基点。&lt;/p&gt;&lt;p&gt;事实：报道明确给出上述三个期限SHIBOR的报价及变动幅度，其中3个月品种持平。&lt;/p&gt;&lt;p&gt;推断：短端资金利率下行，或反映银行间短期流动性边际转松，但仅凭单日数据不足以确认趋势。&lt;/p&gt;&lt;p&gt;影响：可能影响短端资金成本敏感的银行、货币市场基金及短久期债券相关主体，具体取决于后续流动性变化。&lt;/p&gt;&lt;p&gt;验证：可观察后续交易日SHIBOR各期限走势及央行公开市场操作情况；目前缺少成交量、政策操作等验证材料。&lt;/p&gt;</description>
     </item>
     <item>
-      <title>日本最高外汇事务官员称日元波动过快 提醒市场勿忘夏季干预行动</title>
-      <link>https://finance.sina.com.cn/stock/usstock/c/2026-11-12/doc-iniymwri1814745.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/usstock/c/2026-11-12/doc-iniymwri1814745.shtml</guid>
-      <pubDate>Thu, 12 Nov 2026 03:16:30 +0000</pubDate>
+      <title>现货黄金站上3920美元/盎司</title>
+      <link>https://news.10jqka.com.cn/20261113/c681786345.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261113/c681786345.shtml</guid>
+      <pubDate>Fri, 13 Nov 2026 03:00:59 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>&lt;p&gt;现货黄金站上3920美元/盎司，日内涨1.13%。同花顺黄金现货价格报843.89元/克，现涨1.29%。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：现货黄金站上3920美元/盎司，日内涨1.13%；同花顺黄金现货价格报843.89元/克，现涨1.29%。&lt;/p&gt;&lt;p&gt;事实：报道明确给出上述两个黄金报价及日内涨幅。&lt;/p&gt;&lt;p&gt;推断：美元计价与人民币计价黄金同步上涨，或反映当日黄金市场整体走强，但摘要未说明驱动因素。&lt;/p&gt;&lt;p&gt;影响：可能影响黄金相关矿业、饰品及黄金ETF等主体，条件是该价格水平持续。&lt;/p&gt;&lt;p&gt;验证：可观察后续金价能否站稳3920美元/盎司及人民币金价走势；目前缺少成交量、持仓及宏观驱动信息。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>整点回顾：沪指早间窄幅震荡，创业板指探底回升翻红，随后又再度回落，猪肉股异动，金新农涨停，银行板块拉升，江苏银行、南京银</title>
+      <link>https://wallstreetcn.com/livenews/3199532</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3199532</guid>
+      <pubDate>Fri, 13 Nov 2026 03:00:14 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · A 股快讯</source>
+      <description>&lt;p&gt;整点回顾：沪指早间窄幅震荡，创业板指探底回升翻红，随后又再度回落，猪肉股异动，金新农涨停，银行板块拉升，江苏银行、南京银行创新高，两市下跌个股略大于上涨家数，开盘一个半小时成交8848亿，较上日此时缩量超2100亿。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：沪指早间窄幅震荡，创业板指探底回升翻红后再度回落；猪肉股异动，金新农涨停；银行板块拉升，江苏银行、南京银行创新高；两市下跌个股略大于上涨家数；开盘一个半小时成交8848亿，较上日此时缩量超2100亿。&lt;/p&gt;&lt;p&gt;事实：报道明确描述上述盘中表现及成交缩量数据。&lt;/p&gt;&lt;p&gt;推断：指数震荡与成交缩量并存，或显示当日早盘交投活跃度下降，银行与猪肉板块相对强势，但单时点数据不足以判断全天趋势。&lt;/p&gt;&lt;p&gt;影响：可能影响A股市场情绪及相关板块资金关注度，条件是该格局延续至收盘。&lt;/p&gt;&lt;p&gt;验证：可观察全天成交额、涨跌家数变化及银行、猪肉板块后续走势；目前缺少收盘数据验证。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>美方称普京愿让欧洲参与俄乌和谈</title>
+      <link>https://news.10jqka.com.cn/20261113/c681786282.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261113/c681786282.shtml</guid>
+      <pubDate>Fri, 13 Nov 2026 02:59:45 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>&lt;p&gt;美国总统特朗普女婿库什纳12日晚在都柏林表示，普京愿让欧洲参与俄乌和平谈判，没有欧洲参与就无法达成结束冲突的协议；美方特使威特科夫称欧洲代表将参加下一轮谈判。俄乌双方同意扩大谈判范围，纳入欧洲其他国家。库什纳重申，在解决乌克兰安全关切前不会确定更广泛的欧洲安全安排。泽连斯基呼吁欧…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：库什纳称普京愿让欧洲参与俄乌和平谈判，没有欧洲参与就无法达成结束冲突的协议；威特科夫称欧洲代表将参加下一轮谈判；俄乌同意扩大谈判范围纳入欧洲其他国家；库什纳称解决乌克兰安全关切前不会确定更广泛的欧洲安全安排；泽连斯基呼吁欧洲成为正式参与方，并称俄美已同意举行“最大规模”被俘人员交换，预计数千名获释；马克龙和默茨称不必急于确定欧洲谈判代表，应先明确欧洲共同立场。&lt;/p&gt;&lt;p&gt;事实：报道明确转述上述各方表态及谈判范围扩大、换俘安排。&lt;/p&gt;&lt;p&gt;推断：多方表态显示谈判参与方范围可能扩大，但欧洲代表安排与共同立场尚未确定，谈判进展仍存不确定性。&lt;/p&gt;&lt;p&gt;影响：可能影响俄乌冲突相关的地缘风险预期及欧洲安全议题，条件是真实现新一轮谈判。&lt;/p&gt;&lt;p&gt;验证：可观察下一轮谈判是否举行、欧洲代表是否确定及换俘是否落实；目前缺少谈判时间表等验证材料。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>【盘中宝】AI技术的突破改写行业成本逻辑，该领域或成为AI应用商业化的核心赛道，这家公司相关业务已覆盖全球多个国家和地区</title>
+      <link>https://www.cls.cn/detail/2533494</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2533494</guid>
+      <pubDate>Fri, 13 Nov 2026 02:56:16 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称AI技术突破改写行业成本逻辑，该领域或成为AI应用商业化核心赛道，某公司相关业务已覆盖全球多个国家和地区；摘要为空。&lt;/p&gt;&lt;p&gt;事实：报道仅给出上述概括性表述，未披露具体行业、公司名称及数据。&lt;/p&gt;&lt;p&gt;推断：线索有限，无法核实所指领域与公司，标题属推介性表述，不宜作为事实依据。&lt;/p&gt;&lt;p&gt;影响：可能涉及AI应用相关板块的市场关注，但缺少具体标的信息，影响范围无法判断。&lt;/p&gt;&lt;p&gt;验证：需补充原文以确认行业、公司及业务数据；目前缺少验证材料。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>主力资金监控：中际旭创净卖出超19亿</title>
+      <link>https://www.cls.cn/detail/2533492</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2533492</guid>
+      <pubDate>Fri, 13 Nov 2026 02:55:28 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+      <description>&lt;p&gt;【主力资金监控：中际旭创净卖出超19亿】财联社11月13日电，财联社盯盘数据显示，今日早盘主力资金净流入影视院线、计算机、IT服务等板块，净流出电子、通信、机械设备等板块，其中电子板块净流出超83亿元。个股方面，华胜天成主力资金净买入超6亿元位居首位，文投控股、长川科技、旋极信息…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称中际旭创净卖出超19亿；摘要列出早盘主力资金净流入影视院线、计算机、IT服务等板块，净流出电子、通信、机械设备等板块，电子板块净流出超83亿元；个股华胜天成净买入超6亿元居首，文投控股、长川科技、旋极信息净流入居前，中际旭创净卖出超19亿元，蓝色光标、天孚通信、新易盛净流出居前。&lt;/p&gt;&lt;p&gt;事实：报道明确给出上述板块与个股的主力资金流向数据，数据来源为财联社盯盘数据，时点为当日早盘。&lt;/p&gt;&lt;p&gt;推断：中际旭创与电子、通信板块资金流出方向一致，可能反映早盘资金从光通信/电子相关标的撤出，但单日资金流向不能说明持续性或原因。&lt;/p&gt;&lt;p&gt;影响：可能受影响的主体为相关个股及电子、通信板块的市场情绪；影响程度取决于后续资金是否延续。&lt;/p&gt;&lt;p&gt;验证：可观察当日收盘主力资金数据、相关个股成交量与公告，以及后续交易日资金流向是否延续；目前缺少资金流出原因的验证材料。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>特朗普的特别工作组开会讨论应对AI网络攻击</title>
+      <link>https://finance.sina.com.cn/stock/usstock/c/2026-11-13/doc-iniypzqc1107039.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/stock/usstock/c/2026-11-13/doc-iniypzqc1107039.shtml</guid>
+      <pubDate>Fri, 13 Nov 2026 02:55:22 +0000</pubDate>
       <category>中文财经快讯</category>
       <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>&lt;p&gt;日元近日大幅走弱后，日本最高外汇事务官员三村淳警告，现在就忘记今夏发生的事还为时过早，暗示当局已做好再次入市干预以支撑日元的准备。 “我强烈感到过去几天汇率波动太快，”三村淳周四对记者表示。“现在就忘记今夏发生的事太早了”，他对具体汇率水平不予置评。 他发出警告之际，日元兑美元正…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：日本最高外汇事务官员三村淳称过去几天汇率波动太快，表示“现在就忘记今夏发生的事太早了”，对具体汇率水平不予置评；日元兑美元正逼近160关口；夏季该水平告破后日本当局干预，单月干预规模创纪录，部分与美国联手；过去两天受美国通胀数据强于预期及美联储官员鹰派影响日元走弱。&lt;/p&gt;&lt;p&gt;事实：报道明确官员表态、日元逼近160、夏季干预历史及近期走弱背景。&lt;/p&gt;&lt;p&gt;推断：当局可能已为再次入市干预做准备，但官员未确认具体行动，干预时点与规模属推测。&lt;/p&gt;&lt;p&gt;影响：可能影响日元汇率、日本进口企业及外汇市场，条件为日元继续快速贬值。&lt;/p&gt;&lt;p&gt;验证：后续可观察日本财务省干预数据、日元汇率走势及官员进一步表态；目前缺少实际干预确认。&lt;/p&gt;</description>
+      <description>&lt;p&gt;特朗普政府发言人称，美国总统唐纳德·特朗普的人工智能工作组成员于当地时间周四举行会议，讨论如何鼓励美国关键行业报告人工智能驱动的网络攻击。 该工作组由顾问组成，预计将帮助制定政府应对人工智能技术的策略，因为这项技术正在快速发展。 美国国防部技术负责人埃米尔·迈克尔（Emil Mi…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称特朗普的特别工作组开会讨论应对AI网络攻击；摘要称特朗普政府发言人表示，特朗普的人工智能工作组成员于当地时间周四举行会议，讨论如何鼓励美国关键行业报告人工智能驱动的网络攻击；工作组由顾问组成，预计帮助制定政府应对AI技术的策略；美国国防部技术负责人埃米尔·迈克尔兼任工作组副主席，会上谈到制定国家标准方面的进展，标准旨在要求AI开发人员报告安全事件并共享网络安全信息；摘要末尾被截断。&lt;/p&gt;&lt;p&gt;事实：报道明确上述会议、工作组构成与讨论方向，以及国家标准制定进展的表述。&lt;/p&gt;&lt;p&gt;推断：该工作组处于顾问与策略制定阶段，可能推动AI安全事件报告与网络安全信息共享的政策框架，但尚无具体规则或时间表。&lt;/p&gt;&lt;p&gt;影响：可能受影响的主体为美国关键行业企业、AI开发企业及网络安全领域；实际影响取决于后续标准是否落地。&lt;/p&gt;&lt;p&gt;验证：可观察工作组后续会议、标准草案或正式文件、企业合规要求变化；目前缺少具体政策文本。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>恒生科技指数下跌1%。</title>
+      <link>https://wallstreetcn.com/livenews/3199527</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3199527</guid>
+      <pubDate>Fri, 13 Nov 2026 02:54:46 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称恒生科技指数下跌1%；摘要为空。&lt;/p&gt;&lt;p&gt;事实：报道仅说明恒生科技指数下跌1%，未提供点位、原因或成分股信息。&lt;/p&gt;&lt;p&gt;推断：线索有限，无法判断下跌驱动因素或板块内部结构。&lt;/p&gt;&lt;p&gt;影响：可能受影响的主体为跟踪恒生科技指数的相关市场参与者；具体影响缺少材料支撑。&lt;/p&gt;&lt;p&gt;验证：可对照同日其他行情报道（如条目38给出点位）及后续指数走势；目前缺少原因与成分股数据。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>财联社11月13日电，恒生科技指数下跌1%至3,891.06点。</title>
+      <link>https://www.cls.cn/detail/2533493</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2533493</guid>
+      <pubDate>Fri, 13 Nov 2026 02:54:39 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称恒生科技指数下跌1%至3,891.06点；摘要为空。&lt;/p&gt;&lt;p&gt;事实：报道明确恒生科技指数当日下跌1%，点位为3,891.06点。&lt;/p&gt;&lt;p&gt;推断：与条目37为同一行情信号，点位数据可交叉核对；线索有限，未说明下跌原因。&lt;/p&gt;&lt;p&gt;影响：可能受影响的主体为恒生科技指数相关标的与市场情绪；影响程度缺少更多材料。&lt;/p&gt;&lt;p&gt;验证：可观察当日收盘点位、成交额及成分股表现；目前缺少原因与成分股数据。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>财联社11月13日电，比特币跌破70000美元，日内跌超2%。</title>
+      <link>https://www.cls.cn/detail/2533490</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2533490</guid>
+      <pubDate>Fri, 13 Nov 2026 02:53:45 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称比特币跌破70000美元，日内跌超2%；摘要为空。&lt;/p&gt;&lt;p&gt;事实：报道明确比特币价格跌破70000美元，日内跌幅超过2%。&lt;/p&gt;&lt;p&gt;推断：线索有限，仅反映短时价格变动，无法判断驱动因素或趋势。&lt;/p&gt;&lt;p&gt;影响：可能受影响的主体为加密货币相关市场参与者；具体影响缺少材料支撑。&lt;/p&gt;&lt;p&gt;验证：可观察后续价格走势、成交量及是否有相关消息面报道；目前缺少原因与市场数据。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Cerebras电话会：拿下微软大单，HBM短缺反而是机会，WSE-5芯片明年夏天量产</title>
+      <link>https://wallstreetcn.com/articles/3785852</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/articles/3785852</guid>
+      <pubDate>Fri, 13 Nov 2026 02:51:55 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
+      <description>&lt;p&gt;AI芯片初创公司Cerebras在2026年第三季度交出首次实现净利润转正的答卷，并宣布微软成为其六个月内拿下的第三家超大规模云服务商客户，公司重申2027年营收将实现三倍增长的强劲指引。 华尔街见闻提及 ，当地时间11月12日，备受市场瞩目的Cerebras公布2026年第三季…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称Cerebras拿下微软大单、HBM短缺被视为机会、WSE-5芯片计划明年夏天量产；摘要称2026年三季度首次实现净利润转正、核心营收2.309亿美元同比增长70%高于预期2.147亿美元、微软为六个月内第三家超大规模云客户、重申2027年营收三倍增长指引。&lt;/p&gt;&lt;p&gt;事实：报道明确给出上述营收、增速、客户数量与指引，并称公司首次作为上市公司实现非GAAP盈利（摘要截断）。&lt;/p&gt;&lt;p&gt;推断：若微软订单与量产计划如期落地，公司收入结构与产能规划可能进一步向超大规模客户集中；HBM短缺被表述为机会属公司口径，尚不能视为行业事实。&lt;/p&gt;&lt;p&gt;影响：可能影响Cerebras自身业绩预期、其云客户合作节奏及AI芯片供应链关注度，条件是大单兑现与WSE-5按期量产。&lt;/p&gt;&lt;p&gt;验证：后续可观察微软合作的具体规模与合同披露、WSE-5量产时间是否兑现、下季度营收与盈利是否延续，以及HBM供应状况的独立数据；目前缺少订单金额与产能细节。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>第五集 女红军街：长征里的她们</title>
+      <link>https://finance.sina.com.cn/stock/2026-11-13/doc-iniypzqi1343239.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/stock/2026-11-13/doc-iniypzqi1343239.shtml</guid>
+      <pubDate>Fri, 13 Nov 2026 02:51:34 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>&lt;p&gt;专题：新长征路上的对话 1935年1月，中国工农红军第一方面军的30位女红军随队抵达贵州土城。救伤员、传星火、守后方、扛钢枪，她们以柔弱身躯扛起家国重任。放眼整个长征路上的女红军群体，从中国工农红军第一方面军的康克清，到中国工农红军第四方面军的王定国，她们用热血人生，书写绝境里的…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题为“第五集 女红军街：长征里的她们”，摘要提及1935年1月红一方面军30位女红军抵达贵州土城，以及康克清、王定国等人物，并称由国际传播专家王晓辉与荷兰籍记者潘妧纱对话。&lt;/p&gt;&lt;p&gt;事实：报道明确说的是该专题节目内容与历史叙述，属纪念性/专题报道，未涉及当下经济或市场信息。&lt;/p&gt;&lt;p&gt;推断：该条目为系列专题的一集，主题聚焦长征中的女性群体，无明显可延伸的即时影响推论。&lt;/p&gt;&lt;p&gt;影响：主要涉及文化传播与历史教育领域，无直接经济影响线索。&lt;/p&gt;&lt;p&gt;验证：可核对专题节目播出信息与史料来源；目前缺少节目完整内容与史料出处，线索有限。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>垂直涨停，巨量封单，AI漫剧概念股走出5天4板</title>
+      <link>https://finance.sina.com.cn/wm/2026-11-13/doc-iniypzqc1102219.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/wm/2026-11-13/doc-iniypzqc1102219.shtml</guid>
+      <pubDate>Fri, 13 Nov 2026 02:50:33 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>&lt;p&gt;11月13日，AI漫剧概念股表现活跃， 文投控股 （维权） 垂直涨停，走出5天4板，截至发稿，报3.40元，涨停板上封单超210万手。 11月11日晚间，文投控股发布股票交易风险提示公告称，截至2026年第三季度，公司AI漫剧相关业务收入占公司营业收入的比例约为2.57%（未经审…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称AI漫剧概念股垂直涨停、巨量封单、5天4板；摘要称11月13日文投控股涨停报3.40元、封单超210万手，公司11月11日晚公告称截至2026年三季度AI漫剧相关业务收入占营业收入约2.57%（未经审计），并提示受剧本质量、题材偏好、平台审核分发、AI制作技术成熟度等影响，存在项目延期或无法上线等风险。&lt;/p&gt;&lt;p&gt;事实：报道明确给出股价表现、封单量及公司风险提示公告中的收入占比与风险因素。&lt;/p&gt;&lt;p&gt;推断：股价短期强势与AI漫剧题材热度相关，但公司自身披露该业务收入占比很小，题材热度与业务实质贡献之间存在明显落差，属推论。&lt;/p&gt;&lt;p&gt;影响：可能影响文投控股股价波动与投资者情绪，条件为题材持续发酵；不构成任何买卖建议。&lt;/p&gt;&lt;p&gt;验证：后续可观察公司是否披露更多AI漫剧项目进展、该业务收入占比变化及交易所是否进一步问询；目前缺少项目具体上线与收入数据。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>特朗普：唯有苹果的库克能接替黄仁勋</title>
+      <link>https://wallstreetcn.com/charts/41960171</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/charts/41960171</guid>
+      <pubDate>Fri, 13 Nov 2026 02:50:32 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
+      <description>&lt;p&gt;英伟达CEO黄仁勋因婚外情丑闻宣布即时辞职，CFO Colette Kress暂代CEO职务。特朗普随即在Truth Social发文，英伟达CEO黄仁勋表现出色，但他现已辞职，唯一能接替他的人选只有苹果的苹果执行董事长库克。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称特朗普表示唯有苹果的库克能接替黄仁勋；摘要称英伟达CEO黄仁勋因婚外情丑闻宣布即时辞职、CFO Colette Kress暂代CEO，特朗普在Truth Social发文称黄仁勋表现出色但已辞职、唯一接替人选只有苹果执行董事长库克。&lt;/p&gt;&lt;p&gt;事实：报道明确说的是上述辞职、暂代安排与特朗普发文内容，均为转述，未提供英伟达官方公告细节。&lt;/p&gt;&lt;p&gt;推断：该消息涉及公司治理重大变动，若属实将影响英伟达管理层稳定；特朗普对继任人选的表态属个人意见，不构成公司决策，二者关系为推论。&lt;/p&gt;&lt;p&gt;影响：可能影响英伟达管理层与投资者预期、合作伙伴关系，条件为辞职与暂代安排获公司正式确认。&lt;/p&gt;&lt;p&gt;验证：后续应观察英伟达官方公告、SEC文件及正式继任安排；目前缺少公司官方声明，线索有限，相关丑闻细节亦未获独立证实。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>财联社11月13日电，数据显示，今日MMLC电池级碳酸锂（早盘）价格较昨日上涨600元/吨，中间价报91750元/吨。</title>
+      <link>https://www.cls.cn/detail/2533481</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2533481</guid>
+      <pubDate>Fri, 13 Nov 2026 02:47:40 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+      <description>&lt;p&gt;财联社11月13日电，数据显示，今日MMLC电池级碳酸锂（早盘）价格较昨日上涨600元/吨，中间价报91750元/吨。 (Mysteel)&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题与摘要均称11月13日MMLC电池级碳酸锂早盘价格较昨日上涨600元/吨，中间价报91750元/吨，数据来源Mysteel。&lt;/p&gt;&lt;p&gt;事实：报道明确给出单日价格变动与中间价水平。&lt;/p&gt;&lt;p&gt;推断：单日上涨反映当日报价走强，但仅凭一日数据无法判断趋势方向，属推论。&lt;/p&gt;&lt;p&gt;影响：可能影响碳酸锂产业链相关企业的成本与报价关注度，条件为价格变动持续。&lt;/p&gt;&lt;p&gt;验证：后续可观察连续多日MMLC报价、现货成交与库存数据；目前缺少供需与成交量信息，线索有限。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>提前卖出英伟达！特朗普与多名美国议员受关注</title>
+      <link>https://finance.sina.com.cn/stock/bxjj/2026-11-13/doc-iniypzqm3725171.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/stock/bxjj/2026-11-13/doc-iniypzqm3725171.shtml</guid>
+      <pubDate>Fri, 13 Nov 2026 02:47:40 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>&lt;p&gt;金十数据 英伟达（NVDA.O）创始人黄仁勋因私人关系及国家安全争议辞职后，美国总统特朗普及多名国会议员家庭此前出售英伟达股票的交易记录受到关注。 相关交易发生在公司丑闻集中曝光及股价大跌之前，其中部分减持接近历史高点。 加州民主党众议员罗·康纳（Ro Khanna）妻子关联的家…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称“提前卖出英伟达”，摘要提到特朗普投资账户及众议员罗·康纳妻子关联家族信托在相关消息公开前出售英伟达股票，部分减持接近历史高点；摘要末尾称“目前尚无证据表明相关交易…”。&lt;/p&gt;&lt;p&gt;事实：报道明确说黄仁勋因私人关系及国家安全争议辞职后，上述交易记录受到关注；交易发生在公司丑闻集中曝光及股价大跌之前。&lt;/p&gt;&lt;p&gt;推断：交易时点与后续利空消息在时间上接近，引发外界对是否提前获知敏感信息的关注，但报道本身未确认存在内幕交易。&lt;/p&gt;&lt;p&gt;影响：可能影响涉及人物及英伟达的公司治理与监管审查讨论，条件是有进一步调查或披露。&lt;/p&gt;&lt;p&gt;验证：后续可观察是否有监管机构调查、交易记录进一步公开或公司披露；目前缺少证明信息传递链的验证材料。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>多名投资者：没了黄仁勋 AI热潮仍将支撑英伟达</title>
+      <link>https://finance.sina.com.cn/stock/usstock/c/2026-11-13/doc-iniypzqi1339307.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/stock/usstock/c/2026-11-13/doc-iniypzqi1339307.shtml</guid>
+      <pubDate>Fri, 13 Nov 2026 02:47:11 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>&lt;p&gt;专题：英伟达宣布CEO黄仁勋辞职 CFO科莱特·克雷斯出任临时CEO 多名核心投资者表示，尽管联合创始人黄仁勋突然辞职引发这家芯片巨头股价大跌，但英伟达作为AI浪潮最大受益者之一的基本面前景并未受损。 黄仁勋因婚外情相关丑闻卸任，周四英伟达市值蒸发1820亿美元，不过主要投资者依…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称多名投资者认为没了黄仁勋AI热潮仍将支撑英伟达；摘要提到黄仁勋因婚外情相关丑闻卸任，周四英伟达市值蒸发1820亿美元，惠灵顿管理公司马特·维特海勒称公司市值能到4万亿美元并非因为黄仁勋是CEO，而是上季度营收达到1000亿。&lt;/p&gt;&lt;p&gt;事实：报道明确说黄仁勋突然辞职引发股价大跌，CFO科莱特·克雷斯出任临时CEO，部分核心投资者仍看好公司潜力。&lt;/p&gt;&lt;p&gt;推断：部分投资者将公司基本面与CEO个人因素区分看待，但这是受访者观点，不代表市场整体共识。&lt;/p&gt;&lt;p&gt;影响：可能影响英伟达投资者情绪与临时管理层过渡安排，条件是后续业绩与AI需求维持。&lt;/p&gt;&lt;p&gt;验证：后续可观察公司财报、临时CEO任命进展及机构持仓变化；摘要未提供完整营收口径与时间，需核对原文。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>日中则昃：2027年海外宏观展望</title>
+      <link>https://opinion.caixin.com/2026-11-13/102504329.html</link>
+      <guid isPermaLink="true">https://opinion.caixin.com/2026-11-13/102504329.html</guid>
+      <pubDate>Fri, 13 Nov 2026 02:46:32 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://caixin.com">财新 · 最新</source>
+      <description>&lt;p&gt;2027年，AI资本开支的降速或标志着信用周期进入下半场，需关注个体的融资脆弱性与宏观金融不稳定性 AI“泡沫”尚未演化到“一发不可收拾”的阶段，金融风险或仍是非系统性的。图：视觉中国 2026年，AI和原油分别是全球经济和通胀预期差的主要矛盾。展望2027年，AI资本开支的降速…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题为2027年海外宏观展望；摘要提到2026年AI和原油分别是全球经济和通胀预期差的主要矛盾，2027年AI资本开支降速或标志信用周期进入下半场，AI“泡沫”尚未演化到“一发不可收拾”，金融风险或仍是非系统性。&lt;/p&gt;&lt;p&gt;事实：报道明确给出上述展望判断，并称需关注个体融资脆弱性与宏观金融不稳定性。&lt;/p&gt;&lt;p&gt;推断：文章将AI资本开支周期与信用周期联系起来，属于分析性预判而非已发生事实。&lt;/p&gt;&lt;p&gt;影响：可能影响AI相关融资主体与宏观金融稳定性讨论，条件是AI资本开支确实降速。&lt;/p&gt;&lt;p&gt;验证：后续可观察AI资本开支数据、信用利差与融资条件变化；目前为展望性内容，缺少可即时核验的量化材料。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>黄仁勋被拉下马，但政商围剿才刚刚开始？</title>
+      <link>https://wallstreetcn.com/articles/3785859</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/articles/3785859</guid>
+      <pubDate>Fri, 13 Nov 2026 02:44:41 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
+      <description>&lt;p&gt;人工智能（AI）热潮中最具影响力的人物之一黄仁勋，于11月12日辞去英伟达总裁、首席执行官（CEO）及董事职务，为其长达33年的掌舵生涯骤然画上句号。他的离场发生在个人光环与英伟达市场主导地位高度绑定之际，其冲击也因此超出一家公司的领导层更替，为围绕英伟达形成的AI产业融资网络与…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称黄仁勋被拉下马、政商围剿刚开始；摘要称黄仁勋于11月12日辞去英伟达总裁、CEO及董事职务，结束33年掌舵生涯，围绕个人失信、公司治理与国家安全审查的危机仍在发酵，并提到油价走强推高通胀预期、美国股债市场受影响。&lt;/p&gt;&lt;p&gt;事实：报道明确说辞职发生且冲击超出公司领导层更替，为AI产业融资网络与全球算力投资预期增添不确定性。&lt;/p&gt;&lt;p&gt;推断：事件可能通过领导层更替与治理审查渠道外溢至AI产业融资与算力投资预期，但“围剿”程度属报道措辞，需区分事实与判断。&lt;/p&gt;&lt;p&gt;影响：可能影响英伟达、AI产业融资网络及全球算力投资预期，条件是治理与审查事态持续。&lt;/p&gt;&lt;p&gt;验证：后续可观察公司治理审查进展、融资网络相关方表态及算力投资计划调整；摘要未给出审查具体主体与时间表。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>碳酸锂主力合约日内涨幅达4% | 碳酸锂主力合约日内涨幅达4%，现报92660元/吨。</title>
+      <link>https://www.yicai.com/brief/103439412.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/brief/103439412.html</guid>
+      <pubDate>Fri, 13 Nov 2026 02:41:05 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://yicai.com">第一财经 · 简报</source>
+      <description>&lt;p&gt;碳酸锂主力合约日内涨幅达4%，现报92660元/吨。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题与摘要均称碳酸锂主力合约日内涨幅达4%，现报92660元/吨。&lt;/p&gt;&lt;p&gt;事实：报道明确给出涨幅与价格数据。&lt;/p&gt;&lt;p&gt;推断：仅凭该条无法判断上涨原因，线索有限，不能归因于供需或政策等未提及因素。&lt;/p&gt;&lt;p&gt;影响：可能影响碳酸锂相关产业链主体的短期关注度，但缺少驱动因素信息。&lt;/p&gt;&lt;p&gt;验证：后续可观察合约成交量、持仓变化及现货报价是否同步；目前缺少原因与持续性验证材料。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>2026年APEC领导人会议将实现100%绿电供应</title>
+      <link>https://www.cls.cn/detail/2533477</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2533477</guid>
+      <pubDate>Fri, 13 Nov 2026 02:40:55 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+      <description>&lt;p&gt;【2026年APEC领导人会议将实现100%绿电供应】财联社11月13日电，记者今天从南方电网了解到，2026年APEC领导人会议期间，会场等相关场所将实现100%绿电供应。目前，供电保障各项前置工作已落实到位。据介绍，为实现这一目标，南方电网提前统筹了8900万度的绿电资源，可…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称2026年APEC领导人会议将实现100%绿电供应；摘要称记者从南方电网了解到，会议期间会场等相关场所将实现100%绿电供应，供电保障前置工作已落实，南方电网统筹8900万度绿电资源，深圳会场用电来源可追溯，来源标注为央视新闻。&lt;/p&gt;&lt;p&gt;事实：报道明确说会议相关场所将实现100%绿电供应，南方电网已统筹8900万度绿电资源并落实前置保障工作，深圳会场用电具有可追溯的绿电属性。&lt;/p&gt;&lt;p&gt;推断：该安排体现会议场景对绿电采购与溯源管理的需求，可能涉及绿电交易、电网调度和绿证核销等环节的配合；但报道未说明8900万度与会议实际用电量的具体关系。&lt;/p&gt;&lt;p&gt;影响：可能影响绿电供应服务商、电网保障部门和会议承办方；若绿电溯源机制成熟，或对大型活动绿色用能形成示范条件。&lt;/p&gt;&lt;p&gt;验证：可观察会议前南方电网及相关部门是否披露绿电交易凭证、溯源明细和实际供电规模；目前缺少8900万度资源如何分配使用的细节。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>英伟达临时CEO，曾被黄仁勋轻视</title>
+      <link>https://finance.sina.com.cn/stock/usstock/c/2026-11-13/doc-iniypzqi1332888.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/stock/usstock/c/2026-11-13/doc-iniypzqi1332888.shtml</guid>
+      <pubDate>Fri, 13 Nov 2026 02:40:26 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>&lt;p&gt;专题：英伟达宣布CEO黄仁勋辞职 CFO科莱特·克雷斯出任临时CEO 今年夏天，黄仁勋把一众核心财务高管召集到办公室。依靠英伟达不断加码的激进兜底交易支撑起来的AI经济，已经摇摇欲坠，黄仁勋要确认团队处理得当。 在这场会议上，他当众严厉批评了现在接替他执掌英伟达的这名女性。 推荐…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称英伟达临时CEO曾被黄仁勋轻视；摘要称专题报道英伟达宣布CEO黄仁勋辞职、CFO科莱特·克雷斯出任临时CEO，并引述知情人士称黄仁勋曾在财务高管会议上当众批评克雷斯，说她像“车灯前受惊的鹿”；摘要还提到依靠英伟达激进兜底交易支撑的AI经济已摇摇欲坠。&lt;/p&gt;&lt;p&gt;事实：报道明确说英伟达宣布黄仁勋辞职、克雷斯出任临时CEO，并转述了黄仁勋此前在会议上批评克雷斯的情形及对AI经济状况的描述。&lt;/p&gt;&lt;p&gt;推断：该报道将管理层变动与内部管理风格、AI业务风险叙事联系起来，可能影响外界对英伟达治理稳定性的判断；但“AI经济摇摇欲坠”属报道中的描述性说法，缺少可核验数据支撑。&lt;/p&gt;&lt;p&gt;影响：可能影响英伟达投资者、员工及合作伙伴对管理层过渡和战略连续性的预期。&lt;/p&gt;&lt;p&gt;验证：可观察英伟达官方公告、临时CEO任命安排及后续财报电话会中关于管理层和业务风险的表述；目前缺少公司对相关会议细节的正式回应。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>财联社11月13日电，碳酸锂期货主力合约日内涨幅达4%，现报92660元/吨。</title>
+      <link>https://www.cls.cn/detail/2533474</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2533474</guid>
+      <pubDate>Fri, 13 Nov 2026 02:39:51 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称碳酸锂期货主力合约日内涨幅达4%，现报92660元/吨；摘要为空。&lt;/p&gt;&lt;p&gt;事实：报道明确给出碳酸锂期货主力合约日内涨幅4%、价格92660元/吨这一行情数据。&lt;/p&gt;&lt;p&gt;推断：线索有限，仅凭单日涨幅和价格无法判断驱动因素、持仓变化或供需背景，不能据此推断趋势。&lt;/p&gt;&lt;p&gt;影响：可能影响碳酸锂产业链相关企业的套保成本和市场情绪，但具体影响取决于涨幅持续性和现货联动情况。&lt;/p&gt;&lt;p&gt;验证：可观察后续交易日价格、成交量与持仓量变化，以及交易所或现货市场是否披露供需相关信息；目前缺少上涨原因和基本面材料。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>【华尔街原声】OpenAI融资150亿美元，为2027年IPO铺路</title>
+      <link>https://database.caixin.com/2026-11-13/102504327.html</link>
+      <guid isPermaLink="true">https://database.caixin.com/2026-11-13/102504327.html</guid>
+      <pubDate>Fri, 13 Nov 2026 02:38:01 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://caixin.com">财新 · 最新</source>
+      <description>&lt;p&gt;融资预计未来几周完成，被视为潜在IPO前的过渡性融资，投前估值达1.25万亿美元&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称OpenAI融资150亿美元、为2027年IPO铺路；摘要称融资预计未来几周完成，被视为潜在IPO前的过渡性融资，投前估值达1.25万亿美元。&lt;/p&gt;&lt;p&gt;事实：报道明确说OpenAI融资规模为150亿美元，预计未来几周完成，投前估值1.25万亿美元，并被视作潜在IPO前的过渡性融资。&lt;/p&gt;&lt;p&gt;推断：若融资按报道完成，可能为OpenAI提供较长周期的资金支持，并使其资本结构与IPO预期更受关注；但“为2027年IPO铺路”是报道中的定性说法，不等于IPO已确定。&lt;/p&gt;&lt;p&gt;影响：可能影响OpenAI的投资者、AI算力与模型合作方，以及一级市场对AI公司估值的参照。&lt;/p&gt;&lt;p&gt;验证：可观察OpenAI或投资方是否正式确认融资规模、估值和完成时间，以及是否披露IPO相关计划；目前缺少公司官方确认材料。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>How Huang’s Exit Could Lead to Nvidia Slowdown｜中文：黄仁勋的离职如何可能导致英伟达的放缓</title>
+      <link>https://www.bloomberg.com/news/videos/2026-11-13/how-huang-s-exit-could-lead-to-nvidia-slowdown-video</link>
+      <guid isPermaLink="true">https://www.bloomberg.com/news/videos/2026-11-13/how-huang-s-exit-could-lead-to-nvidia-slowdown-video</guid>
+      <pubDate>Fri, 13 Nov 2026 02:37:30 +0000</pubDate>
+      <category>政治与政策</category>
+      <source url="https://bloomberg.com">彭博社 · 政治</source>
+      <description>&lt;p&gt;中文：彭博经济研究院的地缘经济与技术分析师Michael Deng表示，英伟达前首席执行官黄仁勋有能力在中美分歧之间游刃有余，而他的离任可能会使英伟达受到来自……的政府政策影响
+原文：Bloomberg Economics' geonomics and technology an…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称黄仁勋离职可能导致英伟达放缓；摘要引述彭博经济研究院分析师Michael Deng称，黄仁勋有能力在中美分歧之间周旋，其离任可能使英伟达受到政府政策影响，摘要在此处截断。&lt;/p&gt;&lt;p&gt;事实：报道明确说分析师认为黄仁勋的离任可能使英伟达面临政府政策风险，并称黄仁勋此前能在中美分歧间运作。&lt;/p&gt;&lt;p&gt;推断：该分析将管理层个人作用与地缘政策风险挂钩，暗示英伟达在中美之间的政策应对能力可能因人事变动而受影响；但摘要未给出具体政策工具或量化影响，属分析师观点。&lt;/p&gt;&lt;p&gt;影响：可能影响英伟达在中国市场的业务预期及投资者对政策风险的定价，条件是美国或中国相关政策出现调整。&lt;/p&gt;&lt;p&gt;验证：可观察英伟达对华业务披露、相关出口管制政策变化及公司政府事务安排；目前摘要不完整，缺少分析师完整论证和具体政策依据。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>上海钢联发布数据显示，今日MMLC电池级碳酸锂（早盘）中间价报91750元/吨，较上日16:30价格上涨600元/吨。</title>
+      <link>https://wallstreetcn.com/livenews/3199522</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3199522</guid>
+      <pubDate>Fri, 13 Nov 2026 02:35:30 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称上海钢联发布MMLC电池级碳酸锂早盘中间价为91750元/吨，较上日16:30价格上涨600元/吨；摘要为空。&lt;/p&gt;&lt;p&gt;事实：报道明确给出该中间价的具体数值及较前一交易日16:30的涨幅。&lt;/p&gt;&lt;p&gt;推断：仅能确认该报价环比上涨，无法由单一报价推断供需结构或趋势持续性。&lt;/p&gt;&lt;p&gt;影响：可能影响关注碳酸锂价格的主体，如锂盐及电池产业链相关方，但影响程度需更多数据支持。&lt;/p&gt;&lt;p&gt;验证：需后续连续报价、成交量及供需数据；目前缺少摘要与背景材料，线索有限。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>截至早盘收盘，日经225指数涨1.6%，东证指数涨0.8%。</title>
+      <link>https://wallstreetcn.com/livenews/3199521</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3199521</guid>
+      <pubDate>Fri, 13 Nov 2026 02:35:23 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称截至早盘收盘，日经225指数涨1.6%，东证指数涨0.8%；摘要为空。&lt;/p&gt;&lt;p&gt;事实：报道明确给出两个日本股指早盘收盘涨幅。&lt;/p&gt;&lt;p&gt;推断：仅反映当日早盘市场表现，不能据此推断驱动因素或后续走势。&lt;/p&gt;&lt;p&gt;影响：可能影响关注日本股市的投资者情绪，但无具体板块或个股信息。&lt;/p&gt;&lt;p&gt;验证：需后续收盘数据及市场评论；目前缺少摘要，线索有限。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>中国—比利时—卢森堡经贸混委会第23次会议在比利时布鲁塞尔召开</title>
+      <link>https://www.cls.cn/detail/2533469</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2533469</guid>
+      <pubDate>Fri, 13 Nov 2026 02:35:08 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+      <description>&lt;p&gt;【中国—比利时—卢森堡经贸混委会第23次会议在比利时布鲁塞尔召开】11月12日，商务部副部长兼中华人民共和国国际贸易谈判副代表凌激与比利时外交外贸部地缘经济与经济外交代理总司长范登布尔克、卢森堡外交外贸部秘书长舒马赫在比利时布鲁塞尔举行中比卢经贸混委会第23次会议。凌激表示，近年…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题与摘要称11月12日中比卢经贸混委会第23次会议在布鲁塞尔召开，商务部副部长凌激与比方、卢方官员参会；摘要提及航空运输、港口物流、生物医药、清洁能源等领域合作成果，以及培育服务贸易、数（字经济等，摘要截断）。&lt;/p&gt;&lt;p&gt;事实：报道明确会议时间、地点、参会人员及部分合作领域表述。&lt;/p&gt;&lt;p&gt;推断：会议属双边经贸机制性沟通，可能涉及上述领域合作推进，但摘要未给出具体成果或协议。&lt;/p&gt;&lt;p&gt;影响：可能影响中比、中卢相关经贸合作领域，具体影响取决于后续落地措施。&lt;/p&gt;&lt;p&gt;验证：需关注商务部后续通稿、联合声明或具体合作文件；摘要截断，线索有限。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>10月高频数据折射中国经济稳中向好态势</title>
+      <link>https://wallstreetcn.com/livenews/3199520</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3199520</guid>
+      <pubDate>Fri, 13 Nov 2026 02:34:25 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+      <description>&lt;p&gt;从国家发展改革委国家信息中心了解到，10月份，消费、外贸、投资等领域多项高频数据显示，随着存量政策与增量政策的协同发力，中国经济发展的含金量、含新量不断提升，稳中向好态势进一步巩固。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称10月高频数据折射中国经济稳中向好态势；摘要称从国家发改委国家信息中心了解到，10月消费、外贸、投资等领域多项高频数据显示政策协同发力，经济含金量、含新量提升，稳中向好态势巩固。&lt;/p&gt;&lt;p&gt;事实：报道明确引用国家信息中心对10月高频数据的定性判断。&lt;/p&gt;&lt;p&gt;推断：属官方机构对经济态势的正面表述，摘要未列出具体数据，无法核验各项指标变化幅度。&lt;/p&gt;&lt;p&gt;影响：可能影响市场对宏观经济的预期，但缺乏具体数据支撑。&lt;/p&gt;&lt;p&gt;验证：需查阅国家信息中心或发改委发布的具体高频指标；目前缺少数据细节，线索有限。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>银行板块震荡拉升 | 江苏银行、南京银行创历史新高，齐鲁银行涨超3%，北京银行、无锡银行、苏农银行、常熟银行、青岛银行等跟涨。</title>
+      <link>https://www.yicai.com/brief/103439399.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/brief/103439399.html</guid>
+      <pubDate>Fri, 13 Nov 2026 02:32:13 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://yicai.com">第一财经 · 简报</source>
+      <description>&lt;p&gt;江苏银行、南京银行创历史新高，齐鲁银行涨超3%，北京银行、无锡银行、苏农银行、常熟银行、青岛银行等跟涨。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题与摘要称银行板块震荡拉升，江苏银行、南京银行创历史新高，齐鲁银行涨超3%，北京银行、无锡银行、苏农银行、常熟银行、青岛银行等跟涨。&lt;/p&gt;&lt;p&gt;事实：报道明确列出部分银行股涨幅及创新高情况。&lt;/p&gt;&lt;p&gt;推断：仅反映当日板块行情，不能据此推断上涨原因或持续性。&lt;/p&gt;&lt;p&gt;影响：可能影响银行板块相关投资者情绪，但无基本面信息。&lt;/p&gt;&lt;p&gt;验证：需后续行情数据及板块资金流向；目前缺少驱动因素说明，线索有限。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
