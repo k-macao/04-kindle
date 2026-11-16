@@ -1,5 +1,5 @@
 {
-  "checked": "2026-11-15T02:29:43+00:00",
+  "checked": "2026-11-16T02:39:15+00:00",
   "providers": [
     "direct",
     "rsshub",
@@ -8,13 +8,12 @@
     "bridge"
   ],
   "summary": {
-    "ok": 24,
+    "ok": 23,
     "total": 24,
-    "items": 187,
+    "items": 199,
     "by_provider": {
       "direct": 4,
-      "rsshub": 15,
-      "mirror": 5
+      "rsshub": 19
     }
   },
   "sources": [
@@ -41,7 +40,7 @@
       "group": "flash",
       "ok": true,
       "provider": "direct",
-      "count": 9,
+      "count": 12,
       "error": "",
       "attempts": [
         {
@@ -58,7 +57,7 @@
       "group": "flash",
       "ok": true,
       "provider": "direct",
-      "count": 12,
+      "count": 11,
       "error": "",
       "attempts": [
         {
@@ -75,7 +74,7 @@
       "group": "flash",
       "ok": true,
       "provider": "direct",
-      "count": 8,
+      "count": 10,
       "error": "",
       "attempts": [
         {
@@ -92,7 +91,7 @@
       "group": "flash",
       "ok": true,
       "provider": "rsshub",
-      "count": 4,
+      "count": 9,
       "error": "",
       "attempts": [
         {
@@ -126,7 +125,7 @@
       "group": "flash",
       "ok": true,
       "provider": "rsshub",
-      "count": 12,
+      "count": 11,
       "error": "",
       "attempts": [
         {
@@ -194,7 +193,7 @@
       "group": "depth",
       "ok": true,
       "provider": "rsshub",
-      "count": 1,
+      "count": 7,
       "error": "",
       "attempts": [
         {
@@ -211,7 +210,7 @@
       "group": "depth",
       "ok": true,
       "provider": "rsshub",
-      "count": 7,
+      "count": 12,
       "error": "",
       "attempts": [
         {
@@ -228,7 +227,7 @@
       "group": "depth",
       "ok": true,
       "provider": "rsshub",
-      "count": 3,
+      "count": 1,
       "error": "",
       "attempts": [
         {
@@ -245,7 +244,7 @@
       "group": "flash",
       "ok": true,
       "provider": "rsshub",
-      "count": 7,
+      "count": 6,
       "error": "",
       "attempts": [
         {
@@ -260,16 +259,58 @@
       "key": "BLOOMBERG_CRYPTO",
       "name": "彭博社 · 加密",
       "group": "global",
-      "ok": true,
-      "provider": "rsshub",
-      "count": 1,
-      "error": "",
+      "ok": false,
+      "provider": "",
+      "count": 0,
+      "error": "rsshub/https://rsshub.rss.tips: 解析出 1 条，24 小时窗口内 0 条；mirror/https://rsshub.isrss.com: 解析出 1 条，24 小时窗口内 0 条；mirror/https://rsshub.cups.moe: 解析出 1 条，24 小时窗口内 0 条",
       "attempts": [
         {
           "provider": "rsshub",
           "label": "https://rsshub.rss.tips",
-          "ok": true,
-          "error": ""
+          "ok": false,
+          "error": "解析出 1 条，窗口内 0 条"
+        },
+        {
+          "provider": "mirror",
+          "label": "https://rsshub.isrss.com",
+          "ok": false,
+          "error": "解析出 1 条，窗口内 0 条"
+        },
+        {
+          "provider": "mirror",
+          "label": "https://rsshub.cups.moe",
+          "ok": false,
+          "error": "解析出 1 条，窗口内 0 条"
+        },
+        {
+          "provider": "mirror",
+          "label": "https://rsshub.app",
+          "ok": false,
+          "error": "HTTP Error 403: Forbidden"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.org/bridge01",
+          "ok": false,
+          "error": "解析出 1 条，窗口内 0 条"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.org/bridge01",
+          "ok": false,
+          "error": "HTTP Error 500: Internal Server Error"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.flossboxin.org.in",
+          "ok": false,
+          "error": "<urlopen error [Errno 101] Network is unreachable>"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.flossboxin.org.in",
+          "ok": false,
+          "error": "<urlopen error [Errno 101] Network is unreachable>"
         }
       ]
     },
@@ -278,19 +319,13 @@
       "name": "彭博社 · 市场",
       "group": "global",
       "ok": true,
-      "provider": "mirror",
+      "provider": "rsshub",
       "count": 12,
       "error": "",
       "attempts": [
         {
           "provider": "rsshub",
           "label": "https://rsshub.rss.tips",
-          "ok": false,
-          "error": "The read operation timed out"
-        },
-        {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
           "ok": true,
           "error": ""
         }
@@ -302,7 +337,7 @@
       "group": "global",
       "ok": true,
       "provider": "rsshub",
-      "count": 9,
+      "count": 7,
       "error": "",
       "attempts": [
         {
@@ -319,7 +354,7 @@
       "group": "politics",
       "ok": true,
       "provider": "rsshub",
-      "count": 0,
+      "count": 1,
       "error": "",
       "attempts": [
         {
@@ -336,7 +371,7 @@
       "group": "politics",
       "ok": true,
       "provider": "rsshub",
-      "count": 1,
+      "count": 0,
       "error": "",
       "attempts": [
         {
@@ -369,19 +404,13 @@
       "name": "彭博社 · 政治",
       "group": "politics",
       "ok": true,
-      "provider": "mirror",
+      "provider": "rsshub",
       "count": 12,
       "error": "",
       "attempts": [
         {
           "provider": "rsshub",
           "label": "https://rsshub.rss.tips",
-          "ok": false,
-          "error": "The read operation timed out"
-        },
-        {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
           "ok": true,
           "error": ""
         }
@@ -392,19 +421,13 @@
       "name": "Aeon · 哲学",
       "group": "thought",
       "ok": true,
-      "provider": "mirror",
+      "provider": "rsshub",
       "count": 3,
       "error": "",
       "attempts": [
         {
           "provider": "rsshub",
           "label": "https://rsshub.rss.tips",
-          "ok": false,
-          "error": "The read operation timed out"
-        },
-        {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
           "ok": true,
           "error": ""
         }
@@ -415,25 +438,13 @@
       "name": "Psyche · Ideas",
       "group": "thought",
       "ok": true,
-      "provider": "mirror",
-      "count": 3,
+      "provider": "rsshub",
+      "count": 2,
       "error": "",
       "attempts": [
         {
           "provider": "rsshub",
           "label": "https://rsshub.rss.tips",
-          "ok": false,
-          "error": "The read operation timed out"
-        },
-        {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
-          "ok": false,
-          "error": "The read operation timed out"
-        },
-        {
-          "provider": "mirror",
-          "label": "https://rsshub.cups.moe",
           "ok": true,
           "error": ""
         }
@@ -444,13 +455,13 @@
       "name": "爱思想 · 最近更新",
       "group": "thought",
       "ok": true,
-      "provider": "mirror",
+      "provider": "rsshub",
       "count": 12,
       "error": "",
       "attempts": [
         {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
+          "provider": "rsshub",
+          "label": "https://rsshub.rss.tips",
           "ok": true,
           "error": ""
         }
