@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>同花顺行情面板</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#fff;color:#000;
+font-family:"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+.wrap{max-width:960px;margin:0 auto;padding:16px}
+header{border-bottom:3px solid #000;padding-bottom:8px}
+h1{font-size:26px;margin:0 0 4px}
+.meta{font-size:14px;color:#333}
+.badge{display:inline-block;border:1px solid #000;padding:0 6px;font-size:13px;margin-left:6px}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:15px}
+th,td{border:1px solid #999;padding:5px 7px;text-align:right;white-space:nowrap}
+th{background:#eee}td:first-child,th:first-child{text-align:left}
+.up{font-weight:bold}.down{font-weight:bold}
+section h2{font-size:19px;border-bottom:2px solid #000;padding-bottom:4px;margin:20px 0 4px}
+footer{border-top:1px solid #000;margin-top:16px;padding-top:8px;font-size:13px;color:#333}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<h1>同花顺行情面板<span class="badge" id="state">…</span></h1>
+<div class="meta" id="meta">加载中…</div>
+</header>
+<main id="main"></main>
+<footer>仅供信息展示，不构成投资建议 · 数据来源：同花顺金融数据服务（hithink-finance）·
+面板每 60 秒拉一次 stocks.json，generated 变了才重绘。</footer>
+</div>
+<noscript><p>需要 JavaScript 才能每分钟刷新；Kindle 请用 stocks.txt 纯文本版。</p></noscript>
+<script>
+'use strict';
+var POLL = 60;
+var lastGenerated = null;
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){
+return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function num(v,d){return (v==null||isNaN(v))?'--':Number(v).toLocaleString('zh-CN',
+{minimumFractionDigits:d==null?2:d,maximumFractionDigits:d==null?2:d});}
+function ratio(v){if(v==null||isNaN(v))return '--';
+return (v>0?'+':'')+Number(v).toFixed(2)+'%';}
+function change(v){if(v==null||isNaN(v))return '';
+var a=v>0?'▲':(v<0?'▼':'·');return a+(v>0?'+':'')+Number(v).toFixed(2);}
+function cls(v){return v>0?'up':(v<0?'down':'');}
+function vol(v){if(v==null)return '--';var h=v/100;
+return h>=10000?(h/10000).toFixed(2)+'万手':h.toLocaleString('zh-CN',
+{minimumFractionDigits:2,maximumFractionDigits:2})+'手';}
+function money(v){if(v==null)return '--';var y=v/1e8;
+return Math.abs(y)>=10000?(y/10000).toFixed(2)+'万亿':y.toFixed(2)+'亿';}
+function quoteRows(rows){
+var h='<table><tr><th>名称</th><th>最新</th><th>涨跌幅</th><th>涨跌</th>'+
+'<th>开盘</th><th>最高</th><th>最低</th><th>成交量</th><th>成交额</th></tr>';
+rows.forEach(function(r){h+='<tr><td>'+esc(r.name||r.thscode)+'</td>'+
+'<td>'+num(r.last_price)+'</td>'+
+'<td class="'+cls(r.price_change_ratio_pct)+'">'+ratio(r.price_change_ratio_pct)+'</td>'+
+'<td class="'+cls(r.price_change)+'">'+change(r.price_change)+'</td>'+
+'<td>'+num(r.open_price)+'</td><td>'+num(r.high_price)+'</td>'+
+'<td>'+num(r.low_price)+'</td><td>'+vol(r.volume)+'</td>'+
+'<td>'+money(r.turnover)+'</td></tr>';});
+return h+'</table>';}
+function limitRows(rows){
+var h='<table><tr><th>名称</th><th>最新</th><th>涨跌幅</th><th>封板</th>'+
+'<th>原因</th><th>连板</th><th>封单额</th></tr>';
+rows.forEach(function(r){h+='<tr><td>'+esc(r.name||r.thscode)+'</td>'+
+'<td>'+num(r.last_price)+'</td>'+
+'<td class="'+cls(r.price_change_ratio_pct)+'">'+ratio(r.price_change_ratio_pct)+'</td>'+
+'<td>'+esc(r.limit_up_time||'')+'</td><td>'+esc(r.limit_up_reason||'')+'</td>'+
+'<td>'+esc(r.continue_day_text||'')+'</td><td>'+money(r.seal_money)+'</td></tr>';});
+return h+'</table>';}
+function render(d){
+var h='';
+if(d.indices&&d.indices.length)h+='<section><h2>指数（'+d.indices.length+'）</h2>'+
+quoteRows(d.indices)+'</section>';
+if(d.stocks&&d.stocks.length)h+='<section><h2>自选股（'+d.stocks.length+
+'）· 按涨跌幅排序</h2>'+quoteRows(d.stocks)+'</section>';
+if(d.limit_up&&d.limit_up.length)h+='<section><h2>涨停池（'+d.limit_up.length+
+'）· 按封板时间</h2>'+limitRows(d.limit_up)+'</section>';
+(d.errors||[]).forEach(function(e){h+='<p>注：'+esc(e)+'</p>';});
+document.getElementById('main').innerHTML=h||'<p>暂无数据</p>';
+var demo=d.demo?'【演示数据】':'';
+document.getElementById('meta').textContent='生成 '+d.generated+'（北京时间） · 数据时间 '+
+(d.data_time||'无')+' '+demo+' · 每'+POLL+'秒检查一次';
+document.getElementById('state').textContent='ONLINE';
+}
+function load(){
+fetch('stocks.json?t='+Date.now(),{cache:'no-store'}).then(function(r){
+if(!r.ok)throw new Error('HTTP '+r.status);return r.json();}).then(function(d){
+if(d.generated===lastGenerated)return;lastGenerated=d.generated;render(d);
+}).catch(function(){document.getElementById('state').textContent='OFFLINE / CACHED';});}
+load();setInterval(load,POLL*1000);
+</script>
+</body>
+</html>

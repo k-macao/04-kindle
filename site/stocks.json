@@ -1,0 +1,88 @@
+{
+  "generated": "2026-11-17T16:03:13Z",
+  "doc": "stocks.txt",
+  "title": "同花顺行情面板",
+  "data_time": "2026-07-17T08:13:11Z",
+  "data_time_kind": "exact",
+  "data_hash": "e8cd94649c99c9e6",
+  "demo": true,
+  "counts": {
+    "indices": 2,
+    "stocks": 2,
+    "limit_up": 1
+  },
+  "indices": [
+    {
+      "thscode": "000001.SH",
+      "ticker": "000001",
+      "name": "上证指数",
+      "last_price": 3665.94,
+      "price_change": 16.79,
+      "price_change_ratio_pct": 0.46,
+      "open_price": 3650.12,
+      "high_price": 3670.0,
+      "low_price": 3648.5,
+      "prev_price": 3649.15,
+      "volume": 51234567800.0,
+      "turnover": 1567890000000.0
+    },
+    {
+      "thscode": "399006.SZ",
+      "ticker": "399006",
+      "name": "创业板指",
+      "last_price": 2478.94,
+      "price_change": 13.86,
+      "price_change_ratio_pct": 0.56,
+      "open_price": 2468.0,
+      "high_price": 2485.0,
+      "low_price": 2465.0,
+      "prev_price": 2465.08,
+      "volume": 23456789000.0,
+      "turnover": 987650000000.0
+    }
+  ],
+  "stocks": [
+    {
+      "thscode": "600519.SH",
+      "ticker": "600519",
+      "name": "贵州茅台",
+      "last_price": 1277.8,
+      "price_change": 21.8,
+      "price_change_ratio_pct": 1.735669,
+      "open_price": 1252.08,
+      "high_price": 1282.0,
+      "low_price": 1250.21,
+      "prev_price": 1256.0,
+      "volume": 3098875.0,
+      "turnover": 3937375200.0
+    },
+    {
+      "thscode": "000001.SZ",
+      "ticker": "000001",
+      "name": "平安银行",
+      "last_price": 11.23,
+      "price_change": -0.12,
+      "price_change_ratio_pct": -1.057,
+      "open_price": 11.35,
+      "high_price": 11.4,
+      "low_price": 11.2,
+      "prev_price": 11.35,
+      "volume": 45678900.0,
+      "turnover": 512340000.0
+    }
+  ],
+  "limit_up": [
+    {
+      "thscode": "603986.SH",
+      "ticker": "603986",
+      "name": "兆易创新",
+      "last_price": 118.23,
+      "price_change_ratio_pct": 10.0008,
+      "limit_up_time": "09:34",
+      "limit_up_reason": "存储芯片",
+      "continue_day_text": "2连板",
+      "seal_money": 123456789.12
+    }
+  ],
+  "errors": []
+}
