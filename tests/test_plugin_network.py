@@ -72,6 +72,39 @@ class NetWiringTest(unittest.TestCase):
         self.assertLess(find("local function utcEpoch"),
                         find("local function isoSeconds"))
 
+    def test_stocks_epub_goes_through_the_reader_pipeline(self):
+        # 行情卡片版：清单里有 epub 就下载成书交给阅读器，失败才回退纯文本。
+        self.assertIn("function Report:refreshStocksEpub(manifest, sig)", MAIN)
+        self.assertIn("pcall(function() self:refreshStocksEpub(manifest, sig) end)", MAIN)
+        self.assertIn("refreshStocks 回退", MAIN)
+        self.assertIn("self:httpGetAny(self:urlCandidates(url), DOC_MAX)", MAIN)
+        self.assertIn("self:pruneDocs(name, spec.prefix)", MAIN)
+        # EPUB 与纯文本各自记签名，回退时不会把对方的缓存判成「没变」。
+        self.assertIn('sig = "stocks_epub_sig"', MAIN)
+        self.assertIn("self.settings.stocks_sig = sig", MAIN)
+
+    def test_stocks_epub_prefix_does_not_collide_with_text_cache(self):
+        # pruneDocs 按前缀删旧文件：卡片版前缀不能是纯文本缓存的超串，
+        # 否则清旧 EPUB 时会把回退用的 octopus004-stocks.txt 一起删掉。
+        prefix = re.search(r'local STOCKS_PREFIX = "([^"]+)"', MAIN).group(1)
+        cache = re.search(r'local STOCKS_CACHE = "([^"]+)"', MAIN).group(1)
+        self.assertFalse(cache.startswith(prefix), (prefix, cache))
+        # 前缀也是 local：必须定义在 DOC_KINDS 之前才能被引用。
+        self.assertLess(MAIN.index("local STOCKS_PREFIX"),
+                        MAIN.index("local DOC_KINDS"))
+
+    def test_stocks_mode_reopens_cached_card_without_network(self):
+        # 已经有下载好的卡片版时，Show report 应该立刻交给阅读器，
+        # 不能先显示纯文本、等下一轮 60 秒才变成卡片。
+        start = MAIN[MAIN.index("function Report:start()"):]
+        start = start[:start.index("\nend\n")]
+        self.assertIn("self:openDoc(spec, current)", start)
+        self.assertIn("lfs.attributes(current, \"mode\") == \"file\"", start)
+
+    def test_stocks_mode_keeps_reader_awake(self):
+        self.assertIn("function Report:usesReader()", MAIN)
+        self.assertIn("not interactive and not self:usesReader()", MAIN)
+
     def test_version_was_bumped(self):
         meta = (PLUGIN / "_meta.lua").read_text(encoding="utf-8")
         version = re.search(r'version = "([\d.]+)"', meta).group(1)

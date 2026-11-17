@@ -1,10 +1,12 @@
 {
-  "generated": "2026-11-17T16:22:33Z",
+  "generated": "2026-11-17T17:09:38Z",
   "doc": "stocks.txt",
+  "epub": "stocks.epub",
   "title": "同花顺行情面板",
+  "data_timestamp": 1794932552000,
   "data_time": "2026-11-17T16:22:32Z",
   "data_time_kind": "exact",
-  "data_hash": "445db287e468b50a",
+  "data_hash": "74daab78f4c6538c",
   "demo": false,
   "counts": {
     "indices": 7,
@@ -917,5 +919,6 @@
       "seal_money": 89207283.0
     }
   ],
+  "history": {},
   "errors": []
 }

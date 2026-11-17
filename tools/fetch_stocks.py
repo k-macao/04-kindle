@@ -24,7 +24,9 @@ REST 接口约定（见仓库 ``docs/api/README.md``）：
   开高低收、成交量/额（一次请求带回全部自选股）；
 - ``GET /api/a-share-index/prices/snapshot?thscodes=…`` —— 宽基指数快照；
 - ``GET /api/a-share/special-data/limit-up-pool`` —— 当日涨停池（情绪面，
-  失败不挡主行情，只记进 ``errors``）。
+  失败不挡主行情，只记进 ``errors``）；
+- ``GET /api/a-share/prices/historical-batch`` 与指数同名接口 —— 最近
+  ``--history-days`` 根日 K 收盘价，给卡片上的迷你走势图（失败不挡快照）。
 
 快照不返回中文名，名字用 ``GET /api/meta/tickers/search?q=<thscode>`` 逐个补，
 补过的存进 ``site/stocks_names.json`` 缓存，下次不再问（和新闻译文缓存一个路子）。
@@ -243,11 +245,50 @@ def resolve_names(client, codes, cache, fallback_names):
     return names
 
 
-def fetch_payload(client, stocks, indices, limit_up_size=0, names_cache_path=None):
-    """抓一轮：指数快照 + 股票快照 +（可选）涨停池，归一成 stocks_data 结构。"""
+def normalize_history_group(group, keep):
+    """批量历史 K 线一组 → [[date_ms, close], ...]，只留最近 keep 根。"""
+    if not isinstance(group, dict):
+        return []
+    bars = []
+    for bar in group.get("item") or []:
+        if not isinstance(bar, dict):
+            continue
+        date_ms = bar.get("date_ms")
+        close = _num(bar.get("close_price"))
+        if isinstance(date_ms, (int, float)) and close is not None:
+            bars.append([int(date_ms), close])
+    bars.sort(key=lambda pair: pair[0])
+    return bars[-keep:] if keep and keep > 0 else bars
+
+
+def fetch_history(client, path, codes, days, now_ms=None):
+    """批量日 K（每批最多 10 个代码）→ {thscode: [[date_ms, close], ...]}。
+
+    窗口按自然日往前推（周末/节假日接口只返回交易日，取回后裁到最近 days 根）。
+    """
+    if not codes or not days or days <= 0:
+        return {}
+    now_ms = now_ms or int(datetime.now(timezone.utc).timestamp() * 1000)
+    start_ms = now_ms - (days * 2 + 10) * 24 * 3600 * 1000
+    history = {}
+    for offset in range(0, len(codes), 10):
+        chunk = codes[offset:offset + 10]
+        data = client.get(path, {
+            "thscodes": ",".join(chunk), "interval": "1d",
+            "start": start_ms, "end": now_ms, "adjust": "forward"})
+        for group in data.get("item") or []:
+            if isinstance(group, dict) and group.get("thscode"):
+                history[str(group["thscode"])] = normalize_history_group(group, days)
+    return history
+
+
+def fetch_payload(client, stocks, indices, limit_up_size=0, names_cache_path=None,
+                  history_days=0):
+    """抓一轮：指数快照 + 股票快照 +（可选）涨停池 +（可选）历史 K 线。"""
     generated = datetime.now(timezone.utc).isoformat()
     payload = {"generated": generated, "data_timestamp": None,
-               "indices": [], "stocks": [], "limit_up": [], "errors": []}
+               "indices": [], "stocks": [], "limit_up": [], "history": {},
+               "errors": []}
 
     fallback = {}
     for code, name in list(indices) + list(stocks):
@@ -293,6 +334,20 @@ def fetch_payload(client, stocks, indices, limit_up_size=0, names_cache_path=Non
             # 涨停池是情绪面，挂了不挡主行情——记下来，面板上如实写。
             payload["errors"].append(f"涨停池未获取：{exc}")
 
+    if history_days and history_days > 0:
+        # 历史 K 线只为卡片上的迷你走势图，挂了不挡快照。
+        try:
+            history = {}
+            history.update(fetch_history(
+                client, "/api/a-share-index/prices/historical-batch",
+                [code for code, _ in indices], history_days))
+            history.update(fetch_history(
+                client, "/api/a-share/prices/historical-batch",
+                [code for code, _ in stocks], history_days))
+            payload["history"] = history
+        except ThsError as exc:
+            payload["errors"].append(f"历史 K 线未获取（无迷你走势图）：{exc}")
+
     if names_cache_path:
         save_names_cache(names_cache_path, cache)
     return payload
@@ -313,7 +368,8 @@ def run_once(args, client):
     indices = parse_codes(args.indices) if args.indices else list(stock_watchlist.INDICES)
     limit_up_size = 0 if args.no_limit_up else args.limit_up_size
     payload = fetch_payload(client, stocks, indices, limit_up_size,
-                            args.names_cache or None)
+                            args.names_cache or None,
+                            history_days=args.history_days)
     if not payload["indices"] and not payload["stocks"]:
         raise ThsError("同花顺快照一条都没返回，不生成空面板")
     out = Path(args.out)
@@ -346,6 +402,8 @@ def main(argv=None):
     parser.add_argument("--limit-up-size", type=int,
                         default=stock_watchlist.LIMIT_UP_SIZE,
                         help="涨停池取前几名")
+    parser.add_argument("--history-days", type=int, default=20,
+                        help="卡片迷你走势图取最近几根日 K（0=不取）")
     parser.add_argument("--names-cache", default=stock_watchlist.NAMES_CACHE,
                         help="中文名缓存路径")
     parser.add_argument("--base-url", default=os.environ.get(

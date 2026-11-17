@@ -214,6 +214,44 @@ class FetchPayloadTest(unittest.TestCase):
         self.assertEqual(len(payload["errors"]), 1)
         self.assertIn("涨停池", payload["errors"][0])
 
+    def test_history_batch_is_chunked_and_trimmed(self):
+        # 每批最多 10 个代码；接口按日返回，取回后只留最近 N 根。
+        bars = [{"date_ms": 1784000000000 + i * 86400000, "close_price": 10.0 + i}
+                for i in range(30)]
+        fetch = FakeFetch({"/prices/historical-batch": envelope_bytes(
+            {"code": 0, "data": {"item": [{"thscode": "600519.SH", "item": bars}]}})})
+        history = fetch_stocks.fetch_history(
+            make_client(fetch), "/api/a-share/prices/historical-batch",
+            ["600519.SH", "000001.SZ"], days=20, now_ms=1900000000000)
+        self.assertEqual(list(history), ["600519.SH"])
+        self.assertEqual(len(history["600519.SH"]), 20)
+        # 裁掉的是最早的那几根，时间轴保持升序。
+        self.assertEqual(history["600519.SH"][-1][1], 39.0)
+        self.assertLess(history["600519.SH"][0][0], history["600519.SH"][-1][0])
+        self.assertEqual(len(fetch.calls), 1)
+
+    def test_history_days_zero_skips_requests(self):
+        fetch = FakeFetch({})
+        self.assertEqual(fetch_stocks.fetch_history(
+            make_client(fetch), "/api/a-share/prices/historical-batch",
+            ["600519.SH"], days=0), {})
+        self.assertEqual(fetch.calls, [])
+
+    def test_history_failure_is_an_error_not_a_crash(self):
+        fetch = FakeFetch({
+            "a-share-index/prices/snapshot": envelope_bytes(SNAPSHOT),
+            "a-share/prices/snapshot": envelope_bytes(SNAPSHOT),
+            "historical-batch": envelope_bytes(
+                {"code": 3002, "message": "数据尚未准备", "data": None}),
+            "tickers/search": envelope_bytes(SEARCH),
+        })
+        payload = fetch_stocks.fetch_payload(
+            make_client(fetch), stocks=[("600519.SH", "")], indices=[],
+            limit_up_size=0, history_days=20)
+        self.assertEqual(payload["history"], {})
+        self.assertEqual(len(payload["stocks"]), 2)
+        self.assertTrue(any("历史" in error for error in payload["errors"]))
+
     def test_watchlist_codes_are_well_formed(self):
         for code, _name in stock_watchlist.INDICES + stock_watchlist.STOCKS:
             self.assertRegex(code, r"^\d{6}\.(SH|SZ|BJ)$")
@@ -263,18 +301,82 @@ class BuildTest(unittest.TestCase):
         changed["stocks"][0]["last_price"] = 1300.0
         self.assertNotEqual(first, build_stocks.data_hash(changed))
 
-    def test_build_writes_three_files_and_passes_check(self):
+    def test_build_writes_four_files_and_passes_check(self):
         with tempfile.TemporaryDirectory() as tmp:
             data_path = Path(tmp) / "stocks_data.json"
             data_path.write_text(json.dumps(self._payload()), encoding="utf-8")
             out = Path(tmp) / "site"
             build_stocks.build(str(data_path), str(out))
-            for name in ("stocks.json", "stocks.txt", "stocks.html"):
+            for name in ("stocks.json", "stocks.txt", "stocks.html", "stocks.epub"):
                 self.assertTrue((out / name).is_file(), name)
             self.assertEqual(build_stocks.check(str(out)), [])
             page = (out / "stocks.html").read_text(encoding="utf-8")
             self.assertIn("stocks.json", page)
             self.assertIn("var POLL = 60", page)
+            # 卡片 + 迷你走势图 + 涨停表都由页面里的 JS 现画
+            self.assertIn('class="cards"', page)
+            self.assertIn("function spark(", page)
+            self.assertIn("polyline", page)
+            self.assertIn("function limitRows(", page)
+
+    def test_epub_is_valid_zip_with_cards(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "site"
+            build_stocks.build(out_dir=str(out), demo=True)
+            import zipfile
+            with zipfile.ZipFile(out / "stocks.epub") as zf:
+                names = zf.namelist()
+                self.assertEqual(names[0], "mimetype")
+                self.assertEqual(zf.read("mimetype"), b"application/epub+zip")
+                chapter = zf.read("OEBPS/chapter.xhtml").decode("utf-8")
+            self.assertIn("同花顺行情面板", chapter)
+            self.assertIn("贵州茅台", chapter)
+            self.assertIn("<table", chapter)
+            # crengine 不认 flex/grid，EPUB 里不能出现
+            self.assertNotIn("display:grid", chapter)
+            self.assertNotIn("display: grid", chapter)
+            self.assertNotIn("<svg", chapter)
+
+    def test_manifest_lists_epub_and_history(self):
+        payload = self._payload()
+        payload["history"] = {"600519.SH": [[1784000000000, 1250.0]]}
+        data = build_stocks.manifest(payload, "2026-11-17 15:00:00")
+        self.assertEqual(data["epub"], "stocks.epub")
+        self.assertIn("600519.SH", data["history"])
+
+    def test_history_changes_data_hash(self):
+        payload = self._payload()
+        payload["history"] = {"600519.SH": [[1784000000000, 1250.0]]}
+        first = build_stocks.data_hash(payload)
+        payload["history"]["600519.SH"][0][1] = 1251.0
+        self.assertNotEqual(first, build_stocks.data_hash(payload))
+
+    def test_epub_cards_show_close_range(self):
+        payload = self._payload()
+        payload["history"] = {"600519.SH": [[1784000000000 + i * 86400000,
+                                             1200.0 + i * 4.0] for i in range(20)]}
+        xhtml = build_stocks.render_epub_xhtml(payload, "2026-11-17 15:00:00")
+        self.assertIn("贵州茅台", xhtml)
+        self.assertIn("近20日收盘", xhtml)
+        self.assertIn("1,200.00", xhtml)
+        self.assertIn("1,276.00", xhtml)
+        # 没历史数据的股票不该出现空的走势行
+        self.assertEqual(xhtml.count("近20日收盘"), 1)
+
+    def test_manifest_can_be_rebuilt_from_itself(self):
+        # site/stocks.json 本身就是「清单 + 数据」：拿它当 --data 重排一次
+        # （只改版式时很方便）不能把数据时间弄丢。
+        data = build_stocks.manifest(self._payload(), "2026-11-17T07:00:00Z")
+        again = build_stocks.manifest(data, "2026-11-17T08:00:00Z")
+        self.assertEqual(again["data_time"], data["data_time"])
+        self.assertEqual(again["counts"], data["counts"])
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "site"
+            data_path = Path(tmp) / "stocks.json"
+            data_path.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
+            build_stocks.build(str(data_path), str(out))
+            rebuilt = json.loads((out / "stocks.json").read_text(encoding="utf-8"))
+        self.assertEqual(rebuilt["data_time"], data["data_time"])
 
     def test_build_rejects_empty_panel(self):
         with tempfile.TemporaryDirectory() as tmp:

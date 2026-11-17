@@ -7,16 +7,29 @@
 <style>
 *{box-sizing:border-box}body{margin:0;background:#fff;color:#000;
 font-family:"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
-.wrap{max-width:960px;margin:0 auto;padding:16px}
+.wrap{max-width:1080px;margin:0 auto;padding:16px}
 header{border-bottom:3px solid #000;padding-bottom:8px}
 h1{font-size:26px;margin:0 0 4px}
 .meta{font-size:14px;color:#333}
 .badge{display:inline-block;border:1px solid #000;padding:0 6px;font-size:13px;margin-left:6px}
-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:15px}
-th,td{border:1px solid #999;padding:5px 7px;text-align:right;white-space:nowrap}
-th{background:#eee}td:first-child,th:first-child{text-align:left}
+section h2{font-size:19px;border-bottom:2px solid #000;padding-bottom:4px;margin:22px 0 10px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.cards.index{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}
+.card{border:2px solid #000;padding:0;background:#fff}
+.card .head{display:flex;justify-content:space-between;align-items:baseline;
+padding:8px 12px;border-bottom:1px solid #000;background:#f2f2f2}
+.card .name{font-size:15px;font-weight:bold}
+.card .code{font-size:12px;color:#555}
+.card .body{padding:8px 12px}
+.card .price{font-size:28px;font-weight:bold;line-height:1.1}
+.card .ratio{font-size:16px;font-weight:bold;margin-bottom:6px}
+.card table.kv{width:100%;border-collapse:collapse;font-size:12.5px}
+.card table.kv td{padding:1px 0}
+.card table.kv td:last-child{text-align:right}
+.card .spark{margin-top:6px;border-top:1px dashed #999;padding-top:4px}
+.card .spark svg{display:block;width:100%;height:36px}
+.card .spark-label{font-size:11px;color:#555;display:flex;justify-content:space-between}
 .up{font-weight:bold}.down{font-weight:bold}
-section h2{font-size:19px;border-bottom:2px solid #000;padding-bottom:4px;margin:20px 0 4px}
 footer{border-top:1px solid #000;margin-top:16px;padding-top:8px;font-size:13px;color:#333}
 </style>
 </head>
@@ -30,11 +43,22 @@ footer{border-top:1px solid #000;margin-top:16px;padding-top:8px;font-size:13px;
 <footer>仅供信息展示，不构成投资建议 · 数据来源：同花顺金融数据服务（hithink-finance）·
 面板每 60 秒拉一次 stocks.json，generated 变了才重绘。</footer>
 </div>
-<noscript><p>需要 JavaScript 才能每分钟刷新；Kindle 请用 stocks.txt 纯文本版。</p></noscript>
+<noscript><p>需要 JavaScript 才能每分钟刷新；Kindle 请用 stocks.txt 纯文本版或 stocks.epub 卡片版。</p></noscript>
 <script>
 'use strict';
 var POLL = 60;
 var lastGenerated = null;
+// 清单里的时间都是 ISO-8601 UTC（"...Z"），显示前换成北京时间（+8h）。
+function bj(iso){
+if(!iso)return '无';
+var s=String(iso).replace('Z','');s=s.replace(' ','T');
+var p=s.match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})$/);
+if(!p)return String(iso);
+var d=new Date(Date.UTC(+p[1],+p[2]-1,+p[3],+p[4],+p[5],+p[6])+8*3600*1000);
+function z(n){return (n<10?'0':'')+n;}
+return d.getUTCFullYear()+'-'+z(d.getUTCMonth()+1)+'-'+z(d.getUTCDate())+' '+
+z(d.getUTCHours())+':'+z(d.getUTCMinutes())+':'+z(d.getUTCSeconds());
+}
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){
 return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function num(v,d){return (v==null||isNaN(v))?'--':Number(v).toLocaleString('zh-CN',
@@ -49,19 +73,51 @@ return h>=10000?(h/10000).toFixed(2)+'万手':h.toLocaleString('zh-CN',
 {minimumFractionDigits:2,maximumFractionDigits:2})+'手';}
 function money(v){if(v==null)return '--';var y=v/1e8;
 return Math.abs(y)>=10000?(y/10000).toFixed(2)+'万亿':y.toFixed(2)+'亿';}
-function quoteRows(rows){
-var h='<table><tr><th>名称</th><th>最新</th><th>涨跌幅</th><th>涨跌</th>'+
-'<th>开盘</th><th>最高</th><th>最低</th><th>成交量</th><th>成交额</th></tr>';
-rows.forEach(function(r){h+='<tr><td>'+esc(r.name||r.thscode)+'</td>'+
-'<td>'+num(r.last_price)+'</td>'+
-'<td class="'+cls(r.price_change_ratio_pct)+'">'+ratio(r.price_change_ratio_pct)+'</td>'+
-'<td class="'+cls(r.price_change)+'">'+change(r.price_change)+'</td>'+
-'<td>'+num(r.open_price)+'</td><td>'+num(r.high_price)+'</td>'+
-'<td>'+num(r.low_price)+'</td><td>'+vol(r.volume)+'</td>'+
-'<td>'+money(r.turnover)+'</td></tr>';});
-return h+'</table>';}
+function spark(closes){
+if(!closes||closes.length<2)return '';
+var pts=closes.filter(function(v){return typeof v==='number';});
+if(pts.length<2)return '';
+var lo=Math.min.apply(null,pts),hi=Math.max.apply(null,pts),span=(hi-lo)||1;
+var w=140,h=32,step=w/(pts.length-1),coords=[];
+pts.forEach(function(v,i){coords.push((i*step).toFixed(1)+','+
+(h-2-((v-lo)/span)*(h-4)).toFixed(1));});
+return '<svg width="'+w+'" height="'+h+'" viewBox="0 0 '+w+' '+h+'" '+
+'xmlns="http://www.w3.org/2000/svg" aria-hidden="true">'+
+'<polyline points="'+coords.join(' ')+'" fill="none" stroke="#000" '+
+'stroke-width="1.5"/></svg>';}
+function closesOf(d,code){
+var bars=(d.history||{})[code]||[];
+return bars.map(function(p){return p[1];});}
+function rangeOf(closes){
+var pts=closes.filter(function(v){return typeof v==='number';});
+if(!pts.length)return null;
+return {first:pts[0],last:pts[pts.length-1],
+lo:Math.min.apply(null,pts),hi:Math.max.apply(null,pts)};}
+function card(r,d,small){
+var closes=closesOf(d,r.thscode);
+var s=spark(closes),rg=rangeOf(closes);
+var kv='';
+if(!small){
+kv='<table class="kv"><tr><td>今开</td><td>'+num(r.open_price)+'</td></tr>'+
+'<tr><td>最高</td><td>'+num(r.high_price)+'</td></tr>'+
+'<tr><td>最低</td><td>'+num(r.low_price)+'</td></tr>'+
+'<tr><td>成交量</td><td>'+vol(r.volume)+'</td></tr>'+
+'<tr><td>成交额</td><td>'+money(r.turnover)+'</td></tr></table>';
+}
+var sparkHtml='';
+if(s){
+sparkHtml='<div class="spark">'+s+'<div class="spark-label"><span>近'+
+closes.length+'日 '+num(rg.first)+'→'+num(rg.last)+'</span>'+
+'<span>低 '+num(rg.lo)+' 高 '+num(rg.hi)+'</span></div></div>';
+}
+return '<div class="card"><div class="head"><span class="name">'+
+esc(r.name||r.thscode)+'</span><span class="code">'+esc(r.thscode||'')+
+'</span></div><div class="body"><div class="price">'+num(r.last_price)+
+'</div><div class="ratio '+cls(r.price_change_ratio_pct)+'">'+
+ratio(r.price_change_ratio_pct)+' '+change(r.price_change)+'</div>'+
+kv+sparkHtml+'</div></div>';}
 function limitRows(rows){
-var h='<table><tr><th>名称</th><th>最新</th><th>涨跌幅</th><th>封板</th>'+
+var h='<table class="data"><tr><th>名称</th><th>最新</th><th>涨跌幅</th><th>封板</th>'+
 '<th>原因</th><th>连板</th><th>封单额</th></tr>';
 rows.forEach(function(r){h+='<tr><td>'+esc(r.name||r.thscode)+'</td>'+
 '<td>'+num(r.last_price)+'</td>'+
@@ -71,17 +127,18 @@ rows.forEach(function(r){h+='<tr><td>'+esc(r.name||r.thscode)+'</td>'+
 return h+'</table>';}
 function render(d){
 var h='';
-if(d.indices&&d.indices.length)h+='<section><h2>指数（'+d.indices.length+'）</h2>'+
-quoteRows(d.indices)+'</section>';
-if(d.stocks&&d.stocks.length)h+='<section><h2>自选股（'+d.stocks.length+
-'）· 按涨跌幅排序</h2>'+quoteRows(d.stocks)+'</section>';
+if(d.indices&&d.indices.length){h+='<section><h2>指数（'+d.indices.length+'）</h2><div class="cards index">';
+d.indices.forEach(function(r){h+=card(r,d,true);});h+='</div></section>';}
+if(d.stocks&&d.stocks.length){h+='<section><h2>自选股（'+d.stocks.length+
+'）· 按涨跌幅排序</h2><div class="cards">';
+d.stocks.forEach(function(r){h+=card(r,d,false);});h+='</div></section>';}
 if(d.limit_up&&d.limit_up.length)h+='<section><h2>涨停池（'+d.limit_up.length+
 '）· 按封板时间</h2>'+limitRows(d.limit_up)+'</section>';
 (d.errors||[]).forEach(function(e){h+='<p>注：'+esc(e)+'</p>';});
 document.getElementById('main').innerHTML=h||'<p>暂无数据</p>';
 var demo=d.demo?'【演示数据】':'';
-document.getElementById('meta').textContent='生成 '+d.generated+'（北京时间） · 数据时间 '+
-(d.data_time||'无')+' '+demo+' · 每'+POLL+'秒检查一次';
+document.getElementById('meta').textContent='生成 '+bj(d.generated)+'（北京时间） · 数据时间 '+
+bj(d.data_time)+'（北京时间） '+demo+' · 每'+POLL+'秒检查一次';
 document.getElementById('state').textContent='ONLINE';
 }
 function load(){
