@@ -58,6 +58,20 @@ class NetWiringTest(unittest.TestCase):
         self.assertNotIn('return nil, "network failure"', MAIN)
         self.assertIn("另 %d 个地址也失败", MAIN)
 
+    def test_beijing_is_defined_before_refresh(self):
+        # Lua 的 local 只在声明点之后可见：finish() 在 refresh 里调 beijing()，
+        # 定义在 refresh 之后就会被当成全局 nil，设备上直接闪退
+        # （crash.log: attempt to call global 'beijing'）。
+        lines = MAIN.splitlines()
+
+        def find(needle):
+            return next(i for i, line in enumerate(lines) if needle in line)
+
+        self.assertLess(find("local function beijing"),
+                        find("function Report:refresh("))
+        self.assertLess(find("local function utcEpoch"),
+                        find("local function isoSeconds"))
+
     def test_version_was_bumped(self):
         meta = (PLUGIN / "_meta.lua").read_text(encoding="utf-8")
         version = re.search(r'version = "([\d.]+)"', meta).group(1)

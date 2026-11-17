@@ -76,6 +76,35 @@ local function resolveURL(base, path)
     return (folder or base) .. path
 end
 
+-- 时间换算必须定义在 Report:refresh 之前：Lua 的 local 只在声明点之后可见，
+-- refresh 里 finish() 调用 beijing()，定义在后面就会被当成全局 nil 而闪退。
+-- Epoch seconds for a UTC civil time (days-from-civil). Does not consult the
+-- device timezone, so it is correct whatever the Kindle's local clock is set to.
+local function utcEpoch(y, mo, d, h, mi, sec)
+    y = (mo <= 2) and (y - 1) or y
+    local era = math.floor(y / 400)
+    local yoe = y - era * 400
+    local mp = (mo + 9) % 12
+    local doy = math.floor((153 * mp + 2) / 5) + d - 1
+    local doe = yoe * 365 + math.floor(yoe / 4) - math.floor(yoe / 100) + doy
+    local days = era * 146097 + doe - 719468
+    return days * 86400 + h * 3600 + mi * 60 + sec
+end
+
+-- "2026-11-02T10:09:05Z" -> epoch seconds, or nil when unparsable.
+local function isoSeconds(iso)
+    local y, mo, d, h, mi, sec =
+        tostring(iso):match("^(%d%d%d%d)-(%d%d)-(%d%d)T(%d%d):(%d%d):(%d%d)Z$")
+    if not y then return nil end
+    return utcEpoch(tonumber(y), tonumber(mo), tonumber(d),
+                    tonumber(h), tonumber(mi), tonumber(sec))
+end
+
+-- Format an epoch as Beijing wall-clock time.
+local function beijing(epoch, fmt)
+    return os.date("!" .. fmt, epoch + BEIJING_OFFSET)
+end
+
 function Report:init()
     self.store = LuaSettings:open(DataStorage:getSettingsDir() .. "/octopus004.lua")
     self.settings = self.store.data or {}
@@ -728,32 +757,8 @@ function Report:advance()
     UIManager:setDirty(self.dashboard, "full")
 end
 
--- Epoch seconds for a UTC civil time (days-from-civil). Does not consult the
--- device timezone, so it is correct whatever the Kindle's local clock is set to.
-local function utcEpoch(y, mo, d, h, mi, sec)
-    y = (mo <= 2) and (y - 1) or y
-    local era = math.floor(y / 400)
-    local yoe = y - era * 400
-    local mp = (mo + 9) % 12
-    local doy = math.floor((153 * mp + 2) / 5) + d - 1
-    local doe = yoe * 365 + math.floor(yoe / 4) - math.floor(yoe / 100) + doy
-    local days = era * 146097 + doe - 719468
-    return days * 86400 + h * 3600 + mi * 60 + sec
-end
-
--- "2026-11-02T10:09:05Z" -> epoch seconds, or nil when unparsable.
-local function isoSeconds(iso)
-    local y, mo, d, h, mi, sec =
-        tostring(iso):match("^(%d%d%d%d)-(%d%d)-(%d%d)T(%d%d):(%d%d):(%d%d)Z$")
-    if not y then return nil end
-    return utcEpoch(tonumber(y), tonumber(mo), tonumber(d),
-                    tonumber(h), tonumber(mi), tonumber(sec))
-end
-
--- Format an epoch as Beijing wall-clock time.
-local function beijing(epoch, fmt)
-    return os.date("!" .. fmt, epoch + BEIJING_OFFSET)
-end
+-- utcEpoch / isoSeconds / beijing 定义在文件顶部（resolveURL 之后）：
+-- refresh 里 finish() 要调 beijing，local 必须先声明。不要把它们搬回这里。
 
 -- 逐个地址单独试一遍（短超时），把结果摊在屏幕上：设备链路上到底哪个地址可用。
 function Report:diagnose()
