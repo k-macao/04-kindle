@@ -49,6 +49,10 @@ local DOC_KINDS = {
              data_time = "news_data_time", data_time_kind = "news_data_time_kind",
              label = "NEWS" },
 }
+-- 同花顺行情面板是第三种来源：清单 site/stocks.json（generated 做签名）+ 纯文本
+-- site/stocks.txt。不是 EPUB，所以不走 refreshDoc 的 PK 校验；每 60 秒只拉几百
+-- 字节的清单，generated 变了才重下文本。缓存文件与报告文本分开，互不覆盖。
+local STOCKS_CACHE = "octopus004-stocks.txt"
 local INTERVAL = 60
 local WIFI_WAIT = 90
 -- 设备上显示的时间统一为北京时间（UTC+8），与设备本地时区无关。
@@ -80,10 +84,12 @@ function Report:init()
     if self.settings.display == nil then self.settings.display = "text" end
     if self.settings.doc_url == nil then self.settings.doc_url = "" end
     if self.settings.news_url == nil then self.settings.news_url = "" end
+    if self.settings.stocks_url == nil then self.settings.stocks_url = "" end
     if self.settings.enabled == nil then self.settings.enabled = false end
     self.wake = Wake.new({ Device = Device, UIManager = UIManager, logger = logger })
     self.refresh_task = function() self:refresh(false) end
     self.cache_path = dataDir() .. "/octopus004-report.txt"
+    self.stocks_cache_path = dataDir() .. "/" .. STOCKS_CACHE
     self.image_dir = dataDir() .. "/octopus004-pages"
     self.page_index = 1
     self.page_count = tonumber(self.settings.image_count) or 0
@@ -101,6 +107,7 @@ function Report:note(text) UIManager:show(InfoMessage:new{ text = text, timeout 
 function Report:isImageMode() return self.settings.display == "image" end
 function Report:isDocMode() return self.settings.display == "doc" end
 function Report:isNewsMode() return self.settings.display == "news" end
+function Report:isStocksMode() return self.settings.display == "stocks" end
 -- 两种 EPUB 来源共用同一套「下载书 → 交给阅读器」的流程。
 function Report:isBookMode() return self:isDocMode() or self:isNewsMode() end
 function Report:docKind() return self:isNewsMode() and "news" or "doc" end
@@ -110,11 +117,20 @@ local function displayName(mode)
     if mode == "image" then return "page images" end
     if mode == "doc" then return "epub" end
     if mode == "news" then return "news" end
+    if mode == "stocks" then return "stocks" end
     return "text"
 end
 
 function Report:readCache()
     local f = io.open(self.cache_path, "rb")
+    if not f then return nil end
+    local s = f:read(MAX_BYTES + 1); f:close()
+    if not s or #s == 0 or #s > MAX_BYTES then return nil end
+    return s
+end
+
+function Report:readStocksCache()
+    local f = io.open(self.stocks_cache_path, "rb")
     if not f then return nil end
     local s = f:read(MAX_BYTES + 1); f:close()
     if not s or #s == 0 or #s > MAX_BYTES then return nil end
@@ -168,6 +184,9 @@ function Report:start()
         -- the reader shows the document; this widget stays out of the way
     elseif self:isImageMode() then
         if not self.dashboard and self:hasPage(self.page_index) then self:showPage(false) end
+    elseif self:isStocksMode() then
+        local cached = self:readStocksCache()
+        if cached and not self.dashboard then self:showText(cached, false) end
     else
         local cached = self:readCache()
         if cached and not self.dashboard then self:showText(cached, false) end
@@ -410,6 +429,58 @@ function Report:fetchDocManifest(spec)
     return decoded
 end
 
+-- 行情面板清单：site/stocks.json，字段与 EPUB 清单同形（generated 签名 + doc
+-- 相对路径 + data_time），所以校验规则共用；只是错误提示要说人话。
+function Report:fetchStocksManifest()
+    local urls = self:urlCandidates(self.settings.stocks_url or "")
+    if #urls == 0 then return nil, "Set the stocks manifest URL first" end
+    local body, err, used = self:httpGetAny(urls, MANIFEST_MAX)
+    if not body then return nil, err end
+    local decoded
+    local ok = pcall(function() decoded = require("rapidjson").decode(body) end)
+    if not ok or type(decoded) ~= "table" then return nil, "Invalid manifest JSON" end
+    if type(decoded.doc) ~= "string" or decoded.doc == "" then return nil, "Manifest has no doc entry" end
+    if type(decoded.generated) ~= "string" or decoded.generated == "" then
+        return nil, "Manifest has no generated stamp"
+    end
+    decoded.base = used
+    return decoded
+end
+
+function Report:refreshStocks()
+    local manifest, err = self:fetchStocksManifest()
+    if not manifest then error(err) end
+    local sig = manifest.generated
+    if type(manifest.data_time) == "string" then self.settings.stocks_data_time = manifest.data_time end
+    if type(manifest.data_time_kind) == "string" then
+        self.settings.stocks_data_time_kind = manifest.data_time_kind
+    end
+    self.last_check = os.time()
+    local cached = self:readStocksCache()
+    if sig == tostring(self.settings.stocks_sig or "") and cached then
+        self:save()
+        if not self.box then self:showText(cached, false)
+        else self:advance() end
+        return
+    end
+    local url = resolveURL(manifest.base or self.settings.stocks_url, manifest.doc)
+    if not url:match("^https://") then error("Document URL is not HTTPS") end
+    local body, download_error = self:httpGetAny(self:urlCandidates(url), MAX_BYTES)
+    if not body then error(download_error) end
+    if #body == 0 then error("Downloaded panel is empty") end
+    local temp = self.stocks_cache_path .. ".tmp"
+    local f = io.open(temp, "wb")
+    if not f then error("Cannot save panel cache") end
+    local wrote = f:write(body)
+    local closed = f:close()
+    if not wrote or not closed or not os.rename(temp, self.stocks_cache_path) then
+        os.remove(temp); error("Cannot save panel cache")
+    end
+    self.settings.stocks_sig = sig
+    self:save()
+    self:showText(body, false)
+end
+
 function Report:refreshText()
     local body, err = self:fetchText()
     if not body then error(err) end
@@ -489,6 +560,7 @@ function Report:refresh(interactive)
         local success, err = pcall(function()
             if self:isBookMode() then self:refreshDoc(self:docKind())
             elseif self:isImageMode() then self:refreshImage()
+            elseif self:isStocksMode() then self:refreshStocks()
             else self:refreshText() end
         end)
         if success then finish(nil) else finish(tostring(err)) end
@@ -686,9 +758,11 @@ end
 -- 逐个地址单独试一遍（短超时），把结果摊在屏幕上：设备链路上到底哪个地址可用。
 function Report:diagnose()
     local spec = self:docSpec()
-    local urls = self:urlCandidates(self.settings[spec.manifest] or "")
+    local manifest_url = self.settings[spec.manifest] or ""
+    if self:isStocksMode() then manifest_url = self.settings.stocks_url or "" end
+    local urls = self:urlCandidates(manifest_url)
     if #urls == 0 then self:note("Fill the manifest URL first"); return end
-    local lines = { "Manifest: " .. tostring(self.settings[spec.manifest]) }
+    local lines = { "Manifest: " .. tostring(manifest_url) }
     for _, url in ipairs(urls) do
         local started = os.time()
         local body, err = self:httpGet(Net.bust(url), MANIFEST_MAX, nil, 10)
@@ -710,6 +784,8 @@ function Report:status()
     local stamp_setting, kind_setting
     if self:isBookMode() then
         stamp_setting, kind_setting = self.settings[spec.data_time], self.settings[spec.data_time_kind]
+    elseif self:isStocksMode() then
+        stamp_setting, kind_setting = self.settings.stocks_data_time, self.settings.stocks_data_time_kind
     else
         stamp_setting, kind_setting = self.settings.data_time, self.settings.data_time_kind
     end
@@ -741,6 +817,8 @@ function Report:status()
     local source
     if self:isBookMode() then
         source = (self:isNewsMode() and "news: " or "epub: ") .. tostring(self.settings[spec.manifest])
+    elseif self:isStocksMode() then
+        source = "stocks: " .. tostring(self.settings.stocks_url)
     elseif self:isImageMode() then
         source = "images: " .. tostring(self.settings.image_url)
     else
@@ -778,6 +856,8 @@ local URL_KINDS = {
               title = "004 EPUB manifest HTTPS URL" },
     news  = { key = "news_url",  clear = "news_sig",
               title = "004 daily news manifest HTTPS URL" },
+    stocks = { key = "stocks_url", clear = "stocks_sig",
+              title = "THS stocks manifest HTTPS URL" },
 }
 
 function Report:setURL(kind)
@@ -819,6 +899,9 @@ function Report:setDisplay(mode)
     end
     if self:isBookMode() then
         self:refresh(true)
+    elseif self:isStocksMode() then
+        local cached = self:readStocksCache()
+        if cached then self:showText(cached, false) end
     elseif not self:isImageMode() then
         local cached = self:readCache()
         if cached then self:showText(cached, false) end
@@ -838,6 +921,7 @@ function Report:chooseDisplay()
         { { text = "Text report", callback = function() pick("text") end } },
         { { text = "EPUB (styled)", callback = function() pick("doc") end } },
         { { text = "News subscription", callback = function() pick("news") end } },
+        { { text = "Stocks panel", callback = function() pick("stocks") end } },
         { { text = "Page images", callback = function() pick("image") end } },
     } }
     UIManager:show(dialog)
@@ -871,6 +955,10 @@ function Report:addToMainMenu(items)
               return "News manifest URL: " .. (self.settings.news_url ~= "" and self.settings.news_url or "(not set)")
           end,
           callback = function() self:setURL("news") end },
+        { text_func = function()
+              return "Stocks manifest URL: " .. (self.settings.stocks_url ~= "" and self.settings.stocks_url or "(not set)")
+          end,
+          callback = function() self:setURL("stocks") end },
         { text_func = function()
               return "Image manifest URL: " .. (self.settings.image_url ~= "" and self.settings.image_url or "(not set)")
           end,

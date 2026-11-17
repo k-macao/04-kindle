@@ -134,10 +134,23 @@ Feedly / Reeder。插件那套「News subscription」读的是 `site/news.json`�
 想继续用就手动跑 `build_news.py` 并自己提交那三个文件。详见
 [docs/kindle-news.md](docs/kindle-news.md)。
 
+## 同花顺行情面板（hithink-finance）
+
+从同花顺官方 GitHub 仓库 [Hithink-Tech-Org/Financial-API](https://github.com/Hithink-Tech-Org/Financial-API)
+的金融数据服务抓 A 股行情快照（宽基指数 + 约 40 只自选股 + 当日涨停池），排成
+`site/stocks.json`（清单+数据）、`site/stocks.txt`（Kindle 纯文本面板）、
+`site/stocks.html`（网页面板）。统一 API Key 放在仓库 Actions Secret
+**`THS_API_KEY`** / **`THS_KEY`**（官网 <https://fuyao.aicubes.cn/admin/> 创建），
+不写入仓库。GitHub Actions 定时最短 5 分钟，所以工作流在 A 股交易时段
+（北京时间 09:00–15:55）每 5 分钟抓一轮；Kindle 插件与网页面板每 60 秒检查
+一次清单，`generated` 变了才刷新。本地要真正的 60 秒一轮：
+`HITHINK_FINANCE_API_KEY=… python tools/fetch_stocks.py --loop 60 --build`。
+自选清单在 `tools/stock_watchlist.py`，详见 [docs/kindle-stocks.md](docs/kindle-stocks.md)。
+
 ## 2. Kindle 安装与使用
 
 1. 已越狱的 Kindle 安装并启动 KOReader。将 `octopus004.koplugin` 文件夹完整复制到 `koreader/plugins/`，重启 KOReader。部署方式见 [docs/kindle-ssh.md](docs/kindle-ssh.md)：USB 直连用 `tools/kindle-usb.sh`（Windows 用 `tools/kindle-usb.ps1`；`--install` / `-Install` 直接拷入，无需 SSH），联网用 `tools/deploy-plugin.sh`（KOReader 自带 SSH 服务，默认端口 2222，无需另装 usbnet）。
-2. Tools → **004 Report** → 按显示模式填地址：**Report URL**（纯文本）、**EPUB manifest URL**（字模式）、**News manifest URL**（每日新闻）或 **Image manifest URL**（截图），再用 **Display mode** 选 text / epub / news / page images。选择 **Show report** 开始。
+2. Tools → **004 Report** → 按显示模式填地址：**Report URL**（纯文本）、**EPUB manifest URL**（字模式）、**News manifest URL**（每日新闻）、**Stocks manifest URL**（同花顺行情面板）或 **Image manifest URL**（截图），再用 **Display mode** 选 text / epub / news / stocks / page images。选择 **Show report** 开始。
 3. 每 60 秒检查一次报告并翻到下一页，末页回到首页。点击屏幕可手动翻页、立即刷新、查看状态或停止。停止会恢复原有屏保设置。
 4. 有硬件唤醒时尝试使用 KOReader 唤醒管理器；否则保持设备唤醒并使用软件计时。是否支持取决于 Oasis 1 的 KOReader 构建。Wi-Fi 保持开启；一分钟联网和翻页会增加耗电。
 
