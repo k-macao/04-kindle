@@ -81,7 +81,8 @@ TRADING_DAY_MINUTES = 24 * 60
 def total_volume(payload):
     """整份快照的成交量合计（None 当 0）。全 0 基本就是「今天还没成交」。"""
     total = 0.0
-    for row in (payload.get("indices") or []) + (payload.get("stocks") or []):
+    hk = (payload.get("hk") or {}).get("rows") or []
+    for row in (payload.get("indices") or []) + (payload.get("stocks") or []) + hk:
         volume = row.get("volume")
         if isinstance(volume, (int, float)):
             total += volume
@@ -91,7 +92,8 @@ def total_volume(payload):
 def priced_count(payload):
     """有真实最新价的条目数（0 与 None 都不算）。"""
     count = 0
-    for row in (payload.get("indices") or []) + (payload.get("stocks") or []):
+    hk = (payload.get("hk") or {}).get("rows") or []
+    for row in (payload.get("indices") or []) + (payload.get("stocks") or []) + hk:
         value = row.get("last_price")
         if isinstance(value, (int, float)) and value != 0:
             count += 1
@@ -105,9 +107,13 @@ def empty_snapshot(payload):
     停牌股本来就没有成交。两个条件同时成立才当空壳。
     """
     rows = len(payload.get("indices") or []) + len(payload.get("stocks") or [])
+    rows += len(((payload.get("hk") or {}).get("rows")) or [])
     if rows == 0:
         return True
     no_volume = total_volume(payload) == 0
+    # 全市场概览取到了成交额 → 这一轮显然不是空壳
+    if ((payload.get("market") or {}).get("turnover") or 0) > 0:
+        return False
     all_empty = priced_count(payload) == 0
     # 指数会带着「前收盘」那个点位（所以 priced_count > 0），个股却全是 null；
     # 两个条件任一成立，再加上「成交量全 0」，就是空壳。
@@ -269,14 +275,90 @@ def fmt_seal(value):
     return f"封单{fmt_turnover(value)}"
 
 
+def _sector_codes():
+    """清单里所有板块代码（含 000819.SH 这种不是 .TI 的行业指数）。"""
+    global _SECTOR_CODES
+    if _SECTOR_CODES is None:
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        try:
+            import market_watchlist
+        except ImportError:                        # 只有单文件被拷走时才用后缀兜底
+            _SECTOR_CODES = frozenset()
+        else:
+            _SECTOR_CODES = frozenset(code for code, _ in market_watchlist.SECTORS)
+    return _SECTOR_CODES
+
+
+_SECTOR_CODES = None
+
+
+def is_sector_row(row):
+    """这一行算「板块」还是「宽基指数」。
+
+    同花顺行业指数大多是 ``881xxx/884xxx.TI``，但「有色金属」是 ``000819.SH``
+    ——只按后缀判会把它当成宽基指数。所以先查清单里的板块代码。
+    """
+    if row.get("is_sector"):
+        return True
+    code = str(row.get("thscode") or "")
+    if code in _sector_codes():
+        return True
+    return code.endswith(".TI")
+
+
+def _display_width(text):
+    """终端显示宽度：CJK 算 2 列，其余 1 列。"""
+    width = 0
+    for char in text or "":
+        width += 2 if ord(char) > 0x2E80 else 1
+    return width
+
+
+def _pad_display(text, width):
+    return text + " " * max(0, width - _display_width(text))
+
+
+def _short_name(name, limit=12):
+    """按显示宽度截断长名字，超出才加省略号。
+
+    同花顺有「汽车服务及其他」「油气开采及服务」这类 7 字名，两个都被截成
+    「汽车服务…」「油气开采…」时会撞名——盘面上分不清是哪个板块。
+    """
+    if _display_width(name) <= limit:
+        return name
+    out = ""
+    for char in name:
+        if _display_width(out + char + "…") > limit:
+            break
+        out += char
+    return out + "…"
+
+
+def index_line(row, compact=False):
+    """一行指数：名字 + 最新 + 涨跌幅 +（涨跌额/成交额）。compact 用于分栏。"""
+    name = row.get("name") or row.get("thscode") or ""
+    if row_is_empty(row):
+        return f"{name} 未成交"
+    ratio = fmt_ratio(row.get("price_change_ratio_pct"))
+    if compact:
+        name = _short_name(name, 14)
+        return f"{name} {fmt_pos(row.get('last_price'))} {ratio}"
+    return (f"{name} {fmt_pos(row.get('last_price'))} {ratio} "
+            f"{fmt_change(row.get('price_change'))}"
+            f" · 额{fmt_turnover(row.get('turnover'))}").rstrip()
+
+
 def data_hash(payload):
     """行情指纹：价格/涨跌幅/条数/历史收盘变了才变，供工作流跳过无变化的提交。"""
     history = payload.get("history") or {}
     core = {
         "indices": [(r.get("thscode"), r.get("last_price"),
                      r.get("price_change_ratio_pct")) for r in payload.get("indices") or []],
-        "stocks": [(r.get("thscode"), r.get("last_price"),
-                    r.get("price_change_ratio_pct")) for r in payload.get("stocks") or []],
+        # 全市场只留统计口径：5584 只逐只价格进 hash 会让收盘后每轮都变，反而刷空提交
+        "market": [(payload.get("market") or {}).get(k) for k in
+                   ("count", "up", "down", "limit_up", "limit_down", "turnover")],
+        "hk": [(r.get("thscode"), r.get("last_price"), r.get("turnover"))
+               for r in (payload.get("hk") or {}).get("rows") or []],
         "limit_up": [(r.get("thscode"), r.get("last_price")) for r in payload.get("limit_up") or []],
         "history": {code: [pair[1] for pair in bars]
                     for code, bars in sorted(history.items())},
@@ -306,19 +388,51 @@ def manifest(payload, generated):
         "data_hash": data_hash(payload),
         "demo": bool(payload.get("demo")),
         "counts": {
-            "indices": len(payload.get("indices") or []),
-            "stocks": len(payload.get("stocks") or []),
+            "indices": len(core_indices(payload)),
+            "sectors": len(sector_indices(payload)),
+            "market": (payload.get("market") or {}).get("count") or 0,
+            "hk": len(((payload.get("hk") or {}).get("rows")) or []),
             "limit_up": len(payload.get("limit_up") or []),
         },
         "indices": payload.get("indices") or [],
-        "stocks": payload.get("stocks") or [],
+        "market": payload.get("market"),
+        "hk": _hk_manifest(payload),
         "limit_up": payload.get("limit_up") or [],
         "history": payload.get("history") or {},
         "errors": payload.get("errors") or [],
     }
 
 
+def core_indices(payload):
+    """宽基指数（不含行业/概念板块）。"""
+    return [r for r in payload.get("indices") or [] if not is_sector_row(r)]
+
+
+def sector_indices(payload):
+    return [r for r in payload.get("indices") or [] if is_sector_row(r)]
+
+
+def _hk_manifest(payload):
+    """港股那块写进清单：带上 data_time（网页/插件要显示行情时间）。"""
+    hk = payload.get("hk")
+    if not isinstance(hk, dict):
+        return None
+    stamp = hk.get("data_timestamp")
+    data_time = None
+    if isinstance(stamp, (int, float)):
+        data_time = datetime.fromtimestamp(
+            stamp / 1000, tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    out = dict(hk)
+    out["data_timestamp"] = stamp if isinstance(stamp, (int, float)) else None
+    out["data_time"] = data_time
+    return out
+
+
 def render_txt(payload, generated):
+    """Kindle 纯文本版：一屏卡片式监视器（市场概览 → 指数 → 板块 → 港股）。
+
+    不再有「自选股」：面板看的是全市场（指数/板块/涨跌家数/量价）+ 港股。
+    """
     lines = [TITLE]
     demo = "【演示数据】" if payload.get("demo") else ""
     lines.append(f"生成 {generated} 北京时间 · {status_line(payload)}{demo}")
@@ -327,37 +441,73 @@ def render_txt(payload, generated):
         lines.append("注：这一版快照没有成交数据（开盘前/接口给空壳），下面显示 -- 与「未成交」")
     lines.append("")
 
-    indices = payload.get("indices") or []
-    lines.append(f"【指数】{len(indices)}")
-    for row in indices:
-        name = row.get("name") or row.get("thscode") or ""
-        if row_is_empty(row):
-            lines.append(f"{name} 未成交")
-            continue
-        lines.append(f"{name} {fmt_pos(row.get('last_price'))} "
-                     f"{fmt_ratio(row.get('price_change_ratio_pct'))} "
-                     f"{fmt_change(row.get('price_change'))}".rstrip())
-    lines.append("")
+    market = payload.get("market") or {}
+    if market:
+        lines.append(f"【市场概览】全 A · {market.get('count', 0)} 只")
+        lines.append(f"  涨 {market.get('up', 0)} · 跌 {market.get('down', 0)}"
+                     f" · 平 {market.get('flat', 0)} · 无价 {market.get('no_price', 0)}"
+                     f" · 涨停 {market.get('limit_up', 0)}"
+                     f" · 跌停 {market.get('limit_down', 0)}")
+        avg = market.get("avg_ratio")
+        lines.append(f"  平均涨跌 {fmt_ratio(avg) if avg is not None else '--'}"
+                     f" · 成交额 {fmt_turnover(market.get('turnover'))}"
+                     f" · 量 {fmt_volume(market.get('volume'))}")
+        gainers = market.get("top_gainers") or []
+        losers = market.get("top_losers") or []
+        if gainers:
+            lines.append("  涨前列 " + " ".join(
+                f"{g.get('name') or g.get('thscode')}{fmt_ratio(g.get('ratio'))}"
+                for g in gainers[:5]))
+        if losers:
+            lines.append("  跌前列 " + " ".join(
+                f"{g.get('name') or g.get('thscode')}{fmt_ratio(g.get('ratio'))}"
+                for g in losers[:5]))
+        lines.append("")
 
-    stocks = payload.get("stocks") or []
-    lines.append(f"【自选股】{len(stocks)} · 按涨跌幅排序")
-    for row in stocks:
-        name = row.get("name") or row.get("thscode") or ""
-        if row_is_empty(row):
-            lines.append(f"{name} 未成交（开盘前或接口未返回，下一轮再看）")
-            continue
-        lines.append(f"{name} {fmt_pos(row.get('last_price'))} "
-                     f"{fmt_ratio(row.get('price_change_ratio_pct'))} "
-                     f"{fmt_change(row.get('price_change'))}".rstrip())
-        # 成交量为 0 时别写「成交 0.00 手」：直接说「未成交」，免得看着像真成交了。
-        traded = isinstance(row.get("volume"), (int, float)) and row.get("volume") != 0
-        volume_text = (f"成交{fmt_volume(row.get('volume'))} "
-                       f"成交额{fmt_turnover(row.get('turnover'))}"
-                       if traded else "未成交")
-        lines.append(f"  开{fmt_pos(row.get('open_price'))} "
-                     f"高{fmt_pos(row.get('high_price'))} "
-                     f"低{fmt_pos(row.get('low_price'))} {volume_text}")
-    lines.append("")
+    indices = payload.get("indices") or []
+    broad = [r for r in indices if not is_sector_row(r)]
+    sectors = sorted([r for r in indices if is_sector_row(r)],
+                     key=lambda r: -((r.get("price_change_ratio_pct") or -999)))
+
+    if broad:
+        lines.append(f"【指数】{len(broad)}")
+        for row in broad:
+            lines.append(index_line(row))
+        lines.append("")
+
+    if sectors:
+        up = sum(1 for r in sectors if (r.get("price_change_ratio_pct") or 0) > 0)
+        lines.append(f"【板块】{len(sectors)} · 涨 {up} 跌 {len(sectors) - up} · 按涨跌幅")
+        cells = [index_line(r, compact=True) for r in sectors]
+        col_w = max(_display_width(c) for c in cells) + 3
+        for i in range(0, len(cells), 2):
+            right = cells[i + 1] if i + 1 < len(cells) else ""
+            lines.append((_pad_display(cells[i], col_w) + right).rstrip())
+        lines.append("")
+
+    hk = payload.get("hk") or {}
+    hk_rows = hk.get("rows") or []
+    if hk_rows:
+        stamp = hk.get("data_timestamp")
+        when = beijing_text(stamp) if isinstance(stamp, (int, float)) else "无"
+        lines.append(f"【港股】{len(hk_rows)} 个 · 行情 {when} · 腾讯公开接口")
+        ordered = ([r for r in hk_rows if r.get("is_index")]
+                   + [r for r in hk_rows if not r.get("is_index")])
+        for row in ordered:
+            name = row.get("name") or row.get("thscode") or ""
+            if row_is_empty(row):
+                lines.append(f"{name} 未成交")
+                continue
+            traded = isinstance(row.get("volume"), (int, float)) and row.get("volume") != 0
+            # 港股指数腾讯只给点位、不给成交额（给了也是成分合计，口径不同），
+            # 所以指数行不显示成交额，别让「0.18亿」误导。
+            tail = (f"额{fmt_turnover(row.get('turnover'))}"
+                    if traded and row.get("turnover")
+                    and not row.get("is_index") else "")
+            lines.append((f"{name} {fmt_pos(row.get('last_price'))} "
+                          f"{fmt_ratio(row.get('price_change_ratio_pct'))} "
+                          f"{fmt_change(row.get('price_change'))} {tail}").rstrip())
+        lines.append("")
 
     limit_up = payload.get("limit_up") or []
     if limit_up:
@@ -397,8 +547,31 @@ h1{font-size:26px;margin:0 0 4px}
 .stale-hint{display:none;border:2px dashed #000;padding:6px 10px;margin:10px 0;font-size:13px}
 .muted{font-size:16px;font-weight:normal;color:#555}
 section h2{font-size:19px;border-bottom:2px solid #000;padding-bottom:4px;margin:22px 0 10px}
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
-.cards.index{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.cards.index{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.cards.sector{grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:6px}
+.cards.hk{grid-template-columns:repeat(auto-fill,minmax(158px,1fr))}
+.breadth{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));
+gap:1px;background:#000;border:2px solid #000;margin:10px 0}
+.breadth .cell{background:#fff;padding:6px 10px}
+.breadth .k{font-size:11.5px;color:#555}
+.breadth .v{font-size:21px;font-weight:bold;line-height:1.15}
+.breadth .s{font-size:11.5px;color:#333}
+.bar{display:flex;height:10px;border:1px solid #000;margin-top:5px}
+.bar .u{background:#000}
+.bar .d{background:#bbb}
+.bar .f{background:#fff}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
+.two .k{font-size:11.5px;color:#555;border-bottom:1px solid #000;padding-bottom:2px}
+.rank{display:flex;justify-content:space-between;font-size:13px;padding:2px 0;
+border-bottom:1px dotted #bbb}
+.card.sector .head{padding:5px 7px}
+.card.sector .name{font-size:13px}
+.card.sector .body{padding:5px 7px}
+.card.sector .price{font-size:17px}
+.card.sector .ratio{font-size:12.5px;margin-bottom:0}
+.card.sector .bar2{height:4px;background:#e6e6e6;margin-top:4px;border:1px solid #999}
+.card.sector .bar2 i{display:block;height:100%;background:#000}
 .card{border:2px solid #000;padding:0;background:#fff}
 .card .head{display:flex;justify-content:space-between;align-items:baseline;
 padding:8px 12px;border-bottom:1px solid #000;background:#f2f2f2}
@@ -427,7 +600,7 @@ footer{border-top:1px solid #000;margin-top:16px;padding-top:8px;font-size:13px;
 面板上的数字可能不是最新的。工作流已是 15 分钟一轮 + 体检补跑（refresh-stocks-watchdog.yml），
 仍不更新就看 GitHub Actions 的运行记录，详见 docs/kindle-stocks.md。</div>
 <main id="main"></main>
-<footer>__DISCLAIMER__ · 数据来源：同花顺金融数据服务（hithink-finance）·
+<footer>__DISCLAIMER__ · A 股/指数/板块：同花顺金融数据服务（hithink-finance）· 港股：腾讯公开行情接口 ·
 面板每 __POLL_TEXT__ 拉一次 stocks.json，generated 变了才重绘。</footer>
 </div>
 <noscript><p>需要 JavaScript 才能每分钟刷新；Kindle 请用 stocks.txt 纯文本版或 stocks.epub 卡片版。</p></noscript>
@@ -554,6 +727,57 @@ esc(r.name||r.thscode)+'</span><span class="code">'+esc(r.thscode||'')+
 '</div><div class="ratio '+cls(r.price_change_ratio_pct)+'">'+
 (empty?'':ratio(r.price_change_ratio_pct)+' '+change(r.price_change))+'</div>'+
 kv+sparkHtml+'</div></div>';}
+function breadthBar(m){
+var total=(m.up||0)+(m.down||0)+(m.flat||0);
+if(!total)return '';
+function w(n){return (100*(n||0)/total).toFixed(2)+'%';}
+return '<div class="bar"><span class="u" style="width:'+w(m.up)+'"></span>'+
+'<span class="f" style="width:'+w(m.flat)+'"></span>'+
+'<span class="d" style="width:'+w(m.down)+'"></span></div>';}
+function breadth(m){
+if(!m)return '';
+var cells=[
+['上涨 / 下跌','<span class="up">'+(m.up||0)+'</span> / <span class="down">'+(m.down||0)+'</span>',
+'共 '+(m.count||0)+' 只 · 平盘 '+(m.flat||0)],
+['涨停 / 跌停','<span class="up">'+(m.limit_up||0)+'</span> / <span class="down">'+(m.limit_down||0)+'</span>',
+'无价 '+(m.no_price||0)],
+['平均涨跌',ratio(m.avg_ratio),'全 A 算术平均'],
+['成交额',money(m.turnover),'量 '+vol(m.volume)]];
+var h='<div class="breadth">';
+cells.forEach(function(c){h+='<div class="cell"><div class="k">'+c[0]+
+'</div><div class="v">'+c[1]+'</div><div class="s">'+c[2]+'</div></div>';});
+h+='</div>'+breadthBar(m);
+var up=(m.top_gainers||[]),down=(m.top_losers||[]);
+if(up.length||down.length){
+h+='<div class="two"><div><div class="k">涨幅前五</div>';
+up.slice(0,5).forEach(function(g){h+='<div class="rank"><span>'+
+esc(g.name||g.thscode)+'</span><b class="up">'+ratio(g.ratio)+'</b></div>';});
+h+='</div><div><div class="k">跌幅前五</div>';
+down.slice(0,5).forEach(function(g){h+='<div class="rank"><span>'+
+esc(g.name||g.thscode)+'</span><b class="down">'+ratio(g.ratio)+'</b></div>';});
+h+='</div></div>';}
+return h;}
+function sectorCard(r){
+var empty=rowEmpty(r),rc=r.price_change_ratio_pct||0;
+var w=Math.min(100,Math.abs(rc)*10).toFixed(0);
+return '<div class="card sector"><div class="head"><span class="name">'+
+esc(r.name||r.thscode)+'</span></div><div class="body">'+
+'<div class="price '+(empty?'muted':cls(rc))+'">'+
+(empty?'未成交':num(r.last_price))+'</div>'+
+'<div class="ratio '+cls(rc)+'">'+(empty?'':ratio(r.price_change_ratio_pct))+'</div>'+
+'<div class="s">额 '+money(r.turnover)+'</div>'+
+'<div class="bar2"><i style="width:'+w+'%"></i></div></div></div>';}
+function hkCard(r){
+var empty=rowEmpty(r);
+return '<div class="card"><div class="head"><span class="name">'+
+esc(r.name||r.thscode)+'</span><span class="code">'+
+esc(String(r.thscode||'').replace(/^hk/,''))+'</span></div><div class="body">'+
+'<div class="price '+(empty?'muted':cls(r.price_change_ratio_pct))+'">'+
+(empty?'未成交':num(r.last_price))+'</div>'+
+'<div class="ratio '+cls(r.price_change_ratio_pct)+'">'+
+(empty?'':ratio(r.price_change_ratio_pct)+' '+change(r.price_change))+'</div>'+
+'<table class="kv"><tr><td>成交额</td><td>'+money(r.turnover)+'</td></tr>'+
+'<tr><td>成交量</td><td>'+vol(r.volume)+'</td></tr></table></div></div>';}
 function limitRows(rows){
 var h='<table class="data"><tr><th>名称</th><th>最新</th><th>涨跌幅</th><th>封板</th>'+
 '<th>原因</th><th>连板</th><th>封单额</th></tr>';
@@ -565,20 +789,35 @@ rows.forEach(function(r){h+='<tr><td>'+esc(r.name||r.thscode)+'</td>'+
 return h+'</table>';}
 function render(d){
 var h='';
-if(d.indices&&d.indices.length){h+='<section><h2>指数（'+d.indices.length+'）</h2><div class="cards index">';
-d.indices.forEach(function(r){h+=card(r,d,true);});h+='</div></section>';}
-if(d.stocks&&d.stocks.length){h+='<section><h2>自选股（'+d.stocks.length+
-'）· 按涨跌幅排序</h2><div class="cards">';
-d.stocks.forEach(function(r){h+=card(r,d,false);});h+='</div></section>';}
+// 一屏监视：市场概览 → 宽基 → 板块 → 港股 → 涨停池
+if(d.market){h+='<section><h2>市场概览 · 全 A</h2>'+breadth(d.market)+'</section>';}
+var idx=(d.indices||[]),broad=[],sectors=[];
+idx.forEach(function(r){
+if(r.is_sector||/\.TI$/.test(String(r.thscode||'')))sectors.push(r);else broad.push(r);});
+if(broad.length){h+='<section><h2>指数（'+broad.length+'）</h2><div class="cards index">';
+broad.forEach(function(r){h+=card(r,d,true);});h+='</div></section>';}
+if(sectors.length){
+var sorted=sectors.slice().sort(function(a,b){
+return (b.price_change_ratio_pct||-999)-(a.price_change_ratio_pct||-999);});
+h+='<section><h2>板块（'+sectors.length+'）· 按涨跌幅</h2><div class="cards sector">';
+sorted.forEach(function(r){h+=sectorCard(r);});h+='</div></section>';}
+var hkRows=((d.hk||{}).rows||[]);
+if(hkRows.length){
+var hi=[],hs=[];
+hkRows.forEach(function(r){if(r.is_index)hi.push(r);else hs.push(r);});
+h+='<section><h2>港股（'+hkRows.length+'）<span class="muted"> 行情 '+
+bj((d.hk||{}).data_time)+'</span></h2><div class="cards hk">';
+hi.concat(hs).forEach(function(r){h+=hkCard(r);});h+='</div></section>';}
 if(d.limit_up&&d.limit_up.length)h+='<section><h2>涨停池（'+d.limit_up.length+
 '）· 按封板时间</h2>'+limitRows(d.limit_up)+'</section>';
 (d.errors||[]).forEach(function(e){h+='<p>注：'+esc(e)+'</p>';});
 document.getElementById('main').innerHTML=h||'<p>暂无数据</p>';
 var demo=d.demo?'【演示数据】':'';
-var age=ageText(d.data_time), stale=isStale(d.data_time);
-document.getElementById('meta').textContent='生成 '+bj(d.generated)+'（北京时间） · 数据时间 '+
-bj(d.data_time)+'（北京时间）'+(age?' · '+age:'')+(sessionLabel(d.data_time)?' · '+sessionLabel(d.data_time):'')+
-(demo?' '+demo:'')+' · 每'+POLL_TEXT+'检查一次';
+var stale=isStale(d.data_time);
+document.getElementById('meta').textContent='生成 '+bj(d.generated)+'（北京时间）· 数据时间 '+
+bj(d.data_time)+(ageText(d.data_time)?' · '+ageText(d.data_time):'')+
+(sessionLabel(d.data_time)?' · '+sessionLabel(d.data_time):'')+(demo?' '+demo:'')+
+' · 每'+POLL_TEXT+'检查一次';
 var badge=document.getElementById('state');
 badge.textContent=stale?'STALE':'ONLINE';
 badge.className=stale?'badge stale':'badge';
@@ -634,7 +873,10 @@ def _epub_escape(text):
 
 
 def render_epub_xhtml(payload, generated_bj):
-    """EPUB 章节 XHTML：指数表 + 自选股卡片表 + 涨停表（crengine 友好）。"""
+    """EPUB 章节 XHTML：市场概览 + 宽基 + 板块 + 港股 + 涨停（crengine 友好）。
+
+    只用表格和标题，不用 flex/grid/SVG —— Kindle 的 crengine 不支持。
+    """
     esc = _epub_escape
     demo = "【演示数据】" if payload.get("demo") else ""
     parts = [f"<h1>{esc(TITLE)}{esc(demo)}</h1>",
@@ -644,85 +886,104 @@ def render_epub_xhtml(payload, generated_bj):
         parts.append('<p class="meta">注：这一版快照没有成交数据（开盘前/接口给空壳），'
                      '下面显示 -- 与「未成交」，下一轮再看。</p>')
 
-    indices = payload.get("indices") or []
-    if indices:
-        parts.append(f"<h2>指数（{len(indices)}）</h2>")
+    market = payload.get("market") or {}
+    if market:
+        parts.append("<h2>市场概览 · 全 A</h2>")
+        parts.append('<table class="data">'
+                     "<tr><th>上涨</th><th>下跌</th><th>平盘</th><th>涨停</th>"
+                     "<th>跌停</th><th>平均涨跌</th><th>成交额</th></tr>"
+                     f"<tr><td>{market.get('up', 0)}</td><td>{market.get('down', 0)}</td>"
+                     f"<td>{market.get('flat', 0)}</td><td>{market.get('limit_up', 0)}</td>"
+                     f"<td>{market.get('limit_down', 0)}</td>"
+                     f"<td>{esc(fmt_ratio(market.get('avg_ratio')))}</td>"
+                     f"<td>{esc(fmt_turnover(market.get('turnover')))}</td></tr></table>")
+        parts.append(f'<p class="meta">共 {market.get("count", 0)} 只 · '
+                     f'无价 {market.get("no_price", 0)} · '
+                     f'成交量 {esc(fmt_volume(market.get("volume")))}</p>')
+        gainers = (market.get("top_gainers") or [])[:5]
+        losers = (market.get("top_losers") or [])[:5]
+        if gainers or losers:
+            parts.append('<table class="data"><tr><th>涨幅前列</th><th>涨跌幅</th>'
+                         "<th>跌幅前列</th><th>涨跌幅</th></tr>")
+            for i in range(max(len(gainers), len(losers))):
+                g = gainers[i] if i < len(gainers) else {}
+                d = losers[i] if i < len(losers) else {}
+                parts.append(
+                    "<tr>"
+                    f"<td>{esc(g.get('name') or g.get('thscode') or '')}</td>"
+                    f"<td>{esc(fmt_ratio(g.get('ratio')))}</td>"
+                    f"<td>{esc(d.get('name') or d.get('thscode') or '')}</td>"
+                    f"<td>{esc(fmt_ratio(d.get('ratio')))}</td></tr>")
+            parts.append("</table>")
+
+    def index_table(rows, title):
+        parts.append(f"<h2>{esc(title)}（{len(rows)}）</h2>")
         parts.append('<table class="data"><tr><th>名称</th><th>最新</th>'
-                     "<th>涨跌幅</th><th>涨跌</th><th>开盘</th><th>最高</th>"
-                     "<th>最低</th></tr>")
-        for row in indices:
+                     "<th>涨跌幅</th><th>涨跌</th><th>成交额</th></tr>")
+        for row in rows:
             if row_is_empty(row):
-                # 开盘前的空壳：整行写「未成交」，不要一排 0.00。
                 parts.append(f"<tr><td>{esc(row.get('name') or row.get('thscode'))}</td>"
-                             '<td colspan="6">未成交</td></tr>')
+                             '<td colspan="4">未成交</td></tr>')
                 continue
             parts.append(
                 f"<tr><td>{esc(row.get('name') or row.get('thscode'))}</td>"
                 f"<td>{esc(fmt_price(row.get('last_price')))}</td>"
                 f"<td>{esc(fmt_ratio(row.get('price_change_ratio_pct')))}</td>"
                 f"<td>{esc(fmt_change(row.get('price_change')))}</td>"
-                f"<td>{esc(fmt_pos(row.get('open_price')))}</td>"
-                f"<td>{esc(fmt_pos(row.get('high_price')))}</td>"
-                f"<td>{esc(fmt_pos(row.get('low_price')))}</td></tr>")
+                f"<td>{esc(fmt_turnover(row.get('turnover')))}</td></tr>")
         parts.append("</table>")
 
-    history = payload.get("history") or {}
-    stocks = payload.get("stocks") or []
-    if stocks:
-        parts.append(f"<h2>自选股（{len(stocks)}）· 按涨跌幅排序</h2>")
-        for row in stocks:
-            closes = [pair[1] for pair in history.get(row.get("thscode") or [], [])
-                      if len(pair) > 1 and isinstance(pair[1], (int, float))]
-            trend = ""
-            if len(closes) >= 2:
-                trend = (f"近{len(closes)}日收盘 {closes[0]:,.2f} → "
-                         f"{closes[-1]:,.2f}（区间 {min(closes):,.2f}–"
-                         f"{max(closes):,.2f}）")
-            head = (f"<tr><td><b>{esc(row.get('name') or row.get('thscode'))}</b> "
-                    f"{esc(row.get('thscode') or '')}</td>")
+    indices = payload.get("indices") or []
+    broad = [r for r in indices if not is_sector_row(r)]
+    sectors = sorted([r for r in indices if is_sector_row(r)],
+                     key=lambda r: -((r.get("price_change_ratio_pct") or -999)))
+    if broad:
+        index_table(broad, "指数")
+    if sectors:
+        up = sum(1 for r in sectors if (r.get("price_change_ratio_pct") or 0) > 0)
+        index_table(sectors, f"板块 · 涨 {up} 跌 {len(sectors) - up}")
+
+    hk = payload.get("hk") or {}
+    hk_rows = hk.get("rows") or []
+    if hk_rows:
+        stamp = hk.get("data_timestamp")
+        when = beijing_text(stamp) if isinstance(stamp, (int, float)) else "无"
+        parts.append(f"<h2>港股（{len(hk_rows)}）</h2>")
+        parts.append(f'<p class="meta">行情 {esc(when)} · 腾讯公开行情接口 · 币种 HKD</p>')
+        parts.append('<table class="data"><tr><th>名称</th><th>最新</th>'
+                     "<th>涨跌幅</th><th>成交额</th></tr>")
+        ordered = ([r for r in hk_rows if r.get("is_index")]
+                   + [r for r in hk_rows if not r.get("is_index")])
+        for row in ordered:
             if row_is_empty(row):
-                parts.append('<table class="card">' + head
-                             + '<td class="big">未成交</td>'
-                             '<td>开盘前或接口未返回，下一轮再看</td></tr>'
-                             + (f"<tr><td colspan=\"3\">{esc(trend)}</td></tr>" if trend else "")
-                             + "</table>")
+                parts.append(f"<tr><td>{esc(row.get('name') or row.get('thscode'))}</td>"
+                             '<td colspan="3">未成交</td></tr>')
                 continue
-            traded = isinstance(row.get("volume"), (int, float)) and row.get("volume") != 0
-            volume_cell = (f"<td>成交 {esc(fmt_volume(row.get('volume')))}</td>"
-                           f"<td>成交额 {esc(fmt_turnover(row.get('turnover')))}</td>"
-                           if traded else '<td colspan="2">未成交</td>')
             parts.append(
-                '<table class="card">' + head
-                + f'<td class="big">{esc(fmt_price(row.get("last_price")))}</td>'
-                f"<td>{esc(fmt_ratio(row.get('price_change_ratio_pct')))} "
-                f"{esc(fmt_change(row.get('price_change')))}</td></tr>"
-                f"<tr><td>开 {esc(fmt_pos(row.get('open_price')))} · "
-                f"高 {esc(fmt_pos(row.get('high_price')))} · "
-                f"低 {esc(fmt_pos(row.get('low_price')))}</td>"
-                + volume_cell
-                + "</tr>"
-                + (f"<tr><td colspan=\"3\">{esc(trend)}</td></tr>" if trend else "")
-                + "</table>")
+                f"<tr><td>{esc(row.get('name') or row.get('thscode'))}</td>"
+                f"<td>{esc(fmt_price(row.get('last_price')))}</td>"
+                f"<td>{esc(fmt_ratio(row.get('price_change_ratio_pct')))}</td>"
+                f"<td>{esc(fmt_turnover(row.get('turnover')))}</td></tr>")
+        parts.append("</table>")
 
     limit_up = payload.get("limit_up") or []
     if limit_up:
-        parts.append(f"<h2>涨停池（{len(limit_up)}）· 按封板时间</h2>")
-        parts.append('<table class="data"><tr><th>名称</th><th>最新</th>'
-                     "<th>涨跌幅</th><th>封板</th><th>原因</th><th>连板</th>"
-                     "<th>封单额</th></tr>")
+        parts.append(f"<h2>涨停池（{len(limit_up)}）</h2>")
+        parts.append('<table class="data"><tr><th>名称</th><th>最新</th><th>涨跌幅</th>'
+                     "<th>封板</th><th>原因</th><th>连板</th><th>封单额</th></tr>")
         for row in limit_up:
             parts.append(
                 f"<tr><td>{esc(row.get('name') or row.get('thscode'))}</td>"
                 f"<td>{esc(fmt_price(row.get('last_price')))}</td>"
                 f"<td>{esc(fmt_ratio(row.get('price_change_ratio_pct')))}</td>"
-                f"<td>{esc(row.get('limit_up_time'))}</td>"
-                f"<td>{esc(row.get('limit_up_reason'))}</td>"
-                f"<td>{esc(row.get('continue_day_text'))}</td>"
-                f"<td>{esc(fmt_turnover(row.get('seal_money')))}</td></tr>")
+                f"<td>{esc(row.get('limit_up_time') or '')}</td>"
+                f"<td>{esc(row.get('limit_up_reason') or '')}</td>"
+                f"<td>{esc(row.get('continue_day_text') or '')}</td>"
+                f"<td>{esc(fmt_seal(row.get('seal_money')))}</td></tr>")
         parts.append("</table>")
 
     for error in payload.get("errors") or []:
-        parts.append(f"<p>注：{esc(error)}</p>")
+        parts.append(f'<p class="meta">注：{esc(error)}</p>')
     parts.append(f"<p>{esc(DISCLAIMER)}</p>")
     body = "\n".join(parts)
     return ('<?xml version="1.0" encoding="utf-8"?>\n'
@@ -855,19 +1116,44 @@ DEMO_PAYLOAD = {
          "price_change_ratio_pct": 0.56, "open_price": 2468.0,
          "high_price": 2485.0, "low_price": 2465.0, "prev_price": 2465.08,
          "volume": 23456789000.0, "turnover": 987650000000.0},
+        {"thscode": "881101.TI", "ticker": "881101", "name": "种植业与林业",
+         "last_price": 3732.1, "price_change": -56.6,
+         "price_change_ratio_pct": -1.49, "volume": 2345678900.0,
+         "turnover": 3456789000.0, "is_sector": True},
+        {"thscode": "881121.TI", "ticker": "881121", "name": "半导体",
+         "last_price": 4521.7, "price_change": 152.3,
+         "price_change_ratio_pct": 3.49, "volume": 8765432100.0,
+         "turnover": 234567890000.0, "is_sector": True},
     ],
-    "stocks": [
-        {"thscode": "600519.SH", "ticker": "600519", "name": "贵州茅台",
-         "last_price": 1277.8, "price_change": 21.8,
-         "price_change_ratio_pct": 1.735669, "open_price": 1252.08,
-         "high_price": 1282.0, "low_price": 1250.21, "prev_price": 1256.0,
-         "volume": 3098875.0, "turnover": 3937375200.0},
-        {"thscode": "000001.SZ", "ticker": "000001", "name": "平安银行",
-         "last_price": 11.23, "price_change": -0.12,
-         "price_change_ratio_pct": -1.057, "open_price": 11.35,
-         "high_price": 11.4, "low_price": 11.2, "prev_price": 11.35,
-         "volume": 45678900.0, "turnover": 512340000.0},
-    ],
+    "market": {
+        "count": 5584, "up": 2861, "down": 2413, "flat": 126, "no_price": 184,
+        "limit_up": 58, "limit_down": 3, "turnover": 1712345678900.0,
+        "volume": 123456789000.0, "avg_ratio": 0.32,
+        "top_gainers": [
+            {"thscode": "300750.SZ", "name": "宁德时代", "ratio": 10.02,
+             "last_price": 268.4},
+            {"thscode": "002594.SZ", "name": "比亚迪", "ratio": 9.98,
+             "last_price": 312.5}],
+        "top_losers": [
+            {"thscode": "600036.SH", "name": "招商银行", "ratio": -9.87,
+             "last_price": 32.1}],
+    },
+    "hk": {
+        "generated": "2026-11-17T07:00:00+00:00",
+        "data_timestamp": 1784275991000,
+        "rows": [
+            {"thscode": "hkHSI", "name": "恒生指数", "last_price": 23294.75,
+             "price_change": -214.6, "price_change_ratio_pct": -0.91,
+             "volume": 1234567890.0, "turnover": 87654321000.0, "is_index": True},
+            {"thscode": "hkHSTECH", "name": "恒生科技", "last_price": 5218.4,
+             "price_change": -61.2, "price_change_ratio_pct": -1.16,
+             "volume": 987654321.0, "turnover": 45678901234.0, "is_index": True},
+            {"thscode": "hk00700", "name": "腾讯控股", "last_price": 372.8,
+             "price_change": -3.2, "price_change_ratio_pct": -0.85,
+             "volume": 21345678.0, "turnover": 7890123456.0, "is_index": False},
+        ],
+        "errors": [],
+    },
     "limit_up": [
         {"thscode": "603986.SH", "ticker": "603986", "name": "兆易创新",
          "last_price": 118.23, "price_change_ratio_pct": 10.0008,
@@ -875,8 +1161,6 @@ DEMO_PAYLOAD = {
          "continue_day_text": "2连板", "seal_money": 123456789.12},
     ],
     "history": {
-        "600519.SH": [[1784275991000 - (19 - i) * 86400000,
-                       1200.0 + i * 4.1] for i in range(20)],
         "000001.SH": [[1784275991000 - (19 - i) * 86400000,
                        3600.0 + i * 3.4] for i in range(20)],
     },
@@ -903,7 +1187,9 @@ def build(data_path=None, out_dir="site", demo=False):
         if not data_path:
             raise ValueError("缺少 --data（或用 --demo 先看版式）")
         payload = json.loads(Path(data_path).read_text(encoding="utf-8"))
-    total = len(payload.get("indices") or []) + len(payload.get("stocks") or [])
+    total = (len(payload.get("indices") or [])
+             + len(payload.get("stocks") or [])
+             + len(((payload.get("hk") or {}).get("rows")) or []))
     if total == 0:
         raise ValueError("行情一条都没有，不生成空面板")
     # 开盘前/接口抽风时会给「空壳快照」（成交量全 0、大多没有最新价）。这种东西
@@ -931,9 +1217,11 @@ def build(data_path=None, out_dir="site", demo=False):
     problems = check(out)
     if problems:
         raise ValueError("产物自检不过：" + "；".join(problems))
+    counts = data["counts"]
     print(f"已生成 {out}/stocks.json、stocks.txt、stocks.html、stocks.epub"
-          f"（指数 {data['counts']['indices']} / 股票 {data['counts']['stocks']}"
-          f" / 涨停 {data['counts']['limit_up']}，hash {data['data_hash']}）")
+          f"（指数 {counts['indices']} / 板块 {counts['sectors']}"
+          f" / 全市场 {counts['market']} / 港股 {counts['hk']}"
+          f" / 涨停 {counts['limit_up']}，hash {data['data_hash']}）")
     return data
 
 

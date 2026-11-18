@@ -54,7 +54,7 @@ from urllib.request import Request, urlopen
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-import stock_watchlist  # noqa: E402
+import market_watchlist  # noqa: E402
 
 DEFAULT_BASE_URL = "https://fuyao.aicubes.cn"
 # 官方推荐的环境变量名（见 Financial-API README「获取统一 API Key」一节）；
@@ -363,21 +363,225 @@ def parse_codes(text):
     return pairs
 
 
+def fetch_index_rows(client, codes, chunk=40, log=None):
+    """批量取指数/板块快照，**把坏代码隔离出来**。
+
+    实测：一批里只要有一个不存在的代码（如 ``932000.CSI``），整批就返回 0 条且
+    ``code=0``（不是报错，是静默空）——宽基指数曾因此全灭。所以：批次返回的条数
+    少了，就逐个单取，把真正坏的代码挑出来，其余照常返回。
+    """
+    rows, bad, stamps = [], [], []
+    codes = [c for c in dict.fromkeys(codes) if c]
+
+    def take(data):
+        got = (data or {}).get("item") or []
+        rows.extend(got)
+        if isinstance((data or {}).get("timestamp"), (int, float)):
+            stamps.append(data["timestamp"])
+        return {r.get("thscode") for r in got}
+
+    def probe(code):
+        """单取一个代码：成功入 rows，失败/空入 bad。"""
+        try:
+            got = take(client.get("/api/a-share-index/prices/snapshot",
+                                  {"thscodes": code}))
+        except ThsError:
+            bad.append(code)
+            return
+        if code not in got:
+            bad.append(code)
+
+    for start in range(0, len(codes), chunk):
+        batch = codes[start:start + chunk]
+        try:
+            got = take(client.get("/api/a-share-index/prices/snapshot",
+                                  {"thscodes": ",".join(batch)}))
+        except ThsError as exc:
+            if log:
+                log(f"批次 {batch[0]}…{batch[-1]} 失败（{exc}），逐个重试")
+            for code in batch:
+                probe(code)
+            continue
+        missing = [c for c in batch if c not in got]
+        if missing:
+            if log:
+                log(f"批次里有 {len(missing)} 个代码没返回，逐个确认："
+                    + ", ".join(missing[:5]))
+            for code in missing:
+                probe(code)
+    return rows, list(dict.fromkeys(bad)), (max(stamps) if stamps else None)
+
+
+def fetch_full_market(client, page=None, log=None):
+    """全 A 快照（分页取尽）→ (rows, total)。用于涨跌家数/成交额等市场概览。"""
+    page = page or market_watchlist.FULL_MARKET_PAGE
+    rows, total, offset = [], None, 0
+    while True:
+        try:
+            data = client.get("/api/a-share/prices/snapshot",
+                              {"limit": page, "offset": offset})
+        except ThsError as exc:
+            if log:
+                log(f"全市场第 {offset} 页失败：{exc}")
+            break
+        total = data.get("total", total)
+        chunk = data.get("item") or []
+        rows.extend(chunk)
+        if len(chunk) < page:
+            break
+        offset += page
+        if total and offset >= total:
+            break
+    return rows, total
+
+
+def market_breadth(rows):
+    """全市场统计：涨跌家数、涨跌停、成交额、平均涨跌幅、涨跌前 10。"""
+    stats = {"count": len(rows), "up": 0, "down": 0, "flat": 0, "no_price": 0,
+             "limit_up": 0, "limit_down": 0, "turnover": 0.0, "volume": 0.0,
+             "avg_ratio": None, "top_gainers": [], "top_losers": []}
+    ratios = []
+    for row in rows:
+        ratio = row.get("price_change_ratio_pct")
+        price = row.get("last_price")
+        stats["turnover"] += row.get("turnover") or 0.0
+        stats["volume"] += row.get("volume") or 0.0
+        if price in (None, 0) or ratio is None:
+            stats["no_price"] += 1
+            continue
+        ratios.append(ratio)
+        if ratio > 0:
+            stats["up"] += 1
+        elif ratio < 0:
+            stats["down"] += 1
+        else:
+            stats["flat"] += 1
+        # 涨跌停粗判：主板 10%、创业板/科创 20%、北交所 30%。
+        code = str(row.get("thscode") or "")
+        limit = 29.5 if code.endswith(".BJ") else (
+            19.5 if (code.startswith("30") or code.startswith("68")) else 9.8)
+        if ratio >= limit:
+            stats["limit_up"] += 1
+        elif ratio <= -limit:
+            stats["limit_down"] += 1
+    if ratios:
+        stats["avg_ratio"] = sum(ratios) / len(ratios)
+    ranked = [r for r in rows if r.get("price_change_ratio_pct") is not None
+              and r.get("last_price")]
+    ranked.sort(key=lambda r: -(r.get("price_change_ratio_pct") or 0))
+    stats["top_gainers"] = [{"thscode": r.get("thscode"), "name": r.get("name") or "",
+                             "ratio": r.get("price_change_ratio_pct"),
+                             "last_price": r.get("last_price")} for r in ranked[:10]]
+    stats["top_losers"] = [{"thscode": r.get("thscode"), "name": r.get("name") or "",
+                            "ratio": r.get("price_change_ratio_pct"),
+                            "last_price": r.get("last_price")} for r in ranked[-10:][::-1]]
+    return stats
+
+
+def enrich_index_rows(rows, pairs, sector_codes=None):
+    """给指数/板块补中文名与顺序（接口不返回名字），并标记哪些是板块。
+
+    板块判定不能只看 ``.TI`` 后缀：同花顺的「有色金属」是 ``000819.SH``，
+    按后缀会被当成宽基指数（实测会跑到【指数】段里去）。
+    """
+    names = {code: name for code, name in pairs}
+    order = {code: pos for pos, (code, _) in enumerate(pairs)}
+    if sector_codes is None:
+        sector_codes = {code for code, _ in market_watchlist.SECTORS}
+    sector_codes = set(sector_codes)
+    out = []
+    for row in rows:
+        code = row.get("thscode")
+        if not code:
+            continue
+        item = dict(row)
+        item["name"] = names.get(code) or item.get("name") or code
+        item["is_sector"] = (code in sector_codes or code.endswith(".TI")
+                             or bool(item.get("sector")))
+        out.append(item)
+    out.sort(key=lambda r: order.get(r.get("thscode"), 9999))
+    return out
+
+
 def run_once(args, client):
-    stocks = parse_codes(args.codes) if args.codes else list(stock_watchlist.STOCKS)
-    indices = parse_codes(args.indices) if args.indices else list(stock_watchlist.INDICES)
-    limit_up_size = 0 if args.no_limit_up else args.limit_up_size
-    payload = fetch_payload(client, stocks, indices, limit_up_size,
-                            args.names_cache or None,
-                            history_days=args.history_days)
-    if not payload["indices"] and not payload["stocks"]:
-        raise ThsError("同花顺快照一条都没返回，不生成空面板")
+    """抓一轮并写出 stocks_data.json。
+
+    面板形态是「指数 + 板块 + 市场概览 + 港股」的一屏监视（**不再有自选股**）：
+    ``indices`` 放宽基与行业/概念板块，``market`` 放全 A 统计（5584 只的涨跌家数、
+    成交额、涨跌停、涨跌前 10），``hk`` 放港股（另走腾讯接口）。
+    """
+    pairs = list(market_watchlist.INDICES) + list(market_watchlist.SECTORS)
+    if args.indices:
+        wanted = parse_codes(args.indices)
+        pairs = [(c, n) for c, n in pairs if c in wanted] or [(c, c) for c in wanted]
+    codes = [c for c, _ in pairs]
+
+    payload = {"generated": datetime.now(timezone.utc).isoformat(),
+               "data_timestamp": None, "index_timestamp": None,
+               "indices": [], "market": None, "hk": None,
+               "limit_up": [], "errors": []}
+
+    # 1) 指数 + 板块（坏代码隔离，某批失败不影响其余）
+    rows, bad, index_ts = fetch_index_rows(
+        client, codes, log=lambda m: payload["errors"].append(m))
+    payload["index_timestamp"] = index_ts
+    payload["indices"] = enrich_index_rows(rows, pairs)
+    if bad:
+        payload["errors"].append(f"这些指数/板块代码无效或接口没返回：{', '.join(bad)}")
+
+    # 2) 全 A 市场概览（分页取尽；失败留 null，不挡指数）
+    if not args.no_market:
+        try:
+            market_rows, total = fetch_full_market(
+                client, log=lambda m: payload["errors"].append(m))
+            if market_rows:
+                stats = market_breadth(market_rows)
+                stats["total"] = total or len(market_rows)
+                payload["market"] = stats
+        except ThsError as exc:
+            payload["errors"].append(f"全市场快照失败：{exc}")
+
+    # 3) 涨停池（情绪面，失败不挡主行情）
+    if not args.no_limit_up and args.limit_up_size:
+        try:
+            data = client.get("/api/a-share/special-data/limit-up-pool", {
+                "page": 1, "size": args.limit_up_size,
+                "sort_field": "limit_up_time", "sort_dir": "desc"})
+            payload["limit_up"] = [r for r in (
+                normalize_limit_up(e) for e in data.get("item") or []) if r]
+        except ThsError as exc:
+            payload["errors"].append(f"涨停池失败：{exc}")
+
+    # 4) 港股（腾讯源，独立失败，不拖垮 A 股）
+    if not args.no_hk:
+        try:
+            import fetch_hk  # noqa: E402
+            hk = fetch_hk.fetch_payload()
+            payload["hk"] = hk
+            payload["errors"].extend(hk.get("errors") or [])
+        except Exception as exc:                    # noqa: BLE001
+            payload["errors"].append(f"港股行情失败：{exc}")
+
+    # 数据时间 = 各市场里最新的快照时间（港股收盘晚于 A 股，取 max 才不误报过期）
+    stamps = [payload.get("index_timestamp")]
+    hk_stamp = (payload.get("hk") or {}).get("data_timestamp")
+    if isinstance(hk_stamp, (int, float)):
+        stamps.append(hk_stamp)
+    stamps = [s for s in stamps if isinstance(s, (int, float))]
+    payload["data_timestamp"] = max(stamps) if stamps else None
+
+    if not payload["indices"] and not payload["market"]:
+        raise ThsError("指数和全市场快照一条都没返回，不生成空面板")
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
                    encoding="utf-8")
-    print(f"已抓取 {len(payload['indices'])} 个指数 / {len(payload['stocks'])} 只股票"
-          f" / {len(payload['limit_up'])} 只涨停 → {out}")
+    market = payload.get("market") or {}
+    hk = payload.get("hk") or {}
+    print(f"已抓取 {len(payload['indices'])} 个指数/板块"
+          f" / 全市场 {market.get('count', 0)} 只（涨 {market.get('up', 0)} 跌 {market.get('down', 0)}）"
+          f" / 涨停 {len(payload['limit_up'])}"
+          f" / 港股 {len(hk.get('rows') or [])} 个 → {out}")
     for error in payload["errors"]:
         print(f"警告：{error}", file=sys.stderr)
     if args.build:
@@ -399,12 +603,16 @@ def main(argv=None):
                         help="只抓这些指数 thscode（逗号分隔），默认用自选清单")
     parser.add_argument("--no-limit-up", action="store_true",
                         help="不取涨停池")
+    parser.add_argument("--no-market", action="store_true",
+                        help="不取全 A 市场概览（5584 只，省时间）")
+    parser.add_argument("--no-hk", action="store_true",
+                        help="不取港股（腾讯公开接口）")
     parser.add_argument("--limit-up-size", type=int,
-                        default=stock_watchlist.LIMIT_UP_SIZE,
+                        default=20,
                         help="涨停池取前几名")
     parser.add_argument("--history-days", type=int, default=20,
                         help="卡片迷你走势图取最近几根日 K（0=不取）")
-    parser.add_argument("--names-cache", default=stock_watchlist.NAMES_CACHE,
+    parser.add_argument("--names-cache", default=market_watchlist.NAMES_CACHE,
                         help="中文名缓存路径")
     parser.add_argument("--base-url", default=os.environ.get(
         "HITHINK_FINANCE_BASE_URL", DEFAULT_BASE_URL),
