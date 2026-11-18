@@ -115,6 +115,33 @@ class NetWiringTest(unittest.TestCase):
         self.assertIn("intervalText()", MAIN)
         self.assertNotIn('"004  |  60s  |  tap for menu"', MAIN)
 
+    def test_auto_start_is_off_by_default(self):
+        # 「自动阅读预设」默认取消：autostart 默认 false，且启动时的自动开始
+        # 要求同时满足 autostart 与上次是跑着的（autostart_resume）。
+        self.assertIn("if self.settings.autostart == nil then", MAIN)
+        self.assertIn("self.settings.autostart = self.settings.enabled == true", MAIN)
+        init = MAIN[MAIN.index("function Report:init()"):]
+        init = init[:init.index("\nend\n")]
+        self.assertIn("if self.settings.autostart and self.settings.autostart_resume then", init)
+        # 手动 Stop 之后即便 Auto-start 开着也不再自动开。
+        stop = MAIN[MAIN.index("function Report:stop()"):]
+        stop = stop[:stop.index("\nend\n")]
+        self.assertIn("self.settings.autostart_resume = nil", stop)
+
+    def test_auto_start_touches_no_reader_presets(self):
+        # 启动时只让 autoturn 停住，不改用户存下来的自动翻页预设/间隔。
+        self.assertIn("function Report:cancelAutoTurn()", MAIN)
+        body = MAIN[MAIN.index("function Report:cancelAutoTurn()"):]
+        body = body[:body.index("\nend\n")]
+        self.assertIn("auto_turn:stop()", body)
+        for forbidden in ("autoturn_enabled", "autoturn_interval",
+                          "G_reader_settings:saveSetting(\"autoturn", "delSetting(\"autoturn"):
+            self.assertNotIn(forbidden, MAIN)
+
+    def test_menu_has_auto_start_toggle(self):
+        self.assertIn('"Auto-start on launch: "', MAIN)
+        self.assertIn("function Report:toggleAutostart()", MAIN)
+
     def test_version_was_bumped(self):
         meta = (PLUGIN / "_meta.lua").read_text(encoding="utf-8")
         version = re.search(r'version = "([\d.]+)"', meta).group(1)

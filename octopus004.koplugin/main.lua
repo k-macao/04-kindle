@@ -132,6 +132,14 @@ function Report:init()
     if self.settings.doc_url == nil then self.settings.doc_url = "" end
     if self.settings.news_url == nil then self.settings.news_url = "" end
     if self.settings.stocks_url == nil then self.settings.stocks_url = "" end
+    -- 自动阅读默认是「取消」的：装好插件后不会自己开始翻页，要手动 Show report。
+    -- 想让它开机就自己跑，在菜单里打开 Auto-start on launch（见 addToMainMenu）。
+    if self.settings.autostart == nil then
+        -- 老版本只有 enabled（true = 正在跑）：跑着的话当作用户是要它自动跑的，
+        -- 但这次启动仍然不自动开——新语义下「自动」必须显式打开。
+        self.settings.autostart = self.settings.enabled == true
+        self.settings.enabled = false
+    end
     if self.settings.enabled == nil then self.settings.enabled = false end
     self.wake = Wake.new({ Device = Device, UIManager = UIManager, logger = logger })
     self.refresh_task = function() self:refresh(false) end
@@ -141,7 +149,10 @@ function Report:init()
     self.page_index = 1
     self.page_count = tonumber(self.settings.image_count) or 0
     if self.ui and self.ui.menu then self.ui.menu:registerToMainMenu(self) end
-    if self.settings.enabled then UIManager:scheduleIn(3, function() self:start() end) end
+    -- 只有「自动开始 = on」并且上次是跑着的才自动开；默认两样都不成立。
+    if self.settings.autostart and self.settings.autostart_resume then
+        UIManager:scheduleIn(3, function() self:start() end)
+    end
 end
 
 function Report:save()
@@ -229,8 +240,25 @@ function Report:releaseScreen()
     self:save()
 end
 
+-- 两个「自动」会抢屏幕：004 自己按 INTERVAL 翻页，KOReader 的自动翻页（autoturn）
+-- 也在翻同一页。开跑前先让 autoturn 停掉；不改用户存下来的 autoturn 预设，
+-- 004 停了以后用户原来的设置还在（同理见 holdScreen/releaseScreen 对屏保的处理）。
+function Report:cancelAutoTurn()
+    local doc = self.ui and self.ui.document
+    if doc and doc.config and doc.config.auto_turn then
+        pcall(function() doc.config.auto_turn:stop() end)
+    end
+    local ok, ReaderAutoTurn = pcall(require, "apps/reader/modules/readerturning")
+    if ok and ReaderAutoTurn and ReaderAutoTurn.stop then
+        pcall(ReaderAutoTurn.stop, ReaderAutoTurn)
+    end
+end
+
 function Report:start()
-    self.settings.enabled = true; self:save(); self:holdScreen()
+    self.settings.enabled = true
+    self.settings.autostart_resume = self.settings.autostart and true or nil
+    self:save(); self:holdScreen()
+    self:cancelAutoTurn()
     if self.wake:mode(true) == "awake" then self.wake:hold_awake() end
     if self:isBookMode() then
         -- the reader shows the document; this widget stays out of the way
@@ -255,7 +283,10 @@ function Report:start()
 end
 
 function Report:stop()
-    self.settings.enabled = false; self:save()
+    self.settings.enabled = false
+    -- 手动 Stop 就是「这次别跑了」：即便 Auto-start 是 on，下次启动也不再自动开。
+    self.settings.autostart_resume = nil
+    self:save()
     self.gen = (self.gen or 0) + 1
     self.in_cycle = false
     self.wake:cancel(); self.wake:kindle_hold(false); self.wake:release_awake()
@@ -974,6 +1005,15 @@ function Report:setURL(kind)
     UIManager:show(dialog); dialog:onShowKeyboard()
 end
 
+-- 自动阅读预设（默认取消）：关掉时立刻停止当前这一轮，并把 enabled 存成 false，
+-- 下次启动 init() 不会再自动 start()。
+function Report:toggleAutostart()
+    self.settings.autostart = not self.settings.autostart
+    if not self.settings.autostart and self.settings.enabled then self:stop() end
+    self:save()
+    self:note("004: auto-start " .. (self.settings.autostart and "on" or "off"))
+end
+
 function Report:setDisplay(mode)
     self.settings.display = mode
     self:save()
@@ -1030,6 +1070,10 @@ function Report:addToMainMenu(items)
     items.octopus004 = { text = "004 Report", sorting_hint = "tools", sub_item_table = {
         { text_func = function() return self.settings.enabled and "Stop report" or "Show report" end,
           callback = function() if self.settings.enabled then self:stop() else self:start() end end },
+        { text_func = function()
+              return "Auto-start on launch: " .. (self.settings.autostart and "on" or "off")
+          end,
+          callback = function() self:toggleAutostart() end },
         { text_func = function() return "Display mode: " .. displayName(self.settings.display) end,
           callback = function() self:chooseDisplay() end },
         { text_func = function() return "Report URL (text): " .. self.settings.url end,
