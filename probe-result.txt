@@ -1,33 +1,58 @@
-  批次 0 缺少: ['881113.TI', '881119.TI', '881127.TI']
-  批次 40 缺少: ['881147.TI', '881150.TI', '881154.TI', '881161.TI', '881163.TI']
 
-板块：共 63 个，返回 55 个，缺失 8 个
-  缺失代码: ['881113.TI', '881119.TI', '881127.TI', '881147.TI', '881150.TI', '881154.TI', '881161.TI', '881163.TI']
-  缺失名字: ['有色金属', '仪器仪表', '消费电子', '贸易', '港口航运', '保险', '水务', '酒店及餐饮']
+### 单个 000001.SH  code=0 total=1 n=1
+    {"thscode": "000001.SH", "ticker": "1A0001", "volume": 42393483000, "turnover": 650231690000, "last_price": 3587.83, "price_change": 3.25, "price_change_ratio_pct": 0.090666, "open_price": 3596.55, "high_price": 3596.55,
 
-宽基：共 12，返回 0，缺失 ['000001.SH', '399001.SZ', '399006.SZ', '000300.SH', '000688.SH', '000905.SH', '000852.SH', '000016.SH', '399005.SZ', '000010.SH', '399673.SZ', '932000.CSI']
+### 单个 399001.SZ  code=0 total=1 n=1
+    {"thscode": "399001.SZ", "ticker": "399001", "volume": 50703574000, "turnover": 719470540000, "last_price": 10659.4116, "price_change": 20.8874, "price_change_ratio_pct": 0.196337, "open_price": 10678.295, "high_price": 
 
-港股：请求 23 个，响应 9676 字节
-  hkHSI: name='恒生指数' last=23294.750 prev=23508.170 vol=17715285.4159 amount=17715285.416 time=2026/11/18 18:31:03
-  hkHSCEI: name='国企指数' last=7836.270 prev=7904.370 vol=6186455.4491 amount=6186455.449 time=2026/11/18 16:08:28
-  hkHSTECH: name='恒生科技指数' last=3736.330 prev=3758.170 vol=5022194.0108 amount=5022194.011 time=2026/11/18 16:08:28
-  hk00700: name='腾讯控股' last=372.800 prev=376.000 vol=21333340.0 amount=7956175438.684 time=2026/11/18 16:08:10
-  hk09988: name='阿里巴巴-W' last=85.250 prev=85.450 vol=91692021.0 amount=7799624421.070 time=2026/11/18 16:08:12
-  hk03690: name='美团-W' last=70.150 prev=70.500 vol=31806940.0 amount=2255615182.310 time=2026/11/18 16:08:12
-  hk01810: name='小米集团-W' last=29.660 prev=29.700 vol=100207665.0 amount=2976304316.200 time=2026/11/18 16:08:12
-  hk09618: name='京东集团-SW' last=97.650 prev=105.200 vol=20497083.0 amount=1997670834.050 time=2026/11/18 16:08:12
-  hk09999: name='网易' last=188.300 prev=189.800 vol=7177288.0 amount=1348153134.800 time=2026/11/18 16:08:12
-  hk01024: name='快手-W' last=24.040 prev=24.240 vol=34949458.0 amount=839858043.240 time=2026/11/18 16:08:10
-  hk00981: name='中芯国际' last=49.200 prev=49.200 vol=81487319.0 amount=4031299986.340 time=2026/11/18 16:08:11
-  hk01211: name='比亚迪股份' last=64.050 prev=64.150 vol=14377694.0 amount=919515323.370 time=2026/11/18 16:08:12
-  hk02020: name='安踏体育' last=82.100 prev=82.250 vol=11746389.0 amount=965669774.850 time=2026/11/18 16:08:04
-  hk00388: name='香港交易所' last=375.600 prev=378.200 vol=2943072.0 amount=1105320161.226 time=2026/11/18 16:08:12
-  hk00005: name='汇丰控股' last=136.000 prev=138.500 vol=9588338.0 amount=1303618662.600 time=2026/11/18 16:08:12
-  hk00939: name='建设银行' last=10.510 prev=10.590 vol=188324659.0 amount=1983060989.750 time=2026/11/18 16:08:12
-  hk01398: name='工商银行' last=7.935 prev=8.005 vol=172897637.0 amount=1372410710.630 time=2026/11/18 16:08:12
-  hk02318: name='中国平安' last=50.700 prev=51.250 vol=28630836.0 amount=1451448287.050 time=2026/11/18 16:08:12
-  hk00883: name='中国海洋石油' last=22.280 prev=22.620 vol=61428385.0 amount=1389431359.840 time=2026/11/18 16:08:12
-  hk00857: name='中国石油股份' last=10.300 prev=10.350 vol=88109460.0 amount=919602543.510 time=2026/11/18 16:08:11
-  hk00386: name='中国石油化工股份' last=4.760 prev=4.755 vol=88127335.0 amount=422142127.585 time=2026/11/18 16:08:12
-  hk00762: name='中国联通' last=5.430 prev=5.345 vol=33596399.0 amount=181436706.530 time=2026/11/18 16:08:11
-  hk00941: name='中国移动' last=80.550 prev=80.500 vol=6878233.0 amount=553545113.850 time=2026/11/18 16:08:12
+### 单个 000300.SH  code=0 total=1 n=1
+    {"thscode": "000300.SH", "ticker": "1B0300", "volume": 16731827000, "turnover": 389913840000, "last_price": 3983.77, "price_change": 7.31, "price_change_ratio_pct": 0.183832, "open_price": 3991.16, "high_price": 3991.16,
+
+### 单个 399006.SZ  code=0 total=1 n=1
+    {"thscode": "399006.SZ", "ticker": "399006", "volume": 15619417000, "turnover": 341433090000, "last_price": 2311.6208, "price_change": 19.4171, "price_change_ratio_pct": 0.847093, "open_price": 2306.1181, "high_price": 2
+
+### 单个 932000.CSI  code=1002 total=None n=0
+    msg: Invalid parameter format: thscodes
+
+### 两个 000001+399001  code=0 total=2 n=2
+    {"thscode": "000001.SH", "ticker": "1A0001", "volume": 42393483000, "turnover": 650231690000, "last_price": 3587.83, "price_change": 3.25, "price_change_ratio_pct": 0.090666, "open_price": 3596.55, "high_price": 3596.55,
+    {"thscode": "399001.SZ", "ticker": "399001", "volume": 50703574000, "turnover": 719470540000, "last_price": 10659.4116, "price_change": 20.8874, "price_change_ratio_pct": 0.196337, "open_price": 10678.295, "high_price": 
+
+### 三个 加 000300  code=0 total=3 n=3
+    {"thscode": "000001.SH", "ticker": "1A0001", "volume": 42393483000, "turnover": 650231690000, "last_price": 3587.83, "price_change": 3.25, "price_change_ratio_pct": 0.090666, "open_price": 3596.55, "high_price": 3596.55,
+    {"thscode": "399001.SZ", "ticker": "399001", "volume": 50703574000, "turnover": 719470540000, "last_price": 10659.4116, "price_change": 20.8874, "price_change_ratio_pct": 0.196337, "open_price": 10678.295, "high_price": 
+    {"thscode": "000300.SH", "ticker": "1B0300", "volume": 16731827000, "turnover": 389913840000, "last_price": 3983.77, "price_change": 7.31, "price_change_ratio_pct": 0.183832, "open_price": 3991.16, "high_price": 3991.16,
+
+### 混合 板块+宽基  code=0 total=2 n=2
+    {"thscode": "881101.TI", "ticker": "881101", "volume": 582959940, "turnover": 3422989900, "last_price": 3732.117, "price_change": -56.652, "price_change_ratio_pct": -1.495261, "open_price": 3791.803, "high_price": 3805.5
+    {"thscode": "000001.SH", "ticker": "1A0001", "volume": 42393483000, "turnover": 650231690000, "last_price": 3587.83, "price_change": 3.25, "price_change_ratio_pct": 0.090666, "open_price": 3596.55, "high_price": 3596.55,
+
+### a-share-index 全表共 1431 条
+   000001.SH: 在表内 上证指数
+   399001.SZ: 在表内 深证成指
+   000300.SH: 在表内 沪深300
+   932000.CSI: 不在表内
+   000016.SH: 在表内 上证50
+   表内带 SH/SZ 交易所后缀的指数：573 个，前 12：
+      399001.SZ 深证成指
+      399002.SZ 深成指R
+      399003.SZ 成份Ｂ指
+      399004.SZ 深证100R
+      399005.SZ 中小100
+      399006.SZ 创业板指
+      399007.SZ 深证300
+      399008.SZ 中小300
+      399009.SZ 深证200
+      399010.SZ 深证700
+      399011.SZ 深证1000
+      399012.SZ 创业300
+
+### 缺失板块在目录里的真实代码：
+   有色金属: [('000819.SH', '有色金属')]
+   仪器仪表: [('884192.TI', '仪器仪表')]
+   消费电子: [('881124.TI', '消费电子'), ('885800.TI', '消费电子概念'), ('884230.TI', '品牌消费电子'), ('884098.TI', '消费电子零部件及组装')]
+   贸易: [('885764.TI', '自由贸易港'), ('881159.TI', '贸易'), ('885965.TI', '中俄贸易概念'), ('881180.TI', '石油加工贸易')]
+   港口航运: [('881148.TI', '港口航运')]
+   保险: [('883934.TI', '保险重仓'), ('885767.TI', '互联网保险'), ('881156.TI', '保险'), ('885623.TI', '参股保险')]
+   水务: [('884268.TI', '水务及水治理')]
+   酒店及餐饮: []
