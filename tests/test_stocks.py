@@ -418,8 +418,11 @@ class BuildTest(unittest.TestCase):
         self.assertIn("3 分钟前", line)
         self.assertIn("已收盘", line)
         self.assertNotIn("STALE", line)
-        stale = build_stocks.status_line(payload, now_ms=data_ms + 40 * 60000)
-        self.assertIn("STALE", stale)
+        # 这份 payload 是 16:13（已收盘），收盘后不再更新，不该报 STALE
+        # （否则凌晨看面板永远在报警）。盘中落后的 STALE 由下一条测试覆盖。
+        closed = build_stocks.status_line(payload, now_ms=data_ms + 40 * 60000)
+        self.assertNotIn("STALE", closed)
+        self.assertIn("收盘后不再更新", closed)
         # 演示数据不标「多久以前」，免得看着像实时数据坏了
         demo = dict(payload, demo=True)
         self.assertIn("演示数据", build_stocks.status_line(demo, now_ms=data_ms))
@@ -432,9 +435,41 @@ class BuildTest(unittest.TestCase):
         self.assertEqual(build_stocks.age_text(base, base - 60000), "")
         self.assertEqual(build_stocks.session_label(base), "未开盘")
         self.assertEqual(build_stocks.session_label(base + 90 * 60000), "盘中")   # 10:19
+        # 午休单列：11:45 抓到的那份成交量跟 11:30 一样，标「盘中」会误导
+        self.assertEqual(build_stocks.session_label(base + 176 * 60000), "午休")   # 11:45
+        self.assertEqual(build_stocks.session_label(base + 251 * 60000), "盘中")   # 13:00
         self.assertEqual(build_stocks.session_label(base + 7 * 3600000), "已收盘")
+        # base 是 08:49（未开盘）：这时段行情本来不动，所以「老 21 分钟」不算过期；
+        # 真过期判定在 test_stale_only_when_data_should_be_moving 里覆盖。
         self.assertFalse(build_stocks.is_stale(base, base + 5 * 60000))
-        self.assertTrue(build_stocks.is_stale(base, base + 21 * 60000))
+        self.assertFalse(build_stocks.is_stale(base, base + 21 * 60000))
+
+    def test_stale_only_when_data_should_be_moving(self):
+        # 收盘后/深夜看面板不该报 STALE —— 行情本来就不动。以前是死比
+        # 「现在 - 数据时间 > 20 分钟」，凌晨一点看必然报警，纯误报。
+        import datetime as _dt
+
+        def ms(h, m, day=18):
+            """北京时间 → 毫秒时间戳（h 是北京整点，减 8 得 UTC）。"""
+            return int((_dt.datetime(2026, 11, day, h, m, tzinfo=_dt.timezone.utc)
+                        - _dt.timedelta(hours=8)).timestamp() * 1000)
+
+        close = ms(15, 10)                   # 收盘后的一份数据
+        self.assertEqual(build_stocks.session_label(close), "已收盘")
+        self.assertFalse(build_stocks.is_stale(close, ms(18, 10)), "收盘后 3 小时不算过期")
+        self.assertFalse(build_stocks.is_stale(close, ms(1, 10, day=19)), "次日凌晨不算过期")
+        self.assertTrue(build_stocks.is_stale(close, ms(16, 10, day=19)), "跨交易日仍无新数据才算过期")
+        # 盘中落后依然要报
+        live = ms(10, 0)
+        self.assertTrue(build_stocks.is_stale(live, ms(10, 40)))
+        # 抬头在收盘后说清楚「收盘后不再更新」，不要只写「已收盘」让人以为卡住了
+        text = build_stocks.status_line({"data_timestamp": close}, now_ms=ms(18, 10))
+        self.assertIn("收盘后不再更新", text)
+        self.assertNotIn("STALE", text)
+        # 午休同理：11:45 的数据在 11:50 看不算过期（行情停了），但 12:40 就算
+        lunch = ms(11, 45)
+        self.assertEqual(build_stocks.session_label(lunch), "午休")
+        self.assertFalse(build_stocks.is_stale(lunch, ms(11, 50)))
 
     def test_empty_snapshot_is_detected(self):
         # 开盘前的空壳：成交量全 0、只有前收盘那个点位；不能显示成「0.00 手」，
@@ -587,6 +622,29 @@ class BuildTest(unittest.TestCase):
         finally:
             stocks_watchdog.dispatch = original
 
+    def test_loop_window_and_nap(self):
+        # 常驻循环的「该不该干活」窗口：北京 09:00–15:30，周一到周五。
+        # 比 in_session（09:15–15:05）宽，且**窗口外不退出**——cron 会迟到几小时，
+        # 一次迟到的触发应该能睡到次日开盘自己开工。
+        parse = stocks_watchdog.parse_stamp
+        self.assertTrue(stocks_watchdog.in_loop_window(parse("2026-11-18T01:00:00Z")))   # 09:00
+        self.assertFalse(stocks_watchdog.in_loop_window(parse("2026-11-18T00:59:00Z")))  # 08:59
+        self.assertTrue(stocks_watchdog.in_loop_window(parse("2026-11-18T07:30:00Z")))   # 15:30
+        self.assertFalse(stocks_watchdog.in_loop_window(parse("2026-11-18T07:31:00Z")))  # 15:31
+        self.assertFalse(stocks_watchdog.in_loop_window(parse("2026-11-21T02:00:00Z")))  # 周六
+        # 窗口内立刻回来
+        self.assertEqual(stocks_watchdog.seconds_until_window(parse("2026-11-18T02:00:00Z")), 0)
+        # 北京 01:37（周四凌晨）→ 距当日 09:00 约 7.4 小时
+        nap = stocks_watchdog.seconds_until_window(parse("2026-11-18T17:37:00Z"))
+        self.assertAlmostEqual(nap / 3600, 7.38, places=1)
+        # 给 cap 就别睡太久（避免一次 sleep 卡死作业）
+        self.assertEqual(stocks_watchdog.seconds_until_window(
+            parse("2026-11-18T17:37:00Z"), cap=1800), 1800)
+        # 周五收盘后 → 跳过周末，指向下周一 09:00（北京）
+        friday = parse("2026-11-20T09:00:00Z")          # 北京 11-20 17:00 周五
+        n = stocks_watchdog.seconds_until_window(friday)
+        self.assertAlmostEqual(n / 3600, 64.0, delta=0.1)   # 周五17:00 → 周一09:00 = 64h
+
     def test_self_loop_guards(self):
         # 单个 step 里连续跑 6 小时，必须自己会停：无 Key/接口挂了不能空转，
         # 连续失败 4 轮就中止并且不交接下一棒。
@@ -603,8 +661,12 @@ class BuildTest(unittest.TestCase):
         # 交接下一棒要用 actions: write
         self.assertRegex(text, r"permissions:\s*\n\s*contents:\s*write\s*\n\s*actions:\s*write")
         steps = re.split(r"\n      - name: ", text)
-        loop = [s for s in steps if s.startswith("交易时段自循环")][0]
-        self.assertIn("--check-session", loop)                        # 收盘就停
+        loop = [s for s in steps if s.startswith("常驻自循环")][0]
+        # 窗口外不能退出（cron 会迟到几小时），要长睡等开盘
+        self.assertIn("--in-window", loop)
+        self.assertIn("--sleep-until-window", loop)
+        self.assertNotIn("--check-session", loop, "常驻循环不该用「盘中就退出」的旧判断")
+        self.assertIn("deadline", loop)                               # 有预算上限
         self.assertIn("fails", loop)                                  # 连续失败计数
         self.assertIn("ABORT_HANDOFF=1", loop)                        # 中止标记
         handoff = [s for s in steps if s.startswith("交接下一棒")][0]

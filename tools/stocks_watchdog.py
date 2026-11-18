@@ -43,6 +43,39 @@ def parse_stamp(text):
         return None
 
 
+# 自循环的「可以开始抓了」窗口：比 in_session 早一点、晚一点都行（集合竞价与
+# 收盘后的最终快照都值得抓一次）。在这里放宽，是为了避免「cron 恰好在 09:03
+# 触发、自循环一看 09:15 未到就退出」这种白跑。
+LOOP_START_MIN = 9 * 60 + 0     # 北京 09:00 起算「该干活了」
+LOOP_END_MIN = 15 * 60 + 30     # 15:30 之后不再抓（收盘 15:00 + 收尾快照）
+
+
+def in_loop_window(now):
+    """自循环该不该在这个时刻抓一轮（周一到周五 09:00–15:30 北京时间）。"""
+    beijing = now.astimezone(timezone.utc) + BEIJING_OFFSET
+    minutes = beijing.hour * 60 + beijing.minute
+    return beijing.weekday() < 5 and LOOP_START_MIN <= minutes <= LOOP_END_MIN
+
+
+def seconds_until_window(now, cap=None):
+    """距下一个「该干活」的时刻还有多少秒（已在该窗口内返回 0）。
+
+    cap 给了就最多返回 cap（让调用方可以「睡一大觉再看一眼」）。
+    """
+    if in_loop_window(now):
+        return 0
+    beijing = now.astimezone(timezone.utc) + BEIJING_OFFSET
+    for day in range(0, 8):
+        target = (beijing + timedelta(days=day)).replace(
+            hour=LOOP_START_MIN // 60, minute=LOOP_START_MIN % 60,
+            second=0, microsecond=0)
+        if target <= beijing or target.weekday() >= 5:
+            continue
+        delta = (target - beijing).total_seconds()
+        return int(min(delta, cap) if cap else delta)
+    return int(cap or 3600)
+
+
 def in_session(now):
     """北京时间是否在交易时段（周一到周五 09:15–15:05）。"""
     beijing = now.astimezone(timezone.utc) + BEIJING_OFFSET
@@ -137,8 +170,26 @@ def main(argv=None):
     parser.add_argument("--check-session", action="store_true",
                         help="只在交易时段内返回 0（自循环用）")
     parser.add_argument("--handoff", action="store_true",
-                        help="仍在交易时段就 workflow_dispatch 交接下一棒给自己")
+                        help="还有活要干（今天还没收盘）就 workflow_dispatch 交接下一棒给自己")
+    parser.add_argument("--in-window", action="store_true",
+                        help="只在「该抓一轮」的窗口内返回 0（自循环用）")
+    parser.add_argument("--sleep-until-window", type=int, default=None,
+                        metavar="CAP",
+                        help="距下一个该干活的时刻还有多少秒（最多 CAP 秒）")
     args = parser.parse_args(argv)
+
+    if args.in_window:
+        now = parse_stamp(args.now) if args.now else None
+        now = now or datetime.now(timezone.utc)
+        ok = in_loop_window(now)
+        print("抓取窗口内" if ok else "窗口外")
+        return 0 if ok else 1
+
+    if args.sleep_until_window is not None:
+        now = parse_stamp(args.now) if args.now else None
+        now = now or datetime.now(timezone.utc)
+        print(seconds_until_window(now, cap=args.sleep_until_window))
+        return 0
 
     if args.check_session:
         now = parse_stamp(args.now) if args.now else None
@@ -149,10 +200,12 @@ def main(argv=None):
     if args.handoff:
         now = parse_stamp(args.now) if args.now else None
         now = now or datetime.now(timezone.utc)
-        if not in_session(now):
-            print("非交易时段：不交接（自循环到此为止，等 cron 或被叫醒）")
+        if not in_loop_window(now):
+            # 收盘了（或周末）：不再交接，让 runner 释放；下一次开盘靠 cron /
+            # watchdog / 手动叫醒。
+            print("已过今天的抓取窗口：不交接（等下一次开盘的触发）")
             return 0
-        print("还在交易时段：交接下一棒给 refresh-stocks.yml")
+        print("窗口还没结束：交接下一棒给 refresh-stocks.yml")
         dispatch(args.repo)
         return 0
 
