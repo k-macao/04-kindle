@@ -1,6 +1,6 @@
 # 004 → Kindle（无需 Tesserae Cloud）
 
-通过 GitHub Pages 发布 004 **构建后的报告正文**，KOReader 插件每 60 秒检查一次并自动翻页。两种显示方式：**纯文本**（设备原生排版，轻量）和**页面截图**（真实排版、图表和表格都在，见 [docs/kindle-graphic.md](docs/kindle-graphic.md)）。不依赖 Tesserae 服务端或 Cloud 账号。已有的 Tesserae 插件如启用了自动刷新，请先停止，以免两者抢占屏幕。
+通过 GitHub Pages 发布 004 **构建后的报告正文**，KOReader 插件每 7 分钟检查一次并自动翻页。两种显示方式：**纯文本**（设备原生排版，轻量）和**页面截图**（真实排版、图表和表格都在，见 [docs/kindle-graphic.md](docs/kindle-graphic.md)）。不依赖 Tesserae 服务端或 Cloud 账号。已有的 Tesserae 插件如启用了自动刷新，请先停止，以免两者抢占屏幕。
 
 > 当前是可安装的初版，尚未在 Kindle Oasis 1 或真实 GitHub Pages 部署上做端到端验证。必须先把下面的生成步骤接入 **004 仓库实际的 Pages 发布流程**；本仓库改动不会自动修改 004。004 自身最短计划约 5 分钟，且 GitHub Actions 可能延迟；一分钟只指设备的检查/翻页间隔，不代表数据每分钟更新。
 
@@ -38,7 +38,7 @@ python tools/build_epub.py https://k-macao.github.io/004/ --out site   # 只用�
 
 上传也可以用 `.github/workflows/refresh-epub.yml` 自动完成（每次定时运行（默认每 60 分钟）都会生成并推送一次；目录页第一行是本次更新时间，源数据时间超过 12 小时只给出警告，仍然推送）。它**抓一次**页面存成 `report-built.html`，EPUB 与 `kindle.txt` 共用这一份（分别抓两次的话，004 正好在中间发布，两种产物就会来自不同的构建），先跑测试、生成后用 `tools/check_no_status.py` 自检，**有状态类文字残留、站点外壳或乱码残留、或者正文行数异常就不推送**。
 手动上传 `site/report.epub` + `site/epub.json` 时，插件里 **EPUB manifest URL** 指向
-`site/epub.json`，**Display mode → EPUB (styled)**。每 60 秒只拉一次几百字节的清单：
+`site/epub.json`，**Display mode → EPUB (styled)**。每 7 分钟只拉一次几百字节的清单：
 没更新就翻页，`generated` 变了才重下 EPUB 并从头打开。详见
 [docs/kindle-epub.md](docs/kindle-epub.md)。
 
@@ -144,7 +144,7 @@ Feedly / Reeder。插件那套「News subscription」读的是 `site/news.json`�
 `site/stocks.txt`（纯文本回退版）。统一 API Key 放在仓库 Actions Secret
 **`THS_API_KEY`** / **`THS_KEY`**（官网 <https://fuyao.aicubes.cn/admin/> 创建），
 不写入仓库。GitHub Actions 定时最短 5 分钟，所以工作流在 A 股交易时段
-（北京时间 09:00–15:55）每 5 分钟抓一轮；Kindle 插件与网页面板每 60 秒检查
+（北京时间 09:00–15:55）每 5 分钟抓一轮；Kindle 插件与网页面板每 7 分钟检查
 一次清单，`generated` 变了才刷新。本地要真正的 60 秒一轮：
 `HITHINK_FINANCE_API_KEY=… python tools/fetch_stocks.py --loop 60 --build`。
 自选清单在 `tools/stock_watchlist.py`，详见 [docs/kindle-stocks.md](docs/kindle-stocks.md)。
@@ -153,8 +153,8 @@ Feedly / Reeder。插件那套「News subscription」读的是 `site/news.json`�
 
 1. 已越狱的 Kindle 安装并启动 KOReader。将 `octopus004.koplugin` 文件夹完整复制到 `koreader/plugins/`，重启 KOReader。部署方式见 [docs/kindle-ssh.md](docs/kindle-ssh.md)：USB 直连用 `tools/kindle-usb.sh`（Windows 用 `tools/kindle-usb.ps1`；`--install` / `-Install` 直接拷入，无需 SSH），联网用 `tools/deploy-plugin.sh`（KOReader 自带 SSH 服务，默认端口 2222，无需另装 usbnet）。
 2. Tools → **004 Report** → 按显示模式填地址：**Report URL**（纯文本）、**EPUB manifest URL**（字模式）、**News manifest URL**（每日新闻）、**Stocks manifest URL**（同花顺行情面板）或 **Image manifest URL**（截图），再用 **Display mode** 选 text / epub / news / stocks / page images。选择 **Show report** 开始。
-3. 每 60 秒检查一次报告并翻到下一页，末页回到首页。点击屏幕可手动翻页、立即刷新、查看状态或停止。停止会恢复原有屏保设置。
-4. 有硬件唤醒时尝试使用 KOReader 唤醒管理器；否则保持设备唤醒并使用软件计时。是否支持取决于 Oasis 1 的 KOReader 构建。Wi-Fi 保持开启；一分钟联网和翻页会增加耗电。
+3. 每 7 分钟检查一次报告并翻到下一页，末页回到首页。点击屏幕可手动翻页、立即刷新、查看状态或停止。停止会恢复原有屏保设置。
+4. 有硬件唤醒时尝试使用 KOReader 唤醒管理器；否则保持设备唤醒并使用软件计时。是否支持取决于 Oasis 1 的 KOReader 构建。Wi-Fi 保持开启；联网和翻页会增加耗电（检查间隔 7 分钟，见 `main.lua` 的 `INTERVAL`）。
 
 请求失败时保留并轮播本地上次成功内容；文本模式顶部显示 `OFFLINE / CACHED`，图片模式整屏无状态栏，
 失败会弹一次提示、详情见菜单 `Status`；状态菜单可查看错误和最近成功检查时间。
@@ -176,7 +176,7 @@ Feedly / Reeder。插件那套「News subscription」读的是 `site/news.json`�
 - **菜单 → Check URLs (network)**：用 10 秒超时把每个候选地址单独试一遍，直接告诉你这台设备上
   哪个地址能用（jsDelivr 会缓存分支内容，自动刷新会带一个每分钟变化的查询串尽量绕开）。
 
-网络恢复后下一次 60 秒的检查会自动重试，不需要重启 KOReader。成功检查时间不是源数据时间，报告开头的转换时间也不是源数据时间，数据新鲜度以报告正文中的行情/采集时间为准。KOReader 退出、关机、网络故障或系统休眠等可能中断刷新。屏幕上的内容可能是旧的，不能用于需要实时数据的决策。
+网络恢复后下一次 7 分钟的检查会自动重试，不需要重启 KOReader。成功检查时间不是源数据时间，报告开头的转换时间也不是源数据时间，数据新鲜度以报告正文中的行情/采集时间为准。KOReader 退出、关机、网络故障或系统休眠等可能中断刷新。屏幕上的内容可能是旧的，不能用于需要实时数据的决策。
 
 ## 内容范围
 

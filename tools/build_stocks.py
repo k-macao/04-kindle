@@ -13,7 +13,7 @@
 - ``stocks.txt`` —— Kindle 纯文本面板（电子墨水友好：白底黑字、▲▼ + 正负号，
   不靠颜色传信息）；
 - ``stocks.html`` —— 浏览器卡片仪表盘：指数卡 + 自选股卡（带近 20 日迷你走势图）
-  + 涨停表，每 60 秒拉一次 ``stocks.json``，``generated`` 变了就重绘；
+  + 涨停表，每 ``POLL_SECONDS``（7 分钟）拉一次 ``stocks.json``，``generated`` 变了就重绘；
   拉不到就保留上一次的数据并标 OFFLINE；
 - ``stocks.epub`` —— Kindle 字模式卡片版：同一套数据排成表格卡片，交给
   KOReader 阅读器显示（crengine 不认 flex/grid/SVG，所以迷你图只出现在网页面板）。
@@ -35,7 +35,19 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 TITLE = "同花顺行情面板"
 DISCLAIMER = "仅供信息展示，不构成投资建议"
 BEIJING = timezone.utc  # 北京时间 = UTC+8 固定偏移，不用 tzdata
-POLL_SECONDS = 60
+# 服务端抓取间隔（分钟）：GitHub Actions 的 cron 最快 5 分钟一轮，见
+# .github/workflows/refresh-stocks.yml。文本面板上照实写，别写成「每分钟」。
+SERVER_MINUTES = 5
+# 设备端检查间隔：和服务端节奏对齐，7 分钟一查不会漏掉新快照，
+# 也不会把同一个 generated 反复拉（每拉一次都要唤醒设备）。
+POLL_SECONDS = 420
+
+
+def poll_text():
+    """POLL_SECONDS → 面板上显示的「7分钟」/「90秒」（前面留一个空格由调用处决定）。"""
+    if POLL_SECONDS % 60 == 0:
+        return f"{POLL_SECONDS // 60}分钟"
+    return f"{POLL_SECONDS}秒"
 
 
 def beijing_text(epoch_ms, fmt="%Y-%m-%d %H:%M:%S"):
@@ -151,7 +163,7 @@ def render_txt(payload, generated):
     demo = "【演示数据】" if payload.get("demo") else ""
     data_text = beijing_text(payload.get("data_timestamp")) or "无"
     lines.append(f"生成 {generated} 北京时间 · 数据 {data_text}{demo}")
-    lines.append(f"每5分钟刷新 · 每60秒检查 · {DISCLAIMER}")
+    lines.append(f"每{SERVER_MINUTES}分钟刷新 · 每{poll_text()}检查 · {DISCLAIMER}")
     lines.append("")
 
     indices = payload.get("indices") or []
@@ -240,12 +252,14 @@ footer{border-top:1px solid #000;margin-top:16px;padding-top:8px;font-size:13px;
 </header>
 <main id="main"></main>
 <footer>__DISCLAIMER__ · 数据来源：同花顺金融数据服务（hithink-finance）·
-面板每 __POLL__ 秒拉一次 stocks.json，generated 变了才重绘。</footer>
+面板每 __POLL_TEXT__ 拉一次 stocks.json，generated 变了才重绘。</footer>
 </div>
 <noscript><p>需要 JavaScript 才能每分钟刷新；Kindle 请用 stocks.txt 纯文本版或 stocks.epub 卡片版。</p></noscript>
 <script>
 'use strict';
 var POLL = __POLL__;
+// 界面文案用同一份间隔（POLL 是秒）：改成 7 分钟时两边不会说岔。
+var POLL_TEXT = '__POLL_TEXT__';
 var lastGenerated = null;
 // 清单里的时间都是 ISO-8601 UTC（"...Z"），显示前换成北京时间（+8h）。
 function bj(iso){
@@ -337,7 +351,7 @@ if(d.limit_up&&d.limit_up.length)h+='<section><h2>涨停池（'+d.limit_up.lengt
 document.getElementById('main').innerHTML=h||'<p>暂无数据</p>';
 var demo=d.demo?'【演示数据】':'';
 document.getElementById('meta').textContent='生成 '+bj(d.generated)+'（北京时间） · 数据时间 '+
-bj(d.data_time)+'（北京时间） '+demo+' · 每'+POLL+'秒检查一次';
+bj(d.data_time)+'（北京时间） '+demo+' · 每'+POLL_TEXT+'检查一次';
 document.getElementById('state').textContent='ONLINE';
 }
 function load(){
@@ -355,6 +369,7 @@ load();setInterval(load,POLL*1000);
 def render_html():
     return (HTML_TEMPLATE.replace("__TITLE__", TITLE)
             .replace("__DISCLAIMER__", DISCLAIMER)
+            .replace("__POLL_TEXT__", poll_text())
             .replace("__POLL__", str(POLL_SECONDS)))
 
 
@@ -524,7 +539,7 @@ def write_epub(path, xhtml, title=TITLE):
 
 
 def check(out_dir):
-    """产物自检：清单可解析、字段齐、文本非空、面板带 60 秒轮询。"""
+    """产物自检：清单可解析、字段齐、文本非空、面板带定时轮询。"""
     out = Path(out_dir)
     problems = []
     manifest_path = out / "stocks.json"
@@ -553,7 +568,7 @@ def check(out_dir):
     else:
         page = html_path.read_text(encoding="utf-8")
         if "stocks.json" not in page or f"var POLL = {POLL_SECONDS}" not in page:
-            problems.append("stocks.html 没有每 60 秒拉 stocks.json 的轮询")
+            problems.append(f"stocks.html 没有每 {poll_text()}拉 stocks.json 的轮询")
     epub_path = out / "stocks.epub"
     if not epub_path.is_file():
         problems.append("缺少 stocks.epub")

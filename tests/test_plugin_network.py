@@ -105,6 +105,16 @@ class NetWiringTest(unittest.TestCase):
         self.assertIn("function Report:usesReader()", MAIN)
         self.assertIn("not interactive and not self:usesReader()", MAIN)
 
+    def test_check_interval_is_seven_minutes(self):
+        # 设备端检查间隔 7 分钟：INTERVAL 是秒，界面文案由 intervalText() 生成，
+        # 不能把「60s」写死在标题里。
+        interval = int(re.search(r"local INTERVAL = (\d+)", MAIN).group(1))
+        self.assertEqual(interval, 420)
+        self.assertIn("local function intervalText()", MAIN)
+        self.assertIn('string.format("%dm", INTERVAL / 60)', MAIN)
+        self.assertIn("intervalText()", MAIN)
+        self.assertNotIn('"004  |  60s  |  tap for menu"', MAIN)
+
     def test_version_was_bumped(self):
         meta = (PLUGIN / "_meta.lua").read_text(encoding="utf-8")
         version = re.search(r'version = "([\d.]+)"', meta).group(1)

@@ -41,12 +41,14 @@ footer{border-top:1px solid #000;margin-top:16px;padding-top:8px;font-size:13px;
 </header>
 <main id="main"></main>
 <footer>仅供信息展示，不构成投资建议 · 数据来源：同花顺金融数据服务（hithink-finance）·
-面板每 60 秒拉一次 stocks.json，generated 变了才重绘。</footer>
+面板每 7分钟 拉一次 stocks.json，generated 变了才重绘。</footer>
 </div>
 <noscript><p>需要 JavaScript 才能每分钟刷新；Kindle 请用 stocks.txt 纯文本版或 stocks.epub 卡片版。</p></noscript>
 <script>
 'use strict';
-var POLL = 60;
+var POLL = 420;
+// 界面文案用同一份间隔（POLL 是秒）：改成 7 分钟时两边不会说岔。
+var POLL_TEXT = '7分钟';
 var lastGenerated = null;
 // 清单里的时间都是 ISO-8601 UTC（"...Z"），显示前换成北京时间（+8h）。
 function bj(iso){
@@ -138,7 +140,7 @@ if(d.limit_up&&d.limit_up.length)h+='<section><h2>涨停池（'+d.limit_up.lengt
 document.getElementById('main').innerHTML=h||'<p>暂无数据</p>';
 var demo=d.demo?'【演示数据】':'';
 document.getElementById('meta').textContent='生成 '+bj(d.generated)+'（北京时间） · 数据时间 '+
-bj(d.data_time)+'（北京时间） '+demo+' · 每'+POLL+'秒检查一次';
+bj(d.data_time)+'（北京时间） '+demo+' · 每'+POLL_TEXT+'检查一次';
 document.getElementById('state').textContent='ONLINE';
 }
 function load(){

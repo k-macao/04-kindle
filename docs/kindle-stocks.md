@@ -6,8 +6,8 @@
 | 产物 | 给谁看 | 刷新方式 |
 | --- | --- | --- |
 | `site/stocks.json` | 清单 + 数据（Kindle 插件与网页面板都读它） | 工作流每 5 分钟重写 |
-| `site/stocks.html` | 浏览器卡片仪表盘 | 每 60 秒拉一次 `stocks.json` |
-| `site/stocks.epub` | Kindle 字模式卡片版（交给阅读器排版） | 清单 `generated` 变了才重下 |
+| `site/stocks.html` | 浏览器卡片仪表盘 | 每 7 分钟拉一次 `stocks.json` |
+| `site/stocks.epub` | Kindle 字模式卡片版（交给阅读器排版） | 每 7 分钟查一次清单，变了才重下 |
 | `site/stocks.txt` | Kindle 纯文本面板（EPUB 不可用时的回退） | 同上 |
 
 面板是**表格 + 图形 + 卡片**三层：
@@ -31,10 +31,14 @@
 - **服务端最快 5 分钟一轮**：GitHub Actions 的定时任务最短 5 分钟，做不到 1 分钟。
   工作流在 A 股交易时段（北京时间 09:00–15:55，周一到周五）每 5 分钟抓一轮，
   见 `.github/workflows/refresh-stocks.yml`。
-- **设备端每 60 秒检查一次**：Kindle 插件与网页面板都每 60 秒拉一次清单，
-  `generated` 变了才刷新——和 EPUB/新闻同一套规矩。
+- **设备端每 7 分钟检查一次**：Kindle 插件与网页面板都每 7 分钟（`INTERVAL = 420`
+  秒 / `POLL_SECONDS = 420`）拉一次清单，`generated` 变了才刷新——和 EPUB/新闻
+  同一套规矩。比服务端 5 分钟稍慢一点，既不会漏掉快照，也不会每分钟把设备唤醒
+  一次白拉同一份清单。改成别的间隔：插件改 `main.lua` 的 `INTERVAL`（界面上的
+  「7m」由 `intervalText()` 自动跟着变），网页面板改 `build_stocks.py` 的
+  `POLL_SECONDS`（面板文案由 `poll_text()` 跟着变）。
 - **本地要真正的 60 秒一轮**：`python tools/fetch_stocks.py --loop 60 --build`
-  常驻跑（见第 3 节）。
+  常驻跑（见第 3 节；这是电脑上的抓取循环，跟设备端的 7 分钟检查是两回事）。
 
 数据新鲜度以清单里的 `data_time`（快照数据时间）为准，不是生成时间；
 收盘后快照时间不变，工作流按 `data_hash` 判断「行情没变就不提交」。
@@ -98,7 +102,7 @@ HTTPS 地址（和 EPUB/新闻一样，支持多地址与镜像自动切换）�
 https://raw.githubusercontent.com/k-macao/04-kindle/main/site/stocks.json
 ```
 
-每 60 秒只拉一次清单：没更新就翻一页，`generated` 变了才重下 `stocks.epub`
+每 7 分钟只拉一次清单：没更新就翻一页，`generated` 变了才重下 `stocks.epub`
 （文件名带序号，所以阅读器每次从头打开），交给 KOReader 阅读器排版显示
 ——字体、行距、页边距都跟着你设备上现有的阅读设置走。
 
@@ -109,7 +113,8 @@ EPUB 卡片版长这样：每只股票一张表格卡片（名称/代码、大�
 
 清单里没有 `epub` 字段、或者 EPUB 下载失败（非 HTTPS / 不是 zip）时，
 自动回退到纯文本 `stocks.txt`，不会白屏。状态菜单（Status）会显示行情的
-`data_time`（超过 24 小时没更新标 `stale`）和当前打开的 STOCKS 文件名。
+`data_time`（超过 24 小时没更新标 `stale`）、检查间隔（`every 7m`）和当前打开的
+STOCKS 文件名。
 
 ## 5. 排错
 

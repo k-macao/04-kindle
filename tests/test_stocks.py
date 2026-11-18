@@ -312,7 +312,10 @@ class BuildTest(unittest.TestCase):
             self.assertEqual(build_stocks.check(str(out)), [])
             page = (out / "stocks.html").read_text(encoding="utf-8")
             self.assertIn("stocks.json", page)
-            self.assertIn("var POLL = 60", page)
+            self.assertIn(f"var POLL = {build_stocks.POLL_SECONDS}", page)
+            # 文案与轮询间隔同源：改间隔时不会只改一半（7 分钟 = 420 秒）。
+            self.assertIn(f"POLL_TEXT = '{build_stocks.poll_text()}'", page)
+            self.assertIn(f"setInterval(load,POLL*1000)", page)
             # 卡片 + 迷你走势图 + 涨停表都由页面里的 JS 现画
             self.assertIn('class="cards"', page)
             self.assertIn("function spark(", page)
@@ -393,6 +396,14 @@ class BuildTest(unittest.TestCase):
             self.assertTrue(data["demo"])
             text = (out / "stocks.txt").read_text(encoding="utf-8")
             self.assertIn("演示数据", text)
+
+    def test_device_poll_is_seven_minutes(self):
+        # 设备端（网页面板 + Kindle 插件）都是 7 分钟检查一次；服务端仍是 5 分钟一轮。
+        self.assertEqual(build_stocks.POLL_SECONDS, 420)
+        self.assertEqual(build_stocks.poll_text(), "7分钟")
+        text = build_stocks.render_txt(self._payload(), "2026-11-17 15:00:00")
+        self.assertIn("每7分钟检查", text)
+        self.assertIn("每5分钟刷新", text)
 
     def test_formatters(self):
         self.assertEqual(build_stocks.fmt_volume(3098875.0), "3.10万手")

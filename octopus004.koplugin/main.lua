@@ -61,10 +61,17 @@ local DOC_KINDS = {
 }
 -- 同花顺行情面板是第三种来源：清单 site/stocks.json（generated 做签名）+ 卡片版
 -- site/stocks.epub（有就交给阅读器，见 refreshStocksEpub）+ 纯文本回退版
--- site/stocks.txt。每 60 秒只拉一次清单，generated 变了才重下正文；
+-- site/stocks.txt。每 INTERVAL 秒只拉一次清单，generated 变了才重下正文；
 -- 文本缓存与报告/新闻的缓存文件分开，互不覆盖。
 local STOCKS_CACHE = "octopus004-stocks.txt"
-local INTERVAL = 60
+-- 检查间隔（秒）：7 分钟。服务端工作流最快 5 分钟一轮，60 秒一查大多是在
+-- 重复拉同一条清单，白唤醒设备；7 分钟足够跟上服务端节奏，也更省电。
+local INTERVAL = 420
+-- 界面上显示的间隔（"7m" / "90s"）：INTERVAL 是秒，人读的是分钟。
+local function intervalText()
+    if INTERVAL % 60 == 0 then return string.format("%dm", INTERVAL / 60) end
+    return string.format("%ds", INTERVAL)
+end
 local WIFI_WAIT = 90
 -- 设备上显示的时间统一为北京时间（UTC+8），与设备本地时区无关。
 local BEIJING_OFFSET = 8 * 3600
@@ -596,7 +603,8 @@ function Report:refreshImage()
         self.page_count = #manifest.pages
         if not self.dashboard then
             self:showText("004 · 图形界面\n\n正在下载 1/" .. #manifest.pages ..
-                " 页页面图片…\n首次需要下载全部页面，之后每 60 秒只检查是否有更新。", false)
+                " 页页面图片…\n首次需要下载全部页面，之后每 " .. intervalText()
+                .. " 只检查是否有更新。", false)
         end
         local count, download_error = self:downloadPages(manifest)
         if not count then error(download_error) end
@@ -676,7 +684,8 @@ function Report:showText(text, preserve)
     local w, h = Screen:getWidth(), Screen:getHeight()
     local margin = math.floor(w * 0.035)
     local face = Font:getFace("cfont", 22)
-    local header = TextWidget:new{ text = "004  |  60s  |  tap for menu", face = Font:getFace("smallinfofont") }
+    local header = TextWidget:new{ text = "004  |  " .. intervalText() .. "  |  tap for menu",
+        face = Font:getFace("smallinfofont") }
     local box = TextBoxWidget:new{ text = text, face = face, width = w - 2 * margin,
         height = h - 2 * margin - header:getSize().h - 8 }
     if previous_line > 1 then box:scrollLines(math.min(previous_line - 1, box:getAllLineCount() - 1)) end
@@ -846,7 +855,8 @@ function Report:diagnose()
 end
 
 function Report:status()
-    local mode = self.wake:mode(true) == "rtc" and "hardware wake" or "awake timer"
+    local mode = (self.wake:mode(true) == "rtc" and "hardware wake" or "awake timer")
+        .. " · every " .. intervalText()
     local checked = self.last_check and (beijing(self.last_check, "%Y-%m-%d %H:%M:%S") .. " (Beijing)") or "never"
     local data = ""
     local spec = self:docSpec()

@@ -1,7 +1,7 @@
 # 图形界面模式：把 004 发布页按屏幕尺寸渲染成图片
 
 纯文本模式（`kindle_report.py` + `kindle.txt`）只保留正文文字，表格变成一行行字、徽章和图
-表全丢。这个模式改成**把真实页面按设备分辨率截图**，插件按页显示，60 秒轮询刷新——设备上
+表全丢。这个模式改成**把真实页面按设备分辨率截图**，插件按页显示，每 7 分钟轮询刷新——设备上
 看到的是和网页一样的排版，代价是不能交互、页数多时刷新变慢。
 
 整条链路只在**本仓库**里完成，不需要改 004 的任何代码或 CI。
@@ -16,7 +16,7 @@ site/report.json + site/pages/page-000.png … page-NNN.png
    │  上传到本仓库 main（或任何 HTTPS 静态位置，要求不跳转）
    ▼
 octopus004.koplugin（Display mode = page images）
-   │  每 60 秒拉 report.json，generated 变了才重新下载图片
+   │  每 7 分钟拉 report.json，generated 变了才重新下载图片
    ▼
 Kindle 屏幕：一页一张图，自动翻页
 ```
@@ -157,7 +157,7 @@ UTF-8 无 BOM，拔线后重新打开 KOReader → 004 Report → Show report。
 
 ## 4. 更新
 
-改了 004 之后重新跑一次第 1 步、覆盖 `site/` 里的文件即可。设备每 60 秒拉一次
+改了 004 之后重新跑一次第 1 步、覆盖 `site/` 里的文件即可。设备每 7 分钟拉一次
 `report.json`，发现 `generated` 变了才重新下载所有图片；`generated` 没变就继续翻页。
 
 注意 `raw.githubusercontent.com` 走 CDN，更新后通常要 **1–5 分钟**才看得到新文件；这是
