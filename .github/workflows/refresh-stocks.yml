@@ -63,6 +63,46 @@ jobs:
       - name: 跑测试（信封解析、重试、归一化、排版、自检）
         run: python -m unittest discover -s tests
 
+      # 测试里不许**无条件**依赖第三方库：CI runner 只有标准库。
+      # （#57 就是因为在测试函数体里 import yaml，合并后 refresh-stocks 每次都在
+      #   「跑测试」挂掉，错误混在一大堆测试输出里，很不好认。）
+      # 注意有的测试是 try/except ImportError + skipUnless 的可选依赖（PIL / lupa），
+      # 那是合法的，这里只拦「模块顶层无条件 import」。
+      - name: 检查测试只无条件依赖标准库
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import ast
+          import pathlib
+          import sys
+
+          allowed = set(sys.stdlib_module_names) | {"tests"}
+          # 仓库自己的模块：tools/ 下的，以及仓库根目录的 kindle_report.py
+          local = {p.stem for p in pathlib.Path("tools").glob("*.py")}
+          local |= {p.stem for p in pathlib.Path(".").glob("*.py")}
+          bad = []
+          for path in pathlib.Path("tests").rglob("*.py"):
+              tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+              # 只检查模块顶层（try: import PIL 这种包在 Try 里的算可选依赖，放行）
+              for node in tree.body:
+                  if isinstance(node, ast.Import):
+                      names = [(a.name.split(".")[0], node.lineno) for a in node.names]
+                  elif isinstance(node, ast.ImportFrom) and node.level == 0:
+                      names = [((node.module or "").split(".")[0], node.lineno)]
+                  else:
+                      continue
+                  for name, line in names:
+                      if name and name not in allowed and name not in local:
+                          bad.append(f"{path}:{line} import {name}")
+          if bad:
+              print("测试在模块顶层 import 了非标准库模块（CI 上会直接失败）：", file=sys.stderr)
+              print("\n".join(bad), file=sys.stderr)
+              print("确实需要时请包在 try/except ImportError + @unittest.skipUnless 里。",
+                    file=sys.stderr)
+              raise SystemExit(1)
+          print("测试的顶层依赖只有标准库与 tools/ ✓")
+          PY
+
       # ── 交易时段自循环 ────────────────────────────────────────────────
       # 一次触发，在同一个 runner 里连续刷到预算用完，再 workflow_dispatch 交接下一棒。
       # 每轮：抓取 → 排版 → 自检 → 提交（行情没变不提交）。
