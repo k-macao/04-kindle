@@ -122,9 +122,10 @@ class NetWiringTest(unittest.TestCase):
         self.assertIn("self.settings.autostart = self.settings.enabled == true", MAIN)
         init = MAIN[MAIN.index("function Report:init()"):]
         init = init[:init.index("\nend\n")]
-        self.assertIn("if self.settings.autostart and self.settings.autostart_resume then", init)
+        self.assertIn("if self.settings.autostart and self.settings.autostart_resume", init)
+        self.assertIn("and not session_started then", init)
         # 手动 Stop 之后即便 Auto-start 开着也不再自动开。
-        stop = MAIN[MAIN.index("function Report:stop()"):]
+        stop = MAIN[MAIN.index("function Report:stop(silent)"):]
         stop = stop[:stop.index("\nend\n")]
         self.assertIn("self.settings.autostart_resume = nil", stop)
 
@@ -141,6 +142,65 @@ class NetWiringTest(unittest.TestCase):
     def test_menu_has_auto_start_toggle(self):
         self.assertIn('"Auto-start on launch: "', MAIN)
         self.assertIn("function Report:toggleAutostart()", MAIN)
+
+    def test_auto_start_cannot_reopen_the_same_doc_forever(self):
+        # 死循环根因：init→start→openDoc→showReader→init 里，只看设置里的
+        # autostart_resume 会一遍遍重开。现在有两道闸：进程内标记 session_started，
+        # 以及「自动开书只做一次」（session_opened_doc / auto_opened_doc）。
+        self.assertIn("local session_started = false", MAIN)
+        self.assertIn("local session_opened_doc = false", MAIN)
+        init = MAIN[MAIN.index("function Report:init()"):]
+        init = init[:init.index("\nend\n")]
+        self.assertIn("not session_started", init)
+        self.assertIn("if self.settings.auto_opened_doc then session_opened_doc = true end", init)
+        self.assertIn("if self.settings.auto_opened_doc then", MAIN)  # 或写回设置
+        start = MAIN[MAIN.index("function Report:start()"):]
+        start = start[:start.index("\n    self:refresh(true)")]
+        self.assertIn("session_started = true", start)
+        self.assertIn("and not session_opened_doc then", start)
+
+    def test_open_doc_skips_when_already_open_and_records_marker(self):
+        body = MAIN[MAIN.index("function Report:openDoc(spec, path)"):]
+        body = body[:body.index("\nend\n")]
+        self.assertIn('local current = self.ui and self.ui.document and self.ui.document.file', body)
+        self.assertIn("if current and current == path then", body)
+        self.assertIn("session_opened_doc = true", body)
+        self.assertIn("patchSettings({ auto_opened_doc = true })", body)
+        # 自动那一路上不重置标记，否则又能循环
+        start = MAIN[MAIN.index("function Report:start()"):]
+        start = start[:start.index("\n    self:refresh(true)")]
+        self.assertIn("if self.interactive_start then", start)
+        self.assertIn("session_opened_doc = false", start)
+
+    def test_emergency_stop_is_a_file_level_kill_switch(self):
+        self.assertIn("local function emergencyStopped()", MAIN)
+        self.assertIn("data.emergency_stop == true", MAIN)
+        init = MAIN[MAIN.index("function Report:init()"):]
+        init = init[:init.index("\nend\n")]
+        self.assertIn("if self.settings.emergency_stop then", init)
+        self.assertIn("the plugin stays idle", init)
+        self.assertIn("function Report:toggleEmergencyStop()", MAIN)
+        self.assertIn('"Stop everything (emergency): "', MAIN)
+
+    def test_session_widget_keeps_timers_alive_across_readerui_swap(self):
+        # 后台壳：不显示但能收 onResume/onSuspend；ReaderUI 被换掉后能重新挂上，
+        # 并且把菜单挂到当前宿主上，否则被 EPUB 模式困住时够不着 Stop。
+        self.assertIn('local Session = WidgetContainer:extend{ name = "octopus004-session"', MAIN)
+        self.assertIn("function Report:ensureSession()", MAIN)
+        self.assertIn("function Report:attachToHost()", MAIN)
+        start = MAIN[MAIN.index("function Report:start()"):]
+        start = start[:start.index("\n    self:refresh(true)")]
+        self.assertIn("self:ensureSession()", start)
+        finish = MAIN[MAIN.index("        self.next_due = os.time() + INTERVAL"):]
+        finish = finish[:finish.index("\n    end\n")]
+        self.assertIn("if self.settings.enabled then self:ensureSession() end", finish)
+
+    def test_stop_is_reachable_and_writes_its_reason(self):
+        body = MAIN[MAIN.index("function Report:stop(silent)"):]
+        body = body[:body.index("\nend\n")]
+        self.assertIn("self.settings.autostart_resume = nil", body)
+        self.assertIn("session_started = true", body)
+        self.assertIn('"004: stopped', body)
 
     def test_version_was_bumped(self):
         meta = (PLUGIN / "_meta.lua").read_text(encoding="utf-8")
