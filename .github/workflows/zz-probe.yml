@@ -1,8 +1,6 @@
 name: zz probe (temporary)
 on:
-  push:
-    branches: [arena/8f0e4cef-04-kindle]
-    paths: [".github/workflows/zz-probe.yml"]
+  workflow_dispatch:
 permissions:
   contents: write
 jobs:
@@ -13,58 +11,44 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: 探测接口能力
+      - name: 测指数目录规模与全A抓取耗时
         env:
           HITHINK_FINANCE_API_KEY: ${{ secrets.HITHINK_FINANCE_API_KEY }}
           THS_API_KEY: ${{ secrets.THS_API_KEY }}
           THS_KEY: ${{ secrets.THS_KEY }}
         run: |
           python - <<'PY' 2>&1 | tee probe.txt
-          import json, os, sys
+          import json, os, time
           from urllib.parse import urlencode
           from urllib.request import Request, urlopen
-
-          KEY = next((os.environ[k] for k in ("HITHINK_FINANCE_API_KEY", "THS_API_KEY", "THS_KEY")
-                      if os.environ.get(k)), "")
-          print("key present:", bool(KEY), "len", len(KEY))
+          KEY = next((os.environ[k] for k in ("HITHINK_FINANCE_API_KEY","THS_API_KEY","THS_KEY") if os.environ.get(k)), "")
           BASE = "https://fuyao.aicubes.cn"
-
           def hit(path, **params):
               url = BASE + path + ("?" + urlencode(params) if params else "")
-              req = Request(url, headers={"X-api-key": KEY, "User-Agent": "probe"})
+              t0 = time.time()
               try:
-                  with urlopen(req, timeout=30) as r:
-                      body = json.loads(r.read().decode())
-              except Exception as exc:
-                  return {"_error": f"{type(exc).__name__}: {exc}"}
-              return {"code": body.get("code"), "msg": body.get("message"),
-                      "total": (body.get("data") or {}).get("total") if isinstance(body.get("data"), dict) else None,
-                      "n": len((body.get("data") or {}).get("item") or []) if isinstance(body.get("data"), dict) else None,
-                      "sample": ((body.get("data") or {}).get("item") or [None])[0] if isinstance(body.get("data"), dict) else None}
-
-          tests = {
-            "A股快照 limit=1 (看 total=全市场只数)": ("/api/a-share/prices/snapshot", {"limit": 1}),
-            "A股快照 limit=5000": ("/api/a-share/prices/snapshot", {"limit": 5000}),
-            "标的全表 a-share": ("/api/meta/tickers/list", {"asset_type": "a-share", "limit": 1}),
-            "标的全表 a-share-index": ("/api/meta/tickers/list", {"asset_type": "a-share-index", "limit": 1}),
-            "指数快照 沪指": ("/api/a-share-index/prices/snapshot", {"thscodes": "000001.SH"}),
-            "指数快照 恒生HSI.HK": ("/api/a-share-index/prices/snapshot", {"thscodes": "HSI.HK"}),
-            "指数快照 恒生 HSI": ("/api/a-share-index/prices/snapshot", {"thscodes": "HSI"}),
-            "指数快照 恒生 800000.HK": ("/api/a-share-index/prices/snapshot", {"thscodes": "800000.HK"}),
-            "A股快照 港股代码 00700.HK": ("/api/a-share/prices/snapshot", {"thscodes": "00700.HK"}),
-            "港股IPO日历": ("/api/hk-share/ipo/calendar-list", {}),
-            "指数目录 industry": ("/api/a-share-index/catalog/ths-index-list", {"tag": "industry"}),
-            "指数目录 tszs": ("/api/a-share-index/catalog/ths-index-list", {"tag": "tszs"}),
-          }
-          for label, (path, params) in tests.items():
-              r = hit(path, **params)
-              print(f"\n### {label}\n  {json.dumps(r, ensure_ascii=False)[:600]}")
+                  with urlopen(Request(url, headers={"X-api-key": KEY, "User-Agent": "probe"}), timeout=60) as r:
+                      b = json.loads(r.read().decode())
+              except Exception as e:
+                  return {"_error": f"{type(e).__name__}: {e}"}
+              d = b.get("data") if isinstance(b.get("data"), dict) else {}
+              return {"code": b.get("code"), "n": len(d.get("item") or []), "total": d.get("total"),
+                      "secs": round(time.time()-t0, 1), "kb": round(len(json.dumps(b))/1024)}
+          print("index目录 cn_concept:", hit("/api/a-share-index/catalog/ths-index-list", tag="cn_concept"))
+          print("index目录 region    :", hit("/api/a-share-index/catalog/ths-index-list", tag="region"))
+          print("index目录 industry  :", hit("/api/a-share-index/catalog/ths-index-list", tag="industry"))
+          print("a-share-index 全表  :", hit("/api/meta/tickers/list", asset_type="a-share-index", limit=10000))
+          print("A股快照 5000 只     :", hit("/api/a-share/prices/snapshot", limit=5000))
+          print("A股快照 584 剩余    :", hit("/api/a-share/prices/snapshot", limit=1000, offset=5000))
+          print("指数快照 8 个       :", hit("/api/a-share-index/prices/snapshot",
+                thscodes="000001.SH,399001.SZ,399006.SZ,000300.SH,000688.SH,000905.SH,000852.SH,000016.SH"))
+          print("指数快照 50 个      :", hit("/api/a-share-index/prices/snapshot",
+                thscodes=",".join(f"{i:06d}.SH" for i in range(1, 51))))
           PY
-      - name: 写回结果
+      - name: 写回
         if: always()
         run: |
           git config user.name probe; git config user.email probe@example.com
-          cp probe.txt probe-result.txt
-          git add probe-result.txt
-          git commit -q -m "probe: 接口能力探测（临时）"
+          cp probe.txt probe-result.txt; git add probe-result.txt
+          git commit -q -m "probe: 规模与耗时（临时）"
           git push -q origin "HEAD:refs/heads/${GITHUB_REF_NAME}"
