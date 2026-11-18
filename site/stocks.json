@@ -1,924 +1,4824 @@
 {
-  "generated": "2026-11-18T00:46:34Z",
+  "generated": "2026-11-18T00:47:15Z",
   "doc": "stocks.txt",
   "epub": "stocks.epub",
   "title": "同花顺行情面板",
-  "data_timestamp": 1794934723000,
-  "data_time": "2026-11-17T16:58:43Z",
+  "data_timestamp": 1794962827000,
+  "data_time": "2026-11-18T00:47:07Z",
   "data_time_kind": "exact",
-  "data_hash": "c197ff89b341e629",
+  "data_hash": "ad30ce6c670e9526",
   "demo": false,
   "counts": {
     "indices": 7,
     "stocks": 43,
-    "limit_up": 20
+    "limit_up": 0
   },
   "indices": [
     {
       "thscode": "000001.SH",
       "ticker": "1A0001",
       "name": "上证指数",
-      "last_price": 3584.58,
-      "price_change": -17.99,
-      "price_change_ratio_pct": -0.499366,
-      "open_price": 3585.67,
-      "high_price": 3604.98,
-      "low_price": 3565.59,
-      "prev_price": 3602.57,
-      "volume": 44407470000.0,
-      "turnover": 690514640000.0
+      "last_price": 3584.56,
+      "price_change": -0.02,
+      "price_change_ratio_pct": -0.00055795,
+      "open_price": 0.0,
+      "high_price": 0.0,
+      "low_price": 0.0,
+      "prev_price": 3584.58,
+      "volume": 0.0,
+      "turnover": 0.0
     },
     {
       "thscode": "399001.SZ",
       "ticker": "399001",
       "name": "深证成指",
-      "last_price": 10638.5242,
-      "price_change": -52.2542,
-      "price_change_ratio_pct": -0.488778,
-      "open_price": 10605.1729,
-      "high_price": 10768.0551,
-      "low_price": 10556.2868,
-      "prev_price": 10690.7784,
-      "volume": 53788564000.0,
-      "turnover": 767179960000.0
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 10638.5242,
+      "volume": 0.0,
+      "turnover": 0.0
     },
     {
       "thscode": "399006.SZ",
       "ticker": "399006",
       "name": "创业板指",
-      "last_price": 2292.2037,
-      "price_change": -27.8162,
-      "price_change_ratio_pct": -1.198964,
-      "open_price": 2299.9676,
-      "high_price": 2343.1465,
-      "low_price": 2263.7423,
-      "prev_price": 2320.0199,
-      "volume": 16528732000.0,
-      "turnover": 369315660000.0
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 2292.2037,
+      "volume": 0.0,
+      "turnover": 0.0
     },
     {
       "thscode": "000300.SH",
       "ticker": "1B0300",
       "name": "沪深300",
       "last_price": 3976.46,
-      "price_change": -3.34,
-      "price_change_ratio_pct": -0.083924,
-      "open_price": 3965.9,
-      "high_price": 3985.99,
-      "low_price": 3942.38,
-      "prev_price": 3979.8,
-      "volume": 17926286000.0,
-      "turnover": 409477160000.0
+      "price_change": 0.0,
+      "price_change_ratio_pct": 0.0,
+      "open_price": 0.0,
+      "high_price": 0.0,
+      "low_price": 0.0,
+      "prev_price": 3976.46,
+      "volume": 0.0,
+      "turnover": 0.0
     },
     {
       "thscode": "000688.SH",
       "ticker": "1B0688",
       "name": "科创50",
       "last_price": 1221.19,
-      "price_change": 7.51,
-      "price_change_ratio_pct": 0.618779,
-      "open_price": 1212.39,
-      "high_price": 1255.44,
-      "low_price": 1198.26,
-      "prev_price": 1213.68,
-      "volume": 1004561700.0,
-      "turnover": 96783588000.0
+      "price_change": 0.0,
+      "price_change_ratio_pct": 0.0,
+      "open_price": 0.0,
+      "high_price": 0.0,
+      "low_price": 0.0,
+      "prev_price": 1221.19,
+      "volume": 0.0,
+      "turnover": 0.0
     },
     {
       "thscode": "000905.SH",
       "ticker": "1B0905",
       "name": "中证500",
-      "last_price": 6283.01,
-      "price_change": -14.17,
-      "price_change_ratio_pct": -0.225021,
-      "open_price": 6252.19,
-      "high_price": 6376.51,
-      "low_price": 6234.4,
-      "prev_price": 6297.18,
-      "volume": 12508115100.0,
-      "turnover": 259335860000.0
+      "last_price": 6282.99,
+      "price_change": -0.02,
+      "price_change_ratio_pct": -0.00031832,
+      "open_price": 0.0,
+      "high_price": 0.0,
+      "low_price": 0.0,
+      "prev_price": 6283.01,
+      "volume": 0.0,
+      "turnover": 0.0
     },
     {
       "thscode": "000852.SH",
       "ticker": "1B0852",
       "name": "中证1000",
-      "last_price": 6092.39,
-      "price_change": -72.23,
-      "price_change_ratio_pct": -1.171686,
-      "open_price": 6111.05,
-      "high_price": 6225.56,
-      "low_price": 6055.73,
-      "prev_price": 6164.62,
-      "volume": 18590169000.0,
-      "turnover": 283212960000.0
+      "last_price": 6092.34,
+      "price_change": -0.05,
+      "price_change_ratio_pct": -0.0008207,
+      "open_price": 0.0,
+      "high_price": 0.0,
+      "low_price": 0.0,
+      "prev_price": 6092.39,
+      "volume": 0.0,
+      "turnover": 0.0
     }
   ],
   "stocks": [
     {
-      "thscode": "688981.SH",
-      "ticker": "688981",
-      "name": "中芯国际",
-      "last_price": 113.45,
-      "price_change": 7.01,
-      "price_change_ratio_pct": 6.58587,
-      "open_price": 108.12,
-      "high_price": 115.94,
-      "low_price": 107.66,
-      "prev_price": 106.44,
-      "volume": 74634202.0,
-      "turnover": 8384901100.0
-    },
-    {
-      "thscode": "600690.SH",
-      "ticker": "600690",
-      "name": "海尔智家",
-      "last_price": 22.3,
-      "price_change": 0.58,
-      "price_change_ratio_pct": 2.67035,
-      "open_price": 21.71,
-      "high_price": 22.32,
-      "low_price": 21.69,
-      "prev_price": 21.72,
-      "volume": 78830124.0,
-      "turnover": 1741594800.0
-    },
-    {
-      "thscode": "601766.SH",
-      "ticker": "601766",
-      "name": "中国中车",
-      "last_price": 6.73,
-      "price_change": 0.13,
-      "price_change_ratio_pct": 1.969697,
-      "open_price": 6.6,
-      "high_price": 6.74,
-      "low_price": 6.59,
-      "prev_price": 6.6,
-      "volume": 229807460.0,
-      "turnover": 1534072800.0
-    },
-    {
-      "thscode": "000651.SZ",
-      "ticker": "000651",
-      "name": "格力电器",
-      "last_price": 40.66,
-      "price_change": 0.51,
-      "price_change_ratio_pct": 1.270237,
-      "open_price": 40.08,
-      "high_price": 40.68,
-      "low_price": 40.01,
-      "prev_price": 40.15,
-      "volume": 63128090.0,
-      "turnover": 2554607700.0
-    },
-    {
-      "thscode": "603288.SH",
-      "ticker": "603288",
-      "name": "海天味业",
-      "last_price": 36.2,
-      "price_change": 0.44,
-      "price_change_ratio_pct": 1.230425,
-      "open_price": 35.88,
-      "high_price": 36.27,
-      "low_price": 35.42,
-      "prev_price": 35.76,
-      "volume": 20307345.0,
-      "turnover": 729755250.0
-    },
-    {
-      "thscode": "603259.SH",
-      "ticker": "603259",
-      "name": "药明康德",
-      "last_price": 146.07,
-      "price_change": 1.66,
-      "price_change_ratio_pct": 1.149505,
-      "open_price": 144.5,
-      "high_price": 146.8,
-      "low_price": 142.2,
-      "prev_price": 144.41,
-      "volume": 24062981.0,
-      "turnover": 3491561100.0
-    },
-    {
-      "thscode": "601688.SH",
-      "ticker": "601688",
-      "name": "华泰证券",
-      "last_price": 17.23,
-      "price_change": 0.17,
-      "price_change_ratio_pct": 0.996483,
-      "open_price": 17.0,
-      "high_price": 17.27,
-      "low_price": 16.91,
-      "prev_price": 17.06,
-      "volume": 45805005.0,
-      "turnover": 784102690.0
-    },
-    {
-      "thscode": "600028.SH",
-      "ticker": "600028",
-      "name": "中国石化",
-      "last_price": 5.89,
-      "price_change": 0.05,
-      "price_change_ratio_pct": 0.856164,
-      "open_price": 5.8,
-      "high_price": 5.89,
-      "low_price": 5.76,
-      "prev_price": 5.84,
-      "volume": 226842680.0,
-      "turnover": 1325570290.0
-    },
-    {
-      "thscode": "688256.SH",
-      "ticker": "688256",
-      "name": "寒武纪",
-      "last_price": 904.8,
-      "price_change": 6.83,
-      "price_change_ratio_pct": 0.760604,
-      "open_price": 910.0,
-      "high_price": 950.0,
-      "low_price": 886.0,
-      "prev_price": 897.97,
-      "volume": 13376588.0,
-      "turnover": 12248173700.0
-    },
-    {
-      "thscode": "000333.SZ",
-      "ticker": "000333",
-      "name": "美的集团",
-      "last_price": 93.33,
-      "price_change": 0.65,
-      "price_change_ratio_pct": 0.701338,
-      "open_price": 92.68,
-      "high_price": 93.9,
-      "low_price": 92.0,
-      "prev_price": 92.68,
-      "volume": 34890574.0,
-      "turnover": 3251375300.0
-    },
-    {
-      "thscode": "600050.SH",
-      "ticker": "600050",
-      "name": "中国联通",
-      "last_price": 4.42,
-      "price_change": 0.03,
-      "price_change_ratio_pct": 0.683371,
-      "open_price": 4.39,
-      "high_price": 4.43,
-      "low_price": 4.37,
-      "prev_price": 4.39,
-      "volume": 181599530.0,
-      "turnover": 799718190.0
-    },
-    {
-      "thscode": "601988.SH",
-      "ticker": "601988",
-      "name": "中国银行",
-      "last_price": 7.37,
-      "price_change": 0.05,
-      "price_change_ratio_pct": 0.68306,
-      "open_price": 7.33,
-      "high_price": 7.37,
-      "low_price": 7.27,
-      "prev_price": 7.32,
-      "volume": 227702170.0,
-      "turnover": 1667546000.0
-    },
-    {
-      "thscode": "600941.SH",
-      "ticker": "600941",
-      "name": "中国移动",
-      "last_price": 105.2,
-      "price_change": 0.71,
-      "price_change_ratio_pct": 0.679491,
-      "open_price": 104.48,
-      "high_price": 105.38,
-      "low_price": 103.96,
-      "prev_price": 104.49,
-      "volume": 14832153.0,
-      "turnover": 1554565400.0
-    },
-    {
-      "thscode": "600887.SH",
-      "ticker": "600887",
-      "name": "伊利股份",
-      "last_price": 32.41,
-      "price_change": 0.21,
-      "price_change_ratio_pct": 0.652174,
-      "open_price": 32.29,
-      "high_price": 32.44,
-      "low_price": 31.95,
-      "prev_price": 32.2,
-      "volume": 55399481.0,
-      "turnover": 1785959200.0
-    },
-    {
-      "thscode": "601668.SH",
-      "ticker": "601668",
-      "name": "中国建筑",
-      "last_price": 4.7,
-      "price_change": 0.03,
-      "price_change_ratio_pct": 0.642398,
-      "open_price": 4.68,
-      "high_price": 4.7,
-      "low_price": 4.64,
-      "prev_price": 4.67,
-      "volume": 206305580.0,
-      "turnover": 964012480.0
-    },
-    {
-      "thscode": "300760.SZ",
-      "ticker": "300760",
-      "name": "迈瑞医疗",
-      "last_price": 185.38,
-      "price_change": 1.08,
-      "price_change_ratio_pct": 0.586001,
-      "open_price": 184.0,
-      "high_price": 185.91,
-      "low_price": 182.11,
-      "prev_price": 184.3,
-      "volume": 8619956.0,
-      "turnover": 1589413500.0
-    },
-    {
-      "thscode": "601728.SH",
-      "ticker": "601728",
-      "name": "中国电信",
-      "last_price": 6.98,
-      "price_change": 0.04,
-      "price_change_ratio_pct": 0.576369,
-      "open_price": 6.99,
-      "high_price": 7.0,
-      "low_price": 6.86,
-      "prev_price": 6.94,
-      "volume": 109827832.0,
-      "turnover": 762783740.0
-    },
-    {
-      "thscode": "000858.SZ",
-      "ticker": "000858",
-      "name": "五粮液",
-      "last_price": 73.98,
-      "price_change": 0.28,
-      "price_change_ratio_pct": 0.379919,
-      "open_price": 73.5,
-      "high_price": 74.0,
-      "low_price": 72.98,
-      "prev_price": 73.7,
-      "volume": 18602842.0,
-      "turnover": 1369028400.0
+      "thscode": "601398.SH",
+      "ticker": "601398",
+      "name": "工商银行",
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 9.06,
+      "volume": 0.0,
+      "turnover": 0.0
     },
     {
       "thscode": "601939.SH",
       "ticker": "601939",
       "name": "建设银行",
-      "last_price": 12.3,
-      "price_change": 0.04,
-      "price_change_ratio_pct": 0.326264,
-      "open_price": 12.27,
-      "high_price": 12.36,
-      "low_price": 12.14,
-      "prev_price": 12.26,
-      "volume": 146638330.0,
-      "turnover": 1797096200.0
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 12.3,
+      "volume": 0.0,
+      "turnover": 0.0
     },
     {
       "thscode": "601288.SH",
       "ticker": "601288",
       "name": "农业银行",
-      "last_price": 7.61,
-      "price_change": 0.02,
-      "price_change_ratio_pct": 0.263505,
-      "open_price": 7.59,
-      "high_price": 7.63,
-      "low_price": 7.48,
-      "prev_price": 7.59,
-      "volume": 359205270.0,
-      "turnover": 2717453800.0
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 7.61,
+      "volume": 0.0,
+      "turnover": 0.0
     },
     {
-      "thscode": "600519.SH",
-      "ticker": "600519",
-      "name": "贵州茅台",
-      "last_price": 1457.7,
-      "price_change": 3.8,
-      "price_change_ratio_pct": 0.261366,
-      "open_price": 1458.88,
-      "high_price": 1461.6,
-      "low_price": 1437.71,
-      "prev_price": 1453.9,
-      "volume": 3511645.0,
-      "turnover": 5094594700.0
+      "thscode": "601988.SH",
+      "ticker": "601988",
+      "name": "中国银行",
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 7.37,
+      "volume": 0.0,
+      "turnover": 0.0
     },
     {
       "thscode": "600036.SH",
       "ticker": "600036",
       "name": "招商银行",
-      "last_price": 43.45,
-      "price_change": 0.05,
-      "price_change_ratio_pct": 0.115207,
-      "open_price": 43.49,
-      "high_price": 43.58,
-      "low_price": 42.91,
-      "prev_price": 43.4,
-      "volume": 73675717.0,
-      "turnover": 3186094100.0
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 43.45,
+      "volume": 0.0,
+      "turnover": 0.0
     },
     {
       "thscode": "601328.SH",
       "ticker": "601328",
       "name": "交通银行",
-      "last_price": 8.73,
-      "price_change": 0.01,
-      "price_change_ratio_pct": 0.114679,
-      "open_price": 8.73,
-      "high_price": 8.74,
-      "low_price": 8.59,
-      "prev_price": 8.72,
-      "volume": 187712770.0,
-      "turnover": 1628645000.0
-    },
-    {
-      "thscode": "601398.SH",
-      "ticker": "601398",
-      "name": "工商银行",
-      "last_price": 9.06,
-      "price_change": 0.01,
-      "price_change_ratio_pct": 0.110497,
-      "open_price": 9.05,
-      "high_price": 9.07,
-      "low_price": 8.93,
-      "prev_price": 9.05,
-      "volume": 347894070.0,
-      "turnover": 3132810800.0
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 8.73,
+      "volume": 0.0,
+      "turnover": 0.0
     },
     {
       "thscode": "601318.SH",
       "ticker": "601318",
       "name": "中国平安",
-      "last_price": 54.65,
-      "price_change": 0.0,
-      "price_change_ratio_pct": 0.0,
-      "open_price": 54.65,
-      "high_price": 54.88,
-      "low_price": 54.08,
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
       "prev_price": 54.65,
-      "volume": 52789033.0,
-      "turnover": 2873600900.0
+      "volume": 0.0,
+      "turnover": 0.0
     },
     {
       "thscode": "600030.SH",
       "ticker": "600030",
       "name": "中信证券",
-      "last_price": 25.19,
-      "price_change": 0.0,
-      "price_change_ratio_pct": 0.0,
-      "open_price": 25.1,
-      "high_price": 25.24,
-      "low_price": 24.93,
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
       "prev_price": 25.19,
-      "volume": 71310833.0,
-      "turnover": 1789995800.0
+      "volume": 0.0,
+      "turnover": 0.0
     },
     {
-      "thscode": "002415.SZ",
-      "ticker": "002415",
-      "name": "海康威视",
-      "last_price": 35.28,
-      "price_change": -0.02,
-      "price_change_ratio_pct": -0.056657,
-      "open_price": 35.08,
-      "high_price": 35.47,
-      "low_price": 35.06,
-      "prev_price": 35.3,
-      "volume": 46548899.0,
-      "turnover": 1643510300.0
+      "thscode": "601688.SH",
+      "ticker": "601688",
+      "name": "华泰证券",
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 17.23,
+      "volume": 0.0,
+      "turnover": 0.0
     },
     {
-      "thscode": "002594.SZ",
-      "ticker": "002594",
-      "name": "比亚迪",
-      "last_price": 80.35,
-      "price_change": -0.14,
-      "price_change_ratio_pct": -0.173935,
-      "open_price": 80.0,
-      "high_price": 80.49,
-      "low_price": 79.39,
-      "prev_price": 80.49,
-      "volume": 18691180.0,
-      "turnover": 1494444000.0
+      "thscode": "600941.SH",
+      "ticker": "600941",
+      "name": "中国移动",
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 105.2,
+      "volume": 0.0,
+      "turnover": 0.0
     },
     {
-      "thscode": "601088.SH",
-      "ticker": "601088",
-      "name": "中国神华",
-      "last_price": 50.57,
-      "price_change": -0.09,
-      "price_change_ratio_pct": -0.177655,
-      "open_price": 50.7,
-      "high_price": 50.79,
-      "low_price": 49.8,
-      "prev_price": 50.66,
-      "volume": 25756152.0,
-      "turnover": 1295727360.0
+      "thscode": "601728.SH",
+      "ticker": "601728",
+      "name": "中国电信",
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 6.98,
+      "volume": 0.0,
+      "turnover": 0.0
     },
     {
-      "thscode": "600150.SH",
-      "ticker": "600150",
-      "name": "中国船舶",
-      "last_price": 33.98,
-      "price_change": -0.16,
-      "price_change_ratio_pct": -0.468658,
-      "open_price": 34.14,
-      "high_price": 34.31,
-      "low_price": 33.38,
-      "prev_price": 34.14,
-      "volume": 57896217.0,
-      "turnover": 1952294400.0
+      "thscode": "600050.SH",
+      "ticker": "600050",
+      "name": "中国联通",
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 4.42,
+      "volume": 0.0,
+      "turnover": 0.0
     },
     {
-      "thscode": "601857.SH",
-      "ticker": "601857",
-      "name": "中国石油",
-      "last_price": 12.4,
-      "price_change": -0.07,
-      "price_change_ratio_pct": -0.561347,
-      "open_price": 12.1,
-      "high_price": 12.42,
-      "low_price": 12.04,
-      "prev_price": 12.47,
-      "volume": 156654530.0,
-      "turnover": 1915682400.0
+      "thscode": "600519.SH",
+      "ticker": "600519",
+      "name": "贵州茅台",
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 1457.7,
+      "volume": 0.0,
+      "turnover": 0.0
+    },
+    {
+      "thscode": "000858.SZ",
+      "ticker": "000858",
+      "name": "五粮液",
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 73.98,
+      "volume": 0.0,
+      "turnover": 0.0
+    },
+    {
+      "thscode": "600887.SH",
+      "ticker": "600887",
+      "name": "伊利股份",
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 32.41,
+      "volume": 0.0,
+      "turnover": 0.0
+    },
+    {
+      "thscode": "603288.SH",
+      "ticker": "603288",
+      "name": "海天味业",
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 36.2,
+      "volume": 0.0,
+      "turnover": 0.0
+    },
+    {
+      "thscode": "000333.SZ",
+      "ticker": "000333",
+      "name": "美的集团",
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 93.33,
+      "volume": 0.0,
+      "turnover": 0.0
+    },
+    {
+      "thscode": "000651.SZ",
+      "ticker": "000651",
+      "name": "格力电器",
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 40.66,
+      "volume": 0.0,
+      "turnover": 0.0
+    },
+    {
+      "thscode": "600690.SH",
+      "ticker": "600690",
+      "name": "海尔智家",
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 22.3,
+      "volume": 0.0,
+      "turnover": 0.0
     },
     {
       "thscode": "600276.SH",
       "ticker": "600276",
       "name": "恒瑞医药",
-      "last_price": 47.66,
-      "price_change": -0.36,
-      "price_change_ratio_pct": -0.749688,
-      "open_price": 47.81,
-      "high_price": 47.9,
-      "low_price": 46.8,
-      "prev_price": 48.02,
-      "volume": 43215356.0,
-      "turnover": 2044627500.0
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 47.66,
+      "volume": 0.0,
+      "turnover": 0.0
     },
     {
-      "thscode": "300750.SZ",
-      "ticker": "300750",
-      "name": "宁德时代",
-      "last_price": 238.5,
-      "price_change": -2.0,
-      "price_change_ratio_pct": -0.831601,
-      "open_price": 240.0,
-      "high_price": 243.24,
-      "low_price": 237.0,
-      "prev_price": 240.5,
-      "volume": 32735281.0,
-      "turnover": 7841015800.0
+      "thscode": "603259.SH",
+      "ticker": "603259",
+      "name": "药明康德",
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 146.07,
+      "volume": 0.0,
+      "turnover": 0.0
     },
     {
-      "thscode": "600031.SH",
-      "ticker": "600031",
-      "name": "三一重工",
-      "last_price": 18.6,
-      "price_change": -0.18,
-      "price_change_ratio_pct": -0.958466,
-      "open_price": 18.88,
-      "high_price": 18.88,
-      "low_price": 18.25,
-      "prev_price": 18.78,
-      "volume": 47251521.0,
-      "turnover": 871527180.0
-    },
-    {
-      "thscode": "601012.SH",
-      "ticker": "601012",
-      "name": "隆基绿能",
-      "last_price": 11.26,
-      "price_change": -0.14,
-      "price_change_ratio_pct": -1.22807,
-      "open_price": 11.38,
-      "high_price": 11.39,
-      "low_price": 11.11,
-      "prev_price": 11.4,
-      "volume": 67009370.0,
-      "turnover": 752595580.0
+      "thscode": "300760.SZ",
+      "ticker": "300760",
+      "name": "迈瑞医疗",
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 185.38,
+      "volume": 0.0,
+      "turnover": 0.0
     },
     {
       "thscode": "300142.SZ",
       "ticker": "300142",
       "name": "沃森生物",
-      "last_price": 10.38,
-      "price_change": -0.13,
-      "price_change_ratio_pct": -1.236917,
-      "open_price": 10.43,
-      "high_price": 10.56,
-      "low_price": 10.27,
-      "prev_price": 10.51,
-      "volume": 26922780.0,
-      "turnover": 280424060.0
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 10.38,
+      "volume": 0.0,
+      "turnover": 0.0
     },
     {
-      "thscode": "002463.SZ",
-      "ticker": "002463",
-      "name": "沪电股份",
-      "last_price": 72.9,
-      "price_change": -1.08,
-      "price_change_ratio_pct": -1.459854,
-      "open_price": 73.98,
-      "high_price": 76.81,
-      "low_price": 71.77,
-      "prev_price": 73.98,
-      "volume": 79034618.0,
-      "turnover": 5857683100.0
+      "thscode": "300750.SZ",
+      "ticker": "300750",
+      "name": "宁德时代",
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 238.5,
+      "volume": 0.0,
+      "turnover": 0.0
     },
     {
-      "thscode": "002475.SZ",
-      "ticker": "002475",
-      "name": "立讯精密",
-      "last_price": 47.6,
-      "price_change": -0.85,
-      "price_change_ratio_pct": -1.754386,
-      "open_price": 47.95,
-      "high_price": 48.71,
-      "low_price": 47.2,
-      "prev_price": 48.45,
-      "volume": 58745045.0,
-      "turnover": 2810301200.0
+      "thscode": "002594.SZ",
+      "ticker": "002594",
+      "name": "比亚迪",
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 80.35,
+      "volume": 0.0,
+      "turnover": 0.0
+    },
+    {
+      "thscode": "601012.SH",
+      "ticker": "601012",
+      "name": "隆基绿能",
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 11.26,
+      "volume": 0.0,
+      "turnover": 0.0
     },
     {
       "thscode": "300274.SZ",
       "ticker": "300274",
       "name": "阳光电源",
-      "last_price": 73.95,
-      "price_change": -1.86,
-      "price_change_ratio_pct": -2.453502,
-      "open_price": 75.4,
-      "high_price": 78.18,
-      "low_price": 72.99,
-      "prev_price": 75.81,
-      "volume": 51076465.0,
-      "turnover": 3845427900.0
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 73.95,
+      "volume": 0.0,
+      "turnover": 0.0
+    },
+    {
+      "thscode": "688981.SH",
+      "ticker": "688981",
+      "name": "中芯国际",
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 113.45,
+      "volume": 0.0,
+      "turnover": 0.0
+    },
+    {
+      "thscode": "688256.SH",
+      "ticker": "688256",
+      "name": "寒武纪",
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 904.8,
+      "volume": 0.0,
+      "turnover": 0.0
     },
     {
       "thscode": "603986.SH",
       "ticker": "603986",
       "name": "兆易创新",
-      "last_price": 214.56,
-      "price_change": -8.66,
-      "price_change_ratio_pct": -3.879581,
-      "open_price": 218.0,
-      "high_price": 224.6,
-      "low_price": 212.0,
-      "prev_price": 223.22,
-      "volume": 34271399.0,
-      "turnover": 7450556100.0
-    },
-    {
-      "thscode": "300308.SZ",
-      "ticker": "300308",
-      "name": "中际旭创",
-      "last_price": 393.0,
-      "price_change": -15.97,
-      "price_change_ratio_pct": -3.904932,
-      "open_price": 398.88,
-      "high_price": 410.96,
-      "low_price": 383.0,
-      "prev_price": 408.97,
-      "volume": 51883389.0,
-      "turnover": 20474931000.0
-    },
-    {
-      "thscode": "300502.SZ",
-      "ticker": "300502",
-      "name": "新易盛",
-      "last_price": 160.0,
-      "price_change": -6.8,
-      "price_change_ratio_pct": -4.076739,
-      "open_price": 163.62,
-      "high_price": 167.46,
-      "low_price": 155.24,
-      "prev_price": 166.8,
-      "volume": 87637324.0,
-      "turnover": 14090068000.0
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 214.56,
+      "volume": 0.0,
+      "turnover": 0.0
     },
     {
       "thscode": "688008.SH",
       "ticker": "688008",
       "name": "澜起科技",
-      "last_price": 130.6,
-      "price_change": -9.19,
-      "price_change_ratio_pct": -6.574147,
-      "open_price": 138.88,
-      "high_price": 138.88,
-      "low_price": 128.46,
-      "prev_price": 139.79,
-      "volume": 47446235.0,
-      "turnover": 6318390000.0
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 130.6,
+      "volume": 0.0,
+      "turnover": 0.0
+    },
+    {
+      "thscode": "300308.SZ",
+      "ticker": "300308",
+      "name": "中际旭创",
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 393.0,
+      "volume": 0.0,
+      "turnover": 0.0
+    },
+    {
+      "thscode": "300502.SZ",
+      "ticker": "300502",
+      "name": "新易盛",
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 160.0,
+      "volume": 0.0,
+      "turnover": 0.0
+    },
+    {
+      "thscode": "002463.SZ",
+      "ticker": "002463",
+      "name": "沪电股份",
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 72.9,
+      "volume": 0.0,
+      "turnover": 0.0
+    },
+    {
+      "thscode": "002475.SZ",
+      "ticker": "002475",
+      "name": "立讯精密",
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 47.6,
+      "volume": 0.0,
+      "turnover": 0.0
+    },
+    {
+      "thscode": "002415.SZ",
+      "ticker": "002415",
+      "name": "海康威视",
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 35.28,
+      "volume": 0.0,
+      "turnover": 0.0
+    },
+    {
+      "thscode": "601088.SH",
+      "ticker": "601088",
+      "name": "中国神华",
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 50.57,
+      "volume": 0.0,
+      "turnover": 0.0
+    },
+    {
+      "thscode": "601857.SH",
+      "ticker": "601857",
+      "name": "中国石油",
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 12.4,
+      "volume": 0.0,
+      "turnover": 0.0
+    },
+    {
+      "thscode": "600028.SH",
+      "ticker": "600028",
+      "name": "中国石化",
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 5.89,
+      "volume": 0.0,
+      "turnover": 0.0
+    },
+    {
+      "thscode": "600150.SH",
+      "ticker": "600150",
+      "name": "中国船舶",
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 33.98,
+      "volume": 0.0,
+      "turnover": 0.0
+    },
+    {
+      "thscode": "600031.SH",
+      "ticker": "600031",
+      "name": "三一重工",
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 18.6,
+      "volume": 0.0,
+      "turnover": 0.0
+    },
+    {
+      "thscode": "601766.SH",
+      "ticker": "601766",
+      "name": "中国中车",
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 6.73,
+      "volume": 0.0,
+      "turnover": 0.0
+    },
+    {
+      "thscode": "601668.SH",
+      "ticker": "601668",
+      "name": "中国建筑",
+      "last_price": null,
+      "price_change": null,
+      "price_change_ratio_pct": null,
+      "open_price": null,
+      "high_price": null,
+      "low_price": null,
+      "prev_price": 4.7,
+      "volume": 0.0,
+      "turnover": 0.0
     }
   ],
-  "limit_up": [
-    {
-      "thscode": "603030.SH",
-      "name": "全筑股份",
-      "last_price": 1.94,
-      "price_change_ratio_pct": 10.2273,
-      "limit_up_time": "13:26",
-      "limit_up_reason": "边缘AI算力+智慧建筑+建筑装饰",
-      "continue_day_text": "首板",
-      "seal_money": 45641410.0
-    },
-    {
-      "thscode": "002226.SZ",
-      "name": "江南化工",
-      "last_price": 5.45,
-      "price_change_ratio_pct": 10.101,
-      "limit_up_time": "13:13",
-      "limit_up_reason": "民爆+资产注入+央企",
-      "continue_day_text": "首板",
-      "seal_money": 34434359.0
-    },
-    {
-      "thscode": "301391.SZ",
-      "name": "卡莱特",
-      "last_price": 38.88,
-      "price_change_ratio_pct": 20.0,
-      "limit_up_time": "13:08",
-      "limit_up_reason": "华为昇腾+AI算力调度+股份回购",
-      "continue_day_text": "首板",
-      "seal_money": 25069824.0
-    },
-    {
-      "thscode": "002855.SZ",
-      "name": "捷荣技术",
-      "last_price": 11.29,
-      "price_change_ratio_pct": 10.039,
-      "limit_up_time": "11:07",
-      "limit_up_reason": "消费电子+精密结构件+折叠屏",
-      "continue_day_text": "首板",
-      "seal_money": 28915948.0
-    },
-    {
-      "thscode": "002652.SZ",
-      "name": "扬子新材",
-      "last_price": 4.4,
-      "price_change_ratio_pct": 10.0,
-      "limit_up_time": "11:03",
-      "limit_up_reason": "半导体洁净室+有机涂层板+三季报减亏",
-      "continue_day_text": "首板",
-      "seal_money": 13189440.0
-    },
-    {
-      "thscode": "603297.SH",
-      "name": "永新光学",
-      "last_price": 115.93,
-      "price_change_ratio_pct": 10.0009,
-      "limit_up_time": "11:03",
-      "limit_up_reason": "光刻机+半导体光学+精密光学",
-      "continue_day_text": "首板",
-      "seal_money": 19881995.0
-    },
-    {
-      "thscode": "002889.SZ",
-      "name": "东方嘉盛",
-      "last_price": 15.21,
-      "price_change_ratio_pct": 9.9783,
-      "limit_up_time": "11:00",
-      "limit_up_reason": "光刻机保税维修+半导体供应链+智慧仓",
-      "continue_day_text": "首板",
-      "seal_money": 111829411.0
-    },
-    {
-      "thscode": "603931.SH",
-      "name": "格林达",
-      "last_price": 27.97,
-      "price_change_ratio_pct": 9.9882,
-      "limit_up_time": "10:59",
-      "limit_up_reason": "湿电子化学品+先进封装+光刻胶",
-      "continue_day_text": "首板",
-      "seal_money": 33166826.0
-    },
-    {
-      "thscode": "002959.SZ",
-      "name": "小熊电器",
-      "last_price": 39.9,
-      "price_change_ratio_pct": 10.0083,
-      "limit_up_time": "10:49",
-      "limit_up_reason": "小家电+跨境电商+母婴产品",
-      "continue_day_text": "2连板",
-      "seal_money": 38515470.0
-    },
-    {
-      "thscode": "002242.SZ",
-      "name": "九阳股份",
-      "last_price": 31.52,
-      "price_change_ratio_pct": 10.0175,
-      "limit_up_time": "10:38",
-      "limit_up_reason": "地天板+“羊”字辈+厨房小家电+机器人投资",
-      "continue_day_text": "首板",
-      "seal_money": 223120430.0
-    },
-    {
-      "thscode": "600261.SH",
-      "name": "阳光照明",
-      "last_price": 5.7,
-      "price_change_ratio_pct": 10.0386,
-      "limit_up_time": "10:38",
-      "limit_up_reason": "商业航天+激光通信+LED照明+“羊”字辈",
-      "continue_day_text": "首板",
-      "seal_money": 84985239.0
-    },
-    {
-      "thscode": "603078.SH",
-      "name": "江化微",
-      "last_price": 24.54,
-      "price_change_ratio_pct": 9.9955,
-      "limit_up_time": "10:28",
-      "limit_up_reason": "湿电子化学品+存储芯片+上海国资",
-      "continue_day_text": "首板",
-      "seal_money": 87000779.0
-    },
-    {
-      "thscode": "600619.SH",
-      "name": "海立股份",
-      "last_price": 13.1,
-      "price_change_ratio_pct": 9.9916,
-      "limit_up_time": "10:23",
-      "limit_up_reason": "空调压缩机+光刻机冷却+上海国资",
-      "continue_day_text": "首板",
-      "seal_money": 79865617.0
-    },
-    {
-      "thscode": "301288.SZ",
-      "name": "清研环境",
-      "last_price": 20.14,
-      "price_change_ratio_pct": 20.0238,
-      "limit_up_time": "10:10",
-      "limit_up_reason": "金属镍+固危废资源化+污水处理",
-      "continue_day_text": "首板",
-      "seal_money": 8803778.1
-    },
-    {
-      "thscode": "301209.SZ",
-      "name": "联合化学",
-      "last_price": 52.96,
-      "price_change_ratio_pct": 20.0091,
-      "limit_up_time": "10:00",
-      "limit_up_reason": "光刻胶+光刻机+有机颜料",
-      "continue_day_text": "首板",
-      "seal_money": 51789054.0
-    },
-    {
-      "thscode": "600206.SH",
-      "name": "有研新材",
-      "last_price": 39.33,
-      "price_change_ratio_pct": 10.014,
-      "limit_up_time": "09:52",
-      "limit_up_reason": "半导体靶材+先进存储+靶材扩产+三季报增长",
-      "continue_day_text": "首板",
-      "seal_money": 255987250.0
-    },
-    {
-      "thscode": "600202.SH",
-      "name": "哈空调",
-      "last_price": 5.59,
-      "price_change_ratio_pct": 10.0394,
-      "limit_up_time": "09:45",
-      "limit_up_reason": "空冷器+核电+控股股东增持",
-      "continue_day_text": "首板",
-      "seal_money": 27604035.0
-    },
-    {
-      "thscode": "600467.SH",
-      "name": "好当家",
-      "last_price": 2.75,
-      "price_change_ratio_pct": 10.0,
-      "limit_up_time": "09:45",
-      "limit_up_reason": "海参+水产养殖+白酒",
-      "continue_day_text": "首板",
-      "seal_money": 43553400.0
-    },
-    {
-      "thscode": "002861.SZ",
-      "name": "瀛通通讯",
-      "last_price": 14.96,
-      "price_change_ratio_pct": 10.0,
-      "limit_up_time": "09:38",
-      "limit_up_reason": "AI眼镜+智能声学+消费电子",
-      "continue_day_text": "2连板",
-      "seal_money": 40309750.0
-    },
-    {
-      "thscode": "002912.SZ",
-      "name": "中新赛克",
-      "last_price": 24.33,
-      "price_change_ratio_pct": 9.991,
-      "limit_up_time": "09:36",
-      "limit_up_reason": "AI安全+数据安全+深圳国资",
-      "continue_day_text": "首板",
-      "seal_money": 89207283.0
-    }
-  ],
-  "history": {},
+  "limit_up": [],
+  "history": {
+    "000001.SH": [
+      [
+        1792512000000,
+        3713.03
+      ],
+      [
+        1792598400000,
+        3658.03
+      ],
+      [
+        1792684800000,
+        3690.48
+      ],
+      [
+        1792944000000,
+        3697.52
+      ],
+      [
+        1793030400000,
+        3648.3
+      ],
+      [
+        1793116800000,
+        3681.47
+      ],
+      [
+        1793203200000,
+        3651.43
+      ],
+      [
+        1793289600000,
+        3599.02
+      ],
+      [
+        1793548800000,
+        3638.03
+      ],
+      [
+        1793635200000,
+        3608.1
+      ],
+      [
+        1793721600000,
+        3686.17
+      ],
+      [
+        1793808000000,
+        3689.91
+      ],
+      [
+        1793894400000,
+        3649.18
+      ],
+      [
+        1794153600000,
+        3660.79
+      ],
+      [
+        1794240000000,
+        3663.72
+      ],
+      [
+        1794326400000,
+        3680.64
+      ],
+      [
+        1794412800000,
+        3655.83
+      ],
+      [
+        1794499200000,
+        3634.35
+      ],
+      [
+        1794758400000,
+        3602.57
+      ],
+      [
+        1794844800000,
+        3584.58
+      ]
+    ],
+    "399001.SZ": [
+      [
+        1792512000000,
+        11704.354
+      ],
+      [
+        1792598400000,
+        11357.32
+      ],
+      [
+        1792684800000,
+        11673.826
+      ],
+      [
+        1792944000000,
+        11534.379
+      ],
+      [
+        1793030400000,
+        11245.732
+      ],
+      [
+        1793116800000,
+        11473.18
+      ],
+      [
+        1793203200000,
+        11138.198
+      ],
+      [
+        1793289600000,
+        10833.784
+      ],
+      [
+        1793548800000,
+        11010.677
+      ],
+      [
+        1793635200000,
+        10876.989
+      ],
+      [
+        1793721600000,
+        11335.687
+      ],
+      [
+        1793808000000,
+        11471.094
+      ],
+      [
+        1793894400000,
+        11175.781
+      ],
+      [
+        1794153600000,
+        11145.491
+      ],
+      [
+        1794240000000,
+        11241.536
+      ],
+      [
+        1794326400000,
+        11389.737
+      ],
+      [
+        1794412800000,
+        11197.976
+      ],
+      [
+        1794499200000,
+        10968.787
+      ],
+      [
+        1794758400000,
+        10690.778
+      ],
+      [
+        1794844800000,
+        10638.524
+      ]
+    ],
+    "399006.SZ": [
+      [
+        1792512000000,
+        2694.713
+      ],
+      [
+        1792598400000,
+        2576.901
+      ],
+      [
+        1792684800000,
+        2684.097
+      ],
+      [
+        1792944000000,
+        2638.231
+      ],
+      [
+        1793030400000,
+        2548.149
+      ],
+      [
+        1793116800000,
+        2634.76
+      ],
+      [
+        1793203200000,
+        2517.588
+      ],
+      [
+        1793289600000,
+        2413.629
+      ],
+      [
+        1793548800000,
+        2458.698
+      ],
+      [
+        1793635200000,
+        2391.652
+      ],
+      [
+        1793721600000,
+        2544.73
+      ],
+      [
+        1793808000000,
+        2566.803
+      ],
+      [
+        1793894400000,
+        2465.232
+      ],
+      [
+        1794153600000,
+        2458.562
+      ],
+      [
+        1794240000000,
+        2494.397
+      ],
+      [
+        1794326400000,
+        2572.067
+      ],
+      [
+        1794412800000,
+        2509.429
+      ],
+      [
+        1794499200000,
+        2426.085
+      ],
+      [
+        1794758400000,
+        2320.02
+      ],
+      [
+        1794844800000,
+        2292.204
+      ]
+    ],
+    "000300.SH": [
+      [
+        1792512000000,
+        4111.93
+      ],
+      [
+        1792598400000,
+        4036.3
+      ],
+      [
+        1792684800000,
+        4105.33
+      ],
+      [
+        1792944000000,
+        4103.54
+      ],
+      [
+        1793030400000,
+        4049.55
+      ],
+      [
+        1793116800000,
+        4083.87
+      ],
+      [
+        1793203200000,
+        4041.84
+      ],
+      [
+        1793289600000,
+        3985.5
+      ],
+      [
+        1793548800000,
+        4016.92
+      ],
+      [
+        1793635200000,
+        4008.87
+      ],
+      [
+        1793721600000,
+        4101.34
+      ],
+      [
+        1793808000000,
+        4113.41
+      ],
+      [
+        1793894400000,
+        4054.28
+      ],
+      [
+        1794153600000,
+        4056.11
+      ],
+      [
+        1794240000000,
+        4059.11
+      ],
+      [
+        1794326400000,
+        4075.71
+      ],
+      [
+        1794412800000,
+        4043.93
+      ],
+      [
+        1794499200000,
+        4016.29
+      ],
+      [
+        1794758400000,
+        3979.8
+      ],
+      [
+        1794844800000,
+        3976.46
+      ]
+    ],
+    "000688.SH": [
+      [
+        1792512000000,
+        1343.28
+      ],
+      [
+        1792598400000,
+        1305.87
+      ],
+      [
+        1792684800000,
+        1345.51
+      ],
+      [
+        1792944000000,
+        1315.5
+      ],
+      [
+        1793030400000,
+        1252.28
+      ],
+      [
+        1793116800000,
+        1282.93
+      ],
+      [
+        1793203200000,
+        1228.09
+      ],
+      [
+        1793289600000,
+        1160.84
+      ],
+      [
+        1793548800000,
+        1196.94
+      ],
+      [
+        1793635200000,
+        1151.28
+      ],
+      [
+        1793721600000,
+        1265.47
+      ],
+      [
+        1793808000000,
+        1286.68
+      ],
+      [
+        1793894400000,
+        1253.2
+      ],
+      [
+        1794153600000,
+        1256.96
+      ],
+      [
+        1794240000000,
+        1265.02
+      ],
+      [
+        1794326400000,
+        1300.38
+      ],
+      [
+        1794412800000,
+        1309.84
+      ],
+      [
+        1794499200000,
+        1279.66
+      ],
+      [
+        1794758400000,
+        1213.68
+      ],
+      [
+        1794844800000,
+        1221.19
+      ]
+    ],
+    "000905.SH": [
+      [
+        1792512000000,
+        6840.56
+      ],
+      [
+        1792598400000,
+        6655.25
+      ],
+      [
+        1792684800000,
+        6814.44
+      ],
+      [
+        1792944000000,
+        6712.73
+      ],
+      [
+        1793030400000,
+        6511.42
+      ],
+      [
+        1793116800000,
+        6640.89
+      ],
+      [
+        1793203200000,
+        6453.72
+      ],
+      [
+        1793289600000,
+        6266.19
+      ],
+      [
+        1793548800000,
+        6420.23
+      ],
+      [
+        1793635200000,
+        6327.05
+      ],
+      [
+        1793721600000,
+        6622.03
+      ],
+      [
+        1793808000000,
+        6740.93
+      ],
+      [
+        1793894400000,
+        6597.35
+      ],
+      [
+        1794153600000,
+        6586.18
+      ],
+      [
+        1794240000000,
+        6645.89
+      ],
+      [
+        1794326400000,
+        6713.18
+      ],
+      [
+        1794412800000,
+        6604.15
+      ],
+      [
+        1794499200000,
+        6465.49
+      ],
+      [
+        1794758400000,
+        6297.18
+      ],
+      [
+        1794844800000,
+        6283.01
+      ]
+    ],
+    "000852.SH": [
+      [
+        1792512000000,
+        6780.26
+      ],
+      [
+        1792598400000,
+        6578.27
+      ],
+      [
+        1792684800000,
+        6734.55
+      ],
+      [
+        1792944000000,
+        6630.78
+      ],
+      [
+        1793030400000,
+        6427.17
+      ],
+      [
+        1793116800000,
+        6578.1
+      ],
+      [
+        1793203200000,
+        6378.78
+      ],
+      [
+        1793289600000,
+        6161.23
+      ],
+      [
+        1793548800000,
+        6329.34
+      ],
+      [
+        1793635200000,
+        6221.23
+      ],
+      [
+        1793721600000,
+        6511.81
+      ],
+      [
+        1793808000000,
+        6650.14
+      ],
+      [
+        1793894400000,
+        6505.35
+      ],
+      [
+        1794153600000,
+        6499.74
+      ],
+      [
+        1794240000000,
+        6579.36
+      ],
+      [
+        1794326400000,
+        6669.55
+      ],
+      [
+        1794412800000,
+        6537.84
+      ],
+      [
+        1794499200000,
+        6357.26
+      ],
+      [
+        1794758400000,
+        6164.62
+      ],
+      [
+        1794844800000,
+        6092.39
+      ]
+    ],
+    "601398.SH": [
+      [
+        1792512000000,
+        8.45
+      ],
+      [
+        1792598400000,
+        8.59
+      ],
+      [
+        1792684800000,
+        8.32
+      ],
+      [
+        1792944000000,
+        8.58
+      ],
+      [
+        1793030400000,
+        8.62
+      ],
+      [
+        1793116800000,
+        8.56
+      ],
+      [
+        1793203200000,
+        8.78
+      ],
+      [
+        1793289600000,
+        8.75
+      ],
+      [
+        1793548800000,
+        8.69
+      ],
+      [
+        1793635200000,
+        8.59
+      ],
+      [
+        1793721600000,
+        8.41
+      ],
+      [
+        1793808000000,
+        8.35
+      ],
+      [
+        1793894400000,
+        8.44
+      ],
+      [
+        1794153600000,
+        8.61
+      ],
+      [
+        1794240000000,
+        8.6
+      ],
+      [
+        1794326400000,
+        8.53
+      ],
+      [
+        1794412800000,
+        8.69
+      ],
+      [
+        1794499200000,
+        8.85
+      ],
+      [
+        1794758400000,
+        9.05
+      ],
+      [
+        1794844800000,
+        9.06
+      ]
+    ],
+    "601939.SH": [
+      [
+        1792512000000,
+        11.49
+      ],
+      [
+        1792598400000,
+        11.66
+      ],
+      [
+        1792684800000,
+        11.3
+      ],
+      [
+        1792944000000,
+        11.61
+      ],
+      [
+        1793030400000,
+        11.78
+      ],
+      [
+        1793116800000,
+        11.77
+      ],
+      [
+        1793203200000,
+        12.04
+      ],
+      [
+        1793289600000,
+        11.98
+      ],
+      [
+        1793548800000,
+        12.06
+      ],
+      [
+        1793635200000,
+        11.85
+      ],
+      [
+        1793721600000,
+        11.69
+      ],
+      [
+        1793808000000,
+        11.66
+      ],
+      [
+        1793894400000,
+        11.91
+      ],
+      [
+        1794153600000,
+        12.14
+      ],
+      [
+        1794240000000,
+        12.03
+      ],
+      [
+        1794326400000,
+        11.92
+      ],
+      [
+        1794412800000,
+        12.01
+      ],
+      [
+        1794499200000,
+        12.11
+      ],
+      [
+        1794758400000,
+        12.26
+      ],
+      [
+        1794844800000,
+        12.3
+      ]
+    ],
+    "601288.SH": [
+      [
+        1792512000000,
+        7.29
+      ],
+      [
+        1792598400000,
+        7.4
+      ],
+      [
+        1792684800000,
+        7.19
+      ],
+      [
+        1792944000000,
+        7.33
+      ],
+      [
+        1793030400000,
+        7.4
+      ],
+      [
+        1793116800000,
+        7.43
+      ],
+      [
+        1793203200000,
+        7.56
+      ],
+      [
+        1793289600000,
+        7.48
+      ],
+      [
+        1793548800000,
+        7.47
+      ],
+      [
+        1793635200000,
+        7.5
+      ],
+      [
+        1793721600000,
+        7.31
+      ],
+      [
+        1793808000000,
+        7.25
+      ],
+      [
+        1793894400000,
+        7.28
+      ],
+      [
+        1794153600000,
+        7.39
+      ],
+      [
+        1794240000000,
+        7.35
+      ],
+      [
+        1794326400000,
+        7.26
+      ],
+      [
+        1794412800000,
+        7.26
+      ],
+      [
+        1794499200000,
+        7.37
+      ],
+      [
+        1794758400000,
+        7.59
+      ],
+      [
+        1794844800000,
+        7.61
+      ]
+    ],
+    "601988.SH": [
+      [
+        1792512000000,
+        7.24
+      ],
+      [
+        1792598400000,
+        7.22
+      ],
+      [
+        1792684800000,
+        6.93
+      ],
+      [
+        1792944000000,
+        7.0
+      ],
+      [
+        1793030400000,
+        7.02
+      ],
+      [
+        1793116800000,
+        7.02
+      ],
+      [
+        1793203200000,
+        7.16
+      ],
+      [
+        1793289600000,
+        7.09
+      ],
+      [
+        1793548800000,
+        7.04
+      ],
+      [
+        1793635200000,
+        6.92
+      ],
+      [
+        1793721600000,
+        6.83
+      ],
+      [
+        1793808000000,
+        6.77
+      ],
+      [
+        1793894400000,
+        6.85
+      ],
+      [
+        1794153600000,
+        7.0
+      ],
+      [
+        1794240000000,
+        6.96
+      ],
+      [
+        1794326400000,
+        6.94
+      ],
+      [
+        1794412800000,
+        7.04
+      ],
+      [
+        1794499200000,
+        7.18
+      ],
+      [
+        1794758400000,
+        7.32
+      ],
+      [
+        1794844800000,
+        7.37
+      ]
+    ],
+    "600036.SH": [
+      [
+        1792512000000,
+        42.28
+      ],
+      [
+        1792598400000,
+        41.82
+      ],
+      [
+        1792684800000,
+        41.77
+      ],
+      [
+        1792944000000,
+        42.5
+      ],
+      [
+        1793030400000,
+        42.99
+      ],
+      [
+        1793116800000,
+        42.13
+      ],
+      [
+        1793203200000,
+        42.94
+      ],
+      [
+        1793289600000,
+        43.55
+      ],
+      [
+        1793548800000,
+        43.18
+      ],
+      [
+        1793635200000,
+        42.69
+      ],
+      [
+        1793721600000,
+        42.54
+      ],
+      [
+        1793808000000,
+        42.54
+      ],
+      [
+        1793894400000,
+        42.88
+      ],
+      [
+        1794153600000,
+        43.01
+      ],
+      [
+        1794240000000,
+        43.01
+      ],
+      [
+        1794326400000,
+        42.56
+      ],
+      [
+        1794412800000,
+        42.63
+      ],
+      [
+        1794499200000,
+        42.93
+      ],
+      [
+        1794758400000,
+        43.4
+      ],
+      [
+        1794844800000,
+        43.45
+      ]
+    ],
+    "601328.SH": [
+      [
+        1792512000000,
+        8.25
+      ],
+      [
+        1792598400000,
+        8.21
+      ],
+      [
+        1792684800000,
+        8.05
+      ],
+      [
+        1792944000000,
+        8.25
+      ],
+      [
+        1793030400000,
+        8.34
+      ],
+      [
+        1793116800000,
+        8.26
+      ],
+      [
+        1793203200000,
+        8.56
+      ],
+      [
+        1793289600000,
+        8.63
+      ],
+      [
+        1793548800000,
+        8.57
+      ],
+      [
+        1793635200000,
+        8.39
+      ],
+      [
+        1793721600000,
+        8.25
+      ],
+      [
+        1793808000000,
+        8.2
+      ],
+      [
+        1793894400000,
+        8.3
+      ],
+      [
+        1794153600000,
+        8.45
+      ],
+      [
+        1794240000000,
+        8.41
+      ],
+      [
+        1794326400000,
+        8.42
+      ],
+      [
+        1794412800000,
+        8.45
+      ],
+      [
+        1794499200000,
+        8.58
+      ],
+      [
+        1794758400000,
+        8.72
+      ],
+      [
+        1794844800000,
+        8.73
+      ]
+    ],
+    "601318.SH": [
+      [
+        1792512000000,
+        51.2
+      ],
+      [
+        1792598400000,
+        50.94
+      ],
+      [
+        1792684800000,
+        51.76
+      ],
+      [
+        1792944000000,
+        52.62
+      ],
+      [
+        1793030400000,
+        52.61
+      ],
+      [
+        1793116800000,
+        52.31
+      ],
+      [
+        1793203200000,
+        53.2
+      ],
+      [
+        1793289600000,
+        52.8
+      ],
+      [
+        1793548800000,
+        53.12
+      ],
+      [
+        1793635200000,
+        54.59
+      ],
+      [
+        1793721600000,
+        54.01
+      ],
+      [
+        1793808000000,
+        54.35
+      ],
+      [
+        1793894400000,
+        54.5
+      ],
+      [
+        1794153600000,
+        54.6
+      ],
+      [
+        1794240000000,
+        54.1
+      ],
+      [
+        1794326400000,
+        53.41
+      ],
+      [
+        1794412800000,
+        53.33
+      ],
+      [
+        1794499200000,
+        53.8
+      ],
+      [
+        1794758400000,
+        54.65
+      ],
+      [
+        1794844800000,
+        54.65
+      ]
+    ],
+    "600030.SH": [
+      [
+        1792512000000,
+        25.01
+      ],
+      [
+        1792598400000,
+        25.28
+      ],
+      [
+        1792684800000,
+        25.45
+      ],
+      [
+        1792944000000,
+        25.69
+      ],
+      [
+        1793030400000,
+        25.05
+      ],
+      [
+        1793116800000,
+        24.86
+      ],
+      [
+        1793203200000,
+        24.5
+      ],
+      [
+        1793289600000,
+        24.3
+      ],
+      [
+        1793548800000,
+        25.56
+      ],
+      [
+        1793635200000,
+        26.05
+      ],
+      [
+        1793721600000,
+        25.92
+      ],
+      [
+        1793808000000,
+        25.98
+      ],
+      [
+        1793894400000,
+        25.72
+      ],
+      [
+        1794153600000,
+        25.64
+      ],
+      [
+        1794240000000,
+        25.53
+      ],
+      [
+        1794326400000,
+        25.28
+      ],
+      [
+        1794412800000,
+        25.08
+      ],
+      [
+        1794499200000,
+        25.0
+      ],
+      [
+        1794758400000,
+        25.19
+      ],
+      [
+        1794844800000,
+        25.19
+      ]
+    ],
+    "601688.SH": [
+      [
+        1792512000000,
+        16.990000000000002
+      ],
+      [
+        1792598400000,
+        16.92
+      ],
+      [
+        1792684800000,
+        17.25
+      ],
+      [
+        1792944000000,
+        17.66
+      ],
+      [
+        1793030400000,
+        17.35
+      ],
+      [
+        1793116800000,
+        17.19
+      ],
+      [
+        1793203200000,
+        17.09
+      ],
+      [
+        1793289600000,
+        16.99
+      ],
+      [
+        1793548800000,
+        17.54
+      ],
+      [
+        1793635200000,
+        17.87
+      ],
+      [
+        1793721600000,
+        17.79
+      ],
+      [
+        1793808000000,
+        17.9
+      ],
+      [
+        1793894400000,
+        17.84
+      ],
+      [
+        1794153600000,
+        17.62
+      ],
+      [
+        1794240000000,
+        17.52
+      ],
+      [
+        1794326400000,
+        17.27
+      ],
+      [
+        1794412800000,
+        17.11
+      ],
+      [
+        1794499200000,
+        17.05
+      ],
+      [
+        1794758400000,
+        17.06
+      ],
+      [
+        1794844800000,
+        17.23
+      ]
+    ],
+    "600941.SH": [
+      [
+        1792512000000,
+        96.59
+      ],
+      [
+        1792598400000,
+        99.0
+      ],
+      [
+        1792684800000,
+        99.14
+      ],
+      [
+        1792944000000,
+        101.3
+      ],
+      [
+        1793030400000,
+        100.7
+      ],
+      [
+        1793116800000,
+        99.38
+      ],
+      [
+        1793203200000,
+        101.47
+      ],
+      [
+        1793289600000,
+        102.13
+      ],
+      [
+        1793548800000,
+        102.84
+      ],
+      [
+        1793635200000,
+        103.71
+      ],
+      [
+        1793721600000,
+        101.2
+      ],
+      [
+        1793808000000,
+        100.24
+      ],
+      [
+        1793894400000,
+        103.49
+      ],
+      [
+        1794153600000,
+        103.03
+      ],
+      [
+        1794240000000,
+        101.55
+      ],
+      [
+        1794326400000,
+        99.93
+      ],
+      [
+        1794412800000,
+        98.7
+      ],
+      [
+        1794499200000,
+        101.46
+      ],
+      [
+        1794758400000,
+        104.49
+      ],
+      [
+        1794844800000,
+        105.2
+      ]
+    ],
+    "601728.SH": [
+      [
+        1792512000000,
+        6.62
+      ],
+      [
+        1792598400000,
+        6.72
+      ],
+      [
+        1792684800000,
+        6.84
+      ],
+      [
+        1792944000000,
+        6.94
+      ],
+      [
+        1793030400000,
+        6.95
+      ],
+      [
+        1793116800000,
+        6.88
+      ],
+      [
+        1793203200000,
+        6.99
+      ],
+      [
+        1793289600000,
+        7.01
+      ],
+      [
+        1793548800000,
+        7.04
+      ],
+      [
+        1793635200000,
+        7.27
+      ],
+      [
+        1793721600000,
+        6.86
+      ],
+      [
+        1793808000000,
+        6.63
+      ],
+      [
+        1793894400000,
+        6.91
+      ],
+      [
+        1794153600000,
+        6.79
+      ],
+      [
+        1794240000000,
+        6.76
+      ],
+      [
+        1794326400000,
+        6.62
+      ],
+      [
+        1794412800000,
+        6.61
+      ],
+      [
+        1794499200000,
+        6.67
+      ],
+      [
+        1794758400000,
+        6.94
+      ],
+      [
+        1794844800000,
+        6.98
+      ]
+    ],
+    "600050.SH": [
+      [
+        1792512000000,
+        4.31
+      ],
+      [
+        1792598400000,
+        4.29
+      ],
+      [
+        1792684800000,
+        4.35
+      ],
+      [
+        1792944000000,
+        4.42
+      ],
+      [
+        1793030400000,
+        4.39
+      ],
+      [
+        1793116800000,
+        4.36
+      ],
+      [
+        1793203200000,
+        4.4
+      ],
+      [
+        1793289600000,
+        4.39
+      ],
+      [
+        1793548800000,
+        4.45
+      ],
+      [
+        1793635200000,
+        4.55
+      ],
+      [
+        1793721600000,
+        4.47
+      ],
+      [
+        1793808000000,
+        4.42
+      ],
+      [
+        1793894400000,
+        4.47
+      ],
+      [
+        1794153600000,
+        4.39
+      ],
+      [
+        1794240000000,
+        4.33
+      ],
+      [
+        1794326400000,
+        4.29
+      ],
+      [
+        1794412800000,
+        4.23
+      ],
+      [
+        1794499200000,
+        4.27
+      ],
+      [
+        1794758400000,
+        4.39
+      ],
+      [
+        1794844800000,
+        4.42
+      ]
+    ],
+    "600519.SH": [
+      [
+        1792512000000,
+        1309.69
+      ],
+      [
+        1792598400000,
+        1318.49
+      ],
+      [
+        1792684800000,
+        1335.0
+      ],
+      [
+        1792944000000,
+        1349.98
+      ],
+      [
+        1793030400000,
+        1355.9
+      ],
+      [
+        1793116800000,
+        1330.75
+      ],
+      [
+        1793203200000,
+        1354.0
+      ],
+      [
+        1793289600000,
+        1392.05
+      ],
+      [
+        1793548800000,
+        1439.1
+      ],
+      [
+        1793635200000,
+        1480.0
+      ],
+      [
+        1793721600000,
+        1446.44
+      ],
+      [
+        1793808000000,
+        1452.0
+      ],
+      [
+        1793894400000,
+        1453.0
+      ],
+      [
+        1794153600000,
+        1444.99
+      ],
+      [
+        1794240000000,
+        1439.0
+      ],
+      [
+        1794326400000,
+        1402.3
+      ],
+      [
+        1794412800000,
+        1410.27
+      ],
+      [
+        1794499200000,
+        1435.26
+      ],
+      [
+        1794758400000,
+        1453.9
+      ],
+      [
+        1794844800000,
+        1457.7
+      ]
+    ],
+    "000858.SZ": [
+      [
+        1792512000000,
+        72.0
+      ],
+      [
+        1792598400000,
+        71.73
+      ],
+      [
+        1792684800000,
+        73.86
+      ],
+      [
+        1792944000000,
+        75.63
+      ],
+      [
+        1793030400000,
+        75.38
+      ],
+      [
+        1793116800000,
+        72.4
+      ],
+      [
+        1793203200000,
+        72.28
+      ],
+      [
+        1793289600000,
+        74.7
+      ],
+      [
+        1793548800000,
+        74.25
+      ],
+      [
+        1793635200000,
+        75.55
+      ],
+      [
+        1793721600000,
+        75.1
+      ],
+      [
+        1793808000000,
+        75.82
+      ],
+      [
+        1793894400000,
+        75.34
+      ],
+      [
+        1794153600000,
+        74.74
+      ],
+      [
+        1794240000000,
+        74.25
+      ],
+      [
+        1794326400000,
+        72.39
+      ],
+      [
+        1794412800000,
+        72.63
+      ],
+      [
+        1794499200000,
+        73.38
+      ],
+      [
+        1794758400000,
+        73.7
+      ],
+      [
+        1794844800000,
+        73.98
+      ]
+    ],
+    "600887.SH": [
+      [
+        1792512000000,
+        27.6
+      ],
+      [
+        1792598400000,
+        27.8
+      ],
+      [
+        1792684800000,
+        28.19
+      ],
+      [
+        1792944000000,
+        28.6
+      ],
+      [
+        1793030400000,
+        28.89
+      ],
+      [
+        1793116800000,
+        28.69
+      ],
+      [
+        1793203200000,
+        29.45
+      ],
+      [
+        1793289600000,
+        30.15
+      ],
+      [
+        1793548800000,
+        30.62
+      ],
+      [
+        1793635200000,
+        31.47
+      ],
+      [
+        1793721600000,
+        30.71
+      ],
+      [
+        1793808000000,
+        31.05
+      ],
+      [
+        1793894400000,
+        31.45
+      ],
+      [
+        1794153600000,
+        31.14
+      ],
+      [
+        1794240000000,
+        31.14
+      ],
+      [
+        1794326400000,
+        30.61
+      ],
+      [
+        1794412800000,
+        31.0
+      ],
+      [
+        1794499200000,
+        31.74
+      ],
+      [
+        1794758400000,
+        32.2
+      ],
+      [
+        1794844800000,
+        32.41
+      ]
+    ],
+    "603288.SH": [
+      [
+        1792512000000,
+        33.46
+      ],
+      [
+        1792598400000,
+        33.47
+      ],
+      [
+        1792684800000,
+        34.53
+      ],
+      [
+        1792944000000,
+        34.87
+      ],
+      [
+        1793030400000,
+        34.48
+      ],
+      [
+        1793116800000,
+        33.46
+      ],
+      [
+        1793203200000,
+        34.53
+      ],
+      [
+        1793289600000,
+        34.86
+      ],
+      [
+        1793548800000,
+        35.2
+      ],
+      [
+        1793635200000,
+        36.39
+      ],
+      [
+        1793721600000,
+        35.25
+      ],
+      [
+        1793808000000,
+        35.65
+      ],
+      [
+        1793894400000,
+        35.78
+      ],
+      [
+        1794153600000,
+        35.26
+      ],
+      [
+        1794240000000,
+        35.46
+      ],
+      [
+        1794326400000,
+        34.61
+      ],
+      [
+        1794412800000,
+        34.68
+      ],
+      [
+        1794499200000,
+        34.89
+      ],
+      [
+        1794758400000,
+        35.76
+      ],
+      [
+        1794844800000,
+        36.2
+      ]
+    ],
+    "000333.SZ": [
+      [
+        1792512000000,
+        83.86
+      ],
+      [
+        1792598400000,
+        85.29
+      ],
+      [
+        1792684800000,
+        85.59
+      ],
+      [
+        1792944000000,
+        85.5
+      ],
+      [
+        1793030400000,
+        85.04
+      ],
+      [
+        1793116800000,
+        85.91
+      ],
+      [
+        1793203200000,
+        87.48
+      ],
+      [
+        1793289600000,
+        89.18
+      ],
+      [
+        1793548800000,
+        87.66
+      ],
+      [
+        1793635200000,
+        88.88
+      ],
+      [
+        1793721600000,
+        87.98
+      ],
+      [
+        1793808000000,
+        88.12
+      ],
+      [
+        1793894400000,
+        89.6
+      ],
+      [
+        1794153600000,
+        89.79
+      ],
+      [
+        1794240000000,
+        88.53
+      ],
+      [
+        1794326400000,
+        87.68
+      ],
+      [
+        1794412800000,
+        87.99
+      ],
+      [
+        1794499200000,
+        90.55
+      ],
+      [
+        1794758400000,
+        92.68
+      ],
+      [
+        1794844800000,
+        93.33
+      ]
+    ],
+    "000651.SZ": [
+      [
+        1792512000000,
+        37.13
+      ],
+      [
+        1792598400000,
+        37.43
+      ],
+      [
+        1792684800000,
+        37.23
+      ],
+      [
+        1792944000000,
+        37.18
+      ],
+      [
+        1793030400000,
+        36.6
+      ],
+      [
+        1793116800000,
+        37.3
+      ],
+      [
+        1793203200000,
+        37.58
+      ],
+      [
+        1793289600000,
+        38.49
+      ],
+      [
+        1793548800000,
+        38.52
+      ],
+      [
+        1793635200000,
+        39.19
+      ],
+      [
+        1793721600000,
+        38.96
+      ],
+      [
+        1793808000000,
+        38.7
+      ],
+      [
+        1793894400000,
+        39.02
+      ],
+      [
+        1794153600000,
+        39.07
+      ],
+      [
+        1794240000000,
+        39.1
+      ],
+      [
+        1794326400000,
+        38.66
+      ],
+      [
+        1794412800000,
+        38.89
+      ],
+      [
+        1794499200000,
+        39.96
+      ],
+      [
+        1794758400000,
+        40.15
+      ],
+      [
+        1794844800000,
+        40.66
+      ]
+    ],
+    "600690.SH": [
+      [
+        1792512000000,
+        19.69
+      ],
+      [
+        1792598400000,
+        19.6
+      ],
+      [
+        1792684800000,
+        19.65
+      ],
+      [
+        1792944000000,
+        19.56
+      ],
+      [
+        1793030400000,
+        19.36
+      ],
+      [
+        1793116800000,
+        19.47
+      ],
+      [
+        1793203200000,
+        19.63
+      ],
+      [
+        1793289600000,
+        20.74
+      ],
+      [
+        1793548800000,
+        20.55
+      ],
+      [
+        1793635200000,
+        21.35
+      ],
+      [
+        1793721600000,
+        20.98
+      ],
+      [
+        1793808000000,
+        21.42
+      ],
+      [
+        1793894400000,
+        21.62
+      ],
+      [
+        1794153600000,
+        21.62
+      ],
+      [
+        1794240000000,
+        21.47
+      ],
+      [
+        1794326400000,
+        21.08
+      ],
+      [
+        1794412800000,
+        20.78
+      ],
+      [
+        1794499200000,
+        21.23
+      ],
+      [
+        1794758400000,
+        21.72
+      ],
+      [
+        1794844800000,
+        22.3
+      ]
+    ],
+    "600276.SH": [
+      [
+        1792512000000,
+        47.38
+      ],
+      [
+        1792598400000,
+        46.0
+      ],
+      [
+        1792684800000,
+        47.02
+      ],
+      [
+        1792944000000,
+        47.0
+      ],
+      [
+        1793030400000,
+        45.55
+      ],
+      [
+        1793116800000,
+        48.36
+      ],
+      [
+        1793203200000,
+        48.62
+      ],
+      [
+        1793289600000,
+        48.46
+      ],
+      [
+        1793548800000,
+        48.69
+      ],
+      [
+        1793635200000,
+        49.31
+      ],
+      [
+        1793721600000,
+        49.05
+      ],
+      [
+        1793808000000,
+        50.19
+      ],
+      [
+        1793894400000,
+        50.43
+      ],
+      [
+        1794153600000,
+        49.23
+      ],
+      [
+        1794240000000,
+        48.55
+      ],
+      [
+        1794326400000,
+        48.22
+      ],
+      [
+        1794412800000,
+        47.93
+      ],
+      [
+        1794499200000,
+        48.07
+      ],
+      [
+        1794758400000,
+        48.02
+      ],
+      [
+        1794844800000,
+        47.66
+      ]
+    ],
+    "603259.SH": [
+      [
+        1792512000000,
+        147.35
+      ],
+      [
+        1792598400000,
+        141.31
+      ],
+      [
+        1792684800000,
+        144.72
+      ],
+      [
+        1792944000000,
+        146.0
+      ],
+      [
+        1793030400000,
+        141.48
+      ],
+      [
+        1793116800000,
+        142.4
+      ],
+      [
+        1793203200000,
+        142.89
+      ],
+      [
+        1793289600000,
+        142.01
+      ],
+      [
+        1793548800000,
+        138.65
+      ],
+      [
+        1793635200000,
+        135.28
+      ],
+      [
+        1793721600000,
+        148.81
+      ],
+      [
+        1793808000000,
+        154.46
+      ],
+      [
+        1793894400000,
+        147.0
+      ],
+      [
+        1794153600000,
+        150.29
+      ],
+      [
+        1794240000000,
+        150.3
+      ],
+      [
+        1794326400000,
+        148.7
+      ],
+      [
+        1794412800000,
+        150.34
+      ],
+      [
+        1794499200000,
+        146.3
+      ],
+      [
+        1794758400000,
+        144.41
+      ],
+      [
+        1794844800000,
+        146.07
+      ]
+    ],
+    "300760.SZ": [
+      [
+        1792512000000,
+        168.78
+      ],
+      [
+        1792598400000,
+        169.76
+      ],
+      [
+        1792684800000,
+        176.0
+      ],
+      [
+        1792944000000,
+        182.44
+      ],
+      [
+        1793030400000,
+        176.5
+      ],
+      [
+        1793116800000,
+        174.0
+      ],
+      [
+        1793203200000,
+        177.7
+      ],
+      [
+        1793289600000,
+        180.45
+      ],
+      [
+        1793548800000,
+        177.98999999999998
+      ],
+      [
+        1793635200000,
+        184.56
+      ],
+      [
+        1793721600000,
+        179.7
+      ],
+      [
+        1793808000000,
+        182.79
+      ],
+      [
+        1793894400000,
+        182.85
+      ],
+      [
+        1794153600000,
+        181.1
+      ],
+      [
+        1794240000000,
+        178.92
+      ],
+      [
+        1794326400000,
+        176.79
+      ],
+      [
+        1794412800000,
+        177.51
+      ],
+      [
+        1794499200000,
+        179.4
+      ],
+      [
+        1794758400000,
+        184.3
+      ],
+      [
+        1794844800000,
+        185.38
+      ]
+    ],
+    "300142.SZ": [
+      [
+        1792512000000,
+        12.94
+      ],
+      [
+        1792598400000,
+        12.46
+      ],
+      [
+        1792684800000,
+        12.7
+      ],
+      [
+        1792944000000,
+        12.56
+      ],
+      [
+        1793030400000,
+        12.06
+      ],
+      [
+        1793116800000,
+        12.17
+      ],
+      [
+        1793203200000,
+        11.51
+      ],
+      [
+        1793289600000,
+        10.89
+      ],
+      [
+        1793548800000,
+        11.07
+      ],
+      [
+        1793635200000,
+        11.13
+      ],
+      [
+        1793721600000,
+        11.44
+      ],
+      [
+        1793808000000,
+        11.69
+      ],
+      [
+        1793894400000,
+        11.45
+      ],
+      [
+        1794153600000,
+        11.31
+      ],
+      [
+        1794240000000,
+        11.36
+      ],
+      [
+        1794326400000,
+        11.24
+      ],
+      [
+        1794412800000,
+        11.01
+      ],
+      [
+        1794499200000,
+        10.77
+      ],
+      [
+        1794758400000,
+        10.51
+      ],
+      [
+        1794844800000,
+        10.38
+      ]
+    ],
+    "300750.SZ": [
+      [
+        1792512000000,
+        227.9
+      ],
+      [
+        1792598400000,
+        220.41
+      ],
+      [
+        1792684800000,
+        237.6
+      ],
+      [
+        1792944000000,
+        238.0
+      ],
+      [
+        1793030400000,
+        233.0
+      ],
+      [
+        1793116800000,
+        229.14
+      ],
+      [
+        1793203200000,
+        229.07
+      ],
+      [
+        1793289600000,
+        232.92
+      ],
+      [
+        1793548800000,
+        240.19
+      ],
+      [
+        1793635200000,
+        249.32
+      ],
+      [
+        1793721600000,
+        252.88
+      ],
+      [
+        1793808000000,
+        264.06
+      ],
+      [
+        1793894400000,
+        254.22
+      ],
+      [
+        1794153600000,
+        248.64
+      ],
+      [
+        1794240000000,
+        249.95
+      ],
+      [
+        1794326400000,
+        246.66
+      ],
+      [
+        1794412800000,
+        240.0
+      ],
+      [
+        1794499200000,
+        237.7
+      ],
+      [
+        1794758400000,
+        240.5
+      ],
+      [
+        1794844800000,
+        238.5
+      ]
+    ],
+    "002594.SZ": [
+      [
+        1792512000000,
+        80.7
+      ],
+      [
+        1792598400000,
+        80.02
+      ],
+      [
+        1792684800000,
+        81.42
+      ],
+      [
+        1792944000000,
+        82.4
+      ],
+      [
+        1793030400000,
+        82.01
+      ],
+      [
+        1793116800000,
+        82.74
+      ],
+      [
+        1793203200000,
+        82.5
+      ],
+      [
+        1793289600000,
+        81.65
+      ],
+      [
+        1793548800000,
+        84.15
+      ],
+      [
+        1793635200000,
+        84.95
+      ],
+      [
+        1793721600000,
+        85.15
+      ],
+      [
+        1793808000000,
+        86.25
+      ],
+      [
+        1793894400000,
+        85.23
+      ],
+      [
+        1794153600000,
+        84.9
+      ],
+      [
+        1794240000000,
+        84.44
+      ],
+      [
+        1794326400000,
+        82.04
+      ],
+      [
+        1794412800000,
+        80.32
+      ],
+      [
+        1794499200000,
+        79.99
+      ],
+      [
+        1794758400000,
+        80.49
+      ],
+      [
+        1794844800000,
+        80.35
+      ]
+    ],
+    "601012.SH": [
+      [
+        1792512000000,
+        10.99
+      ],
+      [
+        1792598400000,
+        11.16
+      ],
+      [
+        1792684800000,
+        11.3
+      ],
+      [
+        1792944000000,
+        11.53
+      ],
+      [
+        1793030400000,
+        11.45
+      ],
+      [
+        1793116800000,
+        11.27
+      ],
+      [
+        1793203200000,
+        11.15
+      ],
+      [
+        1793289600000,
+        11.0
+      ],
+      [
+        1793548800000,
+        11.5
+      ],
+      [
+        1793635200000,
+        11.76
+      ],
+      [
+        1793721600000,
+        12.0
+      ],
+      [
+        1793808000000,
+        12.47
+      ],
+      [
+        1793894400000,
+        12.42
+      ],
+      [
+        1794153600000,
+        12.02
+      ],
+      [
+        1794240000000,
+        12.16
+      ],
+      [
+        1794326400000,
+        11.75
+      ],
+      [
+        1794412800000,
+        11.78
+      ],
+      [
+        1794499200000,
+        11.7
+      ],
+      [
+        1794758400000,
+        11.4
+      ],
+      [
+        1794844800000,
+        11.26
+      ]
+    ],
+    "300274.SZ": [
+      [
+        1792512000000,
+        72.3
+      ],
+      [
+        1792598400000,
+        70.51
+      ],
+      [
+        1792684800000,
+        72.2
+      ],
+      [
+        1792944000000,
+        70.23
+      ],
+      [
+        1793030400000,
+        68.24
+      ],
+      [
+        1793116800000,
+        68.23
+      ],
+      [
+        1793203200000,
+        67.21
+      ],
+      [
+        1793289600000,
+        65.29
+      ],
+      [
+        1793548800000,
+        71.54
+      ],
+      [
+        1793635200000,
+        75.72
+      ],
+      [
+        1793721600000,
+        81.17
+      ],
+      [
+        1793808000000,
+        85.14
+      ],
+      [
+        1793894400000,
+        81.97
+      ],
+      [
+        1794153600000,
+        77.85
+      ],
+      [
+        1794240000000,
+        79.6
+      ],
+      [
+        1794326400000,
+        80.09
+      ],
+      [
+        1794412800000,
+        78.26
+      ],
+      [
+        1794499200000,
+        77.49
+      ],
+      [
+        1794758400000,
+        75.81
+      ],
+      [
+        1794844800000,
+        73.95
+      ]
+    ],
+    "688981.SH": [
+      [
+        1792512000000,
+        100.24
+      ],
+      [
+        1792598400000,
+        100.09
+      ],
+      [
+        1792684800000,
+        104.1
+      ],
+      [
+        1792944000000,
+        102.77
+      ],
+      [
+        1793030400000,
+        100.0
+      ],
+      [
+        1793116800000,
+        102.0
+      ],
+      [
+        1793203200000,
+        101.0
+      ],
+      [
+        1793289600000,
+        96.79
+      ],
+      [
+        1793548800000,
+        100.0
+      ],
+      [
+        1793635200000,
+        102.11
+      ],
+      [
+        1793721600000,
+        111.3
+      ],
+      [
+        1793808000000,
+        110.69
+      ],
+      [
+        1793894400000,
+        110.9
+      ],
+      [
+        1794153600000,
+        109.02
+      ],
+      [
+        1794240000000,
+        107.75
+      ],
+      [
+        1794326400000,
+        109.31
+      ],
+      [
+        1794412800000,
+        111.72
+      ],
+      [
+        1794499200000,
+        110.5
+      ],
+      [
+        1794758400000,
+        106.44
+      ],
+      [
+        1794844800000,
+        113.45
+      ]
+    ],
+    "688256.SH": [
+      [
+        1792512000000,
+        916.42
+      ],
+      [
+        1792598400000,
+        883.94
+      ],
+      [
+        1792684800000,
+        932.2
+      ],
+      [
+        1792944000000,
+        968.0
+      ],
+      [
+        1793030400000,
+        912.98
+      ],
+      [
+        1793116800000,
+        958.0
+      ],
+      [
+        1793203200000,
+        913.0
+      ],
+      [
+        1793289600000,
+        880.0
+      ],
+      [
+        1793548800000,
+        861.0
+      ],
+      [
+        1793635200000,
+        767.93
+      ],
+      [
+        1793721600000,
+        847.66
+      ],
+      [
+        1793808000000,
+        845.0
+      ],
+      [
+        1793894400000,
+        802.9
+      ],
+      [
+        1794153600000,
+        851.21
+      ],
+      [
+        1794240000000,
+        838.0
+      ],
+      [
+        1794326400000,
+        900.0
+      ],
+      [
+        1794412800000,
+        973.0
+      ],
+      [
+        1794499200000,
+        978.88
+      ],
+      [
+        1794758400000,
+        897.97
+      ],
+      [
+        1794844800000,
+        904.8
+      ]
+    ],
+    "603986.SH": [
+      [
+        1792512000000,
+        288.02
+      ],
+      [
+        1792598400000,
+        276.75
+      ],
+      [
+        1792684800000,
+        292.0
+      ],
+      [
+        1792944000000,
+        276.45
+      ],
+      [
+        1793030400000,
+        268.98
+      ],
+      [
+        1793116800000,
+        289.88
+      ],
+      [
+        1793203200000,
+        275.99
+      ],
+      [
+        1793289600000,
+        257.8
+      ],
+      [
+        1793548800000,
+        265.67
+      ],
+      [
+        1793635200000,
+        250.16
+      ],
+      [
+        1793721600000,
+        271.38
+      ],
+      [
+        1793808000000,
+        263.15
+      ],
+      [
+        1793894400000,
+        239.49
+      ],
+      [
+        1794153600000,
+        238.41
+      ],
+      [
+        1794240000000,
+        244.57
+      ],
+      [
+        1794326400000,
+        259.62
+      ],
+      [
+        1794412800000,
+        258.85
+      ],
+      [
+        1794499200000,
+        246.02
+      ],
+      [
+        1794758400000,
+        223.22
+      ],
+      [
+        1794844800000,
+        214.56
+      ]
+    ],
+    "688008.SH": [
+      [
+        1792512000000,
+        178.14000000000001
+      ],
+      [
+        1792598400000,
+        175.13000000000002
+      ],
+      [
+        1792684800000,
+        180.0
+      ],
+      [
+        1792944000000,
+        167.48
+      ],
+      [
+        1793030400000,
+        164.5
+      ],
+      [
+        1793116800000,
+        174.7
+      ],
+      [
+        1793203200000,
+        166.79
+      ],
+      [
+        1793289600000,
+        158.3
+      ],
+      [
+        1793548800000,
+        164.58
+      ],
+      [
+        1793635200000,
+        150.01
+      ],
+      [
+        1793721600000,
+        167.82
+      ],
+      [
+        1793808000000,
+        163.8
+      ],
+      [
+        1793894400000,
+        150.1
+      ],
+      [
+        1794153600000,
+        149.67
+      ],
+      [
+        1794240000000,
+        154.8
+      ],
+      [
+        1794326400000,
+        162.86
+      ],
+      [
+        1794412800000,
+        162.89
+      ],
+      [
+        1794499200000,
+        150.97
+      ],
+      [
+        1794758400000,
+        139.79
+      ],
+      [
+        1794844800000,
+        130.6
+      ]
+    ],
+    "300308.SZ": [
+      [
+        1792512000000,
+        646.77
+      ],
+      [
+        1792598400000,
+        590.11
+      ],
+      [
+        1792684800000,
+        612.63
+      ],
+      [
+        1792944000000,
+        594.5
+      ],
+      [
+        1793030400000,
+        577.0
+      ],
+      [
+        1793116800000,
+        636.3
+      ],
+      [
+        1793203200000,
+        582.05
+      ],
+      [
+        1793289600000,
+        553.0
+      ],
+      [
+        1793548800000,
+        550.0
+      ],
+      [
+        1793635200000,
+        480.2
+      ],
+      [
+        1793721600000,
+        533.38
+      ],
+      [
+        1793808000000,
+        493.33
+      ],
+      [
+        1793894400000,
+        448.0
+      ],
+      [
+        1794153600000,
+        452.03
+      ],
+      [
+        1794240000000,
+        471.0
+      ],
+      [
+        1794326400000,
+        542.0
+      ],
+      [
+        1794412800000,
+        508.9
+      ],
+      [
+        1794499200000,
+        466.2
+      ],
+      [
+        1794758400000,
+        408.97
+      ],
+      [
+        1794844800000,
+        393.0
+      ]
+    ],
+    "300502.SZ": [
+      [
+        1792512000000,
+        294.12
+      ],
+      [
+        1792598400000,
+        258.01
+      ],
+      [
+        1792684800000,
+        261.0
+      ],
+      [
+        1792944000000,
+        251.69
+      ],
+      [
+        1793030400000,
+        237.59
+      ],
+      [
+        1793116800000,
+        256.79
+      ],
+      [
+        1793203200000,
+        228.4
+      ],
+      [
+        1793289600000,
+        196.0
+      ],
+      [
+        1793548800000,
+        191.48
+      ],
+      [
+        1793635200000,
+        173.36
+      ],
+      [
+        1793721600000,
+        196.5
+      ],
+      [
+        1793808000000,
+        185.61
+      ],
+      [
+        1793894400000,
+        172.1
+      ],
+      [
+        1794153600000,
+        176.0
+      ],
+      [
+        1794240000000,
+        183.8
+      ],
+      [
+        1794326400000,
+        215.0
+      ],
+      [
+        1794412800000,
+        205.58
+      ],
+      [
+        1794499200000,
+        187.58
+      ],
+      [
+        1794758400000,
+        166.8
+      ],
+      [
+        1794844800000,
+        160.0
+      ]
+    ],
+    "002463.SZ": [
+      [
+        1792512000000,
+        114.97
+      ],
+      [
+        1792598400000,
+        106.96
+      ],
+      [
+        1792684800000,
+        107.06
+      ],
+      [
+        1792944000000,
+        98.9
+      ],
+      [
+        1793030400000,
+        99.2
+      ],
+      [
+        1793116800000,
+        104.57
+      ],
+      [
+        1793203200000,
+        94.11
+      ],
+      [
+        1793289600000,
+        87.34
+      ],
+      [
+        1793548800000,
+        86.05
+      ],
+      [
+        1793635200000,
+        78.14
+      ],
+      [
+        1793721600000,
+        85.95
+      ],
+      [
+        1793808000000,
+        81.0
+      ],
+      [
+        1793894400000,
+        73.21
+      ],
+      [
+        1794153600000,
+        77.1
+      ],
+      [
+        1794240000000,
+        81.3
+      ],
+      [
+        1794326400000,
+        89.43
+      ],
+      [
+        1794412800000,
+        91.33
+      ],
+      [
+        1794499200000,
+        82.2
+      ],
+      [
+        1794758400000,
+        73.98
+      ],
+      [
+        1794844800000,
+        72.9
+      ]
+    ],
+    "002475.SZ": [
+      [
+        1792512000000,
+        47.9800769
+      ],
+      [
+        1792598400000,
+        47.01
+      ],
+      [
+        1792684800000,
+        50.42
+      ],
+      [
+        1792944000000,
+        49.81
+      ],
+      [
+        1793030400000,
+        48.8
+      ],
+      [
+        1793116800000,
+        49.7
+      ],
+      [
+        1793203200000,
+        48.07
+      ],
+      [
+        1793289600000,
+        45.6
+      ],
+      [
+        1793548800000,
+        45.27
+      ],
+      [
+        1793635200000,
+        45.45
+      ],
+      [
+        1793721600000,
+        49.51
+      ],
+      [
+        1793808000000,
+        50.86
+      ],
+      [
+        1793894400000,
+        50.05
+      ],
+      [
+        1794153600000,
+        50.78
+      ],
+      [
+        1794240000000,
+        51.68
+      ],
+      [
+        1794326400000,
+        51.67
+      ],
+      [
+        1794412800000,
+        50.82
+      ],
+      [
+        1794499200000,
+        50.02
+      ],
+      [
+        1794758400000,
+        48.45
+      ],
+      [
+        1794844800000,
+        47.6
+      ]
+    ],
+    "002415.SZ": [
+      [
+        1792512000000,
+        32.34
+      ],
+      [
+        1792598400000,
+        32.42
+      ],
+      [
+        1792684800000,
+        33.78
+      ],
+      [
+        1792944000000,
+        34.99
+      ],
+      [
+        1793030400000,
+        34.25
+      ],
+      [
+        1793116800000,
+        34.15
+      ],
+      [
+        1793203200000,
+        34.79
+      ],
+      [
+        1793289600000,
+        34.55
+      ],
+      [
+        1793548800000,
+        34.91
+      ],
+      [
+        1793635200000,
+        35.3
+      ],
+      [
+        1793721600000,
+        35.17
+      ],
+      [
+        1793808000000,
+        35.63
+      ],
+      [
+        1793894400000,
+        35.25
+      ],
+      [
+        1794153600000,
+        34.67
+      ],
+      [
+        1794240000000,
+        34.83
+      ],
+      [
+        1794326400000,
+        34.25
+      ],
+      [
+        1794412800000,
+        33.88
+      ],
+      [
+        1794499200000,
+        34.45
+      ],
+      [
+        1794758400000,
+        35.3
+      ],
+      [
+        1794844800000,
+        35.28
+      ]
+    ],
+    "601088.SH": [
+      [
+        1792512000000,
+        48.290000000000006
+      ],
+      [
+        1792598400000,
+        48.96
+      ],
+      [
+        1792684800000,
+        49.220000000000006
+      ],
+      [
+        1792944000000,
+        50.15
+      ],
+      [
+        1793030400000,
+        49.38
+      ],
+      [
+        1793116800000,
+        49.65
+      ],
+      [
+        1793203200000,
+        51.62
+      ],
+      [
+        1793289600000,
+        51.99
+      ],
+      [
+        1793548800000,
+        51.84
+      ],
+      [
+        1793635200000,
+        52.0
+      ],
+      [
+        1793721600000,
+        50.98
+      ],
+      [
+        1793808000000,
+        47.79
+      ],
+      [
+        1793894400000,
+        48.54
+      ],
+      [
+        1794153600000,
+        49.57
+      ],
+      [
+        1794240000000,
+        48.8
+      ],
+      [
+        1794326400000,
+        49.0
+      ],
+      [
+        1794412800000,
+        48.96
+      ],
+      [
+        1794499200000,
+        50.0
+      ],
+      [
+        1794758400000,
+        50.66
+      ],
+      [
+        1794844800000,
+        50.57
+      ]
+    ],
+    "601857.SH": [
+      [
+        1792512000000,
+        12.56
+      ],
+      [
+        1792598400000,
+        12.7
+      ],
+      [
+        1792684800000,
+        12.75
+      ],
+      [
+        1792944000000,
+        13.38
+      ],
+      [
+        1793030400000,
+        13.2
+      ],
+      [
+        1793116800000,
+        13.26
+      ],
+      [
+        1793203200000,
+        13.69
+      ],
+      [
+        1793289600000,
+        13.84
+      ],
+      [
+        1793548800000,
+        14.02
+      ],
+      [
+        1793635200000,
+        14.0
+      ],
+      [
+        1793721600000,
+        13.62
+      ],
+      [
+        1793808000000,
+        12.54
+      ],
+      [
+        1793894400000,
+        12.7
+      ],
+      [
+        1794153600000,
+        12.62
+      ],
+      [
+        1794240000000,
+        11.82
+      ],
+      [
+        1794326400000,
+        11.92
+      ],
+      [
+        1794412800000,
+        12.03
+      ],
+      [
+        1794499200000,
+        12.39
+      ],
+      [
+        1794758400000,
+        12.47
+      ],
+      [
+        1794844800000,
+        12.4
+      ]
+    ],
+    "600028.SH": [
+      [
+        1792512000000,
+        5.42
+      ],
+      [
+        1792598400000,
+        5.36
+      ],
+      [
+        1792684800000,
+        5.37
+      ],
+      [
+        1792944000000,
+        5.56
+      ],
+      [
+        1793030400000,
+        5.51
+      ],
+      [
+        1793116800000,
+        5.48
+      ],
+      [
+        1793203200000,
+        5.62
+      ],
+      [
+        1793289600000,
+        5.9
+      ],
+      [
+        1793548800000,
+        5.9
+      ],
+      [
+        1793635200000,
+        5.8
+      ],
+      [
+        1793721600000,
+        5.75
+      ],
+      [
+        1793808000000,
+        5.7
+      ],
+      [
+        1793894400000,
+        5.8
+      ],
+      [
+        1794153600000,
+        5.8
+      ],
+      [
+        1794240000000,
+        5.69
+      ],
+      [
+        1794326400000,
+        5.65
+      ],
+      [
+        1794412800000,
+        5.61
+      ],
+      [
+        1794499200000,
+        5.73
+      ],
+      [
+        1794758400000,
+        5.84
+      ],
+      [
+        1794844800000,
+        5.89
+      ]
+    ],
+    "600150.SH": [
+      [
+        1792512000000,
+        34.394999999999996
+      ],
+      [
+        1792598400000,
+        34.065
+      ],
+      [
+        1792684800000,
+        35.1
+      ],
+      [
+        1792944000000,
+        35.17
+      ],
+      [
+        1793030400000,
+        34.64
+      ],
+      [
+        1793116800000,
+        33.77
+      ],
+      [
+        1793203200000,
+        33.86
+      ],
+      [
+        1793289600000,
+        33.39
+      ],
+      [
+        1793548800000,
+        34.11
+      ],
+      [
+        1793635200000,
+        35.3
+      ],
+      [
+        1793721600000,
+        35.52
+      ],
+      [
+        1793808000000,
+        35.38
+      ],
+      [
+        1793894400000,
+        35.17
+      ],
+      [
+        1794153600000,
+        35.01
+      ],
+      [
+        1794240000000,
+        34.26
+      ],
+      [
+        1794326400000,
+        34.06
+      ],
+      [
+        1794412800000,
+        34.2
+      ],
+      [
+        1794499200000,
+        34.11
+      ],
+      [
+        1794758400000,
+        34.14
+      ],
+      [
+        1794844800000,
+        33.98
+      ]
+    ],
+    "600031.SH": [
+      [
+        1792512000000,
+        17.69
+      ],
+      [
+        1792598400000,
+        17.82
+      ],
+      [
+        1792684800000,
+        18.32
+      ],
+      [
+        1792944000000,
+        18.27
+      ],
+      [
+        1793030400000,
+        18.07
+      ],
+      [
+        1793116800000,
+        17.86
+      ],
+      [
+        1793203200000,
+        18.29
+      ],
+      [
+        1793289600000,
+        17.76
+      ],
+      [
+        1793548800000,
+        17.88
+      ],
+      [
+        1793635200000,
+        18.84
+      ],
+      [
+        1793721600000,
+        18.69
+      ],
+      [
+        1793808000000,
+        19.47
+      ],
+      [
+        1793894400000,
+        19.5
+      ],
+      [
+        1794153600000,
+        18.95
+      ],
+      [
+        1794240000000,
+        18.73
+      ],
+      [
+        1794326400000,
+        18.53
+      ],
+      [
+        1794412800000,
+        18.27
+      ],
+      [
+        1794499200000,
+        18.32
+      ],
+      [
+        1794758400000,
+        18.78
+      ],
+      [
+        1794844800000,
+        18.6
+      ]
+    ],
+    "601766.SH": [
+      [
+        1792512000000,
+        6.26
+      ],
+      [
+        1792598400000,
+        6.33
+      ],
+      [
+        1792684800000,
+        6.35
+      ],
+      [
+        1792944000000,
+        6.43
+      ],
+      [
+        1793030400000,
+        6.44
+      ],
+      [
+        1793116800000,
+        6.39
+      ],
+      [
+        1793203200000,
+        6.48
+      ],
+      [
+        1793289600000,
+        6.55
+      ],
+      [
+        1793548800000,
+        6.28
+      ],
+      [
+        1793635200000,
+        6.54
+      ],
+      [
+        1793721600000,
+        6.44
+      ],
+      [
+        1793808000000,
+        6.38
+      ],
+      [
+        1793894400000,
+        6.55
+      ],
+      [
+        1794153600000,
+        6.47
+      ],
+      [
+        1794240000000,
+        6.42
+      ],
+      [
+        1794326400000,
+        6.34
+      ],
+      [
+        1794412800000,
+        6.27
+      ],
+      [
+        1794499200000,
+        6.43
+      ],
+      [
+        1794758400000,
+        6.6
+      ],
+      [
+        1794844800000,
+        6.73
+      ]
+    ],
+    "601668.SH": [
+      [
+        1792512000000,
+        4.51
+      ],
+      [
+        1792598400000,
+        4.5
+      ],
+      [
+        1792684800000,
+        4.5
+      ],
+      [
+        1792944000000,
+        4.58
+      ],
+      [
+        1793030400000,
+        4.58
+      ],
+      [
+        1793116800000,
+        4.58
+      ],
+      [
+        1793203200000,
+        4.61
+      ],
+      [
+        1793289600000,
+        4.65
+      ],
+      [
+        1793548800000,
+        4.65
+      ],
+      [
+        1793635200000,
+        4.73
+      ],
+      [
+        1793721600000,
+        4.71
+      ],
+      [
+        1793808000000,
+        4.65
+      ],
+      [
+        1793894400000,
+        4.71
+      ],
+      [
+        1794153600000,
+        4.67
+      ],
+      [
+        1794240000000,
+        4.65
+      ],
+      [
+        1794326400000,
+        4.56
+      ],
+      [
+        1794412800000,
+        4.59
+      ],
+      [
+        1794499200000,
+        4.62
+      ],
+      [
+        1794758400000,
+        4.67
+      ],
+      [
+        1794844800000,
+        4.7
+      ]
+    ]
+  },
   "errors": []
 }
