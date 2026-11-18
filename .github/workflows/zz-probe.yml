@@ -1,4 +1,4 @@
-name: zz probe (temporary)  # 目录导出 v5
+name: zz probe (temporary)  # 终验 v6
 on:
   workflow_dispatch:
   push:
@@ -55,24 +55,32 @@ jobs:
 
           print(f"\n目录合计 {len(catalog)} 条")
 
-          # 导出全部 881 开头的行业指数（一级/二级行业），供重建清单
-          ind = {c: n for c, n in catalog.items() if c.startswith("881")}
-          print(f"\n=== 881*.TI 行业指数 {len(ind)} 个 ===")
-          for code in sorted(ind):
-              print(f'    ("{code}", "{ind[code]}"),')
+          # 逐条验证清单：每个代码都要能返回行情
+          print("\n=== 逐条验证清单 ===")
+          for label, pairs in (("宽基", mw.INDICES), ("板块", mw.SECTORS)):
+              codes = [c for c, _ in pairs]
+              bad = []
+              for i in range(0, len(codes), 40):
+                  chunk = codes[i:i+40]
+                  try:
+                      b = hit("/api/a-share-index/prices/snapshot",
+                              thscodes=",".join(chunk))
+                  except Exception as exc:
+                      bad += chunk
+                      print(f"  批次失败 {exc}")
+                      continue
+                  got = {it.get("thscode") for it in (b.get("data") or {}).get("item") or []}
+                  bad += [c for c in chunk if c not in got]
+              print(f"  {label}：{len(codes)} 个，无效 {len(bad)} 个 {bad}")
 
-          print("\n=== 其他 TI 前缀分布 ===")
-          from collections import Counter
-          print(Counter(c.split(".")[0][:3] for c in catalog if c.endswith(".TI")))
-
-          print("\n=== 港股名称核对（腾讯给的 vs 清单）===")
+          print("\n=== 港股名称核对 ===")
           hk = [c for c, _ in mw.HK_INDICES + mw.HK_STOCKS]
           url = "https://qt.gtimg.cn/q=" + ",".join(hk)
           raw = urlopen(Request(url, headers={"User-Agent": "Mozilla/5.0",
                                               "Referer": "https://finance.qq.com/"}),
                         timeout=30).read()
           text = raw.decode("gbk", "replace")
-          real = {}
+          real, mine = {}, dict(mw.HK_INDICES + mw.HK_STOCKS)
           for line in text.split(";"):
               line = line.strip()
               if not line.startswith("v_"):
@@ -81,11 +89,10 @@ jobs:
               f = line.split('="', 1)[-1].rstrip('"').split("~")
               if len(f) > 3:
                   real[key] = f[1]
-          mine = dict(mw.HK_INDICES + mw.HK_STOCKS)
           for code in hk:
               got, want = real.get(code), mine.get(code)
               if got is None:
-                  print(f"    {code}: 腾讯无数据（清单写「{want}」）")
+                  print(f"    {code}: 腾讯无数据（清单「{want}」）")
               elif got.strip() != (want or "").strip():
                   print(f"    {code}: 清单「{want}」→ 腾讯「{got}」")
           PY
