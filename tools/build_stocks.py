@@ -81,7 +81,8 @@ TRADING_DAY_MINUTES = 24 * 60
 def total_volume(payload):
     """整份快照的成交量合计（None 当 0）。全 0 基本就是「今天还没成交」。"""
     total = 0.0
-    for row in (payload.get("indices") or []) + (payload.get("stocks") or []):
+    hk = (payload.get("hk") or {}).get("rows") or []
+    for row in (payload.get("indices") or []) + (payload.get("stocks") or []) + hk:
         volume = row.get("volume")
         if isinstance(volume, (int, float)):
             total += volume
@@ -91,7 +92,8 @@ def total_volume(payload):
 def priced_count(payload):
     """有真实最新价的条目数（0 与 None 都不算）。"""
     count = 0
-    for row in (payload.get("indices") or []) + (payload.get("stocks") or []):
+    hk = (payload.get("hk") or {}).get("rows") or []
+    for row in (payload.get("indices") or []) + (payload.get("stocks") or []) + hk:
         value = row.get("last_price")
         if isinstance(value, (int, float)) and value != 0:
             count += 1
@@ -105,9 +107,14 @@ def empty_snapshot(payload):
     停牌股本来就没有成交。两个条件同时成立才当空壳。
     """
     rows = len(payload.get("indices") or []) + len(payload.get("stocks") or [])
+    rows += len(((payload.get("hk") or {}).get("rows")) or [])
     if rows == 0:
         return True
     no_volume = total_volume(payload) == 0
+    market = payload.get("market") or {}
+    if (market.get("turnover") or 0) > 0:
+        # 全市场取到了成交额，这一轮显然不是空壳
+        return False
     all_empty = priced_count(payload) == 0
     # 指数会带着「前收盘」那个点位（所以 priced_count > 0），个股却全是 null；
     # 两个条件任一成立，再加上「成交量全 0」，就是空壳。
@@ -272,11 +279,16 @@ def fmt_seal(value):
 def data_hash(payload):
     """行情指纹：价格/涨跌幅/条数/历史收盘变了才变，供工作流跳过无变化的提交。"""
     history = payload.get("history") or {}
+    market = payload.get("market") or {}
+    hk = payload.get("hk") or {}
     core = {
         "indices": [(r.get("thscode"), r.get("last_price"),
                      r.get("price_change_ratio_pct")) for r in payload.get("indices") or []],
-        "stocks": [(r.get("thscode"), r.get("last_price"),
-                    r.get("price_change_ratio_pct")) for r in payload.get("stocks") or []],
+        # 全市场只留统计口径：5584 只逐只价格进 hash 会让收盘后每轮都变，反而刷空提交
+        "market": [market.get(k) for k in ("count", "up", "down", "limit_up",
+                                           "limit_down", "turnover")],
+        "hk": [(r.get("thscode"), r.get("last_price"), r.get("turnover"))
+               for r in hk.get("rows") or []],
         "limit_up": [(r.get("thscode"), r.get("last_price")) for r in payload.get("limit_up") or []],
         "history": {code: [pair[1] for pair in bars]
                     for code, bars in sorted(history.items())},
@@ -306,16 +318,44 @@ def manifest(payload, generated):
         "data_hash": data_hash(payload),
         "demo": bool(payload.get("demo")),
         "counts": {
-            "indices": len(payload.get("indices") or []),
-            "stocks": len(payload.get("stocks") or []),
+            "indices": len(core_indices(payload)),
+            "sectors": len(sector_indices(payload)),
+            "market": (payload.get("market") or {}).get("count") or 0,
+            "hk": len(((payload.get("hk") or {}).get("rows")) or []),
             "limit_up": len(payload.get("limit_up") or []),
         },
         "indices": payload.get("indices") or [],
-        "stocks": payload.get("stocks") or [],
+        "market": payload.get("market"),
+        "hk": _hk_manifest(payload),
         "limit_up": payload.get("limit_up") or [],
         "history": payload.get("history") or {},
         "errors": payload.get("errors") or [],
     }
+
+
+def core_indices(payload):
+    """宽基指数（不含行业/概念板块）。"""
+    return [r for r in payload.get("indices") or [] if not is_sector_row(r)]
+
+
+def sector_indices(payload):
+    return [r for r in payload.get("indices") or [] if is_sector_row(r)]
+
+
+def _hk_manifest(payload):
+    """港股那块写进清单：带 data_time（网页/插件要显示行情时间）。"""
+    hk = payload.get("hk")
+    if not isinstance(hk, dict):
+        return None
+    stamp = hk.get("data_timestamp")
+    data_time = None
+    if isinstance(stamp, (int, float)):
+        data_time = datetime.fromtimestamp(
+            stamp / 1000, tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    out = dict(hk)
+    out["data_timestamp"] = stamp if isinstance(stamp, (int, float)) else None
+    out["data_time"] = data_time
+    return out
 
 
 def render_txt(payload, generated):
@@ -973,7 +1013,9 @@ def build(data_path=None, out_dir="site", demo=False):
         if not data_path:
             raise ValueError("缺少 --data（或用 --demo 先看版式）")
         payload = json.loads(Path(data_path).read_text(encoding="utf-8"))
-    total = len(payload.get("indices") or []) + len(payload.get("stocks") or [])
+    total = (len(payload.get("indices") or [])
+             + len(payload.get("stocks") or [])
+             + len(((payload.get("hk") or {}).get("rows")) or []))
     if total == 0:
         raise ValueError("行情一条都没有，不生成空面板")
     # 开盘前/接口抽风时会给「空壳快照」（成交量全 0、大多没有最新价）。这种东西
@@ -1001,9 +1043,11 @@ def build(data_path=None, out_dir="site", demo=False):
     problems = check(out)
     if problems:
         raise ValueError("产物自检不过：" + "；".join(problems))
+    counts = data["counts"]
     print(f"已生成 {out}/stocks.json、stocks.txt、stocks.html、stocks.epub"
-          f"（指数 {data['counts']['indices']} / 股票 {data['counts']['stocks']}"
-          f" / 涨停 {data['counts']['limit_up']}，hash {data['data_hash']}）")
+          f"（指数 {counts['indices']} / 板块 {counts['sectors']}"
+          f" / 全市场 {counts['market']} / 港股 {counts['hk']}"
+          f" / 涨停 {counts['limit_up']}，hash {data['data_hash']}）")
     return data
 
 
