@@ -15,7 +15,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 
 import build_stocks  # noqa: E402
-import fetch_stocks  # noqa: E402
+import fetch_stocks
+import stocks_watchdog  # noqa: E402
 import stock_watchlist  # noqa: E402
 
 # 官方文档示例：行情快照（prices.md）与涨停池（limit-up-data.md）的响应。
@@ -403,7 +404,164 @@ class BuildTest(unittest.TestCase):
         self.assertEqual(build_stocks.poll_text(), "7分钟")
         text = build_stocks.render_txt(self._payload(), "2026-11-17 15:00:00")
         self.assertIn("每7分钟检查", text)
-        self.assertIn("每5分钟刷新", text)
+        # 服务端节奏跟 refresh-stocks.yml 的 cron 一致（15 分钟一轮 + watchdog 补跑）
+        self.assertIn(f"每{build_stocks.SERVER_MINUTES}分钟刷新", text)
+        self.assertEqual(build_stocks.SERVER_MINUTES, 15)
+
+    def test_status_line_says_age_and_session(self):
+        # 「时间为什么不是最新」曾经看不出来：现在抬头写距今多久 + 盘中/未开盘/已收盘。
+        payload = self._payload()          # data_timestamp = 1784275991000
+        data_ms = payload["data_timestamp"]
+        line = build_stocks.status_line(payload, now_ms=data_ms + 3 * 60000)
+        self.assertIn("数据 2026-07-17 16:13:11", line)
+        self.assertIn("3 分钟前", line)
+        self.assertIn("已收盘", line)
+        self.assertNotIn("STALE", line)
+        stale = build_stocks.status_line(payload, now_ms=data_ms + 40 * 60000)
+        self.assertIn("STALE", stale)
+        # 演示数据不标「多久以前」，免得看着像实时数据坏了
+        demo = dict(payload, demo=True)
+        self.assertIn("演示数据", build_stocks.status_line(demo, now_ms=data_ms))
+
+    def test_age_and_session_helpers(self):
+        base = 1794962959000            # 2026-11-18 08:49:19 北京时间
+        self.assertEqual(build_stocks.age_text(base, base + 30000), "刚刚")
+        self.assertEqual(build_stocks.age_text(base, base + 25 * 60000), "25 分钟前")
+        self.assertEqual(build_stocks.age_text(base, base + 3 * 3600000), "3 小时前")
+        self.assertEqual(build_stocks.age_text(base, base - 60000), "")
+        self.assertEqual(build_stocks.session_label(base), "未开盘")
+        self.assertEqual(build_stocks.session_label(base + 90 * 60000), "盘中")   # 10:19
+        self.assertEqual(build_stocks.session_label(base + 7 * 3600000), "已收盘")
+        self.assertFalse(build_stocks.is_stale(base, base + 5 * 60000))
+        self.assertTrue(build_stocks.is_stale(base, base + 21 * 60000))
+
+    def test_empty_snapshot_is_detected(self):
+        # 开盘前的空壳：成交量全 0、只有前收盘那个点位；不能显示成「0.00 手」，
+        # 也不能覆盖上一份有成交的面板。
+        # 真实形态：指数带着前收盘点位（个别有价），个股全是 null，成交量全 0。
+        shell = {"data_timestamp": 1794962959000,
+                 "indices": [{"thscode": "000001.SH", "name": "上证指数",
+                              "last_price": 3584.56, "open_price": 0.0, "high_price": 0.0,
+                              "low_price": 0.0, "volume": 0.0, "turnover": 0.0}],
+                 "stocks": [{"thscode": "601398.SH", "name": "工商银行",
+                             "last_price": None, "open_price": None, "volume": 0.0},
+                            {"thscode": "601939.SH", "name": "建设银行",
+                             "last_price": None, "open_price": None, "volume": 0.0},
+                            {"thscode": "600036.SH", "name": "招商银行",
+                             "last_price": None, "open_price": None, "volume": 0.0}]}
+        self.assertTrue(build_stocks.empty_snapshot(shell))
+        self.assertFalse(build_stocks.today_has_values(shell))
+        self.assertTrue(build_stocks.row_is_empty(shell["stocks"][0]))
+        self.assertFalse(build_stocks.row_is_empty(shell["indices"][0]))
+        live = self._payload()
+        self.assertFalse(build_stocks.empty_snapshot(live))
+        text = build_stocks.render_txt(shell, "2026-11-18 08:49:26")
+        self.assertIn("未成交", text)
+        self.assertNotIn("成交 0.00 手", text)
+        self.assertNotIn("成交额 0.00 亿", text)
+        # 有价但没成交的行：开盘价写 "--" 而不是 0.00
+        self.assertIn("上证指数 3,584.56", text)
+        self.assertEqual(build_stocks.fmt_pos(0.0), "--")
+        self.assertEqual(build_stocks.fmt_pos(None), "--")
+        self.assertEqual(build_stocks.fmt_pos(12.3), "12.30")
+
+    def test_empty_snapshot_does_not_overwrite_a_live_panel(self):
+        shell = {"data_timestamp": 1794962959000,
+                 "indices": [{"thscode": "000001.SH", "name": "上证指数",
+                              "last_price": None, "volume": 0.0}],
+                 "stocks": [{"thscode": "601398.SH", "name": "工商银行",
+                             "last_price": None, "volume": 0.0}]}
+        self.assertTrue(build_stocks.empty_snapshot(shell))
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "site"
+            out.mkdir()
+            live = build_stocks.manifest(self._payload(), "2026-11-17T07:00:00Z")
+            (out / "stocks.json").write_text(json.dumps(live), encoding="utf-8")
+            data_path = Path(tmp) / "in.json"
+            data_path.write_text(json.dumps(shell), encoding="utf-8")
+            with self.assertRaises(ValueError) as ctx:
+                build_stocks.build(str(data_path), str(out))
+            self.assertIn("空壳", str(ctx.exception))
+            # 上一份有效面板原样保留
+            kept = json.loads((out / "stocks.json").read_text(encoding="utf-8"))
+            self.assertEqual(kept["data_timestamp"], live["data_timestamp"])
+
+    def test_empty_snapshot_still_writes_when_there_is_nothing_better(self):
+        shell = {"data_timestamp": 1794962959000,
+                 "indices": [{"thscode": "000001.SH", "name": "上证指数",
+                              "last_price": None, "volume": 0.0}],
+                 "stocks": [{"thscode": "601398.SH", "name": "工商银行",
+                             "last_price": None, "volume": 0.0}]}
+        self.assertTrue(build_stocks.empty_snapshot(shell))
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "site"
+            data_path = Path(tmp) / "in.json"
+            data_path.write_text(json.dumps(shell), encoding="utf-8")
+            build_stocks.build(str(data_path), str(out))
+            self.assertTrue((out / "stocks.txt").is_file())
+
+    def test_watchdog_policy(self):
+        # cron 会被丢弃：watchdog 在盘中且落后时补跑，非盘中/新鲜/已在跑都不动。
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "stocks.json"
+            path.write_text(json.dumps({"data_time": "2026-11-18T01:15:00Z"}),
+                            encoding="utf-8")
+            dispatched = []
+            logs = []
+            originals = stocks_watchdog.running_jobs, stocks_watchdog.dispatch
+            stocks_watchdog.running_jobs = lambda repo=None: []
+            stocks_watchdog.dispatch = lambda repo=None: dispatched.append(True)
+            try:
+                # 盘中（北京 10:00）落后 85 分钟 → 补跑
+                result = stocks_watchdog.check(
+                    path, now=stocks_watchdog.parse_stamp("2026-11-18T02:30:00Z"),
+                    repo=None, do_dispatch=True, log=logs.append)
+                self.assertEqual(result, "dispatched")
+                self.assertEqual(len(dispatched), 1)
+                # 新鲜（09:20，落后 5 分钟）→ 不动
+                self.assertEqual(stocks_watchdog.check(
+                    path, now=stocks_watchdog.parse_stamp("2026-11-18T01:20:00Z"),
+                    do_dispatch=True, log=logs.append), "fresh")
+                # 收盘后 → 不动
+                self.assertEqual(stocks_watchdog.check(
+                    path, now=stocks_watchdog.parse_stamp("2026-11-18T09:30:00Z"),
+                    do_dispatch=True, log=logs.append), "outside")
+                # 已有一轮在跑 → 不重复补
+                stocks_watchdog.running_jobs = lambda repo=None: [{"status": "in_progress"}]
+                self.assertEqual(stocks_watchdog.check(
+                    path, now=stocks_watchdog.parse_stamp("2026-11-18T02:30:00Z"),
+                    do_dispatch=True, log=logs.append), "busy")
+                self.assertEqual(len(dispatched), 1)
+            finally:
+                stocks_watchdog.running_jobs, stocks_watchdog.dispatch = originals
+
+    def test_watchdog_session_window(self):
+        parse = stocks_watchdog.parse_stamp
+        self.assertTrue(stocks_watchdog.in_session(parse("2026-11-18T01:16:00Z")))   # 09:16 北京
+        self.assertFalse(stocks_watchdog.in_session(parse("2026-11-18T01:10:00Z")))  # 09:10
+        self.assertFalse(stocks_watchdog.in_session(parse("2026-11-18T07:10:00Z")))  # 15:10
+        self.assertFalse(stocks_watchdog.in_session(parse("2026-11-21T02:00:00Z")))  # 周六
+        self.assertTrue(stocks_watchdog.in_session(parse("2026-11-18T07:04:00Z")))   # 15:04
+
+    def test_workflow_schedule_matches_the_text_panel(self):
+        # 面板上写的「每 N 分钟刷新」必须和工作流 cron 一致，别再出现
+        # 「写着 5 分钟、实际几小时没跑」。
+        import re
+        root = Path(__file__).resolve().parents[1]
+        workflow = (root / ".github" / "workflows" / "refresh-stocks.yml").read_text(encoding="utf-8")
+        cron = re.search(r'cron: "([^"]+)"', workflow).group(1)
+        minutes = cron.split()[0]
+        # 15 分钟一轮：分钟列表写成 3,18,33,48（错开整点），而不是 */5 这种会被丢弃的
+        self.assertNotIn("*/5", cron)
+        values = [int(part) for part in minutes.split(",")]
+        self.assertEqual(len(values), 4)
+        self.assertEqual(build_stocks.SERVER_MINUTES, 15)
+        self.assertEqual(sorted(values), [3, 18, 33, 48])
+        # watchdog 得存在，并且用同一个阈值口径
+        watchdog = (root / ".github" / "workflows" / "refresh-stocks-watchdog.yml").read_text(encoding="utf-8")
+        self.assertIn("tools/stocks_watchdog.py", watchdog)
+        self.assertIn("--stale-minutes", watchdog)
+        self.assertIn("actions: write", watchdog)
 
     def test_formatters(self):
         self.assertEqual(build_stocks.fmt_volume(3098875.0), "3.10万手")

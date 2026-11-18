@@ -27,7 +27,7 @@ import hashlib
 import html as html_mod
 import json
 import sys
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -35,9 +35,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 TITLE = "同花顺行情面板"
 DISCLAIMER = "仅供信息展示，不构成投资建议"
 BEIJING = timezone.utc  # 北京时间 = UTC+8 固定偏移，不用 tzdata
-# 服务端抓取间隔（分钟）：GitHub Actions 的 cron 最快 5 分钟一轮，见
-# .github/workflows/refresh-stocks.yml。文本面板上照实写，别写成「每分钟」。
-SERVER_MINUTES = 5
+# 服务端抓取间隔（分钟）：与 .github/workflows/refresh-stocks.yml 的 cron 一致
+# （交易时段每 15 分钟一轮）。以前写 5 分钟，但 GitHub 会延迟/丢弃 */5 的调度，
+# 实际几小时才跑一次；现在 15 分钟 + refresh-stocks-watchdog.yml 补跑。
+SERVER_MINUTES = 15
 # 设备端检查间隔：和服务端节奏对齐，7 分钟一查不会漏掉新快照，
 # 也不会把同一个 generated 反复拉（每拉一次都要唤醒设备）。
 POLL_SECONDS = 420
@@ -65,8 +66,134 @@ def now_beijing_text():
     return moment.strftime("%Y-%m-%d %H:%M:%S")
 
 
+# 行情判活：开盘前后同花顺会给「空壳快照」（价/开高低/量全是 0 或 null）。
+# 这类数据既不该显示成 0.00 手，也不该覆盖上一份有效面板。
+STALE_MINUTES = 20    # data_time 落后超过这么多分钟就标 STALE
+SESSION_START_MIN = 9 * 60 + 15   # 北京时间 09:15 之前算「未开盘」（09:15 集合竞价）
+SESSION_END_MIN = 15 * 60 + 5     # 15:05 之后算「已收盘」
+
+
+def total_volume(payload):
+    """整份快照的成交量合计（None 当 0）。全 0 基本就是「今天还没成交」。"""
+    total = 0.0
+    for row in (payload.get("indices") or []) + (payload.get("stocks") or []):
+        volume = row.get("volume")
+        if isinstance(volume, (int, float)):
+            total += volume
+    return total
+
+
+def priced_count(payload):
+    """有真实最新价的条目数（0 与 None 都不算）。"""
+    count = 0
+    for row in (payload.get("indices") or []) + (payload.get("stocks") or []):
+        value = row.get("last_price")
+        if isinstance(value, (int, float)) and value != 0:
+            count += 1
+    return count
+
+
+def empty_snapshot(payload):
+    """开盘前的空壳快照：成交量为 0，并且过半条目没有最新价。
+
+    只看价格不行——开盘前指数还会带着「前收盘」那个点位；只看成交量又太严——
+    停牌股本来就没有成交。两个条件同时成立才当空壳。
+    """
+    rows = len(payload.get("indices") or []) + len(payload.get("stocks") or [])
+    if rows == 0:
+        return True
+    no_volume = total_volume(payload) == 0
+    all_empty = priced_count(payload) == 0
+    # 指数会带着「前收盘」那个点位（所以 priced_count > 0），个股却全是 null；
+    # 两个条件任一成立，再加上「成交量全 0」，就是空壳。
+    return no_volume and (all_empty or priced_count(payload) * 2 < rows)
+
+
+def today_has_values(payload):
+    """有没有「今天成交过」的迹象：有成交量，或者绝大多数条目都有最新价。"""
+    return not empty_snapshot(payload)
+
+
+def row_is_empty(row):
+    """这一行是不是空壳：没有任何价格。"""
+    return all(not isinstance(row.get(key), (int, float)) or row.get(key) == 0
+               for key in ("last_price", "open_price", "high_price", "low_price"))
+
+
+def session_label(data_ms):
+    """北京时间 → 盘中 / 未开盘 / 已收盘；不知道就返回空串。"""
+    if not isinstance(data_ms, (int, float)):
+        return ""
+    beijing_dt = datetime.fromtimestamp(data_ms / 1000, tz=timezone.utc) + timedelta(hours=8)
+    minutes = beijing_dt.hour * 60 + beijing_dt.minute
+    if beijing_dt.weekday() >= 5:
+        return "周末休市"
+    if minutes < SESSION_START_MIN:
+        return "未开盘"
+    if minutes > SESSION_END_MIN:
+        return "已收盘"
+    return "盘中"
+
+
+def age_text(data_ms, now_ms=None):
+    """快照到现在多久：'' / '3 分钟前' / '2 小时前' / '3 天前'（负数返回空串）。"""
+    if not isinstance(data_ms, (int, float)):
+        return ""
+    now_ms = now_ms if isinstance(now_ms, (int, float)) else int(
+        datetime.now(timezone.utc).timestamp() * 1000)
+    seconds = (now_ms - data_ms) / 1000
+    if seconds < 0:
+        return ""
+    if seconds < 90:
+        return "刚刚"
+    minutes = seconds / 60
+    if minutes < 90:
+        return f"{minutes:.0f} 分钟前"
+    hours = minutes / 60
+    if hours < 36:
+        return f"{hours:.0f} 小时前"
+    return f"{hours / 24:.0f} 天前"
+
+
+def is_stale(data_ms, now_ms=None):
+    if not isinstance(data_ms, (int, float)):
+        return False
+    now_ms = now_ms if isinstance(now_ms, (int, float)) else int(
+        datetime.now(timezone.utc).timestamp() * 1000)
+    return (now_ms - data_ms) / 60000 > STALE_MINUTES
+
+
+def status_line(payload, now_ms=None):
+    """抬头那一行：数据时间 + 距今 + 盘中/未开盘/已收盘 + STALE 警告。"""
+    data_ms = payload.get("data_timestamp")
+    if not isinstance(data_ms, (int, float)):
+        return "数据 无"
+    stamp = beijing_text(data_ms)
+    if payload.get("demo"):
+        # 演示数据的时间是官方文档里的示例，标「多久以前」只会吓人。
+        return f"数据 {stamp}（演示数据，非实时）"
+    parts = [f"数据 {stamp}"]
+    age = age_text(data_ms, now_ms)
+    if age:
+        parts.append(age)
+    label = session_label(data_ms)
+    if label:
+        parts.append(label)
+    text = " · ".join(parts)
+    if is_stale(data_ms, now_ms):
+        text += f" · STALE 超过 {STALE_MINUTES} 分钟没更新（定时任务可能被延迟，见 docs）"
+    return text
+
+
 def fmt_price(value):
     return "--" if value is None else f"{value:,.2f}"
+
+
+def fmt_pos(value):
+    """价格类字段：0 与 None 都写 "--"。开盘前接口会给 0.0，写成 0.00 像真价格。"""
+    if not isinstance(value, (int, float)) or value == 0:
+        return "--"
+    return f"{value:,.2f}"
 
 
 def fmt_ratio(value):
@@ -161,16 +288,20 @@ def manifest(payload, generated):
 def render_txt(payload, generated):
     lines = [TITLE]
     demo = "【演示数据】" if payload.get("demo") else ""
-    data_text = beijing_text(payload.get("data_timestamp")) or "无"
-    lines.append(f"生成 {generated} 北京时间 · 数据 {data_text}{demo}")
+    lines.append(f"生成 {generated} 北京时间 · {status_line(payload)}{demo}")
     lines.append(f"每{SERVER_MINUTES}分钟刷新 · 每{poll_text()}检查 · {DISCLAIMER}")
+    if not today_has_values(payload):
+        lines.append("注：这一版快照没有成交数据（开盘前/接口给空壳），下面显示 -- 与「未成交」")
     lines.append("")
 
     indices = payload.get("indices") or []
     lines.append(f"【指数】{len(indices)}")
     for row in indices:
         name = row.get("name") or row.get("thscode") or ""
-        lines.append(f"{name} {fmt_price(row.get('last_price'))} "
+        if row_is_empty(row):
+            lines.append(f"{name} 未成交")
+            continue
+        lines.append(f"{name} {fmt_pos(row.get('last_price'))} "
                      f"{fmt_ratio(row.get('price_change_ratio_pct'))} "
                      f"{fmt_change(row.get('price_change'))}".rstrip())
     lines.append("")
@@ -179,14 +310,20 @@ def render_txt(payload, generated):
     lines.append(f"【自选股】{len(stocks)} · 按涨跌幅排序")
     for row in stocks:
         name = row.get("name") or row.get("thscode") or ""
-        lines.append(f"{name} {fmt_price(row.get('last_price'))} "
+        if row_is_empty(row):
+            lines.append(f"{name} 未成交（开盘前或接口未返回，下一轮再看）")
+            continue
+        lines.append(f"{name} {fmt_pos(row.get('last_price'))} "
                      f"{fmt_ratio(row.get('price_change_ratio_pct'))} "
                      f"{fmt_change(row.get('price_change'))}".rstrip())
-        lines.append(f"  开{fmt_price(row.get('open_price'))} "
-                     f"高{fmt_price(row.get('high_price'))} "
-                     f"低{fmt_price(row.get('low_price'))} "
-                     f"成交{fmt_volume(row.get('volume'))} "
-                     f"成交额{fmt_turnover(row.get('turnover'))}")
+        # 成交量为 0 时别写「成交 0.00 手」：直接说「未成交」，免得看着像真成交了。
+        traded = isinstance(row.get("volume"), (int, float)) and row.get("volume") != 0
+        volume_text = (f"成交{fmt_volume(row.get('volume'))} "
+                       f"成交额{fmt_turnover(row.get('turnover'))}"
+                       if traded else "未成交")
+        lines.append(f"  开{fmt_pos(row.get('open_price'))} "
+                     f"高{fmt_pos(row.get('high_price'))} "
+                     f"低{fmt_pos(row.get('low_price'))} {volume_text}")
     lines.append("")
 
     limit_up = payload.get("limit_up") or []
@@ -199,7 +336,7 @@ def render_txt(payload, generated):
                 row.get("limit_up_reason") or "",
                 row.get("continue_day_text") or "",
                 fmt_seal(row.get("seal_money"))) if part)
-            lines.append(f"{name} {fmt_price(row.get('last_price'))} "
+            lines.append(f"{name} {fmt_pos(row.get('last_price'))} "
                          f"{fmt_ratio(row.get('price_change_ratio_pct'))} {extra}".rstrip())
         lines.append("")
 
@@ -223,6 +360,9 @@ header{border-bottom:3px solid #000;padding-bottom:8px}
 h1{font-size:26px;margin:0 0 4px}
 .meta{font-size:14px;color:#333}
 .badge{display:inline-block;border:1px solid #000;padding:0 6px;font-size:13px;margin-left:6px}
+.badge.stale{background:#000;color:#fff}
+.stale-hint{display:none;border:2px dashed #000;padding:6px 10px;margin:10px 0;font-size:13px}
+.muted{font-size:16px;font-weight:normal;color:#555}
 section h2{font-size:19px;border-bottom:2px solid #000;padding-bottom:4px;margin:22px 0 10px}
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
 .cards.index{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}
@@ -250,6 +390,9 @@ footer{border-top:1px solid #000;margin-top:16px;padding-top:8px;font-size:13px;
 <h1>__TITLE__<span class="badge" id="state">…</span></h1>
 <div class="meta" id="meta">加载中…</div>
 </header>
+<div class="stale-hint" id="stale-hint">数据超过 __STALE__ 分钟没更新：GitHub Actions 的定时任务被延迟或丢弃了，
+面板上的数字可能不是最新的。工作流已是 15 分钟一轮 + 体检补跑（refresh-stocks-watchdog.yml），
+仍不更新就看 GitHub Actions 的运行记录，详见 docs/kindle-stocks.md。</div>
 <main id="main"></main>
 <footer>__DISCLAIMER__ · 数据来源：同花顺金融数据服务（hithink-finance）·
 面板每 __POLL_TEXT__ 拉一次 stocks.json，generated 变了才重绘。</footer>
@@ -272,10 +415,42 @@ function z(n){return (n<10?'0':'')+n;}
 return d.getUTCFullYear()+'-'+z(d.getUTCMonth()+1)+'-'+z(d.getUTCDate())+' '+
 z(d.getUTCHours())+':'+z(d.getUTCMinutes())+':'+z(d.getUTCSeconds());
 }
+// 距今多久 / 盘中还是未开盘 / 是否过期：和纯文本面板同一套口径（STALE_MINUTES）。
+function ageText(iso){
+if(!iso)return '';
+var s=String(iso).replace('Z','');
+var p=s.match(/^(\\d{4})-(\\d{2})-(\\d{2})T(\\d{2}):(\\d{2}):(\\d{2})$/);
+if(!p)return '';
+var then=Date.UTC(+p[1],+p[2]-1,+p[3],+p[4],+p[5],+p[6]);
+var sec=(Date.now()-then)/1000;
+if(sec<0)return '';
+if(sec<90)return '刚刚';
+var min=sec/60;if(min<90)return Math.round(min)+' 分钟前';
+var hr=min/60;if(hr<36)return Math.round(hr)+' 小时前';
+return Math.round(hr/24)+' 天前';}
+function sessionLabel(iso){
+if(!iso)return '';
+var s=String(iso).replace('Z','');
+var p=s.match(/^(\\d{4})-(\\d{2})-(\\d{2})T(\\d{2}):(\\d{2}):(\\d{2})$/);
+if(!p)return '';
+var bjMin=((+p[4]+8)%24)*60+(+p[5]);
+var d=new Date(Date.UTC(+p[1],+p[2]-1,+p[3],+p[4],+p[5],+p[6])+8*3600*1000);
+if(d.getUTCDay()===0||d.getUTCDay()===6)return '周末休市';
+if(bjMin<9*60+15)return '未开盘';
+if(bjMin>15*60+5)return '已收盘';
+return '盘中';}
+function isStale(iso){
+if(!iso)return false;
+var s=String(iso).replace('Z','');
+var p=s.match(/^(\\d{4})-(\\d{2})-(\\d{2})T(\\d{2}):(\\d{2}):(\\d{2})$/);
+if(!p)return false;
+var then=Date.UTC(+p[1],+p[2]-1,+p[3],+p[4],+p[5],+p[6]);
+return (Date.now()-then)/60000>__STALE__;}
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){
 return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function num(v,d){return (v==null||isNaN(v))?'--':Number(v).toLocaleString('zh-CN',
 {minimumFractionDigits:d==null?2:d,maximumFractionDigits:d==null?2:d});}
+function pos(v){return (typeof v==='number'&&v!==0)?num(v):'--';}
 function ratio(v){if(v==null||isNaN(v))return '--';
 return (v>0?'+':'')+Number(v).toFixed(2)+'%';}
 function change(v){if(v==null||isNaN(v))return '';
@@ -306,16 +481,25 @@ var pts=closes.filter(function(v){return typeof v==='number';});
 if(!pts.length)return null;
 return {first:pts[0],last:pts[pts.length-1],
 lo:Math.min.apply(null,pts),hi:Math.max.apply(null,pts)};}
+function rowEmpty(r){
+var keys=['last_price','open_price','high_price','low_price'];
+for(var i=0;i<keys.length;i++){var v=r[keys[i]];
+if(typeof v==='number'&&v!==0)return false;}
+return true;}
+function traded(r){return typeof r.volume==='number'&&r.volume!==0;}
 function card(r,d,small){
 var closes=closesOf(d,r.thscode);
 var s=spark(closes),rg=rangeOf(closes);
+var empty=rowEmpty(r);
 var kv='';
-if(!small){
+if(empty){
+kv='<table class="kv"><tr><td>状态</td><td>未成交（开盘前或接口未返回）</td></tr></table>';
+}else if(!small){
 kv='<table class="kv"><tr><td>今开</td><td>'+num(r.open_price)+'</td></tr>'+
 '<tr><td>最高</td><td>'+num(r.high_price)+'</td></tr>'+
 '<tr><td>最低</td><td>'+num(r.low_price)+'</td></tr>'+
-'<tr><td>成交量</td><td>'+vol(r.volume)+'</td></tr>'+
-'<tr><td>成交额</td><td>'+money(r.turnover)+'</td></tr></table>';
+(traded(r)?'<tr><td>成交量</td><td>'+vol(r.volume)+'</td></tr>'+
+'<tr><td>成交额</td><td>'+money(r.turnover)+'</td></tr>':'<tr><td>成交</td><td>未成交</td></tr>')+'</table>';
 }
 var sparkHtml='';
 if(s){
@@ -325,9 +509,10 @@ closes.length+'日 '+num(rg.first)+'→'+num(rg.last)+'</span>'+
 }
 return '<div class="card"><div class="head"><span class="name">'+
 esc(r.name||r.thscode)+'</span><span class="code">'+esc(r.thscode||'')+
-'</span></div><div class="body"><div class="price">'+num(r.last_price)+
+'</span></div><div class="body"><div class="price">'+
+(empty?'<span class="muted">未成交</span>':num(r.last_price))+
 '</div><div class="ratio '+cls(r.price_change_ratio_pct)+'">'+
-ratio(r.price_change_ratio_pct)+' '+change(r.price_change)+'</div>'+
+(empty?'':ratio(r.price_change_ratio_pct)+' '+change(r.price_change))+'</div>'+
 kv+sparkHtml+'</div></div>';}
 function limitRows(rows){
 var h='<table class="data"><tr><th>名称</th><th>最新</th><th>涨跌幅</th><th>封板</th>'+
@@ -350,9 +535,15 @@ if(d.limit_up&&d.limit_up.length)h+='<section><h2>涨停池（'+d.limit_up.lengt
 (d.errors||[]).forEach(function(e){h+='<p>注：'+esc(e)+'</p>';});
 document.getElementById('main').innerHTML=h||'<p>暂无数据</p>';
 var demo=d.demo?'【演示数据】':'';
+var age=ageText(d.data_time), stale=isStale(d.data_time);
 document.getElementById('meta').textContent='生成 '+bj(d.generated)+'（北京时间） · 数据时间 '+
-bj(d.data_time)+'（北京时间） '+demo+' · 每'+POLL_TEXT+'检查一次';
-document.getElementById('state').textContent='ONLINE';
+bj(d.data_time)+'（北京时间）'+(age?' · '+age:'')+(sessionLabel(d.data_time)?' · '+sessionLabel(d.data_time):'')+
+(demo?' '+demo:'')+' · 每'+POLL_TEXT+'检查一次';
+var badge=document.getElementById('state');
+badge.textContent=stale?'STALE':'ONLINE';
+badge.className=stale?'badge stale':'badge';
+var hint=document.getElementById('stale-hint');
+if(hint)hint.style.display=stale?'block':'none';
 }
 function load(){
 fetch('stocks.json?t='+Date.now(),{cache:'no-store'}).then(function(r){
@@ -370,6 +561,7 @@ def render_html():
     return (HTML_TEMPLATE.replace("__TITLE__", TITLE)
             .replace("__DISCLAIMER__", DISCLAIMER)
             .replace("__POLL_TEXT__", poll_text())
+            .replace("__STALE__", str(STALE_MINUTES))
             .replace("__POLL__", str(POLL_SECONDS)))
 
 
@@ -405,10 +597,12 @@ def render_epub_xhtml(payload, generated_bj):
     """EPUB 章节 XHTML：指数表 + 自选股卡片表 + 涨停表（crengine 友好）。"""
     esc = _epub_escape
     demo = "【演示数据】" if payload.get("demo") else ""
-    data_text = beijing_text(payload.get("data_timestamp")) or "无"
     parts = [f"<h1>{esc(TITLE)}{esc(demo)}</h1>",
-             f'<p class="meta">生成 {esc(generated_bj)} 北京时间 · 数据 {esc(data_text)}</p>',
+             f'<p class="meta">生成 {esc(generated_bj)} 北京时间 · {esc(status_line(payload))}</p>',
              f'<p class="meta">{esc(DISCLAIMER)}</p>']
+    if not today_has_values(payload):
+        parts.append('<p class="meta">注：这一版快照没有成交数据（开盘前/接口给空壳），'
+                     '下面显示 -- 与「未成交」，下一轮再看。</p>')
 
     indices = payload.get("indices") or []
     if indices:
@@ -417,14 +611,19 @@ def render_epub_xhtml(payload, generated_bj):
                      "<th>涨跌幅</th><th>涨跌</th><th>开盘</th><th>最高</th>"
                      "<th>最低</th></tr>")
         for row in indices:
+            if row_is_empty(row):
+                # 开盘前的空壳：整行写「未成交」，不要一排 0.00。
+                parts.append(f"<tr><td>{esc(row.get('name') or row.get('thscode'))}</td>"
+                             '<td colspan="6">未成交</td></tr>')
+                continue
             parts.append(
                 f"<tr><td>{esc(row.get('name') or row.get('thscode'))}</td>"
                 f"<td>{esc(fmt_price(row.get('last_price')))}</td>"
                 f"<td>{esc(fmt_ratio(row.get('price_change_ratio_pct')))}</td>"
                 f"<td>{esc(fmt_change(row.get('price_change')))}</td>"
-                f"<td>{esc(fmt_price(row.get('open_price')))}</td>"
-                f"<td>{esc(fmt_price(row.get('high_price')))}</td>"
-                f"<td>{esc(fmt_price(row.get('low_price')))}</td></tr>")
+                f"<td>{esc(fmt_pos(row.get('open_price')))}</td>"
+                f"<td>{esc(fmt_pos(row.get('high_price')))}</td>"
+                f"<td>{esc(fmt_pos(row.get('low_price')))}</td></tr>")
         parts.append("</table>")
 
     history = payload.get("history") or {}
@@ -439,18 +638,29 @@ def render_epub_xhtml(payload, generated_bj):
                 trend = (f"近{len(closes)}日收盘 {closes[0]:,.2f} → "
                          f"{closes[-1]:,.2f}（区间 {min(closes):,.2f}–"
                          f"{max(closes):,.2f}）")
+            head = (f"<tr><td><b>{esc(row.get('name') or row.get('thscode'))}</b> "
+                    f"{esc(row.get('thscode') or '')}</td>")
+            if row_is_empty(row):
+                parts.append('<table class="card">' + head
+                             + '<td class="big">未成交</td>'
+                             '<td>开盘前或接口未返回，下一轮再看</td></tr>'
+                             + (f"<tr><td colspan=\"3\">{esc(trend)}</td></tr>" if trend else "")
+                             + "</table>")
+                continue
+            traded = isinstance(row.get("volume"), (int, float)) and row.get("volume") != 0
+            volume_cell = (f"<td>成交 {esc(fmt_volume(row.get('volume')))}</td>"
+                           f"<td>成交额 {esc(fmt_turnover(row.get('turnover')))}</td>"
+                           if traded else '<td colspan="2">未成交</td>')
             parts.append(
-                '<table class="card">'
-                f"<tr><td><b>{esc(row.get('name') or row.get('thscode'))}</b> "
-                f"{esc(row.get('thscode') or '')}</td>"
-                f'<td class="big">{esc(fmt_price(row.get("last_price")))}</td>'
+                '<table class="card">' + head
+                + f'<td class="big">{esc(fmt_price(row.get("last_price")))}</td>'
                 f"<td>{esc(fmt_ratio(row.get('price_change_ratio_pct')))} "
                 f"{esc(fmt_change(row.get('price_change')))}</td></tr>"
-                f"<tr><td>开 {esc(fmt_price(row.get('open_price')))} · "
-                f"高 {esc(fmt_price(row.get('high_price')))} · "
-                f"低 {esc(fmt_price(row.get('low_price')))}</td>"
-                f"<td>成交 {esc(fmt_volume(row.get('volume')))}</td>"
-                f"<td>成交额 {esc(fmt_turnover(row.get('turnover')))}</td></tr>"
+                f"<tr><td>开 {esc(fmt_pos(row.get('open_price')))} · "
+                f"高 {esc(fmt_pos(row.get('high_price')))} · "
+                f"低 {esc(fmt_pos(row.get('low_price')))}</td>"
+                + volume_cell
+                + "</tr>"
                 + (f"<tr><td colspan=\"3\">{esc(trend)}</td></tr>" if trend else "")
                 + "</table>")
 
@@ -634,6 +844,17 @@ DEMO_PAYLOAD = {
 }
 
 
+def _previous_payload(out_dir):
+    """上一份 site/stocks.json（没有就 None）。清单本身就是「清单 + 数据」，
+    所以能直接拿它判断上一份是不是空壳。"""
+    path = Path(out_dir) / "stocks.json"
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+    return data if isinstance(data, dict) else None
+
+
 def build(data_path=None, out_dir="site", demo=False):
     """读 stocks_data.json（或演示数据）→ 写四份产物，返回清单。"""
     if demo:
@@ -645,6 +866,15 @@ def build(data_path=None, out_dir="site", demo=False):
     total = len(payload.get("indices") or []) + len(payload.get("stocks") or [])
     if total == 0:
         raise ValueError("行情一条都没有，不生成空面板")
+    # 开盘前/接口抽风时会给「空壳快照」（成交量全 0、大多没有最新价）。这种东西
+    # 不该盖掉上一份有成交的面板：宁可让设备继续看上一份，也不要把 0.00 手刷上去。
+    if not demo and empty_snapshot(payload):
+        previous = _previous_payload(out_dir)
+        if previous and not empty_snapshot(previous):
+            raise ValueError(
+                "这一轮快照没有任何成交数据（空壳），不覆盖上一份有效面板"
+                "（上一份数据时间 " + (beijing_text(previous.get("data_timestamp")) or "未知")
+                + " 北京时间）；等有成交的下一轮再写")
     # 清单里的 generated 与 epub.json 同形（ISO-8601 UTC），只做签名用；
     # 文本面板上显示北京时间文字。
     generated = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")

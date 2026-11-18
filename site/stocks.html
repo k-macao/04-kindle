@@ -12,6 +12,9 @@ header{border-bottom:3px solid #000;padding-bottom:8px}
 h1{font-size:26px;margin:0 0 4px}
 .meta{font-size:14px;color:#333}
 .badge{display:inline-block;border:1px solid #000;padding:0 6px;font-size:13px;margin-left:6px}
+.badge.stale{background:#000;color:#fff}
+.stale-hint{display:none;border:2px dashed #000;padding:6px 10px;margin:10px 0;font-size:13px}
+.muted{font-size:16px;font-weight:normal;color:#555}
 section h2{font-size:19px;border-bottom:2px solid #000;padding-bottom:4px;margin:22px 0 10px}
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
 .cards.index{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}
@@ -39,6 +42,9 @@ footer{border-top:1px solid #000;margin-top:16px;padding-top:8px;font-size:13px;
 <h1>同花顺行情面板<span class="badge" id="state">…</span></h1>
 <div class="meta" id="meta">加载中…</div>
 </header>
+<div class="stale-hint" id="stale-hint">数据超过 20 分钟没更新：GitHub Actions 的定时任务被延迟或丢弃了，
+面板上的数字可能不是最新的。工作流已是 15 分钟一轮 + 体检补跑（refresh-stocks-watchdog.yml），
+仍不更新就看 GitHub Actions 的运行记录，详见 docs/kindle-stocks.md。</div>
 <main id="main"></main>
 <footer>仅供信息展示，不构成投资建议 · 数据来源：同花顺金融数据服务（hithink-finance）·
 面板每 7分钟 拉一次 stocks.json，generated 变了才重绘。</footer>
@@ -61,10 +67,42 @@ function z(n){return (n<10?'0':'')+n;}
 return d.getUTCFullYear()+'-'+z(d.getUTCMonth()+1)+'-'+z(d.getUTCDate())+' '+
 z(d.getUTCHours())+':'+z(d.getUTCMinutes())+':'+z(d.getUTCSeconds());
 }
+// 距今多久 / 盘中还是未开盘 / 是否过期：和纯文本面板同一套口径（STALE_MINUTES）。
+function ageText(iso){
+if(!iso)return '';
+var s=String(iso).replace('Z','');
+var p=s.match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})$/);
+if(!p)return '';
+var then=Date.UTC(+p[1],+p[2]-1,+p[3],+p[4],+p[5],+p[6]);
+var sec=(Date.now()-then)/1000;
+if(sec<0)return '';
+if(sec<90)return '刚刚';
+var min=sec/60;if(min<90)return Math.round(min)+' 分钟前';
+var hr=min/60;if(hr<36)return Math.round(hr)+' 小时前';
+return Math.round(hr/24)+' 天前';}
+function sessionLabel(iso){
+if(!iso)return '';
+var s=String(iso).replace('Z','');
+var p=s.match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})$/);
+if(!p)return '';
+var bjMin=((+p[4]+8)%24)*60+(+p[5]);
+var d=new Date(Date.UTC(+p[1],+p[2]-1,+p[3],+p[4],+p[5],+p[6])+8*3600*1000);
+if(d.getUTCDay()===0||d.getUTCDay()===6)return '周末休市';
+if(bjMin<9*60+15)return '未开盘';
+if(bjMin>15*60+5)return '已收盘';
+return '盘中';}
+function isStale(iso){
+if(!iso)return false;
+var s=String(iso).replace('Z','');
+var p=s.match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})$/);
+if(!p)return false;
+var then=Date.UTC(+p[1],+p[2]-1,+p[3],+p[4],+p[5],+p[6]);
+return (Date.now()-then)/60000>20;}
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){
 return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function num(v,d){return (v==null||isNaN(v))?'--':Number(v).toLocaleString('zh-CN',
 {minimumFractionDigits:d==null?2:d,maximumFractionDigits:d==null?2:d});}
+function pos(v){return (typeof v==='number'&&v!==0)?num(v):'--';}
 function ratio(v){if(v==null||isNaN(v))return '--';
 return (v>0?'+':'')+Number(v).toFixed(2)+'%';}
 function change(v){if(v==null||isNaN(v))return '';
@@ -95,16 +133,25 @@ var pts=closes.filter(function(v){return typeof v==='number';});
 if(!pts.length)return null;
 return {first:pts[0],last:pts[pts.length-1],
 lo:Math.min.apply(null,pts),hi:Math.max.apply(null,pts)};}
+function rowEmpty(r){
+var keys=['last_price','open_price','high_price','low_price'];
+for(var i=0;i<keys.length;i++){var v=r[keys[i]];
+if(typeof v==='number'&&v!==0)return false;}
+return true;}
+function traded(r){return typeof r.volume==='number'&&r.volume!==0;}
 function card(r,d,small){
 var closes=closesOf(d,r.thscode);
 var s=spark(closes),rg=rangeOf(closes);
+var empty=rowEmpty(r);
 var kv='';
-if(!small){
+if(empty){
+kv='<table class="kv"><tr><td>状态</td><td>未成交（开盘前或接口未返回）</td></tr></table>';
+}else if(!small){
 kv='<table class="kv"><tr><td>今开</td><td>'+num(r.open_price)+'</td></tr>'+
 '<tr><td>最高</td><td>'+num(r.high_price)+'</td></tr>'+
 '<tr><td>最低</td><td>'+num(r.low_price)+'</td></tr>'+
-'<tr><td>成交量</td><td>'+vol(r.volume)+'</td></tr>'+
-'<tr><td>成交额</td><td>'+money(r.turnover)+'</td></tr></table>';
+(traded(r)?'<tr><td>成交量</td><td>'+vol(r.volume)+'</td></tr>'+
+'<tr><td>成交额</td><td>'+money(r.turnover)+'</td></tr>':'<tr><td>成交</td><td>未成交</td></tr>')+'</table>';
 }
 var sparkHtml='';
 if(s){
@@ -114,9 +161,10 @@ closes.length+'日 '+num(rg.first)+'→'+num(rg.last)+'</span>'+
 }
 return '<div class="card"><div class="head"><span class="name">'+
 esc(r.name||r.thscode)+'</span><span class="code">'+esc(r.thscode||'')+
-'</span></div><div class="body"><div class="price">'+num(r.last_price)+
+'</span></div><div class="body"><div class="price">'+
+(empty?'<span class="muted">未成交</span>':num(r.last_price))+
 '</div><div class="ratio '+cls(r.price_change_ratio_pct)+'">'+
-ratio(r.price_change_ratio_pct)+' '+change(r.price_change)+'</div>'+
+(empty?'':ratio(r.price_change_ratio_pct)+' '+change(r.price_change))+'</div>'+
 kv+sparkHtml+'</div></div>';}
 function limitRows(rows){
 var h='<table class="data"><tr><th>名称</th><th>最新</th><th>涨跌幅</th><th>封板</th>'+
@@ -139,9 +187,15 @@ if(d.limit_up&&d.limit_up.length)h+='<section><h2>涨停池（'+d.limit_up.lengt
 (d.errors||[]).forEach(function(e){h+='<p>注：'+esc(e)+'</p>';});
 document.getElementById('main').innerHTML=h||'<p>暂无数据</p>';
 var demo=d.demo?'【演示数据】':'';
+var age=ageText(d.data_time), stale=isStale(d.data_time);
 document.getElementById('meta').textContent='生成 '+bj(d.generated)+'（北京时间） · 数据时间 '+
-bj(d.data_time)+'（北京时间） '+demo+' · 每'+POLL_TEXT+'检查一次';
-document.getElementById('state').textContent='ONLINE';
+bj(d.data_time)+'（北京时间）'+(age?' · '+age:'')+(sessionLabel(d.data_time)?' · '+sessionLabel(d.data_time):'')+
+(demo?' '+demo:'')+' · 每'+POLL_TEXT+'检查一次';
+var badge=document.getElementById('state');
+badge.textContent=stale?'STALE':'ONLINE';
+badge.className=stale?'badge stale':'badge';
+var hint=document.getElementById('stale-hint');
+if(hint)hint.style.display=stale?'block':'none';
 }
 function load(){
 fetch('stocks.json?t='+Date.now(),{cache:'no-store'}).then(function(r){

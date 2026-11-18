@@ -5,10 +5,12 @@ name: Refresh THS stock panel
 # stocks.html（浏览器卡片仪表盘）/ stocks.epub（Kindle 字模式卡片版）/
 # stocks.txt（纯文本回退版）。
 #
-# 频率说明：GitHub Actions 的 cron 最短 5 分钟，做不到真正的 1 分钟一轮。
-# 这里在 A 股交易时段（北京时间 09:00–15:55，周一到周五）每 5 分钟抓一轮；
-# Kindle 插件与网页面板每 60 秒检查一次清单，generated 变了才刷新——
-# 设备端「一分钟」指的是检查间隔，数据新鲜度以清单里的 data_time 为准。
+# 频率说明：GitHub Actions 的 cron 最短允许 5 分钟，但**实际会延迟、负载高时直接
+# 丢弃**（官方建议 ≥15 分钟）。这个仓库实测过 */5 6 小时一次都没被触发，面板因此
+# 长时间停在旧快照。所以这里改成交易时段每 15 分钟一轮，分钟错开整点（3,18,33,48），
+# 再由 refresh-stocks-watchdog.yml 每 10 分钟体检一次：发现 data_time 落后就补跑。
+# Kindle 插件与网页面板每 7 分钟检查一次清单，generated 变了才刷新；
+# 数据新鲜度以清单里的 data_time 为准（面板抬头会写「N 分钟前」与 STALE）。
 # 本地要真正的 60 秒一轮：HITHINK_FINANCE_API_KEY=… python tools/fetch_stocks.py
 # --loop 60 --build（见 docs/kindle-stocks.md）。
 #
@@ -17,8 +19,9 @@ name: Refresh THS stock panel
 # 免得收盘后每 5 分钟刷一堆空提交。
 on:
   schedule:
-    # 北京时间 09:00–15:55（UTC 01:00–07:55），周一到周五，每 5 分钟。
-    - cron: "*/5 1-7 * * 1-5"
+    # 北京时间 09:00–15:55（UTC 01:00–07:55），周一到周五，每 15 分钟一轮，
+    # 分钟错开整点（3/18/33/48），避免和全网整点任务撞车被延迟。
+    - cron: "3,18,33,48 1-7 * * 1-5"
   workflow_dispatch:
   push:
     branches: [main]

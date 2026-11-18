@@ -1,0 +1,46 @@
+name: THS stock panel watchdog
+
+# GitHub Actions 的 cron 会延迟、负载高时直接丢弃。refresh-stocks.yml 用
+# "*_/15" 的节奏在交易时段抓一轮，但仍然可能整段没跑（实测过 6 小时一次都没触发）。
+# 这个 watchdog 每 10 分钟看一眼 site/stocks.json 的 data_time：
+#
+#   - 距现在 > 25 分钟（盘中）→ 判定被丢掉，立刻 workflow_dispatch 补跑一轮；
+#   - 周末 / 收盘后（北京时间 15:05 之后、以及 09:15 之前）→ 什么都不做；
+#   - 同一次补跑最多每 10 分钟触发一次（concurrency 保证）。
+#
+# 它只负责「叫醒」，真正的抓取/排版/提交还在 refresh-stocks.yml 里，逻辑只有一份。
+
+on:
+  schedule:
+    # 交易时段每 10 分钟（UTC 01:00–07:55 = 北京时间 09:00–15:55）。
+    - cron: "8,28,48 1-7 * * 1-5"
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: read
+
+concurrency:
+  group: stocks-watchdog
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 看 data_time 是否落后（落后就补跑一轮）
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          python tools/stocks_watchdog.py --stale-minutes 25
