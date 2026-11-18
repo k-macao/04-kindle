@@ -90,14 +90,21 @@ var d=new Date(Date.UTC(+p[1],+p[2]-1,+p[3],+p[4],+p[5],+p[6])+8*3600*1000);
 if(d.getUTCDay()===0||d.getUTCDay()===6)return '周末休市';
 if(bjMin<9*60+15)return '未开盘';
 if(bjMin>15*60+5)return '已收盘';
+if(bjMin>=11*60+30&&bjMin<13*60)return '午休';
 return '盘中';}
 function isStale(iso){
+// 只有「该有数据却没有」才算过期：盘中落后 >20 分钟是真问题；
+// 收盘后/周末/深夜数据本来就不动，不能标 STALE（否则凌晨看面板永远在报警）。
 if(!iso)return false;
 var s=String(iso).replace('Z','');
 var p=s.match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})$/);
 if(!p)return false;
 var then=Date.UTC(+p[1],+p[2]-1,+p[3],+p[4],+p[5],+p[6]);
-return (Date.now()-then)/60000>20;}
+var age=(Date.now()-then)/60000;
+if(age<=20)return false;
+var label=sessionLabel(iso);
+if(label==='盘中'||label==='午休')return true;
+return age>24*60;}
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){
 return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function num(v,d){return (v==null||isNaN(v))?'--':Number(v).toLocaleString('zh-CN',

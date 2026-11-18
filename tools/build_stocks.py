@@ -71,6 +71,11 @@ def now_beijing_text():
 STALE_MINUTES = 20    # data_time 落后超过这么多分钟就标 STALE
 SESSION_START_MIN = 9 * 60 + 15   # 北京时间 09:15 之前算「未开盘」（09:15 集合竞价）
 SESSION_END_MIN = 15 * 60 + 5     # 15:05 之后算「已收盘」
+LUNCH_START_MIN = 11 * 60 + 30    # A 股午休 11:30–13:00
+LUNCH_END_MIN = 13 * 60
+# 收盘后数据停住是正常的：只有「跨过一个完整交易日还没新数据」才算真过期。
+# 24 小时留点余量，覆盖「周末/长假后第一个交易日早盘还没抓到」这种情况。
+TRADING_DAY_MINUTES = 24 * 60
 
 
 def total_volume(payload):
@@ -121,7 +126,11 @@ def row_is_empty(row):
 
 
 def session_label(data_ms):
-    """北京时间 → 盘中 / 未开盘 / 已收盘；不知道就返回空串。"""
+    """北京时间 → 盘中 / 午休 / 未开盘 / 已收盘；不知道就返回空串。
+
+    午休单列出来：11:45 抓到的那份快照，成交量跟 11:30 一模一样，标成「盘中」
+    会让人以为行情还在动。
+    """
     if not isinstance(data_ms, (int, float)):
         return ""
     beijing_dt = datetime.fromtimestamp(data_ms / 1000, tz=timezone.utc) + timedelta(hours=8)
@@ -132,6 +141,8 @@ def session_label(data_ms):
         return "未开盘"
     if minutes > SESSION_END_MIN:
         return "已收盘"
+    if LUNCH_START_MIN <= minutes < LUNCH_END_MIN:
+        return "午休"
     return "盘中"
 
 
@@ -156,11 +167,30 @@ def age_text(data_ms, now_ms=None):
 
 
 def is_stale(data_ms, now_ms=None):
+    """「该有数据却没有」才算过期。
+
+    以前是简单比「现在 - 数据时间 > 20 分钟」，于是收盘后、周末、深夜全都会
+    被标成 STALE——可那段时间行情本来就不动，这是误报（凌晨一点看面板，
+    显示「STALE 超过 20 分钟没更新」只会让人以为抓取坏了）。
+
+    现在的规则：
+      · 盘中（含午休）：数据超过 STALE_MINUTES 就算过期（真该在更新）；
+      · 未开盘：只要数据是**今天或更晚**的就不算过期（开盘前本来没新数据）；
+      · 已收盘/周末：只要数据是**今天（或最近一个交易日）或更晚**就不算过期；
+      · 跨过一个交易日还没数据 → 才算真的没跟上（is_stale 为 True）。
+    """
     if not isinstance(data_ms, (int, float)):
         return False
     now_ms = now_ms if isinstance(now_ms, (int, float)) else int(
         datetime.now(timezone.utc).timestamp() * 1000)
-    return (now_ms - data_ms) / 60000 > STALE_MINUTES
+    age_min = (now_ms - data_ms) / 60000
+    if age_min <= STALE_MINUTES:
+        return False
+    label = session_label(data_ms)          # 数据「属于」哪个时段
+    if label in ("盘中", "午休"):
+        return True                         # 盘中还停在旧数据 = 真的没跟上
+    # 未开盘 / 已收盘 / 周末 / 空：看数据是不是「这个交易日」的
+    return age_min > TRADING_DAY_MINUTES
 
 
 def status_line(payload, now_ms=None):
@@ -182,6 +212,9 @@ def status_line(payload, now_ms=None):
     text = " · ".join(parts)
     if is_stale(data_ms, now_ms):
         text += f" · STALE 超过 {STALE_MINUTES} 分钟没更新（定时任务可能被延迟，见 docs）"
+    elif label in ("已收盘", "周末休市"):
+        # 收盘后数据本来就不再变，别让人以为「时间没跟上」。
+        text += "（收盘后不再更新）"
     return text
 
 
@@ -438,14 +471,21 @@ var d=new Date(Date.UTC(+p[1],+p[2]-1,+p[3],+p[4],+p[5],+p[6])+8*3600*1000);
 if(d.getUTCDay()===0||d.getUTCDay()===6)return '周末休市';
 if(bjMin<9*60+15)return '未开盘';
 if(bjMin>15*60+5)return '已收盘';
+if(bjMin>=11*60+30&&bjMin<13*60)return '午休';
 return '盘中';}
 function isStale(iso){
+// 只有「该有数据却没有」才算过期：盘中落后 >20 分钟是真问题；
+// 收盘后/周末/深夜数据本来就不动，不能标 STALE（否则凌晨看面板永远在报警）。
 if(!iso)return false;
 var s=String(iso).replace('Z','');
 var p=s.match(/^(\\d{4})-(\\d{2})-(\\d{2})T(\\d{2}):(\\d{2}):(\\d{2})$/);
 if(!p)return false;
 var then=Date.UTC(+p[1],+p[2]-1,+p[3],+p[4],+p[5],+p[6]);
-return (Date.now()-then)/60000>__STALE__;}
+var age=(Date.now()-then)/60000;
+if(age<=__STALE__)return false;
+var label=sessionLabel(iso);
+if(label==='盘中'||label==='午休')return true;
+return age>24*60;}
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){
 return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function num(v,d){return (v==null||isNaN(v))?'--':Number(v).toLocaleString('zh-CN',

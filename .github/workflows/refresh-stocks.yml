@@ -5,18 +5,20 @@ name: Refresh THS stock panel
 # stocks.html（浏览器卡片仪表盘）/ stocks.epub（Kindle 字模式卡片版）/
 # stocks.txt（纯文本回退版）。
 #
-# 频率说明：GitHub Actions 的 cron 在这个仓库被**严重限流**——配上 "3,18,33,48"
-# 每 15 分钟之后实测 4.2 小时内 0 次触发；连每小时任务的实际间隔都是 4–10 小时。
-# 所以不能指望 cron。这里的做法是「一次触发，自己跑满交易时段」：
+# 频率说明：GitHub Actions 的 cron 在这个仓库**极不靠谱**——实测有 4.2 小时 0 次、
+# 也有本该 07:48 跑的班次迟到到 18:34（收盘后 3.5 小时）才跑。所以不能指望
+# cron 卡在开盘那一刻。这里的做法是「一次触发，长期常驻」：
 #
 #   1. cron / push / 手动 dispatch 任意一次把本工作流叫起来；
-#   2. "交易时段自循环" 步骤在同一个 runner 里每 15 分钟重跑一遍抓取+排版+提交，
-#      直到 6 小时作业预算快用完；
-#   3. 收尾时如果还在交易时段，就 workflow_dispatch 把下一棒交给自己
-#      （GITHUB_TOKEN 可以触发 dispatch，已实测），下一轮接着跑 6 小时。
+#   2. "常驻自循环" 步骤留在同一个 runner 里：
+#        · 抓取窗口内（北京 09:00–15:30，周一到周五）每 15 分钟抓一轮；
+#        · 窗口外（收盘后、深夜、周末）长睡，每 30 分钟醒一次看一眼；
+#      因为常驻，一次**迟到几小时**的 cron 也不会白跑——它会一直等到次日开盘自己开工。
+#   3. 预算（约 5.5 小时）用完时，如果今天还有活要干，就 workflow_dispatch
+#      把下一棒交给自己（GITHUB_TOKEN 可以触发 dispatch，已实测），接力继续。
 #
-# 全天最坏也只需要 1–2 次 cron 被触发就能连起来；refresh-stocks-watchdog.yml 是
-# 额外的保险：它被叫醒时若发现 data_time 落后 >25 分钟，就补一枪。
+# refresh-stocks-watchdog.yml 是额外的保险：被叫醒时若发现 data_time 落后
+# >25 分钟（且在该抓的窗口内）就补一枪。
 # Kindle 插件与网页面板每 7 分钟检查一次清单，generated 变了才刷新；
 # 数据新鲜度以清单里的 data_time 为准（面板抬头会写「N 分钟前」与 STALE）。
 # 本地要真正的 60 秒一轮：HITHINK_FINANCE_API_KEY=… python tools/fetch_stocks.py
@@ -27,8 +29,10 @@ name: Refresh THS stock panel
 # 免得收盘后每 5 分钟刷一堆空提交。
 on:
   schedule:
-    # 北京时间 09:00–15:55（UTC 01:00–07:55），周一到周五，每 15 分钟一轮，
-    # 分钟错开整点（3/18/33/48），避免和全网整点任务撞车被延迟。
+    # UTC 01:00–07:30 = 北京 09:00–15:30，周一到周五，每 15 分钟一班
+    # （分钟错开整点 3/18/33/48，避免和全网整点任务撞车被延迟）。
+    # 注意这只决定「有没有人按第一次按钮」，跑起来之后靠常驻自循环接力；
+    # cron 迟到几小时也不会白费（窗口外它会睡到次日开盘）。
     - cron: "3,18,33,48 1-7 * * 1-5"
   workflow_dispatch:
   push:
@@ -106,7 +110,14 @@ jobs:
       # ── 交易时段自循环 ────────────────────────────────────────────────
       # 一次触发，在同一个 runner 里连续刷到预算用完，再 workflow_dispatch 交接下一棒。
       # 每轮：抓取 → 排版 → 自检 → 提交（行情没变不提交）。
-      - name: 交易时段自循环（每 15 分钟一轮，跑满预算后交接下一棒）
+      # ── 常驻自循环 ──────────────────────────────────────────────────
+      # 一次触发后就一直待在 runner 里：抓取窗口内每 15 分钟一轮，窗口外长睡
+      # （每 30 分钟醒一次看一眼），跨过收盘/整夜，次日开盘自动继续，直到预算用完。
+      #
+      # 为什么不在窗口外直接退出：cron 在本仓库会迟到几小时（实测 07:48 那班
+      # 18:34 才跑）。如果窗口外立刻退出，那次触发就白费了；常驻才能把「被迟到
+      # 叫醒」变成「一直活着，开盘自己开工」。
+      - name: 常驻自循环（窗口内每 15 分钟一轮，窗口外长睡，跑满预算交接）
         env:
           HITHINK_FINANCE_API_KEY: ${{ secrets.HITHINK_FINANCE_API_KEY }}
           THS_API_KEY: ${{ secrets.THS_API_KEY }}
@@ -117,19 +128,29 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # 作业总预算 350 分钟；这里留 20 分钟给收尾交接，单轮最多睡 15 分钟。
+          # 作业上限 350 分钟；留 20 分钟给收尾交接。
           deadline=$(( $(date +%s) + 330 * 60 ))
           round=0
           fails=0
 
           while : ; do
-            if ! python tools/stocks_watchdog.py --check-session; then
-              echo "已收盘/未开盘：自循环结束"
-              break
-            fi
-            if [ "$(date +%s)" -ge "$deadline" ]; then
+            now=$(date +%s)
+            if [ "$now" -ge "$deadline" ]; then
               echo "预算用完：收尾交接"
               break
+            fi
+
+            if ! python tools/stocks_watchdog.py --in-window; then
+              # 窗口外（收盘后/深夜/周末）：睡一大段再看。
+              # cap 1800 = 最多睡 30 分钟，这样作业里不会出现一次超长 sleep，
+              # 也方便「预算到点」及时收尾；下限 60 秒，避免空转刷日志。
+              nap=$(python tools/stocks_watchdog.py --sleep-until-window 1800)
+              [ $((now + nap)) -gt "$deadline" ] && nap=$((deadline - now))
+              [ "$nap" -lt 60 ] && nap=60
+              [ $((now + nap)) -gt "$deadline" ] && nap=$((deadline - now))
+              echo "窗口外：睡 $((nap / 60)) 分 $((nap % 60)) 秒再看"
+              sleep "$nap"
+              continue
             fi
 
             round=$((round + 1))
@@ -138,12 +159,10 @@ jobs:
             # 抓取只负责取回并归一化 → stocks_data.json（不进 Git）；
             # 排版是下一步 build_stocks 的事，改模板不用重抓。
             # --history-days 20：迷你走势图要的近 20 个交易日收盘价（0 = 不取）。
-            # 单轮失败不让整条流水线挂掉：下一轮还会再来一次，日志里留痕。
             if ! python tools/fetch_stocks.py --out stocks_data.json --history-days 20; then
               fails=$((fails + 1))
-              echo "::warning::第 $round 轮抓取失败（连续 $fails 次），15 分钟后重试"
-              # 连续 4 次（约 1 小时）都抓不到，就别再占着 runner 连轴转了：
-              # 记一条错误让 Actions 标红，也**不交接**，免得整夜空转。
+              echo "::warning::第 $round 轮抓取失败（连续 $fails 次），稍后重试"
+              # 连续 4 次（约 1 小时）抓不到，就别再占着 runner 连轴转了。
               if [ "$fails" -ge 4 ]; then
                 echo "::error::连续 $fails 轮抓取失败，停止自循环（检查 Secret / 接口状态）"
                 echo "ABORT_HANDOFF=1" >> "$GITHUB_ENV"
@@ -153,33 +172,32 @@ jobs:
               fails=0
               # 开盘前的空壳快照会被 build_stocks 拒掉（不覆盖上一份有效面板），
               # 这里也当「这轮跳过」，不是错误。
-              if python tools/build_stocks.py --data stocks_data.json --out site; then
-                if python tools/check_stocks.py site; then
-                  git add site/stocks.json site/stocks.txt site/stocks.html site/stocks.epub site/stocks_names.json
-                  old_hash=$(git show HEAD:site/stocks.json 2>/dev/null \
-                    | python -c "import json,sys;print(json.load(sys.stdin).get('data_hash',''))" || echo "")
-                  new_hash=$(python -c "import json;print(json.load(open('site/stocks.json'))['data_hash'])")
-                  if [ -n "$old_hash" ] && [ "$old_hash" = "$new_hash" ]; then
-                    echo "行情没变（data_hash $new_hash），跳过提交"
-                  else
-                    counts=$(python -c "import json;c=json.load(open('site/stocks.json'))['counts'];print(f\"指数 {c['indices']} / 股票 {c['stocks']} / 涨停 {c['limit_up']}\")")
-                    stamp=$(python -c "import json;print(json.load(open('site/stocks.json'))['generated'])")
-                    git commit -q -m "chore(stocks): 同花顺行情面板刷新（${counts}，生成于 ${stamp} 北京时间）"
-                    # push 可能被别的提交抢先（工作流/PR），失败就 rebase 再来一次。
-                    if ! git push -q origin "HEAD:refs/heads/${GITHUB_REF_NAME}"; then
-                      echo "push 被拒，rebase 后重试"
-                      git pull --rebase -q origin "${GITHUB_REF_NAME}" && \
-                        git push -q origin "HEAD:refs/heads/${GITHUB_REF_NAME}" || \
-                        echo "::warning::这一轮没推上去，下一轮再试"
-                    fi
-                  fi
+              if python tools/build_stocks.py --data stocks_data.json --out site \
+                 && python tools/check_stocks.py site; then
+                git add site/stocks.json site/stocks.txt site/stocks.html site/stocks.epub site/stocks_names.json
+                old_hash=$(git show HEAD:site/stocks.json 2>/dev/null \
+                  | python -c "import json,sys;print(json.load(sys.stdin).get('data_hash',''))" || echo "")
+                new_hash=$(python -c "import json;print(json.load(open('site/stocks.json'))['data_hash'])")
+                if [ -n "$old_hash" ] && [ "$old_hash" = "$new_hash" ]; then
+                  echo "行情没变（data_hash $new_hash），跳过提交"
                 else
-                  echo "::warning::第 $round 轮排版/自检没过（可能是空壳快照），不提交"
+                  counts=$(python -c "import json;c=json.load(open('site/stocks.json'))['counts'];print(f\"指数 {c['indices']} / 股票 {c['stocks']} / 涨停 {c['limit_up']}\")")
+                  stamp=$(python -c "import json;print(json.load(open('site/stocks.json'))['generated'])")
+                  git commit -q -m "chore(stocks): 同花顺行情面板刷新（${counts}，生成于 ${stamp} 北京时间）"
+                  # push 可能被别的提交抢先（工作流/PR），失败就 rebase 再来一次。
+                  if ! git push -q origin "HEAD:refs/heads/${GITHUB_REF_NAME}"; then
+                    echo "push 被拒，rebase 后重试"
+                    git pull --rebase -q origin "${GITHUB_REF_NAME}" && \
+                      git push -q origin "HEAD:refs/heads/${GITHUB_REF_NAME}" || \
+                      echo "::warning::这一轮没推上去，下一轮再试"
+                  fi
                 fi
+              else
+                echo "::warning::第 $round 轮排版/自检没过（可能是空壳快照），不提交"
               fi
             fi
 
-            # 睡到下一轮（15 分钟），但别越过预算。
+            # 窗口内 15 分钟一轮；别睡过预算。
             now=$(date +%s)
             [ "$now" -ge "$deadline" ] && continue
             nap=900
@@ -188,7 +206,7 @@ jobs:
             sleep "$nap"
           done
 
-      - name: 交接下一棒（还在交易时段就把自己再叫起来）
+      - name: 交接下一棒（今天还有活就把自己再叫起来）
         if: always() && env.ABORT_HANDOFF != '1'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
