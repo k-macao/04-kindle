@@ -78,6 +78,57 @@ local BEIJING_OFFSET = 8 * 3600
 
 local Report = WidgetContainer:extend{ name = "octopus004", is_doc_only = false }
 
+-- 设置文件：自动开始 / 打开书籍的守卫都写在它里面，所以打开它之前要先能算出路径。
+local function settingsPath()
+    return DataStorage:getSettingsDir() .. "/octopus004.lua"
+end
+
+-- 进程级守卫：同一个 KOReader 进程里只自动 start() 一次。
+-- showReader() 会把当前 ReaderUI 整个换掉、插件随之重新 init；如果只看设置里的
+-- autostart_resume，init→start→openDoc→showReader→init 就会无限重开（实测死循环）。
+-- 这个标记只在进程内存里，重启 KOReader 才会清空。
+local session_started = false
+local session_opened_doc = false
+-- 设置文件里的 auto_opened_doc：上一次（乃至上一个进程）已经自动开过书。
+-- init 时读出来，和进程内标记一起决定要不要再 showReader()。
+
+-- 直接读写设置文件的小工具：init 阶段 self.store 还没建好，守卫要能独立用。
+local function loadSettings()
+    local ok, store = pcall(LuaSettings.open, LuaSettings, settingsPath())
+    if not ok or not store then return nil end
+    return store, store.data or {}
+end
+
+local function patchSettings(patch)
+    local store, data = loadSettings()
+    if not store then return false end
+    for key, value in pairs(patch) do
+        if value == nil then store:delSetting(key) else store:saveSetting(key, value) end
+    end
+    store:flush()
+    return true
+end
+
+-- 自杀开关：设置文件里出现 \`emergency_stop = true\` 时插件什么都不做。
+-- 设备上被自动开始/重开困住时，退出 KOReader、改这一个键、再启动就能彻底静下来。
+local function emergencyStopped()
+    local _, data = loadSettings()
+    return data ~= nil and data.emergency_stop == true
+end
+
+-- 没有挂在实际界面上的「后台壳」：退出菜单/阅读器后它不显示、不拦截 touch，
+-- 但能收 onResume/onSuspend，定时器也不会被某次 ReaderUI 重建顺手带走。
+local Session = WidgetContainer:extend{ name = "octopus004-session", is_doc_only = false }
+function Session:init()
+    -- 0x0、不画任何东西：只是留在 UIManager 里当事件与定时器的宿主。
+    self.dimen = Geom:new{ x = 0, y = 0, w = 0, h = 0 }
+end
+function Session:onResume() if self.on_resume then self.on_resume() end end
+function Session:onSuspend() if self.on_suspend then self.on_suspend() end end
+function Session:onCloseWidget()
+    if self.on_close then self.on_close() end
+end
+
 local function dataDir()
     return DataStorage:getDataDir()
 end
@@ -124,7 +175,7 @@ local function beijing(epoch, fmt)
 end
 
 function Report:init()
-    self.store = LuaSettings:open(DataStorage:getSettingsDir() .. "/octopus004.lua")
+    self.store = LuaSettings:open(settingsPath())
     self.settings = self.store.data or {}
     if self.settings.url == nil then self.settings.url = DEFAULT_URL end
     if self.settings.image_url == nil then self.settings.image_url = "" end
@@ -141,6 +192,7 @@ function Report:init()
         self.settings.enabled = false
     end
     if self.settings.enabled == nil then self.settings.enabled = false end
+    if self.settings.auto_opened_doc then session_opened_doc = true end
     self.wake = Wake.new({ Device = Device, UIManager = UIManager, logger = logger })
     self.refresh_task = function() self:refresh(false) end
     self.cache_path = dataDir() .. "/octopus004-report.txt"
@@ -149,8 +201,19 @@ function Report:init()
     self.page_index = 1
     self.page_count = tonumber(self.settings.image_count) or 0
     if self.ui and self.ui.menu then self.ui.menu:registerToMainMenu(self) end
-    -- 只有「自动开始 = on」并且上次是跑着的才自动开；默认两样都不成立。
-    if self.settings.autostart and self.settings.autostart_resume then
+    -- 紧急停止：设置文件里写了 emergency_stop = true 就什么都不做（菜单里可以再关掉）。
+    if self.settings.emergency_stop then
+        self.settings.enabled = false
+        self.settings.autostart = false
+        self.settings.autostart_resume = nil
+        self:save()
+        logger.warn("004: emergency_stop is set, the plugin stays idle")
+        return
+    end
+    -- 自动开始必须同时满足：用户开了 Auto-start、上次是跑着的、而且这个 KOReader
+    -- 进程还没自动开过（session_started）。第三条是死循环的根治：showReader() 之后
+    -- 插件会重新 init，光看设置会一遍遍重进 start()。
+    if self.settings.autostart and self.settings.autostart_resume and not session_started then
         UIManager:scheduleIn(3, function() self:start() end)
     end
 end
@@ -255,9 +318,22 @@ function Report:cancelAutoTurn()
 end
 
 function Report:start()
+    if emergencyStopped() then
+        self:note("004: emergency_stop is on — clear it in the settings file first")
+        return
+    end
+    session_started = true
+    -- 手动 Show report 是明确的「再开一次」；自动开始那一路不重置，
+    -- 否则 init→start→openDoc→init 就又能循环下去。
+    if self.interactive_start then
+        session_opened_doc = false
+        self.settings.auto_opened_doc = nil
+        patchSettings({ auto_opened_doc = nil })
+    end
     self.settings.enabled = true
     self.settings.autostart_resume = self.settings.autostart and true or nil
     self:save(); self:holdScreen()
+    self:ensureSession()
     self:cancelAutoTurn()
     if self.wake:mode(true) == "awake" then self.wake:hold_awake() end
     if self:isBookMode() then
@@ -266,10 +342,13 @@ function Report:start()
         if not self.dashboard and self:hasPage(self.page_index) then self:showPage(false) end
     elseif self:isStocksMode() then
         -- 已经有卡片版就直接交给阅读器，不必等这一轮联网。
+        -- 但同一个进程只自动开一次：showReader() 会重建 ReaderUI、插件重新 init，
+        -- 每次都开就又回到「重开 → init → 重开」的死循环。
         local spec = DOC_KINDS.stocks
         local current = self.settings[spec.file]
         if current and lfs.attributes(current, "mode") == "file"
-                and not self:docIsOpen(spec) and self.settings.stocks_epub_file_name then
+                and not self:docIsOpen(spec) and self.settings.stocks_epub_file_name
+                and not session_opened_doc then
             self:openDoc(spec, current)
             return
         end
@@ -282,7 +361,8 @@ function Report:start()
     self:refresh(true)
 end
 
-function Report:stop()
+function Report:stop(silent)
+    session_started = true   -- 这个进程里手动停了，就别再自动开始
     self.settings.enabled = false
     -- 手动 Stop 就是「这次别跑了」：即便 Auto-start 是 on，下次启动也不再自动开。
     self.settings.autostart_resume = nil
@@ -296,6 +376,17 @@ function Report:stop()
         self.dashboard, self.box, self.header, self.page_widget = nil, nil, nil, nil
     end
     UIManager:setDirty("all", "full")
+    if not silent then self:note("004: stopped (auto-start off until you start it again)") end
+end
+
+-- 宿主（阅读器/文件管理器）还活着时，把 004 的开关也挂到它的菜单里：
+-- 自动开始之后插件自己的入口在 工具 → 004 Report，但被 EPUB 模式困住时
+-- 阅读器菜单里能直接 Stop 更救命。
+function Report:attachToHost()
+    local ui = self.ui
+    if not ui or not ui.menu or ui.menu == self.menu then return end
+    self.menu = ui.menu
+    pcall(function() ui.menu:registerToMainMenu(self) end)
 end
 
 function Report:onCloseWidget()
@@ -304,12 +395,37 @@ function Report:onCloseWidget()
     self.wake:cancel(); self.wake:kindle_hold(false); self.wake:release_awake()
     self:releaseScreen()
     if self.dashboard then UIManager:close(self.dashboard); self.dashboard = nil end
+    -- 自己关掉（ReaderUI 被 showReader 换掉时也会走这里）：在跑的话过一会儿重新挂
+    -- 后台壳继续计时，别把定时器留在已经消失的界面里。这里不调 stop()，
+    -- 否则一换界面（显示模式、打开书）就把自动阅读停了。
+    if self.settings.enabled then UIManager:scheduleIn(5, function() self:ensureSession() end) end
+end
+
+-- 后台壳：不显示、不挡操作，只负责收 onResume/onSuspend 和挂菜单。
+function Report:ensureSession()
+    if not self.settings.enabled then return end
+    self:attachToHost()
+    if self.session_shown and not self.session_closed then return end
+    local session = Session:new{}
+    session.on_resume = function() self:onResume() end
+    session.on_close = function() self.session_closed = true end
+    local wake = self.wake
+    session.on_suspend = function() wake:cancel() end
+    UIManager:show(session)
+    self.session_widget = session
+    self.session_shown = true
+    self.session_closed = false
 end
 
 function Report:onResume()
     if self.settings.enabled and self.next_due and os.time() >= self.next_due - 5 and not self.in_cycle then
         UIManager:scheduleIn(2, self.refresh_task)
     end
+end
+
+-- 下载书（EPUB 模式）只自动打开一次：之后的重开交给用户，避免界面被反复打断。
+function Report:noteDocOpened()
+    session_opened_doc = true
 end
 
 -- Single HTTPS entry point: strict cap, no redirects, never disables TLS checks.
@@ -681,6 +797,8 @@ function Report:refresh(interactive)
         if error_message and self.dashboard then self:advance() end
         self.next_due = os.time() + INTERVAL
         self.wake:schedule(INTERVAL, self.refresh_task, self.wake:mode(true))
+        -- 自动开始之后面板可能已经被关掉/换界面：确保后台壳还在，计时不会断。
+        if self.settings.enabled then self:ensureSession() end
         -- Keep Wi-Fi on: reconnecting every minute is slow and may miss cycles.
         if self.wake:mode(true) == "rtc" and not interactive and not self:usesReader() then
             self.wake:sleep_now()
@@ -761,6 +879,16 @@ function Report:turnDocPage(spec)
 end
 
 function Report:openDoc(spec, path)
+    local current = self.ui and self.ui.document and self.ui.document.file
+    if current and current == path then
+        -- 已经在看这一本了：showReader() 会重建 ReaderUI，纯属白折腾一遍界面。
+        logger.dbg("004: document already open, not reopening: " .. tostring(path))
+        return
+    end
+    session_opened_doc = true
+    -- 打开书会换掉整个 ReaderUI：先把「自动开过一次」写进设置，万一进程内标记没
+    -- 生效，重启后的 init 也不会再自动开书。
+    patchSettings({ auto_opened_doc = true })
     self.settings[spec.file] = path
     self.settings[spec.opened_at] = os.time()
     self:save()
@@ -958,7 +1086,10 @@ function Report:status()
                 .. (pw == Screen:getWidth() and ph == Screen:getHeight() and ", 1:1" or ", scaled") .. ")"
         end
     end
-    self:note("004 (" .. self.settings.display .. ")\n" .. source .. "\n" .. mode .. page .. data ..
+    local auto = "\nAuto-start: " .. (self.settings.autostart and "on" or "off")
+        .. (self.settings.emergency_stop and " · EMERGENCY STOP" or "")
+        .. " · now: " .. (self.settings.enabled and "running" or "idle")
+    self:note("004 (" .. self.settings.display .. ")\n" .. source .. "\n" .. mode .. page .. auto .. data ..
         "\nLast check: " .. checked .. "\n" .. (self.last_error or "No error"))
 end
 
@@ -1012,6 +1143,18 @@ function Report:toggleAutostart()
     if not self.settings.autostart and self.settings.enabled then self:stop() end
     self:save()
     self:note("004: auto-start " .. (self.settings.autostart and "on" or "off"))
+end
+
+-- 紧急停止：写进设置文件的 emergency_stop。打开时立刻 stop()，之后 init() 也不再
+-- 自动开始；关闭就恢复正常。设备被困住又进不了插件菜单时，直接改文件这一个键也行。
+function Report:toggleEmergencyStop()
+    self.settings.emergency_stop = not self.settings.emergency_stop
+    if self.settings.emergency_stop then
+        self.settings.autostart = false
+        self:stop(true)
+    end
+    self:save()
+    self:note("004: emergency stop " .. (self.settings.emergency_stop and "on" or "off"))
 end
 
 function Report:setDisplay(mode)
@@ -1069,7 +1212,10 @@ end
 function Report:addToMainMenu(items)
     items.octopus004 = { text = "004 Report", sorting_hint = "tools", sub_item_table = {
         { text_func = function() return self.settings.enabled and "Stop report" or "Show report" end,
-          callback = function() if self.settings.enabled then self:stop() else self:start() end end },
+          callback = function()
+              if self.settings.enabled then self:stop()
+              else self.interactive_start = true; self:start(); self.interactive_start = nil end
+          end },
         { text_func = function()
               return "Auto-start on launch: " .. (self.settings.autostart and "on" or "off")
           end,
@@ -1094,6 +1240,10 @@ function Report:addToMainMenu(items)
               return "Image manifest URL: " .. (self.settings.image_url ~= "" and self.settings.image_url or "(not set)")
           end,
           callback = function() self:setURL("image") end },
+        { text_func = function()
+              return "Stop everything (emergency): " .. (self.settings.emergency_stop and "on" or "off")
+          end,
+          callback = function() self:toggleEmergencyStop() end },
         { text = "Status", callback = function() self:status() end },
         { text = "Check URLs (network)", callback = function() self:diagnose() end },
     } }

@@ -157,6 +157,22 @@ Feedly / Reeder。插件那套「News subscription」读的是 `site/news.json`�
    **自动阅读预设默认是取消的**：装好后不会自己开始，要手动 **Show report**；想让它在启动 KOReader 时自己跑，在 004 菜单里把 **Auto-start on launch** 打开（默认 `off`）。手动 Stop 之后即便这一项是 `on`，下次启动也不会自动开始。插件不会改动 KOReader 自己存下来的自动翻页（autoturn）预设——它只在 004 开始跑之前让当前的 autoturn 暂停，避免两个「自动」抢屏幕；004 停止后你原来的设置照旧。
 4. 有硬件唤醒时尝试使用 KOReader 唤醒管理器；否则保持设备唤醒并使用软件计时。是否支持取决于 Oasis 1 的 KOReader 构建。Wi-Fi 保持开启；联网和翻页会增加耗电（检查间隔 7 分钟，见 `main.lua` 的 `INTERVAL`）。
 
+### 自动开始死循环 / 设备被困住时的脱困
+
+自动开始（Auto-start + EPUB 模式）曾经会反复重开同一本书：插件重新 init → `start()` → `showReader()` → 换掉 ReaderUI → 又 init。0.8.0 起有三道闸，正常情况下不会再发生：
+
+- **一个进程只自动开一次**：`session_started` 是进程内标记，`showReader()` 之后重新 init 也不会再自动 `start()`；
+- **同一本书不重复打开**：`auto_opened_doc` 记在设置文件里，`openDoc()` 发现当前文档已经是它就只记一条 `logger.dbg`，不再调 `showReader()`；只有手动 **Show report** 才会重置这个标记；
+- **后台壳**：`ensureSession()` 挂一个不可见、不挡触摸的 widget 收 `onResume`/`onSuspend`，ReaderUI 被换掉后 5 秒自动重挂，定时器和菜单不会留在已经消失的界面里。
+
+万一还是被困住（界面不停跳、进不去菜单），**先完全退出 KOReader**，然后任选其一：
+
+1. **改设置文件**（USB 挂载后 `F:\koreader\settings\octopus004.lua`）：把 `["autostart"] = true` 改 `false`，删掉/改假 `["autostart_resume"]`、`["enabled"]`、`["auto_opened_doc"]`；如果一直重开行情那本书，再加 `["display"] = "text"` 并删 `["stocks_epub_file"]` / `["stocks_epub_file_name"]` / `["stocks_epub_sig"]`；
+2. **写一个紧急停止**：在同一个文件里加一行 `["emergency_stop"] = true`，插件会彻底静下来（`init()` 直接返回），之后可以在 004 菜单里关掉它或删掉这一行；
+3. 想从头来就把 `octopus004.lua` 删掉（设置重置为默认：不自动开始、纯文本模式），URL 需要重填一次。
+
+顺手把 `koreader/octopus004-stocks-card-*.epub` 这些缓存书删掉也行，下一轮会重新下。
+
 请求失败时保留并轮播本地上次成功内容；文本模式顶部显示 `OFFLINE / CACHED`，图片模式整屏无状态栏，
 失败会弹一次提示、详情见菜单 `Status`；状态菜单可查看错误和最近成功检查时间。
 

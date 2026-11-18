@@ -225,11 +225,20 @@ return {
     第 1 页开始**，旧的自动删除。
 - 刚打开的那一轮不会翻页（留给你看首页），之后按 7 分钟节奏走。
 - 如果你手动打开了别的书，插件不会去翻它（只在当前文档是它自己下载的 EPUB 时才翻页）。
+- **自动开书只做一次**：EPUB 模式会调 `showReader()` 打开下载好的书，而这会换掉整个
+  ReaderUI、插件随之重新 `init()`。所以「自动开始」有两道闸：进程内 `session_started`
+  （一个 KOReader 进程只自动 `start()` 一次）和设置里的 `auto_opened_doc`（同一本书不
+  重复打开；`openDoc()` 发现当前文档已经是它就直接返回）。手动 **Show report** 才会
+  重置标记、允许重开。后台壳（`ensureSession()`）负责在界面被换掉后重挂定时器与菜单。
 - **自动阅读预设默认取消**：装好插件、重启 KOReader 后它不会自己开始，要手动 **Show report**。
   想开机自动跑：工具 → 004 Report → **Auto-start on launch: on**（默认 `off`）；手动 **Stop**
   之后即便这项是 `on`，下次启动也不会自动开始。插件也不改 KOReader 自己的自动翻页（autoturn）
   预设——它只在 004 开始跑之前让当前 autoturn 暂停，免得两个自动翻页互相抢页；004 停掉后
   你原来的 autoturn 设置还在。
+- **被困住时**（界面不停跳、进不去菜单）：退出 KOReader，编辑
+  `koreader/settings/octopus004.lua`，加 `["emergency_stop"] = true`（插件 `init()` 直接
+  返回，彻底静下来），或把 `autostart` 改 `false` 并删掉 `auto_opened_doc` / `enabled` /
+  `autostart_resume`。详见 README「自动开始死循环 / 设备被困住时的脱困」。
 - 点屏幕不再有插件菜单，改用 KOReader 原生操作（左右点/滑动翻页，`Status` 之类在
   KOReader 菜单里）；插件自己的入口仍在 工具 → 004 Report。
 
