@@ -1,4 +1,4 @@
-name: zz probe (temporary)  # 终验 v6
+name: zz probe (temporary)  # 终验 v7
 on:
   workflow_dispatch:
   push:
