@@ -55,7 +55,6 @@ from urllib.request import Request, urlopen
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import market_watchlist  # noqa: E402
-import stock_watchlist  # noqa: E402
 
 DEFAULT_BASE_URL = "https://fuyao.aicubes.cn"
 # 官方推荐的环境变量名（见 Financial-API README「获取统一 API Key」一节）；
@@ -609,11 +608,11 @@ def main(argv=None):
     parser.add_argument("--no-hk", action="store_true",
                         help="不取港股（腾讯公开接口）")
     parser.add_argument("--limit-up-size", type=int,
-                        default=stock_watchlist.LIMIT_UP_SIZE,
+                        default=20,
                         help="涨停池取前几名")
     parser.add_argument("--history-days", type=int, default=20,
                         help="卡片迷你走势图取最近几根日 K（0=不取）")
-    parser.add_argument("--names-cache", default=stock_watchlist.NAMES_CACHE,
+    parser.add_argument("--names-cache", default=market_watchlist.NAMES_CACHE,
                         help="中文名缓存路径")
     parser.add_argument("--base-url", default=os.environ.get(
         "HITHINK_FINANCE_BASE_URL", DEFAULT_BASE_URL),

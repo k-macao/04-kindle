@@ -41,7 +41,8 @@ on:
       - ".github/workflows/refresh-stocks.yml"
       - "tools/fetch_stocks.py"
       - "tools/build_stocks.py"
-      - "tools/stock_watchlist.py"
+      - "tools/market_watchlist.py"
+      - "tools/fetch_hk.py"
 
 permissions:
   contents: write

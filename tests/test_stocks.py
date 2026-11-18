@@ -18,7 +18,6 @@ sys.path.insert(0, str(ROOT / "tools"))
 import build_stocks  # noqa: E402
 import fetch_stocks
 import stocks_watchdog  # noqa: E402
-import stock_watchlist  # noqa: E402
 
 # 官方文档示例：行情快照（prices.md）与涨停池（limit-up-data.md）的响应。
 SNAPSHOT = {
@@ -253,10 +252,6 @@ class FetchPayloadTest(unittest.TestCase):
         self.assertEqual(payload["history"], {})
         self.assertEqual(len(payload["stocks"]), 2)
         self.assertTrue(any("历史" in error for error in payload["errors"]))
-
-    def test_watchlist_codes_are_well_formed(self):
-        for code, _name in stock_watchlist.INDICES + stock_watchlist.STOCKS:
-            self.assertRegex(code, r"^\d{6}\.(SH|SZ|BJ)$")
 
 
 class BuildTest(unittest.TestCase):
