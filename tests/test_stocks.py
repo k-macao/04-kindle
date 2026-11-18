@@ -5,6 +5,7 @@
 """
 
 import json
+import re
 import sys
 import tempfile
 import unittest
@@ -562,6 +563,52 @@ class BuildTest(unittest.TestCase):
         self.assertIn("tools/stocks_watchdog.py", watchdog)
         self.assertIn("--stale-minutes", watchdog)
         self.assertIn("actions: write", watchdog)
+
+    def test_watchdog_check_session_and_handoff(self):
+        # refresh-stocks.yml 的自循环靠这两个开关判断「还要不要继续」。
+        parse = stocks_watchdog.parse_stamp
+        session = stocks_watchdog.main(["--check-session", "--now", "2026-11-18T02:00:00Z"])
+        self.assertEqual(session, 0)          # 北京 10:00，盘中
+        closed = stocks_watchdog.main(["--check-session", "--now", "2026-11-18T09:00:00Z"])
+        self.assertEqual(closed, 1)           # 北京 17:00，收盘
+
+        dispatched = []
+        original = stocks_watchdog.dispatch
+        stocks_watchdog.dispatch = lambda repo=None: dispatched.append(True)
+        try:
+            # 盘中交接 → 真的 dispatch
+            self.assertEqual(stocks_watchdog.main(
+                ["--handoff", "--now", "2026-11-18T02:00:00Z"]), 0)
+            self.assertEqual(len(dispatched), 1)
+            # 收盘后交接 → 什么都不做，自循环到此为止
+            self.assertEqual(stocks_watchdog.main(
+                ["--handoff", "--now", "2026-11-18T09:00:00Z"]), 0)
+            self.assertEqual(len(dispatched), 1)
+        finally:
+            stocks_watchdog.dispatch = original
+
+    def test_self_loop_guards(self):
+        # 单个 step 里连续跑 6 小时，必须自己会停：无 Key/接口挂了不能空转，
+        # 连续失败 4 轮就中止并且不交接下一棒。
+        #
+        # 注意：CI 里没装 PyYAML，所以这里不做 YAML 解析，只按缩进切出各步骤的文本。
+        # （之前用 yaml.safe_load，本地恰好装过 pyyaml，CI 上直接报错。）
+        root = Path(__file__).resolve().parents[1]
+        text = (root / ".github" / "workflows" / "refresh-stocks.yml").read_text(encoding="utf-8")
+        self.assertNotIn("\t", text, "YAML 里不能有 Tab")
+        self.assertIn("timeout-minutes:", text)
+        minutes = re.findall(r"timeout-minutes:\s*(\d+)", text)
+        self.assertTrue(minutes, "没写 timeout-minutes")
+        self.assertLessEqual(int(minutes[0]), 360)                     # 作业上限 6 小时
+        self.assertRegex(text, r"permissions:\s*\n\s*contents:\s*write\s*\n\s*actions:\s*write")
+        steps = re.split(r"\n      - name: ", text)
+        loop = [s for s in steps if s.startswith("交易时段自循环")][0]
+        self.assertIn("--check-session", loop)                        # 收盘就停
+        self.assertIn("fails", loop)                                  # 连续失败计数
+        self.assertIn("ABORT_HANDOFF=1", loop)                        # 中止标记
+        handoff = [s for s in steps if s.startswith("交接下一棒")][0]
+        self.assertIn("--handoff", handoff)
+        self.assertIn("ABORT_HANDOFF", handoff)                       # 中止后不交接
 
     def test_formatters(self):
         self.assertEqual(build_stocks.fmt_volume(3098875.0), "3.10万手")

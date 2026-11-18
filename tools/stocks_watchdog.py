@@ -117,6 +117,13 @@ def check(path, now=None, stale_minutes=STALE_MINUTES, repo=None, do_dispatch=Fa
 
 
 def main(argv=None):
+    """命令行入口。
+
+    除了体检，还给 refresh-stocks.yml 的自循环两个小开关：
+
+    ``--check-session``  在交易时段内 → 退出码 0，否则 1（bash 里 `if ...; then` 就能用）；
+    ``--handoff``        仍在交易时段 → ``workflow_dispatch`` 把下一棒交给自己，否则什么都不做。
+    """
     parser = argparse.ArgumentParser(description="行情面板体检：落后就补跑一轮")
     parser.add_argument("--manifest", default="site/stocks.json",
                         help="清单路径（默认 site/stocks.json）")
@@ -127,7 +134,28 @@ def main(argv=None):
     parser.add_argument("--repo", default=None, help="仓库 owner/name（默认当前目录）")
     parser.add_argument("--dispatch", action="store_true",
                         help="真的触发 refresh-stocks.yml（不加只打印会做什么）")
+    parser.add_argument("--check-session", action="store_true",
+                        help="只在交易时段内返回 0（自循环用）")
+    parser.add_argument("--handoff", action="store_true",
+                        help="仍在交易时段就 workflow_dispatch 交接下一棒给自己")
     args = parser.parse_args(argv)
+
+    if args.check_session:
+        now = parse_stamp(args.now) if args.now else None
+        now = now or datetime.now(timezone.utc)
+        print("盘中" if in_session(now) else "非盘中")
+        return 0 if in_session(now) else 1
+
+    if args.handoff:
+        now = parse_stamp(args.now) if args.now else None
+        now = now or datetime.now(timezone.utc)
+        if not in_session(now):
+            print("非交易时段：不交接（自循环到此为止，等 cron 或被叫醒）")
+            return 0
+        print("还在交易时段：交接下一棒给 refresh-stocks.yml")
+        dispatch(args.repo)
+        return 0
+
     now = parse_stamp(args.now) if args.now else None
     result = check(args.manifest, now=now, stale_minutes=args.stale_minutes,
                    repo=args.repo, do_dispatch=args.dispatch)
