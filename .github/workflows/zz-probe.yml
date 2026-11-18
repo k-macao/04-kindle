@@ -15,6 +15,10 @@ jobs:
         with:
           python-version: "3.12"
       - name: 校验板块代码与港股解析
+        env:
+          HITHINK_FINANCE_API_KEY: ${{ secrets.HITHINK_FINANCE_API_KEY }}
+          THS_API_KEY: ${{ secrets.THS_API_KEY }}
+          THS_KEY: ${{ secrets.THS_KEY }}
         run: |
           python - <<'PY' 2>&1 | tee probe.txt
           import json, os, sys
