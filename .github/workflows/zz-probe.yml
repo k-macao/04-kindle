@@ -14,76 +14,39 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: 查宽基指数为什么返回 0 + 板块正确代码
+      - name: 真跑一遍抓取 + 排版
         env:
           HITHINK_FINANCE_API_KEY: ${{ secrets.HITHINK_FINANCE_API_KEY }}
           THS_API_KEY: ${{ secrets.THS_API_KEY }}
           THS_KEY: ${{ secrets.THS_KEY }}
         run: |
-          python - <<'PY' 2>&1 | tee probe.txt
-          import json, os
-          from urllib.parse import urlencode
-          from urllib.request import Request, urlopen
-
-          KEY = next((os.environ[k] for k in ("HITHINK_FINANCE_API_KEY","THS_API_KEY","THS_KEY") if os.environ.get(k)), "")
-          BASE = "https://fuyao.aicubes.cn"
-          def hit(path, **params):
-              url = BASE + path + ("?" + urlencode(params) if params else "")
-              with urlopen(Request(url, headers={"X-api-key": KEY, "User-Agent": "probe"}), timeout=60) as r:
-                  return json.loads(r.read().decode())
-
-          def show(label, path, **params):
-              b = hit(path, **params)
-              d = b.get("data") if isinstance(b.get("data"), dict) else {}
-              items = d.get("item") or []
-              print(f"\n### {label}  code={b.get('code')} total={d.get('total')} n={len(items)}")
-              for it in items[:4]:
-                  print("   ", json.dumps(it, ensure_ascii=False)[:220])
-              if b.get("code") != 0:
-                  print("    msg:", b.get("message"))
-              return items
-
-          # 1) 单个宽基，逐个试
-          for code in ["000001.SH", "399001.SZ", "000300.SH", "399006.SZ", "932000.CSI"]:
-              show(f"单个 {code}", "/api/a-share-index/prices/snapshot", thscodes=code)
-
-          # 2) 两个、三个
-          show("两个 000001+399001", "/api/a-share-index/prices/snapshot", thscodes="000001.SH,399001.SZ")
-          show("三个 加 000300", "/api/a-share-index/prices/snapshot", thscodes="000001.SH,399001.SZ,000300.SH")
-
-          # 3) 板块 + 宽基 混合
-          show("混合 板块+宽基", "/api/a-share-index/prices/snapshot", thscodes="881101.TI,000001.SH")
-
-          # 4) 从 a-share-index 全表里找这些代码在不在
-          allrows = []
-          off = 0
-          while True:
-              b = hit("/api/meta/tickers/list", asset_type="a-share-index", limit=10000, offset=off)
-              rows = (b.get("data") or {}).get("item") or []
-              allrows += rows
-              if len(rows) < 10000:
-                  break
-              off += 10000
-          print(f"\n### a-share-index 全表共 {len(allrows)} 条")
-          by_code = {r.get("thscode"): r for r in allrows}
-          for code in ["000001.SH", "399001.SZ", "000300.SH", "932000.CSI", "000016.SH"]:
-              print(f"   {code}: {'在表内 ' + str(by_code[code].get('name')) if code in by_code else '不在表内'}")
-          # 找出表里以 000/399 开头的交易所指数，看真实代码长什么样
-          exch = [r for r in allrows if str(r.get("exchange")) in ("SH", "SZ")]
-          print(f"   表内带 SH/SZ 交易所后缀的指数：{len(exch)} 个，前 12：")
-          for r in exch[:12]:
-              print("     ", r.get("thscode"), r.get("name"))
-          # 找几个缺失板块的真实代码
-          want = ["有色金属", "仪器仪表", "消费电子", "贸易", "港口航运", "保险", "水务", "酒店及餐饮"]
-          print("\n### 缺失板块在目录里的真实代码：")
-          for name in want:
-              hits = [r for r in allrows if name in str(r.get("name"))]
-              print(f"   {name}: {[(h.get('thscode'), h.get('name')) for h in hits[:4]]}")
+          set -uo pipefail
+          python tools/fetch_stocks.py --out /tmp/stocks_data.json --no-limit-up || echo "抓取失败 $?"
+          mkdir -p /tmp/out
+          python tools/build_stocks.py --data /tmp/stocks_data.json --out /tmp/out || echo "排版失败 $?"
+          cp /dev/null probe-result.txt
+          { echo "=== stocks.txt ==="; cat /tmp/out/stocks.txt 2>/dev/null | head -80; } > probe-result.txt
+          {
+            echo
+            echo "=== 计数与耗时 ==="
+            python - <<'PY'
+          import json
+          d = json.load(open("/tmp/stocks_data.json"))
+          print("indices:", len(d.get("indices") or []))
+          print("market:", {k: (d.get("market") or {}).get(k) for k in
+                ("count","up","down","flat","limit_up","limit_down","turnover","avg_ratio")})
+          print("hk rows:", len((d.get("hk") or {}).get("rows") or []))
+          print("errors:", d.get("errors"))
+          idx = d.get("indices") or []
+          print("前 15 个指数:", [(r.get("thscode"), r.get("name"), r.get("last_price")) for r in idx[:15]])
+          print("板块样例:", [(r.get("thscode"), r.get("name"), r.get("price_change_ratio_pct")) for r in idx if str(r.get("thscode","")).endswith(".TI")][:8])
           PY
+          } >> probe-result.txt 2>&1
+          ls -la /tmp/out >> probe-result.txt 2>&1
       - name: 写回
         if: always()
         run: |
           git config user.name probe; git config user.email probe@example.com
-          cp probe.txt probe-result.txt; git add probe-result.txt
-          git commit -q -m "probe: 宽基/板块真实代码（临时）"
+          git add -f probe-result.txt
+          git commit -q -m "probe: 端到端实跑（临时）"
           git push -q origin "HEAD:refs/heads/${GITHUB_REF_NAME}"
