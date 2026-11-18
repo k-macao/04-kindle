@@ -5,6 +5,7 @@
 """
 
 import json
+import re
 import sys
 import tempfile
 import unittest
@@ -589,21 +590,26 @@ class BuildTest(unittest.TestCase):
     def test_self_loop_guards(self):
         # 单个 step 里连续跑 6 小时，必须自己会停：无 Key/接口挂了不能空转，
         # 连续失败 4 轮就中止并且不交接下一棒。
-        import yaml
+        #
+        # 这里不用 PyYAML：CI 的 runner 上没装，import yaml 会让整步失败
+        # （#57 合并后 refresh-stocks 就是因此在「跑测试」挂掉的）。按缩进切步骤文本，
+        # 断言照样够用，且零第三方依赖。
         root = Path(__file__).resolve().parents[1]
-        wf = yaml.safe_load((root / ".github" / "workflows" / "refresh-stocks.yml")
-                            .read_text(encoding="utf-8"))
-        job = wf["jobs"]["refresh"]
-        self.assertLessEqual(job["timeout-minutes"], 360)
-        self.assertEqual(wf["permissions"].get("actions"), "write")   # 交接要用
-        steps = job["steps"]
-        loop = [s for s in steps if "自循环" in s["name"]][0]["run"]
+        text = (root / ".github" / "workflows" / "refresh-stocks.yml").read_text(encoding="utf-8")
+        self.assertNotIn("\t", text, "YAML 里不能有 Tab")
+        minutes = re.findall(r"timeout-minutes:\s*(\d+)", text)
+        self.assertTrue(minutes, "没写 timeout-minutes")
+        self.assertLessEqual(int(minutes[0]), 360)                     # 作业上限 6 小时
+        # 交接下一棒要用 actions: write
+        self.assertRegex(text, r"permissions:\s*\n\s*contents:\s*write\s*\n\s*actions:\s*write")
+        steps = re.split(r"\n      - name: ", text)
+        loop = [s for s in steps if s.startswith("交易时段自循环")][0]
         self.assertIn("--check-session", loop)                        # 收盘就停
         self.assertIn("fails", loop)                                  # 连续失败计数
         self.assertIn("ABORT_HANDOFF=1", loop)                        # 中止标记
-        handoff = steps[-1]
-        self.assertIn("--handoff", handoff["run"])
-        self.assertIn("ABORT_HANDOFF", handoff["if"])                 # 中止后不交接
+        handoff = [s for s in steps if s.startswith("交接下一棒")][0]
+        self.assertIn("--handoff", handoff)
+        self.assertIn("ABORT_HANDOFF", handoff)                       # 中止后不交接
 
     def test_formatters(self):
         self.assertEqual(build_stocks.fmt_volume(3098875.0), "3.10万手")
