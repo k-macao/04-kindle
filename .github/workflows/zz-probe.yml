@@ -1,6 +1,9 @@
 name: zz probe (temporary)
 on:
   workflow_dispatch:
+  push:
+    branches: [arena/8f0e4cef-04-kindle]
+    paths: [".github/workflows/zz-probe.yml"]
 permissions:
   contents: write
 jobs:
