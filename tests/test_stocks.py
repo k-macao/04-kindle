@@ -979,3 +979,40 @@ class SectorClassificationTest(unittest.TestCase):
             {"thscode": "881101.TI"}]}
         self.assertEqual(len(build_stocks.core_indices(payload)), 1)
         self.assertEqual(len(build_stocks.sector_indices(payload)), 2)
+
+
+class SectorTextLayoutTest(unittest.TestCase):
+    """91 个板块挤成两栏时，一个都不能丢、也不能因为截断而撞名。
+
+    实测踩过：``汽车服务及其他`` 与 ``油气开采及服务`` 都被截成 4 字（``汽车服务…``
+    / ``油气开采…``），撞名后那一格只剩 6 个字符，被「右侧为空」的判定当空行跳过，
+    盘面上直接少了板块。
+    """
+
+    def _payload(self):
+        import market_watchlist as mw
+        return {"data_timestamp": 1784275991000, "market": None, "hk": None,
+                "indices": [
+                    {"thscode": code, "name": name, "last_price": 1000.0 + i,
+                     "price_change": 1.0,
+                     "price_change_ratio_pct": round((i % 20) - 10, 2),
+                     "turnover": 1e9,
+                     "is_sector": code.endswith(".TI") or code == "000819.SH"}
+                    for i, (code, name) in enumerate(mw.SECTORS)]}
+
+    def test_every_sector_appears_exactly_once(self):
+        import market_watchlist as mw
+        text = build_stocks.render_txt(self._payload(), "2026-11-19 09:30:00")
+        section = text.split("【板块】")[1].split("【港股】")[0]
+        for _code, name in mw.SECTORS:
+            self.assertIn(name, section, f"板块「{name}」没出现在文本面板里")
+
+    def test_long_names_are_shortened_uniquely(self):
+        short = build_stocks._short_name
+        # 7 字名按宽度 14 截断后仍要能区分
+        self.assertNotEqual(short("汽车服务及其他"), short("油气开采及服务"))
+        self.assertEqual(short("银行"), "银行")
+        # 截断只发生在超宽时，且结果不超宽
+        long_name = short("汽车服务及其他")
+        self.assertTrue(long_name.endswith("…"))
+        self.assertLessEqual(build_stocks._display_width(long_name), 14)

@@ -318,6 +318,22 @@ def _pad_display(text, width):
     return text + " " * max(0, width - _display_width(text))
 
 
+def _short_name(name, limit=12):
+    """按显示宽度截断长名字，超出才加省略号。
+
+    同花顺有「汽车服务及其他」「油气开采及服务」这类 7 字名，两个都被截成
+    「汽车服务…」「油气开采…」时会撞名——盘面上分不清是哪个板块。
+    """
+    if _display_width(name) <= limit:
+        return name
+    out = ""
+    for char in name:
+        if _display_width(out + char + "…") > limit:
+            break
+        out += char
+    return out + "…"
+
+
 def index_line(row, compact=False):
     """一行指数：名字 + 最新 + 涨跌幅 +（涨跌额/成交额）。compact 用于分栏。"""
     name = row.get("name") or row.get("thscode") or ""
@@ -325,8 +341,7 @@ def index_line(row, compact=False):
         return f"{name} 未成交"
     ratio = fmt_ratio(row.get("price_change_ratio_pct"))
     if compact:
-        if _display_width(name) > 12:
-            name = name[:4] + "…"
+        name = _short_name(name, 14)
         return f"{name} {fmt_pos(row.get('last_price'))} {ratio}"
     return (f"{name} {fmt_pos(row.get('last_price'))} {ratio} "
             f"{fmt_change(row.get('price_change'))}"
@@ -464,10 +479,10 @@ def render_txt(payload, generated):
         up = sum(1 for r in sectors if (r.get("price_change_ratio_pct") or 0) > 0)
         lines.append(f"【板块】{len(sectors)} · 涨 {up} 跌 {len(sectors) - up} · 按涨跌幅")
         cells = [index_line(r, compact=True) for r in sectors]
-        col_w = max(26, min(max(_display_width(c) for c in cells) + 2, 38))
+        col_w = max(_display_width(c) for c in cells) + 3
         for i in range(0, len(cells), 2):
             right = cells[i + 1] if i + 1 < len(cells) else ""
-            lines.append(_pad_display(cells[i], col_w) + right)
+            lines.append((_pad_display(cells[i], col_w) + right).rstrip())
         lines.append("")
 
     hk = payload.get("hk") or {}
