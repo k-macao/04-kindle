@@ -1,4 +1,4 @@
-name: zz probe (temporary)
+name: zz probe (temporary)  # 目录核对 v2
 on:
   workflow_dispatch:
   push:
