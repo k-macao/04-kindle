@@ -507,8 +507,33 @@ h1{font-size:26px;margin:0 0 4px}
 .stale-hint{display:none;border:2px dashed #000;padding:6px 10px;margin:10px 0;font-size:13px}
 .muted{font-size:16px;font-weight:normal;color:#555}
 section h2{font-size:19px;border-bottom:2px solid #000;padding-bottom:4px;margin:22px 0 10px}
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
-.cards.index{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.cards.index{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.cards.sector{grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:6px}
+.cards.hk{grid-template-columns:repeat(auto-fill,minmax(158px,1fr))}
+/* 市场概览：一屏顶部的「体温计」 */
+.breadth{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));
+gap:1px;background:#000;border:2px solid #000;margin:10px 0}
+.breadth .cell{background:#fff;padding:6px 10px}
+.breadth .k{font-size:11.5px;color:#555}
+.breadth .v{font-size:21px;font-weight:bold;line-height:1.15}
+.breadth .s{font-size:11.5px;color:#333}
+.bar{display:flex;height:10px;border:1px solid #000;margin-top:5px}
+.bar .u{background:#000}
+.bar .d{background:repeating-linear-gradient(45deg,#000,#000 2px,#fff 2px,#fff 4px)}
+.bar .f{background:#bbb}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
+.two .k{font-size:11.5px;color:#555;border-bottom:1px solid #000;padding-bottom:2px}
+.rank{display:flex;justify-content:space-between;font-size:13px;padding:2px 0;
+border-bottom:1px dotted #bbb}
+.card .s{font-size:11.5px;color:#333}
+.card.sector .head{padding:5px 7px}
+.card.sector .name{font-size:13px}
+.card.sector .body{padding:5px 7px}
+.card.sector .price{font-size:17px}
+.card.sector .ratio{font-size:12.5px;margin-bottom:0}
+.card.sector .bar2{height:4px;background:#e6e6e6;margin-top:4px;border:1px solid #999}
+.card.sector .bar2 i{display:block;height:100%;background:#000}
 .card{border:2px solid #000;padding:0;background:#fff}
 .card .head{display:flex;justify-content:space-between;align-items:baseline;
 padding:8px 12px;border-bottom:1px solid #000;background:#f2f2f2}
@@ -537,7 +562,7 @@ footer{border-top:1px solid #000;margin-top:16px;padding-top:8px;font-size:13px;
 面板上的数字可能不是最新的。工作流已是 15 分钟一轮 + 体检补跑（refresh-stocks-watchdog.yml），
 仍不更新就看 GitHub Actions 的运行记录，详见 docs/kindle-stocks.md。</div>
 <main id="main"></main>
-<footer>__DISCLAIMER__ · 数据来源：同花顺金融数据服务（hithink-finance）·
+<footer>__DISCLAIMER__ · A 股/指数/板块：同花顺金融数据服务（hithink-finance）· 港股：腾讯公开行情接口 ·
 面板每 __POLL_TEXT__ 拉一次 stocks.json，generated 变了才重绘。</footer>
 </div>
 <noscript><p>需要 JavaScript 才能每分钟刷新；Kindle 请用 stocks.txt 纯文本版或 stocks.epub 卡片版。</p></noscript>
@@ -664,6 +689,58 @@ esc(r.name||r.thscode)+'</span><span class="code">'+esc(r.thscode||'')+
 '</div><div class="ratio '+cls(r.price_change_ratio_pct)+'">'+
 (empty?'':ratio(r.price_change_ratio_pct)+' '+change(r.price_change))+'</div>'+
 kv+sparkHtml+'</div></div>';}
+function breadthBar(m){
+var total=(m.up||0)+(m.down||0)+(m.flat||0);
+if(!total)return '';
+function pct(n){return (100*(n||0)/total).toFixed(2)+'%';}
+return '<div class="bar"><span class="u" style="width:'+pct(m.up)+'"></span>'+
+'<span class="f" style="width:'+pct(m.flat)+'"></span>'+
+'<span class="d" style="width:'+pct(m.down)+'"></span></div>';}
+function breadth(m){
+if(!m)return '';
+var cells=[
+['上涨 / 下跌','<span class="up">'+(m.up||0)+'</span> / <span class="down">'+(m.down||0)+'</span>',
+'共 '+(m.count||0)+' 只 · 平盘 '+(m.flat||0)],
+['涨停 / 跌停','<span class="up">'+(m.limit_up||0)+'</span> / <span class="down">'+(m.limit_down||0)+'</span>',
+'无价 '+(m.no_price||0)],
+['平均涨跌',ratio(m.avg_ratio),'全 A 算术平均'],
+['成交额',money(m.turnover),'量 '+vol(m.volume)]];
+var h='<div class="breadth">';
+cells.forEach(function(c){h+='<div class="cell"><div class="k">'+c[0]+
+'</div><div class="v">'+c[1]+'</div><div class="s">'+c[2]+'</div></div>';});
+h+='</div>'+breadthBar(m);
+var up=(m.top_gainers||[]),down=(m.top_losers||[]);
+if(up.length||down.length){
+h+='<div class="two"><div><div class="k">涨幅前五</div>';
+up.slice(0,5).forEach(function(g){h+='<div class="rank"><span>'+
+esc(g.name||g.thscode)+'</span><b class="up">'+ratio(g.ratio)+'</b></div>';});
+h+='</div><div><div class="k">跌幅前五</div>';
+down.slice(0,5).forEach(function(g){h+='<div class="rank"><span>'+
+esc(g.name||g.thscode)+'</span><b class="down">'+ratio(g.ratio)+'</b></div>';});
+h+='</div></div>';}
+return h;}
+function sectorCard(r){
+var empty=rowEmpty(r), rc=r.price_change_ratio_pct||0;
+var pct=Math.min(100,Math.abs(rc)*10);
+return '<div class="card sector"><div class="head"><span class="name">'+
+esc(r.name||r.thscode)+'</span></div><div class="body">'+
+'<div class="price '+(empty?'muted':cls(rc))+'">'+
+(empty?'未成交':num(r.last_price))+'</div>'+
+'<div class="ratio '+cls(rc)+'">'+ratio(r.price_change_ratio_pct)+' '+
+change(r.price_change)+'</div>'+
+'<div class="s">额 '+money(r.turnover)+'</div>'+
+'<div class="bar2"><i style="width:'+pct.toFixed(0)+'%"></i></div></div></div>';}
+function hkCard(r){
+var empty=rowEmpty(r);
+return '<div class="card"><div class="head"><span class="name">'+
+esc(r.name||r.thscode)+'</span><span class="code">'+
+esc(String(r.thscode||'').replace(/^hk/,''))+'</span></div><div class="body">'+
+'<div class="price '+(empty?'muted':cls(r.price_change_ratio_pct))+'">'+
+(empty?'未成交':num(r.last_price))+'</div>'+
+'<div class="ratio '+cls(r.price_change_ratio_pct)+'">'+
+(empty?'':ratio(r.price_change_ratio_pct)+' '+change(r.price_change))+'</div>'+
+'<table class="kv"><tr><td>成交额</td><td>'+money(r.turnover)+'</td></tr>'+
+'<tr><td>成交量</td><td>'+vol(r.volume)+'</td></tr></table></div></div>';}
 function limitRows(rows){
 var h='<table class="data"><tr><th>名称</th><th>最新</th><th>涨跌幅</th><th>封板</th>'+
 '<th>原因</th><th>连板</th><th>封单额</th></tr>';
@@ -675,11 +752,24 @@ rows.forEach(function(r){h+='<tr><td>'+esc(r.name||r.thscode)+'</td>'+
 return h+'</table>';}
 function render(d){
 var h='';
-if(d.indices&&d.indices.length){h+='<section><h2>指数（'+d.indices.length+'）</h2><div class="cards index">';
-d.indices.forEach(function(r){h+=card(r,d,true);});h+='</div></section>';}
-if(d.stocks&&d.stocks.length){h+='<section><h2>自选股（'+d.stocks.length+
-'）· 按涨跌幅排序</h2><div class="cards">';
-d.stocks.forEach(function(r){h+=card(r,d,false);});h+='</div></section>';}
+// 一屏监视：市场概览 → 宽基 → 板块 → 港股 → 涨停池
+if(d.market){h+='<section><h2>市场概览 · 全 A</h2>'+breadth(d.market)+'</section>';}
+var idx=(d.indices||[]),broad=[],sectors=[];
+idx.forEach(function(r){((r.is_sector||/\.TI$/.test(String(r.thscode||'')))?sectors:broad).push(r);});
+if(broad.length){h+='<section><h2>指数（'+broad.length+'）</h2><div class="cards index">';
+broad.forEach(function(r){h+=card(r,d,true);});h+='</div></section>';}
+if(sectors.length){
+var sorted=sectors.slice().sort(function(a,b){
+return (b.price_change_ratio_pct||-999)-(a.price_change_ratio_pct||-999);});
+h+='<section><h2>板块（'+sectors.length+'）· 按涨跌幅</h2><div class="cards sector">';
+sorted.forEach(function(r){h+=sectorCard(r);});h+='</div></section>';}
+var hkRows=((d.hk||{}).rows||[]);
+if(hkRows.length){
+var hi=[],hs=[];
+hkRows.forEach(function(r){(r.is_index?hi:hs).push(r);});
+h+='<section><h2>港股（'+hkRows.length+'）<span class="muted"> 行情 '+
+bj((d.hk||{}).data_time)+'</span></h2><div class="cards hk">';
+hi.concat(hs).forEach(function(r){h+=hkCard(r);});h+='</div></section>';}
 if(d.limit_up&&d.limit_up.length)h+='<section><h2>涨停池（'+d.limit_up.length+
 '）· 按封板时间</h2>'+limitRows(d.limit_up)+'</section>';
 (d.errors||[]).forEach(function(e){h+='<p>注：'+esc(e)+'</p>';});
