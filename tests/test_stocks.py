@@ -936,7 +936,13 @@ class WatchlistTest(unittest.TestCase):
             seen.add(code)
             self.assertTrue(name.strip())
         self.assertEqual(len(mw.INDICES), 13)
-        self.assertEqual(len(mw.SECTORS), 58)
+        self.assertEqual(len(mw.SECTORS), 91)
+        # 同花顺行业指数的代码是「连续编号」的，缺号说明清单里混了不存在的代码
+        numbers = sorted(int(code[:6]) for code, _ in mw.SECTORS
+                         if code.endswith(".TI") and code.startswith("881"))
+        self.assertEqual(len(numbers), 90)
+        self.assertEqual(numbers[0], 881101)
+        self.assertEqual(numbers[-1], 881284)
         # 宽基与板块不能混（000001.SH 属于宽基，881xxx.TI 属于板块）
         self.assertTrue(all(c.endswith((".SH", ".SZ")) for c, _ in mw.INDICES))
 
