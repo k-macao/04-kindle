@@ -14,46 +14,72 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: 测港股免费数据源
+      - name: 校验板块代码与港股解析
         run: |
           python - <<'PY' 2>&1 | tee probe.txt
-          import json, urllib.request, urllib.error
+          import json, os, sys
+          sys.path.insert(0, "tools")
+          from urllib.parse import urlencode
+          from urllib.request import Request, urlopen
+          import market_watchlist as mw
 
-          UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36"
+          KEY = next((os.environ[k] for k in ("HITHINK_FINANCE_API_KEY","THS_API_KEY","THS_KEY") if os.environ.get(k)), "")
+          BASE = "https://fuyao.aicubes.cn"
+          def hit(path, **params):
+              url = BASE + path + ("?" + urlencode(params) if params else "")
+              with urlopen(Request(url, headers={"X-api-key": KEY, "User-Agent": "probe"}), timeout=60) as r:
+                  return json.loads(r.read().decode())
 
-          def get(url, referer=None, enc="utf-8"):
-              req = urllib.request.Request(url, headers={
-                  "User-Agent": UA,
-                  **({"Referer": referer} if referer else {}),
-              })
-              try:
-                  with urllib.request.urlopen(req, timeout=25) as r:
-                      raw = r.read()
-                      return {"ok": True, "status": r.status, "len": len(raw),
-                              "head": raw[:400].decode(enc, "replace")}
-              except urllib.error.HTTPError as e:
-                  return {"ok": False, "http": e.code, "err": str(e)[:200]}
-              except Exception as e:
-                  return {"ok": False, "err": f"{type(e).__name__}: {e}"[:200]}
+          # 1) 逐个批次问板块快照，看哪些代码不存在
+          codes = [c for c, _ in mw.SECTORS]
+          bad, ok = [], 0
+          for i in range(0, len(codes), 40):
+              chunk = codes[i:i+40]
+              b = hit("/api/a-share-index/prices/snapshot", thscodes=",".join(chunk))
+              if b.get("code") != 0:
+                  print(f"  批次 {i} 整体失败: code={b.get('code')} {b.get('message')}")
+                  bad += chunk
+                  continue
+              got = {it.get("thscode") for it in (b.get("data") or {}).get("item") or []}
+              ok += len(got)
+              missing = [c for c in chunk if c not in got]
+              if missing:
+                  print(f"  批次 {i} 缺少: {missing}")
+                  bad += missing
+          print(f"\n板块：共 {len(codes)} 个，返回 {ok} 个，缺失 {len(bad)} 个")
+          if bad:
+              print("  缺失代码:", bad)
+              print("  缺失名字:", [n for c, n in mw.SECTORS if c in bad])
 
-          tests = [
-              ("腾讯 港股指数", "https://qt.gtimg.cn/q=hkHSI,hkHSCEI,hkHSTECH"),
-              ("腾讯 港股个股", "https://qt.gtimg.cn/q=hk00700,hk09988"),
-              ("腾讯 A股指数", "https://qt.gtimg.cn/q=sh000001,sz399001"),
-              ("新浪 港股指数", "https://hq.sinajs.cn/list=int_hangseng,int_hscei", "https://finance.sina.com.cn"),
-              ("新浪 港股个股", "https://hq.sinajs.cn/list=hk00700", "https://finance.sina.com.cn"),
-              ("新浪 A股", "https://hq.sinajs.cn/list=sh000001", "https://finance.sina.com.cn"),
-          ]
-          for t in tests:
-              name, url = t[0], t[1]
-              ref = t[2] if len(t) > 2 else None
-              r = get(url, ref)
-              print(f"\n### {name}\n  url={url}\n  {json.dumps(r, ensure_ascii=False)[:500]}")
+          # 2) 宽基指数
+          idx = [c for c, _ in mw.INDICES]
+          b = hit("/api/a-share-index/prices/snapshot", thscodes=",".join(idx))
+          got = {it.get("thscode") for it in (b.get("data") or {}).get("item") or []}
+          print(f"\n宽基：共 {len(idx)}，返回 {len(got)}，缺失 {[c for c in idx if c not in got]}")
+
+          # 3) 港股解析（腾讯，GBK）
+          hk = [c for c, _ in mw.HK_INDICES + mw.HK_STOCKS]
+          url = "https://qt.gtimg.cn/q=" + ",".join(hk)
+          raw = urlopen(Request(url, headers={"User-Agent": "Mozilla/5.0"}), timeout=30).read()
+          text = raw.decode("gbk", "replace")
+          print(f"\n港股：请求 {len(hk)} 个，响应 {len(raw)} 字节")
+          for line in text.strip().split(";"):
+              line = line.strip()
+              if not line.startswith("v_"):
+                  continue
+              key = line.split("=")[0].replace("v_", "")
+              payload = line.split('="', 1)[-1].rstrip('"')
+              f = payload.split("~")
+              if len(f) < 6:
+                  print(f"  {key}: 字段不足 {len(f)}")
+                  continue
+              print(f"  {key}: name={f[1]!r} last={f[3]} prev={f[4]} vol={f[6] if len(f)>6 else '-'} "
+                    f"amount={f[37] if len(f)>37 else '-'} time={f[30] if len(f)>30 else '-'}")
           PY
       - name: 写回
         if: always()
         run: |
           git config user.name probe; git config user.email probe@example.com
           cp probe.txt probe-result.txt; git add probe-result.txt
-          git commit -q -m "probe: 港股免费源（临时）"
+          git commit -q -m "probe: 板块代码/港股解析（临时）"
           git push -q origin "HEAD:refs/heads/${GITHUB_REF_NAME}"
