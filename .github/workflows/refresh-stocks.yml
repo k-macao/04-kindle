@@ -5,10 +5,18 @@ name: Refresh THS stock panel
 # stocks.html（浏览器卡片仪表盘）/ stocks.epub（Kindle 字模式卡片版）/
 # stocks.txt（纯文本回退版）。
 #
-# 频率说明：GitHub Actions 的 cron 最短允许 5 分钟，但**实际会延迟、负载高时直接
-# 丢弃**（官方建议 ≥15 分钟）。这个仓库实测过 */5 6 小时一次都没被触发，面板因此
-# 长时间停在旧快照。所以这里改成交易时段每 15 分钟一轮，分钟错开整点（3,18,33,48），
-# 再由 refresh-stocks-watchdog.yml 每 10 分钟体检一次：发现 data_time 落后就补跑。
+# 频率说明：GitHub Actions 的 cron 在这个仓库被**严重限流**——配上 "3,18,33,48"
+# 每 15 分钟之后实测 4.2 小时内 0 次触发；连每小时任务的实际间隔都是 4–10 小时。
+# 所以不能指望 cron。这里的做法是「一次触发，自己跑满交易时段」：
+#
+#   1. cron / push / 手动 dispatch 任意一次把本工作流叫起来；
+#   2. "交易时段自循环" 步骤在同一个 runner 里每 15 分钟重跑一遍抓取+排版+提交，
+#      直到 6 小时作业预算快用完；
+#   3. 收尾时如果还在交易时段，就 workflow_dispatch 把下一棒交给自己
+#      （GITHUB_TOKEN 可以触发 dispatch，已实测），下一轮接着跑 6 小时。
+#
+# 全天最坏也只需要 1–2 次 cron 被触发就能连起来；refresh-stocks-watchdog.yml 是
+# 额外的保险：它被叫醒时若发现 data_time 落后 >25 分钟，就补一枪。
 # Kindle 插件与网页面板每 7 分钟检查一次清单，generated 变了才刷新；
 # 数据新鲜度以清单里的 data_time 为准（面板抬头会写「N 分钟前」与 STALE）。
 # 本地要真正的 60 秒一轮：HITHINK_FINANCE_API_KEY=… python tools/fetch_stocks.py
@@ -33,6 +41,7 @@ on:
 
 permissions:
   contents: write
+  actions: write        # 收尾时 workflow_dispatch 把下一棒交给自己
 
 concurrency:
   group: refresh-stocks
@@ -41,7 +50,7 @@ concurrency:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 350      # 作业上限 6 小时；留 10 分钟给收尾交接
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -54,49 +63,93 @@ jobs:
       - name: 跑测试（信封解析、重试、归一化、排版、自检）
         run: python -m unittest discover -s tests
 
-      # 抓取只负责取回并归一化 → stocks_data.json（不进 Git）；
-      # 排版是下一步 build_stocks 的事，改模板不用重抓。
-      # --history-days 20：迷你走势图要的近 20 个交易日收盘价（0 = 不取）。
-      - name: 从同花顺抓一轮行情快照
+      # ── 交易时段自循环 ────────────────────────────────────────────────
+      # 一次触发，在同一个 runner 里连续刷到预算用完，再 workflow_dispatch 交接下一棒。
+      # 每轮：抓取 → 排版 → 自检 → 提交（行情没变不提交）。
+      - name: 交易时段自循环（每 15 分钟一轮，跑满预算后交接下一棒）
         env:
           HITHINK_FINANCE_API_KEY: ${{ secrets.HITHINK_FINANCE_API_KEY }}
           THS_API_KEY: ${{ secrets.THS_API_KEY }}
           THS_KEY: ${{ secrets.THS_KEY }}
-        run: python tools/fetch_stocks.py --out stocks_data.json --history-days 20
-
-      - name: 排版成清单 + 网页面板 + Kindle 卡片版 EPUB + 纯文本
-        run: python tools/build_stocks.py --data stocks_data.json --out site
-
-      - name: 产物自检（清单可解析、条数、60 秒轮询、EPUB 结构）
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          python - <<'PY'
-          import sys
-          sys.path.insert(0, "tools")
-          import build_stocks
-
-          problems = build_stocks.check("site")
-          if problems:
-              print("；".join(problems), file=sys.stderr)
-              raise SystemExit(1)
-          print("自检通过 · site/stocks.json + stocks.html + stocks.epub + stocks.txt")
-          PY
-
-      - name: 提交并推送（行情没变就不提交）
-        run: |
-          set -euo pipefail
+          set -uo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          # stocks.epub 是二进制：只有内容也会随 data_hash（含历史收盘价）一起变。
-          git add site/stocks.json site/stocks.txt site/stocks.html site/stocks.epub site/stocks_names.json
-          # 行情指纹没变（收盘后/周末快照时间不变）就跳过，免得刷空提交。
-          old_hash=$(git show HEAD:site/stocks.json 2>/dev/null \
-            | python -c "import json,sys;print(json.load(sys.stdin).get('data_hash',''))" || echo "")
-          new_hash=$(python -c "import json;print(json.load(open('site/stocks.json'))['data_hash'])")
-          if [ -n "$old_hash" ] && [ "$old_hash" = "$new_hash" ]; then
-            echo "行情没变（data_hash $new_hash），跳过提交"
-            exit 0
-          fi
-          counts=$(python -c "import json;c=json.load(open('site/stocks.json'))['counts'];print(f\"指数 {c['indices']} / 股票 {c['stocks']} / 涨停 {c['limit_up']}\")")
-          stamp=$(python -c "import json;print(json.load(open('site/stocks.json'))['generated'])")
-          git commit --allow-empty -m "chore(stocks): 同花顺行情面板刷新（${counts}，生成于 ${stamp} 北京时间）"
-          git push origin "HEAD:refs/heads/${GITHUB_REF_NAME}"
+
+          # 作业总预算 350 分钟；这里留 20 分钟给收尾交接，单轮最多睡 15 分钟。
+          deadline=$(( $(date +%s) + 330 * 60 ))
+          round=0
+          fails=0
+
+          while : ; do
+            if ! python tools/stocks_watchdog.py --check-session; then
+              echo "已收盘/未开盘：自循环结束"
+              break
+            fi
+            if [ "$(date +%s)" -ge "$deadline" ]; then
+              echo "预算用完：收尾交接"
+              break
+            fi
+
+            round=$((round + 1))
+            echo "── 第 $round 轮 · $(date -u +%FT%TZ) ──"
+
+            # 抓取只负责取回并归一化 → stocks_data.json（不进 Git）；
+            # 排版是下一步 build_stocks 的事，改模板不用重抓。
+            # --history-days 20：迷你走势图要的近 20 个交易日收盘价（0 = 不取）。
+            # 单轮失败不让整条流水线挂掉：下一轮还会再来一次，日志里留痕。
+            if ! python tools/fetch_stocks.py --out stocks_data.json --history-days 20; then
+              fails=$((fails + 1))
+              echo "::warning::第 $round 轮抓取失败（连续 $fails 次），15 分钟后重试"
+              # 连续 4 次（约 1 小时）都抓不到，就别再占着 runner 连轴转了：
+              # 记一条错误让 Actions 标红，也**不交接**，免得整夜空转。
+              if [ "$fails" -ge 4 ]; then
+                echo "::error::连续 $fails 轮抓取失败，停止自循环（检查 Secret / 接口状态）"
+                echo "ABORT_HANDOFF=1" >> "$GITHUB_ENV"
+                exit 1
+              fi
+            else
+              fails=0
+              # 开盘前的空壳快照会被 build_stocks 拒掉（不覆盖上一份有效面板），
+              # 这里也当「这轮跳过」，不是错误。
+              if python tools/build_stocks.py --data stocks_data.json --out site; then
+                if python tools/check_stocks.py site; then
+                  git add site/stocks.json site/stocks.txt site/stocks.html site/stocks.epub site/stocks_names.json
+                  old_hash=$(git show HEAD:site/stocks.json 2>/dev/null \
+                    | python -c "import json,sys;print(json.load(sys.stdin).get('data_hash',''))" || echo "")
+                  new_hash=$(python -c "import json;print(json.load(open('site/stocks.json'))['data_hash'])")
+                  if [ -n "$old_hash" ] && [ "$old_hash" = "$new_hash" ]; then
+                    echo "行情没变（data_hash $new_hash），跳过提交"
+                  else
+                    counts=$(python -c "import json;c=json.load(open('site/stocks.json'))['counts'];print(f\"指数 {c['indices']} / 股票 {c['stocks']} / 涨停 {c['limit_up']}\")")
+                    stamp=$(python -c "import json;print(json.load(open('site/stocks.json'))['generated'])")
+                    git commit -q -m "chore(stocks): 同花顺行情面板刷新（${counts}，生成于 ${stamp} 北京时间）"
+                    # push 可能被别的提交抢先（工作流/PR），失败就 rebase 再来一次。
+                    if ! git push -q origin "HEAD:refs/heads/${GITHUB_REF_NAME}"; then
+                      echo "push 被拒，rebase 后重试"
+                      git pull --rebase -q origin "${GITHUB_REF_NAME}" && \
+                        git push -q origin "HEAD:refs/heads/${GITHUB_REF_NAME}" || \
+                        echo "::warning::这一轮没推上去，下一轮再试"
+                    fi
+                  fi
+                else
+                  echo "::warning::第 $round 轮排版/自检没过（可能是空壳快照），不提交"
+                fi
+              fi
+            fi
+
+            # 睡到下一轮（15 分钟），但别越过预算。
+            now=$(date +%s)
+            [ "$now" -ge "$deadline" ] && continue
+            nap=900
+            [ $((now + nap)) -gt "$deadline" ] && nap=$((deadline - now))
+            echo "睡 $((nap / 60)) 分钟"
+            sleep "$nap"
+          done
+
+      - name: 交接下一棒（还在交易时段就把自己再叫起来）
+        if: always() && env.ABORT_HANDOFF != '1'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python tools/stocks_watchdog.py --handoff

@@ -563,6 +563,48 @@ class BuildTest(unittest.TestCase):
         self.assertIn("--stale-minutes", watchdog)
         self.assertIn("actions: write", watchdog)
 
+    def test_watchdog_check_session_and_handoff(self):
+        # refresh-stocks.yml 的自循环靠这两个开关判断「还要不要继续」。
+        parse = stocks_watchdog.parse_stamp
+        session = stocks_watchdog.main(["--check-session", "--now", "2026-11-18T02:00:00Z"])
+        self.assertEqual(session, 0)          # 北京 10:00，盘中
+        closed = stocks_watchdog.main(["--check-session", "--now", "2026-11-18T09:00:00Z"])
+        self.assertEqual(closed, 1)           # 北京 17:00，收盘
+
+        dispatched = []
+        original = stocks_watchdog.dispatch
+        stocks_watchdog.dispatch = lambda repo=None: dispatched.append(True)
+        try:
+            # 盘中交接 → 真的 dispatch
+            self.assertEqual(stocks_watchdog.main(
+                ["--handoff", "--now", "2026-11-18T02:00:00Z"]), 0)
+            self.assertEqual(len(dispatched), 1)
+            # 收盘后交接 → 什么都不做，自循环到此为止
+            self.assertEqual(stocks_watchdog.main(
+                ["--handoff", "--now", "2026-11-18T09:00:00Z"]), 0)
+            self.assertEqual(len(dispatched), 1)
+        finally:
+            stocks_watchdog.dispatch = original
+
+    def test_self_loop_guards(self):
+        # 单个 step 里连续跑 6 小时，必须自己会停：无 Key/接口挂了不能空转，
+        # 连续失败 4 轮就中止并且不交接下一棒。
+        import yaml
+        root = Path(__file__).resolve().parents[1]
+        wf = yaml.safe_load((root / ".github" / "workflows" / "refresh-stocks.yml")
+                            .read_text(encoding="utf-8"))
+        job = wf["jobs"]["refresh"]
+        self.assertLessEqual(job["timeout-minutes"], 360)
+        self.assertEqual(wf["permissions"].get("actions"), "write")   # 交接要用
+        steps = job["steps"]
+        loop = [s for s in steps if "自循环" in s["name"]][0]["run"]
+        self.assertIn("--check-session", loop)                        # 收盘就停
+        self.assertIn("fails", loop)                                  # 连续失败计数
+        self.assertIn("ABORT_HANDOFF=1", loop)                        # 中止标记
+        handoff = steps[-1]
+        self.assertIn("--handoff", handoff["run"])
+        self.assertIn("ABORT_HANDOFF", handoff["if"])                 # 中止后不交接
+
     def test_formatters(self):
         self.assertEqual(build_stocks.fmt_volume(3098875.0), "3.10万手")
         self.assertEqual(build_stocks.fmt_turnover(3937375200.0), "39.37亿")
