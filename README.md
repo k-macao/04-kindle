@@ -154,6 +154,7 @@ Feedly / Reeder。插件那套「News subscription」读的是 `site/news.json`�
 1. 已越狱的 Kindle 安装并启动 KOReader。将 `octopus004.koplugin` 文件夹完整复制到 `koreader/plugins/`，重启 KOReader。部署方式见 [docs/kindle-ssh.md](docs/kindle-ssh.md)：USB 直连用 `tools/kindle-usb.sh`（Windows 用 `tools/kindle-usb.ps1`；`--install` / `-Install` 直接拷入，无需 SSH），联网用 `tools/deploy-plugin.sh`（KOReader 自带 SSH 服务，默认端口 2222，无需另装 usbnet）。
 2. Tools → **004 Report** → 按显示模式填地址：**Report URL**（纯文本）、**EPUB manifest URL**（字模式）、**News manifest URL**（每日新闻）、**Stocks manifest URL**（同花顺行情面板）或 **Image manifest URL**（截图），再用 **Display mode** 选 text / epub / news / stocks / page images。选择 **Show report** 开始。
 3. 每 7 分钟检查一次报告并翻到下一页，末页回到首页。点击屏幕可手动翻页、立即刷新、查看状态或停止。停止会恢复原有屏保设置。
+   **自动阅读预设默认是取消的**：装好后不会自己开始，要手动 **Show report**；想让它在启动 KOReader 时自己跑，在 004 菜单里把 **Auto-start on launch** 打开（默认 `off`）。手动 Stop 之后即便这一项是 `on`，下次启动也不会自动开始。插件不会改动 KOReader 自己存下来的自动翻页（autoturn）预设——它只在 004 开始跑之前让当前的 autoturn 暂停，避免两个「自动」抢屏幕；004 停止后你原来的设置照旧。
 4. 有硬件唤醒时尝试使用 KOReader 唤醒管理器；否则保持设备唤醒并使用软件计时。是否支持取决于 Oasis 1 的 KOReader 构建。Wi-Fi 保持开启；联网和翻页会增加耗电（检查间隔 7 分钟，见 `main.lua` 的 `INTERVAL`）。
 
 请求失败时保留并轮播本地上次成功内容；文本模式顶部显示 `OFFLINE / CACHED`，图片模式整屏无状态栏，
