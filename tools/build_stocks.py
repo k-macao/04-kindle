@@ -275,11 +275,35 @@ def fmt_seal(value):
     return f"封单{fmt_turnover(value)}"
 
 
+def _sector_codes():
+    """清单里所有板块代码（含 000819.SH 这种不是 .TI 的行业指数）。"""
+    global _SECTOR_CODES
+    if _SECTOR_CODES is None:
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        try:
+            import market_watchlist
+        except ImportError:                        # 只有单文件被拷走时才用后缀兜底
+            _SECTOR_CODES = frozenset()
+        else:
+            _SECTOR_CODES = frozenset(code for code, _ in market_watchlist.SECTORS)
+    return _SECTOR_CODES
+
+
+_SECTOR_CODES = None
+
+
 def is_sector_row(row):
-    """这一行算「板块」还是「宽基指数」：同花顺行业指数是 *.TI，另有少数 SH 板块。"""
+    """这一行算「板块」还是「宽基指数」。
+
+    同花顺行业指数大多是 ``881xxx/884xxx.TI``，但「有色金属」是 ``000819.SH``
+    ——只按后缀判会把它当成宽基指数。所以先查清单里的板块代码。
+    """
     if row.get("is_sector"):
         return True
-    return str(row.get("thscode") or "").endswith(".TI")
+    code = str(row.get("thscode") or "")
+    if code in _sector_codes():
+        return True
+    return code.endswith(".TI")
 
 
 def _display_width(text):
@@ -460,9 +484,11 @@ def render_txt(payload, generated):
                 lines.append(f"{name} 未成交")
                 continue
             traded = isinstance(row.get("volume"), (int, float)) and row.get("volume") != 0
-            # 港股指数腾讯只给点位、不给成交额，别把「没成交额」写成「未成交」。
-            tail = (f"额{fmt_turnover(row.get('turnover'))}" if traded
-                    and row.get("turnover") else "")
+            # 港股指数腾讯只给点位、不给成交额（给了也是成分合计，口径不同），
+            # 所以指数行不显示成交额，别让「0.18亿」误导。
+            tail = (f"额{fmt_turnover(row.get('turnover'))}"
+                    if traded and row.get("turnover")
+                    and not row.get("is_index") else "")
             lines.append((f"{name} {fmt_pos(row.get('last_price'))} "
                           f"{fmt_ratio(row.get('price_change_ratio_pct'))} "
                           f"{fmt_change(row.get('price_change'))} {tail}").rstrip())

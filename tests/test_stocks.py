@@ -946,3 +946,30 @@ class WatchlistTest(unittest.TestCase):
         self.assertEqual(len(mw.HK_STOCKS), 20)
         for code, name in mw.HK_INDICES + mw.HK_STOCKS:
             self.assertRegex(code, r"^hk[0-9A-Z]+$", name)
+
+
+class SectorClassificationTest(unittest.TestCase):
+    """「有色金属」是同花顺唯一不是 .TI 后缀的行业指数（000819.SH）。
+
+    只按后缀判会把它排进【指数】段，盘面上宽基就变成 14 个了。
+    """
+
+    def test_non_ti_sector_code_is_classified_as_sector(self):
+        self.assertTrue(build_stocks.is_sector_row({"thscode": "000819.SH"}))
+        self.assertFalse(build_stocks.is_sector_row({"thscode": "000001.SH"}))
+        self.assertTrue(build_stocks.is_sector_row({"thscode": "881101.TI"}))
+        # enrich 也要标对，否则网页 JS 会跟着分错
+        out = fetch_stocks.enrich_index_rows(
+            [{"thscode": "000819.SH", "last_price": 1.0},
+             {"thscode": "000001.SH", "last_price": 2.0}],
+            [("000001.SH", "上证指数"), ("000819.SH", "有色金属")])
+        by_code = {r["thscode"]: r["is_sector"] for r in out}
+        self.assertTrue(by_code["000819.SH"])
+        self.assertFalse(by_code["000001.SH"])
+
+    def test_counts_split_broad_and_sector(self):
+        payload = {"indices": [
+            {"thscode": "000001.SH"}, {"thscode": "000819.SH"},
+            {"thscode": "881101.TI"}]}
+        self.assertEqual(len(build_stocks.core_indices(payload)), 1)
+        self.assertEqual(len(build_stocks.sector_indices(payload)), 2)

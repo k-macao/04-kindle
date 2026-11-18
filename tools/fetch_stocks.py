@@ -479,10 +479,17 @@ def market_breadth(rows):
     return stats
 
 
-def enrich_index_rows(rows, pairs):
-    """给指数/板块补中文名与顺序（接口不返回名字），并标记哪些是板块。"""
+def enrich_index_rows(rows, pairs, sector_codes=None):
+    """给指数/板块补中文名与顺序（接口不返回名字），并标记哪些是板块。
+
+    板块判定不能只看 ``.TI`` 后缀：同花顺的「有色金属」是 ``000819.SH``，
+    按后缀会被当成宽基指数（实测会跑到【指数】段里去）。
+    """
     names = {code: name for code, name in pairs}
     order = {code: pos for pos, (code, _) in enumerate(pairs)}
+    if sector_codes is None:
+        sector_codes = {code for code, _ in market_watchlist.SECTORS}
+    sector_codes = set(sector_codes)
     out = []
     for row in rows:
         code = row.get("thscode")
@@ -490,7 +497,8 @@ def enrich_index_rows(rows, pairs):
             continue
         item = dict(row)
         item["name"] = names.get(code) or item.get("name") or code
-        item["is_sector"] = code.endswith(".TI") or bool(item.get("sector"))
+        item["is_sector"] = (code in sector_codes or code.endswith(".TI")
+                             or bool(item.get("sector")))
         out.append(item)
     out.sort(key=lambda r: order.get(r.get("thscode"), 9999))
     return out

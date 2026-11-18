@@ -14,39 +14,108 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: 真跑一遍抓取 + 排版
+      - name: 目录核对 + 端到端实跑
         env:
           HITHINK_FINANCE_API_KEY: ${{ secrets.HITHINK_FINANCE_API_KEY }}
           THS_API_KEY: ${{ secrets.THS_API_KEY }}
           THS_KEY: ${{ secrets.THS_KEY }}
         run: |
           set -uo pipefail
-          python tools/fetch_stocks.py --out /tmp/stocks_data.json --no-limit-up || echo "抓取失败 $?"
-          mkdir -p /tmp/out
-          python tools/build_stocks.py --data /tmp/stocks_data.json --out /tmp/out || echo "排版失败 $?"
           cp /dev/null probe-result.txt
-          { echo "=== stocks.txt ==="; cat /tmp/out/stocks.txt 2>/dev/null | head -80; } > probe-result.txt
+          # ① 用指数目录（带名称）权威核对清单里每个代码到底叫什么
+          python - <<'PY' >> probe-result.txt 2>&1
+          import json, os, sys
+          sys.path.insert(0, "tools")
+          from urllib.parse import urlencode
+          from urllib.request import Request, urlopen
+          import market_watchlist as mw
+
+          KEY = next((os.environ[k] for k in ("HITHINK_FINANCE_API_KEY","THS_API_KEY","THS_KEY") if os.environ.get(k)), "")
+          BASE = "https://fuyao.aicubes.cn"
+          def hit(path, **params):
+              url = BASE + path + ("?" + urlencode(params) if params else "")
+              with urlopen(Request(url, headers={"X-api-key": KEY, "User-Agent": "probe"}), timeout=90) as r:
+                  return json.loads(r.read().decode())
+
+          catalog = {}
+          for tag in ("industry", "cn_concept", "region", "tszs"):
+              try:
+                  d = hit("/api/index/catalog/ths-index-list", tag=tag)
+              except Exception as exc:
+                  print(f"目录 tag={tag} 失败：{exc}")
+                  continue
+              items = (d.get("data") or {}).get("item") or []
+              print(f"目录 tag={tag}: code={d.get('code')} 条数={len(items)}")
+              if items:
+                  print("  样例:", items[0])
+              for it in items:
+                  code = it.get("thscode") or it.get("code")
+                  if code:
+                      catalog[code] = it.get("name") or ""
+
+          print(f"\n目录合计 {len(catalog)} 条")
+
+          print("\n=== 清单逐条核对（目录里的真实名称）===")
+          for label, pairs in (("宽基", mw.INDICES), ("板块", mw.SECTORS)):
+              print(f"\n--- {label}（{len(pairs)} 个）---")
+              miss, wrong = [], []
+              for code, name in pairs:
+                  real = catalog.get(code)
+                  if real is None:
+                      miss.append((code, name))
+                  elif real.strip() != name.strip():
+                      wrong.append((code, name, real))
+              print(f"目录里没有：{len(miss)} 个 {miss}")
+              print(f"名字不一致：{len(wrong)} 个")
+              for code, mine, real in wrong:
+                  print(f"    {code}: 清单写「{mine}」→ 目录是「{real}」")
+
+          print("\n=== 按行业名反查代码（清单里目录查不到的那些）===")
+          by_name = {}
+          for code, name in catalog.items():
+              by_name.setdefault(name.strip(), []).append(code)
+          for code, name in mw.INDICES + mw.SECTORS:
+              if code not in catalog:
+                  print(f"  {name}（清单 {code}）→ 同名候选 {by_name.get(name.strip(), [])}")
+                  for kw in (name[:2], name[:3]):
+                      hits = [(c, n) for c, n in catalog.items() if kw in n]
+                      if hits:
+                          print(f"      含「{kw}」：{hits[:6]}")
+                          break
+          PY
+
+          # ② 端到端：真抓一轮 → 排版 → 出 txt
+          echo -e "\n=== 端到端实跑 ===" >> probe-result.txt
+          python tools/fetch_stocks.py --out /tmp/stocks_data.json --no-limit-up >> probe-result.txt 2>&1 \
+            || echo "抓取失败 $?" >> probe-result.txt
+          mkdir -p /tmp/out
+          python tools/build_stocks.py --data /tmp/stocks_data.json --out /tmp/out >> probe-result.txt 2>&1 \
+            || echo "排版失败 $?" >> probe-result.txt
+          { echo; echo "=== stocks.txt 前 70 行 ==="; head -70 /tmp/out/stocks.txt 2>/dev/null; } >> probe-result.txt
           {
             echo
-            echo "=== 计数与耗时 ==="
+            echo "=== 计数 ==="
             python - <<'PY'
           import json
           d = json.load(open("/tmp/stocks_data.json"))
+          m = d.get("market") or {}
           print("indices:", len(d.get("indices") or []))
-          print("market:", {k: (d.get("market") or {}).get(k) for k in
-                ("count","up","down","flat","limit_up","limit_down","turnover","avg_ratio")})
+          print("market:", {k: m.get(k) for k in
+                ("count","total","up","down","flat","no_price","limit_up","limit_down","turnover","avg_ratio")})
           print("hk rows:", len((d.get("hk") or {}).get("rows") or []))
+          print("index_timestamp:", d.get("index_timestamp"), " data_timestamp:", d.get("data_timestamp"))
           print("errors:", d.get("errors"))
           idx = d.get("indices") or []
-          print("前 15 个指数:", [(r.get("thscode"), r.get("name"), r.get("last_price")) for r in idx[:15]])
-          print("板块样例:", [(r.get("thscode"), r.get("name"), r.get("price_change_ratio_pct")) for r in idx if str(r.get("thscode","")).endswith(".TI")][:8])
+          print("宽基:", [(r.get("thscode"), r.get("name"), r.get("last_price")) for r in idx if not r.get("is_sector")])
+          print("板块数:", len([r for r in idx if r.get("is_sector")]))
+          print("板块前 6:", [(r.get("thscode"), r.get("name"), r.get("price_change_ratio_pct")) for r in idx if r.get("is_sector")][:6])
           PY
+            ls -l /tmp/out
           } >> probe-result.txt 2>&1
-          ls -la /tmp/out >> probe-result.txt 2>&1
       - name: 写回
         if: always()
         run: |
           git config user.name probe; git config user.email probe@example.com
           git add -f probe-result.txt
-          git commit -q -m "probe: 端到端实跑（临时）"
-          git push -q origin "HEAD:refs/heads/${GITHUB_REF_NAME}"
+          git commit -q -m "probe: 目录核对 + 端到端（临时）" || echo "无变化"
+          git push -q origin "HEAD:refs/heads/${GITHUB_REF_NAME}" || echo "push 失败"
