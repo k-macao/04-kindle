@@ -1,729 +1,926 @@
 {
-  "generated": "2026-11-18T01:04:51Z",
+  "generated": "2026-11-18T02:19:55Z",
   "doc": "stocks.txt",
   "epub": "stocks.epub",
   "title": "同花顺行情面板",
-  "data_timestamp": 1794963883000,
-  "data_time": "2026-11-18T01:04:43Z",
+  "data_timestamp": 1794967201000,
+  "data_time": "2026-11-18T02:00:01Z",
   "data_time_kind": "exact",
-  "data_hash": "ef9874535d88aad5",
+  "data_hash": "f22bcee272371363",
   "demo": false,
   "counts": {
     "indices": 7,
     "stocks": 43,
-    "limit_up": 0
+    "limit_up": 20
   },
   "indices": [
     {
       "thscode": "000001.SH",
       "ticker": "1A0001",
       "name": "上证指数",
-      "last_price": 3584.56,
-      "price_change": -0.02,
-      "price_change_ratio_pct": -0.00055795,
-      "open_price": 0.0,
-      "high_price": 0.0,
-      "low_price": 0.0,
+      "last_price": 3585.18,
+      "price_change": 0.6,
+      "price_change_ratio_pct": 0.016738,
+      "open_price": 3596.55,
+      "high_price": 3596.55,
+      "low_price": 3576.32,
       "prev_price": 3584.58,
-      "volume": 0.0,
-      "turnover": 0.0
+      "volume": 12623463600.0,
+      "turnover": 189679700000.0
     },
     {
       "thscode": "399001.SZ",
       "ticker": "399001",
       "name": "深证成指",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
+      "last_price": 10625.0464,
+      "price_change": -13.4778,
+      "price_change_ratio_pct": -0.126689,
+      "open_price": 10678.295,
+      "high_price": 10678.295,
+      "low_price": 10595.1446,
       "prev_price": 10638.5242,
-      "volume": 0.0,
-      "turnover": 0.0
+      "volume": 15825086000.0,
+      "turnover": 215789160000.0
     },
     {
       "thscode": "399006.SZ",
       "ticker": "399006",
       "name": "创业板指",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
+      "last_price": 2292.0769,
+      "price_change": -0.1268,
+      "price_change_ratio_pct": -0.00553179,
+      "open_price": 2306.1181,
+      "high_price": 2306.1181,
+      "low_price": 2282.5217,
       "prev_price": 2292.2037,
-      "volume": 0.0,
-      "turnover": 0.0
+      "volume": 4532401900.0,
+      "turnover": 99948225000.0
     },
     {
       "thscode": "000300.SH",
       "ticker": "1B0300",
       "name": "沪深300",
-      "last_price": 3976.46,
-      "price_change": 0.0,
-      "price_change_ratio_pct": 0.0,
-      "open_price": 0.0,
-      "high_price": 0.0,
-      "low_price": 0.0,
+      "last_price": 3971.1,
+      "price_change": -5.36,
+      "price_change_ratio_pct": -0.134793,
+      "open_price": 3991.16,
+      "high_price": 3991.16,
+      "low_price": 3964.86,
       "prev_price": 3976.46,
-      "volume": 0.0,
-      "turnover": 0.0
+      "volume": 4387911600.0,
+      "turnover": 107581073000.0
     },
     {
       "thscode": "000688.SH",
       "ticker": "1B0688",
       "name": "科创50",
-      "last_price": 1221.19,
-      "price_change": 0.0,
-      "price_change_ratio_pct": 0.0,
-      "open_price": 0.0,
-      "high_price": 0.0,
-      "low_price": 0.0,
+      "last_price": 1240.17,
+      "price_change": 18.98,
+      "price_change_ratio_pct": 1.554222,
+      "open_price": 1238.62,
+      "high_price": 1250.36,
+      "low_price": 1213.76,
       "prev_price": 1221.19,
-      "volume": 0.0,
-      "turnover": 0.0
+      "volume": 257287800.0,
+      "turnover": 27077880000.0
     },
     {
       "thscode": "000905.SH",
       "ticker": "1B0905",
       "name": "中证500",
-      "last_price": 6282.99,
-      "price_change": -0.02,
-      "price_change_ratio_pct": -0.00031832,
-      "open_price": 0.0,
-      "high_price": 0.0,
-      "low_price": 0.0,
+      "last_price": 6270.63,
+      "price_change": -12.38,
+      "price_change_ratio_pct": -0.197039,
+      "open_price": 6301.35,
+      "high_price": 6304.22,
+      "low_price": 6242.06,
       "prev_price": 6283.01,
-      "volume": 0.0,
-      "turnover": 0.0
+      "volume": 3059043100.0,
+      "turnover": 65406629000.0
     },
     {
       "thscode": "000852.SH",
       "ticker": "1B0852",
       "name": "中证1000",
-      "last_price": 6092.34,
-      "price_change": -0.05,
-      "price_change_ratio_pct": -0.0008207,
-      "open_price": 0.0,
-      "high_price": 0.0,
-      "low_price": 0.0,
+      "last_price": 6081.96,
+      "price_change": -10.43,
+      "price_change_ratio_pct": -0.171197,
+      "open_price": 6124.1,
+      "high_price": 6128.58,
+      "low_price": 6047.25,
       "prev_price": 6092.39,
-      "volume": 0.0,
-      "turnover": 0.0
+      "volume": 4778574900.0,
+      "turnover": 75054744000.0
     }
   ],
   "stocks": [
     {
-      "thscode": "601398.SH",
-      "ticker": "601398",
-      "name": "工商银行",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
-      "prev_price": 9.06,
-      "volume": 0.0,
-      "turnover": 0.0
-    },
-    {
-      "thscode": "601939.SH",
-      "ticker": "601939",
-      "name": "建设银行",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
-      "prev_price": 12.3,
-      "volume": 0.0,
-      "turnover": 0.0
-    },
-    {
-      "thscode": "601288.SH",
-      "ticker": "601288",
-      "name": "农业银行",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
-      "prev_price": 7.61,
-      "volume": 0.0,
-      "turnover": 0.0
-    },
-    {
-      "thscode": "601988.SH",
-      "ticker": "601988",
-      "name": "中国银行",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
-      "prev_price": 7.37,
-      "volume": 0.0,
-      "turnover": 0.0
-    },
-    {
-      "thscode": "600036.SH",
-      "ticker": "600036",
-      "name": "招商银行",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
-      "prev_price": 43.45,
-      "volume": 0.0,
-      "turnover": 0.0
-    },
-    {
-      "thscode": "601328.SH",
-      "ticker": "601328",
-      "name": "交通银行",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
-      "prev_price": 8.73,
-      "volume": 0.0,
-      "turnover": 0.0
-    },
-    {
-      "thscode": "601318.SH",
-      "ticker": "601318",
-      "name": "中国平安",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
-      "prev_price": 54.65,
-      "volume": 0.0,
-      "turnover": 0.0
-    },
-    {
-      "thscode": "600030.SH",
-      "ticker": "600030",
-      "name": "中信证券",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
-      "prev_price": 25.19,
-      "volume": 0.0,
-      "turnover": 0.0
-    },
-    {
-      "thscode": "601688.SH",
-      "ticker": "601688",
-      "name": "华泰证券",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
-      "prev_price": 17.23,
-      "volume": 0.0,
-      "turnover": 0.0
-    },
-    {
-      "thscode": "600941.SH",
-      "ticker": "600941",
-      "name": "中国移动",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
-      "prev_price": 105.2,
-      "volume": 0.0,
-      "turnover": 0.0
-    },
-    {
-      "thscode": "601728.SH",
-      "ticker": "601728",
-      "name": "中国电信",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
-      "prev_price": 6.98,
-      "volume": 0.0,
-      "turnover": 0.0
-    },
-    {
-      "thscode": "600050.SH",
-      "ticker": "600050",
-      "name": "中国联通",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
-      "prev_price": 4.42,
-      "volume": 0.0,
-      "turnover": 0.0
-    },
-    {
-      "thscode": "600519.SH",
-      "ticker": "600519",
-      "name": "贵州茅台",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
-      "prev_price": 1457.7,
-      "volume": 0.0,
-      "turnover": 0.0
-    },
-    {
-      "thscode": "000858.SZ",
-      "ticker": "000858",
-      "name": "五粮液",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
-      "prev_price": 73.98,
-      "volume": 0.0,
-      "turnover": 0.0
-    },
-    {
-      "thscode": "600887.SH",
-      "ticker": "600887",
-      "name": "伊利股份",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
-      "prev_price": 32.41,
-      "volume": 0.0,
-      "turnover": 0.0
-    },
-    {
-      "thscode": "603288.SH",
-      "ticker": "603288",
-      "name": "海天味业",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
-      "prev_price": 36.2,
-      "volume": 0.0,
-      "turnover": 0.0
-    },
-    {
-      "thscode": "000333.SZ",
-      "ticker": "000333",
-      "name": "美的集团",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
-      "prev_price": 93.33,
-      "volume": 0.0,
-      "turnover": 0.0
-    },
-    {
-      "thscode": "000651.SZ",
-      "ticker": "000651",
-      "name": "格力电器",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
-      "prev_price": 40.66,
-      "volume": 0.0,
-      "turnover": 0.0
-    },
-    {
-      "thscode": "600690.SH",
-      "ticker": "600690",
-      "name": "海尔智家",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
-      "prev_price": 22.3,
-      "volume": 0.0,
-      "turnover": 0.0
-    },
-    {
-      "thscode": "600276.SH",
-      "ticker": "600276",
-      "name": "恒瑞医药",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
-      "prev_price": 47.66,
-      "volume": 0.0,
-      "turnover": 0.0
-    },
-    {
-      "thscode": "603259.SH",
-      "ticker": "603259",
-      "name": "药明康德",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
-      "prev_price": 146.07,
-      "volume": 0.0,
-      "turnover": 0.0
-    },
-    {
-      "thscode": "300760.SZ",
-      "ticker": "300760",
-      "name": "迈瑞医疗",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
-      "prev_price": 185.38,
-      "volume": 0.0,
-      "turnover": 0.0
-    },
-    {
-      "thscode": "300142.SZ",
-      "ticker": "300142",
-      "name": "沃森生物",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
-      "prev_price": 10.38,
-      "volume": 0.0,
-      "turnover": 0.0
-    },
-    {
-      "thscode": "300750.SZ",
-      "ticker": "300750",
-      "name": "宁德时代",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
-      "prev_price": 238.5,
-      "volume": 0.0,
-      "turnover": 0.0
-    },
-    {
-      "thscode": "002594.SZ",
-      "ticker": "002594",
-      "name": "比亚迪",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
-      "prev_price": 80.35,
-      "volume": 0.0,
-      "turnover": 0.0
-    },
-    {
-      "thscode": "601012.SH",
-      "ticker": "601012",
-      "name": "隆基绿能",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
-      "prev_price": 11.26,
-      "volume": 0.0,
-      "turnover": 0.0
-    },
-    {
-      "thscode": "300274.SZ",
-      "ticker": "300274",
-      "name": "阳光电源",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
-      "prev_price": 73.95,
-      "volume": 0.0,
-      "turnover": 0.0
-    },
-    {
-      "thscode": "688981.SH",
-      "ticker": "688981",
-      "name": "中芯国际",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
-      "prev_price": 113.45,
-      "volume": 0.0,
-      "turnover": 0.0
-    },
-    {
       "thscode": "688256.SH",
       "ticker": "688256",
       "name": "寒武纪",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
+      "last_price": 959.0,
+      "price_change": 54.2,
+      "price_change_ratio_pct": 5.990274,
+      "open_price": 922.89,
+      "high_price": 972.0,
+      "low_price": 906.0,
       "prev_price": 904.8,
-      "volume": 0.0,
-      "turnover": 0.0
-    },
-    {
-      "thscode": "603986.SH",
-      "ticker": "603986",
-      "name": "兆易创新",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
-      "prev_price": 214.56,
-      "volume": 0.0,
-      "turnover": 0.0
-    },
-    {
-      "thscode": "688008.SH",
-      "ticker": "688008",
-      "name": "澜起科技",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
-      "prev_price": 130.6,
-      "volume": 0.0,
-      "turnover": 0.0
-    },
-    {
-      "thscode": "300308.SZ",
-      "ticker": "300308",
-      "name": "中际旭创",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
-      "prev_price": 393.0,
-      "volume": 0.0,
-      "turnover": 0.0
-    },
-    {
-      "thscode": "300502.SZ",
-      "ticker": "300502",
-      "name": "新易盛",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
-      "prev_price": 160.0,
-      "volume": 0.0,
-      "turnover": 0.0
+      "volume": 4184507.0,
+      "turnover": 3916807100.0
     },
     {
       "thscode": "002463.SZ",
       "ticker": "002463",
       "name": "沪电股份",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
+      "last_price": 76.68,
+      "price_change": 3.78,
+      "price_change_ratio_pct": 5.185185,
+      "open_price": 76.3,
+      "high_price": 77.5,
+      "low_price": 75.94,
       "prev_price": 72.9,
-      "volume": 0.0,
-      "turnover": 0.0
+      "volume": 33040018.0,
+      "turnover": 2534107100.0
     },
     {
-      "thscode": "002475.SZ",
-      "ticker": "002475",
-      "name": "立讯精密",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
-      "prev_price": 47.6,
-      "volume": 0.0,
-      "turnover": 0.0
+      "thscode": "688008.SH",
+      "ticker": "688008",
+      "name": "澜起科技",
+      "last_price": 133.17,
+      "price_change": 2.57,
+      "price_change_ratio_pct": 1.967841,
+      "open_price": 134.0,
+      "high_price": 134.77,
+      "low_price": 131.52,
+      "prev_price": 130.6,
+      "volume": 8789883.0,
+      "turnover": 1171894780.0
     },
     {
-      "thscode": "002415.SZ",
-      "ticker": "002415",
-      "name": "海康威视",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
-      "prev_price": 35.28,
-      "volume": 0.0,
-      "turnover": 0.0
+      "thscode": "600690.SH",
+      "ticker": "600690",
+      "name": "海尔智家",
+      "last_price": 22.65,
+      "price_change": 0.35,
+      "price_change_ratio_pct": 1.569507,
+      "open_price": 22.47,
+      "high_price": 22.8,
+      "low_price": 22.18,
+      "prev_price": 22.3,
+      "volume": 27094033.0,
+      "turnover": 612160670.0
     },
     {
-      "thscode": "601088.SH",
-      "ticker": "601088",
-      "name": "中国神华",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
-      "prev_price": 50.57,
-      "volume": 0.0,
-      "turnover": 0.0
+      "thscode": "300142.SZ",
+      "ticker": "300142",
+      "name": "沃森生物",
+      "last_price": 10.53,
+      "price_change": 0.15,
+      "price_change_ratio_pct": 1.445087,
+      "open_price": 10.46,
+      "high_price": 10.68,
+      "low_price": 10.45,
+      "prev_price": 10.38,
+      "volume": 11389591.0,
+      "turnover": 120413485.0
     },
     {
-      "thscode": "601857.SH",
-      "ticker": "601857",
-      "name": "中国石油",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
-      "prev_price": 12.4,
-      "volume": 0.0,
-      "turnover": 0.0
-    },
-    {
-      "thscode": "600028.SH",
-      "ticker": "600028",
-      "name": "中国石化",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
-      "prev_price": 5.89,
-      "volume": 0.0,
-      "turnover": 0.0
+      "thscode": "600050.SH",
+      "ticker": "600050",
+      "name": "中国联通",
+      "last_price": 4.48,
+      "price_change": 0.06,
+      "price_change_ratio_pct": 1.357466,
+      "open_price": 4.46,
+      "high_price": 4.5,
+      "low_price": 4.43,
+      "prev_price": 4.42,
+      "volume": 77708100.0,
+      "turnover": 347245530.0
     },
     {
       "thscode": "600150.SH",
       "ticker": "600150",
       "name": "中国船舶",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
+      "last_price": 34.31,
+      "price_change": 0.33,
+      "price_change_ratio_pct": 0.97116,
+      "open_price": 34.05,
+      "high_price": 34.58,
+      "low_price": 33.69,
       "prev_price": 33.98,
-      "volume": 0.0,
-      "turnover": 0.0
+      "volume": 23770574.0,
+      "turnover": 813989530.0
     },
     {
-      "thscode": "600031.SH",
-      "ticker": "600031",
-      "name": "三一重工",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
-      "prev_price": 18.6,
-      "volume": 0.0,
-      "turnover": 0.0
+      "thscode": "600941.SH",
+      "ticker": "600941",
+      "name": "中国移动",
+      "last_price": 106.18,
+      "price_change": 0.98,
+      "price_change_ratio_pct": 0.931559,
+      "open_price": 105.68,
+      "high_price": 106.66,
+      "low_price": 104.21,
+      "prev_price": 105.2,
+      "volume": 4331607.0,
+      "turnover": 458795880.0
+    },
+    {
+      "thscode": "603986.SH",
+      "ticker": "603986",
+      "name": "兆易创新",
+      "last_price": 216.36,
+      "price_change": 1.8,
+      "price_change_ratio_pct": 0.838926,
+      "open_price": 217.0,
+      "high_price": 218.0,
+      "low_price": 214.43,
+      "prev_price": 214.56,
+      "volume": 6508834.0,
+      "turnover": 1408219800.0
+    },
+    {
+      "thscode": "688981.SH",
+      "ticker": "688981",
+      "name": "中芯国际",
+      "last_price": 114.37,
+      "price_change": 0.92,
+      "price_change_ratio_pct": 0.81093,
+      "open_price": 115.9,
+      "high_price": 115.92,
+      "low_price": 112.12,
+      "prev_price": 113.45,
+      "volume": 14228398.0,
+      "turnover": 1619196900.0
+    },
+    {
+      "thscode": "601857.SH",
+      "ticker": "601857",
+      "name": "中国石油",
+      "last_price": 12.5,
+      "price_change": 0.1,
+      "price_change_ratio_pct": 0.806452,
+      "open_price": 12.38,
+      "high_price": 12.62,
+      "low_price": 12.34,
+      "prev_price": 12.4,
+      "volume": 41293299.0,
+      "turnover": 516446300.0
+    },
+    {
+      "thscode": "000651.SZ",
+      "ticker": "000651",
+      "name": "格力电器",
+      "last_price": 40.92,
+      "price_change": 0.26,
+      "price_change_ratio_pct": 0.639449,
+      "open_price": 40.6,
+      "high_price": 41.16,
+      "low_price": 40.52,
+      "prev_price": 40.66,
+      "volume": 15442260.0,
+      "turnover": 632546960.0
+    },
+    {
+      "thscode": "002475.SZ",
+      "ticker": "002475",
+      "name": "立讯精密",
+      "last_price": 47.84,
+      "price_change": 0.24,
+      "price_change_ratio_pct": 0.504202,
+      "open_price": 47.98,
+      "high_price": 48.55,
+      "low_price": 47.7,
+      "prev_price": 47.6,
+      "volume": 10919691.0,
+      "turnover": 524898760.0
+    },
+    {
+      "thscode": "002415.SZ",
+      "ticker": "002415",
+      "name": "海康威视",
+      "last_price": 35.44,
+      "price_change": 0.16,
+      "price_change_ratio_pct": 0.453515,
+      "open_price": 35.28,
+      "high_price": 35.59,
+      "low_price": 35.12,
+      "prev_price": 35.28,
+      "volume": 8517828.0,
+      "turnover": 301929050.0
+    },
+    {
+      "thscode": "601939.SH",
+      "ticker": "601939",
+      "name": "建设银行",
+      "last_price": 12.35,
+      "price_change": 0.05,
+      "price_change_ratio_pct": 0.406504,
+      "open_price": 12.27,
+      "high_price": 12.38,
+      "low_price": 12.21,
+      "prev_price": 12.3,
+      "volume": 29073084.0,
+      "turnover": 357719970.0
+    },
+    {
+      "thscode": "601288.SH",
+      "ticker": "601288",
+      "name": "农业银行",
+      "last_price": 7.64,
+      "price_change": 0.03,
+      "price_change_ratio_pct": 0.394218,
+      "open_price": 7.6,
+      "high_price": 7.68,
+      "low_price": 7.55,
+      "prev_price": 7.61,
+      "volume": 97941828.0,
+      "turnover": 747506800.0
+    },
+    {
+      "thscode": "601088.SH",
+      "ticker": "601088",
+      "name": "中国神华",
+      "last_price": 50.71,
+      "price_change": 0.14,
+      "price_change_ratio_pct": 0.276844,
+      "open_price": 50.57,
+      "high_price": 50.91,
+      "low_price": 50.1,
+      "prev_price": 50.57,
+      "volume": 6879499.0,
+      "turnover": 348686750.0
+    },
+    {
+      "thscode": "300750.SZ",
+      "ticker": "300750",
+      "name": "宁德时代",
+      "last_price": 239.0,
+      "price_change": 0.5,
+      "price_change_ratio_pct": 0.209644,
+      "open_price": 238.24,
+      "high_price": 241.89,
+      "low_price": 237.28,
+      "prev_price": 238.5,
+      "volume": 6179332.0,
+      "turnover": 1481808500.0
+    },
+    {
+      "thscode": "600028.SH",
+      "ticker": "600028",
+      "name": "中国石化",
+      "last_price": 5.9,
+      "price_change": 0.01,
+      "price_change_ratio_pct": 0.169779,
+      "open_price": 5.89,
+      "high_price": 5.93,
+      "low_price": 5.86,
+      "prev_price": 5.89,
+      "volume": 50049400.0,
+      "turnover": 295783910.0
+    },
+    {
+      "thscode": "601728.SH",
+      "ticker": "601728",
+      "name": "中国电信",
+      "last_price": 6.99,
+      "price_change": 0.01,
+      "price_change_ratio_pct": 0.143266,
+      "open_price": 7.0,
+      "high_price": 7.04,
+      "low_price": 6.88,
+      "prev_price": 6.98,
+      "volume": 23755977.0,
+      "turnover": 165923970.0
+    },
+    {
+      "thscode": "000333.SZ",
+      "ticker": "000333",
+      "name": "美的集团",
+      "last_price": 93.41,
+      "price_change": 0.08,
+      "price_change_ratio_pct": 0.085717,
+      "open_price": 93.48,
+      "high_price": 94.37,
+      "low_price": 92.77,
+      "prev_price": 93.33,
+      "volume": 7502681.0,
+      "turnover": 704031690.0
+    },
+    {
+      "thscode": "601398.SH",
+      "ticker": "601398",
+      "name": "工商银行",
+      "last_price": 9.06,
+      "price_change": 0.0,
+      "price_change_ratio_pct": 0.0,
+      "open_price": 9.03,
+      "high_price": 9.09,
+      "low_price": 9.0,
+      "prev_price": 9.06,
+      "volume": 83899497.0,
+      "turnover": 759593120.0
+    },
+    {
+      "thscode": "601988.SH",
+      "ticker": "601988",
+      "name": "中国银行",
+      "last_price": 7.37,
+      "price_change": 0.0,
+      "price_change_ratio_pct": 0.0,
+      "open_price": 7.34,
+      "high_price": 7.39,
+      "low_price": 7.31,
+      "prev_price": 7.37,
+      "volume": 41207480.0,
+      "turnover": 303221520.0
+    },
+    {
+      "thscode": "300308.SZ",
+      "ticker": "300308",
+      "name": "中际旭创",
+      "last_price": 393.0,
+      "price_change": 0.0,
+      "price_change_ratio_pct": 0.0,
+      "open_price": 400.0,
+      "high_price": 402.06,
+      "low_price": 387.91,
+      "prev_price": 393.0,
+      "volume": 13853892.0,
+      "turnover": 5484043000.0
     },
     {
       "thscode": "601766.SH",
       "ticker": "601766",
       "name": "中国中车",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
+      "last_price": 6.73,
+      "price_change": 0.0,
+      "price_change_ratio_pct": 0.0,
+      "open_price": 6.77,
+      "high_price": 6.77,
+      "low_price": 6.69,
       "prev_price": 6.73,
-      "volume": 0.0,
-      "turnover": 0.0
+      "volume": 29064750.0,
+      "turnover": 195724860.0
     },
     {
       "thscode": "601668.SH",
       "ticker": "601668",
       "name": "中国建筑",
-      "last_price": null,
-      "price_change": null,
-      "price_change_ratio_pct": null,
-      "open_price": null,
-      "high_price": null,
-      "low_price": null,
+      "last_price": 4.7,
+      "price_change": 0.0,
+      "price_change_ratio_pct": 0.0,
+      "open_price": 4.7,
+      "high_price": 4.73,
+      "low_price": 4.69,
       "prev_price": 4.7,
-      "volume": 0.0,
-      "turnover": 0.0
+      "volume": 42533299.0,
+      "turnover": 200265240.0
+    },
+    {
+      "thscode": "600887.SH",
+      "ticker": "600887",
+      "name": "伊利股份",
+      "last_price": 32.4,
+      "price_change": -0.01,
+      "price_change_ratio_pct": -0.030855,
+      "open_price": 32.28,
+      "high_price": 32.59,
+      "low_price": 31.98,
+      "prev_price": 32.41,
+      "volume": 12561934.0,
+      "turnover": 406150520.0
+    },
+    {
+      "thscode": "002594.SZ",
+      "ticker": "002594",
+      "name": "比亚迪",
+      "last_price": 80.24,
+      "price_change": -0.11,
+      "price_change_ratio_pct": -0.136901,
+      "open_price": 80.3,
+      "high_price": 80.84,
+      "low_price": 80.02,
+      "prev_price": 80.35,
+      "volume": 4066476.0,
+      "turnover": 327321720.0
+    },
+    {
+      "thscode": "300274.SZ",
+      "ticker": "300274",
+      "name": "阳光电源",
+      "last_price": 73.82,
+      "price_change": -0.13,
+      "price_change_ratio_pct": -0.175794,
+      "open_price": 73.9,
+      "high_price": 74.38,
+      "low_price": 72.42,
+      "prev_price": 73.95,
+      "volume": 10554094.0,
+      "turnover": 771380210.0
+    },
+    {
+      "thscode": "000858.SZ",
+      "ticker": "000858",
+      "name": "五粮液",
+      "last_price": 73.77,
+      "price_change": -0.21,
+      "price_change_ratio_pct": -0.283861,
+      "open_price": 73.98,
+      "high_price": 74.36,
+      "low_price": 73.6,
+      "prev_price": 73.98,
+      "volume": 5345653.0,
+      "turnover": 395933400.0
+    },
+    {
+      "thscode": "601688.SH",
+      "ticker": "601688",
+      "name": "华泰证券",
+      "last_price": 17.18,
+      "price_change": -0.05,
+      "price_change_ratio_pct": -0.290192,
+      "open_price": 17.22,
+      "high_price": 17.31,
+      "low_price": 17.15,
+      "prev_price": 17.23,
+      "volume": 6704770.0,
+      "turnover": 115366839.0
+    },
+    {
+      "thscode": "601328.SH",
+      "ticker": "601328",
+      "name": "交通银行",
+      "last_price": 8.7,
+      "price_change": -0.03,
+      "price_change_ratio_pct": -0.343643,
+      "open_price": 8.69,
+      "high_price": 8.71,
+      "low_price": 8.62,
+      "prev_price": 8.73,
+      "volume": 39801281.0,
+      "turnover": 345553480.0
+    },
+    {
+      "thscode": "600036.SH",
+      "ticker": "600036",
+      "name": "招商银行",
+      "last_price": 43.29,
+      "price_change": -0.16,
+      "price_change_ratio_pct": -0.368239,
+      "open_price": 43.42,
+      "high_price": 43.43,
+      "low_price": 43.05,
+      "prev_price": 43.45,
+      "volume": 13241141.0,
+      "turnover": 573471950.0
+    },
+    {
+      "thscode": "601318.SH",
+      "ticker": "601318",
+      "name": "中国平安",
+      "last_price": 54.41,
+      "price_change": -0.24,
+      "price_change_ratio_pct": -0.439158,
+      "open_price": 54.68,
+      "high_price": 54.68,
+      "low_price": 54.2,
+      "prev_price": 54.65,
+      "volume": 8769846.0,
+      "turnover": 477793080.0
+    },
+    {
+      "thscode": "603288.SH",
+      "ticker": "603288",
+      "name": "海天味业",
+      "last_price": 36.03,
+      "price_change": -0.17,
+      "price_change_ratio_pct": -0.469613,
+      "open_price": 36.46,
+      "high_price": 36.46,
+      "low_price": 35.91,
+      "prev_price": 36.2,
+      "volume": 4024707.0,
+      "turnover": 145418400.0
+    },
+    {
+      "thscode": "600030.SH",
+      "ticker": "600030",
+      "name": "中信证券",
+      "last_price": 25.03,
+      "price_change": -0.16,
+      "price_change_ratio_pct": -0.635173,
+      "open_price": 25.2,
+      "high_price": 25.25,
+      "low_price": 25.02,
+      "prev_price": 25.19,
+      "volume": 12081994.0,
+      "turnover": 303270220.0
+    },
+    {
+      "thscode": "600519.SH",
+      "ticker": "600519",
+      "name": "贵州茅台",
+      "last_price": 1447.12,
+      "price_change": -10.58,
+      "price_change_ratio_pct": -0.725801,
+      "open_price": 1450.0,
+      "high_price": 1456.0,
+      "low_price": 1440.03,
+      "prev_price": 1457.7,
+      "volume": 611139.0,
+      "turnover": 885830250.0
+    },
+    {
+      "thscode": "300502.SZ",
+      "ticker": "300502",
+      "name": "新易盛",
+      "last_price": 158.77,
+      "price_change": -1.23,
+      "price_change_ratio_pct": -0.76875,
+      "open_price": 162.01,
+      "high_price": 163.23,
+      "low_price": 157.28,
+      "prev_price": 160.0,
+      "volume": 26307695.0,
+      "turnover": 4218362800.0
+    },
+    {
+      "thscode": "300760.SZ",
+      "ticker": "300760",
+      "name": "迈瑞医疗",
+      "last_price": 183.78,
+      "price_change": -1.6,
+      "price_change_ratio_pct": -0.863092,
+      "open_price": 183.5,
+      "high_price": 186.0,
+      "low_price": 183.02,
+      "prev_price": 185.38,
+      "volume": 1525596.0,
+      "turnover": 281409490.0
+    },
+    {
+      "thscode": "600031.SH",
+      "ticker": "600031",
+      "name": "三一重工",
+      "last_price": 18.32,
+      "price_change": -0.28,
+      "price_change_ratio_pct": -1.505376,
+      "open_price": 18.73,
+      "high_price": 18.73,
+      "low_price": 18.3,
+      "prev_price": 18.6,
+      "volume": 7621049.0,
+      "turnover": 140768520.0
+    },
+    {
+      "thscode": "601012.SH",
+      "ticker": "601012",
+      "name": "隆基绿能",
+      "last_price": 11.01,
+      "price_change": -0.25,
+      "price_change_ratio_pct": -2.220249,
+      "open_price": 11.3,
+      "high_price": 11.3,
+      "low_price": 10.95,
+      "prev_price": 11.26,
+      "volume": 25712596.0,
+      "turnover": 284338280.0
+    },
+    {
+      "thscode": "600276.SH",
+      "ticker": "600276",
+      "name": "恒瑞医药",
+      "last_price": 46.51,
+      "price_change": -1.15,
+      "price_change_ratio_pct": -2.412925,
+      "open_price": 47.6,
+      "high_price": 47.6,
+      "low_price": 46.5,
+      "prev_price": 47.66,
+      "volume": 13542289.0,
+      "turnover": 634573080.0
+    },
+    {
+      "thscode": "603259.SH",
+      "ticker": "603259",
+      "name": "药明康德",
+      "last_price": 141.66,
+      "price_change": -4.41,
+      "price_change_ratio_pct": -3.0191,
+      "open_price": 147.29,
+      "high_price": 147.29,
+      "low_price": 141.01,
+      "prev_price": 146.07,
+      "volume": 8903264.0,
+      "turnover": 1274069740.0
     }
   ],
-  "limit_up": [],
+  "limit_up": [
+    {
+      "thscode": "000988.SZ",
+      "name": "华工科技",
+      "last_price": 67.28,
+      "price_change_ratio_pct": 10.0065,
+      "limit_up_time": "09:58",
+      "limit_up_reason": "",
+      "continue_day_text": "首板",
+      "seal_money": 1775828700.0
+    },
+    {
+      "thscode": "600410.SH",
+      "name": "华胜天成",
+      "last_price": 16.82,
+      "price_change_ratio_pct": 10.0065,
+      "limit_up_time": "09:55",
+      "limit_up_reason": "",
+      "continue_day_text": "2连板",
+      "seal_money": 692219600.0
+    },
+    {
+      "thscode": "002005.SZ",
+      "name": "德豪润达",
+      "last_price": 2.32,
+      "price_change_ratio_pct": 9.9526,
+      "limit_up_time": "09:52",
+      "limit_up_reason": "",
+      "continue_day_text": "首板",
+      "seal_money": 82811472.0
+    },
+    {
+      "thscode": "000711.SZ",
+      "name": "京蓝科技",
+      "last_price": 3.48,
+      "price_change_ratio_pct": 10.1266,
+      "limit_up_time": "09:51",
+      "limit_up_reason": "",
+      "continue_day_text": "首板",
+      "seal_money": 154340780.0
+    },
+    {
+      "thscode": "000410.SZ",
+      "name": "沈阳机床",
+      "last_price": 5.71,
+      "price_change_ratio_pct": 10.0193,
+      "limit_up_time": "09:49",
+      "limit_up_reason": "",
+      "continue_day_text": "首板",
+      "seal_money": 239860820.0
+    },
+    {
+      "thscode": "002242.SZ",
+      "name": "九阳股份",
+      "last_price": 34.67,
+      "price_change_ratio_pct": 9.9937,
+      "limit_up_time": "09:49",
+      "limit_up_reason": "",
+      "continue_day_text": "2连板",
+      "seal_money": 378513190.0
+    },
+    {
+      "thscode": "600202.SH",
+      "name": "哈空调",
+      "last_price": 6.15,
+      "price_change_ratio_pct": 10.0179,
+      "limit_up_time": "09:48",
+      "limit_up_reason": "",
+      "continue_day_text": "2连板",
+      "seal_money": 125221319.0
+    },
+    {
+      "thscode": "000980.SZ",
+      "name": "众泰汽车",
+      "last_price": 1.67,
+      "price_change_ratio_pct": 9.8684,
+      "limit_up_time": "09:46",
+      "limit_up_reason": "",
+      "continue_day_text": "首板",
+      "seal_money": 211621070.0
+    },
+    {
+      "thscode": "000889.SZ",
+      "name": "中嘉博创",
+      "last_price": 3.38,
+      "price_change_ratio_pct": 10.0977,
+      "limit_up_time": "09:45",
+      "limit_up_reason": "",
+      "continue_day_text": "首板",
+      "seal_money": 277273300.0
+    },
+    {
+      "thscode": "300991.SZ",
+      "name": "创益通",
+      "last_price": 22.68,
+      "price_change_ratio_pct": 20.0,
+      "limit_up_time": "09:45",
+      "limit_up_reason": "",
+      "continue_day_text": "首板",
+      "seal_money": 261924520.0
+    },
+    {
+      "thscode": "600408.SH",
+      "name": "安泰集团",
+      "last_price": 3.84,
+      "price_change_ratio_pct": 10.0287,
+      "limit_up_time": "09:43",
+      "limit_up_reason": "焦炉煤气制氢+煤炭+大型H型钢",
+      "continue_day_text": "首板",
+      "seal_money": 388150120.0
+    },
+    {
+      "thscode": "000707.SZ",
+      "name": "双环科技",
+      "last_price": 5.05,
+      "price_change_ratio_pct": 10.0218,
+      "limit_up_time": "09:42",
+      "limit_up_reason": "氯化铵涨价+联碱+钠电池正极材料+湖北国资",
+      "continue_day_text": "2连板",
+      "seal_money": 80481850.0
+    },
+    {
+      "thscode": "002959.SZ",
+      "name": "小熊电器",
+      "last_price": 43.89,
+      "price_change_ratio_pct": 10.0,
+      "limit_up_time": "09:39",
+      "limit_up_reason": "",
+      "continue_day_text": "3连板",
+      "seal_money": 94652779.0
+    },
+    {
+      "thscode": "600839.SH",
+      "name": "四川长虹",
+      "last_price": 5.68,
+      "price_change_ratio_pct": 10.0775,
+      "limit_up_time": "09:35",
+      "limit_up_reason": "家电出口+AI家电+国企改革",
+      "continue_day_text": "首板",
+      "seal_money": 1126592160.0
+    },
+    {
+      "thscode": "601188.SH",
+      "name": "龙江交通",
+      "last_price": 5.21,
+      "price_change_ratio_pct": 9.9156,
+      "limit_up_time": "09:35",
+      "limit_up_reason": "冰雪旅游保障+高速公路运营+黑龙江国资",
+      "continue_day_text": "首板",
+      "seal_money": 245552870.0
+    },
+    {
+      "thscode": "000010.SZ",
+      "name": "*ST美丽",
+      "last_price": 0.95,
+      "price_change_ratio_pct": 10.4651,
+      "limit_up_time": "09:33",
+      "limit_up_reason": "增持计划+面值退市保壳+工程施工",
+      "continue_day_text": "首板",
+      "seal_money": 8518935.0
+    },
+    {
+      "thscode": "002095.SZ",
+      "name": "生 意 宝",
+      "last_price": 17.22,
+      "price_change_ratio_pct": 10.0319,
+      "limit_up_time": "09:33",
+      "limit_up_reason": "AI应用+大宗电商+商品数据",
+      "continue_day_text": "首板",
+      "seal_money": 96409562.0
+    },
+    {
+      "thscode": "002403.SZ",
+      "name": "爱仕达",
+      "last_price": 11.36,
+      "price_change_ratio_pct": 9.971,
+      "limit_up_time": "09:31",
+      "limit_up_reason": "人形机器人+智元合作+工业机器人",
+      "continue_day_text": "首板",
+      "seal_money": 223300110.0
+    },
+    {
+      "thscode": "002148.SZ",
+      "name": "北纬科技",
+      "last_price": 8.92,
+      "price_change_ratio_pct": 9.9877,
+      "limit_up_time": "09:30",
+      "limit_up_reason": "四足机器人+物联网+手机游戏",
+      "continue_day_text": "首板",
+      "seal_money": 368476990.0
+    },
+    {
+      "thscode": "002194.SZ",
+      "name": "武汉凡谷",
+      "last_price": 9.31,
+      "price_change_ratio_pct": 10.0473,
+      "limit_up_time": "09:30",
+      "limit_up_reason": "6G预研+滤波器+卫星通信",
+      "continue_day_text": "首板",
+      "seal_money": 462129850.0
+    }
+  ],
   "history": {
     "000001.SH": [
-      [
-        1792512000000,
-        3713.03
-      ],
       [
         1792598400000,
         3658.03
@@ -799,13 +996,13 @@
       [
         1794844800000,
         3584.58
+      ],
+      [
+        1794931200000,
+        3587.67
       ]
     ],
     "399001.SZ": [
-      [
-        1792512000000,
-        11704.354
-      ],
       [
         1792598400000,
         11357.32
@@ -881,13 +1078,13 @@
       [
         1794844800000,
         10638.524
+      ],
+      [
+        1794931200000,
+        10645.781
       ]
     ],
     "399006.SZ": [
-      [
-        1792512000000,
-        2694.713
-      ],
       [
         1792598400000,
         2576.901
@@ -963,13 +1160,13 @@
       [
         1794844800000,
         2292.204
+      ],
+      [
+        1794931200000,
+        2299.115
       ]
     ],
     "000300.SH": [
-      [
-        1792512000000,
-        4111.93
-      ],
       [
         1792598400000,
         4036.3
@@ -1045,13 +1242,13 @@
       [
         1794844800000,
         3976.46
+      ],
+      [
+        1794931200000,
+        3975.64
       ]
     ],
     "000688.SH": [
-      [
-        1792512000000,
-        1343.28
-      ],
       [
         1792598400000,
         1305.87
@@ -1127,13 +1324,13 @@
       [
         1794844800000,
         1221.19
+      ],
+      [
+        1794931200000,
+        1245.04
       ]
     ],
     "000905.SH": [
-      [
-        1792512000000,
-        6840.56
-      ],
       [
         1792598400000,
         6655.25
@@ -1209,13 +1406,13 @@
       [
         1794844800000,
         6283.01
+      ],
+      [
+        1794931200000,
+        6280.07
       ]
     ],
     "000852.SH": [
-      [
-        1792512000000,
-        6780.26
-      ],
       [
         1792598400000,
         6578.27
@@ -1291,13 +1488,13 @@
       [
         1794844800000,
         6092.39
+      ],
+      [
+        1794931200000,
+        6088.96
       ]
     ],
     "601398.SH": [
-      [
-        1792512000000,
-        8.45
-      ],
       [
         1792598400000,
         8.59
@@ -1373,13 +1570,13 @@
       [
         1794844800000,
         9.06
+      ],
+      [
+        1794931200000,
+        9.06
       ]
     ],
     "601939.SH": [
-      [
-        1792512000000,
-        11.49
-      ],
       [
         1792598400000,
         11.66
@@ -1455,13 +1652,13 @@
       [
         1794844800000,
         12.3
+      ],
+      [
+        1794931200000,
+        12.35
       ]
     ],
     "601288.SH": [
-      [
-        1792512000000,
-        7.29
-      ],
       [
         1792598400000,
         7.4
@@ -1537,13 +1734,13 @@
       [
         1794844800000,
         7.61
+      ],
+      [
+        1794931200000,
+        7.64
       ]
     ],
     "601988.SH": [
-      [
-        1792512000000,
-        7.24
-      ],
       [
         1792598400000,
         7.22
@@ -1619,13 +1816,13 @@
       [
         1794844800000,
         7.37
+      ],
+      [
+        1794931200000,
+        7.37
       ]
     ],
     "600036.SH": [
-      [
-        1792512000000,
-        42.28
-      ],
       [
         1792598400000,
         41.82
@@ -1701,13 +1898,13 @@
       [
         1794844800000,
         43.45
+      ],
+      [
+        1794931200000,
+        43.29
       ]
     ],
     "601328.SH": [
-      [
-        1792512000000,
-        8.25
-      ],
       [
         1792598400000,
         8.21
@@ -1783,13 +1980,13 @@
       [
         1794844800000,
         8.73
+      ],
+      [
+        1794931200000,
+        8.7
       ]
     ],
     "601318.SH": [
-      [
-        1792512000000,
-        51.2
-      ],
       [
         1792598400000,
         50.94
@@ -1865,13 +2062,13 @@
       [
         1794844800000,
         54.65
+      ],
+      [
+        1794931200000,
+        54.41
       ]
     ],
     "600030.SH": [
-      [
-        1792512000000,
-        25.01
-      ],
       [
         1792598400000,
         25.28
@@ -1947,13 +2144,13 @@
       [
         1794844800000,
         25.19
+      ],
+      [
+        1794931200000,
+        25.02
       ]
     ],
     "601688.SH": [
-      [
-        1792512000000,
-        16.990000000000002
-      ],
       [
         1792598400000,
         16.92
@@ -2029,13 +2226,13 @@
       [
         1794844800000,
         17.23
+      ],
+      [
+        1794931200000,
+        17.18
       ]
     ],
     "600941.SH": [
-      [
-        1792512000000,
-        96.59
-      ],
       [
         1792598400000,
         99.0
@@ -2111,13 +2308,13 @@
       [
         1794844800000,
         105.2
+      ],
+      [
+        1794931200000,
+        106.18
       ]
     ],
     "601728.SH": [
-      [
-        1792512000000,
-        6.62
-      ],
       [
         1792598400000,
         6.72
@@ -2193,13 +2390,13 @@
       [
         1794844800000,
         6.98
+      ],
+      [
+        1794931200000,
+        7.0
       ]
     ],
     "600050.SH": [
-      [
-        1792512000000,
-        4.31
-      ],
       [
         1792598400000,
         4.29
@@ -2275,13 +2472,13 @@
       [
         1794844800000,
         4.42
+      ],
+      [
+        1794931200000,
+        4.48
       ]
     ],
     "600519.SH": [
-      [
-        1792512000000,
-        1309.69
-      ],
       [
         1792598400000,
         1318.49
@@ -2357,13 +2554,13 @@
       [
         1794844800000,
         1457.7
+      ],
+      [
+        1794931200000,
+        1447.92
       ]
     ],
     "000858.SZ": [
-      [
-        1792512000000,
-        72.0
-      ],
       [
         1792598400000,
         71.73
@@ -2439,13 +2636,13 @@
       [
         1794844800000,
         73.98
+      ],
+      [
+        1794931200000,
+        73.78
       ]
     ],
     "600887.SH": [
-      [
-        1792512000000,
-        27.6
-      ],
       [
         1792598400000,
         27.8
@@ -2521,13 +2718,13 @@
       [
         1794844800000,
         32.41
+      ],
+      [
+        1794931200000,
+        32.38
       ]
     ],
     "603288.SH": [
-      [
-        1792512000000,
-        33.46
-      ],
       [
         1792598400000,
         33.47
@@ -2603,13 +2800,13 @@
       [
         1794844800000,
         36.2
+      ],
+      [
+        1794931200000,
+        35.99
       ]
     ],
     "000333.SZ": [
-      [
-        1792512000000,
-        83.86
-      ],
       [
         1792598400000,
         85.29
@@ -2685,13 +2882,13 @@
       [
         1794844800000,
         93.33
+      ],
+      [
+        1794931200000,
+        93.53
       ]
     ],
     "000651.SZ": [
-      [
-        1792512000000,
-        37.13
-      ],
       [
         1792598400000,
         37.43
@@ -2767,13 +2964,13 @@
       [
         1794844800000,
         40.66
+      ],
+      [
+        1794931200000,
+        40.91
       ]
     ],
     "600690.SH": [
-      [
-        1792512000000,
-        19.69
-      ],
       [
         1792598400000,
         19.6
@@ -2849,13 +3046,13 @@
       [
         1794844800000,
         22.3
+      ],
+      [
+        1794931200000,
+        22.64
       ]
     ],
     "600276.SH": [
-      [
-        1792512000000,
-        47.38
-      ],
       [
         1792598400000,
         46.0
@@ -2931,13 +3128,13 @@
       [
         1794844800000,
         47.66
+      ],
+      [
+        1794931200000,
+        46.41
       ]
     ],
     "603259.SH": [
-      [
-        1792512000000,
-        147.35
-      ],
       [
         1792598400000,
         141.31
@@ -3013,13 +3210,13 @@
       [
         1794844800000,
         146.07
+      ],
+      [
+        1794931200000,
+        141.33
       ]
     ],
     "300760.SZ": [
-      [
-        1792512000000,
-        168.78
-      ],
       [
         1792598400000,
         169.76
@@ -3095,13 +3292,13 @@
       [
         1794844800000,
         185.38
+      ],
+      [
+        1794931200000,
+        183.84
       ]
     ],
     "300142.SZ": [
-      [
-        1792512000000,
-        12.94
-      ],
       [
         1792598400000,
         12.46
@@ -3177,13 +3374,13 @@
       [
         1794844800000,
         10.38
+      ],
+      [
+        1794931200000,
+        10.55
       ]
     ],
     "300750.SZ": [
-      [
-        1792512000000,
-        227.9
-      ],
       [
         1792598400000,
         220.41
@@ -3259,13 +3456,13 @@
       [
         1794844800000,
         238.5
+      ],
+      [
+        1794931200000,
+        239.12
       ]
     ],
     "002594.SZ": [
-      [
-        1792512000000,
-        80.7
-      ],
       [
         1792598400000,
         80.02
@@ -3341,13 +3538,13 @@
       [
         1794844800000,
         80.35
+      ],
+      [
+        1794931200000,
+        80.33
       ]
     ],
     "601012.SH": [
-      [
-        1792512000000,
-        10.99
-      ],
       [
         1792598400000,
         11.16
@@ -3423,13 +3620,13 @@
       [
         1794844800000,
         11.26
+      ],
+      [
+        1794931200000,
+        11.01
       ]
     ],
     "300274.SZ": [
-      [
-        1792512000000,
-        72.3
-      ],
       [
         1792598400000,
         70.51
@@ -3505,13 +3702,13 @@
       [
         1794844800000,
         73.95
+      ],
+      [
+        1794931200000,
+        73.64
       ]
     ],
     "688981.SH": [
-      [
-        1792512000000,
-        100.24
-      ],
       [
         1792598400000,
         100.09
@@ -3587,13 +3784,13 @@
       [
         1794844800000,
         113.45
+      ],
+      [
+        1794931200000,
+        114.24
       ]
     ],
     "688256.SH": [
-      [
-        1792512000000,
-        916.42
-      ],
       [
         1792598400000,
         883.94
@@ -3669,13 +3866,13 @@
       [
         1794844800000,
         904.8
+      ],
+      [
+        1794931200000,
+        964.0
       ]
     ],
     "603986.SH": [
-      [
-        1792512000000,
-        288.02
-      ],
       [
         1792598400000,
         276.75
@@ -3751,13 +3948,13 @@
       [
         1794844800000,
         214.56
+      ],
+      [
+        1794931200000,
+        216.58
       ]
     ],
     "688008.SH": [
-      [
-        1792512000000,
-        178.14000000000001
-      ],
       [
         1792598400000,
         175.13000000000002
@@ -3833,13 +4030,13 @@
       [
         1794844800000,
         130.6
+      ],
+      [
+        1794931200000,
+        133.28
       ]
     ],
     "300308.SZ": [
-      [
-        1792512000000,
-        646.77
-      ],
       [
         1792598400000,
         590.11
@@ -3915,13 +4112,13 @@
       [
         1794844800000,
         393.0
+      ],
+      [
+        1794931200000,
+        393.47
       ]
     ],
     "300502.SZ": [
-      [
-        1792512000000,
-        294.12
-      ],
       [
         1792598400000,
         258.01
@@ -3997,13 +4194,13 @@
       [
         1794844800000,
         160.0
+      ],
+      [
+        1794931200000,
+        158.94
       ]
     ],
     "002463.SZ": [
-      [
-        1792512000000,
-        114.97
-      ],
       [
         1792598400000,
         106.96
@@ -4079,13 +4276,13 @@
       [
         1794844800000,
         72.9
+      ],
+      [
+        1794931200000,
+        76.49
       ]
     ],
     "002475.SZ": [
-      [
-        1792512000000,
-        47.9800769
-      ],
       [
         1792598400000,
         47.01
@@ -4161,13 +4358,13 @@
       [
         1794844800000,
         47.6
+      ],
+      [
+        1794931200000,
+        47.8
       ]
     ],
     "002415.SZ": [
-      [
-        1792512000000,
-        32.34
-      ],
       [
         1792598400000,
         32.42
@@ -4243,13 +4440,13 @@
       [
         1794844800000,
         35.28
+      ],
+      [
+        1794931200000,
+        35.41
       ]
     ],
     "601088.SH": [
-      [
-        1792512000000,
-        48.290000000000006
-      ],
       [
         1792598400000,
         48.96
@@ -4325,13 +4522,13 @@
       [
         1794844800000,
         50.57
+      ],
+      [
+        1794931200000,
+        50.82
       ]
     ],
     "601857.SH": [
-      [
-        1792512000000,
-        12.56
-      ],
       [
         1792598400000,
         12.7
@@ -4407,13 +4604,13 @@
       [
         1794844800000,
         12.4
+      ],
+      [
+        1794931200000,
+        12.52
       ]
     ],
     "600028.SH": [
-      [
-        1792512000000,
-        5.42
-      ],
       [
         1792598400000,
         5.36
@@ -4489,13 +4686,13 @@
       [
         1794844800000,
         5.89
+      ],
+      [
+        1794931200000,
+        5.91
       ]
     ],
     "600150.SH": [
-      [
-        1792512000000,
-        34.394999999999996
-      ],
       [
         1792598400000,
         34.065
@@ -4571,13 +4768,13 @@
       [
         1794844800000,
         33.98
+      ],
+      [
+        1794931200000,
+        34.39
       ]
     ],
     "600031.SH": [
-      [
-        1792512000000,
-        17.69
-      ],
       [
         1792598400000,
         17.82
@@ -4653,13 +4850,13 @@
       [
         1794844800000,
         18.6
+      ],
+      [
+        1794931200000,
+        18.31
       ]
     ],
     "601766.SH": [
-      [
-        1792512000000,
-        6.26
-      ],
       [
         1792598400000,
         6.33
@@ -4735,13 +4932,13 @@
       [
         1794844800000,
         6.73
+      ],
+      [
+        1794931200000,
+        6.73
       ]
     ],
     "601668.SH": [
-      [
-        1792512000000,
-        4.51
-      ],
       [
         1792598400000,
         4.5
@@ -4816,6 +5013,10 @@
       ],
       [
         1794844800000,
+        4.7
+      ],
+      [
+        1794931200000,
         4.7
       ]
     ]

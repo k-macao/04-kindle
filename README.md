@@ -143,9 +143,11 @@ Feedly / Reeder。插件那套「News subscription」读的是 `site/news.json`�
 涨停表）、`site/stocks.epub`（Kindle 字模式卡片版，表格排卡片 + 一行文字走势）、
 `site/stocks.txt`（纯文本回退版）。统一 API Key 放在仓库 Actions Secret
 **`THS_API_KEY`** / **`THS_KEY`**（官网 <https://fuyao.aicubes.cn/admin/> 创建），
-不写入仓库。GitHub Actions 定时最短 5 分钟，所以工作流在 A 股交易时段
-（北京时间 09:00–15:55）每 5 分钟抓一轮；Kindle 插件与网页面板每 7 分钟检查
-一次清单，`generated` 变了才刷新。本地要真正的 60 秒一轮：
+不写入仓库。GitHub Actions 的 cron 会延迟、负载高时直接丢弃（实测过 `*/5`
+6 小时一次都没跑），所以工作流在 A 股交易时段（北京时间 09:00–15:55）每 15 分钟
+抓一轮，另有一个每 10 分钟的体检任务在 `data_time` 落后时补跑；Kindle 插件与
+网页面板每 7 分钟检查一次清单，`generated` 变了才刷新。面板抬头会写「N 分钟前 /
+盘中 / STALE」，一眼能看出数字是不是最新的。本地要真正的 60 秒一轮：
 `HITHINK_FINANCE_API_KEY=… python tools/fetch_stocks.py --loop 60 --build`。
 自选清单在 `tools/stock_watchlist.py`，详见 [docs/kindle-stocks.md](docs/kindle-stocks.md)。
 
