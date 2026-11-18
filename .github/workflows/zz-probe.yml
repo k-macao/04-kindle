@@ -14,44 +14,46 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: 测指数目录规模与全A抓取耗时
-        env:
-          HITHINK_FINANCE_API_KEY: ${{ secrets.HITHINK_FINANCE_API_KEY }}
-          THS_API_KEY: ${{ secrets.THS_API_KEY }}
-          THS_KEY: ${{ secrets.THS_KEY }}
+      - name: 测港股免费数据源
         run: |
           python - <<'PY' 2>&1 | tee probe.txt
-          import json, os, time
-          from urllib.parse import urlencode
-          from urllib.request import Request, urlopen
-          KEY = next((os.environ[k] for k in ("HITHINK_FINANCE_API_KEY","THS_API_KEY","THS_KEY") if os.environ.get(k)), "")
-          BASE = "https://fuyao.aicubes.cn"
-          def hit(path, **params):
-              url = BASE + path + ("?" + urlencode(params) if params else "")
-              t0 = time.time()
+          import json, urllib.request, urllib.error
+
+          UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36"
+
+          def get(url, referer=None, enc="utf-8"):
+              req = urllib.request.Request(url, headers={
+                  "User-Agent": UA,
+                  **({"Referer": referer} if referer else {}),
+              })
               try:
-                  with urlopen(Request(url, headers={"X-api-key": KEY, "User-Agent": "probe"}), timeout=60) as r:
-                      b = json.loads(r.read().decode())
+                  with urllib.request.urlopen(req, timeout=25) as r:
+                      raw = r.read()
+                      return {"ok": True, "status": r.status, "len": len(raw),
+                              "head": raw[:400].decode(enc, "replace")}
+              except urllib.error.HTTPError as e:
+                  return {"ok": False, "http": e.code, "err": str(e)[:200]}
               except Exception as e:
-                  return {"_error": f"{type(e).__name__}: {e}"}
-              d = b.get("data") if isinstance(b.get("data"), dict) else {}
-              return {"code": b.get("code"), "n": len(d.get("item") or []), "total": d.get("total"),
-                      "secs": round(time.time()-t0, 1), "kb": round(len(json.dumps(b))/1024)}
-          print("index目录 cn_concept:", hit("/api/a-share-index/catalog/ths-index-list", tag="cn_concept"))
-          print("index目录 region    :", hit("/api/a-share-index/catalog/ths-index-list", tag="region"))
-          print("index目录 industry  :", hit("/api/a-share-index/catalog/ths-index-list", tag="industry"))
-          print("a-share-index 全表  :", hit("/api/meta/tickers/list", asset_type="a-share-index", limit=10000))
-          print("A股快照 5000 只     :", hit("/api/a-share/prices/snapshot", limit=5000))
-          print("A股快照 584 剩余    :", hit("/api/a-share/prices/snapshot", limit=1000, offset=5000))
-          print("指数快照 8 个       :", hit("/api/a-share-index/prices/snapshot",
-                thscodes="000001.SH,399001.SZ,399006.SZ,000300.SH,000688.SH,000905.SH,000852.SH,000016.SH"))
-          print("指数快照 50 个      :", hit("/api/a-share-index/prices/snapshot",
-                thscodes=",".join(f"{i:06d}.SH" for i in range(1, 51))))
+                  return {"ok": False, "err": f"{type(e).__name__}: {e}"[:200]}
+
+          tests = [
+              ("腾讯 港股指数", "https://qt.gtimg.cn/q=hkHSI,hkHSCEI,hkHSTECH"),
+              ("腾讯 港股个股", "https://qt.gtimg.cn/q=hk00700,hk09988"),
+              ("腾讯 A股指数", "https://qt.gtimg.cn/q=sh000001,sz399001"),
+              ("新浪 港股指数", "https://hq.sinajs.cn/list=int_hangseng,int_hscei", "https://finance.sina.com.cn"),
+              ("新浪 港股个股", "https://hq.sinajs.cn/list=hk00700", "https://finance.sina.com.cn"),
+              ("新浪 A股", "https://hq.sinajs.cn/list=sh000001", "https://finance.sina.com.cn"),
+          ]
+          for t in tests:
+              name, url = t[0], t[1]
+              ref = t[2] if len(t) > 2 else None
+              r = get(url, ref)
+              print(f"\n### {name}\n  url={url}\n  {json.dumps(r, ensure_ascii=False)[:500]}")
           PY
       - name: 写回
         if: always()
         run: |
           git config user.name probe; git config user.email probe@example.com
           cp probe.txt probe-result.txt; git add probe-result.txt
-          git commit -q -m "probe: 规模与耗时（临时）"
+          git commit -q -m "probe: 港股免费源（临时）"
           git push -q origin "HEAD:refs/heads/${GITHUB_REF_NAME}"
