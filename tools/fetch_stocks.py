@@ -367,40 +367,49 @@ def parse_codes(text):
 def fetch_index_rows(client, codes, chunk=40, log=None):
     """批量取指数/板块快照，**把坏代码隔离出来**。
 
-    实测：一批里只要有一个不存在的代码（如 ``932000.CSI``），整个批次就返回
-    ``code=1002`` 和 0 条——宽基指数曾因此全灭。所以分批取，某批失败就逐个单取，
-    把真正坏的代码挑出来，其余照常返回。
+    实测：一批里只要有一个不存在的代码（如 ``932000.CSI``），整批就返回 0 条且
+    ``code=0``（不是报错，是静默空）——宽基指数曾因此全灭。所以：批次返回的条数
+    少了，就逐个单取，把真正坏的代码挑出来，其余照常返回。
     """
     rows, bad, stamps = [], [], []
     codes = [c for c in dict.fromkeys(codes) if c]
+
+    def take(data):
+        got = (data or {}).get("item") or []
+        rows.extend(got)
+        if isinstance((data or {}).get("timestamp"), (int, float)):
+            stamps.append(data["timestamp"])
+        return {r.get("thscode") for r in got}
+
+    def probe(code):
+        """单取一个代码：成功入 rows，失败/空入 bad。"""
+        try:
+            got = take(client.get("/api/a-share-index/prices/snapshot",
+                                  {"thscodes": code}))
+        except ThsError:
+            bad.append(code)
+            return
+        if code not in got:
+            bad.append(code)
+
     for start in range(0, len(codes), chunk):
         batch = codes[start:start + chunk]
         try:
-            data = client.get("/api/a-share-index/prices/snapshot",
-                              {"thscodes": ",".join(batch)})
-            got = (data or {}).get("item") or []
-            rows.extend(got)
-            if isinstance((data or {}).get("timestamp"), (int, float)):
-                stamps.append(data["timestamp"])
-            missing = [c for c in batch if c not in {r.get("thscode") for r in got}]
-            if missing:
-                bad.extend(missing)
+            got = take(client.get("/api/a-share-index/prices/snapshot",
+                                  {"thscodes": ",".join(batch)}))
         except ThsError as exc:
             if log:
                 log(f"批次 {batch[0]}…{batch[-1]} 失败（{exc}），逐个重试")
             for code in batch:
-                try:
-                    data = client.get("/api/a-share-index/prices/snapshot",
-                                      {"thscodes": code})
-                    got = (data or {}).get("item") or []
-                    if got:
-                        rows.extend(got)
-                        if isinstance((data or {}).get("timestamp"), (int, float)):
-                            stamps.append(data["timestamp"])
-                    else:
-                        bad.append(code)
-                except ThsError:
-                    bad.append(code)
+                probe(code)
+            continue
+        missing = [c for c in batch if c not in got]
+        if missing:
+            if log:
+                log(f"批次里有 {len(missing)} 个代码没返回，逐个确认："
+                    + ", ".join(missing[:5]))
+            for code in missing:
+                probe(code)
     return rows, list(dict.fromkeys(bad)), (max(stamps) if stamps else None)
 
 

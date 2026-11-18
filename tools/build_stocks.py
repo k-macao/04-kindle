@@ -1075,19 +1075,44 @@ DEMO_PAYLOAD = {
          "price_change_ratio_pct": 0.56, "open_price": 2468.0,
          "high_price": 2485.0, "low_price": 2465.0, "prev_price": 2465.08,
          "volume": 23456789000.0, "turnover": 987650000000.0},
+        {"thscode": "881101.TI", "ticker": "881101", "name": "种植业与林业",
+         "last_price": 3732.1, "price_change": -56.6,
+         "price_change_ratio_pct": -1.49, "volume": 2345678900.0,
+         "turnover": 3456789000.0, "is_sector": True},
+        {"thscode": "881121.TI", "ticker": "881121", "name": "半导体",
+         "last_price": 4521.7, "price_change": 152.3,
+         "price_change_ratio_pct": 3.49, "volume": 8765432100.0,
+         "turnover": 234567890000.0, "is_sector": True},
     ],
-    "stocks": [
-        {"thscode": "600519.SH", "ticker": "600519", "name": "贵州茅台",
-         "last_price": 1277.8, "price_change": 21.8,
-         "price_change_ratio_pct": 1.735669, "open_price": 1252.08,
-         "high_price": 1282.0, "low_price": 1250.21, "prev_price": 1256.0,
-         "volume": 3098875.0, "turnover": 3937375200.0},
-        {"thscode": "000001.SZ", "ticker": "000001", "name": "平安银行",
-         "last_price": 11.23, "price_change": -0.12,
-         "price_change_ratio_pct": -1.057, "open_price": 11.35,
-         "high_price": 11.4, "low_price": 11.2, "prev_price": 11.35,
-         "volume": 45678900.0, "turnover": 512340000.0},
-    ],
+    "market": {
+        "count": 5584, "up": 2861, "down": 2413, "flat": 126, "no_price": 184,
+        "limit_up": 58, "limit_down": 3, "turnover": 1712345678900.0,
+        "volume": 123456789000.0, "avg_ratio": 0.32,
+        "top_gainers": [
+            {"thscode": "300750.SZ", "name": "宁德时代", "ratio": 10.02,
+             "last_price": 268.4},
+            {"thscode": "002594.SZ", "name": "比亚迪", "ratio": 9.98,
+             "last_price": 312.5}],
+        "top_losers": [
+            {"thscode": "600036.SH", "name": "招商银行", "ratio": -9.87,
+             "last_price": 32.1}],
+    },
+    "hk": {
+        "generated": "2026-11-17T07:00:00+00:00",
+        "data_timestamp": 1784275991000,
+        "rows": [
+            {"thscode": "hkHSI", "name": "恒生指数", "last_price": 23294.75,
+             "price_change": -214.6, "price_change_ratio_pct": -0.91,
+             "volume": 1234567890.0, "turnover": 87654321000.0, "is_index": True},
+            {"thscode": "hkHSTECH", "name": "恒生科技", "last_price": 5218.4,
+             "price_change": -61.2, "price_change_ratio_pct": -1.16,
+             "volume": 987654321.0, "turnover": 45678901234.0, "is_index": True},
+            {"thscode": "hk00700", "name": "腾讯控股", "last_price": 372.8,
+             "price_change": -3.2, "price_change_ratio_pct": -0.85,
+             "volume": 21345678.0, "turnover": 7890123456.0, "is_index": False},
+        ],
+        "errors": [],
+    },
     "limit_up": [
         {"thscode": "603986.SH", "ticker": "603986", "name": "兆易创新",
          "last_price": 118.23, "price_change_ratio_pct": 10.0008,
@@ -1095,8 +1120,6 @@ DEMO_PAYLOAD = {
          "continue_day_text": "2连板", "seal_money": 123456789.12},
     ],
     "history": {
-        "600519.SH": [[1784275991000 - (19 - i) * 86400000,
-                       1200.0 + i * 4.1] for i in range(20)],
         "000001.SH": [[1784275991000 - (19 - i) * 86400000,
                        3600.0 + i * 3.4] for i in range(20)],
     },
@@ -1123,7 +1146,9 @@ def build(data_path=None, out_dir="site", demo=False):
         if not data_path:
             raise ValueError("缺少 --data（或用 --demo 先看版式）")
         payload = json.loads(Path(data_path).read_text(encoding="utf-8"))
-    total = len(payload.get("indices") or []) + len(payload.get("stocks") or [])
+    total = (len(payload.get("indices") or [])
+             + len(payload.get("stocks") or [])
+             + len(((payload.get("hk") or {}).get("rows")) or []))
     if total == 0:
         raise ValueError("行情一条都没有，不生成空面板")
     # 开盘前/接口抽风时会给「空壳快照」（成交量全 0、大多没有最新价）。这种东西
@@ -1151,9 +1176,11 @@ def build(data_path=None, out_dir="site", demo=False):
     problems = check(out)
     if problems:
         raise ValueError("产物自检不过：" + "；".join(problems))
+    counts = data["counts"]
     print(f"已生成 {out}/stocks.json、stocks.txt、stocks.html、stocks.epub"
-          f"（指数 {data['counts']['indices']} / 股票 {data['counts']['stocks']}"
-          f" / 涨停 {data['counts']['limit_up']}，hash {data['data_hash']}）")
+          f"（指数 {counts['indices']} / 板块 {counts['sectors']}"
+          f" / 全市场 {counts['market']} / 港股 {counts['hk']}"
+          f" / 涨停 {counts['limit_up']}，hash {data['data_hash']}）")
     return data
 
 
