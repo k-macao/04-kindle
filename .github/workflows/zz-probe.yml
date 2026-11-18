@@ -1,4 +1,4 @@
-name: zz probe (temporary)  # 目录核对 v4
+name: zz probe (temporary)  # 目录导出 v5
 on:
   workflow_dispatch:
   push:
@@ -55,33 +55,39 @@ jobs:
 
           print(f"\n目录合计 {len(catalog)} 条")
 
-          print("\n=== 清单逐条核对（目录里的真实名称）===")
-          for label, pairs in (("宽基", mw.INDICES), ("板块", mw.SECTORS)):
-              print(f"\n--- {label}（{len(pairs)} 个）---")
-              miss, wrong = [], []
-              for code, name in pairs:
-                  real = catalog.get(code)
-                  if real is None:
-                      miss.append((code, name))
-                  elif real.strip() != name.strip():
-                      wrong.append((code, name, real))
-              print(f"目录里没有：{len(miss)} 个 {miss}")
-              print(f"名字不一致：{len(wrong)} 个")
-              for code, mine, real in wrong:
-                  print(f"    {code}: 清单写「{mine}」→ 目录是「{real}」")
+          # 导出全部 881 开头的行业指数（一级/二级行业），供重建清单
+          ind = {c: n for c, n in catalog.items() if c.startswith("881")}
+          print(f"\n=== 881*.TI 行业指数 {len(ind)} 个 ===")
+          for code in sorted(ind):
+              print(f'    ("{code}", "{ind[code]}"),')
 
-          print("\n=== 按行业名反查代码（清单里目录查不到的那些）===")
-          by_name = {}
-          for code, name in catalog.items():
-              by_name.setdefault(name.strip(), []).append(code)
-          for code, name in mw.INDICES + mw.SECTORS:
-              if code not in catalog:
-                  print(f"  {name}（清单 {code}）→ 同名候选 {by_name.get(name.strip(), [])}")
-                  for kw in (name[:2], name[:3]):
-                      hits = [(c, n) for c, n in catalog.items() if kw in n]
-                      if hits:
-                          print(f"      含「{kw}」：{hits[:6]}")
-                          break
+          print("\n=== 其他 TI 前缀分布 ===")
+          from collections import Counter
+          print(Counter(c.split(".")[0][:3] for c in catalog if c.endswith(".TI")))
+
+          print("\n=== 港股名称核对（腾讯给的 vs 清单）===")
+          hk = [c for c, _ in mw.HK_INDICES + mw.HK_STOCKS]
+          url = "https://qt.gtimg.cn/q=" + ",".join(hk)
+          raw = urlopen(Request(url, headers={"User-Agent": "Mozilla/5.0",
+                                              "Referer": "https://finance.qq.com/"}),
+                        timeout=30).read()
+          text = raw.decode("gbk", "replace")
+          real = {}
+          for line in text.split(";"):
+              line = line.strip()
+              if not line.startswith("v_"):
+                  continue
+              key = line.split("=")[0][2:]
+              f = line.split('="', 1)[-1].rstrip('"').split("~")
+              if len(f) > 3:
+                  real[key] = f[1]
+          mine = dict(mw.HK_INDICES + mw.HK_STOCKS)
+          for code in hk:
+              got, want = real.get(code), mine.get(code)
+              if got is None:
+                  print(f"    {code}: 腾讯无数据（清单写「{want}」）")
+              elif got.strip() != (want or "").strip():
+                  print(f"    {code}: 清单「{want}」→ 腾讯「{got}」")
           PY
 
           # ② 端到端：真抓一轮 → 排版 → 出 txt
