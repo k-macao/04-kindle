@@ -743,7 +743,10 @@ def _epub_escape(text):
 
 
 def render_epub_xhtml(payload, generated_bj):
-    """EPUB 章节 XHTML：指数表 + 自选股卡片表 + 涨停表（crengine 友好）。"""
+    """EPUB 章节 XHTML：市场概览 + 宽基 + 板块 + 港股 + 涨停（crengine 友好）。
+
+    只用表格和标题，不用 flex/grid/SVG —— Kindle 的 crengine 不支持。
+    """
     esc = _epub_escape
     demo = "【演示数据】" if payload.get("demo") else ""
     parts = [f"<h1>{esc(TITLE)}{esc(demo)}</h1>",
@@ -753,85 +756,104 @@ def render_epub_xhtml(payload, generated_bj):
         parts.append('<p class="meta">注：这一版快照没有成交数据（开盘前/接口给空壳），'
                      '下面显示 -- 与「未成交」，下一轮再看。</p>')
 
-    indices = payload.get("indices") or []
-    if indices:
-        parts.append(f"<h2>指数（{len(indices)}）</h2>")
+    market = payload.get("market") or {}
+    if market:
+        parts.append("<h2>市场概览 · 全 A</h2>")
+        parts.append('<table class="data">'
+                     "<tr><th>上涨</th><th>下跌</th><th>平盘</th><th>涨停</th>"
+                     "<th>跌停</th><th>平均涨跌</th><th>成交额</th></tr>"
+                     f"<tr><td>{market.get('up', 0)}</td><td>{market.get('down', 0)}</td>"
+                     f"<td>{market.get('flat', 0)}</td><td>{market.get('limit_up', 0)}</td>"
+                     f"<td>{market.get('limit_down', 0)}</td>"
+                     f"<td>{esc(fmt_ratio(market.get('avg_ratio')))}</td>"
+                     f"<td>{esc(fmt_turnover(market.get('turnover')))}</td></tr></table>")
+        parts.append(f'<p class="meta">共 {market.get("count", 0)} 只 · '
+                     f'无价 {market.get("no_price", 0)} · '
+                     f'成交量 {esc(fmt_volume(market.get("volume")))}</p>')
+        gainers = (market.get("top_gainers") or [])[:5]
+        losers = (market.get("top_losers") or [])[:5]
+        if gainers or losers:
+            parts.append('<table class="data"><tr><th>涨幅前列</th><th>涨跌幅</th>'
+                         "<th>跌幅前列</th><th>涨跌幅</th></tr>")
+            for i in range(max(len(gainers), len(losers))):
+                g = gainers[i] if i < len(gainers) else {}
+                d = losers[i] if i < len(losers) else {}
+                parts.append(
+                    "<tr>"
+                    f"<td>{esc(g.get('name') or g.get('thscode') or '')}</td>"
+                    f"<td>{esc(fmt_ratio(g.get('ratio')))}</td>"
+                    f"<td>{esc(d.get('name') or d.get('thscode') or '')}</td>"
+                    f"<td>{esc(fmt_ratio(d.get('ratio')))}</td></tr>")
+            parts.append("</table>")
+
+    def index_table(rows, title):
+        parts.append(f"<h2>{esc(title)}（{len(rows)}）</h2>")
         parts.append('<table class="data"><tr><th>名称</th><th>最新</th>'
-                     "<th>涨跌幅</th><th>涨跌</th><th>开盘</th><th>最高</th>"
-                     "<th>最低</th></tr>")
-        for row in indices:
+                     "<th>涨跌幅</th><th>涨跌</th><th>成交额</th></tr>")
+        for row in rows:
             if row_is_empty(row):
-                # 开盘前的空壳：整行写「未成交」，不要一排 0.00。
                 parts.append(f"<tr><td>{esc(row.get('name') or row.get('thscode'))}</td>"
-                             '<td colspan="6">未成交</td></tr>')
+                             '<td colspan="4">未成交</td></tr>')
                 continue
             parts.append(
                 f"<tr><td>{esc(row.get('name') or row.get('thscode'))}</td>"
                 f"<td>{esc(fmt_price(row.get('last_price')))}</td>"
                 f"<td>{esc(fmt_ratio(row.get('price_change_ratio_pct')))}</td>"
                 f"<td>{esc(fmt_change(row.get('price_change')))}</td>"
-                f"<td>{esc(fmt_pos(row.get('open_price')))}</td>"
-                f"<td>{esc(fmt_pos(row.get('high_price')))}</td>"
-                f"<td>{esc(fmt_pos(row.get('low_price')))}</td></tr>")
+                f"<td>{esc(fmt_turnover(row.get('turnover')))}</td></tr>")
         parts.append("</table>")
 
-    history = payload.get("history") or {}
-    stocks = payload.get("stocks") or []
-    if stocks:
-        parts.append(f"<h2>自选股（{len(stocks)}）· 按涨跌幅排序</h2>")
-        for row in stocks:
-            closes = [pair[1] for pair in history.get(row.get("thscode") or [], [])
-                      if len(pair) > 1 and isinstance(pair[1], (int, float))]
-            trend = ""
-            if len(closes) >= 2:
-                trend = (f"近{len(closes)}日收盘 {closes[0]:,.2f} → "
-                         f"{closes[-1]:,.2f}（区间 {min(closes):,.2f}–"
-                         f"{max(closes):,.2f}）")
-            head = (f"<tr><td><b>{esc(row.get('name') or row.get('thscode'))}</b> "
-                    f"{esc(row.get('thscode') or '')}</td>")
+    indices = payload.get("indices") or []
+    broad = [r for r in indices if not is_sector_row(r)]
+    sectors = sorted([r for r in indices if is_sector_row(r)],
+                     key=lambda r: -((r.get("price_change_ratio_pct") or -999)))
+    if broad:
+        index_table(broad, "指数")
+    if sectors:
+        up = sum(1 for r in sectors if (r.get("price_change_ratio_pct") or 0) > 0)
+        index_table(sectors, f"板块 · 涨 {up} 跌 {len(sectors) - up}")
+
+    hk = payload.get("hk") or {}
+    hk_rows = hk.get("rows") or []
+    if hk_rows:
+        stamp = hk.get("data_timestamp")
+        when = beijing_text(stamp) if isinstance(stamp, (int, float)) else "无"
+        parts.append(f"<h2>港股（{len(hk_rows)}）</h2>")
+        parts.append(f'<p class="meta">行情 {esc(when)} · 腾讯公开行情接口 · 币种 HKD</p>')
+        parts.append('<table class="data"><tr><th>名称</th><th>最新</th>'
+                     "<th>涨跌幅</th><th>成交额</th></tr>")
+        ordered = ([r for r in hk_rows if r.get("is_index")]
+                   + [r for r in hk_rows if not r.get("is_index")])
+        for row in ordered:
             if row_is_empty(row):
-                parts.append('<table class="card">' + head
-                             + '<td class="big">未成交</td>'
-                             '<td>开盘前或接口未返回，下一轮再看</td></tr>'
-                             + (f"<tr><td colspan=\"3\">{esc(trend)}</td></tr>" if trend else "")
-                             + "</table>")
+                parts.append(f"<tr><td>{esc(row.get('name') or row.get('thscode'))}</td>"
+                             '<td colspan="3">未成交</td></tr>')
                 continue
-            traded = isinstance(row.get("volume"), (int, float)) and row.get("volume") != 0
-            volume_cell = (f"<td>成交 {esc(fmt_volume(row.get('volume')))}</td>"
-                           f"<td>成交额 {esc(fmt_turnover(row.get('turnover')))}</td>"
-                           if traded else '<td colspan="2">未成交</td>')
             parts.append(
-                '<table class="card">' + head
-                + f'<td class="big">{esc(fmt_price(row.get("last_price")))}</td>'
-                f"<td>{esc(fmt_ratio(row.get('price_change_ratio_pct')))} "
-                f"{esc(fmt_change(row.get('price_change')))}</td></tr>"
-                f"<tr><td>开 {esc(fmt_pos(row.get('open_price')))} · "
-                f"高 {esc(fmt_pos(row.get('high_price')))} · "
-                f"低 {esc(fmt_pos(row.get('low_price')))}</td>"
-                + volume_cell
-                + "</tr>"
-                + (f"<tr><td colspan=\"3\">{esc(trend)}</td></tr>" if trend else "")
-                + "</table>")
+                f"<tr><td>{esc(row.get('name') or row.get('thscode'))}</td>"
+                f"<td>{esc(fmt_price(row.get('last_price')))}</td>"
+                f"<td>{esc(fmt_ratio(row.get('price_change_ratio_pct')))}</td>"
+                f"<td>{esc(fmt_turnover(row.get('turnover')))}</td></tr>")
+        parts.append("</table>")
 
     limit_up = payload.get("limit_up") or []
     if limit_up:
-        parts.append(f"<h2>涨停池（{len(limit_up)}）· 按封板时间</h2>")
-        parts.append('<table class="data"><tr><th>名称</th><th>最新</th>'
-                     "<th>涨跌幅</th><th>封板</th><th>原因</th><th>连板</th>"
-                     "<th>封单额</th></tr>")
+        parts.append(f"<h2>涨停池（{len(limit_up)}）</h2>")
+        parts.append('<table class="data"><tr><th>名称</th><th>最新</th><th>涨跌幅</th>'
+                     "<th>封板</th><th>原因</th><th>连板</th><th>封单额</th></tr>")
         for row in limit_up:
             parts.append(
                 f"<tr><td>{esc(row.get('name') or row.get('thscode'))}</td>"
                 f"<td>{esc(fmt_price(row.get('last_price')))}</td>"
                 f"<td>{esc(fmt_ratio(row.get('price_change_ratio_pct')))}</td>"
-                f"<td>{esc(row.get('limit_up_time'))}</td>"
-                f"<td>{esc(row.get('limit_up_reason'))}</td>"
-                f"<td>{esc(row.get('continue_day_text'))}</td>"
-                f"<td>{esc(fmt_turnover(row.get('seal_money')))}</td></tr>")
+                f"<td>{esc(row.get('limit_up_time') or '')}</td>"
+                f"<td>{esc(row.get('limit_up_reason') or '')}</td>"
+                f"<td>{esc(row.get('continue_day_text') or '')}</td>"
+                f"<td>{esc(fmt_seal(row.get('seal_money')))}</td></tr>")
         parts.append("</table>")
 
     for error in payload.get("errors") or []:
-        parts.append(f"<p>注：{esc(error)}</p>")
+        parts.append(f'<p class="meta">注：{esc(error)}</p>')
     parts.append(f"<p>{esc(DISCLAIMER)}</p>")
     body = "\n".join(parts)
     return ('<?xml version="1.0" encoding="utf-8"?>\n'
