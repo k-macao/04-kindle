@@ -1,4 +1,4 @@
-name: zz probe (temporary)  # 目录核对 v2
+name: zz probe (temporary)  # 目录核对 v3
 on:
   workflow_dispatch:
   push:
@@ -116,6 +116,15 @@ jobs:
         if: always()
         run: |
           git config user.name probe; git config user.email probe@example.com
-          git add -f probe-result.txt
-          git commit -q -m "probe: 目录核对 + 端到端（临时）" || echo "无变化"
-          git push -q origin "HEAD:refs/heads/${GITHUB_REF_NAME}" || echo "push 失败"
+          # 这期间若有别的提交（比如我本地又推了东西），rebase 后再推，别静默丢掉结果
+          for i in 1 2 3 4 5; do
+            git add -f probe-result.txt
+            git commit -q -m "probe: 目录核对 + 端到端（临时）" || true
+            git fetch -q origin || true
+            git rebase -q "origin/${GITHUB_REF_NAME}" || git rebase --abort || true
+            if git push -q origin "HEAD:refs/heads/${GITHUB_REF_NAME}"; then
+              echo "写回成功（第 $i 次）"; exit 0
+            fi
+            sleep 5
+          done
+          echo "push 一直失败"; exit 1
