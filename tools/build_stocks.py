@@ -319,6 +319,10 @@ def manifest(payload, generated):
 
 
 def render_txt(payload, generated):
+    """Kindle 纯文本版：一屏卡片式监视器（市场概览 → 指数 → 板块 → 港股）。
+
+    不再有「自选股」：面板看的是全市场（指数/板块/涨跌家数/量价）+ 港股。
+    """
     lines = [TITLE]
     demo = "【演示数据】" if payload.get("demo") else ""
     lines.append(f"生成 {generated} 北京时间 · {status_line(payload)}{demo}")
@@ -327,37 +331,69 @@ def render_txt(payload, generated):
         lines.append("注：这一版快照没有成交数据（开盘前/接口给空壳），下面显示 -- 与「未成交」")
     lines.append("")
 
-    indices = payload.get("indices") or []
-    lines.append(f"【指数】{len(indices)}")
-    for row in indices:
-        name = row.get("name") or row.get("thscode") or ""
-        if row_is_empty(row):
-            lines.append(f"{name} 未成交")
-            continue
-        lines.append(f"{name} {fmt_pos(row.get('last_price'))} "
-                     f"{fmt_ratio(row.get('price_change_ratio_pct'))} "
-                     f"{fmt_change(row.get('price_change'))}".rstrip())
-    lines.append("")
+    market = payload.get("market") or {}
+    if market:
+        lines.append("【市场概览】全 A")
+        lines.append(f"  上涨 {market.get('up', 0)} · 下跌 {market.get('down', 0)}"
+                     f" · 平盘 {market.get('flat', 0)} · 无价 {market.get('no_price', 0)}"
+                     f"（共 {market.get('count', 0)} 只）")
+        avg = market.get("avg_ratio")
+        lines.append(f"  涨停 {market.get('limit_up', 0)} · 跌停 {market.get('limit_down', 0)}"
+                     f" · 平均涨跌 {fmt_ratio(avg) if avg is not None else '--'}")
+        lines.append(f"  成交额 {fmt_turnover(market.get('turnover'))}"
+                     f" · 成交量 {fmt_volume(market.get('volume'))}")
+        gainers = market.get("top_gainers") or []
+        losers = market.get("top_losers") or []
+        if gainers:
+            lines.append("  涨幅前列 " + " ".join(
+                f"{g.get('name') or g.get('thscode')}{fmt_ratio(g.get('ratio'))}"
+                for g in gainers[:5]))
+        if losers:
+            lines.append("  跌幅前列 " + " ".join(
+                f"{g.get('name') or g.get('thscode')}{fmt_ratio(g.get('ratio'))}"
+                for g in losers[:5]))
+        lines.append("")
 
-    stocks = payload.get("stocks") or []
-    lines.append(f"【自选股】{len(stocks)} · 按涨跌幅排序")
-    for row in stocks:
-        name = row.get("name") or row.get("thscode") or ""
-        if row_is_empty(row):
-            lines.append(f"{name} 未成交（开盘前或接口未返回，下一轮再看）")
-            continue
-        lines.append(f"{name} {fmt_pos(row.get('last_price'))} "
-                     f"{fmt_ratio(row.get('price_change_ratio_pct'))} "
-                     f"{fmt_change(row.get('price_change'))}".rstrip())
-        # 成交量为 0 时别写「成交 0.00 手」：直接说「未成交」，免得看着像真成交了。
-        traded = isinstance(row.get("volume"), (int, float)) and row.get("volume") != 0
-        volume_text = (f"成交{fmt_volume(row.get('volume'))} "
-                       f"成交额{fmt_turnover(row.get('turnover'))}"
-                       if traded else "未成交")
-        lines.append(f"  开{fmt_pos(row.get('open_price'))} "
-                     f"高{fmt_pos(row.get('high_price'))} "
-                     f"低{fmt_pos(row.get('low_price'))} {volume_text}")
-    lines.append("")
+    indices = payload.get("indices") or []
+    broad = [r for r in indices if not is_sector_row(r)]
+    sectors = [r for r in indices if is_sector_row(r)]
+
+    if broad:
+        lines.append(f"【指数】{len(broad)}")
+        for row in broad:
+            lines.append(index_line(row))
+        lines.append("")
+
+    if sectors:
+        up = sum(1 for r in sectors if (r.get("price_change_ratio_pct") or 0) > 0)
+        lines.append(f"【板块】{len(sectors)} · 涨 {up} 跌 {len(sectors) - up}"
+                     f" · 按涨跌幅")
+        ordered = sorted(sectors,
+                         key=lambda r: -((r.get("price_change_ratio_pct") or -999)))
+        cells = [index_line(r, compact=True) for r in ordered]
+        width = max((_display_width(c) for c in cells), default=0)
+        col_w = max(26, min(width + 2, 38))
+        for i in range(0, len(cells), 2):
+            left = cells[i]
+            right = cells[i + 1] if i + 1 < len(cells) else ""
+            lines.append(_pad_display(left, col_w) + right)
+        lines.append("")
+
+    hk = payload.get("hk") or {}
+    hk_rows = hk.get("rows") or []
+    hk_index = [r for r in hk_rows if r.get("is_index")]
+    hk_stock = [r for r in hk_rows if not r.get("is_index")]
+    if hk_rows:
+        hk_stamp = hk.get("data_timestamp")
+        when = beijing_text(hk_stamp) if isinstance(hk_stamp, (int, float)) else "无"
+        lines.append(f"【港股】{len(hk_rows)} 个 · 行情 {when}（腾讯公开接口）")
+        for row in hk_index + hk_stock:
+            name = row.get("name") or row.get("thscode") or ""
+            lines.append(f"{name} {fmt_pos(row.get('last_price'))} "
+                         f"{fmt_ratio(row.get('price_change_ratio_pct'))} "
+                         f"{fmt_change(row.get('price_change'))} "
+                         f"额{fmt_turnover(row.get('turnover'))}".rstrip())
+        lines.append("")
 
     limit_up = payload.get("limit_up") or []
     if limit_up:
@@ -377,6 +413,40 @@ def render_txt(payload, generated):
         lines.append(f"注：{error}")
     lines.append(DISCLAIMER)
     return "\n".join(lines) + "\n"
+
+
+def is_sector_row(row):
+    """这一行算「板块」还是「宽基指数」：同花顺行业指数是 *·TI，另有少数 SH 板块。"""
+    if row.get("is_sector"):
+        return True
+    return str(row.get("thscode") or "").endswith(".TI")
+
+
+def _display_width(text):
+    """终端显示宽度：CJK 算 2 列，其余 1 列。"""
+    width = 0
+    for char in text or "":
+        width += 2 if ord(char) > 0x2E80 else 1
+    return width
+
+
+def _pad_display(text, width):
+    return text + " " * max(0, width - _display_width(text))
+
+
+def index_line(row, compact=False):
+    """一行指数：名字 + 最新 + 涨跌幅 +（涨跌额/成交额）。compact 用于分栏。"""
+    name = row.get("name") or row.get("thscode") or ""
+    if row_is_empty(row):
+        return f"{name} 未成交"
+    ratio = fmt_ratio(row.get("price_change_ratio_pct"))
+    if compact:
+        if _display_width(name) > 12:
+            name = name[:4] + "…"
+        return f"{name} {fmt_pos(row.get('last_price'))} {ratio}"
+    return (f"{name} {fmt_pos(row.get('last_price'))} {ratio} "
+            f"{fmt_change(row.get('price_change'))}"
+            f" · 额{fmt_turnover(row.get('turnover'))}").rstrip()
 
 
 HTML_TEMPLATE = """<!doctype html>
