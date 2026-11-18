@@ -1,4 +1,4 @@
-name: zz probe (temporary)  # 终验 v7
+name: zz probe (temporary)  # 终验 v8
 on:
   workflow_dispatch:
   push:
@@ -104,7 +104,23 @@ jobs:
           mkdir -p /tmp/out
           python tools/build_stocks.py --data /tmp/stocks_data.json --out /tmp/out >> probe-result.txt 2>&1 \
             || echo "排版失败 $?" >> probe-result.txt
-          { echo; echo "=== stocks.txt 前 70 行 ==="; head -70 /tmp/out/stocks.txt 2>/dev/null; } >> probe-result.txt
+          { echo; echo "=== stocks.txt 全文 ==="; cat /tmp/out/stocks.txt 2>/dev/null; } >> probe-result.txt
+          {
+            echo
+            echo "=== 自检：板块是否一个不丢 ==="
+            python - <<'PY'
+          import sys
+          sys.path.insert(0, "tools")
+          import market_watchlist as mw
+          txt = open("/tmp/out/stocks.txt", encoding="utf-8").read()
+          missing = [n for _, n in mw.SECTORS if n not in txt]
+          print("板块总数:", len(mw.SECTORS), "文本里缺失:", missing)
+          for name in ("贵金属", "影视院线", "游戏"):
+              print(f"  {name}:", "在" if name in txt else "缺")
+          idx = txt.split("【指数】")[1].split("\n\n")[0]
+          print("【指数】行数:", len([l for l in idx.splitlines()[1:] if l.strip()]))
+          PY
+          } >> probe-result.txt 2>&1
           {
             echo
             echo "=== 计数 ==="
