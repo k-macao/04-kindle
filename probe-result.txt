@@ -1,0 +1,37 @@
+key present: True len 41
+
+### A股快照 limit=1 (看 total=全市场只数)
+  {"code": 0, "msg": "success", "total": 5584, "n": 1, "sample": {"thscode": "000001.SZ", "ticker": "000001", "volume": 136249820, "turnover": 1660573100, "last_price": 12.2, "price_change": -0.05, "price_change_ratio_pct": -0.408163, "open_price": 12.24, "high_price": 12.31, "low_price": 12.03, "prev_price": 12.25}}
+
+### A股快照 limit=5000
+  {"code": 0, "msg": "success", "total": 5584, "n": 5000, "sample": {"thscode": "000001.SZ", "ticker": "000001", "volume": 136249820, "turnover": 1660573100, "last_price": 12.2, "price_change": -0.05, "price_change_ratio_pct": -0.408163, "open_price": 12.24, "high_price": 12.31, "low_price": 12.03, "prev_price": 12.25}}
+
+### 标的全表 a-share
+  {"code": 0, "msg": "success", "total": null, "n": 1, "sample": {"thscode": "600000.SH", "ticker": "600000", "name": "浦发银行", "exchange": "SH", "asset_type": "a-share", "currency": "CNY", "list_date": "1999-11-10", "end_date": null, "last_trade_date": null, "last_delivery_date": null}}
+
+### 标的全表 a-share-index
+  {"code": 0, "msg": "success", "total": null, "n": 1, "sample": {"thscode": "883970.TI", "ticker": "883970", "name": "高毅持股(财报汇总)", "exchange": null, "asset_type": "a-share-index", "currency": "CNY", "list_date": "2018-09-27", "end_date": null, "last_trade_date": null, "last_delivery_date": null}}
+
+### 指数快照 沪指
+  {"code": 0, "msg": "success", "total": 1, "n": 1, "sample": {"thscode": "000001.SH", "ticker": "1A0001", "volume": 42393483000, "turnover": 650231690000, "last_price": 3587.83, "price_change": 3.25, "price_change_ratio_pct": 0.090666, "open_price": 3596.55, "high_price": 3596.55, "low_price": 3560.45, "prev_price": 3584.58}}
+
+### 指数快照 恒生HSI.HK
+  {"code": 1002, "msg": "Invalid parameter format: thscodes", "total": null, "n": null, "sample": null}
+
+### 指数快照 恒生 HSI
+  {"code": 1002, "msg": "Invalid parameter format: thscodes", "total": null, "n": null, "sample": null}
+
+### 指数快照 恒生 800000.HK
+  {"code": 1002, "msg": "Invalid parameter format: thscodes", "total": null, "n": null, "sample": null}
+
+### A股快照 港股代码 00700.HK
+  {"code": 1002, "msg": "Invalid parameter format: thscodes", "total": null, "n": null, "sample": null}
+
+### 港股IPO日历
+  {"code": 1001, "msg": "Missing required parameter: status", "total": null, "n": null, "sample": null}
+
+### 指数目录 industry
+  {"code": 0, "msg": "success", "total": null, "n": 320, "sample": {"thscode": "881101.TI", "name": "种植业与林业"}}
+
+### 指数目录 tszs
+  {"code": 0, "msg": "success", "total": null, "n": 105, "sample": {"thscode": "883902.TI", "name": "昨日成交前十"}}
