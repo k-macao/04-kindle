@@ -1,4 +1,4 @@
-name: zz probe (temporary)  # 目录核对 v3
+name: zz probe (temporary)  # 目录核对 v4
 on:
   workflow_dispatch:
   push:
@@ -40,7 +40,7 @@ jobs:
           catalog = {}
           for tag in ("industry", "cn_concept", "region", "tszs"):
               try:
-                  d = hit("/api/index/catalog/ths-index-list", tag=tag)
+                  d = hit("/api/a-share-index/catalog/ths-index-list", tag=tag)
               except Exception as exc:
                   print(f"目录 tag={tag} 失败：{exc}")
                   continue
