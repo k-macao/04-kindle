@@ -137,9 +137,11 @@ Feedly / Reeder。插件那套「News subscription」读的是 `site/news.json`�
 ## 同花顺行情面板（hithink-finance）
 
 从同花顺官方 GitHub 仓库 [Hithink-Tech-Org/Financial-API](https://github.com/Hithink-Tech-Org/Financial-API)
-的金融数据服务抓 A 股行情快照（宽基指数 + 约 40 只自选股 + 当日涨停池），排成
-`site/stocks.json`（清单+数据）、`site/stocks.txt`（Kindle 纯文本面板）、
-`site/stocks.html`（网页面板）。统一 API Key 放在仓库 Actions Secret
+的金融数据服务抓 A 股行情（宽基指数 + 约 40 只自选股 + 当日涨停池，附近 20 日
+收盘价），排成**表格 + 图形 + 卡片**式界面四份产物：`site/stocks.json`（清单+数据）、
+`site/stocks.html`（浏览器卡片仪表盘：指数小卡 / 自选股大卡带 SVG 迷你走势图 /
+涨停表）、`site/stocks.epub`（Kindle 字模式卡片版，表格排卡片 + 一行文字走势）、
+`site/stocks.txt`（纯文本回退版）。统一 API Key 放在仓库 Actions Secret
 **`THS_API_KEY`** / **`THS_KEY`**（官网 <https://fuyao.aicubes.cn/admin/> 创建），
 不写入仓库。GitHub Actions 定时最短 5 分钟，所以工作流在 A 股交易时段
 （北京时间 09:00–15:55）每 5 分钟抓一轮；Kindle 插件与网页面板每 60 秒检查

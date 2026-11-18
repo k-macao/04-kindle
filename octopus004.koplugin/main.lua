@@ -39,6 +39,9 @@ local DOC_PREFIX = "octopus004-report-"
 -- 每日新闻是第二本书：同一个下载/校验/翻页/清理流程，换一套设置键与前缀，
 -- 两份文档互不覆盖（各自的 sig 变了才重下，各自的旧文件各自清）。
 local NEWS_PREFIX = "octopus004-news-"
+-- 卡片版 EPUB 的前缀必须和纯文本缓存（octopus004-stocks.txt）区分开：
+-- pruneDocs 是按前缀删旧文件的，共用前缀会把文本回退版一起删掉。
+local STOCKS_PREFIX = "octopus004-stocks-card-"
 local DOC_KINDS = {
     doc  = { manifest = "doc_url",  sig = "doc_sig",  seq = "doc_seq",  file = "doc_file",
              file_name = "doc_file_name", opened_at = "doc_opened_at", prefix = DOC_PREFIX,
@@ -48,10 +51,18 @@ local DOC_KINDS = {
              file_name = "news_file_name", opened_at = "news_opened_at", prefix = NEWS_PREFIX,
              data_time = "news_data_time", data_time_kind = "news_data_time_kind",
              label = "NEWS" },
+    -- 行情面板的 EPUB 卡片版与新闻/报告共用「下载书 → 交给阅读器」的流程；
+    -- 清单里没有 epub 字段时回退到纯文本 stocks.txt（见 refreshStocks）。
+    stocks = { manifest = "stocks_url", sig = "stocks_epub_sig", seq = "stocks_epub_seq",
+               file = "stocks_epub_file", file_name = "stocks_epub_file_name",
+               opened_at = "stocks_epub_opened_at", prefix = STOCKS_PREFIX,
+               data_time = "stocks_data_time", data_time_kind = "stocks_data_time_kind",
+               label = "STOCKS" },
 }
--- 同花顺行情面板是第三种来源：清单 site/stocks.json（generated 做签名）+ 纯文本
--- site/stocks.txt。不是 EPUB，所以不走 refreshDoc 的 PK 校验；每 60 秒只拉几百
--- 字节的清单，generated 变了才重下文本。缓存文件与报告文本分开，互不覆盖。
+-- 同花顺行情面板是第三种来源：清单 site/stocks.json（generated 做签名）+ 卡片版
+-- site/stocks.epub（有就交给阅读器，见 refreshStocksEpub）+ 纯文本回退版
+-- site/stocks.txt。每 60 秒只拉一次清单，generated 变了才重下正文；
+-- 文本缓存与报告/新闻的缓存文件分开，互不覆盖。
 local STOCKS_CACHE = "octopus004-stocks.txt"
 local INTERVAL = 60
 local WIFI_WAIT = 90
@@ -139,6 +150,11 @@ function Report:isNewsMode() return self.settings.display == "news" end
 function Report:isStocksMode() return self.settings.display == "stocks" end
 -- 两种 EPUB 来源共用同一套「下载书 → 交给阅读器」的流程。
 function Report:isBookMode() return self:isDocMode() or self:isNewsMode() end
+-- 阅读器里是不是有一本我们要刷新的书：报告/新闻的 EPUB，或行情卡片版。
+function Report:usesReader()
+    if self:isBookMode() then return true end
+    return self:isStocksMode() and self.settings.stocks_epub_file_name ~= nil
+end
 function Report:docKind() return self:isNewsMode() and "news" or "doc" end
 function Report:docSpec() return DOC_KINDS[self:docKind()] end
 
@@ -214,6 +230,14 @@ function Report:start()
     elseif self:isImageMode() then
         if not self.dashboard and self:hasPage(self.page_index) then self:showPage(false) end
     elseif self:isStocksMode() then
+        -- 已经有卡片版就直接交给阅读器，不必等这一轮联网。
+        local spec = DOC_KINDS.stocks
+        local current = self.settings[spec.file]
+        if current and lfs.attributes(current, "mode") == "file"
+                and not self:docIsOpen(spec) and self.settings.stocks_epub_file_name then
+            self:openDoc(spec, current)
+            return
+        end
         local cached = self:readStocksCache()
         if cached and not self.dashboard then self:showText(cached, false) end
     else
@@ -476,6 +500,41 @@ function Report:fetchStocksManifest()
     return decoded
 end
 
+-- 行情面板 EPUB 卡片版：与 refreshDoc 同形（新文件名从头打开、旧文件清理），
+-- 只是清单地址用 stocks_url。失败时抛错，由 refreshStocks 回退纯文本。
+function Report:refreshStocksEpub(manifest, sig)
+    local spec = DOC_KINDS.stocks
+    local current = self.settings[spec.file]
+    local have = current and lfs.attributes(current, "mode") == "file"
+    if sig == tostring(self.settings[spec.sig] or "") and have then
+        self:save()
+        self:turnDocPage(spec)
+        return
+    end
+    local url = resolveURL(manifest.base or self.settings.stocks_url, manifest.epub)
+    if not url:match("^https://") then error("Document URL is not HTTPS") end
+    local body, download_error = self:httpGetAny(self:urlCandidates(url), DOC_MAX)
+    if not body then error(download_error) end
+    if #body < 512 or body:sub(1, 2) ~= "PK" then error("Downloaded file is not an EPUB") end
+    local seq = (tonumber(self.settings[spec.seq]) or 0) + 1
+    local name = string.format("%s%d.epub", spec.prefix, seq)
+    local target = self:docPath(spec, name)
+    local temp = target .. ".tmp"
+    local f = io.open(temp, "wb")
+    if not f then error("Cannot write document cache") end
+    local wrote = f:write(body)
+    local closed = f:close()
+    if not wrote or not closed or not os.rename(temp, target) then
+        os.remove(temp); error("Cannot save document")
+    end
+    self.settings[spec.seq] = seq
+    self.settings[spec.file_name] = name
+    self.settings[spec.sig] = sig
+    self:pruneDocs(name, spec.prefix)
+    self:save()
+    self:openDoc(spec, target)
+end
+
 function Report:refreshStocks()
     local manifest, err = self:fetchStocksManifest()
     if not manifest then error(err) end
@@ -485,6 +544,12 @@ function Report:refreshStocks()
         self.settings.stocks_data_time_kind = manifest.data_time_kind
     end
     self.last_check = os.time()
+    -- 清单里有 epub 就打开卡片版（交给阅读器排版）；没有或下载失败才回退纯文本。
+    if type(manifest.epub) == "string" and manifest.epub ~= "" then
+        local ok, epub_error = pcall(function() self:refreshStocksEpub(manifest, sig) end)
+        if ok then return end
+        logger.warn("stocks epub failed, falling back to text: " .. tostring(epub_error))
+    end
     local cached = self:readStocksCache()
     if sig == tostring(self.settings.stocks_sig or "") and cached then
         self:save()
@@ -566,7 +631,7 @@ function Report:refresh(interactive)
             if self.dashboard then UIManager:setDirty(self.dashboard, "full") end
         end
         self.wake:kindle_hold(false)
-        if error_message and (interactive or self:isImageMode() or self:isBookMode()) then
+        if error_message and (interactive or self:isImageMode() or self:usesReader()) then
             if interactive or self.last_notified_error ~= error_message then
                 self:note("004: " .. error_message)
                 self.last_notified_error = error_message
@@ -578,7 +643,7 @@ function Report:refresh(interactive)
         self.next_due = os.time() + INTERVAL
         self.wake:schedule(INTERVAL, self.refresh_task, self.wake:mode(true))
         -- Keep Wi-Fi on: reconnecting every minute is slow and may miss cycles.
-        if self.wake:mode(true) == "rtc" and not interactive and not self:isBookMode() then
+        if self.wake:mode(true) == "rtc" and not interactive and not self:usesReader() then
             self.wake:sleep_now()
         end
     end
@@ -837,6 +902,10 @@ function Report:status()
             page = page .. string.format("\n  tried %d URLs, ok: %s", #self.last_attempts,
                 tostring((self.last_via or "-"):gsub("^https://", "")))
         end
+    elseif self:isStocksMode() and self.settings.stocks_file_name then
+        local stocks_spec = DOC_KINDS.stocks
+        page = "\nSTOCKS: " .. tostring(self.settings.stocks_file_name)
+            .. (self:docIsOpen(stocks_spec) and " (open)" or " (closed)")
     elseif self:isImageMode() then
         page = "\nPage " .. tostring(self.page_index or 0) .. "/" .. tostring(self.page_count or 0)
         local pw, ph
@@ -861,7 +930,7 @@ local URL_KINDS = {
               title = "004 EPUB manifest HTTPS URL" },
     news  = { key = "news_url",  clear = "news_sig",
               title = "004 daily news manifest HTTPS URL" },
-    stocks = { key = "stocks_url", clear = "stocks_sig",
+    stocks = { key = "stocks_url", clear = "stocks_epub_sig",
               title = "THS stocks manifest HTTPS URL" },
 }
 
@@ -905,8 +974,11 @@ function Report:setDisplay(mode)
     if self:isBookMode() then
         self:refresh(true)
     elseif self:isStocksMode() then
-        local cached = self:readStocksCache()
-        if cached then self:showText(cached, false) end
+        -- 有 EPUB 卡片版就交给阅读器排版，纯文本缓存只在回退时用。
+        if not self.settings.stocks_epub_file_name then
+            local cached = self:readStocksCache()
+            if cached then self:showText(cached, false) end
+        end
     elseif not self:isImageMode() then
         local cached = self:readCache()
         if cached then self:showText(cached, false) end

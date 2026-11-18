@@ -1,17 +1,30 @@
 # 同花顺行情面板（hithink-finance）
 
 从同花顺官方 GitHub 仓库 [Hithink-Tech-Org/Financial-API](https://github.com/Hithink-Tech-Org/Financial-API)
-的金融数据服务（hithink-finance）抓 A 股行情快照，排成三份产物：
+的金融数据服务（hithink-finance）抓 A 股行情，排成四份产物：
 
 | 产物 | 给谁看 | 刷新方式 |
 | --- | --- | --- |
 | `site/stocks.json` | 清单 + 数据（Kindle 插件与网页面板都读它） | 工作流每 5 分钟重写 |
-| `site/stocks.txt` | Kindle 纯文本面板 | 清单 `generated` 变了才重下 |
-| `site/stocks.html` | 浏览器数据面板 | 每 60 秒拉一次 `stocks.json` |
+| `site/stocks.html` | 浏览器卡片仪表盘 | 每 60 秒拉一次 `stocks.json` |
+| `site/stocks.epub` | Kindle 字模式卡片版（交给阅读器排版） | 清单 `generated` 变了才重下 |
+| `site/stocks.txt` | Kindle 纯文本面板（EPUB 不可用时的回退） | 同上 |
+
+面板是**表格 + 图形 + 卡片**三层：
+
+- **指数卡**（小卡）：最新点位、涨跌幅、近 20 日迷你走势图；
+- **自选股卡**（大卡）：最新价、涨跌额/涨跌幅、开/高/低、成交量、成交额，
+  底部一条 SVG 迷你走势图（近 20 个交易日收盘连成的折线）；
+- **涨停表格**：名称、最新、涨跌幅、封板时间、原因、连板数、封单额。
 
 面板内容：宽基指数（上证/深证/创业板/沪深300/科创50/中证500/中证1000）+ 自选股
 （默认约 40 只行业龙头，按涨跌幅排序）+ 当日涨停池（前 20，按封板时间）。
-每只股票显示最新价、涨跌幅、涨跌额、开/高/低、成交量、成交额。
+
+迷你走势图的数据来自历史 K 线接口（`/api/a-share/prices/historical-batch` 与
+`/api/a-share-index/prices/historical-batch`，参数 `interval=1d`、`adjust=forward`，
+每批 ≤10 个代码），只取最近 20 个交易日收盘价，存进清单的 `history` 字段
+（`{thscode: [[毫秒时间, 收盘], ...]}`）。要改天数用 `fetch_stocks.py --history-days N`
+（`0` = 不取历史，面板上就没有迷你图）。
 
 ## 0. 先说清楚「一分钟」
 
@@ -46,13 +59,13 @@ export THS_API_KEY=…   # 或 THS_KEY=… / HITHINK_FINANCE_API_KEY=…
 
 接口约定（见官方仓库 `docs/api/README.md`）：Base URL `https://fuyao.aicubes.cn`，
 认证头 `X-api-key: <API_KEY>`，成功判断是 HTTP 200 **且**信封 `code == 0`。
-这里只用三个接口：A 股快照、指数快照、涨停池；中文名用标的检索补，
-补过的缓存在 `site/stocks_names.json`。
+这里只用五个接口：A 股快照、指数快照、涨停池、A 股历史 K 线、指数历史 K 线；
+中文名用标的检索补，补过的缓存在 `site/stocks_names.json`。
 
 ## 2. 手动跑一轮（验证）
 
 ```sh
-python tools/fetch_stocks.py --out stocks_data.json   # 抓取 → 中间产物（不进 Git）
+python tools/fetch_stocks.py --out stocks_data.json   # 抓取（含近 20 日 K 线）→ 中间产物（不进 Git）
 python tools/build_stocks.py --data stocks_data.json --out site
 python -m unittest discover -s tests                  # 含 tests/test_stocks.py
 ```
@@ -85,9 +98,18 @@ HTTPS 地址（和 EPUB/新闻一样，支持多地址与镜像自动切换）�
 https://raw.githubusercontent.com/k-macao/04-kindle/main/site/stocks.json
 ```
 
-每 60 秒只拉一次几百字节的清单：没更新就翻页，`generated` 变了才重下
-`stocks.txt` 并从头显示。状态菜单（Status）会显示行情的 `data_time`，
-超过 24 小时没更新会标 `stale`。
+每 60 秒只拉一次清单：没更新就翻一页，`generated` 变了才重下 `stocks.epub`
+（文件名带序号，所以阅读器每次从头打开），交给 KOReader 阅读器排版显示
+——字体、行距、页边距都跟着你设备上现有的阅读设置走。
+
+EPUB 卡片版长这样：每只股票一张表格卡片（名称/代码、大字最新价、涨跌幅、
+开高低、成交/成交额），下面一行文字走势「近20日收盘 1,200.00→1,276.00
+（区间 1,200.00–1,276.00）」。crengine 不认 flex/grid/SVG，所以 Kindle 上
+迷你图改成这行文字，真正的折线图只在网页版/浏览器里有。
+
+清单里没有 `epub` 字段、或者 EPUB 下载失败（非 HTTPS / 不是 zip）时，
+自动回退到纯文本 `stocks.txt`，不会白屏。状态菜单（Status）会显示行情的
+`data_time`（超过 24 小时没更新标 `stale`）和当前打开的 STOCKS 文件名。
 
 ## 5. 排错
 
@@ -97,6 +119,9 @@ https://raw.githubusercontent.com/k-macao/04-kindle/main/site/stocks.json
   `code=4001` = 限流，脚本会自动退避重试 3 次。
 - **面板是演示数据**：说明真实抓取还没跑成功过——`site/stocks.json` 里
   `"demo": true` 就是演示版，工作流跑通一轮会自动覆盖。
+- **Kindle 上看到的是纯文本而不是卡片**：说明 EPUB 那条路没走通（清单里没有
+  `epub`、地址不是 HTTPS、下载到的不是 zip）。插件会写一条
+  `stocks epub failed, falling back to text` 到 `crash.log`，照着那条日志查。
 - **Kindle 显示 OFFLINE / CACHED**：清单地址不通，用菜单里的
   `Check URLs (network)` 逐个试，换一条能通的地址（raw / Pages / jsDelivr）。
 - **收盘后数据不变**：正常。快照时间停在收盘那一刻，`data_hash` 相同

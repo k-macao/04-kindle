@@ -1,8 +1,9 @@
 name: Refresh THS stock panel
 
 # 同花顺金融数据服务（hithink-finance，官方 GitHub 仓库 Hithink-Tech-Org/Financial-API）
-# 的 A 股行情快照 → site/stocks.json（清单+数据）/ stocks.txt（Kindle 纯文本面板）/
-# stocks.html（网页面板，每 60 秒拉一次 stocks.json）。
+# 的 A 股行情（快照 + 近 20 日 K 线）→ site/stocks.json（清单+数据）/
+# stocks.html（浏览器卡片仪表盘）/ stocks.epub（Kindle 字模式卡片版）/
+# stocks.txt（纯文本回退版）。
 #
 # 频率说明：GitHub Actions 的 cron 最短 5 分钟，做不到真正的 1 分钟一轮。
 # 这里在 A 股交易时段（北京时间 09:00–15:55，周一到周五）每 5 分钟抓一轮；
@@ -52,17 +53,18 @@ jobs:
 
       # 抓取只负责取回并归一化 → stocks_data.json（不进 Git）；
       # 排版是下一步 build_stocks 的事，改模板不用重抓。
+      # --history-days 20：迷你走势图要的近 20 个交易日收盘价（0 = 不取）。
       - name: 从同花顺抓一轮行情快照
         env:
           HITHINK_FINANCE_API_KEY: ${{ secrets.HITHINK_FINANCE_API_KEY }}
           THS_API_KEY: ${{ secrets.THS_API_KEY }}
           THS_KEY: ${{ secrets.THS_KEY }}
-        run: python tools/fetch_stocks.py --out stocks_data.json
+        run: python tools/fetch_stocks.py --out stocks_data.json --history-days 20
 
-      - name: 排版成清单 + Kindle 文本 + 网页面板
+      - name: 排版成清单 + 网页面板 + Kindle 卡片版 EPUB + 纯文本
         run: python tools/build_stocks.py --data stocks_data.json --out site
 
-      - name: 产物自检（清单可解析、条数、60 秒轮询）
+      - name: 产物自检（清单可解析、条数、60 秒轮询、EPUB 结构）
         run: |
           python - <<'PY'
           import sys
@@ -73,7 +75,7 @@ jobs:
           if problems:
               print("；".join(problems), file=sys.stderr)
               raise SystemExit(1)
-          print("自检通过 · site/stocks.json + stocks.txt + stocks.html")
+          print("自检通过 · site/stocks.json + stocks.html + stocks.epub + stocks.txt")
           PY
 
       - name: 提交并推送（行情没变就不提交）
@@ -81,7 +83,8 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add site/stocks.json site/stocks.txt site/stocks.html site/stocks_names.json
+          # stocks.epub 是二进制：只有内容也会随 data_hash（含历史收盘价）一起变。
+          git add site/stocks.json site/stocks.txt site/stocks.html site/stocks.epub site/stocks_names.json
           # 行情指纹没变（收盘后/周末快照时间不变）就跳过，免得刷空提交。
           old_hash=$(git show HEAD:site/stocks.json 2>/dev/null \
             | python -c "import json,sys;print(json.load(sys.stdin).get('data_hash',''))" || echo "")
