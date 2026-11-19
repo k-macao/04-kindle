@@ -182,7 +182,9 @@ jobs:
                 if [ -n "$old_hash" ] && [ "$old_hash" = "$new_hash" ]; then
                   echo "行情没变（data_hash $new_hash），跳过提交"
                 else
-                  counts=$(python -c "import json;c=json.load(open('site/stocks.json'))['counts'];print(f\"指数 {c['indices']} / 股票 {c['stocks']} / 涨停 {c['limit_up']}\")")
+                  # counts 字段随面板升级变过（stocks → sectors/market/hk），
+                  # 这里用 .get 兜底：提交说明拼不出来不该毁掉整轮抓取。
+                  counts=$(python -c "import json;c=json.load(open('site/stocks.json'))['counts'];print(f\"指数 {c.get('indices', 0)} / 板块 {c.get('sectors', 0)} / 全市场 {c.get('market', 0)} / 港股 {c.get('hk', 0)} / 涨停 {c.get('limit_up', 0)}\")" 2>/dev/null || echo "行情")
                   stamp=$(python -c "import json;print(json.load(open('site/stocks.json'))['generated'])")
                   git commit -q -m "chore(stocks): 同花顺行情面板刷新（${counts}，生成于 ${stamp} 北京时间）"
                   # push 可能被别的提交抢先（工作流/PR），失败就 rebase 再来一次。
