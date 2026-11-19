@@ -612,6 +612,60 @@ class BuildTest(unittest.TestCase):
             finally:
                 stocks_watchdog.running_jobs, stocks_watchdog.dispatch = originals
 
+    def test_dispatch_survives_github_500(self):
+        """dispatch 接口偶发 HTTP 500，不能让它把交接那一步整个搞挂。
+
+        实测过：交接连吃几次 500 → job 变红 → 外层 cron 又把我们叫醒，
+        滚动成一片失败；而数据其实早就抓完提交了。
+        """
+        calls = []
+
+        class Failing:
+            returncode = 1
+            stdout = ""
+            stderr = ("could not create workflow dispatch event: HTTP 500 "
+                      "(https://api.github.com/.../dispatches)")
+
+        class Working:
+            returncode = 0
+            stdout = ""
+            stderr = ""
+
+        original = stocks_watchdog.subprocess.run
+        logs = []
+        try:
+            # 一直 500：重试 DISPATCH_ATTEMPTS 次，返回 False 而不是抛异常
+            stocks_watchdog.subprocess.run = lambda cmd, **kw: (
+                calls.append(cmd), Failing())[1]
+            self.assertFalse(stocks_watchdog.dispatch(
+                sleep=lambda seconds: None, log=logs.append))
+            self.assertEqual(len(calls), stocks_watchdog.DISPATCH_ATTEMPTS)
+            self.assertTrue(any("警告" in line or "::warning::" in line
+                                for line in logs))
+
+            # 前两次 500、第三次成功：返回 True
+            calls.clear()
+            answers = [Failing(), Failing(), Working()]
+            stocks_watchdog.subprocess.run = lambda cmd, **kw: (
+                calls.append(cmd), answers.pop(0))[1]
+            self.assertTrue(stocks_watchdog.dispatch(
+                sleep=lambda seconds: None, log=logs.append))
+            self.assertEqual(len(calls), 3)
+        finally:
+            stocks_watchdog.subprocess.run = original
+
+    def test_handoff_exits_zero_when_dispatch_fails(self):
+        """交接失败不该让 job 标红（数据已经提交，标红只会误导）。"""
+        original = stocks_watchdog.dispatch
+        stocks_watchdog.dispatch = lambda repo=None: False
+        try:
+            # 北京周一 10:00，在抓取窗口内 → 会尝试交接
+            now = "2026-11-18T02:00:00Z"
+            code = stocks_watchdog.main(["--handoff", "--now", now])
+            self.assertEqual(code, 0)
+        finally:
+            stocks_watchdog.dispatch = original
+
     def test_watchdog_session_window(self):
         parse = stocks_watchdog.parse_stamp
         self.assertTrue(stocks_watchdog.in_session(parse("2026-11-18T01:16:00Z")))   # 09:16 北京

@@ -24,6 +24,7 @@ import argparse
 import json
 import subprocess
 import sys
+import time
 from datetime import datetime, timedelta, timezone
 
 BEIJING_OFFSET = timedelta(hours=8)
@@ -108,11 +109,40 @@ def running_jobs(repo=None):
     return [run for run in runs if run.get("status") in ACTIVE_STATES]
 
 
-def dispatch(repo=None):
+DISPATCH_ATTEMPTS = 3
+
+
+def dispatch(repo=None, sleep=time.sleep, log=print):
+    """喊醒 refresh-stocks.yml。
+
+    GitHub 的 dispatch 接口偶发 HTTP 500（实测过：交接那一棒连吃几次 500，
+    结果 job 变红，而外层 cron 又不停把我们叫醒，滚动成一片失败）。所以这里
+    带退避重试；**失败只记警告、不抛异常**——交接失败不该把整轮抓取标成失败，
+    下一次 cron / watchdog 还会再叫醒。
+    """
     cmd = ["gh", "workflow", "run", "refresh-stocks.yml", "--ref", "main"]
     if repo:
         cmd += ["--repo", repo]
-    subprocess.run(cmd, check=True)
+    last = None
+    for attempt in range(1, DISPATCH_ATTEMPTS + 1):
+        try:
+            result = subprocess.run(cmd, capture_output=True, text=True,
+                                    check=False)
+        except OSError as exc:
+            last = str(exc)
+        else:
+            if result.returncode == 0:
+                if attempt > 1:
+                    log(f"交接第 {attempt} 次成功")
+                return True
+            last = (result.stderr or result.stdout or "").strip().splitlines()
+            last = last[-1] if last else f"exit {result.returncode}"
+        if attempt < DISPATCH_ATTEMPTS:
+            wait = 2 ** attempt
+            log(f"交接失败（{last}），{wait} 秒后重试")
+            sleep(wait)
+    log(f"::warning::交接没成功（{last}）：不影响本轮数据，下一班 cron/体检会再叫醒")
+    return False
 
 
 def check(path, now=None, stale_minutes=STALE_MINUTES, repo=None, do_dispatch=False,
@@ -206,6 +236,8 @@ def main(argv=None):
             print("已过今天的抓取窗口：不交接（等下一次开盘的触发）")
             return 0
         print("窗口还没结束：交接下一棒给 refresh-stocks.yml")
+        # 交接成功与否都不影响退出码：这一棒的数据已经抓完并提交了，
+        # 把 job 标红只会误导（真正要紧的是下一次能再被叫醒）。
         dispatch(args.repo)
         return 0
 
