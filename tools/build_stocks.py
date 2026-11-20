@@ -376,6 +376,28 @@ def rrg_section(payload):
     return {}
 
 
+def cross_section(payload):
+    """取出可用的单日横截面段落（RRG 的降级口径）；没有就返回空 dict。"""
+    for key in ("sector_cross", "cross"):
+        section = payload.get(key)
+        if isinstance(section, dict) and section.get("counts"):
+            return section
+    return {}
+
+
+def final_sections(payload):
+    """面板最后一段二选一：能算 RRG 就用 RRG，否则用单日横截面。
+
+    两者**互斥**（同一位置只显示一个）：数据里万一都带着（比如拿旧清单重排），
+    这里统一裁决成「RRG 优先」，清单、指纹、自检都走这一个入口，免得一边写
+    RRG 一边还留着过期的横截面。
+    """
+    rrg = rrg_section(payload)
+    if rrg:
+        return rrg, {}
+    return {}, cross_section(payload)
+
+
 def _wrap_display(text, width=48, indent="  "):
     """按显示宽度折行（CJK 算 2 列），Kindle 上不会被截断。
 
@@ -445,9 +467,71 @@ def render_rrg_text(section):
     return lines
 
 
+def render_cross_text(section):
+    """横截面段落的纯文本版（没有日 K 时顶替 RRG 那一段）。"""
+    counts = section.get("counts") or {}
+    stats = section.get("stats") or {}
+    market = section.get("market") or {}
+    lines = [f"【板块横截面】{counts.get('total', 0)} 个板块 · 单日收盘口径"
+             f" · 数据 {section.get('as_of') or '未知'}"]
+    head = (f"  红 {counts.get('up', 0)} · 绿 {counts.get('down', 0)}"
+            f" · 平 {counts.get('flat', 0)}"
+            f" · 中位数 {fmt_ratio(stats.get('median'))}"
+            f" · 离散度 {stats.get('std', 0):.2f}")
+    # 全 A 的涨跌家数/涨跌停在下面的读数里已经讲了，抬头不重复（Kindle 一屏很贵）
+    lines.append(head)
+
+    bins = [f"{item['label']} {item['count']}" for item in section.get("bins") or []
+            if item.get("count")]
+    if bins:
+        lines.extend(_wrap_display("分布 " + " · ".join(bins), width=46, indent="  "))
+
+    for text in section.get("narrative") or []:
+        lines.extend(_wrap_display(text, width=46, indent="  "))
+
+    def name_list(rows, limit=5):
+        return " ".join(f"{row.get('name')}{fmt_ratio(row.get('today_pct'))}"
+                        for row in rows[:limit])
+
+    winners = section.get("winners") or []
+    losers = section.get("losers") or []
+    if winners:
+        lines.extend(_wrap_display(
+            f"{section.get('winners_label') or '领涨'} " + name_list(winners),
+            width=46, indent="  "))
+    if losers:
+        lines.extend(_wrap_display(
+            f"{section.get('losers_label') or '领跌'} " + name_list(losers),
+            width=46, indent="  "))
+
+    money = section.get("money") or {}
+    top = money.get("top") or []
+    if top:
+        cells = [f"{row['name']} {row['share']:.1f}%({fmt_ratio(row['today_pct'])})"
+                 for row in top[:6] if row.get("share") is not None]
+        if cells:
+            lines.extend(_wrap_display("成交额占比 " + " · ".join(cells),
+                                       width=46, indent="  "))
+
+    themes = section.get("themes") or []
+    if themes:
+        cells = [f"{item['name']} {item['count']}只" for item in themes[:4]
+                 if item.get("count")]
+        if cells:
+            lines.extend(_wrap_display("涨停题材 " + " · ".join(cells),
+                                       width=46, indent="  "))
+    if section.get("why"):
+        lines.extend(_wrap_display(
+            "为什么是横截面：" + str(section["why"]).rstrip("。"),
+            width=46, indent="  "))
+    lines.append("  口径：单日快照的横截面统计，不是 RRG（RRG 要 89 根以上板块日 K）")
+    return lines
+
+
 def data_hash(payload):
     """行情指纹：价格/涨跌幅/条数/历史收盘变了才变，供工作流跳过无变化的提交。"""
     history = payload.get("history") or {}
+    rrg_part, cross_part = final_sections(payload)
     core = {
         "indices": [(r.get("thscode"), r.get("last_price"),
                      r.get("price_change_ratio_pct")) for r in payload.get("indices") or []],
@@ -461,11 +545,16 @@ def data_hash(payload):
                     for code, bars in sorted(history.items())},
         # RRG 只看「象限分布 + 信号 A 名单」：逐板块的 RS/Mom 每轮都在小数点后动，
         # 全塞进指纹会让收盘后也每 15 分钟提交一次，等于白刷。
-        "rrg": [(section.get("as_of"), section.get("preset"),
-                 section.get("counts"),
+        "rrg": [(rrg.get("as_of"), rrg.get("preset"), rrg.get("counts"),
                  [row.get("name") for row in
-                  ((section.get("signal") or {}).get("picks") or [])])
-                for section in [rrg_section(payload)] if section],
+                  ((rrg.get("signal") or {}).get("picks") or [])])
+                for rrg in [rrg_part] if rrg],
+        "cross": [(cross.get("as_of"), cross.get("counts"),
+                   [row.get("name") for row in (cross.get("winners") or [])[:3]],
+                   [row.get("name") for row in (cross.get("losers") or [])[:3]],
+                   [(item.get("name"), item.get("count"))
+                    for item in (cross.get("themes") or [])[:3]])
+                  for cross in [cross_part] if cross],
         "data_timestamp": payload.get("data_timestamp"),
     }
     raw = json.dumps(core, ensure_ascii=False, sort_keys=True)
@@ -473,6 +562,7 @@ def data_hash(payload):
 
 
 def manifest(payload, generated):
+    rrg_part, cross_part = final_sections(payload)
     data_ms = payload.get("data_timestamp")
     data_time = None
     if isinstance(data_ms, (int, float)):
@@ -497,14 +587,17 @@ def manifest(payload, generated):
             "market": (payload.get("market") or {}).get("count") or 0,
             "hk": len(((payload.get("hk") or {}).get("rows")) or []),
             "limit_up": len(payload.get("limit_up") or []),
-            "rrg": len(rrg_section(payload).get("rows") or []),
+            "rrg": len(rrg_part.get("rows") or []),
+            "cross": (cross_part.get("counts") or {}).get("total") or 0,
         },
         "indices": payload.get("indices") or [],
         "market": payload.get("market"),
         "hk": _hk_manifest(payload),
         "limit_up": payload.get("limit_up") or [],
         # 板块轮动整段进清单（网页要自己画四象限图；Kindle 只用文字与表格）
-        "rrg": rrg_section(payload) or None,
+        "rrg": rrg_part or None,
+        # 日 K 不够时的降级段（两者互斥，同一位置只显示一个）
+        "cross": cross_part or None,
         "history": payload.get("history") or {},
         "errors": payload.get("errors") or [],
     }
@@ -630,11 +723,16 @@ def render_txt(payload, generated):
                          f"{fmt_ratio(row.get('price_change_ratio_pct'))} {extra}".rstrip())
         lines.append("")
 
-    # 最后一段：板块轮动 RRG（策略来自 GitHub，见 tools/sector_rrg.py）
+    # 最后一段：板块轮动 RRG；日 K 不够时换成单日横截面（见 tools/sector_rrg.py）
     section = rrg_section(payload)
     if section:
         lines.extend(render_rrg_text(section))
         lines.append("")
+    else:
+        cross = cross_section(payload)
+        if cross:
+            lines.extend(render_cross_text(cross))
+            lines.append("")
 
     for error in payload.get("errors") or []:
         lines.append(f"注：{error}")
@@ -722,6 +820,15 @@ table.rrg-table td{border-bottom:1px solid #ddd;padding:3px 6px;white-space:nowr
 .qchip.q4{border-style:dashed}
 .prev-q{color:#666}
 p.src{font-size:11.5px;color:#444;margin-top:8px;line-height:1.5}
+.bins{border:2px solid #000;padding:6px 8px;margin:8px 0}
+.bins .row{display:flex;align-items:center;gap:8px;font-size:12.5px;line-height:1.9}
+.bins .k{width:86px;text-align:right;color:#333}
+.bins .b{flex:1;background:#f2f2f2;border:1px solid #999;height:12px}
+.bins .b i{display:block;height:100%;background:#000}
+.bins .n{width:30px;text-align:right;font-weight:bold}
+.themes{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.themes .chip{border:1px solid #000;padding:2px 7px;font-size:12.5px}
+.themes .chip b{font-size:14px}
 footer{border-top:1px solid #000;margin-top:16px;padding-top:8px;font-size:13px;color:#333}
 </style>
 </head>
@@ -993,6 +1100,62 @@ h+='<tr><td>'+esc(r.name||r.thscode)+'</td>'+
 '<td class="prev-q">'+(r.prev_quadrant?
 esc(['','领先','改善','滞后','疲软'][r.prev_quadrant]):'--')+'</td></tr>';});
 return h+'</table>';}
+// 单日横截面（RRG 的降级口径）：没有日 K 时至少把「普涨/普跌、量价、题材」
+// 三件事讲清楚，而不是让面板最后一段整块消失。
+function crossSection(g){
+if(!g||!g.counts)return '';
+var c=g.counts||{},st=g.stats||{},mk=g.market||{},list=[],i;
+var maxBin=1;
+(g.bins||[]).forEach(function(b){if(b.count>maxBin)maxBin=b.count;});
+var h='<section><h2>板块横截面<span class="muted"> '+(c.total||0)+' 个板块 · 单日收盘口径 · 数据 '+
+esc(g.as_of||'')+'</span></h2>';
+h+='<div class="breadth qcount">';
+h+='<div class="cell"><div class="k">红 / 绿</div><div class="v"><span class="up">'+(c.up||0)+
+'</span> / <span class="down">'+(c.down||0)+'</span></div><div class="s">板块中位数 '+
+ratio(st.median)+'</div></div>';
+h+='<div class="cell"><div class="k">离散度</div><div class="v">'+
+((typeof st.std==='number')?st.std.toFixed(2):'--')+'</div><div class="s">标准差（越大越像轮动）</div></div>';
+h+='<div class="cell"><div class="k">全 A 涨 / 跌</div><div class="v"><span class="up">'+
+(mk.up||0)+'</span> / <span class="down">'+(mk.down||0)+'</span></div><div class="s">平均 '+
+ratio(mk.avg_ratio)+'</div></div>';
+h+='<div class="cell"><div class="k">涨停 / 跌停</div><div class="v"><span class="up">'+
+(mk.limit_up||0)+'</span> / <span class="down">'+(mk.limit_down||0)+'</span></div><div class="s">全市场情绪面</div></div>';
+h+='</div>';
+if((g.bins||[]).length){
+h+='<div class="bins">';
+(g.bins||[]).forEach(function(b){
+var w=maxBin?Math.round(100*b.count/maxBin):0;
+h+='<div class="row"><span class="k">'+esc(b.label)+'</span><span class="b">'+
+'<i style="width:'+w+'%"></i></span><span class="n">'+b.count+'</span></div>';});
+h+='</div>';}
+h+='<div class="rrg-read">'+(g.narrative||[]).map(function(t){return '<p>'+esc(t)+'</p>';}).join('')+'</div>';
+function sideBlock(title,rows){
+if(!rows||!rows.length)return '';
+var out='<div><div class="k">'+esc(title)+'</div>';
+rows.forEach(function(r){
+out+='<div class="rank"><span>'+esc(r.name)+'</span><b class="'+cls(r.today_pct)+'">'+
+ratio(r.today_pct)+'</b></div>';});
+return out+'</div>';}
+if((g.winners||[]).length||(g.losers||[]).length){
+h+='<div class="two">'+sideBlock(g.winners_label||'领涨',g.winners)+
+sideBlock(g.losers_label||'领跌',g.losers)+'</div>';}
+var money=g.money||{};
+if((money.top||[]).length){
+h+='<table class="data rrg-table"><tr><th>成交额前列</th><th>占两市成交</th><th>今日</th></tr>';
+(money.top||[]).slice(0,8).forEach(function(r){
+h+='<tr><td>'+esc(r.name)+'</td><td>'+((typeof r.share==='number')?r.share.toFixed(1)+'%':'--')+
+'</td><td class="'+cls(r.today_pct)+'">'+ratio(r.today_pct)+'</td></tr>';});
+h+='</table>';}
+if((g.themes||[]).length){
+h+='<div class="themes">';
+(g.themes||[]).forEach(function(t){
+h+='<span class="chip">'+esc(t.name)+' <b>'+t.count+'</b>'+
+(t.examples&&t.examples.length?' · '+esc(t.examples.join('、')):'')+'</span>';});
+h+='</div>';}
+h+='<p class="src">口径：单日快照的横截面统计（涨跌分布 / 量价 / 涨停题材），'+
+'<b>不是 RRG</b>——RRG 要 89 根以上板块日 K，日 K 够了面板会自动换回四象限。'+
+(g.why?'<br>这一轮：'+esc(g.why)+'。':'')+'</p>';
+return h+'</section>';}
 function rrgSection(g){
 var rows=g.rows||[];
 if(!rows.length)return '';
@@ -1017,7 +1180,7 @@ esc(src.file||'')+'（'+esc(src.signal||'')+'）<br>研报：'+esc(src.report||'
 return h+'</section>';}
 function render(d){
 var h='';
-// 一屏监视：市场概览 → 宽基 → 板块 → 港股 → 涨停池 → 板块轮动 RRG
+// 一屏监视：市场概览 → 宽基 → 板块 → 港股 → 涨停池 → 板块轮动 RRG（或降级的横截面）
 if(d.market){h+='<section><h2>市场概览 · 全 A</h2>'+breadth(d.market)+'</section>';}
 var idx=(d.indices||[]),broad=[],sectors=[];
 idx.forEach(function(r){
@@ -1038,8 +1201,10 @@ bj((d.hk||{}).data_time)+'</span></h2><div class="cards hk">';
 hi.concat(hs).forEach(function(r){h+=hkCard(r);});h+='</div></section>';}
 if(d.limit_up&&d.limit_up.length)h+='<section><h2>涨停池（'+d.limit_up.length+
 '）· 按封板时间</h2>'+limitRows(d.limit_up)+'</section>';
-// 最后一段：板块轮动 RRG（策略来自 GitHub hugo2046/QuantsPlaybook）
-if(d.rrg)h+=rrgSection(d.rrg);
+// 最后一段：板块轮动 RRG（策略来自 GitHub hugo2046/QuantsPlaybook）；
+// 板块日 K 不够时退到单日横截面（两者互斥，只显示一个）
+if(d.rrg&&d.rrg.rows&&d.rrg.rows.length)h+=rrgSection(d.rrg);
+else if(d.cross&&d.cross.counts)h+=crossSection(d.cross);
 (d.errors||[]).forEach(function(e){h+='<p>注：'+esc(e)+'</p>';});
 document.getElementById('main').innerHTML=h||'<p>暂无数据</p>';
 var demo=d.demo?'【演示数据】':'';
@@ -1238,6 +1403,36 @@ def render_epub_xhtml(payload, generated_bj):
         parts.append("</table>")
         parts.append(f'<p class="meta">策略：GitHub {esc(source.get("repo") or "")} · '
                      f'{esc(source.get("file") or "")}<br>研报 {esc(source.get("report") or "")}</p>')
+    else:
+        cross = cross_section(payload)
+        if cross:
+            counts = cross.get("counts") or {}
+            stats = cross.get("stats") or {}
+            parts.append(f"<h2>板块横截面（{counts.get('total', 0)}）</h2>")
+            parts.append(f'<p class="meta">单日收盘口径 · 数据 {esc(str(cross.get("as_of") or ""))}'
+                         f' · 红 {counts.get("up", 0)} / 绿 {counts.get("down", 0)}'
+                         f' · 中位数 {esc(fmt_ratio(stats.get("median")))}</p>')
+            for text in cross.get("narrative") or []:
+                parts.append(f"<p>{esc(text)}</p>")
+            winners = cross.get("winners") or []
+            losers = cross.get("losers") or []
+            if winners or losers:
+                parts.append('<table class="data"><tr><th>' +
+                             esc(cross.get("winners_label") or "领涨") +
+                             "</th><th>涨跌幅</th><th>" +
+                             esc(cross.get("losers_label") or "领跌") +
+                             "</th><th>涨跌幅</th></tr>")
+                for index in range(max(len(winners), len(losers))):
+                    left = winners[index] if index < len(winners) else {}
+                    right = losers[index] if index < len(losers) else {}
+                    parts.append(
+                        f"<tr><td>{esc(left.get('name') or '')}</td>"
+                        f"<td>{esc(fmt_ratio(left.get('today_pct')))}</td>"
+                        f"<td>{esc(right.get('name') or '')}</td>"
+                        f"<td>{esc(fmt_ratio(right.get('today_pct')))}</td></tr>")
+                parts.append("</table>")
+            if cross.get("why"):
+                parts.append(f'<p class="meta">为什么是横截面：{esc(str(cross["why"]))}</p>')
 
     for error in payload.get("errors") or []:
         parts.append(f'<p class="meta">注：{esc(error)}</p>')
@@ -1339,6 +1534,16 @@ def check(out_dir):
         page = html_path.read_text(encoding="utf-8")
         if "stocks.json" not in page or f"var POLL = {POLL_SECONDS}" not in page:
             problems.append(f"stocks.html 没有每 {poll_text()}拉 stocks.json 的轮询")
+    cross = data.get("cross") or {}
+    if cross.get("counts"):
+        page = html_path.read_text(encoding="utf-8") if html_path.is_file() else ""
+        if "板块横截面" not in page or "function crossSection" not in page:
+            problems.append("清单里有 cross，但 stocks.html 没有横截面段")
+        if txt_path.is_file() and "【板块横截面】" not in txt_path.read_text(encoding="utf-8"):
+            problems.append("清单里有 cross，但 stocks.txt 没有横截面段")
+    if cross.get("counts") and (data.get("rrg") or {}).get("rows"):
+        # 两者互斥：面板最后一段只显示一个，清单里不该同时有两段
+        problems.append("清单里 rrg 与 cross 同时存在")
     rrg = data.get("rrg") or {}
     if rrg.get("rows"):
         if not rrg.get("narrative"):
@@ -1465,15 +1670,29 @@ def _previous_payload(out_dir):
     return data if isinstance(data, dict) else None
 
 
-def build(data_path=None, out_dir="site", demo=False):
+def build(data_path=None, out_dir="site", demo=False, demo_cross=False):
     """读 stocks_data.json（或演示数据）→ 写四份产物，返回清单。"""
-    if demo:
+    if demo_cross:
+        # 演示「没有板块日 K 时」的版式：同一批板块，但不给 RRG，走单日横截面
+        payload = dict(DEMO_PAYLOAD)
+        demo_rrg = sector_rrg.demo_section()
+        payload["indices"] = _demo_indices({"sector_rrg": demo_rrg,
+                                            "indices": payload["indices"]})
+        section, _notes = sector_rrg.build_cross_section(
+            payload["indices"], market=payload.get("market"),
+            indices=payload["indices"], limit_up=payload.get("limit_up"),
+            as_of=(datetime.now(timezone.utc) + timedelta(hours=8)).strftime("%Y-%m-%d"),
+            why="演示：这一轮没有板块日 K（短窗 RRG 要 89 根）")
+        payload["sector_cross"] = section or {}
+        demo = True
+    if not demo_cross and demo:
         payload = dict(DEMO_PAYLOAD)
         # 演示数据也走真公式：RRG 段落由 sector_rrg.demo_section() 现算，
         # 板块卡片用同一批板块，版式不会「上面 2 个、下面 14 个」。
         payload["sector_rrg"] = sector_rrg.demo_section()
         payload["indices"] = _demo_indices(payload)
-        # 演示数据的时间也用「现在」：RRG 段落写的是今天，抬头却停在几个月前，
+    if demo or demo_cross:
+        # 演示数据的时间也用「现在」：段落写的是今天，抬头却停在几个月前，
         # 演示看着像坏掉（真实数据的时间永远来自接口快照）。
         demo_now = int(datetime.now(timezone.utc).timestamp() * 1000)
         payload["data_timestamp"] = demo_now
@@ -1519,6 +1738,7 @@ def build(data_path=None, out_dir="site", demo=False):
           f" / 全市场 {counts['market']} / 港股 {counts['hk']}"
           f" / 涨停 {counts['limit_up']}"
           + (f" / RRG {counts['rrg']}" if counts.get("rrg") else "")
+          + (f" / 横截面 {counts['cross']}" if counts.get("cross") else "")
           + f"，hash {data['data_hash']}）")
     return data
 
@@ -1530,9 +1750,11 @@ def main(argv=None):
     parser.add_argument("--out", default="site", help="产物目录（默认 site）")
     parser.add_argument("--demo", action="store_true",
                         help="用演示数据排版（没 Key 时先看版式）")
+    parser.add_argument("--demo-cross", action="store_true",
+                        help="演示「没有板块日 K」时的单日横截面版式")
     args = parser.parse_args(argv)
     try:
-        build(args.data, args.out, demo=args.demo)
+        build(args.data, args.out, demo=args.demo, demo_cross=args.demo_cross)
     except (OSError, ValueError, json.JSONDecodeError) as exc:
         print(f"排版失败：{exc}", file=sys.stderr)
         return 1
