@@ -170,12 +170,16 @@ def item_xml(item, names, sites, desc_limit=None, fallback_link=DEFAULT_SITE_URL
 
 
 def render(items, now, title=FEED_TITLE, self_url=DEFAULT_SELF_URL, site_url=DEFAULT_SITE_URL,
-           ttl=TTL_MINUTES, desc_limit=None):
+           ttl=TTL_MINUTES, desc_limit=None, analysis_note=""):
     names = {source["key"]: source["name"] for source in news_sources.SOURCES}
     sites = {source["key"]: source.get("site") or "" for source in news_sources.SOURCES}
     stamp = rfc822(now)
     description = (f"每天 07:00（北京时间）从 RSSHub 抓取并合并的财经、政治与哲学思想新闻，"
                    f"英文条目附中文译文，本次 {len(items)} 条。")
+    # 分析接口挂了就如实写在 channel 里：宁可当天没有线索分析，也不能让读者以为
+    # 每一条都分析过（工作流的自检也认这句话，见 refresh-news.yml）。
+    if analysis_note:
+        description += " " + analysis_note.strip()
     head = [
         '<?xml version="1.0" encoding="utf-8"?>',
         '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">',
@@ -197,15 +201,24 @@ def render(items, now, title=FEED_TITLE, self_url=DEFAULT_SELF_URL, site_url=DEF
 ANALYSIS_REQUIRED_LABELS = ("AI 线索分析", "线索：", "事实：", "推断：", "影响：", "验证：")
 
 
-def check_analysis_fields(parsed_items):
-    """确保发布的每条 RSS description 都包含标题与完整线索链。"""
+def check_analysis_fields(parsed_items, allow_absent=False):
+    """确保发布的每条 RSS description 都包含标题与完整线索链。
+
+    ``allow_absent``：整份 feed 一条分析都没有是允许的（DeepSeek 挂了也不能让
+    新闻停更一天），但调用方要先确认 channel 里写明「本期未生成线索分析」，
+    并且不许出现「一半有、一半没有」的夹生 feed。返回 "full" / "absent"。
+    """
+    covered = sum(1 for item in parsed_items
+                  if "AI 线索分析" in (item.findtext("description") or ""))
+    if covered == 0 and allow_absent:
+        return "absent"
     for index, item in enumerate(parsed_items, start=1):
         description = item.findtext("description") or ""
         missing = [label for label in ANALYSIS_REQUIRED_LABELS if label not in description]
         if missing:
             title = item.findtext("title") or "(无标题)"
             raise ValueError(f"第 {index} 条缺少 AI 线索分析标签 {', '.join(missing)}：{title[:40]}")
-    return True
+    return "full"
 
 
 def check_device_fields(parsed_items):
@@ -238,14 +251,14 @@ def check_device_fields(parsed_items):
 
 def build(payload, out_dir, min_items=10, max_items=build_news.MAX_ITEMS, now=None,
           title=FEED_TITLE, self_url=DEFAULT_SELF_URL, site_url=DEFAULT_SITE_URL,
-          filename="news.xml", desc_limit=None):
+          filename="news.xml", desc_limit=None, analysis_note=""):
     """生成 site/news.xml，返回 (info, path)。条目不足或 XML 不自洽时抛 ValueError。"""
     now = now or datetime.now(timezone.utc)
     items = dedupe_guid_items(build_news.prune(payload.get("items") or [], max_items))
     if len(items) < min_items:
         raise ValueError(f"有效条目 {len(items)} 条，少于下限 {min_items}")
     xml = render(items, now, title=title, self_url=self_url, site_url=site_url,
-                 desc_limit=desc_limit)
+                 desc_limit=desc_limit, analysis_note=analysis_note)
     if len(xml.encode("utf-8")) > FEED_MAX_BYTES:
         raise ValueError(f"feed 超过 {FEED_MAX_BYTES // 1024} KiB，阅读器可能拒收")
 
@@ -296,6 +309,8 @@ def parse_args(argv=None):
                     help="输出文件名（默认 news.xml；精简版写 news-lite.xml）")
     ap.add_argument("--desc-limit", type=int, default=None,
                     help="摘要最多保留多少字（默认不限；精简版用 140）")
+    ap.add_argument("--analysis-note", default="",
+                    help="channel 里的补充说明（分析接口挂掉时写一句「本期未生成线索分析」）")
     return ap.parse_args(argv)
 
 
@@ -306,7 +321,8 @@ def main(argv=None):
         info, path = build(payload, args.out, min_items=args.min_items,
                            max_items=args.max_items, title=args.title,
                            self_url=args.self_url, site_url=args.site_url,
-                           filename=args.filename, desc_limit=args.desc_limit)
+                           filename=args.filename, desc_limit=args.desc_limit,
+                           analysis_note=args.analysis_note)
     except (OSError, ValueError, json.JSONDecodeError) as exc:
         print(f"生成失败：{exc}", file=sys.stderr)
         return 1

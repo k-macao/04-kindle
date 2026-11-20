@@ -276,9 +276,34 @@ class DemoTest(unittest.TestCase):
         self.assertGreater(section["counts"]["improving"], 0)
         self.assertGreater(section["counts"]["lagging"], 0)
         self.assertGreater(section["counts"]["weakening"], 0)
-        # 数据日是今天，别停在几个月前
-        self.assertEqual(section["as_of"],
-                         (datetime.now(timezone.utc) + timedelta(hours=8)).strftime("%Y-%m-%d"))
+        # 数据日是「最近的工作日」，别停在几个月前；也不能拿 UTC 日期冒充今天
+        # （UTC 16:00 = 北京次日，旧写法在这个窗口里差一天，CI 就是这么红的）。
+        self.assertEqual(section["as_of"], sector_rrg.demo_days()[-1].strftime("%Y-%m-%d"))
+        today = sector_rrg.beijing_today()
+        lag = (today - datetime.strptime(section["as_of"], "%Y-%m-%d").date()).days
+        self.assertLessEqual(lag, 2)                 # 周末最多停到周五
+        self.assertEqual(lag, 0 if today.weekday() < 5 else today.weekday() - 4)
+
+    def test_demo_day_rolls_over_with_beijing_midnight(self):
+        """UTC 16:00 之后北京已是次日：数据日跟着北京走，不是跟着 UTC 走。"""
+        # 2026-11-20 20:46 UTC = 北京 11-21（周六）04:46 → 最近的工作日是周五 11-20
+        late = datetime(2026, 11, 20, 20, 46, tzinfo=timezone.utc)
+        self.assertEqual(sector_rrg.demo_days(5, now=late)[-1].strftime("%Y-%m-%d"),
+                         "2026-11-20")
+        # 2026-11-20 13:56 UTC = 北京 11-20（周五）21:56 → 就是当天
+        night = datetime(2026, 11, 20, 13, 56, tzinfo=timezone.utc)
+        self.assertEqual(sector_rrg.demo_days(5, now=night)[-1].strftime("%Y-%m-%d"),
+                         "2026-11-20")
+        # 2026-11-23 02:00 UTC = 北京 11-23（周一）10:00 → 当天
+        monday = datetime(2026, 11, 23, 2, 0, tzinfo=timezone.utc)
+        self.assertEqual(sector_rrg.demo_days(5, now=monday)[-1].strftime("%Y-%m-%d"),
+                         "2026-11-23")
+
+    def test_demo_days_skip_weekends(self):
+        days = sector_rrg.demo_days(8, now=datetime(2026, 11, 22, 2, 0, tzinfo=timezone.utc))
+        self.assertEqual([day.strftime("%m-%d") for day in days],
+                         ["11-11", "11-12", "11-13", "11-16", "11-17", "11-18",
+                          "11-19", "11-20"])
 
 
 class FetchIntegrationTest(unittest.TestCase):

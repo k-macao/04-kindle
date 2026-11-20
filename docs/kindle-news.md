@@ -112,7 +112,15 @@ AI 分析之后多 `analysis` / `analysis_model`），
 - Actions 使用仓库 Secret **`DEEPSEEK_API_KEY`**，默认 DeepSeek `deepseek-chat`；密钥不进代码、不进日志。
 - 一批 5 条，请求间隔 1 秒；相同新闻按标题、摘要、来源、链接等字段命中
   `site/news_analysis_cache.json`，避免每天为重复新闻重新计费。
-- **AI 服务失败、漏条或格式不全时，整轮停止且不推送 XML**；不会悄悄发布没有分析的条目。
+- 输出预算按批次大小算（`200 + 1000 × 条数`，上限 8000），并且认 `finish_reason=length`：
+  某批写得长被截断时**对半拆小重试**，坏掉的只该是那一条，不是整份 feed。
+  写死成 2600 时，5 条一超长就整批 JSON 缺括号，昨天还在用的 feed 就白白停更一天。
+- **分析这一层允许失败，但不许悄悄少分析**：这一步 `continue-on-error: true`，失败时
+  channel 描述会写「本期 AI 线索分析未生成（分析接口调用失败）」，条目就是原文 + 译文。
+  产物自检要求「要么每条都有完整线索链，要么一条都没有且 channel 里写明原因」，
+  **一半有一半没有的夹生 feed 一律不发布**。
+- 失败原因会写成一条 `::error` 注解（`gh api repos/…/check-runs/<id>/annotations` 能读到），
+  余额用完、429、格式不合都能直接看，不用翻日志。
 - `news-lite.xml` / `news-test.xml` 会保留完整分析链，只截短新闻摘要。
 
 抓取时的三个时间约定：
@@ -415,7 +423,10 @@ https://rsshub.rss.tips, https://rsshub.isrss.com, https://rsshub.cups.moe, http
   （xml 可解析、条目数达标、guid 不缺不重、`atom:link rel="self"` 对得上）→ 提交推送
   `site/news.xml` + `site/news_seen.json` + `site/news_zh_cache.json` +
   `site/news_analysis_cache.json` + `site/source-health.json`；
-- 任何一步失败就**不推送**：抓不到足够条目、DeepSeek 有条没分析、xml 解析不过时，读者手上还是上一份 feed；
+- 抓取不足、xml 解析不过、guid 缺失这类问题**不推送**：读者手上还是上一份 feed；
+- 唯一的例外是 AI 线索分析（`continue-on-error: true`）：接口挂了也照常出 feed，
+  但 channel 里写明「本期未生成线索分析」——**新闻的时效比那一层分析重要**，
+  而不写这句话的「无分析 feed」是不发的（见 §1.2）；
 - 与小时级报告完全隔离（`concurrency: refresh-news`），报告失败不影响 feed，feed 失败也不动报告产物；
 - 改了抓取/翻译/feed 的代码（`tools/fetch_news.py`、`news_sources.py`、`build_feed.py`、
   `radar_discover.py`、`translate_news.py`、`analyze_news.py`、本工作流）也会跑一次：这种运行带 `--no-seen`，

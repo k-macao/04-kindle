@@ -1,0 +1,49 @@
+name: Tests (Python 3.12)
+
+# 三个刷新工作流的「跑测试」步骤都是在 3.12 上跑的。那条步骤一红，整条流水线就停住
+# （EPUB/纯文本、行情面板、新闻 feed 都不再更新），但**日志常常拿不到**：本机
+# `gh run view --log-failed` 从 results-receiver 直接 EOF，页面上只剩
+# `Process completed with exit code 1`——排查只能靠猜。
+#
+# 这个工作流只做一件事：在同一个解释器版本上跑同一套测试，把失败的用例写成注解。
+# 于是无论用 `gh api repos/…/check-runs/<id>/annotations` 还是页面上的注解，
+# 都能直接看到「哪个测试文件、哪个用例、断言说了什么」，不用翻日志。
+#
+# 它不写仓库、不抓网络、不碰 site/ 下的产物，所以可以随便重跑。
+on:
+  workflow_dispatch:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 跑测试（失败会写成注解）
+        run: python tools/ci_unittest.py
+
+      - name: 跑一遍工具的 --help（导入期就崩的模块要在这里露出来）
+        run: |
+          set -euo pipefail
+          for tool in tools/build_epub.py tools/build_feed.py tools/build_news.py \
+                      tools/build_stocks.py tools/check_no_status.py tools/fetch_news.py \
+                      tools/fetch_stocks.py tools/sector_rrg.py tools/analyze_news.py \
+                      tools/translate_news.py tools/ci_unittest.py kindle_report.py; do
+            python "$tool" --help > /dev/null
+            echo "ok $tool"
+          done
