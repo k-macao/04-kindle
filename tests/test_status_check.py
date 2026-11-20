@@ -2,6 +2,7 @@
 
 import contextlib
 import io
+import os
 import sys
 import tempfile
 import unittest
@@ -15,6 +16,22 @@ sys.path.insert(0, str(REPO / "tools"))
 import build_epub as be  # noqa: E402
 import check_no_status as cs  # noqa: E402
 import kindle_report as k  # noqa: E402
+
+def run_check(argv):
+    """调用 check_no_status.main()，但把 `GITHUB_ACTIONS` 暂时摘掉。
+
+    这些用例故意制造「正文自检失败」的情形（1 行 kindle.txt、缺文件……）。在 CI 里
+    直接调用时，`main()` 会把它们写成真正的 `::error title=正文自检::` 注解，
+    于是每次绿灯运行的注解区都混着两条假故障——2026-11-20 排查那两次红时，
+    真线索（`AI 线索分析未生成`）就埋在这堆噪音里，白绕了几圈。
+    """
+    saved = os.environ.pop("GITHUB_ACTIONS", None)
+    try:
+        return cs.main(argv)
+    finally:
+        if saved is not None:
+            os.environ["GITHUB_ACTIONS"] = saved
+
 
 CLEAN_BODY = (
     '<h2 id="s01" class="section">01 / 每日全球全景扫描</h2>'
@@ -64,7 +81,7 @@ class CheckTest(unittest.TestCase):
                 "--min-lines", "10", "--min-chars", "10"]
         for key, value in kwargs.items():
             argv += [f"--{key.replace('_', '-')}", str(value)]
-        return cs.main(argv)
+        return run_check(argv)
 
     def test_clean_artifacts_pass(self):
         self.assertEqual(self._run(), 0)
@@ -86,7 +103,7 @@ class CheckTest(unittest.TestCase):
         self.assertEqual(self._run(min_chars=100000), 1)
 
     def test_missing_files_fail(self):
-        self.assertEqual(cs.main(["--text", str(self.dir / "nope.txt"),
+        self.assertEqual(run_check(["--text", str(self.dir / "nope.txt"),
                                   "--epub", str(self.dir / "nope.epub"),
                                   "--min-lines", "1", "--min-chars", "1"]), 1)
 
@@ -99,6 +116,49 @@ class CheckTest(unittest.TestCase):
         self.assertEqual(errors, [])
         self.assertEqual(summary["status_removed"], 154)
         self.assertEqual(summary["sections"], 9)
+
+
+class NoAnnotationNoiseTest(unittest.TestCase):
+    """工具本身该打注解，测试调用时不该打——这两件事要分开。"""
+
+    def test_run_check_silences_the_workflow_command(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            folder = Path(tmp)
+            text_path = folder / "kindle.txt"
+            text_path.write_text("只有一行\n", encoding="utf-8")
+            epub = folder / "report.epub"
+            write_epub(epub, CLEAN_BODY)
+            buffer = io.StringIO()
+            os.environ["GITHUB_ACTIONS"] = "true"
+            try:
+                with contextlib.redirect_stdout(buffer), \
+                        contextlib.redirect_stderr(io.StringIO()):
+                    code = run_check(["--text", str(text_path), "--epub", str(epub),
+                                      "--min-lines", "10", "--min-chars", "1"])
+            finally:
+                os.environ.pop("GITHUB_ACTIONS", None)
+            self.assertEqual(code, 1)
+            self.assertNotIn("::error", buffer.getvalue())
+
+    def test_the_tool_itself_still_annotates_in_ci(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            folder = Path(tmp)
+            text_path = folder / "kindle.txt"
+            text_path.write_text("只有一行\n", encoding="utf-8")
+            epub = folder / "report.epub"
+            write_epub(epub, CLEAN_BODY)
+            buffer = io.StringIO()
+            os.environ["GITHUB_ACTIONS"] = "true"
+            try:
+                # 注解是往 stderr 打的（工作流命令两种流都认，这里只关心它有没有打）。
+                with contextlib.redirect_stdout(io.StringIO()), \
+                        contextlib.redirect_stderr(buffer):
+                    code = cs.main(["--text", str(text_path), "--epub", str(epub),
+                                    "--min-lines", "10", "--min-chars", "1"])
+            finally:
+                os.environ.pop("GITHUB_ACTIONS", None)
+            self.assertEqual(code, 1)
+            self.assertIn("::error title=正文自检::", buffer.getvalue())
 
 
 class BodyResidueTest(unittest.TestCase):
@@ -116,7 +176,7 @@ class BodyResidueTest(unittest.TestCase):
         self.tmp.cleanup()
 
     def _run(self):
-        return cs.main(["--text", str(self.text), "--epub", str(self.epub),
+        return run_check(["--text", str(self.text), "--epub", str(self.epub),
                         "--min-lines", "10", "--min-chars", "10"])
 
     def test_chrome_line_in_text_fails(self):
@@ -177,7 +237,7 @@ class GeneratedArtifactsTest(unittest.TestCase):
             self.assertNotIn("抓取状态", body)
             self.assertIn("雪球网", body)
             self.assertIn("口径", body)
-            self.assertEqual(cs.main(["--text", str(out / "kindle.txt"),
+            self.assertEqual(run_check(["--text", str(out / "kindle.txt"),
                                       "--epub", str(out / "report.epub"),
                                       "--min-lines", "3", "--min-chars", "3"]), 0)
 
@@ -212,7 +272,7 @@ class ManifestPrecisionTest(unittest.TestCase):
                             ' "status_removed": 19}', encoding="utf-8")
         out = io.StringIO()
         with contextlib.redirect_stdout(out):
-            self.assertEqual(cs.main(["--text", str(self.text), "--epub", str(self.epub),
+            self.assertEqual(run_check(["--text", str(self.text), "--epub", str(self.epub),
                                       "--manifest", str(manifest),
                                       "--min-lines", "10", "--min-chars", "10"]), 0)
         self.assertIn("数据时间 2026-11-06T00:00:00Z（date）", out.getvalue())
@@ -223,7 +283,7 @@ class ManifestPrecisionTest(unittest.TestCase):
                             ' "status_removed": 19}', encoding="utf-8")
         out = io.StringIO()
         with contextlib.redirect_stdout(out):
-            self.assertEqual(cs.main(["--text", str(self.text), "--epub", str(self.epub),
+            self.assertEqual(run_check(["--text", str(self.text), "--epub", str(self.epub),
                                       "--manifest", str(manifest),
                                       "--min-lines", "10", "--min-chars", "10"]), 0)
         self.assertIn("数据时间 2026-11-06T13:32:10Z", out.getvalue())
