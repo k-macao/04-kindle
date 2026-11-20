@@ -92,6 +92,55 @@ class AnalyzePayloadTest(unittest.TestCase):
             analyze_news.analyze_payload(payload(1), "key", fetch=response,
                                          delay=0, log=lambda *_: None)
 
+    def test_output_budget_scales_with_the_batch(self):
+        """写死 max_tokens 会让「某批写得长一点」整批被截断，进而把 feed 停更一天。"""
+        one = analyze_news._request_payload([{"id": 0}], "deepseek-chat")
+        five = analyze_news._request_payload([{"id": index} for index in range(5)],
+                                             "deepseek-chat")
+        self.assertGreater(five["max_tokens"], one["max_tokens"])
+        self.assertGreaterEqual(one["max_tokens"], analyze_news.TOKENS_PER_ITEM)
+        self.assertLessEqual(five["max_tokens"], analyze_news.MAX_TOKENS)
+
+    def test_truncated_batch_is_split_instead_of_failing_the_run(self):
+        """finish_reason=length 的那批拆小重试：坏掉的只该是一条，不是整份 feed。"""
+        calls = []
+
+        def fetch(_key, request, _timeout):
+            items = json.loads(request["messages"][1]["content"].split("\n", 1)[1])["items"]
+            calls.append(len(items))
+            if len(items) > 1:      # 多条一批就「写得太多被截断」
+                return {"choices": [{"finish_reason": "length",
+                                     "message": {"content": "{\"items\": [{\"id\": 0, \"anal"}}]}
+            return {"choices": [{"finish_reason": "stop",
+                                 "message": {"content": json.dumps(
+                                     {"items": [{"id": items[0]["id"],
+                                                 "analysis": clue(items[0]["title"])}]},
+                                     ensure_ascii=False)}}]}
+
+        data = payload(4)
+        log = []
+        stats = analyze_news.analyze_payload(data, "key", fetch=fetch, batch_size=4,
+                                             delay=0, log=log.append, now=NOW)
+        self.assertEqual(stats["analyzed"], 4)
+        self.assertTrue(all(item.get("analysis") for item in data["items"]))
+        # 先按 4 条试 → 失败后对半拆成 2+2 → 各再拆成单条；只有单条能成功。
+        self.assertEqual(sorted(calls), [1, 1, 1, 1, 2, 2, 4])
+        self.assertTrue(any("拆成" in line for line in log))
+
+    def test_transport_error_is_not_split(self):
+        """402/429/连不上这类错误拆小批次也没用，别白烧调用次数。"""
+        from urllib.error import HTTPError
+        calls = []
+
+        def fetch(_key, request, _timeout):
+            calls.append(request["max_tokens"])
+            raise HTTPError(analyze_news.ENDPOINT, 402, "Payment Required", {}, None)
+
+        with self.assertRaisesRegex(analyze_news.AnalysisError, "HTTP 402"):
+            analyze_news.analyze_payload(payload(3), "key", fetch=fetch, batch_size=3,
+                                         delay=0, log=lambda *_: None, now=NOW)
+        self.assertEqual(len(calls), 1)
+
     def test_cache_round_trip(self):
         from tempfile import TemporaryDirectory
         with TemporaryDirectory() as directory:

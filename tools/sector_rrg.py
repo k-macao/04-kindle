@@ -579,21 +579,42 @@ DEMO_SECTORS = (
 )
 
 
-def demo_section(trail=DEFAULT_TRAIL, rows=340):
+def beijing_today(now=None):
+    """北京时间的「今天」。
+
+    面板与清单里的数据日一律按北京日期写，所以这里不能用 UTC 日期：UTC 16:00
+    之后北京已经是次日，两者会差一天（CI 就是在这个窗口里红的）。
+    """
+    moment = now or datetime.now(timezone.utc)
+    return (moment + timedelta(hours=8)).date()
+
+
+def demo_days(rows=340, now=None):
+    """演示用的交易日序列：从北京今天往回数工作日，最后一根落在最近的工作日。
+
+    周末没有行情：周六/周日跑演示时最后一根是周五。合成价格与日期无关（只按
+    步号算），所以日期只影响「数据日」这个标签。
+    """
+    cursor = beijing_today(now)
+    days = []
+    while len(days) < rows:
+        if cursor.weekday() < 5:          # 只造工作日，和真实交易日历同形
+            days.append(cursor)
+        cursor -= timedelta(days=1)
+    days.reverse()
+    return days
+
+
+def demo_section(trail=DEFAULT_TRAIL, rows=340, now=None):
     """造一段确定性的合成板块行情，走**真实**的 RRG 公式 → 面板演示段落。
 
     演示数据必须走真公式：否则算错的地方在 --demo 里看不出来，一上真实数据才发现。
     """
-    # 从今天往回数「工作日」，再倒过来——最后一根必须是今天，
+    # 从今天往回数「工作日」，再倒过来——最后一根必须是最近的工作日，
     # 否则面板上「数据日」会停在几个月前，演示看着像坏掉。
-    cursor = datetime.now(timezone.utc).replace(hour=8, minute=0, second=0,
-                                                microsecond=0)
-    days = []
-    while len(days) < rows:
-        if cursor.weekday() < 5:          # 只造工作日，和真实交易日历同形
-            days.append(int(cursor.timestamp() * 1000))
-        cursor -= timedelta(days=1)
-    days.reverse()
+    days = [int(datetime(day.year, day.month, day.day, 8, 0,
+                         tzinfo=timezone.utc).timestamp() * 1000)
+            for day in demo_days(rows, now=now)]
     history, today_pct = {}, {}
     for idx, (code, _name_, drift, amp, period) in enumerate(DEMO_SECTORS):
         price, closes = 100.0, []

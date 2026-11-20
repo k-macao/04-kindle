@@ -358,8 +358,20 @@ class WorkflowTest(unittest.TestCase):
         self.assertIn("site/news_analysis_cache.json", self.text.split("git add", 1)[1])
 
     def test_feed_self_check_uses_shared_analysis_guard(self):
-        self.assertIn("build_feed.check_analysis_fields(items)", self.text)
+        self.assertIn("build_feed.check_analysis_fields(", self.text)
+        self.assertIn("allow_absent=allow_absent", self.text)
         self.assertNotIn('"AI 线索分析：", "线索："', self.text)
+
+    def test_analysis_step_may_fail_but_the_feed_still_ships(self):
+        """分析接口挂了也要出 feed：允许失败，同时必须把「本期未生成」写进 channel。"""
+        self.assertIn("continue-on-error: true\n        env:\n          DEEPSEEK_API_KEY",
+                      self.text)
+        self.assertIn("if: steps.analysis.outcome == 'failure'", self.text)
+        self.assertIn('ANALYSIS_NOTE=', self.text)
+        self.assertIn('--analysis-note "${ANALYSIS_NOTE:-}"', self.text)
+
+    def test_analysis_cache_still_committed_even_when_it_degraded(self):
+        self.assertIn("site/news_analysis_cache.json", self.text.split("git add", 1)[1])
 
     def test_cli_rejects_unknown_layer(self):
         argv = fetch_news.parse_args(["--providers", "direct,瞎写的层"])

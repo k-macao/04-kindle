@@ -67,7 +67,9 @@ jobs:
           python-version: "3.12"
 
       - name: 跑测试（信封解析、重试、归一化、排版、自检）
-        run: python -m unittest discover -s tests
+        # 失败时把用例名写成 `::error` 注解：这层日志常常拿不到（本机
+        # `gh run view --log-failed` 直接 EOF），只剩一句 exit code 1。
+        run: python tools/ci_unittest.py
 
       # 测试里不许**无条件**依赖第三方库：CI runner 只有标准库。
       # （#57 就是因为在测试函数体里 import yaml，合并后 refresh-stocks 每次都在

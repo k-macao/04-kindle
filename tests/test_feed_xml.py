@@ -286,6 +286,59 @@ class AnalysisGuardTest(unittest.TestCase):
             build_feed.check_analysis_fields([item])
 
 
+class AnalysisDegradeTest(unittest.TestCase):
+    """分析接口挂了不能把整份 feed 按死：整份没有分析可以发，夹生的不行。"""
+
+    def bare_item(self):
+        folder = Path(tempfile.mkdtemp())
+        _info, path = build_feed.build(payload(count=1), folder, now=NOW, min_items=1)
+        return parse(path.read_text(encoding="utf-8")).find("./channel/item")
+
+    def test_no_analysis_is_accepted_only_when_allowed(self):
+        item = self.bare_item()
+        self.assertEqual(build_feed.check_analysis_fields([item], allow_absent=True), "absent")
+        with self.assertRaisesRegex(ValueError, "缺少 AI 线索分析标签"):
+            build_feed.check_analysis_fields([item])
+
+    def test_full_coverage_still_reported_as_full(self):
+        chain = ("线索：政策公布；事实：文件列出新要求；推断：执行成本或变化；"
+                 "影响：相关行业需留意；验证：跟踪配套细则。")
+        data = payload(count=1)
+        data["items"][0]["analysis"] = chain
+        folder = Path(tempfile.mkdtemp())
+        _info, path = build_feed.build(data, folder, now=NOW, min_items=1)
+        item = parse(path.read_text(encoding="utf-8")).find("./channel/item")
+        self.assertEqual(build_feed.check_analysis_fields([item], allow_absent=True), "full")
+
+    def test_half_analyzed_feed_is_still_rejected(self):
+        chain = ("线索：政策公布；事实：文件列出新要求；推断：执行成本或变化；"
+                 "影响：相关行业需留意；验证：跟踪配套细则。")
+        data = payload(count=2)
+        data["items"][0]["analysis"] = chain
+        folder = Path(tempfile.mkdtemp())
+        _info, path = build_feed.build(data, folder, now=NOW, min_items=1)
+        items = parse(path.read_text(encoding="utf-8")).findall("./channel/item")
+        # 排序会改条目次序，所以只认「有一条缺标签」，不认它是第几条。
+        self.assertEqual(sum(1 for item in items
+                             if "AI 线索分析" in (item.findtext("description") or "")), 1)
+        with self.assertRaisesRegex(ValueError, "缺少 AI 线索分析标签"):
+            build_feed.check_analysis_fields(items, allow_absent=True)
+
+    def test_note_lands_in_channel_description(self):
+        note = "本期 AI 线索分析未生成（分析接口调用失败），只保留原文与中文译文。"
+        folder = Path(tempfile.mkdtemp())
+        _info, path = build_feed.build(payload(count=1), folder, now=NOW, min_items=1,
+                                       analysis_note=note)
+        root = parse(path.read_text(encoding="utf-8"))
+        self.assertIn(note, root.findtext("./channel/description"))
+
+    def test_channel_description_is_unchanged_without_a_note(self):
+        folder = Path(tempfile.mkdtemp())
+        _info, path = build_feed.build(payload(count=1), folder, now=NOW, min_items=1)
+        root = parse(path.read_text(encoding="utf-8"))
+        self.assertNotIn("未生成", root.findtext("./channel/description"))
+
+
 class DeviceFieldGuardTest(unittest.TestCase):
     """设备侧硬要求：缺一条就整轮停在中途（KOReader 索引 nil 报错）。"""
 

@@ -68,7 +68,9 @@ jobs:
           python-version: "3.12"
 
       - name: 跑测试（解析、去重、时间窗、源目录、英译中、feed 结构）
-        run: python -m unittest discover -s tests
+        # 失败时把用例名写成 `::error` 注解：这层日志常常拿不到（本机
+        # `gh run view --log-failed` 直接 EOF），只剩一句 exit code 1。
+        run: python tools/ci_unittest.py
 
       # 定时/手动会写标题指纹，保证同一条新闻不会天天重复；改代码触发的运行（push）用
       # --no-seen：既不读也不写指纹，免得把当天还没到 07:00 的条目「提前吃掉」。
@@ -117,19 +119,33 @@ jobs:
           --cache site/news_zh_cache.json --max-items 10000 --strict
 
       # 每条新闻先做线索链分析；API Key 放在仓库 Actions Secret，不写入仓库。
-      # 任何一条分析缺失/格式不全都停止发布，避免推送「说是 AI 分析、实际没分析」的 feed。
+      #
+      # 允许这一步失败：分析是「加值」，不是「新闻本身」。写成致命步骤时，接口一挂
+      # （余额用完 / 429 / 模型把某批写太长被截断），整份 feed 就停更一天——2026-11-20
+      # 那次红就是这样，第二天读者手上还是旧 feed。
+      # 但也不能悄悄少分析：这一步失败时 channel 描述会写「本期未生成线索分析」，
+      # 产物自检要求「要么每条都有，要么一条都没有且有这句说明」，夹生的 feed 照旧不发。
       - name: DeepSeek 为每条新闻生成线索分析
+        id: analysis
+        continue-on-error: true
         env:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
         run: >-
           python tools/analyze_news.py --data news_data.json
           --cache site/news_analysis_cache.json
 
+      - name: 分析失败时的说明（不拦住发布，只把话说清楚）
+        if: steps.analysis.outcome == 'failure'
+        run: |
+          set -euo pipefail
+          echo "::warning title=AI 线索分析未生成::DeepSeek 调用失败，本轮 feed 只保留原文与中文译文。"
+          echo "ANALYSIS_NOTE=本期 AI 线索分析未生成（分析接口调用失败），只保留原文与中文译文。" >> "$GITHUB_ENV"
+
       - name: 生成聚合 RSS（site/news.xml）
         run: >-
           python tools/build_feed.py --data news_data.json --out site
           --min-items "$MIN_ITEMS" --max-items "$MAX_ITEMS"
-          --self-url "$FEED_SELF_URL"
+          --self-url "$FEED_SELF_URL" --analysis-note "${ANALYSIS_NOTE:-}"
 
       # 另外出两份同源的小文件。设备上「內容下載失敗」时按体积从小到大试：
       #   news-test.xml 几 KB（只验线路/证书，别的不说明）
@@ -141,10 +157,12 @@ jobs:
           base="${FEED_SELF_URL%news.xml}"
           python tools/build_feed.py --data news_data.json --out site \
             --filename news-lite.xml --min-items 5 --max-items 60 --desc-limit 140 \
-            --title "004 每日新闻聚合（精简）" --self-url "${base}news-lite.xml"
+            --title "004 每日新闻聚合（精简）" --self-url "${base}news-lite.xml" \
+            --analysis-note "${ANALYSIS_NOTE:-}"
           python tools/build_feed.py --data news_data.json --out site \
             --filename news-test.xml --min-items 1 --max-items 3 --desc-limit 80 \
-            --title "004 新闻订阅（连通性测试）" --self-url "${base}news-test.xml"
+            --title "004 新闻订阅（连通性测试）" --self-url "${base}news-test.xml" \
+            --analysis-note "${ANALYSIS_NOTE:-}"
 
       - name: 产物自检（三份 feed：可解析、条数、guid、中文配对、self 地址）
         run: |
@@ -203,8 +221,15 @@ jobs:
                       problems.append(f"{name} 有条目没有绝对的 <link>：{item_link[:40] or '(缺)'}")
                   if not title.strip() or "\n" in title:
                       problems.append(f"{name} 的 <title> 为空或带换行：{title[:20]!r}")
+              # 整份没有分析是允许的（分析接口挂了也要出 feed），但 channel 里必须
+              # 写明「本期未生成」；一半有一半没有的夹生 feed 一律不发布。
+              channel_description = (channel.findtext("description") or "") \
+                  if channel is not None else ""
+              allow_absent = "分析" in channel_description and "未生成" in channel_description
+              analysis_state = "broken"
               try:
-                  build_feed.check_analysis_fields(items)
+                  analysis_state = build_feed.check_analysis_fields(
+                      items, allow_absent=allow_absent)
               except ValueError as exc:
                   problems.append(f"{name} {exc}")
 
@@ -212,7 +237,8 @@ jobs:
               paired = sum(1 for title in titles if "｜中文：" in title)
               untranslated = [title for title in titles if not cjk.search(title)]
               lines.append(f"{name}: {len(items)} 条 / {path.stat().st_size} 字节 / "
-                           f"中英并列 {paired} / 英文未译 {len(untranslated)}")
+                           f"中英并列 {paired} / 英文未译 {len(untranslated)} / "
+                           f"线索分析 {'逐条' if analysis_state == 'full' else analysis_state}")
 
           if problems:
               print("；".join(problems), file=sys.stderr)

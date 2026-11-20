@@ -37,7 +37,9 @@ jobs:
           python-version: "3.12"
 
       - name: 跑测试（过滤规则与两个转换器是否一致）
-        run: python -m unittest discover -s tests
+        # 失败时把用例名写成 `::error` 注解：这层日志常常拿不到（本机
+        # `gh run view --log-failed` 直接 EOF），只剩一句 exit code 1。
+        run: python tools/ci_unittest.py
 
       - name: 抓一次 004 页面（两种产物共用同一份）
         run: |
