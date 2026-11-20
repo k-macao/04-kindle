@@ -137,10 +137,10 @@ Feedly / Reeder。插件那套「News subscription」读的是 `site/news.json`�
 ## 同花顺行情面板（hithink-finance）
 
 从同花顺官方 GitHub 仓库 [Hithink-Tech-Org/Financial-API](https://github.com/Hithink-Tech-Org/Financial-API)
-的金融数据服务抓 A 股行情（宽基指数 + 约 40 只自选股 + 当日涨停池，附近 20 日
-收盘价），排成**表格 + 图形 + 卡片**式界面四份产物：`site/stocks.json`（清单+数据）、
-`site/stocks.html`（浏览器卡片仪表盘：指数小卡 / 自选股大卡带 SVG 迷你走势图 /
-涨停表）、`site/stocks.epub`（Kindle 字模式卡片版，表格排卡片 + 一行文字走势）、
+的金融数据服务抓 A 股行情（13 个宽基指数 + 91 个行业板块 + 全 A 5584 只的涨跌统计
++ 当日涨停池 + 板块日 K），港股走腾讯公开行情，排成四份产物：`site/stocks.json`
+（清单+数据）、`site/stocks.html`（浏览器卡片仪表盘：市场概览 / 指数小卡 / 板块密集卡 /
+港股 / 涨停表 / **板块轮动 RRG 四象限图**）、`site/stocks.epub`（Kindle 字模式卡片版）、
 `site/stocks.txt`（纯文本回退版）。统一 API Key 放在仓库 Actions Secret
 **`THS_API_KEY`** / **`THS_KEY`**（官网 <https://fuyao.aicubes.cn/admin/> 创建），
 不写入仓库。GitHub Actions 的 cron 在本仓库被限流到每天 3–4 次（实测：配了每 15
@@ -150,7 +150,15 @@ Feedly / Reeder。插件那套「News subscription」读的是 `site/news.json`�
 网页面板每 7 分钟检查一次清单，`generated` 变了才刷新。面板抬头会写「N 分钟前 /
 盘中 / STALE」，一眼能看出数字是不是最新的。本地要真正的 60 秒一轮：
 `HITHINK_FINANCE_API_KEY=… python tools/fetch_stocks.py --loop 60 --build`。
-自选清单在 `tools/stock_watchlist.py`，详见 [docs/kindle-stocks.md](docs/kindle-stocks.md)。
+面板最后一段是**板块轮动 RRG**：策略来自 GitHub
+[hugo2046/QuantsPlaybook](https://github.com/hugo2046/QuantsPlaybook)（券商金工研报复现）
+的「相对旋转图 RRG 行业轮动」，用同花顺的板块日 K 算出 91 个板块在
+「相对强度 × 相对强度动量」四象限里的位置（领先 / 改善 / 滞后 / 疲软）、今日象限迁移
+和信号 A 名单——涨跌幅排序看不出的「刚开始转强 / 强弩之末」由它补上。公式照原仓库的
+`factor_algo.py` 逐行搬成标准库版（`tools/sector_rrg.py`），没有 pandas 依赖，
+warm-up 行数也照它的算法说明核过；参数默认研报口径 220/60/20，日 K 不够时自动退短窗
+并在面板上写明。清单在 `tools/market_watchlist.py`，详见
+[docs/kindle-stocks.md](docs/kindle-stocks.md)。
 
 ## 2. Kindle 安装与使用
 

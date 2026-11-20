@@ -41,6 +41,7 @@ on:
       - ".github/workflows/refresh-stocks.yml"
       - "tools/fetch_stocks.py"
       - "tools/build_stocks.py"
+      - "tools/sector_rrg.py"
       - "tools/market_watchlist.py"
       - "tools/fetch_hk.py"
 

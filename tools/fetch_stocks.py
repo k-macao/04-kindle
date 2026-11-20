@@ -26,7 +26,9 @@ REST 接口约定（见仓库 ``docs/api/README.md``）：
 - ``GET /api/a-share/special-data/limit-up-pool`` —— 当日涨停池（情绪面，
   失败不挡主行情，只记进 ``errors``）；
 - ``GET /api/a-share/prices/historical-batch`` 与指数同名接口 —— 最近
-  ``--history-days`` 根日 K 收盘价，给卡片上的迷你走势图（失败不挡快照）。
+  ``--history-days`` 根日 K 收盘价，给卡片上的迷你走势图（失败不挡快照）；
+  板块另取 ``--rrg-days`` 根（默认 340），喂给 ``tools/sector_rrg.py`` 的
+  RRG 板块轮动（策略来自 GitHub ``hugo2046/QuantsPlaybook``）。
 
 快照不返回中文名，名字用 ``GET /api/meta/tickers/search?q=<thscode>`` 逐个补，
 补过的存进 ``site/stocks_names.json`` 缓存，下次不再问（和新闻译文缓存一个路子）。
@@ -55,6 +57,7 @@ from urllib.request import Request, urlopen
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import market_watchlist  # noqa: E402
+import sector_rrg  # noqa: E402
 
 DEFAULT_BASE_URL = "https://fuyao.aicubes.cn"
 # 官方推荐的环境变量名（见 Financial-API README「获取统一 API Key」一节）；
@@ -280,6 +283,68 @@ def fetch_history(client, path, codes, days, now_ms=None):
             if isinstance(group, dict) and group.get("thscode"):
                 history[str(group["thscode"])] = normalize_history_group(group, days)
     return history
+
+
+# RRG 要一年半的日 K（研报口径 319 根），比迷你走势图的 20 根重得多：91 个板块
+# 一轮 10 次批量请求。工作流是「同一个 runner 里常驻循环」，所以按「当天 + TTL +
+# 同一批代码」把长期历史缓存住；每轮只用快照最新价把今天那一行覆盖掉，
+# 盘中照样能看到位置在动，而不用每 15 分钟重拉 3400 根 K 线。
+RRG_CACHE = {"day": "", "stamp": 0.0, "history": {}, "codes": frozenset(), "days": 0}
+
+
+def rrg_history(client, codes, days, cache_minutes=60, now=None):
+    """板块长期日 K，带当天缓存。返回 (history, 是否命中缓存)。"""
+    stamps = time.time() if now is None else now
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    wanted = frozenset(codes)
+    cache = RRG_CACHE
+    fresh = (cache["history"] and cache["day"] == today
+             and cache["codes"] == wanted and cache["days"] == days
+             and stamps - cache["stamp"] < cache_minutes * 60)
+    if fresh:
+        return cache["history"], True
+    history = fetch_history(client, "/api/a-share-index/prices/historical-batch",
+                            list(codes), days)
+    if history:
+        cache.update({"day": today, "stamp": stamps, "history": history,
+                      "codes": wanted, "days": days})
+    return history, False
+
+
+def build_rrg(client, rows, days=340, cache_minutes=60, top_n=6, preset_key="",
+              today_day=None):
+    """指数/板块快照 → RRG 板块轮动段落。返回 (section | None, notes)。
+
+    只用 ``is_sector`` 的行；历史 K 线取不到、根数不够时返回 ``(None, [原因])``，
+    不抛异常——板块轮动挂了不该拖垮整块行情面板。
+    """
+    sectors = [(row.get("thscode"), row.get("name") or "")
+               for row in rows if row.get("is_sector")]
+    codes = [code for code, _ in sectors if code]
+    if len(codes) < 3:
+        return None, [f"板块只有 {len(codes)} 个，不够算 RRG"]
+    notes = []
+    try:
+        history, _cached = rrg_history(client, codes, days, cache_minutes)
+    except ThsError as exc:
+        # 这一天早些时候缓存过就接着用：盘中接口抽风不该让板块段整块消失。
+        today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        history = RRG_CACHE["history"] if RRG_CACHE["day"] == today else {}
+        if not history:
+            return None, [f"板块历史 K 线取不到：{exc}"]
+        notes.append(f"板块历史 K 线这轮没取到（{exc}），沿用今天早些时候的缓存")
+    if not history:
+        return None, ["板块历史 K 线一条都没取到，这一轮不做板块轮动"]
+    prices, pct = {}, {}
+    for row in rows:
+        if not row.get("is_sector"):
+            continue
+        prices[row.get("thscode")] = row.get("last_price")
+        pct[row.get("thscode")] = row.get("price_change_ratio_pct")
+    section, more = sector_rrg.build_section(
+        history, sectors, today_prices=prices, today_day=today_day,
+        today_pct=pct, top_n=top_n, preset_key=preset_key or None)
+    return section, notes + more
 
 
 def fetch_payload(client, stocks, indices, limit_up_size=0, names_cache_path=None,
@@ -552,7 +617,30 @@ def run_once(args, client):
         except ThsError as exc:
             payload["errors"].append(f"涨停池失败：{exc}")
 
-    # 4) 港股（腾讯源，独立失败，不拖垮 A 股）
+    # 4) 板块轮动 RRG（板块长期日 K + 快照；独立失败，不拖垮 A 股）
+    if not args.no_rrg:
+        stamp = payload.get("index_timestamp")
+        today_day = (sector_rrg.beijing_day(stamp)
+                     if isinstance(stamp, (int, float)) else None)
+        try:
+            section, notes = build_rrg(
+                client, payload["indices"], days=args.rrg_days,
+                cache_minutes=args.rrg_cache_minutes, top_n=args.rrg_top_n,
+                preset_key=args.rrg_preset, today_day=today_day)
+            if section:
+                payload["sector_rrg"] = section
+                if section.get("preset_key") != "report":
+                    payload["errors"].append(
+                        f"板块日 K 只够「{section['preset']}」，RRG 用的是短窗参数")
+                payload["errors"].extend(notes)
+            else:
+                payload["errors"].append(
+                    "板块轮动 RRG 未生成：" + ("；".join(notes) or "未知原因"))
+        except ThsError as exc:
+            # 历史 K 线缓存过的就先用缓存（盘中接口抽风不该让板块段整块消失）
+            payload["errors"].append(f"板块轮动 RRG 未生成：{exc}")
+
+    # 5) 港股（腾讯源，独立失败，不拖垮 A 股）
     if not args.no_hk:
         try:
             import fetch_hk  # noqa: E402
@@ -578,10 +666,13 @@ def run_once(args, client):
                    encoding="utf-8")
     market = payload.get("market") or {}
     hk = payload.get("hk") or {}
+    rrg = payload.get("sector_rrg") or {}
+    rrg_text = (f" / RRG {len(rrg.get('rows') or [])} 个板块"
+                f"（{rrg.get('preset')}）" if rrg else "")
     print(f"已抓取 {len(payload['indices'])} 个指数/板块"
           f" / 全市场 {market.get('count', 0)} 只（涨 {market.get('up', 0)} 跌 {market.get('down', 0)}）"
           f" / 涨停 {len(payload['limit_up'])}"
-          f" / 港股 {len(hk.get('rows') or [])} 个 → {out}")
+          f" / 港股 {len(hk.get('rows') or [])} 个{rrg_text} → {out}")
     for error in payload["errors"]:
         print(f"警告：{error}", file=sys.stderr)
     if args.build:
@@ -612,6 +703,17 @@ def main(argv=None):
                         help="涨停池取前几名")
     parser.add_argument("--history-days", type=int, default=20,
                         help="卡片迷你走势图取最近几根日 K（0=不取）")
+    parser.add_argument("--no-rrg", action="store_true",
+                        help="不算板块轮动 RRG（省掉板块长期日 K 的 10 次批量请求）")
+    parser.add_argument("--rrg-days", type=int, default=340,
+                        help="RRG 用的板块日 K 根数（研报口径 220/60/20 需 319 根）")
+    parser.add_argument("--rrg-cache-minutes", type=float, default=60,
+                        help="板块长期日 K 的缓存时长（分钟，0=每轮都重取）")
+    parser.add_argument("--rrg-top-n", type=int, default=6,
+                        help="信号 A 取领先象限里离中心最远的前 N 个")
+    parser.add_argument("--rrg-preset", default="",
+                        choices=["", "report", "short"],
+                        help="锁定 RRG 参数档（默认按数据长度自动挑）")
     parser.add_argument("--names-cache", default=market_watchlist.NAMES_CACHE,
                         help="中文名缓存路径")
     parser.add_argument("--base-url", default=os.environ.get(

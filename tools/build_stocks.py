@@ -18,6 +18,11 @@
 - ``stocks.epub`` —— Kindle 字模式卡片版：同一套数据排成表格卡片，交给
   KOReader 阅读器显示（crengine 不认 flex/grid/SVG，所以迷你图只出现在网页面板）。
 
+四份产物最后都多一段【板块轮动 · RRG】：数据由 ``tools/sector_rrg.py`` 算好放进
+``stocks_data.json`` 的 ``sector_rrg`` 字段（策略来自 GitHub ``hugo2046/QuantsPlaybook``，
+见那个模块的文档），这里只负责排版——网页除了表格还画一张灰度四象限图，
+Kindle 纯文本/EPUB 只有文字与表格。
+
 抓取只负责取回并归一化（``tools/fetch_stocks.py``），这里只负责判断与输出：
 数据条数太少、清单解析不过都不写文件，不覆盖上一份。
 """
@@ -26,11 +31,14 @@ import argparse
 import hashlib
 import html as html_mod
 import json
+import re
 import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+import sector_rrg  # noqa: E402
 
 TITLE = "同花顺行情面板"
 DISCLAIMER = "仅供信息展示，不构成投资建议"
@@ -269,6 +277,13 @@ def fmt_turnover(value):
     return f"{yi:.2f}亿"
 
 
+def fmt_one(value):
+    """RS-Ratio / RS-Momentum 这类无量纲指标：一位小数，缺值 --。"""
+    if not isinstance(value, (int, float)):
+        return "--"
+    return f"{value:.1f}"
+
+
 def fmt_seal(value):
     if value is None:
         return ""
@@ -348,6 +363,88 @@ def index_line(row, compact=False):
             f" · 额{fmt_turnover(row.get('turnover'))}").rstrip()
 
 
+def rrg_section(payload):
+    """取出可用的 RRG 段落；没有（或没算出板块）就返回空 dict。
+
+    排版层一律走这个入口：字段缺了宁可整段不显示，也不要排出半截表格。
+    """
+    # 抓取产物里叫 sector_rrg，清单里叫 rrg——拿清单当输入重排时要都认
+    for key in ("sector_rrg", "rrg"):
+        section = payload.get(key)
+        if isinstance(section, dict) and section.get("rows"):
+            return section
+    return {}
+
+
+def _wrap_display(text, width=48, indent="  "):
+    """按显示宽度折行（CJK 算 2 列），Kindle 上不会被截断。
+
+    先在「·、，；。」后面断，再按宽度硬切——逐字折行会把「-0.06%」劈成
+    「-0.06」+「%」，电子墨水上读起来像两行两个数。
+    """
+    # 一串「非分隔符 + 可选的句读/空格」= 一个不可再分的块：
+    # 「半导体 -0.06%（」不会被拆开，标点留在块尾。
+    tokens = re.findall(
+        r"[^·、，；。：）\s]+[·、，；。：）]?\s*|[·、，；。：）]\s*", text or "")
+    lines, current = [], ""
+    for token in tokens:
+        if not token:
+            continue
+        if _display_width(current + token) <= width:
+            current += token
+            continue
+        if current:
+            lines.append(indent + current.rstrip())
+            current = ""
+        while _display_width(token) > width:
+            cut = ""
+            for char in token:
+                if _display_width(cut + char) > width:
+                    break
+                cut += char
+            lines.append(indent + cut.rstrip())
+            token = token[len(cut):]
+        current = token
+    if current.strip():
+        lines.append(indent + current.rstrip())
+    return lines
+
+
+def rrg_quadrant_line(section, quadrant, limit=6):
+    """一个象限的紧凑清单：名字 + 今日涨跌 + (RS-Ratio / RS-Mom)。"""
+    rows = [row for row in section.get("rows") or []
+            if row.get("quadrant") == quadrant]
+    if not rows:
+        return ""
+    cells = [f"{row.get('name') or row.get('thscode')} {fmt_ratio(row.get('today_pct'))}"
+             f"({row.get('rs_ratio'):.1f}/{row.get('rs_mom'):.1f})"
+             for row in rows[:limit]]
+    extra = f" 等 {len(rows)} 个" if len(rows) > limit else ""
+    return f"{sector_rrg.QUADRANTS[quadrant]}({len(rows)}) " + " · ".join(cells) + extra
+
+
+def render_rrg_text(section):
+    """RRG 段落的纯文本版（Kindle 面板最后一段）。"""
+    rows = section.get("rows") or []
+    counts = section.get("counts") or {}
+    source = section.get("source") or {}
+    demo = "（演示）" if section.get("demo") else ""
+    lines = [f"【板块轮动 · RRG】{len(rows)} 个板块 · {section.get('preset')}"
+             f" · 基准 板块等权 · 数据 {section.get('as_of')}{demo}"]
+    lines.append(f"  象限 领先 {counts.get('leading', 0)} · 改善 {counts.get('improving', 0)}"
+                 f" · 滞后 {counts.get('lagging', 0)} · 疲软 {counts.get('weakening', 0)}"
+                 " · 依次按轮动顺序（领先→疲软→滞后→改善）")
+    for text in section.get("narrative") or []:
+        lines.extend(_wrap_display(text, width=46, indent="  "))
+    for quadrant in (1, 2, 4, 3):
+        line = rrg_quadrant_line(section, quadrant)
+        if line:
+            lines.extend(_wrap_display(line, width=46, indent="  "))
+    lines.append(f"  策略 GitHub {source.get('repo')} · {source.get('file')}")
+    lines.append(f"  研报 {source.get('report')}（仅信息展示，不构成投资建议）")
+    return lines
+
+
 def data_hash(payload):
     """行情指纹：价格/涨跌幅/条数/历史收盘变了才变，供工作流跳过无变化的提交。"""
     history = payload.get("history") or {}
@@ -362,6 +459,13 @@ def data_hash(payload):
         "limit_up": [(r.get("thscode"), r.get("last_price")) for r in payload.get("limit_up") or []],
         "history": {code: [pair[1] for pair in bars]
                     for code, bars in sorted(history.items())},
+        # RRG 只看「象限分布 + 信号 A 名单」：逐板块的 RS/Mom 每轮都在小数点后动，
+        # 全塞进指纹会让收盘后也每 15 分钟提交一次，等于白刷。
+        "rrg": [(section.get("as_of"), section.get("preset"),
+                 section.get("counts"),
+                 [row.get("name") for row in
+                  ((section.get("signal") or {}).get("picks") or [])])
+                for section in [rrg_section(payload)] if section],
         "data_timestamp": payload.get("data_timestamp"),
     }
     raw = json.dumps(core, ensure_ascii=False, sort_keys=True)
@@ -393,11 +497,14 @@ def manifest(payload, generated):
             "market": (payload.get("market") or {}).get("count") or 0,
             "hk": len(((payload.get("hk") or {}).get("rows")) or []),
             "limit_up": len(payload.get("limit_up") or []),
+            "rrg": len(rrg_section(payload).get("rows") or []),
         },
         "indices": payload.get("indices") or [],
         "market": payload.get("market"),
         "hk": _hk_manifest(payload),
         "limit_up": payload.get("limit_up") or [],
+        # 板块轮动整段进清单（网页要自己画四象限图；Kindle 只用文字与表格）
+        "rrg": rrg_section(payload) or None,
         "history": payload.get("history") or {},
         "errors": payload.get("errors") or [],
     }
@@ -429,7 +536,7 @@ def _hk_manifest(payload):
 
 
 def render_txt(payload, generated):
-    """Kindle 纯文本版：一屏卡片式监视器（市场概览 → 指数 → 板块 → 港股）。
+    """Kindle 纯文本版：一屏卡片式监视器（市场概览 → 指数 → 板块 → 港股 → RRG）。
 
     不再有「自选股」：面板看的是全市场（指数/板块/涨跌家数/量价）+ 港股。
     """
@@ -523,6 +630,12 @@ def render_txt(payload, generated):
                          f"{fmt_ratio(row.get('price_change_ratio_pct'))} {extra}".rstrip())
         lines.append("")
 
+    # 最后一段：板块轮动 RRG（策略来自 GitHub，见 tools/sector_rrg.py）
+    section = rrg_section(payload)
+    if section:
+        lines.extend(render_rrg_text(section))
+        lines.append("")
+
     for error in payload.get("errors") or []:
         lines.append(f"注：{error}")
     lines.append(DISCLAIMER)
@@ -587,6 +700,28 @@ padding:8px 12px;border-bottom:1px solid #000;background:#f2f2f2}
 .card .spark svg{display:block;width:100%;height:36px}
 .card .spark-label{font-size:11px;color:#555;display:flex;justify-content:space-between}
 .up{font-weight:bold}.down{font-weight:bold}
+.rrg-chart{border:2px solid #000;padding:6px;margin:10px 0 6px}
+.rrg-chart svg{display:block;width:100%;height:auto}
+.rrg-chart .grid{stroke:#000;stroke-width:1;stroke-dasharray:5 4}
+.rrg-chart .trail{fill:none;stroke:#c9c9c9;stroke-width:1}
+.rrg-chart .trail.hot{stroke:#000;stroke-width:1.6}
+.rrg-chart .pt{fill:#777}
+.rrg-chart .pt.hot{fill:#000}
+.rrg-chart text{font-family:inherit;fill:#000}
+.rrg-chart .lbl{font-size:12px}
+.rrg-chart .qlabel{font-size:15px;font-weight:bold;fill:#555}
+.rrg-chart .ax{font-size:11.5px;fill:#555}
+.rrg-chart .legend{font-size:12px;color:#333;border-top:1px dashed #999;padding-top:4px;margin-top:4px}
+.qcount .cell{background:#fff}
+.rrg-read p{margin:5px 0;font-size:13.5px;line-height:1.5}
+table.rrg-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}
+table.rrg-table th{text-align:left;border-bottom:2px solid #000;padding:4px 6px;font-size:12.5px}
+table.rrg-table td{border-bottom:1px solid #ddd;padding:3px 6px;white-space:nowrap}
+.qchip{display:inline-block;border:1px solid #000;padding:0 5px;font-size:12px}
+.qchip.q1{background:#000;color:#fff}
+.qchip.q4{border-style:dashed}
+.prev-q{color:#666}
+p.src{font-size:11.5px;color:#444;margin-top:8px;line-height:1.5}
 footer{border-top:1px solid #000;margin-top:16px;padding-top:8px;font-size:13px;color:#333}
 </style>
 </head>
@@ -787,9 +922,102 @@ rows.forEach(function(r){h+='<tr><td>'+esc(r.name||r.thscode)+'</td>'+
 '<td>'+esc(r.limit_up_time||'')+'</td><td>'+esc(r.limit_up_reason||'')+'</td>'+
 '<td>'+esc(r.continue_day_text||'')+'</td><td>'+money(r.seal_money)+'</td></tr>';});
 return h+'</table>';}
+function num1(v){
+return (typeof v==='number')?(Math.round(v*10)/10).toFixed(1):'--';}
+function qchip(q,name){
+return '<span class="qchip q'+q+'">'+esc(name)+'</span>';}
+// RRG 四象限图：横轴 RS-Ratio、纵轴 RS-Momentum，十字中枢 (100,100)。
+// 电子墨水只有黑/灰：领先象限淡灰底 + 黑点，其余为灰点；轨迹是被压成两维的
+// 最近几个交易日路径——点朝右上走=继续转强，朝右下走=强弩之末。
+function rrgChart(g){
+var rows=g.rows||[];
+if(!rows.length)return '';
+var minx=100,maxx=100,miny=100,maxy=100;
+rows.forEach(function(r){
+minx=Math.min(minx,r.rs_ratio);maxx=Math.max(maxx,r.rs_ratio);
+miny=Math.min(miny,r.rs_mom);maxy=Math.max(maxy,r.rs_mom);});
+minx=Math.min(minx,99);maxx=Math.max(maxx,101);
+miny=Math.min(miny,99);maxy=Math.max(maxy,101);
+// 记下真实取值范围（图例里写出来，读者才知道这张图被放大到多少倍）
+var dataRange=minx.toFixed(1)+'–'+maxx.toFixed(1)+' / '+miny.toFixed(1)+'–'+maxy.toFixed(1);
+var spanx=Math.max(maxx-minx,2),spany=Math.max(maxy-miny,2);
+minx-=spanx*0.10;maxx+=spanx*0.10;miny-=spany*0.14;maxy+=spany*0.14;
+var W=720,H=400,P=30;
+function X(v){return P+(v-minx)/(maxx-minx)*(W-2*P);}
+function Y(v){return H-P-(v-miny)/(maxy-miny)*(H-2*P);}
+var hot={};
+((g.signal||{}).picks||[]).forEach(function(p){hot[p.thscode]=1;});
+var h='<div class="rrg-chart"><svg viewBox="0 0 '+W+' '+H+'">';
+h+='<rect x="'+X(100).toFixed(1)+'" y="'+Y(maxy).toFixed(1)+'" width="'+
+(X(maxx)-X(100)).toFixed(1)+'" height="'+(Y(100)-Y(maxy)).toFixed(1)+'" fill="#f0f0f0"/>';
+h+='<line class="grid" x1="'+X(100).toFixed(1)+'" y1="'+P+'" x2="'+X(100).toFixed(1)+'" y2="'+(H-P)+'"/>';
+h+='<line class="grid" x1="'+P+'" y1="'+Y(100).toFixed(1)+'" x2="'+(W-P)+'" y2="'+Y(100).toFixed(1)+'"/>';
+[[1,'领先',W-P-6,P+16,'end'],[2,'改善',P+6,P+16,'start'],
+[3,'滞后',P+6,H-P-6,'start'],[4,'疲软',W-P-6,H-P-6,'end']].forEach(function(q){
+h+='<text class="qlabel" x="'+q[2]+'" y="'+q[3]+'" text-anchor="'+q[4]+'">'+q[1]+'</text>';});
+rows.forEach(function(r){
+var t=r.trail||[];
+if(t.length<2)return;
+var pts=t.map(function(p){return X(p[0]).toFixed(1)+','+Y(p[1]).toFixed(1);}).join(' ');
+h+='<polyline class="trail'+(hot[r.thscode]?' hot':'')+'" points="'+pts+'"/>';});
+rows.forEach(function(r){
+h+='<circle class="pt'+(hot[r.thscode]?' hot':'')+'" cx="'+X(r.rs_ratio).toFixed(1)+
+'" cy="'+Y(r.rs_mom).toFixed(1)+'" r="'+(hot[r.thscode]?4:2.6)+'"><title>'+
+esc(r.name)+' '+esc(r.quadrant_name)+' · RS '+num1(r.rs_ratio)+
+' / 动量 '+num1(r.rs_mom)+'</title></circle>';});
+// 标注：信号 A + 每个象限离中心最远的那个（91 个全标会糊成一团）
+var labelled={},labels=[];
+rows.forEach(function(r){if(hot[r.thscode]&&!labelled[r.thscode]){labelled[r.thscode]=1;labels.push(r);}});
+[1,2,3,4].forEach(function(q){
+for(var i=0;i<rows.length;i++){if(rows[i].quadrant===q&&!labelled[rows[i].thscode]){
+labelled[rows[i].thscode]=1;labels.push(rows[i]);break;}}});
+labels.forEach(function(r){
+var x=X(r.rs_ratio),y=Y(r.rs_mom),right=x<W*0.62;
+h+='<text class="lbl" x="'+(right?x+7:x-7).toFixed(1)+'" y="'+(y+4).toFixed(1)+
+'" text-anchor="'+(right?'start':'end')+'">'+esc(r.name)+'</text>';});
+h+='<text class="ax" x="'+P+'" y="'+(H-10)+'">← 相对强度偏弱 · RS-Ratio 中枢 100 · 偏强 →</text>';
+h+='<text class="ax" x="'+(W-P)+'" y="'+(H-10)+'" text-anchor="end">↑ 动量上升</text>';
+h+='</svg><div class="legend">黑点＝'+esc((g.signal||{}).name||'信号 A')+
+'；细线＝最近 '+((rows[0].trail||[]).length||0)+' 个交易日在四象限里的路径；'+
+'灰底＝领先象限 · 虚线十字＝中枢 100 · 本图放大范围 '+esc(dataRange)+
+'（RS-Ratio / RS-Momentum）。</div></div>';
+return h;}
+function rrgTable(g){
+var h='<table class="data rrg-table"><tr><th>板块</th><th>今日</th><th>RS-Ratio</th>'+
+'<th>RS-Mom</th><th>象限</th><th>前一日</th></tr>';
+(g.rows||[]).forEach(function(r){
+h+='<tr><td>'+esc(r.name||r.thscode)+'</td>'+
+'<td class="'+cls(r.today_pct)+'">'+ratio(r.today_pct)+'</td>'+
+'<td>'+num1(r.rs_ratio)+'</td><td>'+num1(r.rs_mom)+'</td>'+
+'<td>'+qchip(r.quadrant,r.quadrant_name)+'</td>'+
+'<td class="prev-q">'+(r.prev_quadrant?
+esc(['','领先','改善','滞后','疲软'][r.prev_quadrant]):'--')+'</td></tr>';});
+return h+'</table>';}
+function rrgSection(g){
+var rows=g.rows||[];
+if(!rows.length)return '';
+var c=g.counts||{},src=g.source||{},names=['领先','改善','滞后','疲软'];
+var keys=['leading','improving','lagging','weakening'];
+var defs=['RS>100 且 动量>100','RS<100 且 动量>100','RS<100 且 动量<100','RS>100 且 动量<100'];
+var h='<section><h2>板块轮动 · RRG<span class="muted"> '+rows.length+' 个板块 · '+
+esc(g.preset||'')+' · 数据 '+esc(g.as_of||'')+'</span></h2>';
+h+=rrgChart(g);
+h+='<div class="breadth qcount">';
+names.forEach(function(name,i){
+h+='<div class="cell"><div class="k">'+name+'</div><div class="v">'+(c[keys[i]]||0)+
+'</div><div class="s">'+defs[i]+'</div></div>';});
+h+='</div>';
+h+='<div class="rrg-read">'+(g.narrative||[]).map(function(t){
+return '<p>'+esc(t)+'</p>';}).join('')+'</div>';
+h+=rrgTable(g);
+h+='<p class="src">基准 '+esc(g.benchmark||'')+' · '+esc(String((g.params||{}).lookback_ratio||''))+
+'/'+esc(String((g.params||{}).lookback_mom||''))+'/'+esc(String((g.params||{}).smooth_window||''))+
+' 参数 · '+esc(String(g.samples||0))+' 根日 K<br>策略：GitHub '+esc(src.repo||'')+' · '+
+esc(src.file||'')+'（'+esc(src.signal||'')+'）<br>研报：'+esc(src.report||'')+'</p>';
+return h+'</section>';}
 function render(d){
 var h='';
-// 一屏监视：市场概览 → 宽基 → 板块 → 港股 → 涨停池
+// 一屏监视：市场概览 → 宽基 → 板块 → 港股 → 涨停池 → 板块轮动 RRG
 if(d.market){h+='<section><h2>市场概览 · 全 A</h2>'+breadth(d.market)+'</section>';}
 var idx=(d.indices||[]),broad=[],sectors=[];
 idx.forEach(function(r){
@@ -810,6 +1038,8 @@ bj((d.hk||{}).data_time)+'</span></h2><div class="cards hk">';
 hi.concat(hs).forEach(function(r){h+=hkCard(r);});h+='</div></section>';}
 if(d.limit_up&&d.limit_up.length)h+='<section><h2>涨停池（'+d.limit_up.length+
 '）· 按封板时间</h2>'+limitRows(d.limit_up)+'</section>';
+// 最后一段：板块轮动 RRG（策略来自 GitHub hugo2046/QuantsPlaybook）
+if(d.rrg)h+=rrgSection(d.rrg);
 (d.errors||[]).forEach(function(e){h+='<p>注：'+esc(e)+'</p>';});
 document.getElementById('main').innerHTML=h||'<p>暂无数据</p>';
 var demo=d.demo?'【演示数据】':'';
@@ -982,6 +1212,33 @@ def render_epub_xhtml(payload, generated_bj):
                 f"<td>{esc(fmt_seal(row.get('seal_money')))}</td></tr>")
         parts.append("</table>")
 
+    section = rrg_section(payload)
+    if section:
+        counts = section.get("counts") or {}
+        source = section.get("source") or {}
+        demo_tag = "（演示）" if section.get("demo") else ""
+        parts.append(f"<h2>板块轮动 · RRG（{len(section['rows'])}）{esc(demo_tag)}</h2>")
+        parts.append(f'<p class="meta">{esc(section.get("preset") or "")} · 基准 '
+                     f'{esc(section.get("benchmark") or "")} · 数据 '
+                     f'{esc(str(section.get("as_of") or ""))} · 象限 领先 '
+                     f'{counts.get("leading", 0)} · 改善 {counts.get("improving", 0)}'
+                     f' · 滞后 {counts.get("lagging", 0)} · 疲软 '
+                     f'{counts.get("weakening", 0)}</p>')
+        for text in section.get("narrative") or []:
+            parts.append(f"<p>{esc(text)}</p>")
+        parts.append('<table class="data"><tr><th>板块</th><th>今日</th>'
+                     "<th>RS-Ratio</th><th>RS-Mom</th><th>象限</th></tr>")
+        for row in section["rows"]:
+            parts.append(
+                f"<tr><td>{esc(row.get('name') or row.get('thscode'))}</td>"
+                f"<td>{esc(fmt_ratio(row.get('today_pct')))}</td>"
+                f"<td>{esc(fmt_one(row.get('rs_ratio')))}</td>"
+                f"<td>{esc(fmt_one(row.get('rs_mom')))}</td>"
+                f"<td>{esc(row.get('quadrant_name') or '')}</td></tr>")
+        parts.append("</table>")
+        parts.append(f'<p class="meta">策略：GitHub {esc(source.get("repo") or "")} · '
+                     f'{esc(source.get("file") or "")}<br>研报 {esc(source.get("report") or "")}</p>')
+
     for error in payload.get("errors") or []:
         parts.append(f'<p class="meta">注：{esc(error)}</p>')
     parts.append(f"<p>{esc(DISCLAIMER)}</p>")
@@ -1066,8 +1323,10 @@ def check(out_dir):
     if data.get("doc") != "stocks.txt":
         problems.append("stocks.json 的 doc 不是 stocks.txt")
     counts = data.get("counts") or {}
-    if not counts.get("indices") and not counts.get("stocks"):
-        problems.append("stocks.json 里指数与股票都是空的")
+    # 宽基 / 板块 / 全市场 / 港股，任何一块有东西就不算空面板
+    # （以前只认 indices + stocks，只有板块的产物会被误判成空）
+    if not any(counts.get(key) for key in ("indices", "sectors", "market", "hk")):
+        problems.append("stocks.json 里指数、板块、全市场、港股都是空的")
     txt_path = out / "stocks.txt"
     if not txt_path.is_file() or txt_path.stat().st_size < 100:
         problems.append("stocks.txt 缺失或过小")
@@ -1080,6 +1339,15 @@ def check(out_dir):
         page = html_path.read_text(encoding="utf-8")
         if "stocks.json" not in page or f"var POLL = {POLL_SECONDS}" not in page:
             problems.append(f"stocks.html 没有每 {poll_text()}拉 stocks.json 的轮询")
+    rrg = data.get("rrg") or {}
+    if rrg.get("rows"):
+        if not rrg.get("narrative"):
+            problems.append("stocks.json 的 rrg 没有叙述文字")
+        page = html_path.read_text(encoding="utf-8") if html_path.is_file() else ""
+        if "板块轮动 · RRG" not in page:
+            problems.append("清单里有 rrg，但 stocks.html 没有板块轮动段")
+        if txt_path.is_file() and "板块轮动 · RRG" not in txt_path.read_text(encoding="utf-8"):
+            problems.append("清单里有 rrg，但 stocks.txt 没有板块轮动段")
     epub_path = out / "stocks.epub"
     if not epub_path.is_file():
         problems.append("缺少 stocks.epub")
@@ -1168,6 +1436,24 @@ DEMO_PAYLOAD = {
 }
 
 
+def _demo_indices(payload):
+    """演示版的指数/板块卡：补齐 RRG 里那些板块，价格用同一份合成收盘价。"""
+    rows = list(payload.get("indices") or [])
+    have = {row.get("thscode") for row in rows}
+    for row in (payload.get("sector_rrg") or {}).get("rows") or []:
+        if row.get("thscode") in have:
+            continue
+        close = row.get("close")
+        rows.append({
+            "thscode": row.get("thscode"), "ticker": str(row.get("thscode")).split(".")[0],
+            "name": row.get("name"), "last_price": close,
+            "price_change_ratio_pct": row.get("today_pct"),
+            "turnover": round(close * 1e8) if isinstance(close, (int, float)) else None,
+            "is_sector": True,
+        })
+    return rows
+
+
 def _previous_payload(out_dir):
     """上一份 site/stocks.json（没有就 None）。清单本身就是「清单 + 数据」，
     所以能直接拿它判断上一份是不是空壳。"""
@@ -1183,6 +1469,16 @@ def build(data_path=None, out_dir="site", demo=False):
     """读 stocks_data.json（或演示数据）→ 写四份产物，返回清单。"""
     if demo:
         payload = dict(DEMO_PAYLOAD)
+        # 演示数据也走真公式：RRG 段落由 sector_rrg.demo_section() 现算，
+        # 板块卡片用同一批板块，版式不会「上面 2 个、下面 14 个」。
+        payload["sector_rrg"] = sector_rrg.demo_section()
+        payload["indices"] = _demo_indices(payload)
+        # 演示数据的时间也用「现在」：RRG 段落写的是今天，抬头却停在几个月前，
+        # 演示看着像坏掉（真实数据的时间永远来自接口快照）。
+        demo_now = int(datetime.now(timezone.utc).timestamp() * 1000)
+        payload["data_timestamp"] = demo_now
+        if isinstance(payload.get("hk"), dict):
+            payload["hk"] = dict(payload["hk"], data_timestamp=demo_now)
     else:
         if not data_path:
             raise ValueError("缺少 --data（或用 --demo 先看版式）")
@@ -1221,7 +1517,9 @@ def build(data_path=None, out_dir="site", demo=False):
     print(f"已生成 {out}/stocks.json、stocks.txt、stocks.html、stocks.epub"
           f"（指数 {counts['indices']} / 板块 {counts['sectors']}"
           f" / 全市场 {counts['market']} / 港股 {counts['hk']}"
-          f" / 涨停 {counts['limit_up']}，hash {data['data_hash']}）")
+          f" / 涨停 {counts['limit_up']}"
+          + (f" / RRG {counts['rrg']}" if counts.get("rrg") else "")
+          + f"，hash {data['data_hash']}）")
     return data
 
 
