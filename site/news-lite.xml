@@ -4,554 +4,500 @@
     <title>004 每日新闻聚合（精简）</title>
     <link>https://github.com/k-macao/04-kindle</link>
     <atom:link href="https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news-lite.xml" rel="self" type="application/rss+xml"/>
-    <description>每天 07:00（北京时间）从 RSSHub 抓取并合并的财经、政治与哲学思想新闻，英文条目附中文译文，本次 60 条。</description>
+    <description>每天 07:00（北京时间）从 RSSHub 抓取并合并的财经、政治与哲学思想新闻，英文条目附中文译文，本次 56 条。 本期 AI 线索分析未生成（分析接口调用失败），只保留原文与中文译文。</description>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 17 Nov 2026 05:10:39 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 20 Nov 2026 20:54:46 +0000</lastBuildDate>
     <generator>04-kindle tools/build_feed.py</generator>
     <ttl>60</ttl>
     <item>
-      <title>宏达股份：寻求海内外优质矿产核心资源的收购及合作机会 | 宏达股份在2026年第三季度业绩说明会上表示，经上一轮技改后，公司锌冶炼系统经营质效提升，后...</title>
-      <link>https://www.yicai.com/brief/103443343.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/brief/103443343.html</guid>
-      <pubDate>Tue, 17 Nov 2026 04:57:22 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://yicai.com">第一财经 · 简报</source>
-      <description>&lt;p&gt;宏达股份在2026年第三季度业绩说明会上表示，经上一轮技改后，公司锌冶炼系统经营质效提升，后续将持续深化技改和研发，在金属收率提升、伴生金属回收方面力争更好收益；公司磷化工出口业务从品牌、质量、产能、物流等各方面已做好了相关准备，未来将严格按照国际出口政策组织实施；公司将围绕磷化…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：宏达股份在2026年第三季度业绩说明会上披露锌冶炼技改后经营质效提升、磷化工出口准备就绪，并称将寻求海内外优质磷矿、铜、金、铅锌矿等核心资源的收购及合作机会；&lt;/p&gt;&lt;p&gt;事实：报道明确公司锌冶炼系统经上一轮技改后质效提升，后续将深化技改和研发以提升金属收率与伴生金属回收，磷化工出口从品牌、质量、产能、物流等方面已做好准备并将按国际出口政策组织实施，同时围绕磷化工与有色金属两大产业加大上游资源布局；&lt;/p&gt;&lt;p&gt;推断：公司战略方向指向上游资源获取与现有冶炼、磷化工业务的纵向协同，但收购合作尚处意向表述阶段，无具体标的、金额或时间表；&lt;/p&gt;&lt;p&gt;影响：可能影响宏达股份自身业务布局及磷化工、有色金属上游资源相关领域，实际影响取决于后续是否落地具体交易及出口政策执行情况；&lt;/p&gt;&lt;p&gt;验证：后续可观察公司是否披露具体收购或合作公告、技改与金属收率数据、磷化工出口实际执行情况，目前缺少交易细节与财务影响材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>俄罗斯称在乌法、萨拉瓦特工厂附近击落逾50架无人机</title>
-      <link>https://finance.sina.com.cn/stock/usstock/c/2026-11-17/doc-iniyzhhm7745325.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/usstock/c/2026-11-17/doc-iniyzhhm7745325.shtml</guid>
-      <pubDate>Tue, 17 Nov 2026 04:56:28 +0000</pubDate>
+      <title>特朗普希望黄仁勋道歉后重掌英伟达</title>
+      <link>https://finance.sina.com.cn/stock/usstock/c/2026-11-21/doc-inizmruv0014971.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/stock/usstock/c/2026-11-21/doc-inizmruv0014971.shtml</guid>
+      <pubDate>Fri, 20 Nov 2026 20:51:50 +0000</pubDate>
       <category>中文财经快讯</category>
       <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>&lt;p&gt;据媒体援引地区紧急事务委员会的消息报道，在俄罗斯巴什科尔托斯坦共和国的乌法和萨拉瓦特工业区遭袭期间，共有50多架无人机被击落。 当局表示，目前所有工厂均正常运转，未遭受重大破坏。 注：乌法市拥有三座大型“巴什石油”（Bashneft）炼油厂——乌法石化厂（Ufaneftekhim…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：报道称俄罗斯巴什科尔托斯坦共和国乌法和萨拉瓦特工业区遭袭期间共击落50多架无人机，当局称所有工厂正常运转、未遭重大破坏，并注明乌法拥有三座大型巴什石油炼油厂、原油加工总产能约每年2350万吨，该炼油集群今年多次成为无人机袭击目标；&lt;/p&gt;&lt;p&gt;事实：报道明确击落无人机数量、当局关于工厂运转与破坏程度的表态，以及乌法炼油集群的产能与既往遇袭背景；&lt;/p&gt;&lt;p&gt;推断：袭击针对工业及炼油设施所在区域，但报道未确认设施受损，因此不能推断产能中断或供应受影响；&lt;/p&gt;&lt;p&gt;影响：可能涉及俄罗斯炼油加工与相关能源供应领域，是否产生实质影响取决于后续是否出现设施损坏或停产信息；&lt;/p&gt;&lt;p&gt;验证：后续可观察官方或企业关于炼厂运行、产能与损坏情况的通报，以及该区域是否再次发生袭击，目前缺少独立核实与损害评估材料。&lt;/p&gt;</description>
+      <description>美国总统唐纳德·特朗普呼吁英伟达在黄仁勋郑重道歉后接受他重掌公司，尽管这种可能性依然看起来极低。 英伟达董事会已明确表示不打算重新接纳这位身陷危机的前首席执行官，但特朗普周五坚持认为让他回归是明智之举，因为黄仁勋“绝对是全世界最聪明的人之一”。 他在白宫举行的记者会上重申，自己会…</description>
     </item>
     <item>
-      <title>百度集团李彦宏：AI发展最紧迫在于落地应用，组织能力变革是关键</title>
-      <link>https://wallstreetcn.com/livenews/3201028</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3201028</guid>
-      <pubDate>Tue, 17 Nov 2026 04:55:42 +0000</pubDate>
+      <title>市场消息：AI初创公司Cognition在新一轮融资中洽谈估值750亿美元。</title>
+      <link>https://flash.jin10.com/detail/20261121045030500800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261121045030500800</guid>
+      <pubDate>Fri, 20 Nov 2026 20:50:30 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+    </item>
+    <item>
+      <title>纽约汇市：美元追随国债收益率走低 避险交易推动日元和瑞郎上涨</title>
+      <link>https://finance.sina.com.cn/stock/usstock/c/2026-11-21/doc-inizmrus3697579.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/stock/usstock/c/2026-11-21/doc-inizmrus3697579.shtml</guid>
+      <pubDate>Fri, 20 Nov 2026 20:50:20 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>随着美国国债收益率下跌，美元兑G10货币小幅走低。全球股市遭遇抛售之际，风险规避情绪加深，避险买盘推动日元和瑞郎表现突出。 随着美国国债收益率全线大幅下跌，彭博美元现货指数下跌0.1%。日元上涨0.6%，至1美元兑158.7日元。科技股占比较高的 纳斯达克 100指数在美国交易时…</description>
+    </item>
+    <item>
+      <title>Cognition正就新一轮融资进行谈判，估值达750亿美元。 该公司考虑融资20亿美元，距上一轮融资仅两个月。（彭博）</title>
+      <link>https://wallstreetcn.com/livenews/3203572</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3203572</guid>
+      <pubDate>Fri, 20 Nov 2026 20:49:49 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+    </item>
+    <item>
+      <title>特朗普否认对万斯不满 淡化两人围绕伊朗战争的摩擦</title>
+      <link>https://finance.sina.com.cn/stock/usstock/c/2026-11-21/doc-inizmruq6920985.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/stock/usstock/c/2026-11-21/doc-inizmruq6920985.shtml</guid>
+      <pubDate>Fri, 20 Nov 2026 20:49:39 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>美国总统唐纳德·特朗普否认他因副总统JD·万斯将共和党中期选举失利归咎于伊朗战争而对其不满的报道。 特朗普周五在记者会上表示，万斯选后在社交媒体上称伊朗战争引发选民不满，这一说法“非常准确”。但他重申，如果重新作出选择，他仍“绝对”会发动这场战争，以阻止伊朗获得核武器。 “我没说…</description>
+    </item>
+    <item>
+      <title>新兴市场-拉美股市暴跌至一年低点，汇率因利率担忧而走低</title>
+      <link>https://wallstreetcn.com/livenews/3203571</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3203571</guid>
+      <pubDate>Fri, 20 Nov 2026 20:49:27 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+      <description>拉美股市跌至一年多来的低点。此前，Anthropic公司IPO未能提振市场对人工智能行业的信心，导致全球股市抛售加剧；同时，美国加息预期持续给该地区货币带来压力。尽管拉美市场对科技板块的直接敞口有限，但全球风险偏好的恶化仍波及该地区。MSCI拉丁美洲股票指数下跌0.86%，相应的…</description>
+    </item>
+    <item>
+      <title>财联社11月21日电，AI初创公司Cognition在新一轮融资中洽谈估值750亿美元。</title>
+      <link>https://www.cls.cn/detail/2540688</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2540688</guid>
+      <pubDate>Fri, 20 Nov 2026 20:49:12 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+    </item>
+    <item>
+      <title>美国总统特朗普：（关于伊朗）我们正在保持耐心。</title>
+      <link>https://flash.jin10.com/detail/20261121044836119800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261121044836119800</guid>
+      <pubDate>Fri, 20 Nov 2026 20:48:36 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+    </item>
+    <item>
+      <title>财联社11月21日电，美国法官批准拜耳72.5亿美元Roundup除草剂和解协议。</title>
+      <link>https://www.cls.cn/detail/2540687</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2540687</guid>
+      <pubDate>Fri, 20 Nov 2026 20:47:50 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+    </item>
+    <item>
+      <title>布伦特原油突破93美元/桶，日内涨0.37%。</title>
+      <link>https://flash.jin10.com/detail/20261121044734606800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261121044734606800</guid>
+      <pubDate>Fri, 20 Nov 2026 20:47:34 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+    </item>
+    <item>
+      <title>WTI原油向上触及85美元/桶，日内涨0.70%。</title>
+      <link>https://flash.jin10.com/detail/20261121044552631800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261121044552631800</guid>
+      <pubDate>Fri, 20 Nov 2026 20:45:52 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+    </item>
+    <item>
+      <title>渣打：逢低布局美股大型股 看好黄金中长期反弹</title>
+      <link>https://flash.jin10.com/detail/20261121044359805800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261121044359805800</guid>
+      <pubDate>Fri, 20 Nov 2026 20:43:59 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+    </item>
+    <item>
+      <title>国际金价创一年多新低 专家：背后原因是美元走强以及美国加息预期的抬升</title>
+      <link>https://news.10jqka.com.cn/20261121/c682068550.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261121/c682068550.shtml</guid>
+      <pubDate>Fri, 20 Nov 2026 20:40:38 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>11月20日亚洲交易时段，伦敦现货黄金跌破3600美元/盎司，盘中最深下探到3514美元附近，创下一年多以来的新低；国内上海金盘中最低下探至755元/克。这一轮持续近一年的黄金上涨行情在近期迎来深度调整，分析人士表示，市场对美联储加息预期重新升温，成为本轮行情调整的直接催化剂。财…</description>
+    </item>
+    <item>
+      <title>恐慌指数VIX创逾一年半新高</title>
+      <link>https://flash.jin10.com/detail/20261121043649846800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261121043649846800</guid>
+      <pubDate>Fri, 20 Nov 2026 20:36:49 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>金十数据11月21日讯，美股恐慌指数VIX突破36，刷新2025年4月以来最高盘中纪录。</description>
+    </item>
+    <item>
+      <title>英伟达服务器供应商们暂停东南亚发货。（日经新闻）</title>
+      <link>https://wallstreetcn.com/livenews/3203569</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3203569</guid>
+      <pubDate>Fri, 20 Nov 2026 20:36:11 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+    </item>
+    <item>
+      <title>美股尾盘跌势不止，纳斯达克100指数跌5.5%，纳指跌幅扩大至5%。 VIX波动率日内涨幅达31.0%，报37.27，至</title>
+      <link>https://wallstreetcn.com/livenews/3203568</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3203568</guid>
+      <pubDate>Fri, 20 Nov 2026 20:35:40 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+      <description>美股尾盘跌势不止，纳斯达克100指数跌5.5%，纳指跌幅扩大至5%。 VIX波动率日内涨幅达31.0%，报37.27，至少创2025年4月份以来新高。 纽元兑美元跌至2009年以来的最低水平。</description>
+    </item>
+    <item>
+      <title>据日经新闻：英伟达(NVDA.O)服务器供应商暂停东南亚发货。</title>
+      <link>https://flash.jin10.com/detail/20261121043525821800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261121043525821800</guid>
+      <pubDate>Fri, 20 Nov 2026 20:35:25 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+    </item>
+    <item>
+      <title>美国商品期货交易委员会（CFTC）：11月17日当周，股票基金投机客将标普500指数芝加哥商业交易所净空头头寸削减65,</title>
+      <link>https://wallstreetcn.com/livenews/3203567</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3203567</guid>
+      <pubDate>Fri, 20 Nov 2026 20:34:13 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+      <description>美国商品期货交易委员会（CFTC）：11月17日当周，股票基金投机客将标普500指数芝加哥商业交易所净空头头寸削减65,517手合约，至210,631手合约。 标普500指数芝加哥商业交易所净多头头寸削减18,245手合约，至891,548手合约。</description>
+    </item>
+    <item>
+      <title>美国商品期货交易委员会（CFTC）：11月17日当周，投机者将芝加哥期货交易所（CBOT）美国超长期国债期货净空头头寸增</title>
+      <link>https://wallstreetcn.com/livenews/3203566</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3203566</guid>
+      <pubDate>Fri, 20 Nov 2026 20:33:52 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+      <description>美国商品期货交易委员会（CFTC）：11月17日当周，投机者将芝加哥期货交易所（CBOT）美国超长期国债期货净空头头寸增加1,551手合约，至369,643手合约。 芝加哥期货交易所美国2年期国债期货净空头头寸削减129,126手合约，至983,619手合约。 芝加哥期货交易所美…</description>
+    </item>
+    <item>
+      <title>纳指扩大跌幅至5%，标普500指数跌3.52%，道指跌1.78%。</title>
+      <link>https://flash.jin10.com/detail/20261121043308152800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261121043308152800</guid>
+      <pubDate>Fri, 20 Nov 2026 20:33:08 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+    </item>
+    <item>
+      <title>美国商品期货交易委员会（CFTC）：截至2026年11月17日当周，股票基金投机者削减标普500指数CME净空头头寸65</title>
+      <link>https://flash.jin10.com/detail/20261121043214819800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261121043214819800</guid>
+      <pubDate>Fri, 20 Nov 2026 20:32:14 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>美国商品期货交易委员会（CFTC）：截至2026年11月17日当周，股票基金投机者削减标普500指数CME净空头头寸65,517份合约，至210,631份。</description>
+    </item>
+    <item>
+      <title>美国商品期货交易委员会（CFTC）：截至2026年11月17日当周，基金经理削减标普500指数CME净多头头寸18,24</title>
+      <link>https://flash.jin10.com/detail/20261121043208458800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261121043208458800</guid>
+      <pubDate>Fri, 20 Nov 2026 20:32:08 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>美国商品期货交易委员会（CFTC）：截至2026年11月17日当周，基金经理削减标普500指数CME净多头头寸18,245份合约，至891,548份。</description>
+    </item>
+    <item>
+      <title>打还是拖？美军陷入“战备消耗”焦虑，美以鹰派施压特朗普新年之前“彻底解决”伊朗</title>
+      <link>https://finance.sina.com.cn/stock/usstock/c/2026-11-21/doc-inizmruq6915745.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/stock/usstock/c/2026-11-21/doc-inizmruq6915745.shtml</guid>
+      <pubDate>Fri, 20 Nov 2026 20:32:06 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>随着美国军事规划人员发出警告，称若僵局延续至明年，美军部队将面临过度消耗的风险，华盛顿和以色列的鹰派官员正敦促美国总统唐纳德·特朗普重启对伊朗的军事打击。 据包括美国官员在内的三名知情人士透露，负责监督中东军事行动的美国中央司令部已向美方官员通报，12月底之后若继续维持大规模军事…</description>
+    </item>
+    <item>
+      <title>美国商品期货交易委员会（CFTC）：截至2026年11月17日当周，投机者削减CBOT美国2年期国债期货净空头头寸129</title>
+      <link>https://flash.jin10.com/detail/20261121043201635800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261121043201635800</guid>
+      <pubDate>Fri, 20 Nov 2026 20:32:01 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>美国商品期货交易委员会（CFTC）：截至2026年11月17日当周，投机者削减CBOT美国2年期国债期货净空头头寸129,126份合约，至983,619份。投机者削减CBOT美国5年期国债期货净空头头寸35,014份合约，至1,289,050份。投机者增加CBOT美国10年期国债…</description>
+    </item>
+    <item>
+      <title>纳指尾盘跌幅扩大至5% 恐慌指数升破36</title>
+      <link>https://www.cls.cn/detail/2540686</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2540686</guid>
+      <pubDate>Fri, 20 Nov 2026 20:31:59 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+      <description>【纳指尾盘跌幅扩大至5% 恐慌指数升破36】财联社11月21日电，道琼斯指数跌1.72%，标普500指数跌3.45%，纳斯达克综合指数跌5.09%。VIX指数升破36，触及2025年4月以来最高盘中水平。</description>
+    </item>
+    <item>
+      <title>美国商品期货交易委员会（CFTC）：11月17日当周，英镑净空头头寸为32,304手合约。 日元净多头头寸为116,31</title>
+      <link>https://wallstreetcn.com/livenews/3203565</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3203565</guid>
+      <pubDate>Fri, 20 Nov 2026 20:31:56 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+      <description>美国商品期货交易委员会（CFTC）：11月17日当周，英镑净空头头寸为32,304手合约。 日元净多头头寸为116,317手合约。 欧元净空头头寸为-142,710手合约。 瑞郎净空头头寸为-8,281手合约。</description>
+    </item>
+    <item>
+      <title>美国商品期货交易委员会（CFTC）：截至2026年11月17日当周，投机者增加CBOT美国超长期国债期货净空头头寸1,5</title>
+      <link>https://flash.jin10.com/detail/20261121043144175800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261121043144175800</guid>
+      <pubDate>Fri, 20 Nov 2026 20:31:44 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>美国商品期货交易委员会（CFTC）：截至2026年11月17日当周，投机者增加CBOT美国超长期国债期货净空头头寸1,551份合约，至369,643份。</description>
+    </item>
+    <item>
+      <title>美国商品期货交易委员会（CFTC）：11月17日当周，比特币净多头头寸为1,528手合约。</title>
+      <link>https://wallstreetcn.com/livenews/3203564</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3203564</guid>
+      <pubDate>Fri, 20 Nov 2026 20:31:31 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+    </item>
+    <item>
+      <title>美国商品期货交易委员会（CFTC）：11月17日当周，投机者所持COMEX黄金净多头头寸下降10,136手合约，至104</title>
+      <link>https://wallstreetcn.com/livenews/3203563</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3203563</guid>
+      <pubDate>Fri, 20 Nov 2026 20:30:47 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+      <description>美国商品期货交易委员会（CFTC）：11月17日当周，投机者所持COMEX黄金净多头头寸下降10,136手合约，至104,270手合约，创五个月新低。 所持COMEX白银净多头头寸降低至17手合约，创最近大约三年新低。 所持COMEX铜净多头头寸降低至27,347手合约，创最近大…</description>
+    </item>
+    <item>
+      <title>美国商品期货交易委员会（CFTC）：11月17日当周，投机者所持NYMEX WTI原油净多头头寸减少9,765手合约，至</title>
+      <link>https://wallstreetcn.com/livenews/3203562</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3203562</guid>
+      <pubDate>Fri, 20 Nov 2026 20:30:24 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+      <description>美国商品期货交易委员会（CFTC）：11月17日当周，投机者所持NYMEX WTI原油净多头头寸减少9,765手合约，至60,819手合约，创10个月新低。 所持布伦特与WTI原油净多头头寸减少至205,942手合约，创19周新低。 所持NYMEX汽油净多头头寸降低至79,636…</description>
+    </item>
+    <item>
+      <title>美国财政部：对四名伊朗个人实施制裁，这些人担任“石油受托人”</title>
+      <link>https://news.10jqka.com.cn/20261121/c682068539.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261121/c682068539.shtml</guid>
+      <pubDate>Fri, 20 Nov 2026 20:28:51 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>美国财政部发表声明称，对四名伊朗个人实施制裁，这些人担任“石油受托人”，负责收取海外销售所得，以规避此前的制裁。(新浪财经)</description>
+    </item>
+    <item>
+      <title>美元兑日元跌约0.8%，Anthropic IPO和AI板块抛售迫使投资者寻求避险</title>
+      <link>https://wallstreetcn.com/livenews/3203561</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3203561</guid>
+      <pubDate>Fri, 20 Nov 2026 20:25:39 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+      <description>周五（11月20日）纽约尾盘，美元兑日元跌0.77%，报158.47日元，本周累计下跌0.77%，整体交投区间为159.97-158.42日元。 欧元兑日元累跌1.29%，报173.83日元；英镑兑日元累跌1.73%，报207.384日元；日元兑离岸人民币累涨0.76%，报4.2…</description>
+    </item>
+    <item>
+      <title>华盛顿和以色列的鹰派官员正敦促美国总统特朗普打击伊朗。（英国金融时报）</title>
+      <link>https://wallstreetcn.com/livenews/3203560</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3203560</guid>
+      <pubDate>Fri, 20 Nov 2026 20:22:50 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+    </item>
+    <item>
+      <title>彭博美元指数本周涨约0.6%</title>
+      <link>https://wallstreetcn.com/livenews/3203559</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3203559</guid>
+      <pubDate>Fri, 20 Nov 2026 20:20:34 +0000</pubDate>
       <category>中文财经快讯</category>
       <source url="https://wallstreetcn.com">华尔街见闻 · A 股快讯</source>
-      <description>&lt;p&gt;2026年APEC工商领导人峰会今日在深圳举办。在“共建开放普惠的人工智能创新生态”研讨环节，百度集团董事长兼首席执行官李彦宏表示，当前行业在算力、基础设施投入巨大，但AI上层应用落地成效不及预期，若应用层迟迟无法突破，AI泡沫风险或将显现。尽管如此，他对AI长期发展趋势保持乐观…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：李彦宏在2026年APEC工商领导人峰会研讨环节表示，行业在算力、基础设施投入巨大但AI上层应用落地成效不及预期，若应用层迟迟无法突破，AI泡沫风险或将显现，并提出应用之上还需配套组织能力，类比电力革命；&lt;/p&gt;&lt;p&gt;事实：报道明确上述表态，并称其对AI长期发展保持乐观、百度AI业务收入占比未来将持续提升；&lt;/p&gt;&lt;p&gt;推断：其观点将AI产业瓶颈指向应用落地与组织能力适配，而非单纯算力投入，但“泡沫风险”属其个人判断而非已发生事实；&lt;/p&gt;&lt;p&gt;影响：可能涉及AI算力与基础设施投入方、模型与应用层企业及百度自身业务结构，实际影响取决于应用层商业化进展；&lt;/p&gt;&lt;p&gt;验证：后续可观察百度AI业务收入占比披露、行业应用落地数据及组织调整动向，目前缺少量化验证材料。&lt;/p&gt;</description>
+      <description>周五（11月20日）纽约尾盘，ICE美元指数跌0.08%，报103.817点，本周累计上涨0.39%，整体交投区间为103.331-103.974点。 彭博美元指数跌0.06%，报1243.08点，本周累涨0.58%，交投区间为1234.25-1244.50点。</description>
     </item>
     <item>
-      <title>收到纽交所退市预警，复朗集团回应：考虑合股等方案</title>
-      <link>https://flash.jin10.com/detail/20261117125458323800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261117125458323800</guid>
-      <pubDate>Tue, 17 Nov 2026 04:54:58 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>&lt;p&gt;金十数据11月17日讯，奢侈品牌LANVIN（浪凡）母公司、中国时尚企业复朗集团日前因连续30个交易日的每股平均收盘价低于1美元，不符合纽约证券交易所的持续上市标准，收到纽交所合规通知。今日，复朗集团就此事回应称，纽交所通知涉及持续上市的股价标准，不影响公司普通股目前的上市及交易…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：复朗集团因连续30个交易日每股平均收盘价低于1美元，不符合纽交所持续上市标准而收到合规通知，公司回应称不影响普通股目前上市及交易、日常经营正常，正评估恢复合规方案，合股是其中之一且须经股东批准，截至11月16日收盘股价报0.（摘要截断）；&lt;/p&gt;&lt;p&gt;事实：报道明确退市预警原因、公司回应内容及合股需股东批准的程序要求；&lt;/p&gt;&lt;p&gt;推断：公司面临股价合规压力，合股为可能选项之一，但尚未实施，不能推断退市必然发生或经营已受影响；&lt;/p&gt;&lt;p&gt;影响：可能涉及复朗集团上市地位、股东权益及旗下LANVIN等品牌相关主体，实际影响取决于后续合规方案与股价表现；&lt;/p&gt;&lt;p&gt;验证：后续可观察公司是否披露合股等具体方案、股东批准结果及纽交所合规进展，目前缺少完整股价数据与方案细节。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>阿曼外长：今天与伊朗外长阿拉格齐进行了建设性会谈。我们回顾了阿曼与伊朗关系的稳定发展，以及深化两国合作的实际途径。我们还</title>
-      <link>https://flash.jin10.com/detail/20261117125442742800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261117125442742800</guid>
-      <pubDate>Tue, 17 Nov 2026 04:54:42 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>&lt;p&gt;阿曼外长：今天与伊朗外长阿拉格齐进行了建设性会谈。我们回顾了阿曼与伊朗关系的稳定发展，以及深化两国合作的实际途径。我们还交流了当前应对地区挑战的最新外交努力，并重申了持续对话和磋商在支持降温与和平解决方面的重要性。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：阿曼外长称当天与伊朗外长阿拉格齐进行建设性会谈，回顾双边关系稳定发展及深化合作途径，交流应对地区挑战的最新外交努力，并重申持续对话与磋商对支持降温和和平解决的重要性；&lt;/p&gt;&lt;p&gt;事实：报道明确会谈性质、双边关系与合作议题，以及关于对话降温的表态；&lt;/p&gt;&lt;p&gt;推断：双方外交沟通持续，涉及地区局势降温议题，但报道未披露具体挑战内容或达成任何协议，不能推断局势已实质缓和；&lt;/p&gt;&lt;p&gt;影响：可能涉及阿曼与伊朗双边关系及地区外交环境，实际影响取决于后续是否有具体合作或降温措施落地；&lt;/p&gt;&lt;p&gt;验证：后续可观察双方是否发布联合声明、具体合作安排或地区局势相关外交进展，目前缺少会谈细节与第三方核实材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>百度集团李彦宏：对AI长期发展趋势保持乐观 百度AI业务收入占比未来将持续提升</title>
-      <link>https://www.cls.cn/detail/2536375</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2536375</guid>
-      <pubDate>Tue, 17 Nov 2026 04:54:41 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-      <description>&lt;p&gt;【百度集团李彦宏：对AI长期发展趋势保持乐观 百度AI业务收入占比未来将持续提升】财联社11月17日电，2026年APEC工商领导人峰会今日在深圳举办。在“共建开放普惠的人工智能创新生态”研讨环节，百度集团董事长兼首席执行官李彦宏表示，当前行业在算力、基础设施投入巨大，但AI上层…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题与摘要显示，2026年APEC工商领导人峰会于深圳举办，李彦宏在“共建开放普惠的人工智能创新生态”研讨环节发言；摘要提到算力与基础设施投入巨大、AI上层应用落地成效不及预期、若应用层无法突破则AI泡沫风险或将显现，以及百度AI业务收入占比未来将持续提升。&lt;/p&gt;&lt;p&gt;事实：报道明确李彦宏对AI长期趋势乐观，并称百度AI业务收入占比将持续提升；同时他承认应用落地不及预期并提示泡沫风险。&lt;/p&gt;&lt;p&gt;推断：其表态将百度AI叙事重心从基础设施投入转向应用落地与收入结构变化，但“占比提升”是公司高管的预期表述，非已实现数据。&lt;/p&gt;&lt;p&gt;影响：可能影响市场对百度AI业务估值逻辑及AI板块应用层关注度，条件是其AI收入占比后续确有披露数据支撑。&lt;/p&gt;&lt;p&gt;验证：后续可观察百度财报中AI业务收入口径与占比、应用层产品落地进展；目前缺少具体收入数据与时间表。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>招银国际：中国生物制药目标价上调至9港元 维持“买入”评级</title>
-      <link>https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-17/doc-iniyzhhf1861333.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-17/doc-iniyzhhf1861333.shtml</guid>
-      <pubDate>Tue, 17 Nov 2026 04:54:37 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>&lt;p&gt;热点栏目 自选股 数据中心 行情中心 资金流向 模拟交易 客户端 招银国际发布研报称，上调 中国生物制药 （01177）目标价3.4%，由8.7港元升至9港元，维持“买入”评级。考虑到公司在2026年持续兑现BD交易，该行上调预测，预计2026年、2027年及2028年收入分别同…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：招银国际研报将中国生物制药目标价由8.7港元上调至9港元，上调幅度3.4%，维持“买入”；预计2026、2027、2028年收入分别同比增长11.5%、13.2%、10.4%，经调整归母净利润分别同比增长12.5%、19.4%、9.9%；摘要提及2026年持续兑现BD交易及创新药商业化与国际化。&lt;/p&gt;&lt;p&gt;事实：报道明确上述目标价、评级与盈利预测数字，并称上调考虑BD交易兑现。&lt;/p&gt;&lt;p&gt;推断：该研报将BD交易与创新药商业化视为公司增长驱动，但预测属机构观点，非公司指引。&lt;/p&gt;&lt;p&gt;影响：可能影响关注该股的投资者对短期估值与盈利预期的判断，条件为后续BD交易与销售数据兑现。&lt;/p&gt;&lt;p&gt;验证：可观察公司后续BD公告、收入与经调整净利润实际值是否接近预测；目前缺少公司层面确认材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>黄仁勋辞职前一个季度，桥水削减英伟达持仓逾30%；同期减持的家族办公室至少有12家，但全都保留了部分持股。最新13F还揭</title>
-      <link>https://xnews.jin10.com/details/235300</link>
-      <guid isPermaLink="true">https://xnews.jin10.com/details/235300</guid>
-      <pubDate>Tue, 17 Nov 2026 04:54:33 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>&lt;p&gt;黄仁勋辞职前一个季度，桥水削减英伟达持仓逾30%；同期减持的家族办公室至少有12家，但全都保留了部分持股。最新13F还揭示了更多资金新动向......点击查看&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称“黄仁勋辞职前一个季度，桥水削减英伟达持仓逾30%”；同期减持的家族办公室至少有12家，但均保留部分持股；摘要称最新13F揭示更多资金新动向，但正文需点击查看。&lt;/p&gt;&lt;p&gt;事实：报道明确桥水减持英伟达逾30%、至少12家家族办公室同期减持且保留部分持股；标题提及黄仁勋辞职，但摘要未提供辞职细节或时间。&lt;/p&gt;&lt;p&gt;推断：13F数据反映部分机构在特定季度降低英伟达敞口，但“黄仁勋辞职”与减持之间的因果关系未被摘要说明，不能据此推断减持原因。&lt;/p&gt;&lt;p&gt;影响：可能影响市场对英伟达机构持仓变化的关注，条件为13F数据经核对无误。&lt;/p&gt;&lt;p&gt;验证：需核对桥水及家族办公室13F原始文件、减持比例口径，以及黄仁勋辞职的官方信息；目前摘要缺少这些验证材料，线索有限。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>百度集团李彦宏：AI发展最紧迫在于落地应用 组织能力变革是关键 | 据证券时报，2026年APEC工商领导人峰会今日在深圳举办。在“共建开放普惠的人工智能创...</title>
-      <link>https://www.yicai.com/brief/103443341.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/brief/103443341.html</guid>
-      <pubDate>Tue, 17 Nov 2026 04:54:14 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://yicai.com">第一财经 · 简报</source>
-      <description>&lt;p&gt;据证券时报，2026年APEC工商领导人峰会今日在深圳举办。在“共建开放普惠的人工智能创新生态”研讨环节，百度集团董事长兼首席执行官李彦宏表示，当前行业在算力、基础设施投入巨大，但AI上层应用落地成效不及预期，若应用层迟迟无法突破，AI泡沫风险或将显现。尽管如此，他对AI长期发展…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：据证券时报，2026年APEC工商领导人峰会于深圳举办，李彦宏在“共建开放普惠的人工智能创新生态”研讨环节表示AI发展最紧迫在于落地应用、组织能力变革是关键；摘要提到算力与基础设施投入巨大、应用落地成效不及预期、AI泡沫风险或将显现，以及百度AI业务收入占比未来将持续提升。&lt;/p&gt;&lt;p&gt;事实：报道明确李彦宏提出应用落地紧迫、组织能力变革关键，并对AI长期趋势乐观、预期百度AI收入占比提升。&lt;/p&gt;&lt;p&gt;推断：该表述将AI技术栈扩展至“应用之上的组织能力”，属于对产业瓶颈的判断，但组织能力变革的具体措施与效果未在摘要中说明。&lt;/p&gt;&lt;p&gt;影响：可能影响市场对AI应用层与企业组织调整的关注，条件为后续有可量化的落地成效。&lt;/p&gt;&lt;p&gt;验证：可观察百度AI应用产品进展、组织调整公告及AI收入占比披露；目前缺少具体措施与数据。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>招银国际：医药行业估值修复行情有望延续 推荐药明生物等标的</title>
-      <link>https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-17/doc-iniyzhhi5532611.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-17/doc-iniyzhhi5532611.shtml</guid>
-      <pubDate>Tue, 17 Nov 2026 04:53:46 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>&lt;p&gt;热点栏目 自选股 数据中心 行情中心 资金流向 模拟交易 客户端 招银国际发布研报称，MSCI中国医疗指数年初至今累计上涨14.8%，跑赢MSCI中国指数32%。随着创新药出海BD交易规模快速增长，创新药出海的价值兑现有赖于未来的里程碑付款和销售分成。随着授权品种的价值兑现，相关…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：招银国际研报称MSCI中国医疗指数年初至今累计上涨14.8%，跑赢MSCI中国指数32%；创新药出海BD交易规模快速增长，价值兑现有赖里程碑付款和销售分成；推荐药明生物、映恩生物-B等标的；并称CXO迎来需求景气度上升周期。&lt;/p&gt;&lt;p&gt;事实：报道明确上述指数涨幅、跑赢幅度、BD交易趋势判断及推荐标的。&lt;/p&gt;&lt;p&gt;推断：该研报将估值修复与BD价值兑现、CXO需求回升相联系，但属机构观点；指数涨幅为年初至今统计，不代表后续走势。&lt;/p&gt;&lt;p&gt;影响：可能影响医药板块尤其是CXO与创新药出海相关标的的关注度，条件为BD里程碑付款与CXO订单数据兑现。&lt;/p&gt;&lt;p&gt;验证：可观察后续BD交易公告、里程碑付款披露及CXO企业订单与业绩；目前摘要未提供具体交易金额与时间表。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>国金证券保荐肯特催化IPO项目质量评级D级 上市首年营收、净利润双降 承销保荐费用率偏高</title>
-      <link>https://finance.sina.com.cn/stock/observe/2026-11-17/doc-iniyzhhi5532501.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/observe/2026-11-17/doc-iniyzhhi5532501.shtml</guid>
-      <pubDate>Tue, 17 Nov 2026 04:53:28 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>&lt;p&gt;专题：券商IPO项目执业质量评级 （一）公司基本情况 全称： 肯特催化 材料股份有限公司 简称：肯特催化 代码：603120.SH IPO申报日期：2023年2月28日 上市日期：2025年4月16日 上市板块：主板 所属行业：化学原料和化学制品制造业（证监会行业分类） IPO保…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称国金证券保荐的肯特催化IPO项目质量评级为D级，上市首年营收、净利润双降，承销保荐费用率偏高；摘要列出公司全称、代码603120.SH、申报日期2023-02-28、上市日期2025-04-16、主板、化学原料和化学制品制造业、保荐机构国金证券、保荐代表人聂敏和牛建军、律师锦天城、审计立信。&lt;/p&gt;&lt;p&gt;事实：报道明确给出上述评级、业绩表现和费用率判断，并列出IPO中介机构信息。&lt;/p&gt;&lt;p&gt;推断：评级D级与上市首年业绩双降、费用率偏高被报道并列呈现，可能被用于讨论保荐执业质量与项目后续表现的关系，但报道未说明评级方法及因果。&lt;/p&gt;&lt;p&gt;影响：可能影响国金证券投行声誉、肯特催化投资者关注度及后续IPO项目审核印象，条件是该评级被市场广泛引用。&lt;/p&gt;&lt;p&gt;验证：可核对肯特催化上市后首年财报的营收和净利润数据、承销保荐费用率计算口径，以及评级机构的方法说明；目前缺少评级报告原文。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Turkey Appoints Trustee to Pro-Opposition Channel Sozcu TV｜中文：土耳其对亲反对派频道Sözcü TV委任托管人</title>
-      <link>https://www.bloomberg.com/news/articles/2026-11-17/turkey-appoints-trustee-to-pro-opposition-channel-sozcu-tv</link>
-      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-17/turkey-appoints-trustee-to-pro-opposition-channel-sozcu-tv</guid>
-      <pubDate>Tue, 17 Nov 2026 04:52:48 +0000</pubDate>
-      <category>政治与政策</category>
-      <source url="https://bloomberg.com">彭博社 · 政治</source>
-      <description>&lt;p&gt;中文：土耳其当局任命了一名托管人来管理亲反对派的电视台Sozcu TV，并在周二凌晨突袭了该电视台位于伊斯坦布尔的总部。这是对批评政府的主要电视台进行的第二次此类接管行动……
-原文：Turkish authorities appointed a trustee to run pr…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称土耳其对亲反对派频道Sözcü TV委任托管人；摘要称当局周二凌晨突袭其伊斯坦布尔总部，这是对批评政府的主要电视台的第二次此类接管。&lt;/p&gt;&lt;p&gt;事实：报道明确说土耳其当局任命托管人管理Sözcü TV并突袭总部，且称这是第二次接管批评政府的电视台。&lt;/p&gt;&lt;p&gt;推断：连续接管亲反对派媒体可能反映对媒体环境的收紧，但报道未提供法律依据或政府回应。&lt;/p&gt;&lt;p&gt;影响：可能影响Sözcü TV的编辑独立性和运营、土耳其媒体行业及国际舆论对土耳其新闻自由的评价。&lt;/p&gt;&lt;p&gt;验证：可观察托管人后续对编采内容的干预、法院或监管文件、政府声明及其他媒体是否遭类似行动；目前缺少土方官方说明。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>中信里昂：周大福创建目标价11.2港元 维持“跑赢大市”评级</title>
-      <link>https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-17/doc-iniyzhhm2308482.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-17/doc-iniyzhhm2308482.shtml</guid>
-      <pubDate>Tue, 17 Nov 2026 04:52:43 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>&lt;p&gt;热点栏目 自选股 数据中心 行情中心 资金流向 模拟交易 客户端 中信里昂发布研报称，维持 周大福 创建 （00659）目标价11.2港元及“跑赢大市”评级。该行认为，周大福创建在未来12个月内宣布派发特别股息的可能性较高，旨在为郑氏家族参与 新世界发展 （00017）的供股计划…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：中信里昂研报维持周大福创建（00659）目标价11.2港元及“跑赢大市”评级；认为未来12个月内宣布特别股息可能性较高，目的是为郑氏家族参与新世界发展（00017）供股提供资金；新世界发展拟“1供11”供股筹249亿港元；郑氏家族为两家公司共同控股方。&lt;/p&gt;&lt;p&gt;事实：报道明确给出研报评级、目标价、特别股息可能性判断及新世界发展供股方案和募资额。&lt;/p&gt;&lt;p&gt;推断：若特别股息用于支持家族参与供股，周大福创建与新世界发展之间可能存在资金联动，但这是研报观点而非公司公告。&lt;/p&gt;&lt;p&gt;影响：可能影响周大福创建股东对派息政策的预期及新世界发展供股认购的资金安排。&lt;/p&gt;&lt;p&gt;验证：可观察周大福创建是否公告特别股息、新世界发展供股进展及港交所权益披露；目前缺少公司正式派息决定。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>宏利金融-S计划发行本金金额为7.5亿加元的后偿债券</title>
-      <link>https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-17/doc-iniyzhhm7743570.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-17/doc-iniyzhhm7743570.shtml</guid>
-      <pubDate>Tue, 17 Nov 2026 04:51:39 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>&lt;p&gt;热点栏目 自选股 数据中心 行情中心 资金流向 模拟交易 客户端 宏利金融-S （00945）发布公告，计划发行本金金额为7.5亿加元、利率4.853厘并于2038 年11月23日到期的定息╱浮息后偿债券 （债券）。因应此次发行，宏利计划就其现有基本暂搁发售章程提交发售章程补充文…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：宏利金融-S（00945）公告计划发行7.5亿加元后偿债券，利率4.853厘，2038年11月23日到期；2033年11月23日前固定利率4.853厘，其后为CORRA加1.42厘；将就现有基本暂搁发售章程提交补充文件。&lt;/p&gt;&lt;p&gt;事实：报道明确给出债券金额、利率结构、到期日和章程补充安排。&lt;/p&gt;&lt;p&gt;推断：此次发债可能用于补充资本或再融资，但报道未说明资金用途。&lt;/p&gt;&lt;p&gt;影响：可能影响宏利金融的资本充足水平和债务成本，以及加元债券市场供给。&lt;/p&gt;&lt;p&gt;验证：可核对宏利后续公告中的发债定价、资金用途及监管审批文件；目前缺少发行完成信息。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>阿曼外交大臣：今天与伊朗外交部长进行了建设性会谈。</title>
-      <link>https://wallstreetcn.com/livenews/3201027</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3201027</guid>
-      <pubDate>Tue, 17 Nov 2026 04:51:38 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
-      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称阿曼外交大臣表示今天与伊朗外交部长进行了建设性会谈；摘要为空。&lt;/p&gt;&lt;p&gt;事实：报道仅有一句会谈描述，未提供会谈地点、议题、成果或后续安排。&lt;/p&gt;&lt;p&gt;推断：线索有限，只能看出阿曼与伊朗外长层面有接触，无法推断具体议题或地区局势走向。&lt;/p&gt;&lt;p&gt;影响：可能涉及阿曼斡旋角色及伊朗对外关系，但缺少细节无法评估具体影响主体。&lt;/p&gt;&lt;p&gt;验证：可观察双方后续官方声明、会谈联合成果或下一轮接触安排；目前缺少摘要和更多报道材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>财联社11月17日电，BCA研究将欧洲股票评级从减持上调至中性；将全球医疗保健行业评级从“增持”下调至“中性”。</title>
-      <link>https://www.cls.cn/detail/2536374</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2536374</guid>
-      <pubDate>Tue, 17 Nov 2026 04:51:21 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题显示BCA研究于2026年11月17日调整两项评级，摘要为空；&lt;/p&gt;&lt;p&gt;事实：BCA研究将欧洲股票评级从减持上调至中性，将全球医疗保健行业评级从增持下调至中性；&lt;/p&gt;&lt;p&gt;推断：该机构对欧洲股票相对谨慎程度下降、对全球医疗保健行业相对乐观程度下降，但标题未说明调整理由；&lt;/p&gt;&lt;p&gt;影响：可能影响关注BCA研究观点的欧洲股票与全球医疗保健板块投资者情绪，实际影响取决于该机构观点传播范围；&lt;/p&gt;&lt;p&gt;验证：需查阅BCA研究完整报告及后续评级变动，目前缺少调整依据与目标价等验证材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>国泰海通保荐友升股份IPO项目质量评级B级 实际募资22.38亿元 股价承压一度破发</title>
-      <link>https://finance.sina.com.cn/stock/observe/2026-11-17/doc-iniyzhhm7715116.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/observe/2026-11-17/doc-iniyzhhm7715116.shtml</guid>
-      <pubDate>Tue, 17 Nov 2026 04:50:46 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>&lt;p&gt;专题：券商IPO项目执业质量评级 （一）公司基本情况 全称：上海友升铝业股份有限公司 简称： 友升股份 代码：603418.SH IPO申报日期：2023年12月30日 上市日期：2025年9月23日 上市板块：主板 所属行业：汽车制造业（证监会行业分类） IPO保荐机构： 国泰…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题与摘要显示友升股份代码603418.SH，2023年12月30日申报、2025年9月23日上市于主板，保荐机构为国泰海通，IPO项目质量评级B级，实际募资22.38亿元，股价一度破发；&lt;/p&gt;&lt;p&gt;事实：报道明确给出上述评级、募资额与破发情况，摘要列出中介机构信息；&lt;/p&gt;&lt;p&gt;推断：B级评级与破发可能反映发行定价或上市后市场表现承压，但评级方法未在摘要中说明，不能据此断定保荐质量与破发存在因果；&lt;/p&gt;&lt;p&gt;影响：可能影响国泰海通投行声誉评价及友升股份投资者关注度；&lt;/p&gt;&lt;p&gt;验证：可跟踪友升股份后续股价、募投项目进展及评级机构完整评级报告，目前缺少评级标准细节。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>维立志博-B：受托人根据H股奖励计划购入22.07万股H股</title>
-      <link>https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-17/doc-iniyzhhm2307421.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-17/doc-iniyzhhm2307421.shtml</guid>
-      <pubDate>Tue, 17 Nov 2026 04:50:32 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>&lt;p&gt;热点栏目 自选股 数据中心 行情中心 资金流向 模拟交易 客户端 维立志博-B（09887）发布公告，于2026年11月16日，受托人已根据H股奖励计划在香港联合交易所有限公司购入22.07万股H股（股份购买），总代价为737.26万港元。 本公司可继续根据H股奖励计划规则指示受…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题与摘要显示维立志博-B（09887）受托人于2026年11月16日根据H股奖励计划购入22.07万股H股，总代价737.26万港元，董事会称彰显信心；&lt;/p&gt;&lt;p&gt;事实：报道明确股份购买数量、金额、日期及公司表态，并称可继续指示受托人公开市场购入；&lt;/p&gt;&lt;p&gt;推断：该购买属股权激励计划下的受托人操作，公司将其解读为信心信号，但单次购买规模有限，不宜直接外推为基本面改善；&lt;/p&gt;&lt;p&gt;影响：可能影响维立志博-B股东对管理层信心的感知；&lt;/p&gt;&lt;p&gt;验证：可跟踪后续H股奖励计划购买公告及公司经营数据，目前缺少购买均价与计划总规模等材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>天风证券保荐众捷股份IPO项目质量评级C-级 上市首年归母净利润同比下降34% 申报周期较长</title>
-      <link>https://finance.sina.com.cn/stock/observe/2026-11-17/doc-iniyzhhm7711567.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/observe/2026-11-17/doc-iniyzhhm7711567.shtml</guid>
-      <pubDate>Tue, 17 Nov 2026 04:50:22 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>&lt;p&gt;专题：券商IPO项目执业质量评级 （一）公司基本情况 全称：苏州众捷汽车零部件股份有限公司 简称： 众捷股份 代码：301560.SZ IPO申报日期：2022年6月30日 上市日期：2025年4月25日 上市板块：创业板 所属行业：汽车制造业（证监会行业分类） IPO保荐机构：…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题与摘要显示众捷股份代码301560.SZ，2022年6月30日申报、2025年4月25日上市于创业板，保荐机构为天风证券，IPO项目质量评级C-级，上市首年归母净利润同比下降34%，申报周期较长；&lt;/p&gt;&lt;p&gt;事实：报道明确给出评级、业绩降幅与申报至上市时间跨度，摘要列出中介机构；&lt;/p&gt;&lt;p&gt;推断：C-级评级与上市首年业绩下滑、申报周期长可能相关，但评级方法未披露，不能断定保荐机构责任或业绩下滑原因；&lt;/p&gt;&lt;p&gt;影响：可能影响天风证券投行项目质量评价及众捷股份市场形象；&lt;/p&gt;&lt;p&gt;验证：可跟踪众捷股份后续定期报告、评级机构完整报告及监管问询信息，目前缺少业绩下滑原因说明。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>国泰海通保荐锡华科技IPO项目质量评级B级 申报周期较长 实际募资额缩水</title>
-      <link>https://finance.sina.com.cn/stock/observe/2026-11-17/doc-iniyzhhm7727526.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/observe/2026-11-17/doc-iniyzhhm7727526.shtml</guid>
-      <pubDate>Tue, 17 Nov 2026 04:50:08 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>&lt;p&gt;专题：券商IPO项目执业质量评级 （一）公司基本情况 全称：江苏锡华新能源科技股份有限公司 简称： 锡华科技 代码：603248.SH IPO申报日期：2023年5月17日 上市日期：2025年12月23日 上市板块：主板 所属行业：通用设备制造业（证监会行业分类） IPO保荐机…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题与摘要显示锡华科技代码603248.SH，2023年5月17日申报、2025年12月23日上市于主板，保荐机构为国泰海通，IPO项目质量评级B级，申报周期较长，实际募资额缩水；&lt;/p&gt;&lt;p&gt;事实：报道明确给出评级、申报与上市日期及募资缩水表述，摘要列出联席承销商等信息；&lt;/p&gt;&lt;p&gt;推断：B级评级与募资缩水、申报周期较长可能反映发行环境或定价调整，但摘要未给出原计划募资额，缩水幅度无法核验；&lt;/p&gt;&lt;p&gt;影响：可能影响国泰海通投行项目评价及锡华科技资金安排；&lt;/p&gt;&lt;p&gt;验证：可对比招股书计划募资额与实际募资额、跟踪募投项目进度，目前缺少缩水具体数据。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>中期选举对美国及全球经济的影响</title>
-      <link>https://opinion.caixin.com/2026-11-17/102505665.html</link>
-      <guid isPermaLink="true">https://opinion.caixin.com/2026-11-17/102505665.html</guid>
-      <pubDate>Tue, 17 Nov 2026 04:48:45 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://caixin.com">财新 · 最新</source>
-      <description>&lt;p&gt;民主党拿下两院，不会让美国经济立刻转向，总统的否决权必要时会发挥作用。停不下来的是听证会、传票和卡人事，加上年底的拨款、明年的债务上限，市场要天天面对这些噪音 当地时间2026年11月2日，美国缅因州埃尔斯沃思，司机们在戴萨特加油站为车辆加油，一块标牌上显示着普通汽油和柴油的价格…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称中期选举影响美国及全球经济；摘要称民主党拿下参众两院，参议院55对44席、净增8席，得州和堪萨斯等红州翻盘，阿拉斯加未完整；并提到总统否决权、听证会、传票、人事卡位、年底拨款和明年债务上限。&lt;/p&gt;&lt;p&gt;事实：报道明确说民主党赢得两院，并称这不会让美国经济立刻转向，总统否决权必要时会发挥作用，市场将持续面对政治噪音。&lt;/p&gt;&lt;p&gt;推断：分裂或对抗性的政治程序可能增加财政与监管议程的不确定性，但报道本身强调经济不会立刻转向，因此不能推断经济已发生实质转向。&lt;/p&gt;&lt;p&gt;影响：可能受影响的是美国财政拨款、债务上限相关程序、被提名人事及市场情绪；条件是对峙持续到年底拨款和明年债务上限节点。&lt;/p&gt;&lt;p&gt;验证：后续可观察拨款法案进展、债务上限表态、听证会和传票动向；摘要未提供市场数据，经济影响缺少验证材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>国内金饰克价继续回落</title>
-      <link>https://flash.jin10.com/detail/20261117124834783800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261117124834783800</guid>
-      <pubDate>Tue, 17 Nov 2026 04:48:34 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>&lt;p&gt;金十数据11月17日讯，今日国内黄金饰品价格对比显示，多家品牌足金饰品价格继续回落，较昨日下跌11元/克左右，整体价格区间下移至1153元-1158元。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称国内金饰克价继续回落；摘要称多家品牌足金饰品价格较昨日下跌约11元/克，区间下移至1153元至1158元。&lt;/p&gt;&lt;p&gt;事实：报道明确给出金饰价格日环比下跌和当前价格区间。&lt;/p&gt;&lt;p&gt;推断：这是零售金饰报价的短期回落，摘要未说明国际金价、汇率或需求原因，不能推断趋势或原因。&lt;/p&gt;&lt;p&gt;影响：可能影响金饰消费者和零售品牌定价，但不构成投资判断依据。&lt;/p&gt;&lt;p&gt;验证：后续可观察品牌金饰报价是否连续变动；缺少国际金价和成交量等验证材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>【机构调研】这家半导体零部件供应商实现向海力士大连工厂批量供货，陶瓷结构件已量产</title>
-      <link>https://www.cls.cn/detail/2536372</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2536372</guid>
-      <pubDate>Tue, 17 Nov 2026 04:45:52 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称某半导体零部件供应商向海力士大连工厂批量供货，陶瓷结构件已量产；摘要为空。&lt;/p&gt;&lt;p&gt;事实：仅标题提供上述说法，摘要为空，线索有限。&lt;/p&gt;&lt;p&gt;推断：标题指向该供应商与海力士大连工厂存在批量供货关系且陶瓷结构件进入量产，但无摘要细节可核对。&lt;/p&gt;&lt;p&gt;影响：可能涉及半导体零部件供应链和该供应商，但具体主体、金额和产能未披露。&lt;/p&gt;&lt;p&gt;验证：需查看机构调研原文、公司公告或客户确认；目前缺少验证材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>江淮汽车注册帝境</title>
-      <link>https://flash.jin10.com/detail/20261117124525529800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261117124525529800</guid>
-      <pubDate>Tue, 17 Nov 2026 04:45:25 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>&lt;p&gt;金十数据11月17日讯，帝境汽车商标被江淮注册继问界、智界、享界、尊界、尚界等五界之后，帝境商标又被注册。日前从江淮汽车方面确认，帝境汽车的商标已经被江淮汽车注册。除了帝境之外，江淮汽车还注册了谛境、缔境等一批同音或近似的境字商标。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称江淮汽车注册“帝境”；摘要称江淮确认注册帝境汽车商标，并注册谛境、缔境等近似商标，还提到问界、智界、享界、尊界、尚界等“五界”。&lt;/p&gt;&lt;p&gt;事实：报道明确说江淮汽车注册了帝境及相关近似商标。&lt;/p&gt;&lt;p&gt;推断：注册商标可能反映品牌储备或产品命名布局，但摘要未说明是否对应具体车型或上市计划，不能推断将推出新品牌。&lt;/p&gt;&lt;p&gt;影响：可能影响江淮汽车品牌与商标布局，实际业务影响取决于后续使用。&lt;/p&gt;&lt;p&gt;验证：可观察商标注册公告、公司产品发布或官方说明；目前缺少车型和投放信息。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>China's AI² Robotics On Business Strategy｜中文：中国 AI² Robotics 的业务战略</title>
-      <link>https://www.bloomberg.com/news/videos/2026-11-17/china-s-ai-robotics-on-business-strategy-video</link>
-      <guid isPermaLink="true">https://www.bloomberg.com/news/videos/2026-11-17/china-s-ai-robotics-on-business-strategy-video</guid>
-      <pubDate>Tue, 17 Nov 2026 04:44:40 +0000</pubDate>
+      <title>SEC Moves to Directly Oversee Database Criticized by Wall Street｜中文：美国证券交易委员会采取措施直接监管数据库，此举受到华尔街的批评</title>
+      <link>https://www.bloomberg.com/news/articles/2026-11-20/sec-moves-to-directly-oversee-database-criticized-by-wall-street</link>
+      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-20/sec-moves-to-directly-oversee-database-criticized-by-wall-street</guid>
+      <pubDate>Fri, 20 Nov 2026 20:18:31 +0000</pubDate>
       <category>全球市场与要闻</category>
       <source url="https://bloomberg.com">彭博社 · 市场</source>
-      <description>&lt;p&gt;中文：在深圳举行的亚太经合组织会议间隙，AI² Robotics创始人兼首席执行官郭燕东与Stephen Engle讨论了他对中国人形机器人技术领域创新的展望。（来源：彭博社）
-原文：Guo Yandong, Founder and CEO at AI² Robotics, di…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题为中国AI² Robotics业务战略；摘要称其创始人兼CEO郭燕东在深圳APEC会议间隙与彭博讨论中国人形机器人技术创新展望。&lt;/p&gt;&lt;p&gt;事实：报道明确为人物访谈，主题是中国人形机器人技术领域的创新展望。&lt;/p&gt;&lt;p&gt;推断：内容属于企业负责人对行业创新的看法，摘要未给出具体业务数据、订单或财务信息。&lt;/p&gt;&lt;p&gt;影响：可能涉及人形机器人行业关注度，但无具体经营影响可判断。&lt;/p&gt;&lt;p&gt;验证：需查看访谈全文或公司披露；目前缺少可核验的业务指标。&lt;/p&gt;</description>
+      <description>中文：美国证券交易委员会周五采取行动，将一个备受华尔街大部分人士厌恶的有争议的交易报告数据库置于其直接监督之下
+原文：The Securities and Exchange Commission moved Friday to bring a controversial trad…</description>
     </item>
     <item>
-      <title>宇树科技王兴兴谈机器人行业当前的机遇与现实挑战</title>
-      <link>https://wallstreetcn.com/livenews/3201026</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3201026</guid>
-      <pubDate>Tue, 17 Nov 2026 04:43:29 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
-      <description>&lt;p&gt;2026年APEC工商领导人峰会今日在深圳举办。在“共建开放普惠的人工智能创新生态”研讨环节，宇树科技董事长兼首席执行官王兴兴表示，大众所见到的AI、机器人成果仅是冰山一角，水下底层技术迭代速度迅猛，行业发展前景值得期待，各界应当主动拥抱AI技术变革。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称宇树科技王兴兴谈机器人行业机遇与挑战；摘要称2026年APEC工商领导人峰会在深圳举办，王兴兴在“共建开放普惠的人工智能创新生态”环节发言，称AI与机器人成果仅是冰山一角、底层技术迭代迅猛、行业前景值得期待。&lt;/p&gt;&lt;p&gt;事实：报道明确的是峰会时间地点、发言场合及王兴兴对行业前景的正面表态，未给出具体技术指标、产品数据或挑战细节。&lt;/p&gt;&lt;p&gt;推断：其“冰山一角”“迭代迅猛”的表述支持行业仍处早期、底层技术投入活跃的判断，但属发言者观点而非独立事实。&lt;/p&gt;&lt;p&gt;影响：可能影响机器人产业链、AI投资关注度及政策讨论氛围，条件是其表态被市场或政策制定者采信。&lt;/p&gt;&lt;p&gt;验证：可观察宇树科技后续产品发布、融资或合作信息，以及峰会其他环节披露；目前缺少量化数据验证。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>据塔斯社：当地官员表示，俄罗斯击退了针对乌法和萨拉瓦特工业区的无人机袭击。</title>
-      <link>https://flash.jin10.com/detail/20261117124244006800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261117124244006800</guid>
-      <pubDate>Tue, 17 Nov 2026 04:42:44 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称据塔斯社，当地官员表示俄罗斯击退了针对乌法和萨拉瓦特工业区的无人机袭击；摘要为空。&lt;/p&gt;&lt;p&gt;事实：报道仅明确“当地官员”这一单一信源称袭击被击退，未说明袭击时间、损失、袭击方及工业区受影响程度。&lt;/p&gt;&lt;p&gt;推断：标题指向乌法和萨拉瓦特工业区为袭击目标，可能涉及俄境内能源或工业设施安全议题，但线索有限，无法确认实际损害。&lt;/p&gt;&lt;p&gt;影响：可能影响相关地区工业运营与能源设施安全预期，条件是有后续损失或停产信息。&lt;/p&gt;&lt;p&gt;验证：需等待俄方或独立信源披露损失、袭击方认领及工业区运营状态；目前缺少验证材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>股市跌得越凶，美债与黄金就越该吃香？这一次，金价却跌到一年多新低，美债也没能托住，两样熟悉的避险资产，怎么同时使不上劲？</title>
-      <link>https://flash.jin10.com/detail/20261117124205979800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261117124205979800</guid>
-      <pubDate>Tue, 17 Nov 2026 04:42:05 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>&lt;p&gt;股市跌得越凶，美债与黄金就越该吃香？这一次，金价却跌到一年多新低，美债也没能托住，两样熟悉的避险资产，怎么同时使不上劲？这份“保险”究竟漏掉了什么？&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题与摘要均称股市下跌背景下金价跌至一年多新低、美债也未能托住，并提问避险资产为何同时失效。&lt;/p&gt;&lt;p&gt;事实：报道明确的是金价处于一年多新低、美债未发挥托底作用这一市场现象的描述，未给出具体价格、跌幅或原因分析。&lt;/p&gt;&lt;p&gt;推断：可推断传统“股跌—避险资产涨”的相关性在当前阶段弱化，但报道本身以提问形式呈现，未提供因果解释，属线索有限。&lt;/p&gt;&lt;p&gt;影响：可能影响避险资产配置逻辑与市场对黄金、美债定价框架的讨论，条件是该现象持续。&lt;/p&gt;&lt;p&gt;验证：可观察后续金价、美债收益率与股市联动数据及报道是否给出归因分析；目前缺少具体数据与解释材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>财联社11月17日电，欧洲斯托克50指数期货下跌0.7%；英国富时100指数期货下跌0.85%；德国DAX指数期货下跌0</title>
-      <link>https://www.cls.cn/detail/2536373</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2536373</guid>
-      <pubDate>Tue, 17 Nov 2026 04:41:54 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-      <description>&lt;p&gt;财联社11月17日电，欧洲斯托克50指数期货下跌0.7%；英国富时100指数期货下跌0.85%；德国DAX指数期货下跌0.6%。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题与摘要称欧洲斯托克50指数期货下跌0.7%、英国富时100指数期货下跌0.85%、德国DAX指数期货下跌0.6%。&lt;/p&gt;&lt;p&gt;事实：报道明确给出三大欧洲股指期货的下跌幅度，未说明下跌原因。&lt;/p&gt;&lt;p&gt;推断：可推断欧洲市场开盘前情绪偏弱，但无法由本条确定驱动因素，属线索有限。&lt;/p&gt;&lt;p&gt;影响：可能影响欧洲股市开盘表现及相关风险资产情绪，条件是跌势延续。&lt;/p&gt;&lt;p&gt;验证：可观察欧洲现货开盘走势及后续是否有解释性报道；目前缺少原因与背景材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>欧洲五国将在卢旺达设遣返中心 | 据新华社，奥地利总理施托克尔16日宣布，奥地利、德国、丹麦、荷兰和希腊计划于2027年在卢旺达开设首个针对庇护申请被拒...</title>
-      <link>https://www.yicai.com/brief/103443335.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/brief/103443335.html</guid>
-      <pubDate>Tue, 17 Nov 2026 04:41:16 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://yicai.com">第一财经 · 简报</source>
-      <description>&lt;p&gt;据新华社，奥地利总理施托克尔16日宣布，奥地利、德国、丹麦、荷兰和希腊计划于2027年在卢旺达开设首个针对庇护申请被拒者的遣返中心。西班牙首相桑切斯批评此举“不人道”。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题与摘要称据新华社，奥地利总理施托克尔16日宣布奥地利、德国、丹麦、荷兰和希腊计划2027年在卢旺达开设首个针对庇护申请被拒者的遣返中心，西班牙首相桑切斯批评此举“不人道”。&lt;/p&gt;&lt;p&gt;事实：报道明确五国计划、时间地点及桑切斯的批评表态，未说明中心规模、法律依据及欧盟层面立场。&lt;/p&gt;&lt;p&gt;推断：可推断欧洲移民政策出现将遣返环节外包至第三国的动向，并存在成员国间分歧，但属基于表态的推论。&lt;/p&gt;&lt;p&gt;影响：可能影响相关国家移民政策、欧盟内部协调及人权议题讨论，条件是计划推进。&lt;/p&gt;&lt;p&gt;验证：可观察五国后续正式协议、卢旺达方面回应及欧盟机构表态；目前缺少执行细节材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>蒙古国总统呼日勒苏赫宣布辞职 | 据新华社，蒙古国总统呼日勒苏赫当地时间17日上午宣布辞去职务。按照蒙古国相关法律规定，总统辞职决定须经国家大呼拉尔...</title>
-      <link>https://www.yicai.com/brief/103443333.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/brief/103443333.html</guid>
-      <pubDate>Tue, 17 Nov 2026 04:40:35 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://yicai.com">第一财经 · 简报</source>
-      <description>&lt;p&gt;据新华社，蒙古国总统呼日勒苏赫当地时间17日上午宣布辞去职务。按照蒙古国相关法律规定，总统辞职决定须经国家大呼拉尔（议会）批准方能生效。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题与摘要均称蒙古国总统呼日勒苏赫于当地时间17日上午宣布辞职，并援引新华社；摘要提到辞职须经国家大呼拉尔批准方能生效。&lt;/p&gt;&lt;p&gt;事实：报道明确说总统宣布辞去职务，且辞职决定须经议会批准才生效。&lt;/p&gt;&lt;p&gt;推断：该辞职目前处于宣布阶段，是否最终生效取决于议会批准程序，报道未提供批准时间或表决结果。&lt;/p&gt;&lt;p&gt;影响：可能影响蒙古国政治权力交接与政策连续性，具体影响取决于议会是否批准及后续安排。&lt;/p&gt;&lt;p&gt;验证：可观察国家大呼拉尔是否召开会议审议、是否发布批准或否决结果，以及总统府后续公告。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>欧洲斯托克50指数期货下跌0.7%；英国富时100指数期货下跌0.85%；德国DAX指数期货下跌0.6%。</title>
-      <link>https://flash.jin10.com/detail/20261117123951558800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261117123951558800</guid>
-      <pubDate>Tue, 17 Nov 2026 04:39:51 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题列出欧洲斯托克50指数期货跌0.7%、英国富时100指数期货跌0.85%、德国DAX指数期货跌0.6%；摘要为空。&lt;/p&gt;&lt;p&gt;事实：报道仅给出上述三项股指期货的下跌幅度，未说明原因。&lt;/p&gt;&lt;p&gt;推断：欧洲主要股指期货同步走低，显示开盘前市场情绪偏弱，但线索有限，无法归因于具体事件。&lt;/p&gt;&lt;p&gt;影响：可能影响欧洲股市开盘表现及相关风险资产情绪，程度取决于后续现货市场走势。&lt;/p&gt;&lt;p&gt;验证：可观察欧洲股市开盘后现货指数表现及是否有后续报道解释下跌原因；目前缺少原因类验证材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>腾讯股价接近年内新低 | 11月17日早盘收盘，腾讯控股跌3.02%，股价378.6港元/股，接近年内股价新低，市值3.44万亿港元。11月16日，腾讯文化公众号发布一...</title>
-      <link>https://www.yicai.com/brief/103443331.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/brief/103443331.html</guid>
-      <pubDate>Tue, 17 Nov 2026 04:38:52 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://yicai.com">第一财经 · 简报</source>
-      <description>&lt;p&gt;11月17日早盘收盘，腾讯控股跌3.02%，股价378.6港元/股，接近年内股价新低，市值3.44万亿港元。11月16日，腾讯文化公众号发布一篇笔记，关于上周总办LinkTime的内容记录，内容显示腾讯总办在内部会议上表示要加快组织变革，所有核心业务每一个团队都要面向AI时代再创…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题与摘要称腾讯控股11月17日早盘收盘跌3.02%，报378.6港元/股，接近年内新低，市值3.44万亿港元；摘要还提到11月16日腾讯文化公众号发布关于总办LinkTime的内部会议记录，称要加快组织变革、核心业务面向AI时代再创业。&lt;/p&gt;&lt;p&gt;事实：报道明确给出股价、跌幅、市值数据，并明确说内部会议内容由腾讯文化公众号发布。&lt;/p&gt;&lt;p&gt;推断：股价下跌与内部会议内容之间是否存在因果关系，报道未说明，线索有限；组织变革表态可能被市场解读为加大AI投入的信号，但这属于推论。&lt;/p&gt;&lt;p&gt;影响：可能影响腾讯投资者情绪及对其AI战略投入的预期，具体影响需结合后续业务与财务信息。&lt;/p&gt;&lt;p&gt;验证：可观察腾讯后续公告、组织调整落地情况、下一交易日股价走势；目前缺少会议内容与股价波动因果关系的验证材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>美联储哈玛克重申支持小幅、渐进式加息，高盛预计2027年石油市场将“大量过剩”，嘉盛市场晴雨表显示，美国原油空头占比接近</title>
-      <link>https://flash.jin10.com/detail/20261117123851502800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261117123851502800</guid>
-      <pubDate>Tue, 17 Nov 2026 04:38:51 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>&lt;p&gt;美联储哈玛克重申支持小幅、渐进式加息，高盛预计2027年石油市场将“大量过剩”，嘉盛市场晴雨表显示，美国原油空头占比接近60%，现货金银多头占比仍高于80%。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题与摘要提到美联储哈玛克重申支持小幅、渐进式加息；高盛预计2027年石油市场将“大量过剩”；嘉盛市场晴雨表显示美国原油空头占比接近60%，现货金银多头占比仍高于80%。&lt;/p&gt;&lt;p&gt;事实：报道明确转述上述机构与人士的立场及持仓占比数据，但未提供具体数据来源细节。&lt;/p&gt;&lt;p&gt;推断：这些信号共同指向对原油偏空、对贵金属偏多的市场情绪，但各信号之间无报道证实的直接关联。&lt;/p&gt;&lt;p&gt;影响：可能影响原油与贵金属相关市场参与者的预期，条件取决于后续政策与供需数据。&lt;/p&gt;&lt;p&gt;验证：可观察美联储官员后续表态、高盛报告原文及嘉盛晴雨表后续更新；目前缺少原始报告与统计口径的验证材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>工信部委托行业协会评估 车企故意拉长账期将被约谈</title>
-      <link>https://www.caixin.com/2026-11-17/102505660.html</link>
-      <guid isPermaLink="true">https://www.caixin.com/2026-11-17/102505660.html</guid>
-      <pubDate>Tue, 17 Nov 2026 04:38:25 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://caixin.com">财新 · 最新</source>
-      <description>&lt;p&gt;中汽协将每年从每家车企随机抽取不少于15家供应商，通过现场调研等方式核实实际付款情况。评估结果将先报送工信部，再按程序向社会公开 11月16日，中国汽车工业协会发布通知称，受工信部委托，中汽协将作为第三方机构，对17家重点汽车企业的供应商账款支付情况开展年度评估。图：视觉中国 【…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称工信部委托行业协会评估，车企故意拉长账期将被约谈；摘要称中汽协11月16日发布通知，受工信部委托作为第三方机构对17家重点汽车企业供应商账款支付情况开展年度评估，每年从每家车企随机抽取不少于15家供应商现场调研核实付款情况，结果先报工信部再按程序向社会公开。&lt;/p&gt;&lt;p&gt;事实：报道明确评估对象为17家重点车企、抽样不少于15家供应商、结果将公开。&lt;/p&gt;&lt;p&gt;推断：该机制可能提高车企拖欠供应商账款的违规成本，但“故意拉长账期将被约谈”的具体触发标准与约谈程序，摘要未详述。&lt;/p&gt;&lt;p&gt;影响：可能影响17家重点车企的现金流管理与供应商关系，并波及汽车供应链中小供应商的回款预期。&lt;/p&gt;&lt;p&gt;验证：可观察中汽协后续发布的评估结果、工信部是否公开约谈案例，以及车企账期披露变化；目前缺少评估细则与首轮结果材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>宇树科技王兴兴：机器人行业首要痛点是模型泛化能力不足 机器人更换应用场景往往需要重新训练</title>
-      <link>https://www.cls.cn/detail/2536368</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2536368</guid>
-      <pubDate>Tue, 17 Nov 2026 04:37:19 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-      <description>&lt;p&gt;【宇树科技王兴兴：机器人行业首要痛点是模型泛化能力不足 机器人更换应用场景往往需要重新训练】财联社11月17日电，2026年APEC工商领导人峰会今日在深圳举办。在“共建开放普惠的人工智能创新生态”研讨环节，宇树科技董事长兼首席执行官王兴兴表示，大众所见到的AI、机器人成果仅是冰…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题与摘要显示，2026年APEC工商领导人峰会在深圳举办，宇树科技董事长兼CEO王兴兴在“共建开放普惠的人工智能创新生态”环节发言；摘要提到“模型泛化能力不足”“更换应用场景往往需要重新训练”。&lt;/p&gt;&lt;p&gt;事实：报道明确称王兴兴表示机器人行业首要痛点是模型泛化能力不足，机器人更换应用场景往往需要重新训练；他还称可见成果仅是冰山一角、底层技术迭代快、前景值得期待。&lt;/p&gt;&lt;p&gt;推断：按发言者判断，泛化能力是制约机器人跨场景复用的关键瓶颈，但这是行业观点而非经报道验证的技术评测结论。&lt;/p&gt;&lt;p&gt;影响：可能影响人形机器人/具身智能企业的研发重点与商业化节奏，条件是其产品确需跨家庭与工作场景适配；对上游训练数据、仿真与模型服务需求也可能形成关注。&lt;/p&gt;&lt;p&gt;验证：可跟踪宇树后续是否发布跨场景泛化能力的技术指标、演示或客户案例；目前缺少具体性能数据与第三方评测材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>宇树科技董事长兼首席执行官王兴兴：行业仍面临多重现实难题，首要痛点是模型泛化能力不足</title>
-      <link>https://wallstreetcn.com/livenews/3201025</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3201025</guid>
-      <pubDate>Tue, 17 Nov 2026 04:36:46 +0000</pubDate>
+      <title>据知情人士透露，Anthropic通过IPO吸引到大约1150亿-1200亿美元的散户需求。（彭博）</title>
+      <link>https://wallstreetcn.com/livenews/3203558</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3203558</guid>
+      <pubDate>Fri, 20 Nov 2026 20:17:16 +0000</pubDate>
       <category>中文财经快讯</category>
       <source url="https://wallstreetcn.com">华尔街见闻 · A 股快讯</source>
-      <description>&lt;p&gt;2026年APEC工商领导人峰会今日在深圳举办。在“共建开放普惠的人工智能创新生态”研讨环节，宇树科技董事长兼首席执行官王兴兴表示，大众所见到的AI、机器人成果仅是冰山一角，水下底层技术迭代速度迅猛，行业发展前景值得期待，各界应当主动拥抱AI技术变革。王兴兴还表示，行业仍面临多重…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：同一峰会、同一发言人的报道，摘要补充“难以实现一台设备适配各类家庭与工作环境”“全球技术演进已接近突破临界点”，并称其“同时提醒”但摘要未展开提醒内容。&lt;/p&gt;&lt;p&gt;事实：报道明确称王兴兴表示行业面临多重现实难题，首要痛点是模型泛化能力不足，换场景往往需重新训练，难以一机适配家庭与工作环境；并称全球技术演进接近突破临界点。&lt;/p&gt;&lt;p&gt;推断：发言同时给出瓶颈与乐观判断，可能意在表达技术拐点临近但仍需工程化突破；“提醒”的具体内容因摘要截断无法确认。&lt;/p&gt;&lt;p&gt;影响：可能影响市场对机器人商业化时间表的预期，条件是对“临界点”的判断被后续产品验证；对整机厂商与应用场景方均有参考意义。&lt;/p&gt;&lt;p&gt;验证：需查看峰会完整发言或宇树官方材料以确认“提醒”内容及“临界点”所指；目前缺少完整文本。&lt;/p&gt;</description>
     </item>
     <item>
-      <title>宇树科技董事长兼首席执行官王兴兴：机器人行业当前的机遇与现实挑战</title>
-      <link>https://flash.jin10.com/detail/20261117123603456800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261117123603456800</guid>
-      <pubDate>Tue, 17 Nov 2026 04:36:03 +0000</pubDate>
+      <title>比特币跌至两年多低点 风险资产抛售加剧下行压力</title>
+      <link>https://www.cls.cn/detail/2540684</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2540684</guid>
+      <pubDate>Fri, 20 Nov 2026 20:14:11 +0000</pubDate>
       <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>&lt;p&gt;金十数据11月17日讯，2026年APEC工商领导人峰会今日在深圳举办。在“共建开放普惠的人工智能创新生态”研讨环节，宇树科技董事长兼首席执行官王兴兴表示，大众所见到的AI、机器人成果仅是冰山一角，水下底层技术迭代速度迅猛，行业发展前景值得期待，各界应当主动拥抱AI技术变革。王兴…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：金十数据对同一峰会发言的报道，摘要与前述条目高度重合，均含“冰山一角”“底层技术迭代速度迅猛”“首要痛点是模型泛化能力不足”“更换应用场景往往需要重新训练”“全球技术演进已接近……”。&lt;/p&gt;&lt;p&gt;事实：报道明确称王兴兴在APEC峰会表示行业有机遇也有现实挑战，首要痛点为模型泛化能力不足，换场景需重新训练，且全球技术演进接近突破临界点（摘要截断）。&lt;/p&gt;&lt;p&gt;推断：多家财经媒体同日同源报道，说明该发言是当日可核对的公开信号，但内容为观点陈述，非新事实披露。&lt;/p&gt;&lt;p&gt;影响：可能强化市场对具身智能“泛化能力”议题的关注，条件是该议题转化为企业研发投入或产品路线调整。&lt;/p&gt;&lt;p&gt;验证：可交叉核对财联社、华尔街见闻、金十的完整报道是否一致；目前摘要均不完整，缺少量化信息。&lt;/p&gt;</description>
+      <source url="https://cls.cn">财联社 · 电报</source>
+      <description>【比特币跌至两年多低点 风险资产抛售加剧下行压力】财联社11月21日电，比特币一度暴跌6.1%，至57,716美元，为2024年9月以来最低。比特币自2025年10月升至超过126,000美元的峰值以来，已下跌超过一半。“整体市场的信心急剧下降，投资者正在去风险，”GSR复杂资产…</description>
     </item>
     <item>
-      <title>马来西亚与法国签署关键矿产和技术合作谅解备忘录。</title>
-      <link>https://wallstreetcn.com/livenews/3201024</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3201024</guid>
-      <pubDate>Tue, 17 Nov 2026 04:36:00 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
-      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称马来西亚与法国签署关键矿产和技术合作谅解备忘录；摘要为空。&lt;/p&gt;&lt;p&gt;事实：报道仅明确签署谅解备忘录这一动作及涉及“关键矿产和技术合作”，未提供签署主体层级、矿产种类、技术范围、金额或时间表。&lt;/p&gt;&lt;p&gt;推断：线索有限，无法判断合作深度与约束力；谅解备忘录通常偏框架性，但此为一般性推断，报道未说明。&lt;/p&gt;&lt;p&gt;影响：可能涉及关键矿产供应链与技术合作领域，条件是该备忘录后续转化为具体项目；对相关矿产贸易与技术企业的实际影响目前无法评估。&lt;/p&gt;&lt;p&gt;验证：需观察双方政府或企业后续公布的备忘录文本、项目清单与执行安排；当前缺少验证材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>早间要闻汇总</title>
-      <link>https://wallstreetcn.com/livenews/3201023</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3201023</guid>
-      <pubDate>Tue, 17 Nov 2026 04:35:23 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
-      <description>&lt;p&gt;科创50指数半日涨超3%，半导体产业链集体反弹。 港股探底回升，恒指半日跌0.8%，恒生科技指数跌0.5%，华虹宏力涨超9%。 纽元兑美元盘中跌至2020年以来新低。 9部门发文深入推进再生资源回收体系建设，要求补齐动力电池回收短板，健全光电设备回收利用体系。 曾毓群、李彦宏、王…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题为“早间要闻汇总”，摘要列出多项信号：科创50指数半日涨超3%、半导体产业链反弹；港股恒指半日跌0.8%、恒生科技指数跌0.5%、华虹宏力涨超9%；纽元兑美元盘中跌至2020年以来新低；9部门发文推进再生资源回收体系建设，要求补齐动力电池回收短板、健全光电设备回收利用体系；曾毓群、李彦宏、王兴兴、王传福、雷军、何超琼、董明珠、李东生、周群飞等齐聚深圳；“灵晟”蝉联全球超算榜首；沪深两市融资余额上日减少214（单位被截断）。&lt;/p&gt;&lt;p&gt;事实：报道明确列出上述市场行情、政策发文方向、人员聚集深圳、超算榜单与融资余额变动等要点，但摘要为汇总且多处截断。&lt;/p&gt;&lt;p&gt;推断：该条目为多主题快讯集合，各条之间无报道明示的因果关系；融资余额减少的具体数值与口径因截断无法确认。&lt;/p&gt;&lt;p&gt;影响：可能分别影响半导体板块情绪、再生资源与动力电池回收相关领域、以及深圳相关产业活动关注度，条件是以完整原文与后续数据为准。&lt;/p&gt;&lt;p&gt;验证：需核对各原始报道的完整数据（如融资余额单位、政策文件全文、超算榜单发布方）；当前摘要不完整，部分要点缺少验证材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>杭州土拍成交额50亿元 最高溢价率32.8%</title>
-      <link>https://wallstreetcn.com/livenews/3201021</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3201021</guid>
-      <pubDate>Tue, 17 Nov 2026 04:35:06 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
-      <description>&lt;p&gt;11月17日，杭州出让3宗涉宅用地，最终2宗溢价、1宗底价成交，总成交金额50亿元。其中，上城区宅地经过60轮竞价，最终由绿城以24.27亿元竞得，成交楼面价42491元/平方米，溢价率32.84%；钱塘区地块为组合地块（2宗宅地、1宗商业用地），经过35轮竞价，最终兴耀房产和滨…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：11月17日杭州出让3宗涉宅用地，2宗溢价、1宗底价成交，总成交金额50亿元；上城区宅地经60轮竞价由绿城以24.27亿元竞得，楼面价42491元/平方米，溢价率32.84%；钱塘区组合地块经35轮竞价由兴耀房产和滨江集团联合体以22.96亿元竞得，综合楼面价17582元/平方米，溢价率26.43%；临安区宅地由荣上地产和国兴集团联合体以底价2.82亿元竞得。&lt;/p&gt;&lt;p&gt;事实：报道明确给出上述成交宗数、金额、竞得方、轮次、楼面价与溢价率，临安区地块楼面价在摘要中被截断。&lt;/p&gt;&lt;p&gt;推断：核心区地块竞价轮次多、溢价率较高，而临安区地块底价成交，显示本次土拍热度存在区域分化，但仅凭单场出让不足以判断整体市场趋势。&lt;/p&gt;&lt;p&gt;影响：可能影响杭州涉宅用地供应节奏、参与竞拍的房企区域布局预期及周边新房定价参考，具体取决于后续供地规模与销售端表现。&lt;/p&gt;&lt;p&gt;验证：可核对杭州规划和自然资源部门出让公告与成交公示、绿城及滨江集团相关披露，并观察后续杭州土拍溢价率与流拍情况；目前缺少临安区地块完整楼面价及竞得方资金安排信息。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Mongolian President Abruptly Resigns After Alleged Misconduct｜中文：蒙古总统在被指控行为不当后突然辞职</title>
-      <link>https://www.bloomberg.com/news/articles/2026-11-17/mongolian-president-abruptly-resigns-after-alleged-misconduct</link>
-      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-17/mongolian-president-abruptly-resigns-after-alleged-misconduct</guid>
-      <pubDate>Tue, 17 Nov 2026 04:34:56 +0000</pubDate>
-      <category>政治与政策</category>
-      <source url="https://bloomberg.com">彭博社 · 政治</source>
-      <description>&lt;p&gt;中文：蒙古总统乌赫纳·呼雷勒苏赫意外宣布，鉴于面临不当行为指控，他将辞去总统职务
-原文：Mongolian President Khurelsukh Ukhnaa unexpectedly announced he will resign from office while fa…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：蒙古总统呼雷勒苏赫·乌赫纳宣布将辞去总统职务，报道称其面临不当行为指控。&lt;/p&gt;&lt;p&gt;事实：报道明确说明辞职为突然宣布，且与不当行为指控同时出现；未提供指控具体内容、来源或法律程序细节。&lt;/p&gt;&lt;p&gt;推断：辞职声明与指控在时间上重合，可能引发蒙古政局短期不确定性，但两者因果关系及指控真实性尚无报道细节支撑，属推论。&lt;/p&gt;&lt;p&gt;影响：可能影响蒙古国内政策连续性、执政党内部安排及对外经贸与资源合作预期，程度取决于继任程序与政局稳定性。&lt;/p&gt;&lt;p&gt;验证：可关注蒙古官方辞职程序公告、议会或宪法机制安排、指控调查进展及主要政党表态；目前缺少指控细节与继任时间表等验证材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>2026年11月17日《市场零距离》上午</title>
-      <link>https://www.yicai.com/video/103443328.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/video/103443328.html</guid>
-      <pubDate>Tue, 17 Nov 2026 04:33:02 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://yicai.com">第一财经 · 最新</source>
-      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：条目为第一财经《市场零距离》2026年11月17日上午节目，摘要为空。&lt;/p&gt;&lt;p&gt;事实：仅能确认节目名称、日期与来源，无具体报道内容。&lt;/p&gt;&lt;p&gt;推断：线索有限，无法判断节目涉及的市场议题或观点。&lt;/p&gt;&lt;p&gt;影响：线索有限，无法识别可能受影响的主体或领域。&lt;/p&gt;&lt;p&gt;验证：需获取该节目文字稿或视频内容后再行分析；目前缺少验证材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>US Moves to Curb China's Remote Access to Nvidia's AI Chips｜中文：美国采取措施限制中国对Nvidia人工智能芯片的远程访问</title>
-      <link>https://www.bloomberg.com/news/videos/2026-11-17/the-asia-trade-11-17-2026-video</link>
-      <guid isPermaLink="true">https://www.bloomberg.com/news/videos/2026-11-17/the-asia-trade-11-17-2026-video</guid>
-      <pubDate>Tue, 17 Nov 2026 04:32:25 +0000</pubDate>
+      <title>Trillions Podcast Live From Bloomberg ETFs in Depth: The Big Three｜中文：Trillions播客直播：彭博ETF深度解析：三大巨头</title>
+      <link>https://www.bloomberg.com/news/videos/2026-11-20/trillions-podcast-live-etfs-in-depth-the-big-three-video</link>
+      <guid isPermaLink="true">https://www.bloomberg.com/news/videos/2026-11-20/trillions-podcast-live-etfs-in-depth-the-big-three-video</guid>
+      <pubDate>Fri, 20 Nov 2026 20:13:45 +0000</pubDate>
       <category>全球市场与要闻</category>
       <source url="https://bloomberg.com">彭博社 · 市场</source>
-      <description>&lt;p&gt;中文：《彭博：亚洲交易》为您提供在亚洲交易日开始时取得领先所需了解的一切信息。彭博电视台正在悉尼进行直播，由Haidi Stroud-Watts和Paul Allen主持，为您带来……的见解和分析
-原文："Bloomberg: The Asia Trade" brings you…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称美国采取措施限制中国对Nvidia人工智能芯片的远程访问；摘要内容为彭博电视节目介绍，未包含政策细节。&lt;/p&gt;&lt;p&gt;事实：报道标题明确指向美方针对中国远程访问Nvidia AI芯片的限制举措；摘要未提供措施范围、生效时间或执行方式。&lt;/p&gt;&lt;p&gt;推断：若措施落地，可能收紧中国用户通过远程方式获取Nvidia算力的渠道，但标题未说明具体机制，属推论。&lt;/p&gt;&lt;p&gt;影响：可能影响依赖远程算力访问的中国AI企业、云服务商及Nvidia相关业务，程度取决于限制范围与执行力度。&lt;/p&gt;&lt;p&gt;验证：可关注美国商务部等官方规则文本、Nvidia声明及云服务商合规调整；目前缺少政策原文与生效条件等验证材料。&lt;/p&gt;</description>
+      <description>中文：Vanguard 的负责人兼银行和机构金融顾问服务主管 Janel Jackson、道富投资管理公司首席商务官 Anna Paglia 以及美洲、全球产品联席主管 Elise Terry…
+原文：Vanguard's Principal &amp; Head of Bank &amp; I…</description>
     </item>
     <item>
-      <title>上证指数早盘创新低 市场底何时探明？ | 午间论市</title>
-      <link>https://www.yicai.com/video/103443327.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/video/103443327.html</guid>
-      <pubDate>Tue, 17 Nov 2026 04:31:54 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://yicai.com">第一财经 · 最新</source>
-      <description>&lt;p&gt;金元证券首席投资顾问徐传豹建议投资者顺势而为，留强汰弱。国泰海通资产配置部权益策略官肖鑫雨认为，降温避险期，投资者可以稳底仓，觅成长。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：上证指数早盘创新低；金元证券首席投资顾问徐传豹建议顺势而为、留强汰弱；国泰海通资产配置部权益策略官肖鑫雨认为降温避险期可稳底仓、觅成长。&lt;/p&gt;&lt;p&gt;事实：报道明确给出指数早盘创新低及两位机构人士的策略观点，未提供具体点位、跌幅或数据。&lt;/p&gt;&lt;p&gt;推断：机构观点偏向防御与结构选择，反映对短期市场走弱背景下的谨慎态度，但属受访者判断而非市场事实。&lt;/p&gt;&lt;p&gt;影响：可能影响投资者情绪与板块配置倾向，具体取决于后续指数走势与成交量变化。&lt;/p&gt;&lt;p&gt;验证：可核对当日上证指数实际点位与成交数据、后续机构研报观点变化；目前缺少具体行情数据与观点完整表述等验证材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>李明德：港股或继续调整 科技股普跌 | 亚太时间</title>
-      <link>https://www.yicai.com/video/103443326.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/video/103443326.html</guid>
-      <pubDate>Tue, 17 Nov 2026 04:30:50 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://yicai.com">第一财经 · 最新</source>
-      <description>&lt;p&gt;大圣集团投资经理李明德表示，港股开盘承压，或继续调整。科技股普遍下跌，市场关注AI收入能否转化为盈利。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称港股或继续调整、科技股普跌，摘要引述大圣集团投资经理李明德称港股开盘承压、或继续调整，科技股普遍下跌，市场关注AI收入能否转化为盈利；&lt;/p&gt;&lt;p&gt;事实：报道明确给出上述观点与盘面描述，未提供具体指数点位、跌幅或个股数据；&lt;/p&gt;&lt;p&gt;推断：该条属机构人士观点加盘面概括，港股承压与科技股下跌被并列呈现，AI盈利转化被描述为市场关注点，但报道未说明二者因果；&lt;/p&gt;&lt;p&gt;影响：可能涉及港股科技板块及关注AI变现的投资者情绪，具体影响程度取决于后续实际数据；&lt;/p&gt;&lt;p&gt;验证：需观察港股收盘指数与科技股表现、相关公司业绩及AI收入披露，目前缺少量化数据。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>提醒：日内请重点关注（以下均为北京时间）</title>
-      <link>https://wallstreetcn.com/livenews/3201020</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3201020</guid>
-      <pubDate>Tue, 17 Nov 2026 04:30:48 +0000</pubDate>
+      <title>费城联储行长保尔森主张以“审慎”步伐加息 愿意考虑连续行动</title>
+      <link>https://finance.sina.com.cn/stock/usstock/c/2026-11-21/doc-inizmrup5221234.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/stock/usstock/c/2026-11-21/doc-inizmrup5221234.shtml</guid>
+      <pubDate>Fri, 20 Nov 2026 20:13:02 +0000</pubDate>
       <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
-      <description>&lt;p&gt;① 15:00 英国9月三个月ILO就业人数与失业率； ② 港股收盘之后 京东发布业绩报告； ③ 17:00 欧洲央行管委Pereira、欧洲央行执委Cipollone讲话； ④ 18:00 欧元区11月ZEW经济景气指数，德国11月ZEW经济景气指数； ⑤ 美股盘前 家得宝、迪…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题为日内重点关注提醒，摘要列出英国9月三个月ILO就业与失业率、京东港股收盘后发布业绩、欧洲央行Pereira与Cipollone讲话、欧元区及德国11月ZEW经济景气指数、美股盘前家得宝与迪士尼业绩、圣路易斯联储主席Musalem讲话、微软Ignite大会等时间点；&lt;/p&gt;&lt;p&gt;事实：报道明确列出上述日程安排，均为北京时间；&lt;/p&gt;&lt;p&gt;推断：该条为日程提示，本身不含结果性信息，所列事件可能成为相关市场波动的观察窗口，但报道未作任何方向判断；&lt;/p&gt;&lt;p&gt;影响：可能涉及英镑、欧元、美股及港股相关个股与板块，条件取决于实际公布值与市场预期差；&lt;/p&gt;&lt;p&gt;验证：后续可核对各事件实际公布数据与市场反应，目前缺少预期值与结果。&lt;/p&gt;</description>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>费城联储行长安娜·保尔森主张以“审慎”的步伐加息，但表示，她愿意考虑在接下来的会议上连续加息，以帮助通胀回到美联储2%的目标。 “就利率需要朝哪个方向走而言，方向其实非常明确，”保尔森周五在纽约接受彭博新闻采访时表示。“利率需要更高。” 保尔森表示，她倾向于以“审慎的方式”行动，…</description>
     </item>
     <item>
-      <title>日本9月第三产业活动指数环比 -0.5%，预期 0.1%，前值 -0.1%。</title>
-      <link>https://wallstreetcn.com/livenews/3201019</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3201019</guid>
-      <pubDate>Tue, 17 Nov 2026 04:30:03 +0000</pubDate>
+      <title>Anthropic的IPO吸引了约1150亿至1200亿美元的散户需求</title>
+      <link>https://news.10jqka.com.cn/20261121/c682068530.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261121/c682068530.shtml</guid>
+      <pubDate>Fri, 20 Nov 2026 20:12:24 +0000</pubDate>
       <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
-      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题显示日本9月第三产业活动指数环比-0.5%，预期0.1%，前值-0.1%；摘要为空，线索有限；&lt;/p&gt;&lt;p&gt;事实：报道明确给出实际值、预期值与前值三项数据；&lt;/p&gt;&lt;p&gt;推断：实际值低于预期且由前值转负，属数据层面的走弱信号，但单月指数不足以推断日本经济整体趋势；&lt;/p&gt;&lt;p&gt;影响：可能涉及日元及日本相关资产的市场情绪，具体反应取决于其他数据与政策环境；&lt;/p&gt;&lt;p&gt;验证：可观察后续日本服务业与消费相关数据是否延续走弱，目前缺少分项与修正值材料。&lt;/p&gt;</description>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>据报道，Anthropic的IPO吸引了约1150亿至1200亿美元的散户需求。（财联社）</description>
     </item>
     <item>
-      <title>光刻胶板块直线拉升 AI漫剧概念遇挫 | 板块牛熊榜</title>
-      <link>https://www.yicai.com/video/103443323.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/video/103443323.html</guid>
-      <pubDate>Tue, 17 Nov 2026 04:29:50 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://yicai.com">第一财经 · 最新</source>
-      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称光刻胶板块直线拉升、AI漫剧概念遇挫，摘要为空，线索有限；&lt;/p&gt;&lt;p&gt;事实：报道仅明确板块层面的涨跌方向描述，未提供个股、涨幅或原因；&lt;/p&gt;&lt;p&gt;推断：可推断当日盘中存在光刻胶与AI漫剧概念之间的板块分化，但拉升与遇挫的驱动因素未被报道，不能归因于具体消息；&lt;/p&gt;&lt;p&gt;影响：可能涉及相关概念板块及持有这些板块的投资者情绪，持续性无法判断；&lt;/p&gt;&lt;p&gt;验证：需观察后续板块走势、成交与公司公告，目前缺少量化与原因材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>财联社11月17日电，马来西亚与法国签署关键矿产和技术合作谅解备忘录。</title>
-      <link>https://www.cls.cn/detail/2536365</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2536365</guid>
-      <pubDate>Tue, 17 Nov 2026 04:29:46 +0000</pubDate>
+      <title>财联社11月21日电，据报道，Anthropic的IPO吸引了约1150亿至1200亿美元的散户需求。</title>
+      <link>https://www.cls.cn/detail/2540683</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2540683</guid>
+      <pubDate>Fri, 20 Nov 2026 20:12:01 +0000</pubDate>
       <category>中文财经快讯</category>
       <source url="https://cls.cn">财联社 · 电报</source>
-      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称马来西亚与法国签署关键矿产和技术合作谅解备忘录，摘要为空，线索有限；&lt;/p&gt;&lt;p&gt;事实：报道明确签署主体为马来西亚与法国，内容为关键矿产和技术合作谅解备忘录；&lt;/p&gt;&lt;p&gt;推断：备忘录属合作意向性文件，可推断两国在关键矿产与技术领域建立合作框架，但报道未披露具体矿产种类、投资规模或执行时间表，不能推断实际落地效果；&lt;/p&gt;&lt;p&gt;影响：可能涉及关键矿产供应链及相关技术合作领域，具体影响取决于后续执行；&lt;/p&gt;&lt;p&gt;验证：可观察双方后续公布的合作细则、项目落地与监管文件，目前缺少细节材料。&lt;/p&gt;</description>
     </item>
     <item>
-      <title>谈鑫：均衡风格配置 兼顾国产科技、红利及战略资源等领域 | 基金周观察</title>
-      <link>https://www.yicai.com/video/103443322.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/video/103443322.html</guid>
-      <pubDate>Tue, 17 Nov 2026 04:29:04 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://yicai.com">第一财经 · 最新</source>
-      <description>&lt;p&gt;国泰海通证券研究所基金研究分析师谈鑫表示，后市可均衡风格配置，兼顾国产科技、红利及战略资源等领域。债基配置方面，短期内建议以防风险为主，可适当关注中短久期利率债产品。（投资风险提示：投资需谨慎，以上观点不构成任何投资建议，仅供参考）&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题与摘要显示为国泰海通证券研究所基金研究分析师谈鑫的基金周观察观点，提到均衡风格配置、兼顾国产科技/红利/战略资源，债基短期以防风险为主、可关注中短久期利率债产品，并附投资风险提示。&lt;/p&gt;&lt;p&gt;事实：报道明确给出上述配置观点及风险提示，属分析师个人观点，不构成投资建议。&lt;/p&gt;&lt;p&gt;推断：该内容反映机构研究端对后市风格均衡化及债市短期防风险的倾向性判断，但仅为观点表达，非市场事实。&lt;/p&gt;&lt;p&gt;影响：可能影响关注基金配置的投资者对科技、红利、战略资源及中短久期利率债产品的关注度，实际影响取决于后续市场表现。&lt;/p&gt;&lt;p&gt;验证：可跟踪相关板块与中短久期利率债后续表现，以及该机构后续观点是否调整；目前缺少具体数据支撑，线索有限。&lt;/p&gt;</description>
+      <title>Anthropic’s IPO Drew More Retail Investor Demand Than SpaceX｜中文：Anthropic 的 IPO 吸引的散户投资者需求超过 SpaceX</title>
+      <link>https://www.bloomberg.com/news/articles/2026-11-20/anthropic-s-ipo-drew-more-retail-investor-demand-than-spacex</link>
+      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-20/anthropic-s-ipo-drew-more-retail-investor-demand-than-spacex</guid>
+      <pubDate>Fri, 20 Nov 2026 20:12:00 +0000</pubDate>
+      <category>全球市场与要闻</category>
+      <source url="https://bloomberg.com">彭博社 · 市场</source>
+      <description>中文：据一位知情人士透露，Anthropic PBC的首次公开募股吸引了零售投资者约1150亿至1200亿美元的股票需求，超过了他们……
+原文：Anthropic PBC’s initial public offering drew roughly between $115 bi…</description>
     </item>
     <item>
-      <title>蒙古国总统呼日勒苏赫宣布辞职</title>
-      <link>https://www.cls.cn/detail/2536364</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2536364</guid>
-      <pubDate>Tue, 17 Nov 2026 04:26:48 +0000</pubDate>
+      <title>纳斯达克中国金龙指数跌幅扩大，现跌3.0%</title>
+      <link>https://news.10jqka.com.cn/20261121/c682068527.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261121/c682068527.shtml</guid>
+      <pubDate>Fri, 20 Nov 2026 20:09:56 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>纳斯达克中国金龙指数跌幅扩大，现跌3.0%，最新报5036.13点。</description>
+    </item>
+    <item>
+      <title>财联社11月21日电，纳斯达克中国金龙指数跌幅扩大，现跌3.0%，最新报5036.13点。</title>
+      <link>https://www.cls.cn/detail/2540682</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2540682</guid>
+      <pubDate>Fri, 20 Nov 2026 20:09:29 +0000</pubDate>
       <category>中文财经快讯</category>
       <source url="https://cls.cn">财联社 · 电报</source>
-      <description>&lt;p&gt;【蒙古国总统呼日勒苏赫宣布辞职】财联社11月17日电，蒙古国总统呼日勒苏赫当地时间17日上午宣布辞去职务。按照蒙古国相关法律规定，总统辞职决定须经国家大呼拉尔（议会）批准方能生效。 (新华社)&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称蒙古国总统呼日勒苏赫宣布辞职，摘要称当地时间17日上午宣布辞去职务，并称按蒙古国法律总统辞职须经国家大呼拉尔（议会）批准方能生效，来源标注新华社。&lt;/p&gt;&lt;p&gt;事实：报道明确总统宣布辞职，且辞职生效需议会批准。&lt;/p&gt;&lt;p&gt;推断：在议会批准前，辞职尚不构成最终生效结果，后续存在程序性不确定性。&lt;/p&gt;&lt;p&gt;影响：可能影响蒙古国政局稳定性及对外政策连续性，具体影响取决于议会批准进展。&lt;/p&gt;&lt;p&gt;验证：可观察国家大呼拉尔是否审议批准、总统职权交接安排及官方后续公告；目前缺少议会表决时间等材料。&lt;/p&gt;</description>
     </item>
     <item>
-      <title>华西证券的“慢哲学”与“快布局”丨《新定位 新征程 “十五五”规划下的券商使命》系列节目（五）</title>
-      <link>https://www.yicai.com/video/103443320.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/video/103443320.html</guid>
-      <pubDate>Tue, 17 Nov 2026 04:26:45 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://yicai.com">第一财经 · 最新</source>
-      <description>&lt;p&gt;区域券商如何在证券行业加速转型的背景下站稳脚跟？华西证券的答案不是面面俱到，而是把长板做长：把零售财富管理的特长做深，把“千企万亿”的科创金融做透，把AI的实用主义做扎实，把稳健经营的底线守住。围绕财富管理转型、“千企万亿”实践与区域券商的经营之道，第一财经记者近日专访了华西证券…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题为华西证券“慢哲学”与“快布局”系列节目，摘要称记者专访华西证券总裁黄明，提及其2026年7月接任总裁、表态“接棒不换挡”，并提及零售财富管理、“千企万亿”科创金融、AI实用主义与稳健经营。&lt;/p&gt;&lt;p&gt;事实：报道明确为专访内容，包含接任时间与公司战略方向表述。&lt;/p&gt;&lt;p&gt;推断：该内容属公司战略与高管表态的媒体呈现，反映区域券商在行业转型下的差异化定位思路，但摘要为节选，信息不完整。&lt;/p&gt;&lt;p&gt;影响：可能影响外界对华西证券战略连续性与业务重点的认知，实际经营效果需后续业绩验证。&lt;/p&gt;&lt;p&gt;验证：可跟踪公司后续财报、财富管理与科创金融业务数据及战略落地情况；摘要截断，线索有限。&lt;/p&gt;</description>
+      <title>利弗莫尔中概股龙头指数跌幅扩大至5%</title>
+      <link>https://news.10jqka.com.cn/20261121/c682068526.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261121/c682068526.shtml</guid>
+      <pubDate>Fri, 20 Nov 2026 20:06:25 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>利弗莫尔中概股龙头指数跌幅扩大至5%，报7472.42点。成分股中，小鹏跌13.38%，南茂跌13.11%，日月光投控跌12.96%，慧荣科技跌11.19%，希尔威金属矿业跌11.02%。</description>
     </item>
     <item>
-      <title>日本计划在广岛建综合防卫基地</title>
-      <link>https://www.yicai.com/news/103443319.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/news/103443319.html</guid>
-      <pubDate>Tue, 17 Nov 2026 04:24:37 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://yicai.com">第一财经 · 最新</source>
-      <description>&lt;p&gt;据CCTV国际时讯，日本内阁官房长官木原稔今天（11月17日）在记者会上表示，日本防卫省计划在广岛县吴市建设多功能综合防卫基地，并将在基地内设置区域，吸引民间企业入驻，开展防卫装备的制造和研发等工作。木原稔表示，吴市拥有海上自卫队重要基地，在当地建设多功能综合防卫基地，对于强化日…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称日本计划在广岛建综合防卫基地，摘要称内阁官房长官木原稔17日在记者会表示防卫省计划在广岛县吴市建设多功能综合防卫基地，设区域吸引民间企业入驻开展防卫装备制造研发，称吴市有海上自卫队重要基地，并称目前没有计划由国家直接拥有相关设施，来源CCTV国际时讯。&lt;/p&gt;&lt;p&gt;事实：报道明确上述计划与表态内容。&lt;/p&gt;&lt;p&gt;推断：该计划指向防卫产业与民间企业协作的方向，但尚处计划与表态阶段，具体规模、时间表未披露。&lt;/p&gt;&lt;p&gt;影响：可能影响日本防卫装备相关产业及当地经济，实际影响取决于计划推进程度。&lt;/p&gt;&lt;p&gt;验证：可观察防卫省后续正式方案、预算安排及企业入驻情况；目前缺少实施细节。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>日本计划在广岛建综合防卫基地 | 据CCTV国际时讯，日本内阁官房长官木原稔今天（11月17日）在记者会上表示，日本防卫省计划在广岛县吴市建设多功能综合防...</title>
-      <link>https://www.yicai.com/brief/103443318.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/brief/103443318.html</guid>
-      <pubDate>Tue, 17 Nov 2026 04:24:35 +0000</pubDate>
+      <title>OIS合约不再充分反映美联储12月加息25个基点 | 随着避险买盘增强，美国国债短端延续涨势，与美联储会议日期挂钩的隔夜指数掉期(OIS)定价显示12月政策会议...</title>
+      <link>https://www.yicai.com/brief/103448911.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/brief/103448911.html</guid>
+      <pubDate>Fri, 20 Nov 2026 20:06:03 +0000</pubDate>
       <category>中文财经快讯</category>
       <source url="https://yicai.com">第一财经 · 简报</source>
-      <description>&lt;p&gt;据CCTV国际时讯，日本内阁官房长官木原稔今天（11月17日）在记者会上表示，日本防卫省计划在广岛县吴市建设多功能综合防卫基地，并将在基地内设置区域，吸引民间企业入驻，开展防卫装备的制造和研发等工作。木原稔表示，吴市拥有海上自卫队重要基地，在当地建设多功能综合防卫基地，对于强化日…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：该条与id 53内容基本重复，标题与摘要均称日本防卫省计划在广岛县吴市建设多功能综合防卫基地，吸引民间企业入驻开展防卫装备制造研发，木原稔称意义重要且目前无国家直接拥有设施计划，来源CCTV国际时讯。&lt;/p&gt;&lt;p&gt;事实：报道明确上述计划与表态。&lt;/p&gt;&lt;p&gt;推断：与id 53为同一事件的不同条目，属重复信息，不构成新增事实。&lt;/p&gt;&lt;p&gt;影响：同id 53，可能影响日本防卫产业与当地经济，取决于推进程度。&lt;/p&gt;&lt;p&gt;验证：同id 53，可观察防卫省正式方案与预算；目前缺少实施细节，线索有限。&lt;/p&gt;</description>
+      <description>随着避险买盘增强，美国国债短端延续涨势，与美联储会议日期挂钩的隔夜指数掉期(OIS)定价显示12月政策会议的加息溢价仅为23个基点。从更远期来看，OIS曲线继续进行鸽派重新定价，目前完全消化第二次25个基点加息的时点是在明年3月会议。</description>
     </item>
     <item>
-      <title>广州1宗宅地2.33亿元底价成交</title>
-      <link>https://www.cls.cn/detail/2536362</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2536362</guid>
-      <pubDate>Tue, 17 Nov 2026 04:24:23 +0000</pubDate>
+      <title>纳斯达克金龙中国指数跌超3%，阿特斯跌24.69%，虎虎科技跌20.28%，JDZG跌19.30%，知乎跌16.12%，</title>
+      <link>https://wallstreetcn.com/livenews/3203557</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3203557</guid>
+      <pubDate>Fri, 20 Nov 2026 20:05:51 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · A 股快讯</source>
+      <description>纳斯达克金龙中国指数跌超3%，阿特斯跌24.69%，虎虎科技跌20.28%，JDZG跌19.30%，知乎跌16.12%，逸仙电商跌14.50%。</description>
+    </item>
+    <item>
+      <title>财联社11月21日电，利弗莫尔中概股龙头指数跌幅扩大至5%，报7472.42点。成分股中，小鹏跌13.38%，南茂跌13</title>
+      <link>https://www.cls.cn/detail/2540681</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2540681</guid>
+      <pubDate>Fri, 20 Nov 2026 20:05:32 +0000</pubDate>
       <category>中文财经快讯</category>
       <source url="https://cls.cn">财联社 · 电报</source>
-      <description>&lt;p&gt;【广州1宗宅地2.33亿元底价成交】财联社11月17日电，广州增城区1宗宅地出让，建设用地面积23283.72平方米，规划建筑面积46567平方米，起始价2.33亿元，起始楼面价5000元/平方米。最终广州市增城区东进城市开发投资有限公司以底价2.33亿元竞得该地块。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：广州增城区1宗宅地出让，建设用地面积23283.72平方米，规划建筑面积46567平方米，起始价2.33亿元，起始楼面价5000元/平方米，最终由广州市增城区东进城市开发投资有限公司以底价竞得。&lt;/p&gt;&lt;p&gt;事实：该地块以起始价2.33亿元成交，竞得方为增城区属国企背景的城市开发投资公司，成交楼面价与起始楼面价一致。&lt;/p&gt;&lt;p&gt;推断：底价成交且竞得方为地方城投类企业，可能反映该地块市场化竞买热度有限，但仅凭单宗地块无法判断区域土地市场整体走势。&lt;/p&gt;&lt;p&gt;影响：可能影响增城区土地供应节奏与地方城投企业的资金安排，具体取决于后续同类地块成交情况。&lt;/p&gt;&lt;p&gt;验证：可观察增城区后续宅地出让的报名家数、溢价率及竞得主体结构；目前缺少竞买人数与地块区位等材料。&lt;/p&gt;</description>
+      <description>财联社11月21日电，利弗莫尔中概股龙头指数跌幅扩大至5%，报7472.42点。成分股中，小鹏跌13.38%，南茂跌13.11%，日月光投控跌12.96%，慧荣科技跌11.19%，希尔威金属矿业跌11.02%。</description>
     </item>
     <item>
-      <title>价值与投资 | 周期与成长交汇：战略金属的跨界融合与价值突围</title>
-      <link>https://www.yicai.com/live/103443084.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/live/103443084.html</guid>
-      <pubDate>Tue, 17 Nov 2026 04:23:15 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://yicai.com">第一财经 · 最新</source>
-      <description>&lt;p&gt;上海证券交易所联合第一财经发起的《价值与投资》节目，2026年将聚焦科创板企业在硬科技、前沿技术、产业转化、创新生态等维度的一线实践，呈现资本市场服务实体经济、助力新质生产力培育的实践路径。本期节目邀请北方稀土、厦门钨业高管，以及申万宏源的机构嘉宾，共同探寻战略金属产业转型升级，…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：上海证券交易所联合第一财经推出《价值与投资》节目，2026年聚焦科创板企业；本期邀请北方稀土、厦门钨业高管及申万宏源机构嘉宾，主题为战略金属产业转型升级与可持续价值创造。&lt;/p&gt;&lt;p&gt;事实：报道明确的是节目主题与参与嘉宾构成，未披露任何企业经营数据、业绩或具体合作事项。&lt;/p&gt;&lt;p&gt;推断：节目定位偏向展示科创板与战略金属产业的资本市场服务叙事，属于宣传性内容，不能据此推断相关公司基本面变化。&lt;/p&gt;&lt;p&gt;影响：可能影响战略金属板块的市场关注度，但影响程度取决于节目实际内容与后续披露。&lt;/p&gt;&lt;p&gt;验证：需观察节目播出后相关公司是否发布正式公告或经营数据；目前线索有限，缺少可核验的财务与产业数据。&lt;/p&gt;</description>
+      <title>本周芝加哥小麦期货跌约2.3%，大豆油跌超6.3%，豆粕涨超3.7%</title>
+      <link>https://wallstreetcn.com/livenews/3203556</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3203556</guid>
+      <pubDate>Fri, 20 Nov 2026 20:05:26 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · A 股快讯</source>
+      <description>周五（11月20日）纽约尾盘，彭博谷物分类指数涨0.02%，报29.3506点，本周累计下跌1.28%。 本周，CBOT玉米期货累跌1.75%，报4.4875美元/蒲式耳。 CBOT小麦期货跌2.27%，报5.93美元/蒲式耳。 CBOT大豆期货累跌0.89%，报12.2050美…</description>
     </item>
     <item>
-      <title>预告：数字化标准已就绪，航运为何还在纸上流转？丨两说</title>
-      <link>https://www.yicai.com/video/103443316.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/video/103443316.html</guid>
-      <pubDate>Tue, 17 Nov 2026 04:22:56 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://yicai.com">第一财经 · 最新</source>
-      <description>&lt;p&gt;全球80%到90%的货物靠船舶运输。但当数字化浪潮席卷全球时，航运业最核心的单证——提单，仍在大量纸上流转。 BIMCO首席技术与数字官格兰特·亨特对话葛唯尔：电子提单标准已至2.0版，采用率为何仅约13%、每年4500万份纸质提单仍在流转？上海升至全球航运中心第二，数字化能否补…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：全球80%至90%货物靠船舶运输；电子提单标准已至2.0版，采用率约13%，每年约4500万份纸质提单仍在流转；上海升至全球航运中心第二；节目将于11月18日、11月21日播出。&lt;/p&gt;&lt;p&gt;事实：报道给出电子提单采用率约13%、纸质提单年流转量约4500万份等数据，并说明节目讨论航运数字化与合同模板、数据共享问题。&lt;/p&gt;&lt;p&gt;推断：电子提单标准成熟但采用率偏低，可能反映行业在合同惯例、数据共享意愿等方面存在落地障碍，但报道未给出因果证据。&lt;/p&gt;&lt;p&gt;影响：可能涉及航运企业、港口、贸易金融与单证服务领域的数字化投入节奏。&lt;/p&gt;&lt;p&gt;验证：可跟踪电子提单采用率、主要航运机构合同模板更新情况及上海航运服务数字化指标；目前缺少采用率统计口径与来源材料。&lt;/p&gt;</description>
+      <title>富国银行展望2027汇市：美元先强后弱，欧元一季度承压</title>
+      <link>https://finance.sina.com.cn/stock/usstock/c/2026-11-21/doc-inizmrup5216111.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/stock/usstock/c/2026-11-21/doc-inizmrup5216111.shtml</guid>
+      <pubDate>Fri, 20 Nov 2026 20:02:22 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>富国银行 策略师预计，2027年一季度美元将小幅走强，随后在年内剩余时间走弱，原因是美国经济增长优势消退，而美元对人工智能热潮的依赖将转变为一项风险点。 富国银行策略师埃里克·纳尔逊、奇杜·纳拉亚南、马库斯·詹宁斯与阿尔瓦罗·维万科在周五的研报中表示：“自2027年二季度起，美元…</description>
     </item>
     <item>
-      <title>中老铁路年度累计发送跨境旅客首次突破30万人次</title>
-      <link>https://www.cls.cn/detail/2536361</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2536361</guid>
-      <pubDate>Tue, 17 Nov 2026 04:22:35 +0000</pubDate>
+      <title>OIS合约不再充分反映美联储12月加息25个基点</title>
+      <link>https://www.cls.cn/detail/2540680</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2540680</guid>
+      <pubDate>Fri, 20 Nov 2026 20:00:03 +0000</pubDate>
       <category>中文财经快讯</category>
       <source url="https://cls.cn">财联社 · 电报</source>
-      <description>&lt;p&gt;【中老铁路年度累计发送跨境旅客首次突破30万人次】财联社11月17日电，从中国铁路昆明局集团有限公司获悉，截至11月16日，中老铁路今年以来累计发送跨境旅客达30.06万人次，历史首次突破30万人次大关。这是继10月21日提前71天超越2025年全年跨境旅客运送量之后，国际旅客联…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：截至11月16日，中老铁路今年以来累计发送跨境旅客30.06万人次，历史首次突破30万人次；10月21日已提前71天超越2025年全年跨境旅客运送量。&lt;/p&gt;&lt;p&gt;事实：报道明确给出年度累计跨境旅客量及首次突破30万人次的时间节点，并提及提前超越上年全年水平。&lt;/p&gt;&lt;p&gt;推断：跨境旅客量同比增长明显，可能反映中老铁路国际客运需求持续释放，但报道未拆分客流构成与季节性因素。&lt;/p&gt;&lt;p&gt;影响：可能影响中老铁路客运运营安排及沿线跨境旅游、口岸服务相关领域。&lt;/p&gt;&lt;p&gt;验证：可观察后续月度跨境旅客数据、列车开行频次调整及口岸通关便利化措施；目前缺少同比基数与客源结构材料。&lt;/p&gt;</description>
+      <description>【OIS合约不再充分反映美联储12月加息25个基点】财联社11月21日电，随着避险买盘增强，美国国债短端延续涨势，与美联储会议日期挂钩的隔夜指数掉期(OIS)定价显示12月政策会议的加息溢价仅为23个基点。从更远期来看，OIS曲线继续进行鸽派重新定价，目前完全消化第二次25个基点…</description>
     </item>
     <item>
-      <title>一财主播说| DeepSeek突然限额 大模型免费时代画上句号?</title>
-      <link>https://www.yicai.com/video/103443315.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/video/103443315.html</guid>
-      <pubDate>Tue, 17 Nov 2026 04:19:44 +0000</pubDate>
+      <title>财联社11月21日电，消息人士称，若向软银出售失败，ABB正考虑将机器人业务部门上市。</title>
+      <link>https://www.cls.cn/detail/2540635</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2540635</guid>
+      <pubDate>Fri, 20 Nov 2026 19:55:29 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+    </item>
+    <item>
+      <title>WTI原油期货结算价为83.98美元/桶，涨幅0.93%</title>
+      <link>https://news.10jqka.com.cn/20261121/c682068505.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261121/c682068505.shtml</guid>
+      <pubDate>Fri, 20 Nov 2026 19:54:34 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>WTI原油期货结算价为83.98美元/桶，涨幅0.93%；布伦特原油期货结算价为92.57美元/桶，涨幅0.64%。</description>
+    </item>
+    <item>
+      <title>财联社11月21日电，WTI原油期货结算价为83.98美元/桶，涨幅0.93%；布伦特原油期货结算价为92.57美元/桶</title>
+      <link>https://www.cls.cn/detail/2540679</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2540679</guid>
+      <pubDate>Fri, 20 Nov 2026 19:53:51 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+      <description>财联社11月21日电，WTI原油期货结算价为83.98美元/桶，涨幅0.93%；布伦特原油期货结算价为92.57美元/桶，涨幅0.64%。</description>
+    </item>
+    <item>
+      <title>“大空头”卖掉了半数英伟达和半导体ETF看跌期权</title>
+      <link>https://finance.sina.com.cn/stock/usstock/c/2026-11-21/doc-inizmruq6898775.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/stock/usstock/c/2026-11-21/doc-inizmruq6898775.shtml</guid>
+      <pubDate>Fri, 20 Nov 2026 19:51:18 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>电影《大空头》的华尔街原型、备受关注的著名投资人Michael Burry表示，他在美国科技股的大抛售中卖掉了50%的VanEck Semiconductor ETF （SMH）和英伟达看跌期权头寸。 “今天我卖掉了我一半的VanEck Semiconductor ETF （SM…</description>
+    </item>
+    <item>
+      <title>AI抛售推升避险需求，日元、瑞郎领涨主要货币，美元走低</title>
+      <link>https://wallstreetcn.com/articles/3786407</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/articles/3786407</guid>
+      <pubDate>Fri, 20 Nov 2026 19:51:01 +0000</pubDate>
       <category>中文财经深度</category>
-      <source url="https://yicai.com">第一财经 · 最新</source>
-      <description>&lt;p&gt;#媒体原创 DeepSeek正式对网页端、App端的免费C端用户实施限额，终结“免费无限制”的服务状态。调整主要有几方面：收紧长对话、单次输入字数砍半、新增每日使用硬性上限。这也意味着，超时对话会无法续接。此前可以直接上传的长文档、整本材料、大段代码，今后可能会被截断。每天用到一…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：DeepSeek对网页端、App端免费C端用户实施限额，措施包括收紧长对话、单次输入字数砍半、新增每日使用硬性上限；官方给出的原因是算力资源短缺。&lt;/p&gt;&lt;p&gt;事实：报道明确说明限额措施内容与官方解释，并称超时对话无法续接、长文档可能被截断、每日额度用完后可能弹窗提示。&lt;/p&gt;&lt;p&gt;推断：免费无限制服务模式出现调整，可能反映大模型推理算力供给与免费用户成本之间存在压力，但报道未提供算力缺口或成本数据。&lt;/p&gt;&lt;p&gt;影响：可能影响免费C端用户的使用体验与留存，以及同类大模型产品的免费策略走向。&lt;/p&gt;&lt;p&gt;验证：可观察DeepSeek后续是否公布算力扩容、付费方案或限额调整，以及第三方对其用户活跃度的监测；目前缺少官方完整规则文本与算力数据。&lt;/p&gt;</description>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
+      <description>全球AI交易逆转引发市场避险情绪升温，日元和瑞郎成为最大受益者，美元涨势遭到冲击。 周五，随着市场对人工智能热潮可持续性的疑虑加剧，日元和瑞郎对美元均上涨0.6%，日元有望创下近一个月来最大单日涨幅。 彭博美元即期指数下跌0.2%，纳斯达克100指数一度重挫3.7%，科技股的大幅…</description>
     </item>
   </channel>
 </rss>
