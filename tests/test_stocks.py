@@ -308,7 +308,7 @@ class BuildTest(unittest.TestCase):
         self.assertEqual(data["doc"], "stocks.txt")
         self.assertEqual(data["data_time_kind"], "exact")
         self.assertEqual(data["counts"], {"indices": 1, "sectors": 1, "market": 5584,
-                                          "hk": 2, "limit_up": 1, "rrg": 0})
+                                          "hk": 2, "limit_up": 1, "rrg": 0, "cross": 0})
         self.assertEqual(data["market"]["up"], 2861)
         self.assertEqual(data["hk"]["data_time"], "2026-07-17T08:13:11Z")
         text = build_stocks.render_txt(payload, "2026-11-17 15:00:00")

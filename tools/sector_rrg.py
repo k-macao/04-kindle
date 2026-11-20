@@ -610,3 +610,292 @@ def demo_section(trail=DEFAULT_TRAIL, rows=340):
     if section:
         section["demo"] = True
     return section or {}
+
+
+# --------------------------------------------------------------------------
+# 降级口径：单日横截面（日 K 不够、算不出 RRG 时）
+# --------------------------------------------------------------------------
+
+# 涨跌幅分布的分档：从右（涨）往左（跌）排，面板上画成一条横条图。
+CROSS_BINS = (
+    ("≥ +2%", 2.0, None),
+    ("+1 ~ +2%", 1.0, 2.0),
+    ("0 ~ +1%", 0.0, 1.0),
+    ("-1 ~ 0", -1.0, 0.0),
+    ("-2 ~ -1%", -2.0, -1.0),
+    ("-3 ~ -2%", -3.0, -2.0),
+    ("-4 ~ -3%", -4.0, -3.0),
+    ("≤ -4%", None, -4.0),
+)
+
+# 涨停原因的粗分类：同花顺的 limit_up_reason 是一串「+」连起来的题材词，
+# 这里只做「按关键词归堆」的粗颗粒聚合（顺序即优先级，先命中先算）。
+THEME_KEYWORDS = (
+    ("半导体材料/封测/存储", ("存储", "光刻", "封装", "封测", "电子化学品", "湿电子",
+                              "集成电路", "高纯铟", "晶圆", "半导体", "芯片")),
+    ("算力/液冷/数据中心", ("算力", "液冷", "数据中心", "IDC", "服务器", "光模块")),
+    ("机器人", ("机器人", "人形")),
+    ("新能源/电力设备", ("光伏", "储能", "锂", "电池", "风电", "逆变", "变压器",
+                         "输配电", "氢能", "充电")),
+    ("军工", ("军工", "航空", "航天", "导弹")),
+    ("医药", ("医药", "创新药", "疫苗", "医疗", "中药")),
+    ("并购重组/国资", ("收购", "重组", "预重整", "国资", "资产出售", "股份回购", "回购")),
+)
+THEME_OTHER = "其他"
+CROSS_TOP = 5
+
+
+def _bin_of(pct):
+    for label, low, high in CROSS_BINS:
+        if low is not None and pct < low:
+            continue
+        if high is not None and pct >= high:
+            continue
+        return label
+    return CROSS_BINS[-1][0]
+
+
+def _theme_of(reason):
+    text = str(reason or "")
+    for name, keywords in THEME_KEYWORDS:
+        if any(word in text for word in keywords):
+            return name
+    return THEME_OTHER
+
+
+def build_cross_section(rows, market=None, indices=None, limit_up=None,
+                        as_of=None, why=""):
+    """单日收盘的板块横截面读数——RRG 算不出来时的降级口径。
+
+    :param rows: 指数/板块快照（只用 ``is_sector`` 的行）
+    :param market: 全 A 统计（涨跌家数、涨跌停、成交额），来自快照的 ``market``
+    :param indices: 宽基指数行（只用来算「大盘 vs 小盘」的分化）
+    :param limit_up: 涨停池（用来聚合赚钱效应集中在哪些题材）
+    :param as_of: 数据日（北京时间 ``YYYY-MM-DD``）
+    :param why: 为什么退到横截面（面板上如实写出来，读者才知道 RRG 去哪了）
+    :returns: `(section, notes)`；板块太少时 `(None, [原因])`
+
+    这里**不编造 RRG 象限**：单日快照只有「今天涨多少、量多大」，
+    没有时间轴就做不出相对强度。所以这里只回答三个问题——
+    今天是普涨/普跌还是轮动、量价是否互相印证、赚钱效应集中在哪里。
+    """
+    sectors = []
+    for row in rows or []:
+        if not row.get("is_sector"):
+            continue
+        pct = _numeric(row.get("price_change_ratio_pct"))
+        if pct is None:
+            continue
+        sectors.append({
+            "thscode": row.get("thscode"),
+            "name": row.get("name") or row.get("thscode") or "",
+            "today_pct": round(pct, 2),
+            "turnover": _numeric(row.get("turnover")),
+        })
+    if len(sectors) < 5:
+        return None, [f"有涨跌幅的板块只有 {len(sectors)} 个，样本太少不做横截面"]
+
+    pcts = [row["today_pct"] for row in sectors]
+    total = len(pcts)
+    counts = {"total": total, "up": sum(1 for p in pcts if p > 0),
+              "down": sum(1 for p in pcts if p < 0),
+              "flat": sum(1 for p in pcts if p == 0)}
+    stats = {
+        "median": round(_median(pcts), 2),
+        "mean": round(sum(pcts) / total, 2),
+        # 总体标准差（这就是这一天的「离散度」）：普跌日它很小，
+        # 结构性行情它才变大——比单看涨跌幅更能说明是轮动还是整体减仓。
+        "std": round(math.sqrt(sum((p - sum(pcts) / total) ** 2 for p in pcts) / total), 2),
+    }
+    # 全 A 的涨跌家数与板块口径**分开放**：一个数是 5584 只个股、一个是 91 个行业指数，
+    # 混在同一个 up/down 里会写出「91 个板块：涨 649」这种错话。
+    breadth = {}
+    for key in ("count", "up", "down", "flat", "limit_up", "limit_down",
+                "avg_ratio", "turnover"):
+        if market and market.get(key) is not None:
+            breadth[key] = market.get(key)
+
+    ranked = sorted(sectors, key=lambda row: -row["today_pct"])
+    winners = ranked[:CROSS_TOP]
+    losers = ranked[-CROSS_TOP:][::-1]
+
+    bins = []
+    for label, _low, _high in CROSS_BINS:
+        bins.append({"label": label,
+                     "count": sum(1 for p in pcts if _bin_of(p) == label)})
+
+    money = _cross_money(sectors, market)
+    spread = _index_spread(indices)
+    themes = _cross_themes(limit_up)
+
+    section = {
+        "mode": "cross_section",
+        "model": "板块横截面（单日收盘）",
+        "as_of": as_of,
+        "why": why or "",
+        "counts": counts,
+        "market": breadth,
+        "stats": stats,
+        "bins": bins,
+        "winners": winners,
+        "losers": losers,
+        # 全线飘绿（或只有一两个红的）时前五名其实也在亏，标题不能还写「领涨」
+        "winners_label": ("领涨" if winners and winners[0]["today_pct"] > 0
+                          and counts["up"] > 2 else "相对抗跌"),
+        "losers_label": ("领跌" if losers and losers[-1]["today_pct"] < 0
+                         else "相对最弱"),
+        "money": money,
+        "spread": spread,
+        "themes": themes,
+    }
+    section["narrative"] = _cross_narrative(section)
+    return section, []
+
+
+def _median(values):
+    ordered = sorted(values)
+    middle = len(ordered) // 2
+    if len(ordered) % 2:
+        return ordered[middle]
+    return (ordered[middle - 1] + ordered[middle]) / 2.0
+
+
+def _cross_money(sectors, market):
+    """量价：钱去了哪儿、有没有用。没有历史量，只能看「今天量 × 今天涨跌」。"""
+    priced = [row for row in sectors if row.get("turnover")]
+    if not priced:
+        return {}
+    priced.sort(key=lambda row: -row["turnover"])
+    total = (market or {}).get("turnover") or sum(row["turnover"] for row in priced)
+    # 前后各取多少只：91 个板块时取 20，板块少的时候按三分之一缩（否则两组会重叠，
+    # 「前 20 平均 vs 后 20 平均」就成了自己跟自己比）。
+    size = max(3, min(20, len(priced) // 3))
+    head = priced[:10]
+    top_group = priced[:size]
+    tail_group = priced[-size:]
+    return {
+        "total": _round(total, 0),
+        "size": size,
+        "top": [{"name": row["name"], "today_pct": row["today_pct"],
+                 "turnover": _round(row["turnover"], 0),
+                 "share": _round(row["turnover"] / total * 100, 1) if total else None}
+                for row in head],
+        "top_avg": _round(sum(r["today_pct"] for r in top_group) / len(top_group), 2),
+        "tail_avg": _round(sum(r["today_pct"] for r in tail_group) / len(tail_group), 2),
+        "top_share": _round(priced[0]["turnover"] / total * 100, 1) if total else None,
+        "top_name": priced[0]["name"],
+        "top_pct": priced[0]["today_pct"],
+    }
+
+
+def _index_spread(indices):
+    """大盘 vs 小盘：权重（沪深300/上证50）与小盘（中证1000/创业板指）的分化。"""
+    named = {row.get("name"): row for row in indices or [] if not row.get("is_sector")}
+    pairs = (("沪深300", "中证1000"), ("上证50", "创业板指"), ("沪深300", "创业板指"))
+    for big, small in pairs:
+        left, right = named.get(big), named.get(small)
+        if not left or not right:
+            continue
+        big_pct = _numeric(left.get("price_change_ratio_pct"))
+        small_pct = _numeric(right.get("price_change_ratio_pct"))
+        if big_pct is None or small_pct is None:
+            continue
+        return {"big": big, "big_pct": round(big_pct, 2),
+                "small": small, "small_pct": round(small_pct, 2),
+                "spread": round(big_pct - small_pct, 2)}
+    return {}
+
+
+def _cross_themes(limit_up):
+    """涨停题材聚合：赚钱效应集中在哪条链上（粗分类，只做线索）。"""
+    groups = {}
+    for row in limit_up or []:
+        name = _theme_of(row.get("limit_up_reason"))
+        group = groups.setdefault(name, {"name": name, "count": 0, "examples": []})
+        group["count"] += 1
+        stock = row.get("name") or row.get("thscode")
+        if stock and len(group["examples"]) < 3:
+            group["examples"].append(str(stock).replace(" ", ""))
+    ordered = sorted(groups.values(), key=lambda item: -item["count"])
+    return ordered
+
+
+def _cross_narrative(section):
+    """横截面读数：只讲当天能证明的事（普跌/普涨、量价、题材），不假装有象限。"""
+    counts = section.get("counts") or {}
+    stats = section.get("stats") or {}
+    total = counts.get("total") or 0
+    lines = []
+    if not total:
+        return lines
+    red, green = counts.get("up", 0), counts.get("down", 0)
+    median = stats.get("median")
+    std = stats.get("std")
+    breadth = section.get("market") or {}
+    head = (f"{total} 个板块：红 {red} · 绿 {green} · 平 {counts.get('flat', 0)}，"
+            f"中位数 {_pct_text(median)}、离散度（标准差）{std:.2f}")
+    avg = breadth.get("avg_ratio")
+    if avg is not None and median is not None:
+        if abs(median - avg) < 0.3:
+            head += f"；全 A 平均 {_pct_text(avg)}，板块与个股几乎同步——跌（涨）是系统性的"
+        elif median > avg:
+            head += f"；全 A 平均 {_pct_text(avg)}，行业指数比个股抗跌"
+        else:
+            head += f"；全 A 平均 {_pct_text(avg)}，行业层面比个股更弱"
+    lines.append(head + "。")
+
+    limit_up, limit_down = breadth.get("limit_up"), breadth.get("limit_down")
+    if limit_down and limit_up is not None and limit_down >= max(limit_up * 1.5, 10):
+        lines.append(f"涨停 {limit_up} / 跌停 {limit_down}：跌停是涨停的 "
+                     f"{limit_down / max(limit_up, 1):.1f} 倍，杀跌的尾部比赚钱的尾部粗，"
+                     "情绪面还在恶化。")
+    elif limit_up and limit_down is not None and limit_up >= max(limit_down * 1.5, 20):
+        lines.append(f"涨停 {limit_up} / 跌停 {limit_down}：赚钱效应明显强于亏钱效应。")
+
+    if green and green / total >= 0.8:
+        lines.append("九成板块翻绿、离散度还不到 1.5 → 这是整体减仓式的普跌，"
+                     "不是板块间搬家；这种日子里「谁抗跌」多是仓位效应，别当成风格切换。")
+    elif red and red / total >= 0.8:
+        lines.append("九成板块翻红、离散度不大 → 是普涨（风险偏好整体回暖），"
+                     "不是某条主线的独立行情。")
+    elif std is not None and std >= 2.0:
+        lines.append("板块之间拉得很开（离散度 ≥ 2）→ 有钱在做板块间切换，"
+                     "这种日子才值得看谁在「刚转强」。")
+    else:
+        lines.append("涨跌参半、离散度不大 → 轮动不明显的震荡日。")
+
+    spread = section.get("spread") or {}
+    if spread:
+        tone = "权重抗跌、小盘杀跌" if spread["spread"] > 0 else "小盘活、权重拖后腿"
+        lines.append(f"{spread['big']} {_pct_text(spread['big_pct'])} vs "
+                     f"{spread['small']} {_pct_text(spread['small_pct'])}"
+                     f"（差 {spread['spread']:+.2f} 个百分点）→ {tone}。")
+
+    money = section.get("money") or {}
+    if money:
+        gap = (money["top_avg"] or 0) - (money["tail_avg"] or 0)
+        if gap >= 0.5:
+            verdict = "钱留在成交活跃的板块里，量价互相印证"
+        elif gap <= -0.5:
+            verdict = "成交越活跃跌得越多，量是出货不是承接"
+        else:
+            verdict = "成交额前列与末列涨跌几乎一样，量没有提供避风港"
+        size = money.get("size") or 20
+        lines.append(f"成交额前 {size} 平均 {_pct_text(money['top_avg'])}、"
+                     f"后 {size} 平均 {_pct_text(money['tail_avg'])}——{verdict}；"
+                     f"最大的一块是{money['top_name']}，占两市成交 "
+                     f"{money['top_share']:.1f}%，今日 {_pct_text(money['top_pct'])}。")
+
+    themes = section.get("themes") or []
+    if themes:
+        best = themes[0]
+        text = (f"涨停 {sum(t['count'] for t in themes)} 只里，"
+                f"{best['count']} 只集中在「{best['name']}」")
+        if best.get("examples"):
+            text += "（" + "、".join(best["examples"]) + "）"
+        others = [t for t in themes[1:] if t["count"] >= 2]
+        if others:
+            text += "；其次 " + "、".join(f"{t['name']} {t['count']} 只" for t in others[:2])
+        lines.append(text + "——赚钱效应就看这几条链。")
+
+    return lines

@@ -347,6 +347,14 @@ def build_rrg(client, rows, days=340, cache_minutes=60, top_n=6, preset_key="",
     return section, notes + more
 
 
+def build_cross(payload, as_of=None, why=""):
+    """单日横截面读数（RRG 的降级口径）。返回 (section | None, notes)。"""
+    return sector_rrg.build_cross_section(
+        payload.get("indices") or [], market=payload.get("market"),
+        indices=payload.get("indices") or [], limit_up=payload.get("limit_up"),
+        as_of=as_of, why=why)
+
+
 def fetch_payload(client, stocks, indices, limit_up_size=0, names_cache_path=None,
                   history_days=0):
     """抓一轮：指数快照 + 股票快照 +（可选）涨停池 +（可选）历史 K 线。"""
@@ -618,10 +626,12 @@ def run_once(args, client):
             payload["errors"].append(f"涨停池失败：{exc}")
 
     # 4) 板块轮动 RRG（板块长期日 K + 快照；独立失败，不拖垮 A 股）
+    #    日 K 不够就退「单日横截面」：宁可换口径，也不让面板最后一段整块消失。
     if not args.no_rrg:
         stamp = payload.get("index_timestamp")
         today_day = (sector_rrg.beijing_day(stamp)
                      if isinstance(stamp, (int, float)) else None)
+        notes = []
         try:
             section, notes = build_rrg(
                 client, payload["indices"], days=args.rrg_days,
@@ -633,12 +643,19 @@ def run_once(args, client):
                     payload["errors"].append(
                         f"板块日 K 只够「{section['preset']}」，RRG 用的是短窗参数")
                 payload["errors"].extend(notes)
+        except ThsError as exc:
+            # 历史 K 线缓存过的就先用缓存（盘中接口抽风不该让板块段整块消失）
+            notes = [str(exc)]
+        if not payload.get("sector_rrg"):
+            # 退到单日横截面（原因写进 section["why"]，面板上如实显示）
+            cross, cross_notes = build_cross(
+                payload, as_of=today_day, why="；".join(notes))
+            if cross:
+                payload["sector_cross"] = cross
             else:
                 payload["errors"].append(
                     "板块轮动 RRG 未生成：" + ("；".join(notes) or "未知原因"))
-        except ThsError as exc:
-            # 历史 K 线缓存过的就先用缓存（盘中接口抽风不该让板块段整块消失）
-            payload["errors"].append(f"板块轮动 RRG 未生成：{exc}")
+                payload["errors"].extend(cross_notes)
 
     # 5) 港股（腾讯源，独立失败，不拖垮 A 股）
     if not args.no_hk:
@@ -667,8 +684,10 @@ def run_once(args, client):
     market = payload.get("market") or {}
     hk = payload.get("hk") or {}
     rrg = payload.get("sector_rrg") or {}
+    cross = payload.get("sector_cross") or {}
     rrg_text = (f" / RRG {len(rrg.get('rows') or [])} 个板块"
-                f"（{rrg.get('preset')}）" if rrg else "")
+                f"（{rrg.get('preset')}）" if rrg else
+                (f" / 横截面 {cross['counts']['total']} 个板块" if cross else ""))
     print(f"已抓取 {len(payload['indices'])} 个指数/板块"
           f" / 全市场 {market.get('count', 0)} 只（涨 {market.get('up', 0)} 跌 {market.get('down', 0)}）"
           f" / 涨停 {len(payload['limit_up'])}"

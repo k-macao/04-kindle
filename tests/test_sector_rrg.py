@@ -408,6 +408,32 @@ class RunOnceTest(unittest.TestCase):
             self.assertIn("881121.TI", requested)
             self.assertNotIn("000001.SH", requested)
 
+    def test_short_history_falls_back_to_cross_section(self):
+        class ShortRouter(self.Router):
+            def get(self, path, params=None):
+                if "historical-batch" in path:
+                    self.calls.append((path, dict(params or {})))
+                    wanted = str((params or {}).get("thscodes") or "").split(",")
+                    history = history_for(self.sectors, 20)
+                    return {"item": [{"thscode": code,
+                                      "item": [{"date_ms": ms, "close_price": close}
+                                               for ms, close in history.get(code, [])]}
+                                     for code in wanted]}
+                return super().get(path, params)
+
+        with tempfile.TemporaryDirectory() as tmp:
+            self.args.out = str(Path(tmp) / "stocks_data.json")
+            client = ShortRouter(self.sectors)
+            payload = fetch_stocks.run_once(self.args, client)
+            self.assertNotIn("sector_rrg", payload)
+            cross = payload["sector_cross"]
+            self.assertEqual(cross["mode"], "cross_section")
+            self.assertGreaterEqual(cross["counts"]["total"], 5)
+            self.assertIn("根", cross["why"])
+            self.assertTrue(cross["narrative"])
+            # 主行情照旧，风光照常出
+            self.assertTrue(payload["indices"])
+
     def test_no_rrg_skips_the_history_requests(self):
         with tempfile.TemporaryDirectory() as tmp:
             self.args.out = str(Path(tmp) / "stocks_data.json")
@@ -417,6 +443,207 @@ class RunOnceTest(unittest.TestCase):
             self.assertNotIn("sector_rrg", payload)
             self.assertFalse([call for call in client.calls
                               if "historical-batch" in call[0]])
+
+
+def sector_row(name, pct, turnover=None, code=None):
+    return {"thscode": code or name, "name": name, "is_sector": True,
+            "last_price": 100.0, "price_change_ratio_pct": pct,
+            "turnover": turnover}
+
+
+class CrossSectionTest(unittest.TestCase):
+    """单日横截面（RRG 的降级口径）：统计、量价、分化、题材、话术。"""
+
+    def _rows(self):
+        return [sector_row("半导体", -0.80, 2163e8),
+                sector_row("通信设备", -3.37, 776e8),
+                sector_row("银行", -0.62, 310e8),
+                sector_row("机场航运", 0.72, 33e8),
+                sector_row("文化传媒", -4.69, 276e8),
+                sector_row("影视院线", -5.93, 77e8),
+                sector_row("煤炭开采加工", -2.10, 120e8),
+                sector_row("证券", -0.05, 149e8)]
+
+    def _market(self):
+        return {"count": 5584, "up": 649, "down": 4876, "flat": 48,
+                "limit_up": 27, "limit_down": 84, "avg_ratio": -2.55,
+                "turnover": 13145.8e8}
+
+    def _indices(self):
+        return [{"thscode": "000300.SH", "name": "沪深300", "is_sector": False,
+                 "price_change_ratio_pct": 0.03},
+                {"thscode": "000852.SH", "name": "中证1000", "is_sector": False,
+                 "price_change_ratio_pct": -1.88},
+                {"thscode": "000001.SH", "name": "上证指数", "is_sector": False,
+                 "price_change_ratio_pct": -0.28}]
+
+    def _limit_up(self):
+        return [{"name": "盛剑科技", "limit_up_reason": "光刻胶+半导体附属装备"},
+                {"name": "大港股份", "limit_up_reason": "集成电路测试+封测"},
+                {"name": "康盛股份", "limit_up_reason": "液冷+算力"},
+                {"name": "襄阳轴承", "limit_up_reason": "机器人轴承"},
+                {"name": "某公司", "limit_up_reason": "???"}]
+
+    def _build(self, **kwargs):
+        params = {"market": self._market(), "indices": self._indices(),
+                  "limit_up": self._limit_up(), "as_of": "2026-11-19",
+                  "why": "板块日 K 只有 20 根，短窗 RRG 要 89 根"}
+        params.update(kwargs)
+        return sector_rrg.build_cross_section(self._rows(), **params)
+
+    def test_counts_are_about_sectors_not_the_whole_market(self):
+        section, notes = self._build()
+        self.assertEqual(notes, [])
+        counts = section["counts"]
+        self.assertEqual(counts["total"], 8)
+        self.assertEqual(counts["up"], 1)
+        self.assertEqual(counts["down"], 7)
+        # 全 A 的 649/4876 单独放 market，绝不混进板块的 up/down
+        self.assertEqual(section["market"]["up"], 649)
+        self.assertEqual(section["market"]["down"], 4876)
+        self.assertIn("红 1", section["narrative"][0])
+        self.assertNotIn("649", section["narrative"][0])
+
+    def test_stats_and_bins_agree(self):
+        section, _ = self._build()
+        self.assertEqual(sum(item["count"] for item in section["bins"]), 8)
+        pcts = sorted(row["price_change_ratio_pct"] for row in self._rows())
+        self.assertAlmostEqual(section["stats"]["median"],
+                               (pcts[3] + pcts[4]) / 2, places=2)
+        self.assertLess(section["stats"]["std"], 3)
+
+    def test_all_red_flips_the_label(self):
+        rows = [sector_row(f"板块{i}", -1.0 - i * 0.1) for i in range(6)]
+        section, _ = sector_rrg.build_cross_section(rows)
+        self.assertEqual(section["winners_label"], "相对抗跌")
+        self.assertEqual(section["losers_label"], "领跌")
+        self.assertEqual(section["winners"][0]["today_pct"], -1.0)
+
+    def test_money_and_share(self):
+        section, _ = self._build()
+        money = section["money"]
+        self.assertEqual(money["top_name"], "半导体")
+        self.assertAlmostEqual(money["top_share"], 16.5, places=1)
+        self.assertAlmostEqual(money["top"][0]["share"], 16.5, places=1)
+        # 成交额前列与末列的平均涨跌都算出来了
+        self.assertIsNotNone(money["top_avg"])
+        self.assertIsNotNone(money["tail_avg"])
+
+    def test_large_vs_small_cap_spread(self):
+        section, _ = self._build()
+        spread = section["spread"]
+        self.assertEqual(spread["big"], "沪深300")
+        self.assertEqual(spread["small"], "中证1000")
+        self.assertAlmostEqual(spread["spread"], 1.91, places=2)
+        self.assertTrue(any("权重抗跌" in line for line in section["narrative"]))
+
+    def test_limit_up_themes_are_grouped(self):
+        section, _ = self._build()
+        themes = {item["name"]: item for item in section["themes"]}
+        self.assertEqual(themes["半导体材料/封测/存储"]["count"], 2)
+        self.assertEqual(themes["算力/液冷/数据中心"]["count"], 1)
+        self.assertEqual(themes["机器人"]["count"], 1)
+        self.assertEqual(sector_rrg.THEME_OTHER in themes, True)
+        # 例子最多 3 个，名字里的空格去掉（同花顺有「红 宝 丽」这种）
+        for item in themes.values():
+            self.assertLessEqual(len(item["examples"]), 3)
+
+    def test_broad_down_day_is_called_a_deleveraging_day(self):
+        section, _ = self._build()
+        text = "".join(section["narrative"])
+        self.assertIn("普跌", text)
+        self.assertIn("不是板块间搬家", text)
+        # 叙述里不谈象限：没有日 K 就只讲当天能证明的事
+        for line in section["narrative"]:
+            self.assertNotIn("象限", line)
+        # 「为什么是横截面」写在 why 字段里，由各渲染层单独显示
+        self.assertEqual(section["why"], "板块日 K 只有 20 根，短窗 RRG 要 89 根")
+
+    def test_broad_up_day_uses_the_other_wording(self):
+        rows = [sector_row(f"板块{i}", 1.0 + i * 0.1) for i in range(6)]
+        section, _ = sector_rrg.build_cross_section(
+            rows, market={"up": 5000, "down": 400})
+        text = "".join(section["narrative"])
+        self.assertIn("普涨", text)
+
+    def test_too_few_sectors_is_a_note(self):
+        section, notes = sector_rrg.build_cross_section([sector_row("A", 1.0)])
+        self.assertIsNone(section)
+        self.assertIn("样本太少", notes[0])
+
+    def test_sectors_without_pct_are_ignored(self):
+        rows = self._rows() + [{"thscode": "x", "name": "停牌板块",
+                                "is_sector": True, "price_change_ratio_pct": None}]
+        section, _ = sector_rrg.build_cross_section(rows)
+        self.assertEqual(section["counts"]["total"], 8)
+        self.assertNotIn("停牌板块", [row["name"] for row in section["winners"]])
+
+
+class CrossRenderTest(unittest.TestCase):
+    def _payload(self):
+        rows = [sector_row("半导体", -0.80, 2163e8), sector_row("通信设备", -3.37, 776e8),
+                sector_row("银行", -0.62, 310e8), sector_row("机场航运", 0.72, 33e8),
+                sector_row("文化传媒", -4.69, 276e8), sector_row("影视院线", -5.93, 77e8)]
+        market = {"count": 5584, "up": 649, "down": 4876, "flat": 48,
+                  "limit_up": 27, "limit_down": 84, "avg_ratio": -2.55,
+                  "turnover": 13145.8e8, "top_gainers": [], "top_losers": []}
+        indices = [{"thscode": "000300.SH", "name": "沪深300", "is_sector": False,
+                    "price_change_ratio_pct": 0.03, "last_price": 3984.84},
+                   {"thscode": "000852.SH", "name": "中证1000", "is_sector": False,
+                    "price_change_ratio_pct": -1.88, "last_price": 5938.90}]
+        section, _ = sector_rrg.build_cross_section(
+            rows + indices, market=market, indices=indices,
+            limit_up=[{"name": "盛剑科技", "limit_up_reason": "光刻胶+半导体装备"}],
+            as_of="2026-11-19", why="板块日 K 只有 20 根，短窗 RRG 要 89 根")
+        payload = dict(build_stocks.DEMO_PAYLOAD)
+        payload["indices"] = indices + rows
+        payload["market"] = market
+        payload["sector_cross"] = section
+        return payload
+
+    def test_text_panel_has_the_cross_section_at_the_end(self):
+        text = build_stocks.render_txt(self._payload(), "2026-11-19 15:10:00")
+        self.assertIn("【板块横截面】", text)
+        self.assertNotIn("【板块轮动 · RRG】", text)
+        self.assertLess(text.index("【涨停池】"), text.index("【板块横截面】"))
+        self.assertLess(text.index("【板块横截面】"), text.rindex("不构成投资建议"))
+        self.assertIn("为什么是横截面", text)
+
+    def test_html_epub_and_check(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "stocks_data.json"
+            path.write_text(json.dumps(self._payload(), ensure_ascii=False), encoding="utf-8")
+            data = build_stocks.build(str(path), tmp)
+            self.assertEqual(data["counts"]["cross"], data["cross"]["counts"]["total"])
+            self.assertIsNone(data["rrg"])
+            html = (Path(tmp) / "stocks.html").read_text(encoding="utf-8")
+            self.assertIn("板块横截面", html)
+            self.assertIn("function crossSection", html)
+            with zipfile.ZipFile(Path(tmp) / "stocks.epub") as zf:
+                chapter = zf.read("OEBPS/chapter.xhtml").decode("utf-8")
+            self.assertIn("板块横截面", chapter)
+            # 删掉文案 → 自检要报
+            (Path(tmp) / "stocks.txt").write_text("同花顺行情面板\n", encoding="utf-8")
+            problems = build_stocks.check(tmp)
+            self.assertTrue(any("横截面" in problem for problem in problems))
+
+    def test_rrg_wins_when_both_are_present(self):
+        payload = self._payload()
+        payload["sector_rrg"] = sector_rrg.demo_section()
+        text = build_stocks.render_txt(payload, "2026-11-19 15:10:00")
+        self.assertIn("【板块轮动 · RRG】", text)
+        self.assertNotIn("【板块横截面】", text)
+        # 两者同时进清单 → 自检要拦
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "stocks_data.json"
+            path.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
+            build_stocks.build(str(path), tmp)
+            manifest = json.loads((Path(tmp) / "stocks.json").read_text(encoding="utf-8"))
+            self.assertIsNotNone(manifest["rrg"])
+            # 互斥由 final_sections 裁决：清单里只留 RRG，横截面不再附带
+            self.assertIsNone(manifest["cross"])
+            self.assertEqual(manifest["counts"]["cross"], 0)
+            self.assertEqual(build_stocks.check(tmp), [])
 
 
 class RenderTest(unittest.TestCase):

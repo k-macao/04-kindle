@@ -154,7 +154,9 @@ Feedly / Reeder。插件那套「News subscription」读的是 `site/news.json`�
 [hugo2046/QuantsPlaybook](https://github.com/hugo2046/QuantsPlaybook)（券商金工研报复现）
 的「相对旋转图 RRG 行业轮动」，用同花顺的板块日 K 算出 91 个板块在
 「相对强度 × 相对强度动量」四象限里的位置（领先 / 改善 / 滞后 / 疲软）、今日象限迁移
-和信号 A 名单——涨跌幅排序看不出的「刚开始转强 / 强弩之末」由它补上。公式照原仓库的
+和信号 A 名单——涨跌幅排序看不出的「刚开始转强 / 强弩之末」由它补上；板块日 K 不够
+（历史接口失败或只回了十几根）时这一段自动退成**单日横截面**：涨跌分布、量价、涨停题材
+与今日读数，不会整块消失。公式照原仓库的
 `factor_algo.py` 逐行搬成标准库版（`tools/sector_rrg.py`），没有 pandas 依赖，
 warm-up 行数也照它的算法说明核过；参数默认研报口径 220/60/20，日 K 不够时自动退短窗
 并在面板上写明。清单在 `tools/market_watchlist.py`，详见
