@@ -373,6 +373,13 @@ class WorkflowTest(unittest.TestCase):
     def test_analysis_cache_still_committed_even_when_it_degraded(self):
         self.assertIn("site/news_analysis_cache.json", self.text.split("git add", 1)[1])
 
+    def test_feed_commit_survives_a_concurrent_merge(self):
+        """跑着的十分钟里有人合并 PR，push 会被拒（2026-11-21T04:00Z 就这么挂过）。"""
+        commit_step = self.text.split("git commit --allow-empty", 1)[1]
+        commit_step = commit_step.split("第二个入口", 1)[0]
+        self.assertIn("git pull --rebase --autostash", commit_step)
+        self.assertEqual(commit_step.count("git push origin"), 2)
+
     def test_manual_run_can_regenerate_the_whole_window(self):
         """降级发布之后要能「就地补回分析」，否则只能等明天那轮。"""
         self.assertIn("regenerate:", self.text)
