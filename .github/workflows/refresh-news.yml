@@ -276,7 +276,12 @@ jobs:
           )"
           git commit --allow-empty -m "chore(news): 聚合 RSS ${items} 条（中英并列 ${paired} 条，${built}）"
           # 定时运行时 HEAD 是默认分支；手动跑时是游离 HEAD，两种都要能推。
-          git push origin "HEAD:refs/heads/${GITHUB_REF_NAME}"
+          if ! git push origin "HEAD:refs/heads/${GITHUB_REF_NAME}"; then
+            # 这一轮跑着的十分钟里正好有人合并了 PR（2026-11-21T04:00Z 就是这么挂的：
+            # feed 已经生成好了，push 却因为远端往前走了一步被拒），rebase 再推一次。
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+            git push origin "HEAD:refs/heads/${GITHUB_REF_NAME}"
+          fi
 
       # 第二个入口：把同一份 feed 挂成 Release 资产。它和 Pages / raw / jsDelivr 是不同的
       # 主机家族，设备上哪条线路通就用哪条。失败不影响主流程（feed 已经在仓库里了）。
