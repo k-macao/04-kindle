@@ -1,5 +1,5 @@
 {
-  "checked": "2026-11-21T04:17:45+00:00",
+  "checked": "2026-11-21T07:23:22+00:00",
   "providers": [
     "direct",
     "rsshub",
@@ -10,10 +10,11 @@
   "summary": {
     "ok": 24,
     "total": 24,
-    "items": 196,
+    "items": 200,
     "by_provider": {
       "direct": 4,
-      "rsshub": 20
+      "rsshub": 18,
+      "mirror": 2
     }
   },
   "sources": [
@@ -40,7 +41,7 @@
       "group": "flash",
       "ok": true,
       "provider": "direct",
-      "count": 9,
+      "count": 8,
       "error": "",
       "attempts": [
         {
@@ -57,7 +58,7 @@
       "group": "flash",
       "ok": true,
       "provider": "direct",
-      "count": 8,
+      "count": 11,
       "error": "",
       "attempts": [
         {
@@ -91,7 +92,7 @@
       "group": "flash",
       "ok": true,
       "provider": "rsshub",
-      "count": 6,
+      "count": 9,
       "error": "",
       "attempts": [
         {
@@ -125,7 +126,7 @@
       "group": "flash",
       "ok": true,
       "provider": "rsshub",
-      "count": 11,
+      "count": 12,
       "error": "",
       "attempts": [
         {
@@ -209,13 +210,19 @@
       "name": "第一财经 · 最新",
       "group": "depth",
       "ok": true,
-      "provider": "rsshub",
-      "count": 8,
+      "provider": "mirror",
+      "count": 7,
       "error": "",
       "attempts": [
         {
           "provider": "rsshub",
           "label": "https://rsshub.rss.tips",
+          "ok": false,
+          "error": "The read operation timed out"
+        },
+        {
+          "provider": "mirror",
+          "label": "https://rsshub.isrss.com",
           "ok": true,
           "error": ""
         }
@@ -261,7 +268,7 @@
       "group": "global",
       "ok": true,
       "provider": "rsshub",
-      "count": 3,
+      "count": 2,
       "error": "",
       "attempts": [
         {
@@ -362,13 +369,19 @@
       "name": "彭博社 · 政治",
       "group": "politics",
       "ok": true,
-      "provider": "rsshub",
+      "provider": "mirror",
       "count": 12,
       "error": "",
       "attempts": [
         {
           "provider": "rsshub",
           "label": "https://rsshub.rss.tips",
+          "ok": false,
+          "error": "The read operation timed out"
+        },
+        {
+          "provider": "mirror",
+          "label": "https://rsshub.isrss.com",
           "ok": true,
           "error": ""
         }
