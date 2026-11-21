@@ -1,5 +1,5 @@
 {
-  "checked": "2026-11-21T03:51:47+00:00",
+  "checked": "2026-11-21T04:06:04+00:00",
   "providers": [
     "direct",
     "rsshub",
@@ -10,11 +10,10 @@
   "summary": {
     "ok": 24,
     "total": 24,
-    "items": 193,
+    "items": 197,
     "by_provider": {
       "direct": 4,
-      "rsshub": 16,
-      "mirror": 4
+      "rsshub": 20
     }
   },
   "sources": [
@@ -143,7 +142,7 @@
       "group": "depth",
       "ok": true,
       "provider": "rsshub",
-      "count": 10,
+      "count": 12,
       "error": "",
       "attempts": [
         {
@@ -228,7 +227,7 @@
       "group": "depth",
       "ok": true,
       "provider": "rsshub",
-      "count": 1,
+      "count": 2,
       "error": "",
       "attempts": [
         {
@@ -278,19 +277,13 @@
       "name": "彭博社 · 市场",
       "group": "global",
       "ok": true,
-      "provider": "mirror",
+      "provider": "rsshub",
       "count": 12,
       "error": "",
       "attempts": [
         {
           "provider": "rsshub",
           "label": "https://rsshub.rss.tips",
-          "ok": false,
-          "error": "The read operation timed out"
-        },
-        {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
           "ok": true,
           "error": ""
         }
@@ -301,19 +294,13 @@
       "name": "彭博社 · 经济",
       "group": "global",
       "ok": true,
-      "provider": "mirror",
+      "provider": "rsshub",
       "count": 12,
       "error": "",
       "attempts": [
         {
           "provider": "rsshub",
           "label": "https://rsshub.rss.tips",
-          "ok": false,
-          "error": "The read operation timed out"
-        },
-        {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
           "ok": true,
           "error": ""
         }
@@ -325,7 +312,7 @@
       "group": "politics",
       "ok": true,
       "provider": "rsshub",
-      "count": 0,
+      "count": 1,
       "error": "",
       "attempts": [
         {
@@ -375,19 +362,13 @@
       "name": "彭博社 · 政治",
       "group": "politics",
       "ok": true,
-      "provider": "mirror",
+      "provider": "rsshub",
       "count": 12,
       "error": "",
       "attempts": [
         {
           "provider": "rsshub",
           "label": "https://rsshub.rss.tips",
-          "ok": false,
-          "error": "The read operation timed out"
-        },
-        {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
           "ok": true,
           "error": ""
         }
@@ -415,19 +396,13 @@
       "name": "Psyche · Ideas",
       "group": "thought",
       "ok": true,
-      "provider": "mirror",
+      "provider": "rsshub",
       "count": 5,
       "error": "",
       "attempts": [
         {
           "provider": "rsshub",
           "label": "https://rsshub.rss.tips",
-          "ok": false,
-          "error": "The read operation timed out"
-        },
-        {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
           "ok": true,
           "error": ""
         }
