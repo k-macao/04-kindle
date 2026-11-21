@@ -43,7 +43,7 @@ jobs:
           for tool in tools/build_epub.py tools/build_feed.py tools/build_news.py \
                       tools/build_stocks.py tools/check_no_status.py tools/fetch_news.py \
                       tools/fetch_stocks.py tools/sector_rrg.py tools/analyze_news.py \
-                      tools/translate_news.py tools/ci_unittest.py kindle_report.py; do
+                      tools/translate_news.py tools/book_digest.py tools/ci_unittest.py kindle_report.py; do
             python "$tool" --help > /dev/null
             echo "ok $tool"
           done

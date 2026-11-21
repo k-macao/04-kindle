@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>读书大纲与逐章精要</title>
+<style>
+:root{color-scheme:light dark;--fg:#161616;--muted:#555;--bg:#faf8f3;--card:#fff;--border:#d8d3c8;--accent:#1f4e5f;}
+@media(prefers-color-scheme:dark){:root{--fg:#e8e6e1;--muted:#9e9a90;--bg:#121314;--card:#1b1d1f;--border:#2e3135;--accent:#7ab8cf;}}
+body{max-width:780px;margin:0 auto;padding:18px 16px 48px;font-family:"Noto Serif SC","Songti SC",serif;background:var(--bg);color:var(--fg);line-height:1.7;}
+h1{font-size:1.45rem;margin:0 0 6px;}
+h2{font-size:1.15rem;margin:24px 0 10px;padding-bottom:4px;border-bottom:1px solid var(--border);}
+.meta{color:var(--muted);font-size:.88rem;margin:2px 0;}
+.links a{margin-right:12px;color:var(--accent);text-decoration:none;font-size:.9rem;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:12px 14px;margin:10px 0;}
+.toc-item{padding:3px 0;border-bottom:1px dotted var(--border);font-size:.93rem;}
+.tag{display:inline-block;font-size:.78rem;padding:1px 6px;border:1px solid var(--border);border-radius:4px;color:var(--muted);margin-left:6px;}
+</style>
+</head>
+<body>
+<header>
+  <h1 id="title">读书大纲与逐章精要</h1>
+  <p class="meta" id="meta">正在加载 book.json…</p>
+  <p class="links"><a href="book.epub">下载 EPUB（Kindle）</a><a href="book.txt">纯文本版</a><a href="book.json">JSON 清单</a></p>
+</header>
+<main id="main"></main>
+<script>
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function render(d){
+  document.getElementById('title').textContent=(d.title||'读书大纲')+(d.demo?'【演示】':'');
+  var b=d.book||{};
+  document.getElementById('meta').textContent='作者：'+(b.authors||'未知')+' · 共 '+(b.total_chapters||0)+' 章 / 约 '+(b.total_chars||0)+' 字 · 生成 '+(d.generated||'')+' · '+(d.ai_used?('AI '+d.model):'离线提要');
+  var ov=d.overview||{},h='<section><h2>一、全书逻辑总纲</h2><div class="card">';
+  h+='<p><b>核心命题：</b>'+esc(ov.core_thesis)+'</p>';
+  h+='<p><b>结构脉络：</b>'+esc(ov.structure_logic)+'</p>';
+  if((ov.key_takeaways||[]).length){
+    h+='<p><b>核心结论：</b></p><ol>'+ov.key_takeaways.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ol>';
+  }
+  if(ov.reading_guide)h+='<p><b>阅读建议：</b>'+esc(ov.reading_guide)+'</p>';
+  h+='</div></section>';
+  var toc=d.toc||[];
+  if(toc.length){
+    h+='<section><h2>二、原书目录大纲（'+toc.length+'）</h2><div class="card">';
+    toc.forEach(function(t){
+      var pad=(Math.max(1,t.depth||1)-1)*18;
+      h+='<div class="toc-item" style="padding-left:'+pad+'px">'+esc(t.title)+'</div>';
+    });
+    h+='</div></section>';
+  }
+  var chs=d.chapters||[];
+  h+='<section><h2>三、逐章精要（'+chs.length+' 章）</h2>';
+  chs.forEach(function(c){
+    h+='<div class="card"><h3>第 '+c.index+' 章 · '+esc(c.title)+'<span class="tag">'+c.chars+' 字</span></h3>';
+    h+='<p><b>核心观点：</b>'+esc(c.thesis)+'</p>';
+    h+='<p><b>关键论据与案例：</b>'+esc(c.evidence)+'</p>';
+    h+='<p><b>本章小结：</b>'+esc(c.summary)+'</p></div>';
+  });
+  h+='</section>';
+  document.getElementById('main').innerHTML=h;
+}
+fetch('book.json?t='+Date.now()).then(function(r){return r.json();}).then(render).catch(function(e){
+  document.getElementById('meta').textContent='加载 book.json 失败：'+e;
+});
+</script>
+</body>
+</html>
