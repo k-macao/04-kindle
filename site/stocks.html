@@ -56,6 +56,37 @@ padding:8px 12px;border-bottom:1px solid #000;background:#f2f2f2}
 .card .spark svg{display:block;width:100%;height:36px}
 .card .spark-label{font-size:11px;color:#555;display:flex;justify-content:space-between}
 .up{font-weight:bold}.down{font-weight:bold}
+.rrg-chart{border:2px solid #000;padding:6px;margin:10px 0 6px}
+.rrg-chart svg{display:block;width:100%;height:auto}
+.rrg-chart .grid{stroke:#000;stroke-width:1;stroke-dasharray:5 4}
+.rrg-chart .trail{fill:none;stroke:#c9c9c9;stroke-width:1}
+.rrg-chart .trail.hot{stroke:#000;stroke-width:1.6}
+.rrg-chart .pt{fill:#777}
+.rrg-chart .pt.hot{fill:#000}
+.rrg-chart text{font-family:inherit;fill:#000}
+.rrg-chart .lbl{font-size:12px}
+.rrg-chart .qlabel{font-size:15px;font-weight:bold;fill:#555}
+.rrg-chart .ax{font-size:11.5px;fill:#555}
+.rrg-chart .legend{font-size:12px;color:#333;border-top:1px dashed #999;padding-top:4px;margin-top:4px}
+.qcount .cell{background:#fff}
+.rrg-read p{margin:5px 0;font-size:13.5px;line-height:1.5}
+table.rrg-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}
+table.rrg-table th{text-align:left;border-bottom:2px solid #000;padding:4px 6px;font-size:12.5px}
+table.rrg-table td{border-bottom:1px solid #ddd;padding:3px 6px;white-space:nowrap}
+.qchip{display:inline-block;border:1px solid #000;padding:0 5px;font-size:12px}
+.qchip.q1{background:#000;color:#fff}
+.qchip.q4{border-style:dashed}
+.prev-q{color:#666}
+p.src{font-size:11.5px;color:#444;margin-top:8px;line-height:1.5}
+.bins{border:2px solid #000;padding:6px 8px;margin:8px 0}
+.bins .row{display:flex;align-items:center;gap:8px;font-size:12.5px;line-height:1.9}
+.bins .k{width:86px;text-align:right;color:#333}
+.bins .b{flex:1;background:#f2f2f2;border:1px solid #999;height:12px}
+.bins .b i{display:block;height:100%;background:#000}
+.bins .n{width:30px;text-align:right;font-weight:bold}
+.themes{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.themes .chip{border:1px solid #000;padding:2px 7px;font-size:12.5px}
+.themes .chip b{font-size:14px}
 footer{border-top:1px solid #000;margin-top:16px;padding-top:8px;font-size:13px;color:#333}
 </style>
 </head>
@@ -256,9 +287,163 @@ rows.forEach(function(r){h+='<tr><td>'+esc(r.name||r.thscode)+'</td>'+
 '<td>'+esc(r.limit_up_time||'')+'</td><td>'+esc(r.limit_up_reason||'')+'</td>'+
 '<td>'+esc(r.continue_day_text||'')+'</td><td>'+money(r.seal_money)+'</td></tr>';});
 return h+'</table>';}
+function num1(v){
+return (typeof v==='number')?(Math.round(v*10)/10).toFixed(1):'--';}
+function qchip(q,name){
+return '<span class="qchip q'+q+'">'+esc(name)+'</span>';}
+// RRG 四象限图：横轴 RS-Ratio、纵轴 RS-Momentum，十字中枢 (100,100)。
+// 电子墨水只有黑/灰：领先象限淡灰底 + 黑点，其余为灰点；轨迹是被压成两维的
+// 最近几个交易日路径——点朝右上走=继续转强，朝右下走=强弩之末。
+function rrgChart(g){
+var rows=g.rows||[];
+if(!rows.length)return '';
+var minx=100,maxx=100,miny=100,maxy=100;
+rows.forEach(function(r){
+minx=Math.min(minx,r.rs_ratio);maxx=Math.max(maxx,r.rs_ratio);
+miny=Math.min(miny,r.rs_mom);maxy=Math.max(maxy,r.rs_mom);});
+minx=Math.min(minx,99);maxx=Math.max(maxx,101);
+miny=Math.min(miny,99);maxy=Math.max(maxy,101);
+// 记下真实取值范围（图例里写出来，读者才知道这张图被放大到多少倍）
+var dataRange=minx.toFixed(1)+'–'+maxx.toFixed(1)+' / '+miny.toFixed(1)+'–'+maxy.toFixed(1);
+var spanx=Math.max(maxx-minx,2),spany=Math.max(maxy-miny,2);
+minx-=spanx*0.10;maxx+=spanx*0.10;miny-=spany*0.14;maxy+=spany*0.14;
+var W=720,H=400,P=30;
+function X(v){return P+(v-minx)/(maxx-minx)*(W-2*P);}
+function Y(v){return H-P-(v-miny)/(maxy-miny)*(H-2*P);}
+var hot={};
+((g.signal||{}).picks||[]).forEach(function(p){hot[p.thscode]=1;});
+var h='<div class="rrg-chart"><svg viewBox="0 0 '+W+' '+H+'">';
+h+='<rect x="'+X(100).toFixed(1)+'" y="'+Y(maxy).toFixed(1)+'" width="'+
+(X(maxx)-X(100)).toFixed(1)+'" height="'+(Y(100)-Y(maxy)).toFixed(1)+'" fill="#f0f0f0"/>';
+h+='<line class="grid" x1="'+X(100).toFixed(1)+'" y1="'+P+'" x2="'+X(100).toFixed(1)+'" y2="'+(H-P)+'"/>';
+h+='<line class="grid" x1="'+P+'" y1="'+Y(100).toFixed(1)+'" x2="'+(W-P)+'" y2="'+Y(100).toFixed(1)+'"/>';
+[[1,'领先',W-P-6,P+16,'end'],[2,'改善',P+6,P+16,'start'],
+[3,'滞后',P+6,H-P-6,'start'],[4,'疲软',W-P-6,H-P-6,'end']].forEach(function(q){
+h+='<text class="qlabel" x="'+q[2]+'" y="'+q[3]+'" text-anchor="'+q[4]+'">'+q[1]+'</text>';});
+rows.forEach(function(r){
+var t=r.trail||[];
+if(t.length<2)return;
+var pts=t.map(function(p){return X(p[0]).toFixed(1)+','+Y(p[1]).toFixed(1);}).join(' ');
+h+='<polyline class="trail'+(hot[r.thscode]?' hot':'')+'" points="'+pts+'"/>';});
+rows.forEach(function(r){
+h+='<circle class="pt'+(hot[r.thscode]?' hot':'')+'" cx="'+X(r.rs_ratio).toFixed(1)+
+'" cy="'+Y(r.rs_mom).toFixed(1)+'" r="'+(hot[r.thscode]?4:2.6)+'"><title>'+
+esc(r.name)+' '+esc(r.quadrant_name)+' · RS '+num1(r.rs_ratio)+
+' / 动量 '+num1(r.rs_mom)+'</title></circle>';});
+// 标注：信号 A + 每个象限离中心最远的那个（91 个全标会糊成一团）
+var labelled={},labels=[];
+rows.forEach(function(r){if(hot[r.thscode]&&!labelled[r.thscode]){labelled[r.thscode]=1;labels.push(r);}});
+[1,2,3,4].forEach(function(q){
+for(var i=0;i<rows.length;i++){if(rows[i].quadrant===q&&!labelled[rows[i].thscode]){
+labelled[rows[i].thscode]=1;labels.push(rows[i]);break;}}});
+labels.forEach(function(r){
+var x=X(r.rs_ratio),y=Y(r.rs_mom),right=x<W*0.62;
+h+='<text class="lbl" x="'+(right?x+7:x-7).toFixed(1)+'" y="'+(y+4).toFixed(1)+
+'" text-anchor="'+(right?'start':'end')+'">'+esc(r.name)+'</text>';});
+h+='<text class="ax" x="'+P+'" y="'+(H-10)+'">← 相对强度偏弱 · RS-Ratio 中枢 100 · 偏强 →</text>';
+h+='<text class="ax" x="'+(W-P)+'" y="'+(H-10)+'" text-anchor="end">↑ 动量上升</text>';
+h+='</svg><div class="legend">黑点＝'+esc((g.signal||{}).name||'信号 A')+
+'；细线＝最近 '+((rows[0].trail||[]).length||0)+' 个交易日在四象限里的路径；'+
+'灰底＝领先象限 · 虚线十字＝中枢 100 · 本图放大范围 '+esc(dataRange)+
+'（RS-Ratio / RS-Momentum）。</div></div>';
+return h;}
+function rrgTable(g){
+var h='<table class="data rrg-table"><tr><th>板块</th><th>今日</th><th>RS-Ratio</th>'+
+'<th>RS-Mom</th><th>象限</th><th>前一日</th></tr>';
+(g.rows||[]).forEach(function(r){
+h+='<tr><td>'+esc(r.name||r.thscode)+'</td>'+
+'<td class="'+cls(r.today_pct)+'">'+ratio(r.today_pct)+'</td>'+
+'<td>'+num1(r.rs_ratio)+'</td><td>'+num1(r.rs_mom)+'</td>'+
+'<td>'+qchip(r.quadrant,r.quadrant_name)+'</td>'+
+'<td class="prev-q">'+(r.prev_quadrant?
+esc(['','领先','改善','滞后','疲软'][r.prev_quadrant]):'--')+'</td></tr>';});
+return h+'</table>';}
+// 单日横截面（RRG 的降级口径）：没有日 K 时至少把「普涨/普跌、量价、题材」
+// 三件事讲清楚，而不是让面板最后一段整块消失。
+function crossSection(g,brief){
+if(!g||!g.counts)return '';
+var NARR=brief?3:999;
+var c=g.counts||{},st=g.stats||{},mk=g.market||{},list=[],i;
+var maxBin=1;
+(g.bins||[]).forEach(function(b){if(b.count>maxBin)maxBin=b.count;});
+var h='<section><h2>板块横截面<span class="muted"> '+(c.total||0)+' 个板块 · 单日收盘口径 · 数据 '+
+esc(g.as_of||'')+'</span></h2>';
+h+='<div class="breadth qcount">';
+h+='<div class="cell"><div class="k">红 / 绿</div><div class="v"><span class="up">'+(c.up||0)+
+'</span> / <span class="down">'+(c.down||0)+'</span></div><div class="s">板块中位数 '+
+ratio(st.median)+'</div></div>';
+h+='<div class="cell"><div class="k">离散度</div><div class="v">'+
+((typeof st.std==='number')?st.std.toFixed(2):'--')+'</div><div class="s">标准差（越大越像轮动）</div></div>';
+h+='<div class="cell"><div class="k">全 A 涨 / 跌</div><div class="v"><span class="up">'+
+(mk.up||0)+'</span> / <span class="down">'+(mk.down||0)+'</span></div><div class="s">平均 '+
+ratio(mk.avg_ratio)+'</div></div>';
+h+='<div class="cell"><div class="k">涨停 / 跌停</div><div class="v"><span class="up">'+
+(mk.limit_up||0)+'</span> / <span class="down">'+(mk.limit_down||0)+'</span></div><div class="s">全市场情绪面</div></div>';
+h+='</div>';
+if((g.bins||[]).length){
+h+='<div class="bins">';
+(g.bins||[]).forEach(function(b){
+var w=maxBin?Math.round(100*b.count/maxBin):0;
+h+='<div class="row"><span class="k">'+esc(b.label)+'</span><span class="b">'+
+'<i style="width:'+w+'%"></i></span><span class="n">'+b.count+'</span></div>';});
+h+='</div>';}
+h+='<div class="rrg-read">'+(g.narrative||[]).slice(0,NARR).map(function(t){return '<p>'+esc(t)+'</p>';}).join('')+'</div>';
+if(brief){
+h+='<p class="src">周末精简版：涨跌分布条、成交额占比与涨停题材见完整版面板（刷新页面即恢复）。</p>';
+return h+'</section>';}
+function sideBlock(title,rows){
+if(!rows||!rows.length)return '';
+var out='<div><div class="k">'+esc(title)+'</div>';
+rows.forEach(function(r){
+out+='<div class="rank"><span>'+esc(r.name)+'</span><b class="'+cls(r.today_pct)+'">'+
+ratio(r.today_pct)+'</b></div>';});
+return out+'</div>';}
+if((g.winners||[]).length||(g.losers||[]).length){
+h+='<div class="two">'+sideBlock(g.winners_label||'领涨',g.winners)+
+sideBlock(g.losers_label||'领跌',g.losers)+'</div>';}
+var money=g.money||{};
+if((money.top||[]).length){
+h+='<table class="data rrg-table"><tr><th>成交额前列</th><th>占两市成交</th><th>今日</th></tr>';
+(money.top||[]).slice(0,8).forEach(function(r){
+h+='<tr><td>'+esc(r.name)+'</td><td>'+((typeof r.share==='number')?r.share.toFixed(1)+'%':'--')+
+'</td><td class="'+cls(r.today_pct)+'">'+ratio(r.today_pct)+'</td></tr>';});
+h+='</table>';}
+if((g.themes||[]).length){
+h+='<div class="themes">';
+(g.themes||[]).forEach(function(t){
+h+='<span class="chip">'+esc(t.name)+' <b>'+t.count+'</b>'+
+(t.examples&&t.examples.length?' · '+esc(t.examples.join('、')):'')+'</span>';});
+h+='</div>';}
+h+='<p class="src">口径：单日快照的横截面统计（涨跌分布 / 量价 / 涨停题材），'+
+'<b>不是 RRG</b>——RRG 要 89 根以上板块日 K，日 K 够了面板会自动换回四象限。'+
+(g.why?'<br>这一轮：'+esc(g.why)+'。':'')+'</p>';
+return h+'</section>';}
+function rrgSection(g,brief){
+var rows=g.rows||[];
+if(!rows.length)return '';
+var c=g.counts||{},src=g.source||{},names=['领先','改善','滞后','疲软'];
+var keys=['leading','improving','lagging','weakening'];
+var defs=['RS>100 且 动量>100','RS<100 且 动量>100','RS<100 且 动量<100','RS>100 且 动量<100'];
+var h='<section><h2>板块轮动 · RRG<span class="muted"> '+rows.length+' 个板块 · '+
+esc(g.preset||'')+' · 数据 '+esc(g.as_of||'')+'</span></h2>';
+h+=rrgChart(g);
+h+='<div class="breadth qcount">';
+names.forEach(function(name,i){
+h+='<div class="cell"><div class="k">'+name+'</div><div class="v">'+(c[keys[i]]||0)+
+'</div><div class="s">'+defs[i]+'</div></div>';});
+h+='</div>';
+h+='<div class="rrg-read">'+(g.narrative||[]).slice(0,brief?3:999).map(function(t){
+return '<p>'+esc(t)+'</p>';}).join('')+'</div>';
+if(!brief)h+=rrgTable(g);
+h+='<p class="src">基准 '+esc(g.benchmark||'')+' · '+esc(String((g.params||{}).lookback_ratio||''))+
+'/'+esc(String((g.params||{}).lookback_mom||''))+'/'+esc(String((g.params||{}).smooth_window||''))+
+' 参数 · '+esc(String(g.samples||0))+' 根日 K<br>策略：GitHub '+esc(src.repo||'')+' · '+
+esc(src.file||'')+'（'+esc(src.signal||'')+'）<br>研报：'+esc(src.report||'')+'</p>';
+return h+'</section>';}
 function render(d){
 var h='';
-// 一屏监视：市场概览 → 宽基 → 板块 → 港股 → 涨停池
+var brief=!!(d.view&&d.view.mode==='brief');
+// 一屏监视：市场概览 → 宽基 → 板块 → 港股 → 涨停池 → 板块轮动 RRG（或降级的横截面）
 if(d.market){h+='<section><h2>市场概览 · 全 A</h2>'+breadth(d.market)+'</section>';}
 var idx=(d.indices||[]),broad=[],sectors=[];
 idx.forEach(function(r){
@@ -268,8 +453,17 @@ broad.forEach(function(r){h+=card(r,d,true);});h+='</div></section>';}
 if(sectors.length){
 var sorted=sectors.slice().sort(function(a,b){
 return (b.price_change_ratio_pct||-999)-(a.price_change_ratio_pct||-999);});
+if(brief){
+var n=(d.view&&d.view.sector_rows)||5;
+var ends=sorted.slice(0,n).concat(sorted.slice(-n));
+h+='<section><h2>板块（'+sectors.length+'）<span class="muted"> 精简：抗跌前 '+n+
+' / 杀跌前 '+n+'</span></h2><div class="cards sector">';
+ends.forEach(function(r){h+=sectorCard(r);});h+='</div><p class="src">其余 '+
+Math.max(0,sectors.length-ends.length)+' 个板块见完整版面板（数据在 stocks.json 里是全量）。</p>';
+h+='</section>';}
+else{
 h+='<section><h2>板块（'+sectors.length+'）· 按涨跌幅</h2><div class="cards sector">';
-sorted.forEach(function(r){h+=sectorCard(r);});h+='</div></section>';}
+sorted.forEach(function(r){h+=sectorCard(r);});h+='</div></section>';}}
 var hkRows=((d.hk||{}).rows||[]);
 if(hkRows.length){
 var hi=[],hs=[];
@@ -277,15 +471,27 @@ hkRows.forEach(function(r){if(r.is_index)hi.push(r);else hs.push(r);});
 h+='<section><h2>港股（'+hkRows.length+'）<span class="muted"> 行情 '+
 bj((d.hk||{}).data_time)+'</span></h2><div class="cards hk">';
 hi.concat(hs).forEach(function(r){h+=hkCard(r);});h+='</div></section>';}
-if(d.limit_up&&d.limit_up.length)h+='<section><h2>涨停池（'+d.limit_up.length+
-'）· 按封板时间</h2>'+limitRows(d.limit_up)+'</section>';
+if(d.limit_up&&d.limit_up.length){
+if(brief){
+var themes=(d.view&&d.view.themes)||[];
+h+='<section><h2>涨停池（'+d.limit_up.length+'）· 按题材</h2><div class="themes">';
+themes.forEach(function(t){h+='<span class="chip">'+esc(t.name)+' <b>'+t.count+'</b></span>';});
+h+='</div><p class="src">周末精简版：逐只票的封板时间/原因/连板见完整版面板。</p></section>';}
+else h+='<section><h2>涨停池（'+d.limit_up.length+
+'）· 按封板时间</h2>'+limitRows(d.limit_up)+'</section>';}
+// 最后一段：板块轮动 RRG（策略来自 GitHub hugo2046/QuantsPlaybook）；
+// 板块日 K 不够时退到单日横截面（两者互斥，只显示一个）
+if(d.rrg&&d.rrg.rows&&d.rrg.rows.length)h+=rrgSection(d.rrg,brief);
+else if(d.cross&&d.cross.counts)h+=crossSection(d.cross,brief);
 (d.errors||[]).forEach(function(e){h+='<p>注：'+esc(e)+'</p>';});
 document.getElementById('main').innerHTML=h||'<p>暂无数据</p>';
 var demo=d.demo?'【演示数据】':'';
+var briefTag=brief?'【周末精简版 · '+((d.view||{}).reason||'')+'】':'';
 var stale=isStale(d.data_time);
 document.getElementById('meta').textContent='生成 '+bj(d.generated)+'（北京时间）· 数据时间 '+
 bj(d.data_time)+(ageText(d.data_time)?' · '+ageText(d.data_time):'')+
 (sessionLabel(d.data_time)?' · '+sessionLabel(d.data_time):'')+(demo?' '+demo:'')+
+(briefTag?' '+briefTag:'')+
 ' · 每'+POLL_TEXT+'检查一次';
 var badge=document.getElementById('state');
 badge.textContent=stale?'STALE':'ONLINE';
