@@ -160,6 +160,11 @@ def _call_api(api_key, payload, fetch=None, timeout=60, retries=3, sleep=time.sl
             except Exception:  # pragma: no cover - defensive for unusual HTTPError wrappers
                 detail = ""
             message = f"DeepSeek HTTP {exc.code}" + (f": {detail[:240]}" if detail else "")
+            if exc.code == 402:
+                # 402 是账号级问题（余额/额度），重试与拆批次都救不了，也不用再跑后面的批次。
+                # 说清楚是「要充值」，否则注解里只有一行 Insufficient Balance，看不出该做什么。
+                message = ("DeepSeek 账户余额不足（HTTP 402 Insufficient Balance）："
+                           "需要先在平台充值，本轮不出线索分析。原始返回：" + (detail[:200] or "—"))
             if attempt + 1 < retries and (exc.code == 429 or exc.code >= 500):
                 sleep(2 ** attempt)
                 continue

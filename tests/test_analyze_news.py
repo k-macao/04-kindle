@@ -141,6 +141,19 @@ class AnalyzePayloadTest(unittest.TestCase):
                                          delay=0, log=lambda *_: None, now=NOW)
         self.assertEqual(len(calls), 1)
 
+    def test_insufficient_balance_says_what_to_do(self):
+        """402 是账号余额问题：注解里要写「去充值」，不能只留一句 Insufficient Balance。"""
+        from urllib.error import HTTPError
+        import io
+
+        def fetch(_key, _request, _timeout):
+            raise HTTPError(analyze_news.ENDPOINT, 402, "Payment Required", {},
+                            io.BytesIO(b'{"error":{"message":"Insufficient Balance"}}'))
+
+        with self.assertRaisesRegex(analyze_news.AnalysisError, "余额不足.*充值"):
+            analyze_news.analyze_payload(payload(1), "key", fetch=fetch, delay=0,
+                                         log=lambda *_: None, now=NOW)
+
     def test_cache_round_trip(self):
         from tempfile import TemporaryDirectory
         with TemporaryDirectory() as directory:
