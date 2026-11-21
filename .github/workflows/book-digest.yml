@@ -1,0 +1,124 @@
+name: Book Digest (Z-Library + AI)
+
+# 手动输入书名（或 Z-Library 的 id:hash），用 heartleo/zlib 检索下载 EPUB，
+# 拆出原书多级目录与章节正文，调用 DeepSeek 生成「全书逻辑总纲 + 逐章精要」，
+# 产出 site/book.json、site/book.txt、site/book.epub、site/book.html 供 Kindle 拉取。
+#
+# 所需的仓库 Secrets：
+#   · DEEPSEEK_API_KEY：DeepSeek API Key（与新闻线索分析共用同一个 Secret）
+#   · ZLIB_SESSION_JSON：本机运行 `zlib login` 后 `~/.config/zlib/session.json` 的内容
+#     （或改配 ZLIB_COOKIES + ZLIB_DOMAIN）
+# 若 query 与 book_id 都留空，则自动用内置演示电子书跑通整条拆书 + 总结 + 发布链路。
+on:
+  workflow_dispatch:
+    inputs:
+      query:
+        description: "搜索词（书名 / 作者 / ISBN；留空且未填 book_id 时跑内置演示书）"
+        required: false
+        default: ""
+        type: string
+      book_id:
+        description: "指定 Z-Library 的 id:hash（填了就直接下载该书，跳过搜索）"
+        required: false
+        default: ""
+        type: string
+      lang:
+        description: "语言过滤（可选，如 chinese / english）"
+        required: false
+        default: ""
+        type: string
+      max_chapters:
+        description: "最多提炼多少章"
+        required: false
+        default: "24"
+        type: string
+      send_to_kindle:
+        description: "生成后同时调用 zlib kindle send 推送到 Kindle 邮箱"
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
+concurrency:
+  group: book-digest
+  cancel-in-progress: false
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 跑单测（拆书与总结逻辑先过检）
+        run: python tools/ci_unittest.py
+
+      - name: 安装 heartleo/zlib（仅在检索真实书籍时安装）
+        if: ${{ inputs.query != '' || inputs.book_id != '' }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$HOME/.local/bin"
+          ZLIB_INSTALL_DIR="$HOME/.local/bin" sh -c \
+            "$(curl -fsSL https://raw.githubusercontent.com/heartleo/zlib/main/install.sh)"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+          "$HOME/.local/bin/zlib" --version
+
+      - name: 找书、拆目录并生成 AI 读书精要
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          ZLIB_SESSION_JSON: ${{ secrets.ZLIB_SESSION_JSON }}
+          ZLIB_COOKIES: ${{ secrets.ZLIB_COOKIES }}
+          ZLIB_DOMAIN: ${{ secrets.ZLIB_DOMAIN }}
+          INPUT_QUERY: ${{ inputs.query }}
+          INPUT_BOOK_ID: ${{ inputs.book_id }}
+          INPUT_LANG: ${{ inputs.lang }}
+          INPUT_MAX_CHAPTERS: ${{ inputs.max_chapters }}
+          INPUT_SEND_KINDLE: ${{ inputs.send_to_kindle }}
+        run: |
+          set -euo pipefail
+          args=(--out site --max-chapters "${INPUT_MAX_CHAPTERS:-24}")
+          if [ -n "${INPUT_LANG}" ]; then
+            args+=(--lang "${INPUT_LANG}")
+          fi
+          if [ "${INPUT_SEND_KINDLE}" = "true" ]; then
+            args+=(--send-to-kindle)
+          fi
+          if [ -n "${INPUT_BOOK_ID}" ]; then
+            args+=(--id "${INPUT_BOOK_ID}")
+          elif [ -n "${INPUT_QUERY}" ]; then
+            args+=(--search "${INPUT_QUERY}")
+          else
+            args+=(--demo)
+            if [ -z "${DEEPSEEK_API_KEY}" ]; then
+              args+=(--no-ai)
+            fi
+          fi
+          python tools/book_digest.py "${args[@]}"
+
+      - name: 读书产物自检
+        run: python tools/book_digest.py --check --out site
+
+      - name: 提交并推送读书产物
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add site/book.json site/book.txt site/book.epub site/book.html
+          title=$(python -c "import json;print(json.load(open('site/book.json'))['book']['title'])")
+          stamp=$(python -c "import json;print(json.load(open('site/book.json'))['generated'])")
+          git commit --allow-empty -m "chore(book): 更新《${title}》读书大纲与逐章精要（${stamp}）"
+          for attempt in 1 2 3; do
+            if git push origin "HEAD:refs/heads/${GITHUB_REF_NAME}"; then
+              break
+            fi
+            echo "推送冲突，第 ${attempt} 次 pull --rebase 后重试…"
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+          done
