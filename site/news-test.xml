@@ -6,9 +6,27 @@
     <atom:link href="https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news-test.xml" rel="self" type="application/rss+xml"/>
     <description>每天 07:00（北京时间）从 RSSHub 抓取并合并的财经、政治与哲学思想新闻，英文条目附中文译文，本次 3 条。</description>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 21 Nov 2026 04:11:11 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 21 Nov 2026 04:18:19 +0000</lastBuildDate>
     <generator>04-kindle tools/build_feed.py</generator>
     <ttl>60</ttl>
+    <item>
+      <title>比特币跌破56000美元，日内跌超5%。</title>
+      <link>https://wallstreetcn.com/livenews/3203641</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3203641</guid>
+      <pubDate>Sat, 21 Nov 2026 04:09:33 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称比特币跌破56000美元、日内跌超5%，发布时间为2026-11-21T04:09:33Z，摘要为空；&lt;/p&gt;&lt;p&gt;事实：报道明确给出比特币价格跌破56000美元且日内跌幅超过5%这一行情描述；&lt;/p&gt;&lt;p&gt;推断：仅凭单条快讯无法判断下跌原因、持续时长或是否伴随其他资产联动，摘要缺失使背景信息有限；&lt;/p&gt;&lt;p&gt;影响：可能影响持有比特币的投资者及相关加密资产交易平台的情绪，但具体影响范围与程度缺少材料；&lt;/p&gt;&lt;p&gt;验证：需观察后续价格是否继续下探、是否出现交易所公告或宏观事件解释，目前缺少验证材料。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>财联社11月21日电，比特币跌破56000美元，日内跌超6%。</title>
+      <link>https://www.cls.cn/detail/2540773</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2540773</guid>
+      <pubDate>Sat, 21 Nov 2026 04:07:52 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称比特币跌破56000美元、日内跌超6%，发布时间为2026-11-21T04:07:52Z，摘要为空；&lt;/p&gt;&lt;p&gt;事实：报道明确给出比特币跌破56000美元且日内跌幅超过6%的行情描述；&lt;/p&gt;&lt;p&gt;推断：该条与id 0为同一价格事件的不同快讯，跌幅数字存在5%与6%的差异，可能因发布时点或统计口径不同，但无法据此确认原因；&lt;/p&gt;&lt;p&gt;影响：可能影响加密资产持有者情绪与相关交易活动，具体影响缺少材料；&lt;/p&gt;&lt;p&gt;验证：需对比后续快讯的跌幅口径与价格走势，目前缺少验证材料。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>阿根廷政府批准该国规模最大投资项目</title>
       <link>https://flash.jin10.com/detail/20261121120227696800</link>
@@ -17,24 +35,6 @@
       <category>中文财经快讯</category>
       <source url="https://jin10.com">金十数据 · 快讯</source>
       <description>&lt;p&gt;金十数据11月21日讯，阿根廷政府20日宣布批准将一个液化天然气项目纳入大型投资激励计划。阿根廷经济部长路易斯·卡普托在社交媒体上说，这是该国历史上规模最大的投…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：阿根廷政府20日宣布将一个液化天然气项目纳入大型投资激励计划；经济部长卡普托称这是该国历史上规模最大的投资项目，到2050年累计投资额约507亿美元。&lt;/p&gt;&lt;p&gt;事实：报道明确说该项目被纳入激励计划，并给出累计投资额与“史上最大”的官方表述。&lt;/p&gt;&lt;p&gt;推断：这是阿根廷吸引外资、开发LNG出口能力的政策信号，但项目落地节奏与资金来源报道未说明。&lt;/p&gt;&lt;p&gt;影响：可能影响阿根廷能源出口、外资准入与相关基建领域，条件取决于项目分期投资与投产进度。&lt;/p&gt;&lt;p&gt;验证：后续可观察项目正式投资决定、开工与投产时间表、激励计划细则；目前缺少项目方与融资结构材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>布油跌向90美元，空头手里的“过剩”牌看起来更硬了，可下周继续沿着这套解释看盘，还管用吗？这个周末，有一笔供需账需要先算</title>
-      <link>https://flash.jin10.com/detail/20261121120150917800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261121120150917800</guid>
-      <pubDate>Sat, 21 Nov 2026 04:01:50 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>&lt;p&gt;布油跌向90美元，空头手里的“过剩”牌看起来更硬了，可下周继续沿着这套解释看盘，还管用吗？这个周末，有一笔供需账需要先算明白！点击查看详细拆解...&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称布油跌向90美元，空头以“过剩”为解释；摘要仅提示“点击查看详细拆解”，无具体数据。&lt;/p&gt;&lt;p&gt;事实：报道明确的是布油价格走向90美元及市场存在“过剩”叙事，其余为设问式引导。&lt;/p&gt;&lt;p&gt;推断：标题暗示市场对供需过剩的定价可能面临重新核算，但未给出任何供需数据，属评论性表述而非事实。&lt;/p&gt;&lt;p&gt;影响：可能影响原油相关交易与能源板块情绪，条件取决于实际供需数据是否支持过剩判断。&lt;/p&gt;&lt;p&gt;验证：需观察后续官方库存、产量与需求数据；本条线索有限，缺少可核验的供需账目。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>期铜暴跌与洋山溢价创新高剧烈背离，一旦溢价跌破X美元，铜价将失去底部支撑？</title>
-      <link>https://flash.jin10.com/detail/20261121115739312800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261121115739312800</guid>
-      <pubDate>Sat, 21 Nov 2026 03:57:39 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称期铜暴跌与洋山溢价创新高出现剧烈背离，并提出“溢价跌破X美元”的假设性阈值。摘要为空。&lt;/p&gt;&lt;p&gt;事实：报道明确提到的只有标题中的背离现象与假设性设问，无具体价格、幅度或X数值。&lt;/p&gt;&lt;p&gt;推断：标题暗示洋山溢价被视为铜价底部支撑的观察指标，但属设问，不能当作结论。&lt;/p&gt;&lt;p&gt;影响：可能影响铜相关交易者对该溢价指标的关注，条件取决于溢价实际走势。&lt;/p&gt;&lt;p&gt;验证：线索有限，摘要为空，需补充期铜价格、洋山溢价具体数值及X阈值来源。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
