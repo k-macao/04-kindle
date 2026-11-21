@@ -1,5 +1,5 @@
 {
-  "checked": "2026-11-20T20:52:16+00:00",
+  "checked": "2026-11-21T03:51:47+00:00",
   "providers": [
     "direct",
     "rsshub",
@@ -10,10 +10,11 @@
   "summary": {
     "ok": 24,
     "total": 24,
-    "items": 220,
+    "items": 193,
     "by_provider": {
       "direct": 4,
-      "rsshub": 20
+      "rsshub": 16,
+      "mirror": 4
     }
   },
   "sources": [
@@ -40,7 +41,7 @@
       "group": "flash",
       "ok": true,
       "provider": "direct",
-      "count": 12,
+      "count": 8,
       "error": "",
       "attempts": [
         {
@@ -57,7 +58,7 @@
       "group": "flash",
       "ok": true,
       "provider": "direct",
-      "count": 12,
+      "count": 9,
       "error": "",
       "attempts": [
         {
@@ -74,7 +75,7 @@
       "group": "flash",
       "ok": true,
       "provider": "direct",
-      "count": 12,
+      "count": 1,
       "error": "",
       "attempts": [
         {
@@ -91,7 +92,7 @@
       "group": "flash",
       "ok": true,
       "provider": "rsshub",
-      "count": 8,
+      "count": 5,
       "error": "",
       "attempts": [
         {
@@ -142,7 +143,7 @@
       "group": "depth",
       "ok": true,
       "provider": "rsshub",
-      "count": 12,
+      "count": 10,
       "error": "",
       "attempts": [
         {
@@ -193,7 +194,7 @@
       "group": "depth",
       "ok": true,
       "provider": "rsshub",
-      "count": 9,
+      "count": 7,
       "error": "",
       "attempts": [
         {
@@ -210,7 +211,7 @@
       "group": "depth",
       "ok": true,
       "provider": "rsshub",
-      "count": 11,
+      "count": 8,
       "error": "",
       "attempts": [
         {
@@ -227,7 +228,7 @@
       "group": "depth",
       "ok": true,
       "provider": "rsshub",
-      "count": 2,
+      "count": 1,
       "error": "",
       "attempts": [
         {
@@ -244,7 +245,7 @@
       "group": "flash",
       "ok": true,
       "provider": "rsshub",
-      "count": 7,
+      "count": 10,
       "error": "",
       "attempts": [
         {
@@ -261,7 +262,7 @@
       "group": "global",
       "ok": true,
       "provider": "rsshub",
-      "count": 4,
+      "count": 3,
       "error": "",
       "attempts": [
         {
@@ -277,13 +278,19 @@
       "name": "彭博社 · 市场",
       "group": "global",
       "ok": true,
-      "provider": "rsshub",
+      "provider": "mirror",
       "count": 12,
       "error": "",
       "attempts": [
         {
           "provider": "rsshub",
           "label": "https://rsshub.rss.tips",
+          "ok": false,
+          "error": "The read operation timed out"
+        },
+        {
+          "provider": "mirror",
+          "label": "https://rsshub.isrss.com",
           "ok": true,
           "error": ""
         }
@@ -294,13 +301,19 @@
       "name": "彭博社 · 经济",
       "group": "global",
       "ok": true,
-      "provider": "rsshub",
+      "provider": "mirror",
       "count": 12,
       "error": "",
       "attempts": [
         {
           "provider": "rsshub",
           "label": "https://rsshub.rss.tips",
+          "ok": false,
+          "error": "The read operation timed out"
+        },
+        {
+          "provider": "mirror",
+          "label": "https://rsshub.isrss.com",
           "ok": true,
           "error": ""
         }
@@ -312,7 +325,7 @@
       "group": "politics",
       "ok": true,
       "provider": "rsshub",
-      "count": 1,
+      "count": 0,
       "error": "",
       "attempts": [
         {
@@ -362,13 +375,19 @@
       "name": "彭博社 · 政治",
       "group": "politics",
       "ok": true,
-      "provider": "rsshub",
-      "count": 11,
+      "provider": "mirror",
+      "count": 12,
       "error": "",
       "attempts": [
         {
           "provider": "rsshub",
           "label": "https://rsshub.rss.tips",
+          "ok": false,
+          "error": "The read operation timed out"
+        },
+        {
+          "provider": "mirror",
+          "label": "https://rsshub.isrss.com",
           "ok": true,
           "error": ""
         }
@@ -396,13 +415,19 @@
       "name": "Psyche · Ideas",
       "group": "thought",
       "ok": true,
-      "provider": "rsshub",
+      "provider": "mirror",
       "count": 5,
       "error": "",
       "attempts": [
         {
           "provider": "rsshub",
           "label": "https://rsshub.rss.tips",
+          "ok": false,
+          "error": "The read operation timed out"
+        },
+        {
+          "provider": "mirror",
+          "label": "https://rsshub.isrss.com",
           "ok": true,
           "error": ""
         }
