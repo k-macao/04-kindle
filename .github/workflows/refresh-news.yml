@@ -24,6 +24,11 @@ on:
     # 07:00 Asia/Shanghai。GitHub 的 cron 只认 UTC。
     - cron: "0 23 * * *"
   workflow_dispatch:
+    inputs:
+      regenerate:
+        description: "重抓全量（--no-seen）：给当天已发布的 feed 补一次线索分析"
+        type: boolean
+        default: false
   # 改了抓取/排版/源的代码就顺手跑一次：既验证改动，也让 site/news.xml 立刻更新。
   # 只匹配这些文件，提交产物（site/**）不会触发，不会自激。
   push:
@@ -84,9 +89,13 @@ jobs:
           args=(--out news_data.json --min-items "$MIN_ITEMS"
                 --providers direct,rsshub,mirror,native,bridge
                 --health site/source-health.json)
-          if [ "${{ github.event_name }}" = "push" ]; then
+          # --no-seen = 不读也不写标题指纹，按完整时间窗重抓。两种场合用它：
+          # 改代码触发的 push（免得把当天还没到 07:00 的条目提前吃掉），
+          # 以及手动 dispatch 时勾 regenerate（比如上午那轮因分析接口挂掉而降级发布，
+          # 充值/修好之后要就地补回「线索分析」，而不是等明天那轮）。
+          if [ "${{ github.event_name }}" = "push" ] || [ "${{ inputs.regenerate }}" = "true" ]; then
             args+=(--no-seen)
-            echo "push 触发：本次不读写标题指纹，按完整时间窗生成"
+            echo "按完整时间窗重抓：本次不读写标题指纹"
           fi
           python tools/fetch_news.py "${args[@]}"
           python - <<'PY' >> "$GITHUB_STEP_SUMMARY"

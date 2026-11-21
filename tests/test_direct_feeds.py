@@ -373,6 +373,12 @@ class WorkflowTest(unittest.TestCase):
     def test_analysis_cache_still_committed_even_when_it_degraded(self):
         self.assertIn("site/news_analysis_cache.json", self.text.split("git add", 1)[1])
 
+    def test_manual_run_can_regenerate_the_whole_window(self):
+        """降级发布之后要能「就地补回分析」，否则只能等明天那轮。"""
+        self.assertIn("regenerate:", self.text)
+        self.assertIn('inputs.regenerate', self.text)
+        self.assertIn("--no-seen", self.text)
+
     def test_cli_rejects_unknown_layer(self):
         argv = fetch_news.parse_args(["--providers", "direct,瞎写的层"])
         self.assertIn("瞎写的层", argv.providers)      # 解析这一层不做判断，main 才校验
