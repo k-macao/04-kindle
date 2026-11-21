@@ -1065,3 +1065,122 @@ class SectorTextLayoutTest(unittest.TestCase):
         long_name = short("汽车服务及其他")
         self.assertTrue(long_name.endswith("…"))
         self.assertLessEqual(build_stocks._display_width(long_name), 14)
+
+
+class WeekendBriefModeTest(unittest.TestCase):
+    """周末与法定节假日出精简版；工作日（含盘前、收盘后、抓取延迟）保留完整版。"""
+
+    def _bj_ms(self, text):
+        from datetime import datetime, timedelta, timezone
+        dt = datetime.strptime(text, "%Y-%m-%d %H:%M:%S").replace(tzinfo=timezone.utc)
+        return int((dt - timedelta(hours=8)).timestamp() * 1000)
+
+    def _full_payload(self):
+        import market_watchlist as mw
+        broad = [
+            {"thscode": code, "name": name, "last_price": 3000.0 + i * 10,
+             "price_change": 5.0, "price_change_ratio_pct": round((i % 5) - 2, 2),
+             "turnover": 2e11, "is_sector": False}
+            for i, (code, name) in enumerate(mw.INDICES)
+        ]
+        sectors = [
+            {"thscode": code, "name": name, "last_price": 1000.0 + i,
+             "price_change": 1.0, "price_change_ratio_pct": round((i % 20) - 10, 2),
+             "turnover": 5e9, "is_sector": True}
+            for i, (code, name) in enumerate(mw.SECTORS)
+        ]
+        limit_up = [
+            {"thscode": f"6000{i:02d}.SH", "name": f"样本{i:02d}",
+             "last_price": 10.0 + i, "limit_up_time": "09:35:00",
+             "limit_up_reason": "光刻胶+半导体" if i < 11 else ("算力租赁" if i < 15 else "机器人"),
+             "continue_day_text": "2连板", "seal_money": 1e8}
+            for i in range(20)
+        ]
+        return {
+            "demo": False,
+            "data_timestamp": self._bj_ms("2026-11-20 15:05:00"),
+            "market": {"total": 5584, "up": 1200, "down": 4200, "flat": 184,
+                       "unpriced": 0, "limit_up": 27, "limit_down": 84,
+                       "avg_ratio": -1.85, "turnover": 1.31e12, "volume": 9e10},
+            "indices": broad + sectors,
+            "hk": {"data_timestamp": self._bj_ms("2026-11-20 15:02:00"),
+                   "data_time": "2026-11-20T07:02:00Z", "rows": []},
+            "limit_up": limit_up,
+        }
+
+    def test_triggers_only_on_weekends_and_statutory_holidays(self):
+        payload = self._full_payload()
+        # 周六 / 周日 → 周末休市
+        self.assertEqual(
+            build_stocks.brief_reason(payload, self._bj_ms("2026-11-21 10:00:00")),
+            "周末休市")
+        self.assertEqual(
+            build_stocks.brief_reason(payload, self._bj_ms("2026-11-22 21:00:00")),
+            "周末休市")
+        # 法定节假日（2026 国庆周四）→ 节假日休市
+        self.assertEqual(
+            build_stocks.brief_reason(payload, self._bj_ms("2026-10-01 10:30:00")),
+            "节假日休市")
+        # 工作日盘前 / 盘中 / 午休 / 收盘后 → 一律完整版（空串）
+        for stamp in ("2026-11-20 08:30:00", "2026-11-20 10:30:00",
+                      "2026-11-20 12:15:00", "2026-11-20 16:00:00",
+                      "2026-11-20 22:30:00", "2026-11-23 09:00:00"):
+            self.assertEqual(
+                build_stocks.brief_reason(payload, self._bj_ms(stamp)), "",
+                f"{stamp} 不该触发精简版")
+        # 哪怕工作日抓取断了一整天（数据还是两天前的），也不能把故障当节假日藏起来
+        self.assertEqual(
+            build_stocks.brief_reason(payload, self._bj_ms("2026-11-24 14:00:00")),
+            "")
+
+    def test_brief_trims_txt_and_epub_while_json_stays_full(self):
+        import market_watchlist as mw
+        payload = self._full_payload()
+        brief = build_stocks.brief_view(payload, self._bj_ms("2026-11-21 12:00:00"))
+        self.assertIsNotNone(brief)
+        full_txt = build_stocks.render_txt(payload, "2026-11-20 15:10:00", brief=None)
+        brief_txt = build_stocks.render_txt(payload, "2026-11-21 12:00:00", brief=brief)
+        # 13 个宽基指数一行不少
+        for _code, name in mw.INDICES:
+            self.assertIn(name, brief_txt)
+        # 板块压缩为抗跌前 5 + 杀跌前 5，明确写出剩余 81 个去哪看
+        self.assertIn("精简：抗跌前 5 / 杀跌前 5", brief_txt)
+        self.assertIn("其余 81 个板块见 stocks.html", brief_txt)
+        # 涨停池只留条数 + 题材分布，不再逐只打印样本股票名
+        self.assertIn("【涨停池】20 · 按题材（只数）", brief_txt)
+        self.assertIn("半导体材料/封测/存储 11", brief_txt)
+        self.assertNotIn("样本00", brief_txt)
+        self.assertIn("样本00", full_txt)
+        # 行数明显缩短（完整版 > 110 行，精简版 <= 65 行）
+        self.assertGreater(len(full_txt.splitlines()), 110)
+        self.assertLessEqual(len(brief_txt.splitlines()), 65)
+        # EPUB 同样精简，且 JSON 清单保留全量 91 个板块与 20 只涨停
+        xhtml = build_stocks.render_epub_xhtml(payload, "2026-11-21 12:00:00", brief=brief)
+        self.assertIn("精简：抗跌前 5 / 杀跌前 5", xhtml)
+        self.assertIn("涨停池（20）· 按题材", xhtml)
+        self.assertNotIn("样本00", xhtml)
+        data = build_stocks.manifest(payload, "2026-11-21T04:00:00Z", view=brief)
+        self.assertEqual(data["counts"]["sectors"], 91)
+        self.assertEqual(data["counts"]["limit_up"], 20)
+        self.assertEqual(len(data["limit_up"]), 20)
+        self.assertEqual(data["view"]["mode"], "brief")
+        self.assertEqual(data["view"]["themes"][0]["name"], "半导体材料/封测/存储")
+        self.assertEqual(data["view"]["themes"][0]["count"], 11)
+        # 完整版与精简版的 data_hash 不同，确保周六零点会提交一次版式切换
+        full_data = build_stocks.manifest(payload, "2026-11-20T08:00:00Z", view=None)
+        self.assertNotEqual(data["data_hash"], full_data["data_hash"])
+
+    def test_build_and_check_enforce_brief_consistency(self):
+        payload = self._full_payload()
+        with tempfile.TemporaryDirectory() as tmp:
+            data_path = Path(tmp) / "stocks_data.json"
+            data_path.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
+            out = Path(tmp) / "site"
+            build_stocks.build(str(data_path), str(out), view="brief")
+            self.assertEqual(build_stocks.check(str(out)), [])
+            # 清单标了精简版，但文本被换回完整版 → 自检报错
+            (out / "stocks.txt").write_text(
+                build_stocks.render_txt(payload, "2026-11-21 12:00:00", brief=None),
+                encoding="utf-8")
+            problems = build_stocks.check(str(out))
+            self.assertTrue(any("周末精简版" in item for item in problems))

@@ -827,6 +827,16 @@ def _index_spread(indices):
     return {}
 
 
+def limit_up_themes(limit_up, limit=None):
+    """涨停题材聚合（对外入口）：``[{"name","count","examples"}, …]``，按条数降序。
+
+    横截面段落与「周末精简版」的涨停池都用它：周末只写「题材分布」，
+    不再把 20 只票逐只列一遍。
+    """
+    ordered = _cross_themes(limit_up)
+    return ordered if limit is None else ordered[:limit]
+
+
 def _cross_themes(limit_up):
     """涨停题材聚合：赚钱效应集中在哪条链上（粗分类，只做线索）。"""
     groups = {}

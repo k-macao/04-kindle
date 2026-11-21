@@ -139,8 +139,31 @@ def row_is_empty(row):
                for key in ("last_price", "open_price", "high_price", "low_price"))
 
 
+# A 股法定节假日休市日（北京时间 YYYY-MM-DD，只列周一至周五；周末本身已走 weekday>=5）。
+# 为什么不用「数据超过一天没更新」来猜节假日：抓取一旦因为网络/配额停了一天，
+# 工作日也会被误判成节假日而切到精简版——把故障藏成了「休市」。
+CN_HOLIDAYS = frozenset({
+    # 2026（元旦、春节、清明、劳动节、端午、中秋、国庆）
+    "2026-01-01", "2026-01-02",
+    "2026-02-16", "2026-02-17", "2026-02-18", "2026-02-19", "2026-02-20", "2026-02-23",
+    "2026-04-06",
+    "2026-05-01", "2026-05-04", "2026-05-05",
+    "2026-06-19",
+    "2026-09-25",
+    "2026-10-01", "2026-10-02", "2026-10-05", "2026-10-06", "2026-10-07",
+    # 2027（元旦、春节、清明、劳动节、端午、中秋、国庆）
+    "2027-01-01",
+    "2027-02-05", "2027-02-08", "2027-02-09", "2027-02-10", "2027-02-11", "2027-02-12",
+    "2027-04-05",
+    "2027-05-03", "2027-05-04", "2027-05-05",
+    "2027-06-09",
+    "2027-09-15",
+    "2027-10-01", "2027-10-04", "2027-10-05", "2027-10-06", "2027-10-07",
+})
+
+
 def session_label(data_ms):
-    """北京时间 → 盘中 / 午休 / 未开盘 / 已收盘；不知道就返回空串。
+    """北京时间 → 盘中 / 午休 / 未开盘 / 已收盘 / 周末休市 / 节假日休市；不知道就返回空串。
 
     午休单列出来：11:45 抓到的那份快照，成交量跟 11:30 一模一样，标成「盘中」
     会让人以为行情还在动。
@@ -151,6 +174,8 @@ def session_label(data_ms):
     minutes = beijing_dt.hour * 60 + beijing_dt.minute
     if beijing_dt.weekday() >= 5:
         return "周末休市"
+    if beijing_dt.strftime("%Y-%m-%d") in CN_HOLIDAYS:
+        return "节假日休市"
     if minutes < SESSION_START_MIN:
         return "未开盘"
     if minutes > SESSION_END_MIN:
@@ -226,10 +251,119 @@ def status_line(payload, now_ms=None):
     text = " · ".join(parts)
     if is_stale(data_ms, now_ms):
         text += f" · STALE 超过 {STALE_MINUTES} 分钟没更新（定时任务可能被延迟，见 docs）"
-    elif label in ("已收盘", "周末休市"):
+    elif label in ("已收盘", "周末休市", "节假日休市"):
         # 收盘后数据本来就不再变，别让人以为「时间没跟上」。
         text += "（收盘后不再更新）"
     return text
+
+
+# ---------------------------------------------------------------------------
+# 周末精简版：不在交易、也没有新行情时，面板不该再把 91 个板块、13 个指数、
+# 20 只涨停逐条排列一遍。周末翻 Kindle 的人要的是「上周怎么收的、周一先看什么」，
+# 而不是把周五那张表再读第三遍。
+#
+# 规则（与用户确认过的口径）：
+#   · 指数全留（13 行，是「往哪儿躲」的坐标系）；
+#   · 板块只留抗跌前 5 / 杀跌前 5，其余换成一行「见 stocks.html」；
+#   · 涨停池只留条数 + 题材分布（谁涨停了不必在周末背）；
+#   · RRG / 横截面只留抬头 + 前两三句结论；
+#   · JSON 不动（网页、插件、检查脚本读的是全量数据）。
+# ---------------------------------------------------------------------------
+
+BRIEF_SECTOR_ROWS = 5        # 抗跌前 N / 杀跌前 N
+
+def brief_reason(payload=None, now_ms=None):
+    """要不要出「周末精简版」，返回原因（空串＝完整版）。
+
+    只在**周末**与**法定节假日**触发；工作日的盘前、盘中、午休、收盘后一律保留完整版
+    （演示数据默认也走完整版，除非手动传 ``--brief``）。
+    """
+    if (payload or {}).get("demo"):
+        return ""
+    now_ms = (now_ms if isinstance(now_ms, (int, float))
+              else int(datetime.now(timezone.utc).timestamp() * 1000))
+    beijing = datetime.fromtimestamp(now_ms / 1000, tz=timezone.utc) + timedelta(hours=8)
+    if beijing.weekday() >= 5:
+        return "周末休市"
+    if beijing.strftime("%Y-%m-%d") in CN_HOLIDAYS:
+        return "节假日休市"
+    return ""
+
+
+def _generated_ms(generated):
+    """把 manifest 的 generated（UTC ISO 或北京时间串）转成毫秒时间戳；解析不出就用当前时间。"""
+    if isinstance(generated, (int, float)):
+        return int(generated)
+    text = str(generated or "").strip()
+    for fmt, is_utc in (("%Y-%m-%dT%H:%M:%SZ", True), ("%Y-%m-%d %H:%M:%S", False)):
+        try:
+            dt = datetime.strptime(text, fmt).replace(tzinfo=timezone.utc)
+            if not is_utc:
+                dt = dt - timedelta(hours=8)
+            return int(dt.timestamp() * 1000)
+        except ValueError:
+            continue
+    return None
+
+
+def brief_view(payload, now_ms=None, mode=None):
+    """精简版的清单字段；返回 None 表示出完整版。
+
+    :param mode: ``None`` 自动、``"brief"`` 强制精简、``"full"`` 强制完整
+                 （节假日想手动切，或想看一眼完整版时用）。
+    """
+    if mode == "full":
+        return None
+    reason = "手动指定" if mode == "brief" else brief_reason(payload, now_ms)
+    if not reason:
+        return None
+    data_ms = (payload or {}).get("data_timestamp")
+    return {
+        "mode": "brief",
+        "reason": reason,
+        "as_of": beijing_text(data_ms, "%Y-%m-%d") if isinstance(data_ms, (int, float)) else None,
+        "sector_rows": BRIEF_SECTOR_ROWS,
+        # 涨停题材分布：网页直接用这份，免得 JS 再抄一遍关键词表（口径只有一份）
+        "themes": sector_rrg.limit_up_themes((payload or {}).get("limit_up") or []),
+    }
+
+
+def _wrap_cells(cells, width=46, indent="  "):
+    """把若干短句用 ` · ` 连起来并按显示宽度折行；折行处不留下悬空的分隔符。"""
+    lines, current = [], ""
+    for cell in cells:
+        candidate = f"{current} · {cell}" if current else cell
+        if current and _display_width(indent + candidate) > width:
+            lines.append(indent + current)
+            current = cell
+        else:
+            current = candidate
+    if current:
+        lines.append(indent + current)
+    return lines
+
+
+def brief_banner(brief, sector_total=0):
+    """精简版开头那一行：说清楚删了什么、完整版在哪。"""
+    if not brief:
+        return ""
+    rest = max(0, sector_total - 2 * int(brief.get("sector_rows") or BRIEF_SECTOR_ROWS))
+    tail = f"，其余 {rest} 个板块见 stocks.html" if rest else ""
+    return (f"【周末精简版 · {brief.get('reason')}】指数全留；板块只列抗跌/杀跌各 "
+            f"{brief.get('sector_rows') or BRIEF_SECTOR_ROWS} 个{tail}；"
+            "涨停池只留条数与题材；分析段只留结论")
+
+
+def limit_up_theme_text(limit_up, limit=4):
+    """涨停池的题材分布：`半导体材料/封测/存储 11只 · 算力… 3只 · 其他 4只`。"""
+    groups = sector_rrg.limit_up_themes(limit_up)
+    if not groups:
+        return ""
+    cells = [f"{group['name']} {group['count']}" for group in groups[:limit]]
+    rest = sum(group["count"] for group in groups[limit:])
+    if rest:
+        cells.append(f"{sector_rrg.THEME_OTHER} {rest}")
+    return " · ".join(cells)
 
 
 def fmt_price(value):
@@ -377,12 +511,24 @@ def rrg_section(payload):
 
 
 def cross_section(payload):
-    """取出可用的单日横截面段落（RRG 的降级口径）；没有就返回空 dict。"""
+    """取出可用的单日横截面段落（RRG 的降级口径）；没有就现算（仍不够则空 dict）。
+
+    旧清单（或只抓了快照、没写 ``sector_cross`` 的文件）里已经有 91 个板块和涨停池，
+    重排时直接现算一份，免得面板最后一段空着。
+    """
     for key in ("sector_cross", "cross"):
         section = payload.get(key)
         if isinstance(section, dict) and section.get("counts"):
             return section
-    return {}
+    if rrg_section(payload):
+        return {}
+    indices = payload.get("indices") or []
+    data_ms = payload.get("data_timestamp")
+    as_of = beijing_text(data_ms, "%Y-%m-%d") if isinstance(data_ms, (int, float)) else None
+    section, _notes = sector_rrg.build_cross_section(
+        indices, market=payload.get("market"), indices=indices,
+        limit_up=payload.get("limit_up"), as_of=as_of)
+    return section or {}
 
 
 def final_sections(payload):
@@ -445,8 +591,25 @@ def rrg_quadrant_line(section, quadrant, limit=6):
     return f"{sector_rrg.QUADRANTS[quadrant]}({len(rows)}) " + " · ".join(cells) + extra
 
 
-def render_rrg_text(section):
-    """RRG 段落的纯文本版（Kindle 面板最后一段）。"""
+BRIEF_NARRATIVE_LINES = 2        # 精简版留几条结论（每条只留第一句）
+
+
+def _first_sentences(items, limit=BRIEF_NARRATIVE_LINES):
+    """取前几条结论，每条只留第一句——「只留两三句结论」不是「只留三段」。"""
+    picked = []
+    for text in list(items or [])[:limit]:
+        sentence = str(text).split("。")[0].strip()
+        if sentence:
+            picked.append(sentence + "。")
+    return picked
+
+
+def render_rrg_text(section, brief=None):
+    """RRG 段落的纯文本版（Kindle 面板最后一段）。
+
+    ``brief``：只留抬头、象限分布与前 ``BRIEF_NARRATIVE_LINES`` 句结论，
+    逐象限名单与出处折叠成一行提示。
+    """
     rows = section.get("rows") or []
     counts = section.get("counts") or {}
     source = section.get("source") or {}
@@ -456,7 +619,14 @@ def render_rrg_text(section):
     lines.append(f"  象限 领先 {counts.get('leading', 0)} · 改善 {counts.get('improving', 0)}"
                  f" · 滞后 {counts.get('lagging', 0)} · 疲软 {counts.get('weakening', 0)}"
                  " · 依次按轮动顺序（领先→疲软→滞后→改善）")
-    for text in section.get("narrative") or []:
+    narrative = section.get("narrative") or []
+    if brief:
+        for text in _first_sentences(narrative):
+            lines.extend(_wrap_display(text, width=46, indent="  "))
+        lines.append(f"  逐象限名单（{len(rows)} 个板块）与信号名单见 stocks.html")
+        lines.append(f"  策略 GitHub {source.get('repo')} · 研报口径「仅信息展示，不构成投资建议」")
+        return lines
+    for text in narrative:
         lines.extend(_wrap_display(text, width=46, indent="  "))
     for quadrant in (1, 2, 4, 3):
         line = rrg_quadrant_line(section, quadrant)
@@ -467,8 +637,12 @@ def render_rrg_text(section):
     return lines
 
 
-def render_cross_text(section):
-    """横截面段落的纯文本版（没有日 K 时顶替 RRG 那一段）。"""
+def render_cross_text(section, brief=None):
+    """横截面段落的纯文本版（没有日 K 时顶替 RRG 那一段）。
+
+    ``brief``：抬头 + 中位数/离散度 + 前几句结论 + 抗跌/杀跌各 3 个，
+    分布条、成交额占比与题材分布都省掉（周末看这些翻不出新东西）。
+    """
     counts = section.get("counts") or {}
     stats = section.get("stats") or {}
     market = section.get("market") or {}
@@ -480,6 +654,19 @@ def render_cross_text(section):
             f" · 离散度 {stats.get('std', 0):.2f}")
     # 全 A 的涨跌家数/涨跌停在下面的读数里已经讲了，抬头不重复（Kindle 一屏很贵）
     lines.append(head)
+
+    if brief:
+        # 抗跌/杀跌前 5 在上面【板块】段已经列过，题材分布在【涨停池】段也列过；
+        # 这里只留「为什么这么走」的两三句结论（优先挑带 `→` 的判断句）。
+        raw = list(section.get("narrative") or [])
+        verdicts = [item for item in raw if "→" in str(item)] or raw
+        for text in _first_sentences(verdicts, limit=3):
+            lines.extend(_wrap_display(text, width=46, indent="  "))
+        if section.get("why"):
+            lines.extend(_wrap_display(f"为什么是横截面：{section['why']}。",
+                                       width=46, indent="  "))
+        lines.append("  分布条、成交额占比与完整读数见 stocks.html")
+        return lines
 
     bins = [f"{item['label']} {item['count']}" for item in section.get("bins") or []
             if item.get("count")]
@@ -528,11 +715,18 @@ def render_cross_text(section):
     return lines
 
 
-def data_hash(payload):
-    """行情指纹：价格/涨跌幅/条数/历史收盘变了才变，供工作流跳过无变化的提交。"""
+def data_hash(payload, view=None):
+    """行情指纹：价格/涨跌幅/条数/历史收盘变了才变，供工作流跳过无变化的提交。
+
+    ``view``（周末精简版）也算进去：周五收盘到周六零点行情一点没变，但版式要从
+    完整版换成精简版——不进指纹的话这一步永远不会被提交，设备上就一直是完整版。
+    """
     history = payload.get("history") or {}
     rrg_part, cross_part = final_sections(payload)
+    mode = (view.get("mode") if isinstance(view, dict)
+            else ("brief" if view == "brief" else "full"))
     core = {
+        "view": mode or "full",
         "indices": [(r.get("thscode"), r.get("last_price"),
                      r.get("price_change_ratio_pct")) for r in payload.get("indices") or []],
         # 全市场只留统计口径：5584 只逐只价格进 hash 会让收盘后每轮都变，反而刷空提交
@@ -561,8 +755,12 @@ def data_hash(payload):
     return hashlib.sha256(raw.encode("utf-8")).hexdigest()[:16]
 
 
-def manifest(payload, generated):
+def manifest(payload, generated, view=None):
     rrg_part, cross_part = final_sections(payload)
+    if isinstance(view, dict):
+        brief = view
+    else:
+        brief = brief_view(payload, now_ms=_generated_ms(generated), mode=view)
     data_ms = payload.get("data_timestamp")
     data_time = None
     if isinstance(data_ms, (int, float)):
@@ -579,8 +777,11 @@ def manifest(payload, generated):
         "data_timestamp": data_ms if isinstance(data_ms, (int, float)) else None,
         "data_time": data_time,
         "data_time_kind": "exact" if data_time else None,
-        "data_hash": data_hash(payload),
+        "data_hash": data_hash(payload, view=brief),
         "demo": bool(payload.get("demo")),
+        # 版式：完整版是 null；周末/节假日是 {"mode": "brief", "reason": …}。
+        # 网页与插件据此出精简版，JSON 里的数据仍是全量。
+        "view": brief,
         "counts": {
             "indices": len(core_indices(payload)),
             "sectors": len(sector_indices(payload)),
@@ -628,10 +829,13 @@ def _hk_manifest(payload):
     return out
 
 
-def render_txt(payload, generated):
+def render_txt(payload, generated, brief=None):
     """Kindle 纯文本版：一屏卡片式监视器（市场概览 → 指数 → 板块 → 港股 → RRG）。
 
     不再有「自选股」：面板看的是全市场（指数/板块/涨跌家数/量价）+ 港股。
+
+    ``brief`` 是「周末精简版」（见 brief_view）：指数全留、板块只留抗跌/杀跌各
+    N 个、涨停池只留条数与题材、分析段只留结论。JSON 里的数据一条不少。
     """
     lines = [TITLE]
     demo = "【演示数据】" if payload.get("demo") else ""
@@ -639,6 +843,8 @@ def render_txt(payload, generated):
     lines.append(f"每{SERVER_MINUTES}分钟刷新 · 每{poll_text()}检查 · {DISCLAIMER}")
     if not today_has_values(payload):
         lines.append("注：这一版快照没有成交数据（开盘前/接口给空壳），下面显示 -- 与「未成交」")
+    if brief:
+        lines.append(brief_banner(brief, len(sector_indices(payload))))
     lines.append("")
 
     market = payload.get("market") or {}
@@ -677,13 +883,27 @@ def render_txt(payload, generated):
 
     if sectors:
         up = sum(1 for r in sectors if (r.get("price_change_ratio_pct") or 0) > 0)
-        lines.append(f"【板块】{len(sectors)} · 涨 {up} 跌 {len(sectors) - up} · 按涨跌幅")
-        cells = [index_line(r, compact=True) for r in sectors]
-        col_w = max(_display_width(c) for c in cells) + 3
-        for i in range(0, len(cells), 2):
-            right = cells[i + 1] if i + 1 < len(cells) else ""
-            lines.append((_pad_display(cells[i], col_w) + right).rstrip())
-        lines.append("")
+        if brief:
+            # 周末只留两端：抗跌前 N（跌得最少）与杀跌前 N（跌得最狠）。
+            rows = int(brief.get("sector_rows") or BRIEF_SECTOR_ROWS)
+            head_rows = sectors[:rows]
+            tail_rows = list(reversed(sectors[-rows:])) if len(sectors) > rows else []
+            lines.append(f"【板块】{len(sectors)} · 涨 {up} 跌 {len(sectors) - up}"
+                         f" · 精简：抗跌前 {rows} / 杀跌前 {rows}")
+            for row in head_rows + tail_rows:
+                lines.append(index_line(row))
+            rest = len(sectors) - len(head_rows) - len(tail_rows)
+            if rest > 0:
+                lines.append(f"  其余 {rest} 个板块见 stocks.html（JSON 里是全量）")
+            lines.append("")
+        else:
+            lines.append(f"【板块】{len(sectors)} · 涨 {up} 跌 {len(sectors) - up} · 按涨跌幅")
+            cells = [index_line(r, compact=True) for r in sectors]
+            col_w = max(_display_width(c) for c in cells) + 3
+            for i in range(0, len(cells), 2):
+                right = cells[i + 1] if i + 1 < len(cells) else ""
+                lines.append((_pad_display(cells[i], col_w) + right).rstrip())
+            lines.append("")
 
     hk = payload.get("hk") or {}
     hk_rows = hk.get("rows") or []
@@ -710,7 +930,17 @@ def render_txt(payload, generated):
         lines.append("")
 
     limit_up = payload.get("limit_up") or []
-    if limit_up:
+    if limit_up and brief:
+        themes = limit_up_theme_text(limit_up)
+        lines.append(f"【涨停池】{len(limit_up)} · 按题材（只数）")
+        if themes:
+            wrapped = _wrap_cells(themes.split(" · "), width=44, indent="  ")
+            wrapped[0] = "  题材 " + wrapped[0].strip()
+            lines.extend(wrapped)
+        else:
+            lines.append("  接口没给涨停原因，题材分布这一轮算不出")
+        lines.append("")
+    elif limit_up:
         lines.append(f"【涨停池】{len(limit_up)} · 按封板时间")
         for row in limit_up:
             name = row.get("name") or row.get("thscode") or ""
@@ -723,15 +953,16 @@ def render_txt(payload, generated):
                          f"{fmt_ratio(row.get('price_change_ratio_pct'))} {extra}".rstrip())
         lines.append("")
 
-    # 最后一段：板块轮动 RRG；日 K 不够时换成单日横截面（见 tools/sector_rrg.py）
+    # 最后一段：板块轮动 RRG；日 K 不够时换成单日横截面（见 tools/sector_rrg.py）。
+    # 周末精简版只留抬头与前两三句结论——象限清单/分布表在周末翻不出新东西。
     section = rrg_section(payload)
     if section:
-        lines.extend(render_rrg_text(section))
+        lines.extend(render_rrg_text(section, brief=brief))
         lines.append("")
     else:
         cross = cross_section(payload)
         if cross:
-            lines.extend(render_cross_text(cross))
+            lines.extend(render_cross_text(cross, brief=brief))
             lines.append("")
 
     for error in payload.get("errors") or []:
@@ -1102,8 +1333,9 @@ esc(['','领先','改善','滞后','疲软'][r.prev_quadrant]):'--')+'</td></tr>
 return h+'</table>';}
 // 单日横截面（RRG 的降级口径）：没有日 K 时至少把「普涨/普跌、量价、题材」
 // 三件事讲清楚，而不是让面板最后一段整块消失。
-function crossSection(g){
+function crossSection(g,brief){
 if(!g||!g.counts)return '';
+var NARR=brief?3:999;
 var c=g.counts||{},st=g.stats||{},mk=g.market||{},list=[],i;
 var maxBin=1;
 (g.bins||[]).forEach(function(b){if(b.count>maxBin)maxBin=b.count;});
@@ -1128,7 +1360,10 @@ var w=maxBin?Math.round(100*b.count/maxBin):0;
 h+='<div class="row"><span class="k">'+esc(b.label)+'</span><span class="b">'+
 '<i style="width:'+w+'%"></i></span><span class="n">'+b.count+'</span></div>';});
 h+='</div>';}
-h+='<div class="rrg-read">'+(g.narrative||[]).map(function(t){return '<p>'+esc(t)+'</p>';}).join('')+'</div>';
+h+='<div class="rrg-read">'+(g.narrative||[]).slice(0,NARR).map(function(t){return '<p>'+esc(t)+'</p>';}).join('')+'</div>';
+if(brief){
+h+='<p class="src">周末精简版：涨跌分布条、成交额占比与涨停题材见完整版面板（刷新页面即恢复）。</p>';
+return h+'</section>';}
 function sideBlock(title,rows){
 if(!rows||!rows.length)return '';
 var out='<div><div class="k">'+esc(title)+'</div>';
@@ -1156,7 +1391,7 @@ h+='<p class="src">口径：单日快照的横截面统计（涨跌分布 / 量�
 '<b>不是 RRG</b>——RRG 要 89 根以上板块日 K，日 K 够了面板会自动换回四象限。'+
 (g.why?'<br>这一轮：'+esc(g.why)+'。':'')+'</p>';
 return h+'</section>';}
-function rrgSection(g){
+function rrgSection(g,brief){
 var rows=g.rows||[];
 if(!rows.length)return '';
 var c=g.counts||{},src=g.source||{},names=['领先','改善','滞后','疲软'];
@@ -1170,9 +1405,9 @@ names.forEach(function(name,i){
 h+='<div class="cell"><div class="k">'+name+'</div><div class="v">'+(c[keys[i]]||0)+
 '</div><div class="s">'+defs[i]+'</div></div>';});
 h+='</div>';
-h+='<div class="rrg-read">'+(g.narrative||[]).map(function(t){
+h+='<div class="rrg-read">'+(g.narrative||[]).slice(0,brief?3:999).map(function(t){
 return '<p>'+esc(t)+'</p>';}).join('')+'</div>';
-h+=rrgTable(g);
+if(!brief)h+=rrgTable(g);
 h+='<p class="src">基准 '+esc(g.benchmark||'')+' · '+esc(String((g.params||{}).lookback_ratio||''))+
 '/'+esc(String((g.params||{}).lookback_mom||''))+'/'+esc(String((g.params||{}).smooth_window||''))+
 ' 参数 · '+esc(String(g.samples||0))+' 根日 K<br>策略：GitHub '+esc(src.repo||'')+' · '+
@@ -1180,6 +1415,7 @@ esc(src.file||'')+'（'+esc(src.signal||'')+'）<br>研报：'+esc(src.report||'
 return h+'</section>';}
 function render(d){
 var h='';
+var brief=!!(d.view&&d.view.mode==='brief');
 // 一屏监视：市场概览 → 宽基 → 板块 → 港股 → 涨停池 → 板块轮动 RRG（或降级的横截面）
 if(d.market){h+='<section><h2>市场概览 · 全 A</h2>'+breadth(d.market)+'</section>';}
 var idx=(d.indices||[]),broad=[],sectors=[];
@@ -1190,8 +1426,17 @@ broad.forEach(function(r){h+=card(r,d,true);});h+='</div></section>';}
 if(sectors.length){
 var sorted=sectors.slice().sort(function(a,b){
 return (b.price_change_ratio_pct||-999)-(a.price_change_ratio_pct||-999);});
+if(brief){
+var n=(d.view&&d.view.sector_rows)||5;
+var ends=sorted.slice(0,n).concat(sorted.slice(-n));
+h+='<section><h2>板块（'+sectors.length+'）<span class="muted"> 精简：抗跌前 '+n+
+' / 杀跌前 '+n+'</span></h2><div class="cards sector">';
+ends.forEach(function(r){h+=sectorCard(r);});h+='</div><p class="src">其余 '+
+Math.max(0,sectors.length-ends.length)+' 个板块见完整版面板（数据在 stocks.json 里是全量）。</p>';
+h+='</section>';}
+else{
 h+='<section><h2>板块（'+sectors.length+'）· 按涨跌幅</h2><div class="cards sector">';
-sorted.forEach(function(r){h+=sectorCard(r);});h+='</div></section>';}
+sorted.forEach(function(r){h+=sectorCard(r);});h+='</div></section>';}}
 var hkRows=((d.hk||{}).rows||[]);
 if(hkRows.length){
 var hi=[],hs=[];
@@ -1199,19 +1444,27 @@ hkRows.forEach(function(r){if(r.is_index)hi.push(r);else hs.push(r);});
 h+='<section><h2>港股（'+hkRows.length+'）<span class="muted"> 行情 '+
 bj((d.hk||{}).data_time)+'</span></h2><div class="cards hk">';
 hi.concat(hs).forEach(function(r){h+=hkCard(r);});h+='</div></section>';}
-if(d.limit_up&&d.limit_up.length)h+='<section><h2>涨停池（'+d.limit_up.length+
-'）· 按封板时间</h2>'+limitRows(d.limit_up)+'</section>';
+if(d.limit_up&&d.limit_up.length){
+if(brief){
+var themes=(d.view&&d.view.themes)||[];
+h+='<section><h2>涨停池（'+d.limit_up.length+'）· 按题材</h2><div class="themes">';
+themes.forEach(function(t){h+='<span class="chip">'+esc(t.name)+' <b>'+t.count+'</b></span>';});
+h+='</div><p class="src">周末精简版：逐只票的封板时间/原因/连板见完整版面板。</p></section>';}
+else h+='<section><h2>涨停池（'+d.limit_up.length+
+'）· 按封板时间</h2>'+limitRows(d.limit_up)+'</section>';}
 // 最后一段：板块轮动 RRG（策略来自 GitHub hugo2046/QuantsPlaybook）；
 // 板块日 K 不够时退到单日横截面（两者互斥，只显示一个）
-if(d.rrg&&d.rrg.rows&&d.rrg.rows.length)h+=rrgSection(d.rrg);
-else if(d.cross&&d.cross.counts)h+=crossSection(d.cross);
+if(d.rrg&&d.rrg.rows&&d.rrg.rows.length)h+=rrgSection(d.rrg,brief);
+else if(d.cross&&d.cross.counts)h+=crossSection(d.cross,brief);
 (d.errors||[]).forEach(function(e){h+='<p>注：'+esc(e)+'</p>';});
 document.getElementById('main').innerHTML=h||'<p>暂无数据</p>';
 var demo=d.demo?'【演示数据】':'';
+var briefTag=brief?'【周末精简版 · '+((d.view||{}).reason||'')+'】':'';
 var stale=isStale(d.data_time);
 document.getElementById('meta').textContent='生成 '+bj(d.generated)+'（北京时间）· 数据时间 '+
 bj(d.data_time)+(ageText(d.data_time)?' · '+ageText(d.data_time):'')+
 (sessionLabel(d.data_time)?' · '+sessionLabel(d.data_time):'')+(demo?' '+demo:'')+
+(briefTag?' '+briefTag:'')+
 ' · 每'+POLL_TEXT+'检查一次';
 var badge=document.getElementById('state');
 badge.textContent=stale?'STALE':'ONLINE';
@@ -1267,16 +1520,22 @@ def _epub_escape(text):
     return html_mod.escape(str(text if text is not None else ""), quote=True)
 
 
-def render_epub_xhtml(payload, generated_bj):
+def render_epub_xhtml(payload, generated_bj, brief=None):
     """EPUB 章节 XHTML：市场概览 + 宽基 + 板块 + 港股 + 涨停（crengine 友好）。
 
     只用表格和标题，不用 flex/grid/SVG —— Kindle 的 crengine 不支持。
+
+    ``brief`` 是「周末精简版」：板块表只留抗跌/杀跌各 N 行、涨停池只留题材分布、
+    分析段只留结论（与纯文本版同一口径，见 brief_view）。
     """
     esc = _epub_escape
     demo = "【演示数据】" if payload.get("demo") else ""
     parts = [f"<h1>{esc(TITLE)}{esc(demo)}</h1>",
              f'<p class="meta">生成 {esc(generated_bj)} 北京时间 · {esc(status_line(payload))}</p>',
              f'<p class="meta">{esc(DISCLAIMER)}</p>']
+    if brief:
+        parts.append('<p class="meta"><b>'
+                     f'{esc(brief_banner(brief, len(sector_indices(payload))))}</b></p>')
     if not today_has_values(payload):
         parts.append('<p class="meta">注：这一版快照没有成交数据（开盘前/接口给空壳），'
                      '下面显示 -- 与「未成交」，下一轮再看。</p>')
@@ -1336,7 +1595,19 @@ def render_epub_xhtml(payload, generated_bj):
         index_table(broad, "指数")
     if sectors:
         up = sum(1 for r in sectors if (r.get("price_change_ratio_pct") or 0) > 0)
-        index_table(sectors, f"板块 · 涨 {up} 跌 {len(sectors) - up}")
+        if brief:
+            rows = int(brief.get("sector_rows") or BRIEF_SECTOR_ROWS)
+            head_rows = sectors[:rows]
+            tail_rows = list(reversed(sectors[-rows:])) if len(sectors) > rows else []
+            index_table(head_rows + tail_rows,
+                        f"板块 · 涨 {up} 跌 {len(sectors) - up}"
+                        f" · 精简：抗跌前 {rows} / 杀跌前 {rows}")
+            rest = len(sectors) - len(head_rows) - len(tail_rows)
+            if rest > 0:
+                parts.append(f'<p class="meta">其余 {rest} 个板块见网页面板 stocks.html'
+                             "（数据在 stocks.json 里是全量）</p>")
+        else:
+            index_table(sectors, f"板块 · 涨 {up} 跌 {len(sectors) - up}")
 
     hk = payload.get("hk") or {}
     hk_rows = hk.get("rows") or []
@@ -1362,7 +1633,11 @@ def render_epub_xhtml(payload, generated_bj):
         parts.append("</table>")
 
     limit_up = payload.get("limit_up") or []
-    if limit_up:
+    if limit_up and brief:
+        parts.append(f"<h2>涨停池（{len(limit_up)}）· 按题材</h2>")
+        themes = limit_up_theme_text(limit_up)
+        parts.append(f"<p>{esc('题材 ' + themes) if themes else '接口没给涨停原因，题材分布这一轮算不出'}</p>")
+    elif limit_up:
         parts.append(f"<h2>涨停池（{len(limit_up)}）</h2>")
         parts.append('<table class="data"><tr><th>名称</th><th>最新</th><th>涨跌幅</th>'
                      "<th>封板</th><th>原因</th><th>连板</th><th>封单额</th></tr>")
@@ -1389,18 +1664,23 @@ def render_epub_xhtml(payload, generated_bj):
                      f'{counts.get("leading", 0)} · 改善 {counts.get("improving", 0)}'
                      f' · 滞后 {counts.get("lagging", 0)} · 疲软 '
                      f'{counts.get("weakening", 0)}</p>')
-        for text in section.get("narrative") or []:
+        narrative = section.get("narrative") or []
+        for text in (_first_sentences(narrative) if brief else narrative):
             parts.append(f"<p>{esc(text)}</p>")
-        parts.append('<table class="data"><tr><th>板块</th><th>今日</th>'
-                     "<th>RS-Ratio</th><th>RS-Mom</th><th>象限</th></tr>")
-        for row in section["rows"]:
-            parts.append(
-                f"<tr><td>{esc(row.get('name') or row.get('thscode'))}</td>"
-                f"<td>{esc(fmt_ratio(row.get('today_pct')))}</td>"
-                f"<td>{esc(fmt_one(row.get('rs_ratio')))}</td>"
-                f"<td>{esc(fmt_one(row.get('rs_mom')))}</td>"
-                f"<td>{esc(row.get('quadrant_name') or '')}</td></tr>")
-        parts.append("</table>")
+        if brief:
+            parts.append(f'<p class="meta">逐板块的 RS-Ratio / RS-Mom 与信号名单见网页面板 '
+                         f"stocks.html（{len(section['rows'])} 个板块）</p>")
+        else:
+            parts.append('<table class="data"><tr><th>板块</th><th>今日</th>'
+                         "<th>RS-Ratio</th><th>RS-Mom</th><th>象限</th></tr>")
+            for row in section["rows"]:
+                parts.append(
+                    f"<tr><td>{esc(row.get('name') or row.get('thscode'))}</td>"
+                    f"<td>{esc(fmt_ratio(row.get('today_pct')))}</td>"
+                    f"<td>{esc(fmt_one(row.get('rs_ratio')))}</td>"
+                    f"<td>{esc(fmt_one(row.get('rs_mom')))}</td>"
+                    f"<td>{esc(row.get('quadrant_name') or '')}</td></tr>")
+            parts.append("</table>")
         parts.append(f'<p class="meta">策略：GitHub {esc(source.get("repo") or "")} · '
                      f'{esc(source.get("file") or "")}<br>研报 {esc(source.get("report") or "")}</p>')
     else:
@@ -1412,10 +1692,13 @@ def render_epub_xhtml(payload, generated_bj):
             parts.append(f'<p class="meta">单日收盘口径 · 数据 {esc(str(cross.get("as_of") or ""))}'
                          f' · 红 {counts.get("up", 0)} / 绿 {counts.get("down", 0)}'
                          f' · 中位数 {esc(fmt_ratio(stats.get("median")))}</p>')
-            for text in cross.get("narrative") or []:
+            narrative = cross.get("narrative") or []
+            for text in (_first_sentences(narrative) if brief else narrative):
                 parts.append(f"<p>{esc(text)}</p>")
             winners = cross.get("winners") or []
             losers = cross.get("losers") or []
+            if brief:
+                winners, losers = winners[:3], losers[:3]
             if winners or losers:
                 parts.append('<table class="data"><tr><th>' +
                              esc(cross.get("winners_label") or "领涨") +
@@ -1553,6 +1836,10 @@ def check(out_dir):
             problems.append("清单里有 rrg，但 stocks.html 没有板块轮动段")
         if txt_path.is_file() and "板块轮动 · RRG" not in txt_path.read_text(encoding="utf-8"):
             problems.append("清单里有 rrg，但 stocks.txt 没有板块轮动段")
+    view = data.get("view") or {}
+    if view.get("mode") == "brief" and txt_path.is_file():
+        if "【周末精简版" not in txt_path.read_text(encoding="utf-8"):
+            problems.append("清单标了周末精简版，但 stocks.txt 没有精简横幅")
     epub_path = out / "stocks.epub"
     if not epub_path.is_file():
         problems.append("缺少 stocks.epub")
@@ -1670,7 +1957,7 @@ def _previous_payload(out_dir):
     return data if isinstance(data, dict) else None
 
 
-def build(data_path=None, out_dir="site", demo=False, demo_cross=False):
+def build(data_path=None, out_dir="site", demo=False, demo_cross=False, view=None):
     """读 stocks_data.json（或演示数据）→ 写四份产物，返回清单。"""
     if demo_cross:
         # 演示「没有板块日 K 时」的版式：同一批板块，但不给 RRG，走单日横截面
@@ -1719,16 +2006,19 @@ def build(data_path=None, out_dir="site", demo=False, demo_cross=False):
     # 清单里的 generated 与 epub.json 同形（ISO-8601 UTC），只做签名用；
     # 文本面板上显示北京时间文字。
     generated = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    # 周末/节假日出精简版（见 brief_view）；演示数据默认走完整版，
+    # 免得周六看演示时以为板块表本来就只有 10 行。
+    brief = brief_view(payload, mode=("full" if (demo or demo_cross) and view is None else view))
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
-    data = manifest(payload, generated)
+    data = manifest(payload, generated, view=brief)
     (out / "stocks.json").write_text(
         json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     (out / "stocks.txt").write_text(
-        render_txt(payload, now_beijing_text()), encoding="utf-8")
+        render_txt(payload, now_beijing_text(), brief=brief), encoding="utf-8")
     (out / "stocks.html").write_text(render_html(), encoding="utf-8")
     write_epub(out / "stocks.epub",
-               render_epub_xhtml(payload, now_beijing_text()))
+               render_epub_xhtml(payload, now_beijing_text(), brief=brief))
     problems = check(out)
     if problems:
         raise ValueError("产物自检不过：" + "；".join(problems))
@@ -1739,6 +2029,7 @@ def build(data_path=None, out_dir="site", demo=False, demo_cross=False):
           f" / 涨停 {counts['limit_up']}"
           + (f" / RRG {counts['rrg']}" if counts.get("rrg") else "")
           + (f" / 横截面 {counts['cross']}" if counts.get("cross") else "")
+          + (f" / 周末精简版（{brief['reason']}）" if brief else "")
           + f"，hash {data['data_hash']}）")
     return data
 
@@ -1752,9 +2043,15 @@ def main(argv=None):
                         help="用演示数据排版（没 Key 时先看版式）")
     parser.add_argument("--demo-cross", action="store_true",
                         help="演示「没有板块日 K」时的单日横截面版式")
+    view = parser.add_mutually_exclusive_group()
+    view.add_argument("--brief", dest="view", action="store_const", const="brief",
+                      help="强制出周末精简版（板块只留两端、分析只留结论）")
+    view.add_argument("--full", dest="view", action="store_const", const="full",
+                      help="强制出完整版（节假日想翻全表时用）")
     args = parser.parse_args(argv)
     try:
-        build(args.data, args.out, demo=args.demo, demo_cross=args.demo_cross)
+        build(args.data, args.out, demo=args.demo, demo_cross=args.demo_cross,
+              view=args.view)
     except (OSError, ValueError, json.JSONDecodeError) as exc:
         print(f"排版失败：{exc}", file=sys.stderr)
         return 1
