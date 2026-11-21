@@ -427,6 +427,9 @@ https://rsshub.rss.tips, https://rsshub.isrss.com, https://rsshub.cups.moe, http
 - 唯一的例外是 AI 线索分析（`continue-on-error: true`）：接口挂了也照常出 feed，
   但 channel 里写明「本期未生成线索分析」——**新闻的时效比那一层分析重要**，
   而不写这句话的「无分析 feed」是不发的（见 §1.2）；
+- 降级发布之后可以**就地补回来**：手动 dispatch 这个工作流并勾上 `regenerate`，
+  它会用 `--no-seen` 按完整时间窗重抓一遍（不读也不写标题指纹），
+  把当天这份 feed 重新生成、补上线索分析。不勾就跟定时那轮一样，只收没推过的条目；
 - 与小时级报告完全隔离（`concurrency: refresh-news`），报告失败不影响 feed，feed 失败也不动报告产物；
 - 改了抓取/翻译/feed 的代码（`tools/fetch_news.py`、`news_sources.py`、`build_feed.py`、
   `radar_discover.py`、`translate_news.py`、`analyze_news.py`、本工作流）也会跑一次：这种运行带 `--no-seen`，
