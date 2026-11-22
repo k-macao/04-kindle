@@ -1184,3 +1184,60 @@ class WeekendBriefModeTest(unittest.TestCase):
                 encoding="utf-8")
             problems = build_stocks.check(str(out))
             self.assertTrue(any("周末精简版" in item for item in problems))
+
+
+class JrglobalRadarTest(unittest.TestCase):
+    """Jovian Research (jrglobal.xyz/tools/) 聪明钱雷达、AI 数据智库与组合实验室集成测试。"""
+
+    def test_reverse_lookup_by_stock_and_manager(self):
+        import jrglobal_radar
+        # 按股票简称或代码反查谁在持有
+        hits = jrglobal_radar.reverse_lookup("晶合集成")
+        self.assertTrue(hits)
+        self.assertEqual(hits[0]["code"], "688249.SH")
+        mgrs = [h["manager"] for h in hits[0]["holders"]]
+        self.assertIn("谢治宇", mgrs)
+        self.assertIn("乔迁", mgrs)
+
+        by_code = jrglobal_radar.reverse_lookup("300308")
+        self.assertTrue(by_code)
+        self.assertEqual(by_code[0]["name"], "中际旭创")
+        self.assertEqual(by_code[0]["top1_count"], 10)
+
+        # 按基金经理姓名反查重仓股
+        by_mgr = jrglobal_radar.reverse_lookup("金梓才")
+        self.assertGreaterEqual(len(by_mgr), 5)
+        self.assertTrue(any(r["name"] == "三环集团" for r in by_mgr))
+
+    def test_cross_verify_panel_matches_top_gainers_and_renders_all_outputs(self):
+        payload = dict(build_stocks.DEMO_PAYLOAD)
+        payload["market"] = dict(payload["market"], top_gainers=[
+            {"thscode": "688249.SH", "name": "晶合集成", "ratio": 10.26, "last_price": 23.1},
+        ])
+        data = build_stocks.manifest(payload, "2026-11-20T07:20:00Z", view="full")
+        radar = data.get("radar") or {}
+        self.assertEqual(radar.get("report_period"), "Q3 2026")
+        self.assertEqual(len(radar.get("tools") or []), 4)
+        matches = radar.get("panel_matches") or []
+        self.assertEqual(len(matches), 1)
+        self.assertEqual(matches[0]["name"], "晶合集成")
+        self.assertIn("谢治宇", matches[0]["holders_summary"])
+
+        # 纯文本、EPUB、网页三端均包含聪明钱雷达与 AI 数据智库
+        txt = build_stocks.render_txt(payload, "2026-11-20 15:20:00", brief=None)
+        self.assertIn("【聪明钱雷达 & AI 智库】", txt)
+        self.assertIn("盘面反查：晶合集成", txt)
+        self.assertIn("aidata.jrglobal.xyz", txt)
+        self.assertIn("巴菲特", txt)
+
+        xhtml = build_stocks.render_epub_xhtml(payload, "2026-11-20 15:20:00", brief=None)
+        self.assertIn("聪明钱雷达 &amp; AI 数据智库", xhtml)
+        self.assertIn("晶合集成", xhtml)
+        for banned in ("display:grid", "display:flex", "<svg"):
+            self.assertNotIn(banned, xhtml)
+
+        page = build_stocks.render_html()
+        self.assertIn("function radarSection", page)
+        self.assertIn("window.filterRadarStock", page)
+        self.assertIn("jrglobal.xyz/tools/", page)
+

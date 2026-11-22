@@ -38,6 +38,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+import jrglobal_radar  # noqa: E402
 import sector_rrg  # noqa: E402
 
 TITLE = "同花顺行情面板"
@@ -544,6 +545,13 @@ def final_sections(payload):
     return {}, cross_section(payload)
 
 
+def radar_section(payload):
+    """取出或根据当前盘面合成 Jovian Research（jrglobal.xyz/tools/）聪明钱雷达与 AI 数据智库段落。"""
+    existing = payload.get("radar")
+    snap = existing if isinstance(existing, dict) and existing.get("cn_gurus") else None
+    return jrglobal_radar.cross_verify_panel(payload, snapshot=snap)
+
+
 def _wrap_display(text, width=48, indent="  "):
     """按显示宽度折行（CJK 算 2 列），Kindle 上不会被截断。
 
@@ -812,6 +820,8 @@ def manifest(payload, generated, view=None):
         "rrg": rrg_part or None,
         # 日 K 不够时的降级段（两者互斥，同一位置只显示一个）
         "cross": cross_part or None,
+        # Jovian Research (jrglobal.xyz/tools/) 聪明钱雷达 + AI 数据智库 + 组合实验室
+        "radar": radar_section(payload),
         "history": payload.get("history") or {},
         "errors": payload.get("errors") or [],
     }
@@ -977,6 +987,12 @@ def render_txt(payload, generated, brief=None):
         if cross:
             lines.extend(render_cross_text(cross, brief=brief))
             lines.append("")
+
+    # Jovian Research (jrglobal.xyz/tools/) 聪明钱雷达 + AI 数据智库 + 组合实验室
+    radar = radar_section(payload)
+    if radar:
+        lines.extend(jrglobal_radar.render_radar_txt(radar, brief=brief))
+        lines.append("")
 
     for error in payload.get("errors") or []:
         lines.append(f"注：{error}")
@@ -1428,6 +1444,78 @@ h+='<p class="src">基准 '+esc(g.benchmark||'')+' · '+esc(String((g.params||{}
 ' 参数 · '+esc(String(g.samples||0))+' 根日 K<br>策略：GitHub '+esc(src.repo||'')+' · '+
 esc(src.file||'')+'（'+esc(src.signal||'')+'）<br>研报：'+esc(src.report||'')+'</p>';
 return h+'</section>';}
+function radarSection(r,brief){
+if(!r)return '';
+window.__RADAR_INDEX__=r.stock_index||[];
+var h='<section><h2>聪明钱雷达 &amp; AI 数据智库<span class="muted"> Jovian Research · '+
+esc(r.report_period||'Q3 2026')+' · <a href="https://jrglobal.xyz/tools/" target="_blank" rel="noopener" style="color:#000">jrglobal.xyz/tools/</a></span></h2>';
+if((r.cn_categories||[]).length){
+h+='<div class="breadth">';
+r.cn_categories.forEach(function(c){
+h+='<div class="cell"><div class="k">'+esc(c.name)+'</div><div class="v">'+c.count+'</div><div class="s">A股聪明钱</div></div>';});
+h+='<div class="cell"><div class="k">美股 13F 机构</div><div class="v">2381</div><div class="s">SEC 13F-HR</div></div>';
+h+='</div>';}
+if((r.panel_matches||[]).length){
+h+='<div class="rrg-read">';
+r.panel_matches.forEach(function(m){
+h+='<p><b>盘面反查命中：'+esc(m.name)+'（'+esc(m.code)+' '+ratioText(m.today_pct)+' · '+esc(m.panel_source)+'）</b> ← 聪明钱重仓：'+esc(m.holders_summary)+(m.consensus_note?'；'+esc(m.consensus_note):'')+'</p>';});
+h+='</div>';}
+h+='<div style="margin:10px 0;padding:8px 10px;border:2px solid #000;background:#fafafa">'+
+'<label style="font-size:13px;font-weight:bold">股票 / 经理反查（输股票名、代码或基金经理名，反查谁在持有与 Q3 调仓）：</label>'+
+'<input id="radar-q" type="text" placeholder="如：晶合集成 / 中际旭创 / 688249 / 谢治宇 / 金梓才" '+
+'oninput="window.filterRadarStock(this.value)" '+
+'style="margin-left:6px;padding:4px 8px;border:1px solid #000;font-size:13px;width:280px;max-width:100%">'+
+'<div id="radar-results" style="margin-top:6px;font-size:12.5px"></div></div>';
+if((r.cn_top1_consensus||[]).length){
+h+='<div class="two"><div><div class="k">A 股公募顶流「第一重仓」共识榜</div>';
+r.cn_top1_consensus.slice(0,brief?5:10).forEach(function(c){
+h+='<div class="rank"><span><b>'+esc(c.name)+'</b>（'+esc(c.sector)+'）· '+(c.holders||[]).slice(0,3).map(esc).join('、')+'</span><b>'+c.top1_managers+' 人第一重仓</b></div>';});
+h+='</div>';
+if((r.us_13f||[]).length){
+h+='<div><div class="k">美股 13F 大师与主权基金持仓（Q3 2026）</div>';
+r.us_13f.slice(0,brief?5:9).forEach(function(u){
+h+='<div class="rank"><span><b>'+esc(u.name)+'</b> · 第一重仓 '+esc(u.top1)+'</span><b>$'+Number(u.aum_usd_b||0).toFixed(0)+'B ('+(u.gain_pct>=0?'+':'')+Number(u.gain_pct||0).toFixed(1)+'%)</b></div>';});
+h+='</div>';}
+h+='</div>';}
+if(!brief&&(r.cn_gurus||[]).length){
+h+='<table class="limit" style="margin-top:10px"><thead><tr><th>百亿/顶流经理</th><th>机构 · 风格</th><th class="r">规模(亿)</th><th class="r">近1年</th><th>前十大重仓与 Q3 调仓动作（新建 / 加仓 / 减仓）</th></tr></thead><tbody>';
+r.cn_gurus.forEach(function(g){
+var holds=(g.top_holdings||[]).slice(0,6).map(function(x){
+return esc(x.name)+'('+Number(x.value_yi||0).toFixed(1)+'亿·'+esc(x.action||'持有')+')';}).join('、');
+h+='<tr><td><b>'+esc(g.name)+'</b></td><td>'+esc(g.org)+' · '+esc(g.style)+'</td><td class="r">'+Number(g.aum_yi||0).toFixed(1)+'</td><td class="r">+'+Number(g.return_1y_pct||0).toFixed(1)+'%</td><td>'+holds+'</td></tr>';});
+h+='</tbody></table>';}
+var ai=r.ai_data||{};
+if((r.supply_chain_verify||[]).length){
+h+='<div class="rrg-read" style="margin-top:8px">'+(r.supply_chain_verify||[]).map(function(t){return '<p>'+esc(t)+'</p>';}).join('')+'</div>';}
+if(!brief&&(ai.taiwan_semi_2026_10||[]).length){
+h+='<div class="two" style="margin-top:8px"><div><div class="k">台湾半导体算力链月营收（2026-10 · aidata.jrglobal.xyz）</div>';
+ai.taiwan_semi_2026_10.slice(0,6).forEach(function(x){
+h+='<div class="rank"><span>'+esc(x.name)+' · '+esc(x.segment)+'</span><b>'+esc(x.rev)+' (同比 +'+Number(x.yoy_pct||0).toFixed(1)+'%)</b></div>';});
+h+='</div><div><div class="k">组合实验室基准 &amp; 算力集群（portfolio / aidata.jrglobal.xyz）</div>';
+(r.portfolio_benchmarks||[]).forEach(function(b){
+var v=b.return_1y_pct!==null&&b.return_1y_pct!==undefined?('1Y '+(b.return_1y_pct>=0?'+':'')+b.return_1y_pct.toFixed(1)+'%'):('6M +'+Number(b.return_6m_pct||0).toFixed(2)+'%');
+h+='<div class="rank"><span>'+esc(b.name)+'</span><b>'+v+'</b></div>';});
+h+='</div></div>';}
+if((r.tools||[]).length){
+h+='<div class="themes" style="margin-top:8px">';
+r.tools.forEach(function(t){
+h+='<a class="chip" href="'+esc(t.url)+'" target="_blank" rel="noopener" style="color:#000;text-decoration:none"><b>'+esc(t.name)+'</b> · '+esc(t.free)+'</a>';});
+h+='</div>';}
+return h+'</section>';}
+window.filterRadarStock=function(q){
+var box=document.getElementById('radar-results');
+if(!box)return;
+var kw=String(q||'').trim();
+if(!kw){box.innerHTML='<span class="muted">提示：输入股票代码/简称或经理姓名，立即显示持有机构、重仓市值与最新季度加减仓。</span>';return;}
+var ku=kw.toUpperCase(),list=window.__RADAR_INDEX__||[];
+var hits=list.filter(function(item){
+var mgrs=(item.holders||[]).map(function(h){return h.manager||'';}).join(' ');
+return String(item.code||'').toUpperCase().indexOf(ku)>=0||String(item.name||'').indexOf(kw)>=0||String(item.sector||'').indexOf(kw)>=0||mgrs.indexOf(kw)>=0;});
+if(!hits.length){box.innerHTML='未在当前顶流重仓索引中命中「'+esc(kw)+'」，可前往 <a href="https://radar.jrglobal.xyz/stocks/" target="_blank" rel="noopener" style="color:#000">radar.jrglobal.xyz/stocks/</a> 反查全市场 5000+ 只个股。';return;}
+box.innerHTML=hits.slice(0,8).map(function(item){
+var hs=(item.holders||[]).map(function(h){
+return esc(h.manager)+(h.value_yi?'('+Number(h.value_yi).toFixed(1)+'亿·'+esc(h.action||'持有')+')':(h.action?'('+esc(h.action)+')':''));}).join('、');
+return '<div style="padding:3px 0;border-bottom:1px dotted #ccc"><b>'+esc(item.name)+'（'+esc(item.code)+' · '+esc(item.sector||'')+'）</b>：'+hs+(item.consensus_note?' <span class="muted">['+esc(item.consensus_note)+']</span>':'')+'</div>';}).join('');};
 function render(d){
 var h='';
 var brief=!!(d.view&&d.view.mode==='brief');
@@ -1471,6 +1559,7 @@ else h+='<section><h2>涨停池（'+d.limit_up.length+
 // 板块日 K 不够时退到单日横截面（两者互斥，只显示一个）
 if(d.rrg&&d.rrg.rows&&d.rrg.rows.length)h+=rrgSection(d.rrg,brief);
 else if(d.cross&&d.cross.counts)h+=crossSection(d.cross,brief);
+if(d.radar)h+=radarSection(d.radar,brief);
 (d.errors||[]).forEach(function(e){h+='<p>注：'+esc(e)+'</p>';});
 document.getElementById('main').innerHTML=h||'<p>暂无数据</p>';
 var demo=d.demo?'【演示数据】':'';
@@ -1731,6 +1820,10 @@ def render_epub_xhtml(payload, generated_bj, brief=None):
                 parts.append("</table>")
             if cross.get("why"):
                 parts.append(f'<p class="meta">为什么是横截面：{esc(str(cross["why"]))}</p>')
+
+    radar = radar_section(payload)
+    if radar:
+        parts.extend(jrglobal_radar.render_radar_epub(radar, brief=bool(brief), esc=esc))
 
     for error in payload.get("errors") or []:
         parts.append(f'<p class="meta">注：{esc(error)}</p>')
@@ -2023,10 +2116,11 @@ def build(data_path=None, out_dir="site", demo=False, demo_cross=False, view=Non
     generated = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     # 周末/节假日出精简版（见 brief_view）；演示数据默认走完整版，
     # 免得周六看演示时以为板块表本来就只有 10 行。
-    brief = brief_view(payload, mode=("full" if (demo or demo_cross) and view is None else view))
+    effective_mode = "full" if (demo or demo_cross) and view is None else view
+    brief = brief_view(payload, mode=effective_mode)
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
-    data = manifest(payload, generated, view=brief)
+    data = manifest(payload, generated, view=(brief if brief is not None else effective_mode))
     (out / "stocks.json").write_text(
         json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     (out / "stocks.txt").write_text(

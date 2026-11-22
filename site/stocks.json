@@ -1,69 +1,14 @@
 {
-  "generated": "2026-11-22T07:12:59Z",
+  "generated": "2026-11-22T07:32:35Z",
   "doc": "stocks.txt",
   "epub": "stocks.epub",
   "title": "同花顺行情面板",
   "data_timestamp": 1795072642000,
   "data_time": "2026-11-19T07:17:22Z",
   "data_time_kind": "exact",
-  "data_hash": "1d962c79c3d1ae27",
+  "data_hash": "e2aa4772f8d4ffe0",
   "demo": false,
-  "view": {
-    "mode": "brief",
-    "reason": "周末休市",
-    "as_of": "2026-11-19",
-    "sector_rows": 5,
-    "themes": [
-      {
-        "name": "半导体材料/封测/存储",
-        "count": 11,
-        "examples": [
-          "京蓝科技",
-          "兴业股份",
-          "兴欣新材"
-        ]
-      },
-      {
-        "name": "算力/液冷/数据中心",
-        "count": 3,
-        "examples": [
-          "金科股份",
-          "广电电气",
-          "康盛股份"
-        ]
-      },
-      {
-        "name": "机器人",
-        "count": 2,
-        "examples": [
-          "九阳股份",
-          "襄阳轴承"
-        ]
-      },
-      {
-        "name": "新能源/电力设备",
-        "count": 2,
-        "examples": [
-          "原尚股份",
-          "*ST仕净"
-        ]
-      },
-      {
-        "name": "并购重组/国资",
-        "count": 1,
-        "examples": [
-          "*ST西旅"
-        ]
-      },
-      {
-        "name": "其他",
-        "count": 1,
-        "examples": [
-          "红宝丽"
-        ]
-      }
-    ]
-  },
+  "view": null,
   "counts": {
     "indices": 13,
     "sectors": 91,
@@ -2828,6 +2773,2285 @@
       "涨停 20 只里，11 只集中在「半导体材料/封测/存储」（京蓝科技、兴业股份、兴欣新材）；其次 算力/液冷/数据中心 3 只、机器人 2 只——赚钱效应就看这几条链。",
       "隔夜 vs 日内（APM 日内动量拆分）：盘中低开走阳真承接：机场航运（隔夜 +0.19% → 日内 +0.52%，分位 0.74）、有色金属（隔夜 -1.52% → 日内 +0.39%，分位 0.81）；冲高回落/派发预警：半导体（放量长上影，日内 -0.35%，分位 0.28）、通信设备（放量长上影，日内 -2.35%，分位 0.14）、软件开发（高开低走派发，日内 -3.62%，分位 0.11）。",
       "情绪温度 38/100（防守 · 指数托底、个股冰点：宽度 3/25 · 极值 6/25 · 日内承接 13/20 · 连板 10/15 · 封板 6/15）；CCK 横截面绝对偏差 CSAD 0.79，呈同向羊群交易；最高 3 连板（盛剑科技），连板 2 / 首板 18，封单合计 0.84 亿。"
+    ]
+  },
+  "radar": {
+    "as_of": "2026-11-20",
+    "report_period": "Q3 2026",
+    "source": {
+      "name": "Jovian Research · 数据工具",
+      "tools_url": "https://jrglobal.xyz/tools/",
+      "radar_url": "https://radar.jrglobal.xyz/",
+      "portfolio_url": "https://portfolio.jrglobal.xyz/",
+      "macro_url": "https://macro.jrglobal.xyz/",
+      "aidata_url": "https://aidata.jrglobal.xyz/"
+    },
+    "tools": [
+      {
+        "key": "radar",
+        "name": "聪明钱雷达 SmartMoney Radar",
+        "url": "https://radar.jrglobal.xyz/",
+        "summary": "A股八类 11,615 位投资者（公募/牛散/国家队/社保/外资）+ 美股 2,381 家 13F 机构，支持按股票反查持有方与每季调仓",
+        "free": "免费 · 免注册"
+      },
+      {
+        "key": "aidata",
+        "name": "AI 数据智库 AI Data Hub",
+        "url": "https://aidata.jrglobal.xyz/",
+        "summary": "40+ 个每日同步数据集：模型价格、AI 芯片出货、HBM/DRAM 价格、台韩半导体高频硬数据、大厂数据中心 CapEx，提供免费公开 API",
+        "free": "免费 · 免 Key API"
+      },
+      {
+        "key": "portfolio",
+        "name": "组合实验室 Portfolio Lab",
+        "url": "https://portfolio.jrglobal.xyz/",
+        "summary": "5.3 万+资产（A股/ETF/公募/私募/美股）同组合回测与 12 种目标优化（MVO/风险平价/HRP/HERC/防崩盘），每晚更新",
+        "free": "分析优化免登录（保存需访问码）"
+      },
+      {
+        "key": "macro",
+        "name": "宏观看板 Macro Board",
+        "url": "https://macro.jrglobal.xyz/",
+        "summary": "每日早 9 点更新：5,600+ 条宏观序列、411 张图表、中国宏观月度预测、美联储利率预期、15 条国债收益率曲线",
+        "free": "公众号回复「预期差」获取访问码"
+      }
+    ],
+    "cn_categories": [
+      {
+        "name": "公募基金经理",
+        "count": 498
+      },
+      {
+        "name": "牛散",
+        "count": 2363
+      },
+      {
+        "name": "实控人/大股东",
+        "count": 4083
+      },
+      {
+        "name": "私募",
+        "count": 4230
+      },
+      {
+        "name": "外资",
+        "count": 254
+      },
+      {
+        "name": "社保",
+        "count": 99
+      },
+      {
+        "name": "券商",
+        "count": 78
+      },
+      {
+        "name": "国家队",
+        "count": 10
+      }
+    ],
+    "cn_gurus": [
+      {
+        "id": "101001430",
+        "name": "金梓才",
+        "org": "财通基金",
+        "style": "集中持股科技",
+        "aum_yi": 744.51,
+        "holdings_count": 66,
+        "top1": "三环集团",
+        "return_1y_pct": 482.1,
+        "top_holdings": [
+          {
+            "code": "300408.SZ",
+            "name": "三环集团",
+            "value_yi": 69.51,
+            "weight_pct": 9.34,
+            "sector": "电子",
+            "action": "加仓 +12%"
+          },
+          {
+            "code": "301377.SZ",
+            "name": "鼎泰高科",
+            "value_yi": 62.82,
+            "weight_pct": 8.44,
+            "sector": "机械",
+            "action": "加仓 +16%"
+          },
+          {
+            "code": "688519.SH",
+            "name": "南亚新材",
+            "value_yi": 62.34,
+            "weight_pct": 8.37,
+            "sector": "电子",
+            "action": "加仓 +7%"
+          },
+          {
+            "code": "688498.SH",
+            "name": "源杰科技",
+            "value_yi": 61.03,
+            "weight_pct": 8.2,
+            "sector": "电子",
+            "action": "减仓 -25%"
+          },
+          {
+            "code": "688313.SH",
+            "name": "仕佳光子",
+            "value_yi": 60.78,
+            "weight_pct": 8.16,
+            "sector": "通信",
+            "action": "新建"
+          },
+          {
+            "code": "301511.SZ",
+            "name": "德福科技",
+            "value_yi": 57.7,
+            "weight_pct": 7.75,
+            "sector": "电子",
+            "action": "减仓 -1%"
+          },
+          {
+            "code": "301200.SZ",
+            "name": "大族数控",
+            "value_yi": 52.91,
+            "weight_pct": 7.11,
+            "sector": "电子",
+            "action": "加仓 +25%"
+          },
+          {
+            "code": "300570.SZ",
+            "name": "太辰光",
+            "value_yi": 45.9,
+            "weight_pct": 6.16,
+            "sector": "通信",
+            "action": "新建"
+          },
+          {
+            "code": "300308.SZ",
+            "name": "中际旭创",
+            "value_yi": 44.32,
+            "weight_pct": 5.95,
+            "sector": "通信",
+            "action": "持有"
+          },
+          {
+            "code": "300502.SZ",
+            "name": "新易盛",
+            "value_yi": 43.58,
+            "weight_pct": 5.85,
+            "sector": "通信",
+            "action": "持有"
+          }
+        ]
+      },
+      {
+        "id": "101003918",
+        "name": "张明昕",
+        "org": "华商基金",
+        "style": "集中持股科技",
+        "aum_yi": 740.26,
+        "holdings_count": 98,
+        "top1": "源杰科技",
+        "return_1y_pct": 411.2,
+        "top_holdings": [
+          {
+            "code": "688498.SH",
+            "name": "源杰科技",
+            "value_yi": 52.24,
+            "weight_pct": 7.06,
+            "sector": "电子",
+            "action": "加仓 +29%"
+          },
+          {
+            "code": "300308.SZ",
+            "name": "中际旭创",
+            "value_yi": 47.18,
+            "weight_pct": 6.37,
+            "sector": "通信",
+            "action": "减仓 -13%"
+          },
+          {
+            "code": "300502.SZ",
+            "name": "新易盛",
+            "value_yi": 46.64,
+            "weight_pct": 6.3,
+            "sector": "通信",
+            "action": "减仓 -17%"
+          },
+          {
+            "code": "300408.SZ",
+            "name": "三环集团",
+            "value_yi": 44.61,
+            "weight_pct": 6.03,
+            "sector": "电子",
+            "action": "加仓 +2%"
+          },
+          {
+            "code": "000636.SZ",
+            "name": "风华高科",
+            "value_yi": 41.98,
+            "weight_pct": 5.67,
+            "sector": "电子",
+            "action": "加仓 +2%"
+          },
+          {
+            "code": "600183.SH",
+            "name": "生益科技",
+            "value_yi": 32.16,
+            "weight_pct": 4.34,
+            "sector": "电子",
+            "action": "加仓 +132%"
+          },
+          {
+            "code": "688048.SH",
+            "name": "长光华芯",
+            "value_yi": 29.22,
+            "weight_pct": 3.95,
+            "sector": "电子",
+            "action": "加仓 +34%"
+          },
+          {
+            "code": "002384.SZ",
+            "name": "东山精密",
+            "value_yi": 26.89,
+            "weight_pct": 3.63,
+            "sector": "电子",
+            "action": "加仓 +290%"
+          },
+          {
+            "code": "600487.SH",
+            "name": "亨通光电",
+            "value_yi": 22.83,
+            "weight_pct": 3.08,
+            "sector": "通信",
+            "action": "持有"
+          },
+          {
+            "code": "688313.SH",
+            "name": "仕佳光子",
+            "value_yi": 20.44,
+            "weight_pct": 2.76,
+            "sector": "通信",
+            "action": "持有"
+          }
+        ]
+      },
+      {
+        "id": "101015045",
+        "name": "严凯",
+        "org": "东方基金",
+        "style": "集中持股科技",
+        "aum_yi": 648.19,
+        "holdings_count": 79,
+        "top1": "中微公司",
+        "return_1y_pct": 204.9,
+        "top_holdings": [
+          {
+            "code": "688012.SH",
+            "name": "中微公司",
+            "value_yi": 58.2,
+            "weight_pct": 8.98,
+            "sector": "半导体",
+            "action": "重仓持有"
+          },
+          {
+            "code": "688072.SH",
+            "name": "拓荆科技",
+            "value_yi": 46.1,
+            "weight_pct": 7.11,
+            "sector": "半导体",
+            "action": "重仓持有"
+          },
+          {
+            "code": "002371.SZ",
+            "name": "北方华创",
+            "value_yi": 42.5,
+            "weight_pct": 6.56,
+            "sector": "半导体",
+            "action": "重仓持有"
+          }
+        ]
+      },
+      {
+        "id": "101001175",
+        "name": "谢治宇",
+        "org": "兴证全球基金",
+        "style": "科技港股医药",
+        "aum_yi": 608.18,
+        "holdings_count": 108,
+        "top1": "晶合集成",
+        "return_1y_pct": 70.0,
+        "top_holdings": [
+          {
+            "code": "688249.SH",
+            "name": "晶合集成",
+            "value_yi": 40.85,
+            "weight_pct": 6.72,
+            "sector": "电子",
+            "action": "加仓 +105%"
+          },
+          {
+            "code": "002475.SZ",
+            "name": "立讯精密",
+            "value_yi": 37.57,
+            "weight_pct": 6.18,
+            "sector": "电子",
+            "action": "加仓 +0.1%"
+          },
+          {
+            "code": "688099.SH",
+            "name": "晶晨股份",
+            "value_yi": 35.9,
+            "weight_pct": 5.9,
+            "sector": "电子",
+            "action": "加仓 +19%"
+          },
+          {
+            "code": "688120.SH",
+            "name": "华海清科",
+            "value_yi": 25.05,
+            "weight_pct": 4.12,
+            "sector": "电子",
+            "action": "持有"
+          },
+          {
+            "code": "600160.SH",
+            "name": "巨化股份",
+            "value_yi": 24.65,
+            "weight_pct": 4.05,
+            "sector": "基础化工",
+            "action": "减仓 -29%"
+          },
+          {
+            "code": "300347.SZ",
+            "name": "泰格医药",
+            "value_yi": 21.35,
+            "weight_pct": 3.51,
+            "sector": "医药",
+            "action": "减仓 -0.3%"
+          },
+          {
+            "code": "688319.SH",
+            "name": "欧林生物",
+            "value_yi": 19.25,
+            "weight_pct": 3.17,
+            "sector": "医药",
+            "action": "持有"
+          },
+          {
+            "code": "603259.SH",
+            "name": "药明康德",
+            "value_yi": 18.84,
+            "weight_pct": 3.1,
+            "sector": "医药",
+            "action": "新建"
+          },
+          {
+            "code": "300750.SZ",
+            "name": "宁德时代",
+            "value_yi": 18.67,
+            "weight_pct": 3.07,
+            "sector": "电力设备",
+            "action": "持有"
+          },
+          {
+            "code": "688041.SH",
+            "name": "海光信息",
+            "value_yi": 18.24,
+            "weight_pct": 3.0,
+            "sector": "电子",
+            "action": "持有"
+          },
+          {
+            "code": "002156.SZ",
+            "name": "通富微电",
+            "value_yi": 16.87,
+            "weight_pct": 2.77,
+            "sector": "电子",
+            "action": "新建"
+          }
+        ]
+      },
+      {
+        "id": "101000231",
+        "name": "朱少醒",
+        "org": "富国基金",
+        "style": "均衡配置科技",
+        "aum_yi": 510.49,
+        "holdings_count": 273,
+        "top1": "宁波银行",
+        "return_1y_pct": 31.5,
+        "top_holdings": [
+          {
+            "code": "002142.SZ",
+            "name": "宁波银行",
+            "value_yi": 49.96,
+            "weight_pct": 9.79,
+            "sector": "银行",
+            "action": "减仓 -6%"
+          },
+          {
+            "code": "002353.SZ",
+            "name": "杰瑞股份",
+            "value_yi": 39.02,
+            "weight_pct": 7.64,
+            "sector": "机械",
+            "action": "加仓 +7%"
+          },
+          {
+            "code": "300308.SZ",
+            "name": "中际旭创",
+            "value_yi": 23.04,
+            "weight_pct": 4.51,
+            "sector": "通信",
+            "action": "加仓 +70%"
+          },
+          {
+            "code": "603129.SH",
+            "name": "春风动力",
+            "value_yi": 22.05,
+            "weight_pct": 4.32,
+            "sector": "汽车",
+            "action": "减仓 -12%"
+          },
+          {
+            "code": "688266.SH",
+            "name": "泽璟制药",
+            "value_yi": 18.48,
+            "weight_pct": 3.62,
+            "sector": "医药",
+            "action": "加仓 +30%"
+          },
+          {
+            "code": "688548.SH",
+            "name": "广钢气体",
+            "value_yi": 18.43,
+            "weight_pct": 3.61,
+            "sector": "基础化工",
+            "action": "减仓 -13%"
+          },
+          {
+            "code": "688825.SH",
+            "name": "长鑫科技",
+            "value_yi": 16.44,
+            "weight_pct": 3.22,
+            "sector": "电子",
+            "action": "新建"
+          },
+          {
+            "code": "300750.SZ",
+            "name": "宁德时代",
+            "value_yi": 14.41,
+            "weight_pct": 2.82,
+            "sector": "电力设备",
+            "action": "减仓 -47%"
+          },
+          {
+            "code": "600519.SH",
+            "name": "贵州茅台",
+            "value_yi": 11.33,
+            "weight_pct": 2.22,
+            "sector": "食品饮料",
+            "action": "持有"
+          },
+          {
+            "code": "300502.SZ",
+            "name": "新易盛",
+            "value_yi": 10.93,
+            "weight_pct": 2.14,
+            "sector": "通信",
+            "action": "持有"
+          }
+        ]
+      },
+      {
+        "id": "101000465",
+        "name": "傅鹏博",
+        "org": "睿远基金",
+        "style": "科技制造",
+        "aum_yi": 295.26,
+        "holdings_count": 77,
+        "top1": "立讯精密",
+        "return_1y_pct": 120.5,
+        "top_holdings": [
+          {
+            "code": "002475.SZ",
+            "name": "立讯精密",
+            "value_yi": 26.5,
+            "weight_pct": 8.97,
+            "sector": "电子",
+            "action": "减仓 -1%"
+          },
+          {
+            "code": "300502.SZ",
+            "name": "新易盛",
+            "value_yi": 25.81,
+            "weight_pct": 8.74,
+            "sector": "通信",
+            "action": "减仓 -7%"
+          },
+          {
+            "code": "002384.SZ",
+            "name": "东山精密",
+            "value_yi": 24.62,
+            "weight_pct": 8.34,
+            "sector": "电子",
+            "action": "减仓 -1%"
+          },
+          {
+            "code": "688167.SH",
+            "name": "炬光科技",
+            "value_yi": 24.51,
+            "weight_pct": 8.3,
+            "sector": "电子",
+            "action": "减仓 -4%"
+          },
+          {
+            "code": "300751.SZ",
+            "name": "迈为股份",
+            "value_yi": 21.85,
+            "weight_pct": 7.4,
+            "sector": "机械",
+            "action": "加仓 +6%"
+          },
+          {
+            "code": "300476.SZ",
+            "name": "胜宏科技",
+            "value_yi": 20.77,
+            "weight_pct": 7.03,
+            "sector": "电子",
+            "action": "减仓 -9%"
+          },
+          {
+            "code": "300308.SZ",
+            "name": "中际旭创",
+            "value_yi": 19.19,
+            "weight_pct": 6.5,
+            "sector": "通信",
+            "action": "加仓 +83%"
+          },
+          {
+            "code": "688808.SH",
+            "name": "联讯仪器",
+            "value_yi": 17.17,
+            "weight_pct": 5.81,
+            "sector": "机械",
+            "action": "新建"
+          },
+          {
+            "code": "002008.SZ",
+            "name": "大族激光",
+            "value_yi": 14.34,
+            "weight_pct": 4.86,
+            "sector": "机械",
+            "action": "加仓 +5%"
+          },
+          {
+            "code": "002444.SZ",
+            "name": "巨星科技",
+            "value_yi": 13.58,
+            "weight_pct": 4.6,
+            "sector": "机械",
+            "action": "持有"
+          }
+        ]
+      }
+    ],
+    "cn_top1_consensus": [
+      {
+        "name": "中际旭创",
+        "code": "300308.SZ",
+        "sector": "通信/光模块",
+        "top1_managers": 10,
+        "holders": [
+          "马芳",
+          "郑希",
+          "冯炉丹",
+          "姚加红",
+          "杨梦",
+          "沈若雨",
+          "韩浩",
+          "王森",
+          "孙权",
+          "刘元海"
+        ],
+        "note": "傅鹏博 Q3 加仓+83%、朱少醒加仓+70%，但谢治宇清仓、张明昕减仓-13%（高位分歧）"
+      },
+      {
+        "name": "新易盛",
+        "code": "300502.SZ",
+        "sector": "通信/光模块",
+        "top1_managers": 6,
+        "holders": [
+          "罗擎",
+          "雷志勇",
+          "江山",
+          "何一铖",
+          "杨冬",
+          "陈皓"
+        ],
+        "note": "金梓才、张明昕、傅鹏博、朱少醒均列入前十重仓"
+      },
+      {
+        "name": "长鑫科技",
+        "code": "688825.SH",
+        "sector": "半导体/存储",
+        "top1_managers": 5,
+        "holders": [
+          "张仲维",
+          "曹晋",
+          "张璐涵",
+          "冯帆",
+          "赖礼辉"
+        ],
+        "note": "朱少醒 Q3 新建 16.44 亿进入前十重仓，呼应 DRAM/HBM 涨价周期"
+      },
+      {
+        "name": "药明康德",
+        "code": "603259.SH",
+        "sector": "医药/CXO",
+        "top1_managers": 4,
+        "holders": [
+          "葛兰",
+          "周蔚文",
+          "赵磊",
+          "农冰立"
+        ],
+        "note": "谢治宇 Q3 新建 18.84 亿（占比 3.10%）"
+      },
+      {
+        "name": "紫金矿业",
+        "code": "601899.SH",
+        "sector": "有色金属",
+        "top1_managers": 6,
+        "holders": [
+          "蓝小康",
+          "张迎军",
+          "朱运",
+          "吉莉",
+          "李杨",
+          "王凌霄"
+        ],
+        "note": "周期/资源方向公募第一共识标的"
+      },
+      {
+        "name": "沪电股份",
+        "code": "002463.SZ",
+        "sector": "电子/PCB",
+        "top1_managers": 3,
+        "holders": [
+          "马磊",
+          "高楠",
+          "郭玮羚"
+        ],
+        "note": "AI 服务器高多层 PCB 核心标的"
+      },
+      {
+        "name": "立讯精密",
+        "code": "002475.SZ",
+        "sector": "电子/消费电子",
+        "top1_managers": 3,
+        "holders": [
+          "傅鹏博",
+          "朱璘",
+          "王贵重"
+        ],
+        "note": "谢治宇持仓 37.57 亿（第 2 大重仓）"
+      },
+      {
+        "name": "三环集团",
+        "code": "300408.SZ",
+        "sector": "电子/MLCC",
+        "top1_managers": 2,
+        "holders": [
+          "金梓才",
+          "祁禾"
+        ],
+        "note": "金梓才第 1 重仓（69.51 亿，Q3 加仓+12%）、张明昕第 4 重仓（44.61 亿）"
+      },
+      {
+        "name": "晶合集成",
+        "code": "688249.SH",
+        "sector": "半导体/晶圆代工",
+        "top1_managers": 2,
+        "holders": [
+          "谢治宇",
+          "乔迁"
+        ],
+        "note": "谢治宇 Q3 翻倍加仓+105% 至 40.85 亿（跃居第 1 重仓）"
+      },
+      {
+        "name": "寒武纪",
+        "code": "688256.SH",
+        "sector": "半导体/AI芯片",
+        "top1_managers": 2,
+        "holders": [
+          "袁曦",
+          "邓心怡"
+        ],
+        "note": "国产 AI 算力芯片核心重仓"
+      }
+    ],
+    "us_13f": [
+      {
+        "name": "巴菲特 · Berkshire Hathaway",
+        "cik": "0001067983",
+        "style": "价值·长期",
+        "aum_usd_b": 292.37,
+        "holdings_count": 28,
+        "top1": "APPLE INC",
+        "gain_pct": 48.0,
+        "period": "Q3 2026"
+      },
+      {
+        "name": "克里夫·阿斯内斯 · AQR Capital",
+        "cik": "0001167557",
+        "style": "量化·因子",
+        "aum_usd_b": 315.26,
+        "holdings_count": 3822,
+        "top1": "NVIDIA CORP",
+        "gain_pct": 10.27,
+        "period": "Q3 2026"
+      },
+      {
+        "name": "肯·格里芬 · Citadel Advisors",
+        "cik": "0001423053",
+        "style": "多策略",
+        "aum_usd_b": 170.44,
+        "holdings_count": 5941,
+        "top1": "ISHARES TR",
+        "gain_pct": -2.05,
+        "period": "Q3 2026"
+      },
+      {
+        "name": "大卫·肖 · D. E. Shaw & Co.",
+        "cik": "0001009207",
+        "style": "量化·多策略",
+        "aum_usd_b": 142.98,
+        "holdings_count": 2886,
+        "top1": "SPDR S&P 500 ETF",
+        "gain_pct": -2.39,
+        "period": "Q3 2026"
+      },
+      {
+        "name": "Two Sigma Investments",
+        "cik": "0001179392",
+        "style": "量化",
+        "aum_usd_b": 124.5,
+        "holdings_count": 3254,
+        "top1": "NVIDIA CORP",
+        "gain_pct": -4.76,
+        "period": "Q3 2026"
+      },
+      {
+        "name": "英格兰德 · Millennium",
+        "cik": "0001273087",
+        "style": "多策略",
+        "aum_usd_b": 123.77,
+        "holdings_count": 3361,
+        "top1": "ISHARES TR",
+        "gain_pct": -1.89,
+        "period": "Q3 2026"
+      },
+      {
+        "name": "挪威主权基金 · Norges Bank",
+        "cik": "0001374170",
+        "style": "主权基金",
+        "aum_usd_b": 950.35,
+        "holdings_count": 1488,
+        "top1": "NVIDIA CORP",
+        "gain_pct": 44.97,
+        "period": "Q2 2026"
+      },
+      {
+        "name": "Capital World Investors",
+        "cik": "0001422849",
+        "style": "长线资管",
+        "aum_usd_b": 776.89,
+        "holdings_count": 572,
+        "top1": "BROADCOM INC",
+        "gain_pct": 32.06,
+        "period": "Q3 2026"
+      },
+      {
+        "name": "PRIMECAP Management",
+        "cik": "0000763212",
+        "style": "成长·长线",
+        "aum_usd_b": 152.46,
+        "holdings_count": 304,
+        "top1": "MICRON TECHNOLOGY",
+        "gain_pct": 50.5,
+        "period": "Q3 2026"
+      }
+    ],
+    "ai_data": {
+      "taiwan_semi_2026_10": [
+        {
+          "name": "台积电 TSMC (2330)",
+          "segment": "晶圆代工",
+          "rev": "NT$586.9B",
+          "yoy_pct": 59.7
+        },
+        {
+          "name": "世芯-KY Alchip (3661)",
+          "segment": "AI ASIC",
+          "rev": "NT$10.3B",
+          "yoy_pct": 515.8
+        },
+        {
+          "name": "技嘉 Gigabyte (2376)",
+          "segment": "AI 服务器",
+          "rev": "NT$67.0B",
+          "yoy_pct": 136.7
+        },
+        {
+          "name": "创意 GUC (3443)",
+          "segment": "ASIC 设计",
+          "rev": "NT$8.4B",
+          "yoy_pct": 127.0
+        },
+        {
+          "name": "纬创 Wistron (3231)",
+          "segment": "AI 服务器",
+          "rev": "NT$402.6B",
+          "yoy_pct": 117.6
+        },
+        {
+          "name": "广达 Quanta (2382)",
+          "segment": "AI 服务器",
+          "rev": "NT$353.3B",
+          "yoy_pct": 104.0
+        },
+        {
+          "name": "南电 Nan Ya PCB (8046)",
+          "segment": "ABF 载板",
+          "rev": "NT$6.3B",
+          "yoy_pct": 69.7
+        },
+        {
+          "name": "欣兴 Unimicron (3037)",
+          "segment": "ABF 载板",
+          "rev": "NT$19.0B",
+          "yoy_pct": 67.6
+        },
+        {
+          "name": "日月光 ASE (3711)",
+          "segment": "先进封测",
+          "rev": "NT$88.6B",
+          "yoy_pct": 47.1
+        },
+        {
+          "name": "奇鋐 AVC (3017)",
+          "segment": "液冷散热",
+          "rev": "NT$22.1B",
+          "yoy_pct": 34.4
+        }
+      ],
+      "korea_export": {
+        "month": "2026-10",
+        "semi_export_usd_b": 56.44,
+        "semi_yoy_pct": 259.4,
+        "prev_month_usd_b": 60.3,
+        "prev_month_yoy_pct": 262.8,
+        "dram_yoy_pct": 369.8,
+        "nand_yoy_pct": 206.8
+      },
+      "global_semi_wsts": {
+        "month": "2026-09",
+        "global_usd_b": 196.33,
+        "global_yoy_pct": 146.8,
+        "americas_usd_b": 75.81,
+        "americas_yoy_pct": 191.7,
+        "apac_usd_b": 102.7,
+        "apac_yoy_pct": 133.4
+      },
+      "chip_shipments_q3_2026": [
+        {
+          "chip": "NVIDIA B300",
+          "h100e": "3.60M H100e",
+          "units": 1424701
+        },
+        {
+          "chip": "NVIDIA R200",
+          "h100e": "1.30M H100e",
+          "units": 146477
+        },
+        {
+          "chip": "Google TPU v7",
+          "h100e": "640.8K H100e",
+          "units": 274866
+        },
+        {
+          "chip": "NVIDIA B200",
+          "h100e": "340.9K H100e",
+          "units": 134927
+        },
+        {
+          "chip": "Huawei Ascend 910C (Q2)",
+          "h100e": "134.9K H100e",
+          "units": 171188
+        }
+      ],
+      "top_datacenters": [
+        {
+          "name": "Colossus 2",
+          "owner": "SpaceXAI",
+          "h100e": "1.11M H100e",
+          "power_mw": 946,
+          "capex_usd_b": 35.84
+        },
+        {
+          "name": "Stargate Abilene",
+          "owner": "OpenAI / Oracle",
+          "h100e": "1.02M H100e",
+          "power_mw": 824,
+          "capex_usd_b": 31.21
+        },
+        {
+          "name": "New Carlisle",
+          "owner": "Anthropic / Amazon",
+          "h100e": "818.4K H100e",
+          "power_mw": 1037,
+          "capex_usd_b": 39.28
+        },
+        {
+          "name": "Fairwater Atlanta",
+          "owner": "Microsoft",
+          "h100e": "768.8K H100e",
+          "power_mw": 636,
+          "capex_usd_b": 24.09
+        }
+      ],
+      "compute_cost_ocpi": {
+        "date": "2026-11-20",
+        "gpus": [
+          {
+            "gpu": "B200",
+            "ocpi": 9.1,
+            "prev_month": 9.44
+          },
+          {
+            "gpu": "H200",
+            "ocpi": 6.14,
+            "prev_month": 6.21
+          },
+          {
+            "gpu": "H100 SXM",
+            "ocpi": 2.9,
+            "prev_month": 3.02
+          },
+          {
+            "gpu": "A100 SXM4",
+            "ocpi": 1.0,
+            "prev_month": 1.06
+          },
+          {
+            "gpu": "RTX 5090",
+            "ocpi": 0.67,
+            "prev_month": 0.68
+          }
+        ]
+      },
+      "enterprise_adoption_ramp": {
+        "month": "2026-10",
+        "overall_pct": 56.8,
+        "large_corp_pct": 65.72,
+        "vendors": [
+          {
+            "vendor": "Anthropic",
+            "pct": 44.78
+          },
+          {
+            "vendor": "OpenAI",
+            "pct": 40.56
+          },
+          {
+            "vendor": "xAI",
+            "pct": 6.27
+          },
+          {
+            "vendor": "DeepSeek",
+            "pct": 0.2
+          }
+        ]
+      }
+    },
+    "portfolio_benchmarks": [
+      {
+        "name": "Semiconductor Stocks Portfolio（半导体股票组合）",
+        "return_1y_pct": 65.2,
+        "return_6m_pct": -19.15,
+        "rank": 98
+      },
+      {
+        "name": "Dividend-Paying Stocks Portfolio（高股息红利组合）",
+        "return_1y_pct": 19.1,
+        "return_6m_pct": 12.63,
+        "rank": 96
+      },
+      {
+        "name": "Mebane Faber Ivy Portfolio（常春藤全天候组合）",
+        "return_1y_pct": 14.4,
+        "return_6m_pct": -3.43,
+        "rank": 99
+      },
+      {
+        "name": "Roger Gibson Five Asset Portfolio（五资产均衡组合）",
+        "return_1y_pct": 12.6,
+        "return_6m_pct": -3.97,
+        "rank": 97
+      },
+      {
+        "name": "Top 3 Sector ETF Rotation（前三行业 ETF 轮动）",
+        "return_1y_pct": null,
+        "return_6m_pct": 2.67,
+        "rank": null
+      }
+    ],
+    "stock_index": [
+      {
+        "code": "300408.SZ",
+        "name": "三环集团",
+        "sector": "电子",
+        "holders": [
+          {
+            "manager": "金梓才",
+            "org": "财通基金",
+            "style": "集中持股科技",
+            "value_yi": 69.51,
+            "weight_pct": 9.34,
+            "action": "加仓 +12%"
+          },
+          {
+            "manager": "张明昕",
+            "org": "华商基金",
+            "style": "集中持股科技",
+            "value_yi": 44.61,
+            "weight_pct": 6.03,
+            "action": "加仓 +2%"
+          },
+          {
+            "manager": "祁禾",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          }
+        ],
+        "total_value_yi": 114.12,
+        "top1_count": 2,
+        "top1_managers": [
+          "金梓才",
+          "祁禾"
+        ],
+        "consensus_note": "金梓才第 1 重仓（69.51 亿，Q3 加仓+12%）、张明昕第 4 重仓（44.61 亿）"
+      },
+      {
+        "code": "301377.SZ",
+        "name": "鼎泰高科",
+        "sector": "机械",
+        "holders": [
+          {
+            "manager": "金梓才",
+            "org": "财通基金",
+            "style": "集中持股科技",
+            "value_yi": 62.82,
+            "weight_pct": 8.44,
+            "action": "加仓 +16%"
+          }
+        ],
+        "total_value_yi": 62.82,
+        "top1_count": 0
+      },
+      {
+        "code": "688519.SH",
+        "name": "南亚新材",
+        "sector": "电子",
+        "holders": [
+          {
+            "manager": "金梓才",
+            "org": "财通基金",
+            "style": "集中持股科技",
+            "value_yi": 62.34,
+            "weight_pct": 8.37,
+            "action": "加仓 +7%"
+          }
+        ],
+        "total_value_yi": 62.34,
+        "top1_count": 0
+      },
+      {
+        "code": "688498.SH",
+        "name": "源杰科技",
+        "sector": "电子",
+        "holders": [
+          {
+            "manager": "金梓才",
+            "org": "财通基金",
+            "style": "集中持股科技",
+            "value_yi": 61.03,
+            "weight_pct": 8.2,
+            "action": "减仓 -25%"
+          },
+          {
+            "manager": "张明昕",
+            "org": "华商基金",
+            "style": "集中持股科技",
+            "value_yi": 52.24,
+            "weight_pct": 7.06,
+            "action": "加仓 +29%"
+          }
+        ],
+        "total_value_yi": 113.27,
+        "top1_count": 0
+      },
+      {
+        "code": "688313.SH",
+        "name": "仕佳光子",
+        "sector": "通信",
+        "holders": [
+          {
+            "manager": "金梓才",
+            "org": "财通基金",
+            "style": "集中持股科技",
+            "value_yi": 60.78,
+            "weight_pct": 8.16,
+            "action": "新建"
+          },
+          {
+            "manager": "张明昕",
+            "org": "华商基金",
+            "style": "集中持股科技",
+            "value_yi": 20.44,
+            "weight_pct": 2.76,
+            "action": "持有"
+          }
+        ],
+        "total_value_yi": 81.22,
+        "top1_count": 0
+      },
+      {
+        "code": "301511.SZ",
+        "name": "德福科技",
+        "sector": "电子",
+        "holders": [
+          {
+            "manager": "金梓才",
+            "org": "财通基金",
+            "style": "集中持股科技",
+            "value_yi": 57.7,
+            "weight_pct": 7.75,
+            "action": "减仓 -1%"
+          }
+        ],
+        "total_value_yi": 57.7,
+        "top1_count": 0
+      },
+      {
+        "code": "301200.SZ",
+        "name": "大族数控",
+        "sector": "电子",
+        "holders": [
+          {
+            "manager": "金梓才",
+            "org": "财通基金",
+            "style": "集中持股科技",
+            "value_yi": 52.91,
+            "weight_pct": 7.11,
+            "action": "加仓 +25%"
+          }
+        ],
+        "total_value_yi": 52.91,
+        "top1_count": 0
+      },
+      {
+        "code": "300570.SZ",
+        "name": "太辰光",
+        "sector": "通信",
+        "holders": [
+          {
+            "manager": "金梓才",
+            "org": "财通基金",
+            "style": "集中持股科技",
+            "value_yi": 45.9,
+            "weight_pct": 6.16,
+            "action": "新建"
+          }
+        ],
+        "total_value_yi": 45.9,
+        "top1_count": 0
+      },
+      {
+        "code": "300308.SZ",
+        "name": "中际旭创",
+        "sector": "通信",
+        "holders": [
+          {
+            "manager": "金梓才",
+            "org": "财通基金",
+            "style": "集中持股科技",
+            "value_yi": 44.32,
+            "weight_pct": 5.95,
+            "action": "持有"
+          },
+          {
+            "manager": "张明昕",
+            "org": "华商基金",
+            "style": "集中持股科技",
+            "value_yi": 47.18,
+            "weight_pct": 6.37,
+            "action": "减仓 -13%"
+          },
+          {
+            "manager": "朱少醒",
+            "org": "富国基金",
+            "style": "均衡配置科技",
+            "value_yi": 23.04,
+            "weight_pct": 4.51,
+            "action": "加仓 +70%"
+          },
+          {
+            "manager": "傅鹏博",
+            "org": "睿远基金",
+            "style": "科技制造",
+            "value_yi": 19.19,
+            "weight_pct": 6.5,
+            "action": "加仓 +83%"
+          },
+          {
+            "manager": "马芳",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          },
+          {
+            "manager": "郑希",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          },
+          {
+            "manager": "冯炉丹",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          },
+          {
+            "manager": "姚加红",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          },
+          {
+            "manager": "杨梦",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          },
+          {
+            "manager": "沈若雨",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          },
+          {
+            "manager": "韩浩",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          },
+          {
+            "manager": "王森",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          },
+          {
+            "manager": "孙权",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          },
+          {
+            "manager": "刘元海",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          }
+        ],
+        "total_value_yi": 133.73,
+        "top1_count": 10,
+        "top1_managers": [
+          "马芳",
+          "郑希",
+          "冯炉丹",
+          "姚加红",
+          "杨梦",
+          "沈若雨",
+          "韩浩",
+          "王森",
+          "孙权",
+          "刘元海"
+        ],
+        "consensus_note": "傅鹏博 Q3 加仓+83%、朱少醒加仓+70%，但谢治宇清仓、张明昕减仓-13%（高位分歧）"
+      },
+      {
+        "code": "300502.SZ",
+        "name": "新易盛",
+        "sector": "通信",
+        "holders": [
+          {
+            "manager": "金梓才",
+            "org": "财通基金",
+            "style": "集中持股科技",
+            "value_yi": 43.58,
+            "weight_pct": 5.85,
+            "action": "持有"
+          },
+          {
+            "manager": "张明昕",
+            "org": "华商基金",
+            "style": "集中持股科技",
+            "value_yi": 46.64,
+            "weight_pct": 6.3,
+            "action": "减仓 -17%"
+          },
+          {
+            "manager": "朱少醒",
+            "org": "富国基金",
+            "style": "均衡配置科技",
+            "value_yi": 10.93,
+            "weight_pct": 2.14,
+            "action": "持有"
+          },
+          {
+            "manager": "傅鹏博",
+            "org": "睿远基金",
+            "style": "科技制造",
+            "value_yi": 25.81,
+            "weight_pct": 8.74,
+            "action": "减仓 -7%"
+          },
+          {
+            "manager": "罗擎",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          },
+          {
+            "manager": "雷志勇",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          },
+          {
+            "manager": "江山",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          },
+          {
+            "manager": "何一铖",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          },
+          {
+            "manager": "杨冬",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          },
+          {
+            "manager": "陈皓",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          }
+        ],
+        "total_value_yi": 126.96,
+        "top1_count": 6,
+        "top1_managers": [
+          "罗擎",
+          "雷志勇",
+          "江山",
+          "何一铖",
+          "杨冬",
+          "陈皓"
+        ],
+        "consensus_note": "金梓才、张明昕、傅鹏博、朱少醒均列入前十重仓"
+      },
+      {
+        "code": "000636.SZ",
+        "name": "风华高科",
+        "sector": "电子",
+        "holders": [
+          {
+            "manager": "张明昕",
+            "org": "华商基金",
+            "style": "集中持股科技",
+            "value_yi": 41.98,
+            "weight_pct": 5.67,
+            "action": "加仓 +2%"
+          }
+        ],
+        "total_value_yi": 41.98,
+        "top1_count": 0
+      },
+      {
+        "code": "600183.SH",
+        "name": "生益科技",
+        "sector": "电子",
+        "holders": [
+          {
+            "manager": "张明昕",
+            "org": "华商基金",
+            "style": "集中持股科技",
+            "value_yi": 32.16,
+            "weight_pct": 4.34,
+            "action": "加仓 +132%"
+          }
+        ],
+        "total_value_yi": 32.16,
+        "top1_count": 0
+      },
+      {
+        "code": "688048.SH",
+        "name": "长光华芯",
+        "sector": "电子",
+        "holders": [
+          {
+            "manager": "张明昕",
+            "org": "华商基金",
+            "style": "集中持股科技",
+            "value_yi": 29.22,
+            "weight_pct": 3.95,
+            "action": "加仓 +34%"
+          }
+        ],
+        "total_value_yi": 29.22,
+        "top1_count": 0
+      },
+      {
+        "code": "002384.SZ",
+        "name": "东山精密",
+        "sector": "电子",
+        "holders": [
+          {
+            "manager": "张明昕",
+            "org": "华商基金",
+            "style": "集中持股科技",
+            "value_yi": 26.89,
+            "weight_pct": 3.63,
+            "action": "加仓 +290%"
+          },
+          {
+            "manager": "傅鹏博",
+            "org": "睿远基金",
+            "style": "科技制造",
+            "value_yi": 24.62,
+            "weight_pct": 8.34,
+            "action": "减仓 -1%"
+          }
+        ],
+        "total_value_yi": 51.51,
+        "top1_count": 0
+      },
+      {
+        "code": "600487.SH",
+        "name": "亨通光电",
+        "sector": "通信",
+        "holders": [
+          {
+            "manager": "张明昕",
+            "org": "华商基金",
+            "style": "集中持股科技",
+            "value_yi": 22.83,
+            "weight_pct": 3.08,
+            "action": "持有"
+          }
+        ],
+        "total_value_yi": 22.83,
+        "top1_count": 0
+      },
+      {
+        "code": "688012.SH",
+        "name": "中微公司",
+        "sector": "半导体",
+        "holders": [
+          {
+            "manager": "严凯",
+            "org": "东方基金",
+            "style": "集中持股科技",
+            "value_yi": 58.2,
+            "weight_pct": 8.98,
+            "action": "重仓持有"
+          }
+        ],
+        "total_value_yi": 58.2,
+        "top1_count": 0
+      },
+      {
+        "code": "688072.SH",
+        "name": "拓荆科技",
+        "sector": "半导体",
+        "holders": [
+          {
+            "manager": "严凯",
+            "org": "东方基金",
+            "style": "集中持股科技",
+            "value_yi": 46.1,
+            "weight_pct": 7.11,
+            "action": "重仓持有"
+          }
+        ],
+        "total_value_yi": 46.1,
+        "top1_count": 0
+      },
+      {
+        "code": "002371.SZ",
+        "name": "北方华创",
+        "sector": "半导体",
+        "holders": [
+          {
+            "manager": "严凯",
+            "org": "东方基金",
+            "style": "集中持股科技",
+            "value_yi": 42.5,
+            "weight_pct": 6.56,
+            "action": "重仓持有"
+          }
+        ],
+        "total_value_yi": 42.5,
+        "top1_count": 0
+      },
+      {
+        "code": "688249.SH",
+        "name": "晶合集成",
+        "sector": "电子",
+        "holders": [
+          {
+            "manager": "谢治宇",
+            "org": "兴证全球基金",
+            "style": "科技港股医药",
+            "value_yi": 40.85,
+            "weight_pct": 6.72,
+            "action": "加仓 +105%"
+          },
+          {
+            "manager": "乔迁",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          }
+        ],
+        "total_value_yi": 40.85,
+        "top1_count": 2,
+        "top1_managers": [
+          "谢治宇",
+          "乔迁"
+        ],
+        "consensus_note": "谢治宇 Q3 翻倍加仓+105% 至 40.85 亿（跃居第 1 重仓）"
+      },
+      {
+        "code": "002475.SZ",
+        "name": "立讯精密",
+        "sector": "电子",
+        "holders": [
+          {
+            "manager": "谢治宇",
+            "org": "兴证全球基金",
+            "style": "科技港股医药",
+            "value_yi": 37.57,
+            "weight_pct": 6.18,
+            "action": "加仓 +0.1%"
+          },
+          {
+            "manager": "傅鹏博",
+            "org": "睿远基金",
+            "style": "科技制造",
+            "value_yi": 26.5,
+            "weight_pct": 8.97,
+            "action": "减仓 -1%"
+          },
+          {
+            "manager": "朱璘",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          },
+          {
+            "manager": "王贵重",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          }
+        ],
+        "total_value_yi": 64.07,
+        "top1_count": 3,
+        "top1_managers": [
+          "傅鹏博",
+          "朱璘",
+          "王贵重"
+        ],
+        "consensus_note": "谢治宇持仓 37.57 亿（第 2 大重仓）"
+      },
+      {
+        "code": "688099.SH",
+        "name": "晶晨股份",
+        "sector": "电子",
+        "holders": [
+          {
+            "manager": "谢治宇",
+            "org": "兴证全球基金",
+            "style": "科技港股医药",
+            "value_yi": 35.9,
+            "weight_pct": 5.9,
+            "action": "加仓 +19%"
+          }
+        ],
+        "total_value_yi": 35.9,
+        "top1_count": 0
+      },
+      {
+        "code": "688120.SH",
+        "name": "华海清科",
+        "sector": "电子",
+        "holders": [
+          {
+            "manager": "谢治宇",
+            "org": "兴证全球基金",
+            "style": "科技港股医药",
+            "value_yi": 25.05,
+            "weight_pct": 4.12,
+            "action": "持有"
+          }
+        ],
+        "total_value_yi": 25.05,
+        "top1_count": 0
+      },
+      {
+        "code": "600160.SH",
+        "name": "巨化股份",
+        "sector": "基础化工",
+        "holders": [
+          {
+            "manager": "谢治宇",
+            "org": "兴证全球基金",
+            "style": "科技港股医药",
+            "value_yi": 24.65,
+            "weight_pct": 4.05,
+            "action": "减仓 -29%"
+          }
+        ],
+        "total_value_yi": 24.65,
+        "top1_count": 0
+      },
+      {
+        "code": "300347.SZ",
+        "name": "泰格医药",
+        "sector": "医药",
+        "holders": [
+          {
+            "manager": "谢治宇",
+            "org": "兴证全球基金",
+            "style": "科技港股医药",
+            "value_yi": 21.35,
+            "weight_pct": 3.51,
+            "action": "减仓 -0.3%"
+          }
+        ],
+        "total_value_yi": 21.35,
+        "top1_count": 0
+      },
+      {
+        "code": "688319.SH",
+        "name": "欧林生物",
+        "sector": "医药",
+        "holders": [
+          {
+            "manager": "谢治宇",
+            "org": "兴证全球基金",
+            "style": "科技港股医药",
+            "value_yi": 19.25,
+            "weight_pct": 3.17,
+            "action": "持有"
+          }
+        ],
+        "total_value_yi": 19.25,
+        "top1_count": 0
+      },
+      {
+        "code": "603259.SH",
+        "name": "药明康德",
+        "sector": "医药",
+        "holders": [
+          {
+            "manager": "谢治宇",
+            "org": "兴证全球基金",
+            "style": "科技港股医药",
+            "value_yi": 18.84,
+            "weight_pct": 3.1,
+            "action": "新建"
+          },
+          {
+            "manager": "葛兰",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          },
+          {
+            "manager": "周蔚文",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          },
+          {
+            "manager": "赵磊",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          },
+          {
+            "manager": "农冰立",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          }
+        ],
+        "total_value_yi": 18.84,
+        "top1_count": 4,
+        "top1_managers": [
+          "葛兰",
+          "周蔚文",
+          "赵磊",
+          "农冰立"
+        ],
+        "consensus_note": "谢治宇 Q3 新建 18.84 亿（占比 3.10%）"
+      },
+      {
+        "code": "300750.SZ",
+        "name": "宁德时代",
+        "sector": "电力设备",
+        "holders": [
+          {
+            "manager": "谢治宇",
+            "org": "兴证全球基金",
+            "style": "科技港股医药",
+            "value_yi": 18.67,
+            "weight_pct": 3.07,
+            "action": "持有"
+          },
+          {
+            "manager": "朱少醒",
+            "org": "富国基金",
+            "style": "均衡配置科技",
+            "value_yi": 14.41,
+            "weight_pct": 2.82,
+            "action": "减仓 -47%"
+          }
+        ],
+        "total_value_yi": 33.08,
+        "top1_count": 0
+      },
+      {
+        "code": "688041.SH",
+        "name": "海光信息",
+        "sector": "电子",
+        "holders": [
+          {
+            "manager": "谢治宇",
+            "org": "兴证全球基金",
+            "style": "科技港股医药",
+            "value_yi": 18.24,
+            "weight_pct": 3.0,
+            "action": "持有"
+          }
+        ],
+        "total_value_yi": 18.24,
+        "top1_count": 0
+      },
+      {
+        "code": "002156.SZ",
+        "name": "通富微电",
+        "sector": "电子",
+        "holders": [
+          {
+            "manager": "谢治宇",
+            "org": "兴证全球基金",
+            "style": "科技港股医药",
+            "value_yi": 16.87,
+            "weight_pct": 2.77,
+            "action": "新建"
+          }
+        ],
+        "total_value_yi": 16.87,
+        "top1_count": 0
+      },
+      {
+        "code": "002142.SZ",
+        "name": "宁波银行",
+        "sector": "银行",
+        "holders": [
+          {
+            "manager": "朱少醒",
+            "org": "富国基金",
+            "style": "均衡配置科技",
+            "value_yi": 49.96,
+            "weight_pct": 9.79,
+            "action": "减仓 -6%"
+          }
+        ],
+        "total_value_yi": 49.96,
+        "top1_count": 0
+      },
+      {
+        "code": "002353.SZ",
+        "name": "杰瑞股份",
+        "sector": "机械",
+        "holders": [
+          {
+            "manager": "朱少醒",
+            "org": "富国基金",
+            "style": "均衡配置科技",
+            "value_yi": 39.02,
+            "weight_pct": 7.64,
+            "action": "加仓 +7%"
+          }
+        ],
+        "total_value_yi": 39.02,
+        "top1_count": 0
+      },
+      {
+        "code": "603129.SH",
+        "name": "春风动力",
+        "sector": "汽车",
+        "holders": [
+          {
+            "manager": "朱少醒",
+            "org": "富国基金",
+            "style": "均衡配置科技",
+            "value_yi": 22.05,
+            "weight_pct": 4.32,
+            "action": "减仓 -12%"
+          }
+        ],
+        "total_value_yi": 22.05,
+        "top1_count": 0
+      },
+      {
+        "code": "688266.SH",
+        "name": "泽璟制药",
+        "sector": "医药",
+        "holders": [
+          {
+            "manager": "朱少醒",
+            "org": "富国基金",
+            "style": "均衡配置科技",
+            "value_yi": 18.48,
+            "weight_pct": 3.62,
+            "action": "加仓 +30%"
+          }
+        ],
+        "total_value_yi": 18.48,
+        "top1_count": 0
+      },
+      {
+        "code": "688548.SH",
+        "name": "广钢气体",
+        "sector": "基础化工",
+        "holders": [
+          {
+            "manager": "朱少醒",
+            "org": "富国基金",
+            "style": "均衡配置科技",
+            "value_yi": 18.43,
+            "weight_pct": 3.61,
+            "action": "减仓 -13%"
+          }
+        ],
+        "total_value_yi": 18.43,
+        "top1_count": 0
+      },
+      {
+        "code": "688825.SH",
+        "name": "长鑫科技",
+        "sector": "电子",
+        "holders": [
+          {
+            "manager": "朱少醒",
+            "org": "富国基金",
+            "style": "均衡配置科技",
+            "value_yi": 16.44,
+            "weight_pct": 3.22,
+            "action": "新建"
+          },
+          {
+            "manager": "张仲维",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          },
+          {
+            "manager": "曹晋",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          },
+          {
+            "manager": "张璐涵",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          },
+          {
+            "manager": "冯帆",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          },
+          {
+            "manager": "赖礼辉",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          }
+        ],
+        "total_value_yi": 16.44,
+        "top1_count": 5,
+        "top1_managers": [
+          "张仲维",
+          "曹晋",
+          "张璐涵",
+          "冯帆",
+          "赖礼辉"
+        ],
+        "consensus_note": "朱少醒 Q3 新建 16.44 亿进入前十重仓，呼应 DRAM/HBM 涨价周期"
+      },
+      {
+        "code": "600519.SH",
+        "name": "贵州茅台",
+        "sector": "食品饮料",
+        "holders": [
+          {
+            "manager": "朱少醒",
+            "org": "富国基金",
+            "style": "均衡配置科技",
+            "value_yi": 11.33,
+            "weight_pct": 2.22,
+            "action": "持有"
+          }
+        ],
+        "total_value_yi": 11.33,
+        "top1_count": 0
+      },
+      {
+        "code": "688167.SH",
+        "name": "炬光科技",
+        "sector": "电子",
+        "holders": [
+          {
+            "manager": "傅鹏博",
+            "org": "睿远基金",
+            "style": "科技制造",
+            "value_yi": 24.51,
+            "weight_pct": 8.3,
+            "action": "减仓 -4%"
+          }
+        ],
+        "total_value_yi": 24.51,
+        "top1_count": 0
+      },
+      {
+        "code": "300751.SZ",
+        "name": "迈为股份",
+        "sector": "机械",
+        "holders": [
+          {
+            "manager": "傅鹏博",
+            "org": "睿远基金",
+            "style": "科技制造",
+            "value_yi": 21.85,
+            "weight_pct": 7.4,
+            "action": "加仓 +6%"
+          }
+        ],
+        "total_value_yi": 21.85,
+        "top1_count": 0
+      },
+      {
+        "code": "300476.SZ",
+        "name": "胜宏科技",
+        "sector": "电子",
+        "holders": [
+          {
+            "manager": "傅鹏博",
+            "org": "睿远基金",
+            "style": "科技制造",
+            "value_yi": 20.77,
+            "weight_pct": 7.03,
+            "action": "减仓 -9%"
+          }
+        ],
+        "total_value_yi": 20.77,
+        "top1_count": 0
+      },
+      {
+        "code": "688808.SH",
+        "name": "联讯仪器",
+        "sector": "机械",
+        "holders": [
+          {
+            "manager": "傅鹏博",
+            "org": "睿远基金",
+            "style": "科技制造",
+            "value_yi": 17.17,
+            "weight_pct": 5.81,
+            "action": "新建"
+          }
+        ],
+        "total_value_yi": 17.17,
+        "top1_count": 0
+      },
+      {
+        "code": "002008.SZ",
+        "name": "大族激光",
+        "sector": "机械",
+        "holders": [
+          {
+            "manager": "傅鹏博",
+            "org": "睿远基金",
+            "style": "科技制造",
+            "value_yi": 14.34,
+            "weight_pct": 4.86,
+            "action": "加仓 +5%"
+          }
+        ],
+        "total_value_yi": 14.34,
+        "top1_count": 0
+      },
+      {
+        "code": "002444.SZ",
+        "name": "巨星科技",
+        "sector": "机械",
+        "holders": [
+          {
+            "manager": "傅鹏博",
+            "org": "睿远基金",
+            "style": "科技制造",
+            "value_yi": 13.58,
+            "weight_pct": 4.6,
+            "action": "持有"
+          }
+        ],
+        "total_value_yi": 13.58,
+        "top1_count": 0
+      },
+      {
+        "code": "601899.SH",
+        "name": "紫金矿业",
+        "sector": "有色金属",
+        "holders": [
+          {
+            "manager": "蓝小康",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          },
+          {
+            "manager": "张迎军",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          },
+          {
+            "manager": "朱运",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          },
+          {
+            "manager": "吉莉",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          },
+          {
+            "manager": "李杨",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          },
+          {
+            "manager": "王凌霄",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          }
+        ],
+        "total_value_yi": 0.0,
+        "top1_count": 6,
+        "top1_managers": [
+          "蓝小康",
+          "张迎军",
+          "朱运",
+          "吉莉",
+          "李杨",
+          "王凌霄"
+        ],
+        "consensus_note": "周期/资源方向公募第一共识标的"
+      },
+      {
+        "code": "002463.SZ",
+        "name": "沪电股份",
+        "sector": "电子/PCB",
+        "holders": [
+          {
+            "manager": "马磊",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          },
+          {
+            "manager": "高楠",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          },
+          {
+            "manager": "郭玮羚",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          }
+        ],
+        "total_value_yi": 0.0,
+        "top1_count": 3,
+        "top1_managers": [
+          "马磊",
+          "高楠",
+          "郭玮羚"
+        ],
+        "consensus_note": "AI 服务器高多层 PCB 核心标的"
+      },
+      {
+        "code": "688256.SH",
+        "name": "寒武纪",
+        "sector": "半导体/AI芯片",
+        "holders": [
+          {
+            "manager": "袁曦",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          },
+          {
+            "manager": "邓心怡",
+            "org": "公募顶流",
+            "style": "",
+            "value_yi": null,
+            "weight_pct": null,
+            "action": "第一大重仓"
+          }
+        ],
+        "total_value_yi": 0.0,
+        "top1_count": 2,
+        "top1_managers": [
+          "袁曦",
+          "邓心怡"
+        ],
+        "consensus_note": "国产 AI 算力芯片核心重仓"
+      }
+    ],
+    "panel_matches": [
+      {
+        "code": "688249.SH",
+        "name": "晶合集成",
+        "today_pct": 10.261125,
+        "panel_source": "全A涨幅前列",
+        "holders_summary": "谢治宇(40.9亿/加仓 +105%)、乔迁(第一大重仓)",
+        "consensus_note": "谢治宇 Q3 翻倍加仓+105% 至 40.85 亿（跃居第 1 重仓）"
+      }
+    ],
+    "supply_chain_verify": [
+      "半导体/存储硬数据（aidata.jrglobal.xyz）：韩国 2026-10 半导体出口 $56.44B（同比 +259.4%，其中 DRAM +369.8%、NAND +206.8%）；WSTS 全球半导体月销 $196.33B（+146.8%）——直接印证 A 股半导体/存储涨停链与公募新建长鑫科技的景气度。",
+      "台湾算力链 2026-10 月营收同比：台积电 +59.7%、世芯-KY +515.8%、技嘉 +136.7%、创意 +127.0%、纬创 +117.6%；Ornn 算力成本指数（2026-11-20）B200=9.10 / H100=2.90；Ramp 美企 AI 采用率 56.8%（Anthropic 44.78% 反超 OpenAI 40.56%）。"
     ]
   },
   "history": {},
