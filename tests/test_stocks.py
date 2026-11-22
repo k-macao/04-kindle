@@ -308,7 +308,8 @@ class BuildTest(unittest.TestCase):
         self.assertEqual(data["doc"], "stocks.txt")
         self.assertEqual(data["data_time_kind"], "exact")
         self.assertEqual(data["counts"], {"indices": 1, "sectors": 1, "market": 5584,
-                                          "hk": 2, "limit_up": 1, "rrg": 0, "cross": 0})
+                                          "hk": 2, "limit_up": 1, "rrg": 0, "cross": 0,
+                                          "volume_price": 0})
         self.assertEqual(data["market"]["up"], 2861)
         self.assertEqual(data["hk"]["data_time"], "2026-07-17T08:13:11Z")
         text = build_stocks.render_txt(payload, "2026-11-17 15:00:00")
@@ -364,7 +365,9 @@ class BuildTest(unittest.TestCase):
             self.assertIn("function hkCard(", page)
             self.assertIn("function spark(", page)
             self.assertIn("function limitRows(", page)
-            self.assertIn("腾讯公开行情接口", page)
+            self.assertIn("result-grid", page)
+            self.assertIn("数据已过期，请先核对上方行情时间", page)
+            self.assertNotIn("定时任务被延迟或丢弃", page)
 
     def test_epub_is_valid_zip_with_cards(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -1239,30 +1242,29 @@ class JrglobalRadarTest(unittest.TestCase):
         self.assertEqual(matches[0]["name"], "晶合集成")
         self.assertIn("谢治宇", matches[0]["holders_summary"])
 
-        # 纯文本、EPUB、网页三端均包含聪明钱雷达与 AI 数据智库
+        # 三端只输出结果卡，不再铺产品说明、覆盖口径和大段叙述。
         txt = build_stocks.render_txt(payload, "2026-11-20 15:20:00", brief=None)
-        self.assertIn("【聪明钱雷达 & AI 智库】", txt)
-        self.assertIn("盘面反查：晶合集成", txt)
-        self.assertIn("aidata.jrglobal.xyz", txt)
-        self.assertIn("巴菲特", txt)
-        self.assertIn("四大工具本次落盘口径", txt)
-        self.assertIn("AI 芯片出货", txt)
-        self.assertIn("宏观看板（目录覆盖（非单点宏观读数））", txt)
+        self.assertIn("【结果数据】", txt)
+        self.assertIn("[聪明钱] 晶合集成", txt)
+        self.assertIn("[半导体景气]", txt)
+        self.assertIn("[组合]", txt)
+        self.assertNotIn("四大工具本次落盘口径", txt)
+        self.assertNotIn("宏观口径说明", txt)
 
         xhtml = build_stocks.render_epub_xhtml(payload, "2026-11-20 15:20:00", brief=None)
-        self.assertIn("聪明钱雷达 &amp; AI 数据智库", xhtml)
-        self.assertIn("四大工具", xhtml)
-        self.assertIn("组合实验室基准", xhtml)
-        self.assertIn("宏观看板", xhtml)
+        self.assertIn("结果数据", xhtml)
+        self.assertIn("聪明钱 / 机构共识", xhtml)
+        self.assertIn("半导体景气", xhtml)
+        self.assertIn("组合收益", xhtml)
         self.assertIn("晶合集成", xhtml)
+        self.assertNotIn("四大工具", xhtml)
         for banned in ("display:grid", "display:flex", "<svg"):
             self.assertNotIn(banned, xhtml)
 
         page = build_stocks.render_html()
         self.assertIn("function radarSection", page)
         self.assertIn("window.filterRadarStock", page)
-        self.assertIn("tool_inventory", page)
-        self.assertIn("macro.coverage", page)
-        self.assertIn("AI 芯片出货", page)
-        self.assertIn("jrglobal.xyz/tools/", page)
+        self.assertIn("result-grid", page)
+        self.assertIn("resultCard('半导体景气'", page)
+        self.assertNotIn("四大工具本次落盘口径", page)
 

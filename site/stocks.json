@@ -1,12 +1,12 @@
 {
-  "generated": "2026-11-22T15:35:51Z",
+  "generated": "2026-11-22T17:27:42Z",
   "doc": "stocks.txt",
   "epub": "stocks.epub",
   "title": "同花顺行情面板",
   "data_timestamp": 1795072642000,
   "data_time": "2026-11-19T07:17:22Z",
   "data_time_kind": "exact",
-  "data_hash": "6f1fbd4a2752b331",
+  "data_hash": "e9515270a11c951a",
   "demo": false,
   "view": null,
   "counts": {
@@ -16,7 +16,8 @@
     "hk": 23,
     "limit_up": 20,
     "rrg": 0,
-    "cross": 91
+    "cross": 91,
+    "volume_price": 91
   },
   "indices": [
     {
@@ -2320,6 +2321,462 @@
   ],
   "rrg": null,
   "cross": {
+    "mode": "cross_section",
+    "model": "板块横截面（单日收盘）",
+    "as_of": "2026-11-19",
+    "why": "",
+    "counts": {
+      "total": 91,
+      "up": 1,
+      "down": 90,
+      "flat": 0
+    },
+    "market": {
+      "count": 5584,
+      "up": 649,
+      "down": 4876,
+      "flat": 48,
+      "limit_up": 27,
+      "limit_down": 84,
+      "avg_ratio": -2.5463111751247087,
+      "turnover": 1314579172076.0999
+    },
+    "stats": {
+      "median": -2.43,
+      "mean": -2.41,
+      "std": 1.08,
+      "csad": 0.79,
+      "herding": true
+    },
+    "bins": [
+      {
+        "label": "≥ +2%",
+        "count": 0
+      },
+      {
+        "label": "+1 ~ +2%",
+        "count": 0
+      },
+      {
+        "label": "0 ~ +1%",
+        "count": 1
+      },
+      {
+        "label": "-1 ~ 0",
+        "count": 6
+      },
+      {
+        "label": "-2 ~ -1%",
+        "count": 22
+      },
+      {
+        "label": "-3 ~ -2%",
+        "count": 38
+      },
+      {
+        "label": "-4 ~ -3%",
+        "count": 18
+      },
+      {
+        "label": "≤ -4%",
+        "count": 6
+      }
+    ],
+    "winners": [
+      {
+        "thscode": "881151.TI",
+        "name": "机场航运",
+        "today_pct": 0.72,
+        "turnover": 3299845900.0,
+        "overnight_pct": 0.19,
+        "intraday_pct": 0.52,
+        "amplitude_pct": 1.14,
+        "clv": 0.74
+      },
+      {
+        "thscode": "881157.TI",
+        "name": "证券",
+        "today_pct": -0.05,
+        "turnover": 14944025000.0,
+        "overnight_pct": -0.04,
+        "intraday_pct": -0.01,
+        "amplitude_pct": 1.34,
+        "clv": 0.61
+      },
+      {
+        "thscode": "881172.TI",
+        "name": "电子化学品",
+        "today_pct": -0.06,
+        "turnover": 21727436000.0,
+        "overnight_pct": -0.57,
+        "intraday_pct": 0.52,
+        "amplitude_pct": 2.91,
+        "clv": 0.29
+      },
+      {
+        "thscode": "881155.TI",
+        "name": "银行",
+        "today_pct": -0.62,
+        "turnover": 31035724000.0,
+        "overnight_pct": 0.07,
+        "intraday_pct": -0.69,
+        "amplitude_pct": 1.41,
+        "clv": 0.41
+      },
+      {
+        "thscode": "881156.TI",
+        "name": "保险",
+        "today_pct": -0.74,
+        "turnover": 5353840300.0,
+        "overnight_pct": 0.15,
+        "intraday_pct": -0.88,
+        "amplitude_pct": 1.66,
+        "clv": 0.47
+      }
+    ],
+    "losers": [
+      {
+        "thscode": "881174.TI",
+        "name": "厨卫电器",
+        "today_pct": -6.18,
+        "turnover": 2317020500.0,
+        "overnight_pct": -2.86,
+        "intraday_pct": -3.42,
+        "amplitude_pct": 4.38,
+        "clv": 0.07
+      },
+      {
+        "thscode": "881274.TI",
+        "name": "影视院线",
+        "today_pct": -5.93,
+        "turnover": 7706781500.0,
+        "overnight_pct": -2.62,
+        "intraday_pct": -3.4,
+        "amplitude_pct": 3.95,
+        "clv": 0.11
+      },
+      {
+        "thscode": "881164.TI",
+        "name": "文化传媒",
+        "today_pct": -4.69,
+        "turnover": 27611113000.0,
+        "overnight_pct": -0.49,
+        "intraday_pct": -4.23,
+        "amplitude_pct": 4.51,
+        "clv": 0.07
+      },
+      {
+        "thscode": "881275.TI",
+        "name": "游戏",
+        "today_pct": -4.4,
+        "turnover": 7083077400.0,
+        "overnight_pct": -1.37,
+        "intraday_pct": -3.07,
+        "amplitude_pct": 3.45,
+        "clv": 0.09
+      },
+      {
+        "thscode": "881271.TI",
+        "name": "IT服务",
+        "today_pct": -4.19,
+        "turnover": 43124929000.0,
+        "overnight_pct": -0.22,
+        "intraday_pct": -3.98,
+        "amplitude_pct": 4.44,
+        "clv": 0.09
+      }
+    ],
+    "winners_label": "相对抗跌",
+    "losers_label": "领跌",
+    "money": {
+      "total": 1314579172076.0,
+      "size": 20,
+      "top": [
+        {
+          "name": "半导体",
+          "today_pct": -0.8,
+          "turnover": 216327640000.0,
+          "share": 16.5
+        },
+        {
+          "name": "通信设备",
+          "today_pct": -3.37,
+          "turnover": 77640155000.0,
+          "share": 5.9
+        },
+        {
+          "name": "元件",
+          "today_pct": -1.74,
+          "turnover": 55339058000.0,
+          "share": 4.2
+        },
+        {
+          "name": "有色金属",
+          "today_pct": -1.14,
+          "turnover": 46900272000.0,
+          "share": 3.6
+        },
+        {
+          "name": "IT服务",
+          "today_pct": -4.19,
+          "turnover": 43124929000.0,
+          "share": 3.3
+        },
+        {
+          "name": "汽车零部件",
+          "today_pct": -3.24,
+          "turnover": 38500501000.0,
+          "share": 2.9
+        },
+        {
+          "name": "通用设备",
+          "today_pct": -3.32,
+          "turnover": 36121442000.0,
+          "share": 2.7
+        },
+        {
+          "name": "银行",
+          "today_pct": -0.62,
+          "turnover": 31035724000.0,
+          "share": 2.4
+        },
+        {
+          "name": "消费电子",
+          "today_pct": -3.6,
+          "turnover": 29407252000.0,
+          "share": 2.2
+        },
+        {
+          "name": "电池",
+          "today_pct": -2.64,
+          "turnover": 28686618000.0,
+          "share": 2.2
+        }
+      ],
+      "top_avg": -2.48,
+      "tail_avg": -2.39,
+      "top_share": 16.5,
+      "top_name": "半导体",
+      "top_pct": -0.8
+    },
+    "spread": {
+      "big": "沪深300",
+      "big_pct": 0.03,
+      "small": "中证1000",
+      "small_pct": -1.88,
+      "spread": 1.91
+    },
+    "themes": [
+      {
+        "name": "半导体材料/封测/存储",
+        "count": 11,
+        "examples": [
+          "京蓝科技",
+          "兴业股份",
+          "兴欣新材"
+        ]
+      },
+      {
+        "name": "算力/液冷/数据中心",
+        "count": 3,
+        "examples": [
+          "金科股份",
+          "广电电气",
+          "康盛股份"
+        ]
+      },
+      {
+        "name": "机器人",
+        "count": 2,
+        "examples": [
+          "九阳股份",
+          "襄阳轴承"
+        ]
+      },
+      {
+        "name": "新能源/电力设备",
+        "count": 2,
+        "examples": [
+          "原尚股份",
+          "*ST仕净"
+        ]
+      },
+      {
+        "name": "并购重组/国资",
+        "count": 1,
+        "examples": [
+          "*ST西旅"
+        ]
+      },
+      {
+        "name": "其他",
+        "count": 1,
+        "examples": [
+          "红宝丽"
+        ]
+      }
+    ],
+    "intraday": {
+      "true_support": [
+        {
+          "name": "机场航运",
+          "today_pct": 0.72,
+          "overnight_pct": 0.19,
+          "intraday_pct": 0.52,
+          "clv": 0.74,
+          "amplitude_pct": 1.14,
+          "share": 0.3,
+          "tag": "日内走强"
+        },
+        {
+          "name": "有色金属",
+          "today_pct": -1.14,
+          "overnight_pct": -1.52,
+          "intraday_pct": 0.39,
+          "clv": 0.81,
+          "amplitude_pct": 2.55,
+          "share": 3.6,
+          "tag": "低开走阳"
+        }
+      ],
+      "fade_warning": [
+        {
+          "name": "半导体",
+          "today_pct": -0.8,
+          "overnight_pct": -0.45,
+          "intraday_pct": -0.35,
+          "clv": 0.28,
+          "amplitude_pct": 3.46,
+          "share": 16.5,
+          "tag": "放量长上影"
+        },
+        {
+          "name": "通信设备",
+          "today_pct": -3.37,
+          "overnight_pct": -1.05,
+          "intraday_pct": -2.35,
+          "clv": 0.14,
+          "amplitude_pct": 2.71,
+          "share": 5.9,
+          "tag": "放量长上影"
+        },
+        {
+          "name": "软件开发",
+          "today_pct": -3.3,
+          "overnight_pct": 0.33,
+          "intraday_pct": -3.62,
+          "clv": 0.11,
+          "amplitude_pct": 4.1,
+          "share": 2.1,
+          "tag": "高开低走派发"
+        },
+        {
+          "name": "计算机设备",
+          "today_pct": -3.59,
+          "overnight_pct": -0.11,
+          "intraday_pct": -3.48,
+          "clv": 0.12,
+          "amplitude_pct": 3.94,
+          "share": 1.9,
+          "tag": "高开低走派发"
+        },
+        {
+          "name": "化学制药",
+          "today_pct": -2.15,
+          "overnight_pct": -0.15,
+          "intraday_pct": -2.01,
+          "clv": 0.15,
+          "amplitude_pct": 2.6,
+          "share": 1.4,
+          "tag": "高开低走派发"
+        }
+      ],
+      "broad": [
+        {
+          "name": "科创50",
+          "today_pct": 1.83,
+          "overnight_pct": -0.46,
+          "intraday_pct": 2.29,
+          "amplitude_pct": 4.52,
+          "clv": 0.89
+        },
+        {
+          "name": "创业板指",
+          "today_pct": -0.79,
+          "overnight_pct": -0.93,
+          "intraday_pct": 0.14,
+          "amplitude_pct": 1.89,
+          "clv": 0.49
+        },
+        {
+          "name": "沪深300",
+          "today_pct": 0.03,
+          "overnight_pct": -0.28,
+          "intraday_pct": 0.31,
+          "amplitude_pct": 1.45,
+          "clv": 0.81
+        },
+        {
+          "name": "上证50",
+          "today_pct": 0.32,
+          "overnight_pct": -0.07,
+          "intraday_pct": 0.4,
+          "amplitude_pct": 1.7,
+          "clv": 0.94
+        },
+        {
+          "name": "中证1000",
+          "today_pct": -1.88,
+          "overnight_pct": -0.32,
+          "intraday_pct": -1.57,
+          "amplitude_pct": 1.99,
+          "clv": 0.21
+        },
+        {
+          "name": "上证指数",
+          "today_pct": -0.28,
+          "overnight_pct": -0.13,
+          "intraday_pct": -0.15,
+          "amplitude_pct": 1.01,
+          "clv": 0.82
+        }
+      ]
+    },
+    "limit_up_structure": {
+      "total": 20,
+      "max_board": 3,
+      "max_board_name": "盛剑科技",
+      "multi_board_count": 2,
+      "first_board_count": 18,
+      "early_count": 8,
+      "afternoon_count": 5,
+      "total_seal_yi": 0.84,
+      "median_seal_wan": 376.0
+    },
+    "sentiment": {
+      "score": 38,
+      "level": "防守",
+      "divergence": "指数托底、个股冰点",
+      "components": {
+        "breadth": 2.9,
+        "extremes": 6.1,
+        "support": 13.1,
+        "ladder": 9.5,
+        "seal": 5.9
+      }
+    },
+    "narrative": [
+      "91 个板块：红 1 · 绿 90 · 平 0，中位数 -2.43%、离散度（标准差）1.08；全 A 平均 -2.55%，板块与个股几乎同步——跌（涨）是系统性的。",
+      "涨停 27 / 跌停 84：跌停是涨停的 3.1 倍，杀跌的尾部比赚钱的尾部粗，情绪面还在恶化。",
+      "九成板块翻绿、离散度还不到 1.5 → 这是整体减仓式的普跌，不是板块间搬家；这种日子里「谁抗跌」多是仓位效应，别当成风格切换。",
+      "沪深300 +0.03% vs 中证1000 -1.88%（差 +1.91 个百分点）→ 权重抗跌、小盘杀跌。",
+      "成交额前 20 平均 -2.48%、后 20 平均 -2.39%——成交额前列与末列涨跌几乎一样，量没有提供避风港；最大的一块是半导体，占两市成交 16.5%，今日 -0.80%。",
+      "涨停 20 只里，11 只集中在「半导体材料/封测/存储」（京蓝科技、兴业股份、兴欣新材）；其次 算力/液冷/数据中心 3 只、机器人 2 只——赚钱效应就看这几条链。",
+      "隔夜 vs 日内（APM 日内动量拆分）：盘中低开走阳真承接：机场航运（隔夜 +0.19% → 日内 +0.52%，分位 0.74）、有色金属（隔夜 -1.52% → 日内 +0.39%，分位 0.81）；冲高回落/派发预警：半导体（放量长上影，日内 -0.35%，分位 0.28）、通信设备（放量长上影，日内 -2.35%，分位 0.14）、软件开发（高开低走派发，日内 -3.62%，分位 0.11）。",
+      "情绪温度 38/100（防守 · 指数托底、个股冰点：宽度 3/25 · 极值 6/25 · 日内承接 13/20 · 连板 10/15 · 封板 6/15）；CCK 横截面绝对偏差 CSAD 0.79，呈同向羊群交易；最高 3 连板（盛剑科技），连板 2 / 首板 18，封单合计 0.84 亿。"
+    ]
+  },
+  "volume_price": {
     "mode": "cross_section",
     "model": "板块横截面（单日收盘）",
     "as_of": "2026-11-19",
