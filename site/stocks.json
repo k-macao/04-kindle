@@ -1,12 +1,12 @@
 {
-  "generated": "2026-11-22T07:32:35Z",
+  "generated": "2026-11-22T15:35:51Z",
   "doc": "stocks.txt",
   "epub": "stocks.epub",
   "title": "同花顺行情面板",
   "data_timestamp": 1795072642000,
   "data_time": "2026-11-19T07:17:22Z",
   "data_time_kind": "exact",
-  "data_hash": "e2aa4772f8d4ffe0",
+  "data_hash": "6f1fbd4a2752b331",
   "demo": false,
   "view": null,
   "counts": {
@@ -2798,7 +2798,7 @@
         "key": "aidata",
         "name": "AI 数据智库 AI Data Hub",
         "url": "https://aidata.jrglobal.xyz/",
-        "summary": "40+ 个每日同步数据集：模型价格、AI 芯片出货、HBM/DRAM 价格、台韩半导体高频硬数据、大厂数据中心 CapEx，提供免费公开 API",
+        "summary": "约 30 个公开数据集：模型价格、AI 芯片出货、HBM/DRAM 价格、台韩半导体高频硬数据、大厂数据中心 CapEx，提供免费只读 API",
         "free": "免费 · 免 Key API"
       },
       {
@@ -2814,6 +2814,119 @@
         "url": "https://macro.jrglobal.xyz/",
         "summary": "每日早 9 点更新：5,600+ 条宏观序列、411 张图表、中国宏观月度预测、美联储利率预期、15 条国债收益率曲线",
         "free": "公众号回复「预期差」获取访问码"
+      }
+    ],
+    "coverage": {
+      "cn_investors": 11615,
+      "us_13f_institutions": 2381,
+      "portfolio_assets": 53000,
+      "portfolio_optimizers": 12,
+      "macro_series": 5600,
+      "macro_charts": 411,
+      "macro_yield_curves": 15,
+      "ai_datasets": 30
+    },
+    "tool_inventory": [
+      {
+        "key": "radar",
+        "name": "聪明钱雷达 SmartMoney Radar",
+        "url": "https://radar.jrglobal.xyz/",
+        "free": "免费 · 免注册",
+        "summary": "A股八类 11,615 位投资者（公募/牛散/国家队/社保/外资）+ 美股 2,381 家 13F 机构，支持按股票反查持有方与每季调仓",
+        "data_as_of": "Q3 2026",
+        "scope": "季度持仓快照 + 当日盘面反查",
+        "metrics": [
+          {
+            "label": "A股投资者",
+            "value": "11,615 位"
+          },
+          {
+            "label": "A股类别",
+            "value": "8 类"
+          },
+          {
+            "label": "美股13F",
+            "value": "2,381 家"
+          },
+          {
+            "label": "本地明细",
+            "value": "6 位经理 / 54 条重仓 / 9 家13F样本"
+          }
+        ]
+      },
+      {
+        "key": "aidata",
+        "name": "AI 数据智库 AI Data Hub",
+        "url": "https://aidata.jrglobal.xyz/",
+        "free": "免费 · 免 Key API",
+        "summary": "约 30 个公开数据集：模型价格、AI 芯片出货、HBM/DRAM 价格、台韩半导体高频硬数据、大厂数据中心 CapEx，提供免费只读 API",
+        "data_as_of": "2026-11-20",
+        "scope": "产业链月报 + 芯片/算力/企业采用率快照",
+        "metrics": [
+          {
+            "label": "公开数据集",
+            "value": "约 30 个"
+          },
+          {
+            "label": "台湾算力链",
+            "value": "10 家"
+          },
+          {
+            "label": "芯片/数据中心",
+            "value": "5 款 / 4 座"
+          },
+          {
+            "label": "GPU/厂商",
+            "value": "5 款 / 4 家"
+          }
+        ]
+      },
+      {
+        "key": "portfolio",
+        "name": "组合实验室 Portfolio Lab",
+        "url": "https://portfolio.jrglobal.xyz/",
+        "free": "分析优化免登录（保存需访问码）",
+        "summary": "5.3 万+资产（A股/ETF/公募/私募/美股）同组合回测与 12 种目标优化（MVO/风险平价/HRP/HERC/防崩盘），每晚更新",
+        "data_as_of": "2026-11-20",
+        "scope": "基准组合收益快照",
+        "metrics": [
+          {
+            "label": "资产池",
+            "value": "53,000+"
+          },
+          {
+            "label": "优化方法",
+            "value": "12 种"
+          },
+          {
+            "label": "本地基准",
+            "value": "5 组"
+          }
+        ]
+      },
+      {
+        "key": "macro",
+        "name": "宏观看板 Macro Board",
+        "url": "https://macro.jrglobal.xyz/",
+        "free": "公众号回复「预期差」获取访问码",
+        "summary": "每日早 9 点更新：5,600+ 条宏观序列、411 张图表、中国宏观月度预测、美联储利率预期、15 条国债收益率曲线",
+        "data_as_of": "每日 09:00",
+        "scope": "目录覆盖（非单点宏观读数）",
+        "metrics": [
+          {
+            "label": "宏观时间序列",
+            "value": "5,600条+"
+          },
+          {
+            "label": "可视化图表",
+            "value": "411张"
+          },
+          {
+            "label": "国债收益率曲线",
+            "value": "15条"
+          }
+        ],
+        "note": "需访问码；本地面板只列覆盖口径，不伪造未取得的最新宏观数值"
       }
     ],
     "cn_categories": [
@@ -3807,6 +3920,33 @@
         "rank": null
       }
     ],
+    "macro_data": {
+      "scope": "目录覆盖（非单点宏观读数）",
+      "refresh": "每日 09:00",
+      "coverage": [
+        {
+          "name": "宏观时间序列",
+          "count": 5600,
+          "unit": "条+"
+        },
+        {
+          "name": "可视化图表",
+          "count": 411,
+          "unit": "张"
+        },
+        {
+          "name": "国债收益率曲线",
+          "count": 15,
+          "unit": "条"
+        }
+      ],
+      "modules": [
+        "中国宏观月度预测",
+        "美联储利率预期",
+        "中美国债收益率曲线"
+      ],
+      "access": "需访问码；本地面板只列覆盖口径，不伪造未取得的最新宏观数值"
+    },
     "stock_index": [
       {
         "code": "300408.SZ",

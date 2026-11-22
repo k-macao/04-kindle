@@ -626,7 +626,7 @@ def run_once(args, client):
             payload["errors"].append(f"涨停池失败：{exc}")
 
     # 4) 板块轮动 RRG（板块长期日 K + 快照；独立失败，不拖垮 A 股）
-    #    日 K 不够就退「单日横截面」：宁可换口径，也不让面板最后一段整块消失。
+    #    日 K 不够就退「单日横截面」：宁可换口径，也不让量化分析段整块消失。
     if not args.no_rrg:
         stamp = payload.get("index_timestamp")
         today_day = (sector_rrg.beijing_day(stamp)

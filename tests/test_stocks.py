@@ -1209,6 +1209,16 @@ class JrglobalRadarTest(unittest.TestCase):
         self.assertGreaterEqual(len(by_mgr), 5)
         self.assertTrue(any(r["name"] == "三环集团" for r in by_mgr))
 
+    def test_four_tool_snapshot_changes_the_panel_hash(self):
+        import jrglobal_radar
+        payload = json.loads(json.dumps(build_stocks.DEMO_PAYLOAD, ensure_ascii=False))
+        payload["radar"] = json.loads(json.dumps(
+            jrglobal_radar.cross_verify_panel(payload), ensure_ascii=False))
+        before = build_stocks.data_hash(payload)
+        payload["radar"]["macro_data"]["coverage"][1]["count"] += 1
+        after = build_stocks.data_hash(payload)
+        self.assertNotEqual(before, after)
+
     def test_cross_verify_panel_matches_top_gainers_and_renders_all_outputs(self):
         payload = dict(build_stocks.DEMO_PAYLOAD)
         payload["market"] = dict(payload["market"], top_gainers=[
@@ -1218,6 +1228,12 @@ class JrglobalRadarTest(unittest.TestCase):
         radar = data.get("radar") or {}
         self.assertEqual(radar.get("report_period"), "Q3 2026")
         self.assertEqual(len(radar.get("tools") or []), 4)
+        inventory = radar.get("tool_inventory") or []
+        self.assertEqual([row["key"] for row in inventory],
+                         ["radar", "aidata", "portfolio", "macro"])
+        self.assertEqual(inventory[0]["metrics"][0]["value"], "11,615 位")
+        self.assertIn("非单点宏观读数", inventory[3]["scope"])
+        self.assertEqual((radar.get("macro_data") or {})["coverage"][1]["count"], 411)
         matches = radar.get("panel_matches") or []
         self.assertEqual(len(matches), 1)
         self.assertEqual(matches[0]["name"], "晶合集成")
@@ -1229,9 +1245,15 @@ class JrglobalRadarTest(unittest.TestCase):
         self.assertIn("盘面反查：晶合集成", txt)
         self.assertIn("aidata.jrglobal.xyz", txt)
         self.assertIn("巴菲特", txt)
+        self.assertIn("四大工具本次落盘口径", txt)
+        self.assertIn("AI 芯片出货", txt)
+        self.assertIn("宏观看板（目录覆盖（非单点宏观读数））", txt)
 
         xhtml = build_stocks.render_epub_xhtml(payload, "2026-11-20 15:20:00", brief=None)
         self.assertIn("聪明钱雷达 &amp; AI 数据智库", xhtml)
+        self.assertIn("四大工具", xhtml)
+        self.assertIn("组合实验室基准", xhtml)
+        self.assertIn("宏观看板", xhtml)
         self.assertIn("晶合集成", xhtml)
         for banned in ("display:grid", "display:flex", "<svg"):
             self.assertNotIn(banned, xhtml)
@@ -1239,5 +1261,8 @@ class JrglobalRadarTest(unittest.TestCase):
         page = build_stocks.render_html()
         self.assertIn("function radarSection", page)
         self.assertIn("window.filterRadarStock", page)
+        self.assertIn("tool_inventory", page)
+        self.assertIn("macro.coverage", page)
+        self.assertIn("AI 芯片出货", page)
         self.assertIn("jrglobal.xyz/tools/", page)
 

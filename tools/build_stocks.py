@@ -533,7 +533,7 @@ def cross_section(payload):
 
 
 def final_sections(payload):
-    """面板最后一段二选一：能算 RRG 就用 RRG，否则用单日横截面。
+    """面板的量化段二选一：能算 RRG 就用 RRG，否则用单日横截面。
 
     两者**互斥**（同一位置只显示一个）：数据里万一都带着（比如拿旧清单重排），
     这里统一裁决成「RRG 优先」，清单、指纹、自检都走这一个入口，免得一边写
@@ -613,7 +613,7 @@ def _first_sentences(items, limit=BRIEF_NARRATIVE_LINES):
 
 
 def render_rrg_text(section, brief=None):
-    """RRG 段落的纯文本版（Kindle 面板最后一段）。
+    """RRG 量化段的纯文本版。
 
     ``brief``：只留抬头、象限分布与前 ``BRIEF_NARRATIVE_LINES`` 句结论，
     逐象限名单与出处折叠成一行提示。
@@ -744,6 +744,7 @@ def data_hash(payload, view=None):
     """
     history = payload.get("history") or {}
     rrg_part, cross_part = final_sections(payload)
+    radar_part = radar_section(payload)
     mode = (view.get("mode") if isinstance(view, dict)
             else ("brief" if view == "brief" else "full"))
     core = {
@@ -770,6 +771,9 @@ def data_hash(payload, view=None):
                    [(item.get("name"), item.get("count"))
                     for item in (cross.get("themes") or [])[:3]])
                   for cross in [cross_part] if cross],
+        # 四工具快照也会独立更新；只看行情价格会把「持仓/AI/月报/组合已更新」误判成无变化。
+        # stock_index 是由持仓与共识派生出的冗余索引，排除它以缩短 hash 输入。
+        "radar": {key: value for key, value in radar_part.items() if key != "stock_index"},
         "data_timestamp": payload.get("data_timestamp"),
     }
     raw = json.dumps(core, ensure_ascii=False, sort_keys=True)
@@ -1361,7 +1365,7 @@ h+='<tr><td>'+esc(r.name||r.thscode)+'</td>'+
 esc(['','领先','改善','滞后','疲软'][r.prev_quadrant]):'--')+'</td></tr>';});
 return h+'</table>';}
 // 单日横截面（RRG 的降级口径）：没有日 K 时至少把「普涨/普跌、量价、题材」
-// 三件事讲清楚，而不是让面板最后一段整块消失。
+// 三件事讲清楚，而不是让量化分析段整块消失。
 function crossSection(g,brief){
 if(!g||!g.counts)return '';
 var NARR=brief?3:999;
@@ -1449,6 +1453,12 @@ if(!r)return '';
 window.__RADAR_INDEX__=r.stock_index||[];
 var h='<section><h2>聪明钱雷达 &amp; AI 数据智库<span class="muted"> Jovian Research · '+
 esc(r.report_period||'Q3 2026')+' · <a href="https://jrglobal.xyz/tools/" target="_blank" rel="noopener" style="color:#000">jrglobal.xyz/tools/</a></span></h2>';
+if((r.tool_inventory||[]).length){
+h+='<table class="data rrg-table"><thead><tr><th>四大工具</th><th>本次落盘口径</th><th>数据规模（源站全量 / 本地样本分开计）</th></tr></thead><tbody>';
+r.tool_inventory.forEach(function(t){
+var metrics=(t.metrics||[]).map(function(m){return esc(m.label)+' <b>'+esc(m.value)+'</b>';}).join(' · ');
+h+='<tr><td><a href="'+esc(t.url||'#')+'" target="_blank" rel="noopener" style="color:#000"><b>'+esc(t.name)+'</b></a><br><span class="muted">'+esc(t.free||'')+'</span></td><td>'+esc(t.scope||'')+'<br><span class="muted">'+esc(t.data_as_of||'')+'</span></td><td>'+metrics+(t.note?'<br><span class="muted">'+esc(t.note)+'</span>':'')+'</td></tr>';});
+h+='</tbody></table>';}
 if((r.cn_categories||[]).length){
 h+='<div class="breadth">';
 r.cn_categories.forEach(function(c){
@@ -1496,10 +1506,24 @@ h+='</div><div><div class="k">组合实验室基准 &amp; 算力集群（portfol
 var v=b.return_1y_pct!==null&&b.return_1y_pct!==undefined?('1Y '+(b.return_1y_pct>=0?'+':'')+b.return_1y_pct.toFixed(1)+'%'):('6M +'+Number(b.return_6m_pct||0).toFixed(2)+'%');
 h+='<div class="rank"><span>'+esc(b.name)+'</span><b>'+v+'</b></div>';});
 h+='</div></div>';}
+if(!brief&&((ai.chip_shipments_q3_2026||[]).length||(ai.top_datacenters||[]).length)){
+h+='<div class="two" style="margin-top:8px"><div><div class="k">AI 芯片出货（Q3 2026 · H100e）</div>';
+(ai.chip_shipments_q3_2026||[]).forEach(function(x){
+h+='<div class="rank"><span>'+esc(x.chip)+'</span><b>'+esc(x.h100e)+' / '+Number(x.units||0).toLocaleString()+' 片</b></div>';});
+h+='</div><div><div class="k">头部算力集群</div>';
+(ai.top_datacenters||[]).forEach(function(x){
+h+='<div class="rank"><span>'+esc(x.name)+' · '+esc(x.owner)+'</span><b>'+esc(x.h100e)+' / '+Number(x.power_mw||0)+'MW</b></div>';});
+h+='</div></div>';}
+var macro=r.macro_data||{};
+if(!brief&&(macro.coverage||[]).length){
+h+='<div style="margin-top:10px"><div class="k">宏观看板 · '+esc(macro.scope||'目录覆盖')+' · '+esc(macro.refresh||'')+'</div><div class="breadth">';
+(macro.coverage||[]).forEach(function(x){
+h+='<div class="cell"><div class="k">'+esc(x.name)+'</div><div class="v">'+Number(x.count||0).toLocaleString()+esc(x.unit||'')+'</div><div class="s">macro.jrglobal.xyz</div></div>';});
+h+='</div><p class="src">模块：'+esc((macro.modules||[]).join(' / '))+'<br>'+esc(macro.access||'')+'</p></div>';}
 if((r.tools||[]).length){
 h+='<div class="themes" style="margin-top:8px">';
 r.tools.forEach(function(t){
-h+='<a class="chip" href="'+esc(t.url)+'" target="_blank" rel="noopener" style="color:#000;text-decoration:none"><b>'+esc(t.name)+'</b> · '+esc(t.free)+'</a>';});
+h+='<a class="chip" href="'+esc(t.url)+'" target="_blank" rel="noopener" style="color:#000;text-decoration:none"><b>'+esc(t.name)+'</b> · '+esc(t.free)+' · '+esc(t.summary||'')+'</a>';});
 h+='</div>';}
 return h+'</section>';}
 window.filterRadarStock=function(q){
@@ -1933,7 +1957,7 @@ def check(out_dir):
         if txt_path.is_file() and "【板块横截面】" not in txt_path.read_text(encoding="utf-8"):
             problems.append("清单里有 cross，但 stocks.txt 没有横截面段")
     if cross.get("counts") and (data.get("rrg") or {}).get("rows"):
-        # 两者互斥：面板最后一段只显示一个，清单里不该同时有两段
+        # 两者互斥：量化分析段只显示一个，清单里不该同时有两段
         problems.append("清单里 rrg 与 cross 同时存在")
     rrg = data.get("rrg") or {}
     if rrg.get("rows"):
