@@ -150,7 +150,7 @@ Feedly / Reeder。插件那套「News subscription」读的是 `site/news.json`�
 网页面板每 7 分钟检查一次清单，`generated` 变了才刷新。面板抬头会写「N 分钟前 /
 盘中 / STALE」，一眼能看出数字是不是最新的。本地要真正的 60 秒一轮：
 `HITHINK_FINANCE_API_KEY=… python tools/fetch_stocks.py --loop 60 --build`。
-面板最后一段是**板块轮动 RRG**：策略来自 GitHub
+面板的量化分析段是**板块轮动 RRG**：策略来自 GitHub
 [hugo2046/QuantsPlaybook](https://github.com/hugo2046/QuantsPlaybook)（券商金工研报复现）
 的「相对旋转图 RRG 行业轮动」，用同花顺的板块日 K 算出 91 个板块在
 「相对强度 × 相对强度动量」四象限里的位置（领先 / 改善 / 滞后 / 疲软）、今日象限迁移
@@ -161,6 +161,22 @@ Feedly / Reeder。插件那套「News subscription」读的是 `site/news.json`�
 warm-up 行数也照它的算法说明核过；参数默认研报口径 220/60/20，日 K 不够时自动退短窗
 并在面板上写明。清单在 `tools/market_watchlist.py`，详见
 [docs/kindle-stocks.md](docs/kindle-stocks.md)。
+
+### Jovian Research 四大工具数据
+
+行情面板还接入 `tools/jrglobal_radar.py`，把四个工具的带日期快照与当日涨幅榜/涨停池联动：
+
+- **聪明钱雷达**：A 股八类 11,615 位投资者 + 美股 2,381 家 13F 机构；本地展开
+  6 位代表经理的 54 条重仓、10 只第一重仓共识和 9 家 13F 样本，支持股票代码/简称/经理反查；
+- **AI 数据智库**：台湾算力链月营收、韩国半导体/DRAM/NAND 出口、WSTS 月销、
+  AI 芯片出货、头部数据中心、GPU 算力成本和企业 AI 采用率；
+- **组合实验室**：5.3 万+资产、12 种优化方法的服务口径，并落盘 5 个基准组合收益快照；
+- **宏观看板**：5,600+ 条序列、411 张图表、15 条收益率曲线的目录覆盖；当前不伪造
+  未取得来源日期的单点宏观数值，面板会明确标成「目录覆盖（非单点宏观读数）」。
+
+四工具数据进入 `stocks.json/html/epub/txt`；网页有本地反查框，Kindle 走纯表格/折行文本。
+当前快照日期、每组实盘数字、字段、命令与数据边界详见
+[docs/kindle-jrglobal.md](docs/kindle-jrglobal.md)。
 
 ## 2. Kindle 安装与使用
 

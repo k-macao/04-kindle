@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Jovian Research (jrglobal.xyz/tools/) 聪明钱雷达、AI 数据智库与组合实验室集成模块。
+"""Jovian Research (jrglobal.xyz/tools/) 四大数据工具集成模块。
 
 功能：
-1. 收录并支持在线刷新 jrglobal.xyz 四大免费工具的核心数据：
+1. 收录经过核验的 jrglobal.xyz 四大免费工具快照，并随行情面板一起输出：
    · 聪明钱雷达 (radar.jrglobal.xyz)：A 股八大类 11,615 位投资者（公募 498 / 牛散 2,363 /
      大股东 4,083 / 私募 4,230 / 外资 254 / 券商 78 / 社保 99 / 国家队 10）与美股 2,381 家
      13F 机构（巴菲特、阿斯内斯、格里芬、大卫·肖、挪威主权基金等）的重仓股与季度调仓；
@@ -34,8 +34,8 @@ MACRO_URL = "https://macro.jrglobal.xyz/"
 AIDATA_URL = "https://aidata.jrglobal.xyz/"
 
 # ---------------------------------------------------------------------------
-# 经过实盘核验的 jrglobal.xyz 基准快照（Q3 2026 持仓 / 2026-10 产业链月报 / 2026-11-20 OCPI）
-# 离线构建或网络受限时直接使用；在线时可通过 refresh_snapshot() 从源站更新。
+# 经过实盘核验的 jrglobal.xyz 基准快照（Q3 2026 持仓 / 2026-10 产业链月报 / 2026-11-20 OCPI）。
+# 当前模块使用这份带日期的只读快照；它不是逐笔行情，也不会把构建时间伪装成数据时间。
 # ---------------------------------------------------------------------------
 
 DEFAULT_SNAPSHOT = {
@@ -61,7 +61,7 @@ DEFAULT_SNAPSHOT = {
             "key": "aidata",
             "name": "AI 数据智库 AI Data Hub",
             "url": AIDATA_URL,
-            "summary": "40+ 个每日同步数据集：模型价格、AI 芯片出货、HBM/DRAM 价格、台韩半导体高频硬数据、大厂数据中心 CapEx，提供免费公开 API",
+            "summary": "约 30 个公开数据集：模型价格、AI 芯片出货、HBM/DRAM 价格、台韩半导体高频硬数据、大厂数据中心 CapEx，提供免费只读 API",
             "free": "免费 · 免 Key API",
         },
         {
@@ -79,6 +79,18 @@ DEFAULT_SNAPSHOT = {
             "free": "公众号回复「预期差」获取访问码",
         },
     ],
+    # 四个工具的站点覆盖口径。下面的本地明细只是「可在 Kindle 上完整排下」的代表性子集；
+    # coverage 记录源站全量规模，不能把本地 6 位经理 / 9 家机构误说成源站只有这些。
+    "coverage": {
+        "cn_investors": 11615,
+        "us_13f_institutions": 2381,
+        "portfolio_assets": 53000,
+        "portfolio_optimizers": 12,
+        "macro_series": 5600,
+        "macro_charts": 411,
+        "macro_yield_curves": 15,
+        "ai_datasets": 30,
+    },
     # A 股八大类投资者覆盖统计（来自 radar.jrglobal.xyz 首页）
     "cn_categories": [
         {"name": "公募基金经理", "count": 498},
@@ -312,7 +324,98 @@ DEFAULT_SNAPSHOT = {
         {"name": "Roger Gibson Five Asset Portfolio（五资产均衡组合）", "return_1y_pct": 12.6, "return_6m_pct": -3.97, "rank": 97},
         {"name": "Top 3 Sector ETF Rotation（前三行业 ETF 轮动）", "return_1y_pct": None, "return_6m_pct": 2.67, "rank": None},
     ],
+    # 宏观看板目前公开给本模块的是「目录覆盖与更新口径」，没有落入可核验的单点宏观数值。
+    # 必须把这类目录统计与上面的持仓/营收/收益快照分开，避免把 5,600 条序列误当成今日读数。
+    "macro_data": {
+        "scope": "目录覆盖（非单点宏观读数）",
+        "refresh": "每日 09:00",
+        "coverage": [
+            {"name": "宏观时间序列", "count": 5600, "unit": "条+"},
+            {"name": "可视化图表", "count": 411, "unit": "张"},
+            {"name": "国债收益率曲线", "count": 15, "unit": "条"},
+        ],
+        "modules": ["中国宏观月度预测", "美联储利率预期", "中美国债收益率曲线"],
+        "access": "需访问码；本地面板只列覆盖口径，不伪造未取得的最新宏观数值",
+    },
 }
+
+
+def tool_inventory(snapshot=None):
+    """把四大工具当前落盘的数据口径整理成可渲染、可自检的清单。
+
+    ``tools`` 只描述产品能力；这里另列「当前快照真的带了什么」。这样网页、EPUB、纯文本
+    都能明确区分源站全量覆盖、本地代表性明细和仅有目录口径的宏观看板。
+    """
+    snap = snapshot or DEFAULT_SNAPSHOT
+    coverage = dict(DEFAULT_SNAPSHOT.get("coverage") or {})
+    coverage.update(snap.get("coverage") or {})
+    # 工具名称/URL/能力说明属于当前模块配置，不沿用旧 stocks.json 里的文案；
+    # 数据观测值仍全部取 ``snap``。这样拿旧清单自重排时也会完成 schema 升级。
+    tools = {row.get("key"): row for row in snap.get("tools") or []}
+    tools.update({row.get("key"): row for row in DEFAULT_SNAPSHOT.get("tools") or []})
+    cn_categories = snap.get("cn_categories") or []
+    cn_gurus = snap.get("cn_gurus") or []
+    us_13f = snap.get("us_13f") or []
+    ai_data = snap.get("ai_data") or {}
+    portfolio = snap.get("portfolio_benchmarks") or []
+    macro = snap.get("macro_data") or DEFAULT_SNAPSHOT.get("macro_data") or {}
+
+    def base(key, fallback_name):
+        tool = tools.get(key) or {}
+        return {
+            "key": key,
+            "name": tool.get("name") or fallback_name,
+            "url": tool.get("url") or (snap.get("source") or {}).get(f"{key}_url") or "",
+            "free": tool.get("free") or "",
+            "summary": tool.get("summary") or "",
+        }
+
+    radar = base("radar", "聪明钱雷达 SmartMoney Radar")
+    radar.update({
+        "data_as_of": snap.get("report_period") or snap.get("as_of"),
+        "scope": "季度持仓快照 + 当日盘面反查",
+        "metrics": [
+            {"label": "A股投资者", "value": f"{coverage.get('cn_investors') or sum(c.get('count', 0) for c in cn_categories):,} 位"},
+            {"label": "A股类别", "value": f"{len(cn_categories)} 类"},
+            {"label": "美股13F", "value": f"{coverage.get('us_13f_institutions', 0):,} 家"},
+            {"label": "本地明细", "value": f"{len(cn_gurus)} 位经理 / {sum(len(g.get('top_holdings') or []) for g in cn_gurus)} 条重仓 / {len(us_13f)} 家13F样本"},
+        ],
+    })
+
+    aidata = base("aidata", "AI 数据智库 AI Data Hub")
+    aidata.update({
+        "data_as_of": snap.get("as_of"),
+        "scope": "产业链月报 + 芯片/算力/企业采用率快照",
+        "metrics": [
+            {"label": "公开数据集", "value": f"约 {coverage.get('ai_datasets', 0)} 个"},
+            {"label": "台湾算力链", "value": f"{len(ai_data.get('taiwan_semi_2026_10') or [])} 家"},
+            {"label": "芯片/数据中心", "value": f"{len(ai_data.get('chip_shipments_q3_2026') or [])} 款 / {len(ai_data.get('top_datacenters') or [])} 座"},
+            {"label": "GPU/厂商", "value": f"{len((ai_data.get('compute_cost_ocpi') or {}).get('gpus') or [])} 款 / {len((ai_data.get('enterprise_adoption_ramp') or {}).get('vendors') or [])} 家"},
+        ],
+    })
+
+    portfolio_item = base("portfolio", "组合实验室 Portfolio Lab")
+    portfolio_item.update({
+        "data_as_of": snap.get("as_of"),
+        "scope": "基准组合收益快照",
+        "metrics": [
+            {"label": "资产池", "value": f"{coverage.get('portfolio_assets', 0):,}+"},
+            {"label": "优化方法", "value": f"{coverage.get('portfolio_optimizers', 0)} 种"},
+            {"label": "本地基准", "value": f"{len(portfolio)} 组"},
+        ],
+    })
+
+    macro_item = base("macro", "宏观看板 Macro Board")
+    macro_item.update({
+        "data_as_of": macro.get("refresh") or "每日更新",
+        "scope": macro.get("scope") or "目录覆盖（非单点宏观读数）",
+        "metrics": [
+            {"label": row.get("name") or "", "value": f"{row.get('count', 0):,}{row.get('unit') or ''}"}
+            for row in macro.get("coverage") or []
+        ],
+        "note": macro.get("access") or "",
+    })
+    return [radar, aidata, portfolio_item, macro_item]
 
 
 def build_stock_index(snapshot=None):
@@ -488,13 +591,17 @@ def cross_verify_panel(payload, snapshot=None):
         "as_of": snap.get("as_of"),
         "report_period": snap.get("report_period"),
         "source": snap.get("source"),
-        "tools": snap.get("tools"),
+        # 产品说明跟代码版本走；观测值跟快照走。旧清单重排时不会继续带着过期的功能文案。
+        "tools": DEFAULT_SNAPSHOT.get("tools"),
+        "coverage": snap.get("coverage") or DEFAULT_SNAPSHOT.get("coverage"),
+        "tool_inventory": tool_inventory(snap),
         "cn_categories": snap.get("cn_categories"),
         "cn_gurus": snap.get("cn_gurus"),
         "cn_top1_consensus": snap.get("cn_top1_consensus"),
         "us_13f": snap.get("us_13f"),
         "ai_data": ai_data,
         "portfolio_benchmarks": snap.get("portfolio_benchmarks"),
+        "macro_data": snap.get("macro_data") or DEFAULT_SNAPSHOT.get("macro_data"),
         "stock_index": list(stock_index.values()),
         "panel_matches": matched_stocks,
         "supply_chain_verify": supply_chain_verify,
@@ -541,6 +648,18 @@ def render_radar_txt(radar, brief=False):
         ]
         return lines
 
+    inventory = radar.get("tool_inventory") or tool_inventory(radar)
+    lines.append("  四大工具本次落盘口径（源站全量 / 本地代表样本分开计数）：")
+    for item in inventory:
+        metrics = " · ".join(
+            f"{metric.get('label')} {metric.get('value')}"
+            for metric in item.get("metrics") or [] if metric.get("label")
+        )
+        lines.extend(_wrap_display(
+            f"{item.get('name')}｜{item.get('scope')}｜{metrics}",
+            width=46, indent="  "
+        ))
+
     # 完整版：展开 Q3 代表性调仓、美股 13F、AI 数据智库与组合实验室基准
     gurus = radar.get("cn_gurus") or []
     if gurus:
@@ -565,6 +684,22 @@ def render_radar_txt(radar, brief=False):
     for verify_line in radar.get("supply_chain_verify") or []:
         lines.extend(_wrap_display(verify_line, width=46, indent="  "))
 
+    ai_data = radar.get("ai_data") or {}
+    chips = ai_data.get("chip_shipments_q3_2026") or []
+    if chips:
+        chip_cells = [
+            f"{row.get('chip')} {row.get('h100e')} / {int(row.get('units') or 0):,}片"
+            for row in chips
+        ]
+        lines.extend(_wrap_display("AI 芯片出货：" + " · ".join(chip_cells), width=46, indent="  "))
+    datacenters = ai_data.get("top_datacenters") or []
+    if datacenters:
+        dc_cells = [
+            f"{row.get('name')}({row.get('owner')}，{row.get('h100e')}，{row.get('power_mw')}MW)"
+            for row in datacenters
+        ]
+        lines.extend(_wrap_display("算力集群：" + " · ".join(dc_cells), width=46, indent="  "))
+
     bench = radar.get("portfolio_benchmarks") or []
     if bench:
         b_cells = [
@@ -573,6 +708,21 @@ def render_radar_txt(radar, brief=False):
             for b in bench[:4]
         ]
         lines.extend(_wrap_display("组合实验室基准：" + " · ".join(b_cells), width=46, indent="  "))
+
+    macro = radar.get("macro_data") or DEFAULT_SNAPSHOT.get("macro_data") or {}
+    macro_cells = [
+        f"{row.get('name')} {row.get('count', 0):,}{row.get('unit') or ''}"
+        for row in macro.get("coverage") or []
+    ]
+    if macro_cells:
+        modules = " / ".join(macro.get("modules") or [])
+        lines.extend(_wrap_display(
+            f"宏观看板（{macro.get('scope')}）：" + " · ".join(macro_cells)
+            + (f" · 模块 {modules}" if modules else ""),
+            width=46, indent="  "
+        ))
+        if macro.get("access"):
+            lines.extend(_wrap_display("宏观口径说明：" + macro["access"], width=46, indent="  "))
 
     lines.append("  四大免费工具：radar / portfolio / macro / aidata.jrglobal.xyz")
     return lines
@@ -593,6 +743,19 @@ def render_radar_epub(radar, brief=False, esc=None):
         '<p class="meta">来源：Jovian Research (jrglobal.xyz/tools/) · '
         "覆盖 A 股公募 498 / 牛散 2363 / 私募 4230 / 外资 254 / 社保 99 / 国家队 10 及美股 13F 2381 家</p>",
     ]
+    inventory = radar.get("tool_inventory") or tool_inventory(radar)
+    if inventory:
+        parts.append('<table class="data"><tr><th>四大工具</th><th>本次落盘口径</th><th>数据规模</th></tr>')
+        for item in inventory:
+            metrics = "；".join(
+                f"{metric.get('label')} {metric.get('value')}"
+                for metric in item.get("metrics") or [] if metric.get("label")
+            )
+            parts.append(
+                f"<tr><td>{esc(item.get('name'))}</td><td>{esc(item.get('scope'))}</td>"
+                f"<td>{esc(metrics)}</td></tr>"
+            )
+        parts.append("</table>")
     for m in radar.get("panel_matches") or []:
         parts.append(
             f"<p><b>盘面反查命中：</b>{esc(m.get('name'))}（{esc(m.get('code'))} "
@@ -631,6 +794,44 @@ def render_radar_epub(radar, brief=False, esc=None):
             parts.append("</table>")
     for verify_line in (radar.get("supply_chain_verify") or [])[: (1 if brief else 2)]:
         parts.append(f"<p>{esc(verify_line)}</p>")
+
+    if not brief:
+        ai_data = radar.get("ai_data") or {}
+        chips = ai_data.get("chip_shipments_q3_2026") or []
+        if chips:
+            parts.append('<table class="data"><tr><th>AI 芯片</th><th>H100e</th><th>出货量</th></tr>')
+            for row in chips:
+                units = f"{int(row.get('units') or 0):,}"
+                parts.append(
+                    f"<tr><td>{esc(row.get('chip'))}</td><td>{esc(row.get('h100e'))}</td>"
+                    f"<td>{esc(units)}</td></tr>"
+                )
+            parts.append("</table>")
+
+        bench = radar.get("portfolio_benchmarks") or []
+        if bench:
+            parts.append('<table class="data"><tr><th>组合实验室基准</th><th>1 年</th><th>6 个月</th><th>排名</th></tr>')
+            for row in bench:
+                one_year = "--" if row.get("return_1y_pct") is None else f"{row['return_1y_pct']:+.1f}%"
+                six_month = "--" if row.get("return_6m_pct") is None else f"{row['return_6m_pct']:+.2f}%"
+                rank = "--" if row.get("rank") is None else str(row["rank"])
+                parts.append(
+                    f"<tr><td>{esc(row.get('name'))}</td><td>{esc(one_year)}</td>"
+                    f"<td>{esc(six_month)}</td><td>{esc(rank)}</td></tr>"
+                )
+            parts.append("</table>")
+
+        macro = radar.get("macro_data") or DEFAULT_SNAPSHOT.get("macro_data") or {}
+        macro_rows = macro.get("coverage") or []
+        if macro_rows:
+            parts.append(f"<h3>宏观看板（{esc(macro.get('scope'))}）</h3>")
+            parts.append('<table class="data"><tr><th>目录</th><th>覆盖</th></tr>')
+            for row in macro_rows:
+                value = f"{row.get('count', 0):,}{row.get('unit') or ''}"
+                parts.append(f"<tr><td>{esc(row.get('name'))}</td><td>{esc(value)}</td></tr>")
+            parts.append("</table>")
+            if macro.get("access"):
+                parts.append(f'<p class="meta">{esc(macro.get("access"))}</p>')
     return parts
 
 
