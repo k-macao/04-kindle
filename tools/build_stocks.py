@@ -511,24 +511,24 @@ def rrg_section(payload):
 
 
 def cross_section(payload):
-    """取出可用的单日横截面段落（RRG 的降级口径）；没有就现算（仍不够则空 dict）。
-
-    旧清单（或只抓了快照、没写 ``sector_cross`` 的文件）里已经有 91 个板块和涨停池，
-    重排时直接现算一份，免得面板最后一段空着。
-    """
+    """取出可用的单日横截面段落（RRG 的降级口径）；有板块快照时按最新公式重算。"""
+    existing = None
     for key in ("sector_cross", "cross"):
         section = payload.get(key)
         if isinstance(section, dict) and section.get("counts"):
-            return section
-    if rrg_section(payload):
+            existing = section
+            break
+    if rrg_section(payload) and existing is None:
         return {}
     indices = payload.get("indices") or []
     data_ms = payload.get("data_timestamp")
-    as_of = beijing_text(data_ms, "%Y-%m-%d") if isinstance(data_ms, (int, float)) else None
+    as_of = ((existing or {}).get("as_of")
+             or (beijing_text(data_ms, "%Y-%m-%d") if isinstance(data_ms, (int, float)) else None))
+    why = (existing or {}).get("why") or ""
     section, _notes = sector_rrg.build_cross_section(
         indices, market=payload.get("market"), indices=indices,
-        limit_up=payload.get("limit_up"), as_of=as_of)
-    return section or {}
+        limit_up=payload.get("limit_up"), as_of=as_of, why=why)
+    return section or existing or {}
 
 
 def final_sections(payload):
@@ -646,12 +646,15 @@ def render_cross_text(section, brief=None):
     counts = section.get("counts") or {}
     stats = section.get("stats") or {}
     market = section.get("market") or {}
+    sent = section.get("sentiment") or {}
+    sent_tag = (f" · 情绪 {sent['score']}/100({sent.get('level') or ''})"
+                if sent.get("score") is not None else "")
     lines = [f"【板块横截面】{counts.get('total', 0)} 个板块 · 单日收盘口径"
              f" · 数据 {section.get('as_of') or '未知'}"]
     head = (f"  红 {counts.get('up', 0)} · 绿 {counts.get('down', 0)}"
             f" · 平 {counts.get('flat', 0)}"
             f" · 中位数 {fmt_ratio(stats.get('median'))}"
-            f" · 离散度 {stats.get('std', 0):.2f}")
+            f" · 离散度 {stats.get('std', 0):.2f}{sent_tag}")
     # 全 A 的涨跌家数/涨跌停在下面的读数里已经讲了，抬头不重复（Kindle 一屏很贵）
     lines.append(head)
 
@@ -659,9 +662,19 @@ def render_cross_text(section, brief=None):
         # 抗跌/杀跌前 5 在上面【板块】段已经列过，题材分布在【涨停池】段也列过；
         # 这里只留「为什么这么走」的两三句结论（优先挑带 `→` 的判断句）。
         raw = list(section.get("narrative") or [])
-        verdicts = [item for item in raw if "→" in str(item)] or raw
-        for text in _first_sentences(verdicts, limit=3):
+        verdicts = [item for item in raw if "→" in str(item) and not str(item).startswith("隔夜 vs 日内")] or raw
+        for text in _first_sentences(verdicts, limit=2):
             lines.extend(_wrap_display(text, width=46, indent="  "))
+        intra = section.get("intraday") or {}
+        sup = [f"{r['name']}(日内{fmt_ratio(r['intraday_pct'])})" for r in (intra.get("true_support") or [])[:3]]
+        fade = [f"{r['name']}({r.get('tag') or '回落'})" for r in (intra.get("fade_warning") or [])[:3]]
+        if sup or fade:
+            parts = []
+            if sup:
+                parts.append("真承接 " + " ".join(sup))
+            if fade:
+                parts.append("派发预警 " + " ".join(fade))
+            lines.extend(_wrap_display(" · ".join(parts), width=46, indent="  "))
         if section.get("why"):
             lines.extend(_wrap_display(f"为什么是横截面：{section['why']}。",
                                        width=46, indent="  "))
@@ -1339,19 +1352,21 @@ var NARR=brief?3:999;
 var c=g.counts||{},st=g.stats||{},mk=g.market||{},list=[],i;
 var maxBin=1;
 (g.bins||[]).forEach(function(b){if(b.count>maxBin)maxBin=b.count;});
+var sent=g.sentiment||{},sentTxt=(typeof sent.score==='number')?(' · 情绪 '+sent.score+'/100（'+esc(sent.level||'')+(sent.divergence?' · '+esc(sent.divergence):'')+'）'):'';
 var h='<section><h2>板块横截面<span class="muted"> '+(c.total||0)+' 个板块 · 单日收盘口径 · 数据 '+
-esc(g.as_of||'')+'</span></h2>';
+esc(g.as_of||'')+sentTxt+'</span></h2>';
 h+='<div class="breadth qcount">';
 h+='<div class="cell"><div class="k">红 / 绿</div><div class="v"><span class="up">'+(c.up||0)+
 '</span> / <span class="down">'+(c.down||0)+'</span></div><div class="s">板块中位数 '+
 ratio(st.median)+'</div></div>';
-h+='<div class="cell"><div class="k">离散度</div><div class="v">'+
-((typeof st.std==='number')?st.std.toFixed(2):'--')+'</div><div class="s">标准差（越大越像轮动）</div></div>';
+h+='<div class="cell"><div class="k">离散度 / CSAD</div><div class="v">'+
+((typeof st.std==='number')?st.std.toFixed(2):'--')+'</div><div class="s">标准差'+(typeof st.csad==='number'?' · CSAD '+st.csad.toFixed(2)+(st.herding?'(羊群)':''):'')+'</div></div>';
 h+='<div class="cell"><div class="k">全 A 涨 / 跌</div><div class="v"><span class="up">'+
 (mk.up||0)+'</span> / <span class="down">'+(mk.down||0)+'</span></div><div class="s">平均 '+
 ratio(mk.avg_ratio)+'</div></div>';
-h+='<div class="cell"><div class="k">涨停 / 跌停</div><div class="v"><span class="up">'+
-(mk.limit_up||0)+'</span> / <span class="down">'+(mk.limit_down||0)+'</span></div><div class="s">全市场情绪面</div></div>';
+h+='<div class="cell"><div class="k">情绪温度</div><div class="v">'+
+((typeof sent.score==='number')?(sent.score+' / 100'):((mk.limit_up||0)+' / '+(mk.limit_down||0)))+
+'</div><div class="s">'+esc(sent.level||'涨跌停')+(sent.divergence?' · '+esc(sent.divergence):'')+'</div></div>';
 h+='</div>';
 if((g.bins||[]).length){
 h+='<div class="bins">';

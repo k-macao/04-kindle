@@ -707,26 +707,34 @@ def build_cross_section(rows, market=None, indices=None, limit_up=None,
         pct = _numeric(row.get("price_change_ratio_pct"))
         if pct is None:
             continue
-        sectors.append({
+        item = {
             "thscode": row.get("thscode"),
             "name": row.get("name") or row.get("thscode") or "",
             "today_pct": round(pct, 2),
             "turnover": _numeric(row.get("turnover")),
-        })
+        }
+        item.update(_ohlc_metrics(row))
+        sectors.append(item)
     if len(sectors) < 5:
         return None, [f"有涨跌幅的板块只有 {len(sectors)} 个，样本太少不做横截面"]
 
     pcts = [row["today_pct"] for row in sectors]
     total = len(pcts)
+    mean_val = sum(pcts) / total
+    csad_val = sum(abs(p - mean_val) for p in pcts) / total
     counts = {"total": total, "up": sum(1 for p in pcts if p > 0),
               "down": sum(1 for p in pcts if p < 0),
               "flat": sum(1 for p in pcts if p == 0)}
     stats = {
         "median": round(_median(pcts), 2),
-        "mean": round(sum(pcts) / total, 2),
+        "mean": round(mean_val, 2),
         # 总体标准差（这就是这一天的「离散度」）：普跌日它很小，
         # 结构性行情它才变大——比单看涨跌幅更能说明是轮动还是整体减仓。
-        "std": round(math.sqrt(sum((p - sum(pcts) / total) ** 2 for p in pcts) / total), 2),
+        "std": round(math.sqrt(sum((p - mean_val) ** 2 for p in pcts) / total), 2),
+        # 国泰君安 CCK 羊群效应模型（hugo2046/QuantsPlaybook）：
+        # 横截面绝对偏差 CSAD 相对于 |mean| 偏小时，说明资金在无差别同向交易（羊群踩踏/抢筹）。
+        "csad": round(csad_val, 2),
+        "herding": bool(abs(mean_val) >= 1.8 and csad_val / max(abs(mean_val), 0.01) < 0.45),
     }
     # 全 A 的涨跌家数与板块口径**分开放**：一个数是 5584 只个股、一个是 91 个行业指数，
     # 混在同一个 up/down 里会写出「91 个板块：涨 649」这种错话。
@@ -748,6 +756,9 @@ def build_cross_section(rows, market=None, indices=None, limit_up=None,
     money = _cross_money(sectors, market)
     spread = _index_spread(indices)
     themes = _cross_themes(limit_up)
+    intraday = _cross_intraday(sectors, indices, market)
+    limit_up_struct = _limit_up_structure(limit_up)
+    sentiment = _cross_sentiment(breadth, counts, indices, sectors, limit_up_struct)
 
     section = {
         "mode": "cross_section",
@@ -768,6 +779,9 @@ def build_cross_section(rows, market=None, indices=None, limit_up=None,
         "money": money,
         "spread": spread,
         "themes": themes,
+        "intraday": intraday,
+        "limit_up_structure": limit_up_struct,
+        "sentiment": sentiment,
     }
     section["narrative"] = _cross_narrative(section)
     return section, []
@@ -825,6 +839,241 @@ def _index_spread(indices):
                 "small": small, "small_pct": round(small_pct, 2),
                 "spread": round(big_pct - small_pct, 2)}
     return {}
+
+
+def _ohlc_metrics(row):
+    """拆分单根日 K 的隔夜跳空、日内实体、收盘分位（CLV）与振幅。
+
+    依据开源证券/华西证券「日内分时截面动量（APM）」与 QuantsPlaybook「隔夜日间网络因子」：
+    A 股隔夜收益主要由散户/隔夜消息驱动（易反转），日内实体与收盘分位由机构交易驱动（具动量）。
+    """
+    prev = _numeric((row or {}).get("prev_price"))
+    op = _numeric((row or {}).get("open_price"))
+    hi = _numeric((row or {}).get("high_price"))
+    lo = _numeric((row or {}).get("low_price"))
+    cl = _numeric((row or {}).get("last_price"))
+    if not (prev and op and hi and lo and cl) or prev <= 0 or op <= 0 or hi < lo:
+        return {}
+    overnight = (op - prev) / prev * 100.0
+    intraday = (cl - op) / op * 100.0
+    amp = (hi - lo) / prev * 100.0
+    clv = (cl - lo) / (hi - lo) if hi > lo else 0.5
+    return {
+        "overnight_pct": round(overnight, 2),
+        "intraday_pct": round(intraday, 2),
+        "amplitude_pct": round(amp, 2),
+        "clv": round(max(0.0, min(1.0, clv)), 2),
+    }
+
+
+def _cross_intraday(sectors, indices, market):
+    """提取盘中真承接（低开高走 + 高 CLV）与冲高派发（放量长上影 / 高开低走）。"""
+    with_ohlc = [s for s in sectors or [] if "intraday_pct" in s and "clv" in s]
+    if len(with_ohlc) < 3:
+        return {}
+    total_turnover = (market or {}).get("turnover") or sum(s.get("turnover") or 0 for s in with_ohlc)
+
+    def _entry(s, tag=""):
+        share = (round(s["turnover"] / total_turnover * 100.0, 1)
+                 if total_turnover and s.get("turnover") else None)
+        out = {
+            "name": s["name"],
+            "today_pct": s["today_pct"],
+            "overnight_pct": s["overnight_pct"],
+            "intraday_pct": s["intraday_pct"],
+            "clv": s["clv"],
+            "amplitude_pct": s.get("amplitude_pct"),
+            "share": share,
+        }
+        if tag:
+            out["tag"] = tag
+        return out
+
+    # 盘中真承接：日内收阳（>= +0.15%）且收盘在全天振幅上半区（CLV >= 0.55），剔除冲高回落留长上影的假阳线
+    support_candidates = [
+        _entry(s, "低开走阳" if s["overnight_pct"] < -0.1 else "日内走强")
+        for s in with_ohlc
+        if s["intraday_pct"] >= 0.15 and s["clv"] >= 0.55
+    ]
+    support_candidates.sort(key=lambda r: (-r["intraday_pct"], -r["clv"]))
+
+    # 冲高回落 / 高开派发：
+    # 1) 成交占比 >= 5% 的热门板块却收出长上影（CLV <= 0.35 且振幅 >= 2.0%）
+    # 2) 隔夜平/高开（>= -0.15%）但日内实体杀跌 <= -2.0% 且 CLV <= 0.20
+    fade_candidates = []
+    for s in with_ohlc:
+        item = _entry(s)
+        share = item.get("share") or 0.0
+        if share >= 5.0 and s["clv"] <= 0.35 and (s.get("amplitude_pct") or 0) >= 2.0:
+            item["tag"] = "放量长上影"
+            fade_candidates.append(item)
+        elif s["overnight_pct"] >= -0.15 and s["intraday_pct"] <= -2.0 and s["clv"] <= 0.20:
+            item["tag"] = "高开低走派发"
+            fade_candidates.append(item)
+    fade_candidates.sort(key=lambda r: (-(r.get("share") or 0), r["intraday_pct"]))
+
+    broad_list = []
+    wanted = ("科创50", "创业板指", "沪深300", "上证50", "中证1000", "上证指数")
+    by_name = {r.get("name"): r for r in indices or [] if not r.get("is_sector")}
+    for name in wanted:
+        row = by_name.get(name)
+        if not row:
+            continue
+        m = _ohlc_metrics(row)
+        if m:
+            broad_list.append({
+                "name": name,
+                "today_pct": round(_numeric(row.get("price_change_ratio_pct")) or 0.0, 2),
+                **m,
+            })
+
+    return {
+        "true_support": support_candidates[:5],
+        "fade_warning": fade_candidates[:5],
+        "broad": broad_list,
+    }
+
+
+def _parse_board_height(text):
+    """从同花顺 ``continue_day_text``（如 ``3连板``、``4天3板``、``首板``）提取连板高度。"""
+    raw = str(text or "").strip()
+    if not raw or "首板" in raw:
+        return 1
+    import re as _re
+    m = _re.search(r"(\d+)\s*连板", raw)
+    if m:
+        return max(1, int(m.group(1)))
+    m = _re.search(r"\d+\s*天\s*(\d+)\s*板", raw)
+    if m:
+        return max(1, int(m.group(1)))
+    return 1
+
+
+def _limit_up_structure(limit_up):
+    """涨停池微观结构：连板高度梯队、早盘封板占比、封单金额强度。"""
+    rows = list(limit_up or [])
+    if not rows:
+        return {}
+    max_board = 1
+    max_board_name = ""
+    multi_board_count = 0
+    early_count = 0
+    afternoon_count = 0
+    seals = []
+    for r in rows:
+        b = _parse_board_height(r.get("continue_day_text"))
+        if b >= 2:
+            multi_board_count += 1
+        if b > max_board or (b == max_board and not max_board_name):
+            max_board = b
+            max_board_name = str(r.get("name") or r.get("thscode") or "").replace(" ", "")
+        t = str(r.get("limit_up_time") or "").strip()
+        if t:
+            if t <= "10:00:00":
+                early_count += 1
+            elif t >= "13:00:00":
+                afternoon_count += 1
+        seal = _numeric(r.get("seal_money"))
+        if seal is not None and seal >= 0:
+            seals.append(seal)
+
+    total = len(rows)
+    total_seal_yi = round(sum(seals) / 1e8, 2) if seals else None
+    median_seal_wan = round(_median(seals) / 1e4, 0) if seals else None
+    return {
+        "total": total,
+        "max_board": max_board,
+        "max_board_name": max_board_name,
+        "multi_board_count": multi_board_count,
+        "first_board_count": total - multi_board_count,
+        "early_count": early_count,
+        "afternoon_count": afternoon_count,
+        "total_seal_yi": total_seal_yi,
+        "median_seal_wan": median_seal_wan,
+    }
+
+
+def _cross_sentiment(breadth, sector_counts, indices, sectors, limit_up_struct):
+    """合成 0–100 盘面情绪温度计（参考潮汐 Tide 五分量与涨跌停情绪择时模型）。
+
+    五个分量（满分 100）：
+      1. 宽度分 (0–25)：全 A 上涨占比 up / (up + down)
+      2. 极值分 (0–25)：涨停 / (涨停 + 跌停)
+      3. 日内承接分 (0–20)：宽基指数（或板块）的平均收盘分位 CLV
+      4. 连板梯队分 (0–15)：最高连板高度 × 2.5 + 连板家数加分
+      5. 封板质量分 (0–15)：10:00 前早盘封板占比 + 封单中位数强度
+    """
+    up = (breadth or {}).get("up")
+    down = (breadth or {}).get("down")
+    if isinstance(up, (int, float)) and isinstance(down, (int, float)) and (up + down) > 0:
+        breadth_score = round(25.0 * up / (up + down), 1)
+    else:
+        s_up = (sector_counts or {}).get("up") or 0
+        s_tot = max(1, (sector_counts or {}).get("total") or 1)
+        breadth_score = round(25.0 * s_up / s_tot, 1)
+
+    lu = (breadth or {}).get("limit_up")
+    ld = (breadth or {}).get("limit_down")
+    if isinstance(lu, (int, float)) and isinstance(ld, (int, float)) and (lu + ld) > 0:
+        extreme_score = round(25.0 * lu / (lu + ld), 1)
+    else:
+        extreme_score = round(breadth_score, 1)
+
+    clvs = []
+    for r in indices or []:
+        if not r.get("is_sector"):
+            m = _ohlc_metrics(r)
+            if "clv" in m:
+                clvs.append(m["clv"])
+    if not clvs:
+        clvs = [s["clv"] for s in sectors or [] if "clv" in s]
+    avg_clv = sum(clvs) / len(clvs) if clvs else 0.5
+    support_score = round(20.0 * avg_clv, 1)
+
+    if limit_up_struct and limit_up_struct.get("total"):
+        mb = limit_up_struct.get("max_board") or 1
+        mc = limit_up_struct.get("multi_board_count") or 0
+        ladder_score = min(15.0, round(mb * 2.5 + min(5.0, mc * 1.0), 1))
+        early_ratio = (limit_up_struct.get("early_count") or 0) / max(1, limit_up_struct["total"])
+        med_wan = limit_up_struct.get("median_seal_wan") or 0.0
+        seal_score = min(15.0, round(10.0 * early_ratio + min(5.0, (med_wan / 1000.0) * 5.0), 1))
+    else:
+        ladder_score = round(7.5 * (breadth_score / 12.5), 1)
+        seal_score = round(7.5 * (extreme_score / 12.5), 1)
+        ladder_score = max(0.0, min(15.0, ladder_score))
+        seal_score = max(0.0, min(15.0, seal_score))
+
+    score = int(round(breadth_score + extreme_score + support_score + ladder_score + seal_score))
+    score = max(0, min(100, score))
+    if score < 25:
+        level = "冰点"
+    elif score < 40:
+        level = "防守"
+    elif score < 60:
+        level = "中性"
+    elif score < 75:
+        level = "活跃"
+    else:
+        level = "过热"
+
+    divergence = ""
+    if (breadth_score + extreme_score) <= 12.0 and support_score >= 12.0:
+        divergence = "指数托底、个股冰点"
+    elif (breadth_score + extreme_score) >= 35.0 and support_score <= 8.0:
+        divergence = "个股活跃、权重冲高回落"
+
+    return {
+        "score": score,
+        "level": level,
+        "divergence": divergence,
+        "components": {
+            "breadth": breadth_score,
+            "extremes": extreme_score,
+            "support": support_score,
+            "ladder": ladder_score,
+            "seal": seal_score,
+        },
+    }
 
 
 def limit_up_themes(limit_up, limit=None):
@@ -928,5 +1177,46 @@ def _cross_narrative(section):
         if others:
             text += "；其次 " + "、".join(f"{t['name']} {t['count']} 只" for t in others[:2])
         lines.append(text + "——赚钱效应就看这几条链。")
+
+    intraday = section.get("intraday") or {}
+    support_list = intraday.get("true_support") or []
+    fade_list = intraday.get("fade_warning") or []
+    if support_list or fade_list:
+        parts = []
+        if support_list:
+            picked = "、".join(
+                f"{r['name']}（隔夜 {_pct_text(r['overnight_pct'])} → 日内 {_pct_text(r['intraday_pct'])}，分位 {r['clv']:.2f}）"
+                for r in support_list[:3]
+            )
+            parts.append("盘中低开走阳真承接：" + picked)
+        if fade_list:
+            faded = "、".join(
+                f"{r['name']}（{r.get('tag') or '冲高回落'}，日内 {_pct_text(r['intraday_pct'])}，分位 {r['clv']:.2f}）"
+                for r in fade_list[:3]
+            )
+            parts.append("冲高回落/派发预警：" + faded)
+        lines.append("隔夜 vs 日内（APM 日内动量拆分）：" + "；".join(parts) + "。")
+
+    sentiment = section.get("sentiment") or {}
+    lu_struct = section.get("limit_up_structure") or {}
+    if sentiment.get("score") is not None:
+        comp = sentiment.get("components") or {}
+        div = f" · {sentiment['divergence']}" if sentiment.get("divergence") else ""
+        sent_line = (
+            f"情绪温度 {sentiment['score']}/100（{sentiment.get('level')}{div}："
+            f"宽度 {comp.get('breadth', 0):.0f}/25 · 极值 {comp.get('extremes', 0):.0f}/25 · "
+            f"日内承接 {comp.get('support', 0):.0f}/20 · 连板 {comp.get('ladder', 0):.0f}/15 · "
+            f"封板 {comp.get('seal', 0):.0f}/15）"
+        )
+        if stats.get("herding"):
+            sent_line += f"；CCK 横截面绝对偏差 CSAD {stats.get('csad'):.2f}，呈同向羊群交易"
+        if lu_struct.get("total"):
+            sent_line += (
+                f"；最高 {lu_struct['max_board']} 连板"
+                + (f"（{lu_struct['max_board_name']}）" if lu_struct.get("max_board_name") else "")
+                + f"，连板 {lu_struct['multi_board_count']} / 首板 {lu_struct['first_board_count']}"
+                + (f"，封单合计 {lu_struct['total_seal_yi']:.2f} 亿" if lu_struct.get("total_seal_yi") is not None else "")
+            )
+        lines.append(sent_line + "。")
 
     return lines
