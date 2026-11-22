@@ -1,5 +1,5 @@
 {
-  "checked": "2026-11-21T07:23:22+00:00",
+  "checked": "2026-11-22T02:55:59+00:00",
   "providers": [
     "direct",
     "rsshub",
@@ -10,11 +10,11 @@
   "summary": {
     "ok": 24,
     "total": 24,
-    "items": 200,
+    "items": 181,
     "by_provider": {
       "direct": 4,
-      "rsshub": 18,
-      "mirror": 2
+      "rsshub": 17,
+      "mirror": 3
     }
   },
   "sources": [
@@ -41,7 +41,7 @@
       "group": "flash",
       "ok": true,
       "provider": "direct",
-      "count": 8,
+      "count": 11,
       "error": "",
       "attempts": [
         {
@@ -58,7 +58,7 @@
       "group": "flash",
       "ok": true,
       "provider": "direct",
-      "count": 11,
+      "count": 10,
       "error": "",
       "attempts": [
         {
@@ -75,7 +75,7 @@
       "group": "flash",
       "ok": true,
       "provider": "direct",
-      "count": 1,
+      "count": 5,
       "error": "",
       "attempts": [
         {
@@ -92,7 +92,7 @@
       "group": "flash",
       "ok": true,
       "provider": "rsshub",
-      "count": 9,
+      "count": 8,
       "error": "",
       "attempts": [
         {
@@ -125,13 +125,19 @@
       "name": "新浪 · 股市滚动",
       "group": "flash",
       "ok": true,
-      "provider": "rsshub",
+      "provider": "mirror",
       "count": 12,
       "error": "",
       "attempts": [
         {
           "provider": "rsshub",
           "label": "https://rsshub.rss.tips",
+          "ok": false,
+          "error": "The read operation timed out"
+        },
+        {
+          "provider": "mirror",
+          "label": "https://rsshub.isrss.com",
           "ok": true,
           "error": ""
         }
@@ -143,7 +149,7 @@
       "group": "depth",
       "ok": true,
       "provider": "rsshub",
-      "count": 11,
+      "count": 12,
       "error": "",
       "attempts": [
         {
@@ -177,7 +183,7 @@
       "group": "depth",
       "ok": true,
       "provider": "rsshub",
-      "count": 12,
+      "count": 11,
       "error": "",
       "attempts": [
         {
@@ -194,7 +200,7 @@
       "group": "depth",
       "ok": true,
       "provider": "rsshub",
-      "count": 6,
+      "count": 0,
       "error": "",
       "attempts": [
         {
@@ -210,8 +216,76 @@
       "name": "第一财经 · 最新",
       "group": "depth",
       "ok": true,
+      "provider": "rsshub",
+      "count": 8,
+      "error": "",
+      "attempts": [
+        {
+          "provider": "rsshub",
+          "label": "https://rsshub.rss.tips",
+          "ok": true,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "key": "CAIXIN_WEEKLY",
+      "name": "财新周刊",
+      "group": "depth",
+      "ok": true,
+      "provider": "rsshub",
+      "count": 3,
+      "error": "",
+      "attempts": [
+        {
+          "provider": "rsshub",
+          "label": "https://rsshub.rss.tips",
+          "ok": true,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "key": "WSCN_HK",
+      "name": "华尔街见闻 · 港股快讯",
+      "group": "flash",
+      "ok": true,
+      "provider": "rsshub",
+      "count": 3,
+      "error": "",
+      "attempts": [
+        {
+          "provider": "rsshub",
+          "label": "https://rsshub.rss.tips",
+          "ok": true,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "key": "BLOOMBERG_CRYPTO",
+      "name": "彭博社 · 加密",
+      "group": "global",
+      "ok": true,
+      "provider": "rsshub",
+      "count": 1,
+      "error": "",
+      "attempts": [
+        {
+          "provider": "rsshub",
+          "label": "https://rsshub.rss.tips",
+          "ok": true,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "key": "BLOOMBERG",
+      "name": "彭博社 · 市场",
+      "group": "global",
+      "ok": true,
       "provider": "mirror",
-      "count": 7,
+      "count": 12,
       "error": "",
       "attempts": [
         {
@@ -229,80 +303,12 @@
       ]
     },
     {
-      "key": "CAIXIN_WEEKLY",
-      "name": "财新周刊",
-      "group": "depth",
-      "ok": true,
-      "provider": "rsshub",
-      "count": 2,
-      "error": "",
-      "attempts": [
-        {
-          "provider": "rsshub",
-          "label": "https://rsshub.rss.tips",
-          "ok": true,
-          "error": ""
-        }
-      ]
-    },
-    {
-      "key": "WSCN_HK",
-      "name": "华尔街见闻 · 港股快讯",
-      "group": "flash",
-      "ok": true,
-      "provider": "rsshub",
-      "count": 10,
-      "error": "",
-      "attempts": [
-        {
-          "provider": "rsshub",
-          "label": "https://rsshub.rss.tips",
-          "ok": true,
-          "error": ""
-        }
-      ]
-    },
-    {
-      "key": "BLOOMBERG_CRYPTO",
-      "name": "彭博社 · 加密",
-      "group": "global",
-      "ok": true,
-      "provider": "rsshub",
-      "count": 2,
-      "error": "",
-      "attempts": [
-        {
-          "provider": "rsshub",
-          "label": "https://rsshub.rss.tips",
-          "ok": true,
-          "error": ""
-        }
-      ]
-    },
-    {
-      "key": "BLOOMBERG",
-      "name": "彭博社 · 市场",
-      "group": "global",
-      "ok": true,
-      "provider": "rsshub",
-      "count": 12,
-      "error": "",
-      "attempts": [
-        {
-          "provider": "rsshub",
-          "label": "https://rsshub.rss.tips",
-          "ok": true,
-          "error": ""
-        }
-      ]
-    },
-    {
       "key": "BLOOMBERG_ECON",
       "name": "彭博社 · 经济",
       "group": "global",
       "ok": true,
       "provider": "rsshub",
-      "count": 12,
+      "count": 7,
       "error": "",
       "attempts": [
         {
@@ -319,7 +325,7 @@
       "group": "politics",
       "ok": true,
       "provider": "rsshub",
-      "count": 1,
+      "count": 0,
       "error": "",
       "attempts": [
         {
@@ -336,7 +342,7 @@
       "group": "politics",
       "ok": true,
       "provider": "rsshub",
-      "count": 3,
+      "count": 0,
       "error": "",
       "attempts": [
         {
@@ -369,19 +375,13 @@
       "name": "彭博社 · 政治",
       "group": "politics",
       "ok": true,
-      "provider": "mirror",
-      "count": 12,
+      "provider": "rsshub",
+      "count": 11,
       "error": "",
       "attempts": [
         {
           "provider": "rsshub",
           "label": "https://rsshub.rss.tips",
-          "ok": false,
-          "error": "The read operation timed out"
-        },
-        {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
           "ok": true,
           "error": ""
         }
@@ -393,7 +393,7 @@
       "group": "thought",
       "ok": true,
       "provider": "rsshub",
-      "count": 4,
+      "count": 3,
       "error": "",
       "attempts": [
         {
@@ -409,13 +409,19 @@
       "name": "Psyche · Ideas",
       "group": "thought",
       "ok": true,
-      "provider": "rsshub",
-      "count": 5,
+      "provider": "mirror",
+      "count": 4,
       "error": "",
       "attempts": [
         {
           "provider": "rsshub",
           "label": "https://rsshub.rss.tips",
+          "ok": false,
+          "error": "The read operation timed out"
+        },
+        {
+          "provider": "mirror",
+          "label": "https://rsshub.isrss.com",
           "ok": true,
           "error": ""
         }
