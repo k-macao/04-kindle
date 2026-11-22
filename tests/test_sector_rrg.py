@@ -731,5 +731,89 @@ class RenderTest(unittest.TestCase):
             self.assertEqual(first["rrg"]["as_of"], again["rrg"]["as_of"])
 
 
+class QuantSignalEnrichmentTest(unittest.TestCase):
+    """测试隔夜/日内 APM 拆分、CLV 分位、0–100 情绪温度计、CCK 羊群效应与涨停微观结构。"""
+
+    def test_intraday_split_sentiment_and_herding_on_real_like_snapshot(self):
+        sectors = [
+            # 有色金属：隔夜低开 -1.52%，日内逆势走阳 +0.39%，收盘分位 0.81 → 盘中真承接
+            {"thscode": "881103.TI", "name": "有色金属", "is_sector": True,
+             "prev_price": 100.0, "open_price": 98.48, "high_price": 99.10,
+             "low_price": 98.00, "last_price": 98.86,
+             "price_change_ratio_pct": -1.14, "turnover": 469e8},
+            # 半导体：占两市成交 16.5%，冲高留长上影（CLV 0.28，振幅 3.3%）→ 放量长上影预警
+            {"thscode": "881121.TI", "name": "半导体", "is_sector": True,
+             "prev_price": 100.0, "open_price": 99.55, "high_price": 101.60,
+             "low_price": 98.30, "last_price": 99.20,
+             "price_change_ratio_pct": -0.80, "turnover": 2163e8},
+            # 软件开发：隔夜高开 +0.33%，日内杀跌 -3.62%，分位 0.11 → 高开低走派发
+            {"thscode": "881131.TI", "name": "软件开发", "is_sector": True,
+             "prev_price": 100.0, "open_price": 100.33, "high_price": 100.50,
+             "low_price": 96.30, "last_price": 96.70,
+             "price_change_ratio_pct": -3.30, "turnover": 275e8},
+            {"thscode": "881101.TI", "name": "文化传媒", "is_sector": True,
+             "prev_price": 100.0, "open_price": 99.50, "high_price": 99.60,
+             "low_price": 95.00, "last_price": 95.31,
+             "price_change_ratio_pct": -4.69, "turnover": 276e8},
+            {"thscode": "881102.TI", "name": "IT服务", "is_sector": True,
+             "prev_price": 100.0, "open_price": 99.80, "high_price": 99.90,
+             "low_price": 95.50, "last_price": 95.81,
+             "price_change_ratio_pct": -4.19, "turnover": 431e8},
+        ]
+        indices = [
+            {"thscode": "000300.SH", "name": "沪深300", "is_sector": False,
+             "prev_price": 100.0, "open_price": 99.72, "high_price": 100.20,
+             "low_price": 99.10, "last_price": 100.03, "price_change_ratio_pct": 0.03},
+            {"thscode": "000688.SH", "name": "科创50", "is_sector": False,
+             "prev_price": 100.0, "open_price": 99.54, "high_price": 102.20,
+             "low_price": 99.00, "last_price": 101.83, "price_change_ratio_pct": 1.83},
+            {"thscode": "000852.SH", "name": "中证1000", "is_sector": False,
+             "prev_price": 100.0, "open_price": 99.68, "high_price": 99.80,
+             "low_price": 97.70, "last_price": 98.12, "price_change_ratio_pct": -1.88},
+        ]
+        market = {"count": 5584, "up": 649, "down": 4876, "flat": 48,
+                  "limit_up": 27, "limit_down": 84, "avg_ratio": -2.55,
+                  "turnover": 13145.8e8}
+        limit_up = [
+            {"name": "盛剑科技", "limit_up_time": "09:37:00",
+             "continue_day_text": "3连板", "seal_money": 7e6,
+             "limit_up_reason": "光刻胶+半导体"},
+            {"name": "京蓝科技", "limit_up_time": "13:25:00",
+             "continue_day_text": "2连板", "seal_money": 8e6,
+             "limit_up_reason": "铟资源+半导体"},
+            {"name": "兴业股份", "limit_up_time": "13:25:00",
+             "continue_day_text": "首板", "seal_money": 1e6,
+             "limit_up_reason": "光刻胶树脂"},
+        ]
+
+        section, notes = sector_rrg.build_cross_section(
+            sectors + indices, market=market, indices=indices,
+            limit_up=limit_up, as_of="2026-11-19"
+        )
+        self.assertEqual(notes, [])
+        # 1) 盘中真承接识别出有色金属（低开走阳）
+        support_names = [r["name"] for r in section["intraday"]["true_support"]]
+        self.assertIn("有色金属", support_names)
+        # 2) 冲高回落/高开派发识别出半导体（放量长上影）与软件开发（高开低走派发）
+        fade_by_name = {r["name"]: r["tag"] for r in section["intraday"]["fade_warning"]}
+        self.assertEqual(fade_by_name.get("半导体"), "放量长上影")
+        self.assertEqual(fade_by_name.get("软件开发"), "高开低走派发")
+        # 3) 涨停池微观结构
+        lu_s = section["limit_up_structure"]
+        self.assertEqual(lu_s["max_board"], 3)
+        self.assertEqual(lu_s["max_board_name"], "盛剑科技")
+        self.assertEqual(lu_s["multi_board_count"], 2)
+        self.assertEqual(lu_s["early_count"], 1)
+        self.assertEqual(lu_s["afternoon_count"], 2)
+        # 4) 0-100 情绪温度计与「指数托底、个股冰点」背离
+        sent = section["sentiment"]
+        self.assertTrue(0 <= sent["score"] <= 100)
+        self.assertEqual(sent["divergence"], "指数托底、个股冰点")
+        # 5) 叙述文字里包含 APM 隔夜/日内拆分与情绪温度
+        joined = "\n".join(section["narrative"])
+        self.assertIn("隔夜 vs 日内", joined)
+        self.assertIn("情绪温度", joined)
+
+
 if __name__ == "__main__":
     unittest.main()
