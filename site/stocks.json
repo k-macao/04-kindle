@@ -1,12 +1,12 @@
 {
-  "generated": "2026-11-23T05:43:44Z",
+  "generated": "2026-11-23T05:59:26Z",
   "doc": "stocks.txt",
   "epub": "stocks.epub",
   "title": "同花顺行情面板",
-  "data_timestamp": 1795412579000,
-  "data_time": "2026-11-23T05:42:59Z",
+  "data_timestamp": 1795413529000,
+  "data_time": "2026-11-23T05:58:49Z",
   "data_time_kind": "exact",
-  "data_hash": "25d23d426af25054",
+  "data_hash": "0ead6aeeee607beb",
   "demo": false,
   "view": null,
   "counts": {
@@ -22,13 +22,13 @@
     {
       "thscode": "000001.SH",
       "ticker": "1A0001",
-      "volume": 38481260000,
-      "turnover": 551553000000,
-      "last_price": 3521.79,
-      "price_change": -12,
-      "price_change_ratio_pct": -0.339579,
+      "volume": 41561303000,
+      "turnover": 600146870000,
+      "last_price": 3533.79,
+      "price_change": 0,
+      "price_change_ratio_pct": 0,
       "open_price": 3503.52,
-      "high_price": 3527.95,
+      "high_price": 3544.6,
       "low_price": 3476.65,
       "prev_price": 3533.79,
       "name": "上证指数",
@@ -37,13 +37,13 @@
     {
       "thscode": "399001.SZ",
       "ticker": "399001",
-      "volume": 46429330000,
-      "turnover": 614064410000,
-      "last_price": 10402.6523,
-      "price_change": 146.2638,
-      "price_change_ratio_pct": 1.426075,
+      "volume": 50196007000,
+      "turnover": 668623680000,
+      "last_price": 10463.8982,
+      "price_change": 207.5097,
+      "price_change_ratio_pct": 2.023224,
       "open_price": 10155.6022,
-      "high_price": 10419.7903,
+      "high_price": 10501.2778,
       "low_price": 10118.0155,
       "prev_price": 10256.3885,
       "name": "深证成指",
@@ -52,13 +52,13 @@
     {
       "thscode": "399006.SZ",
       "ticker": "399006",
-      "volume": 14739231000,
-      "turnover": 302921840000,
-      "last_price": 2268.1727,
-      "price_change": 56.0453,
-      "price_change_ratio_pct": 2.533548,
+      "volume": 16078945000,
+      "turnover": 331258790000,
+      "last_price": 2286.5077,
+      "price_change": 74.3803,
+      "price_change_ratio_pct": 3.362388,
       "open_price": 2195.5163,
-      "high_price": 2273.6586,
+      "high_price": 2294.7753,
       "low_price": 2188.4484,
       "prev_price": 2212.1274,
       "name": "创业板指",
@@ -67,13 +67,13 @@
     {
       "thscode": "000300.SH",
       "ticker": "1B0300",
-      "volume": 14693796000,
-      "turnover": 335205040000,
-      "last_price": 3945.19,
-      "price_change": -9.38,
-      "price_change_ratio_pct": -0.237194,
+      "volume": 15977125000,
+      "turnover": 365357820000,
+      "last_price": 3958.76,
+      "price_change": 4.19,
+      "price_change_ratio_pct": 0.105953,
       "open_price": 3931.47,
-      "high_price": 3953.15,
+      "high_price": 3968.45,
       "low_price": 3901.49,
       "prev_price": 3954.57,
       "name": "沪深300",
@@ -82,13 +82,13 @@
     {
       "thscode": "000688.SH",
       "ticker": "1B0688",
-      "volume": 762587000,
-      "turnover": 66931494000,
-      "last_price": 1221.76,
-      "price_change": -9.33,
-      "price_change_ratio_pct": -0.757865,
+      "volume": 843480700,
+      "turnover": 73933527000,
+      "last_price": 1231.47,
+      "price_change": 0.38,
+      "price_change_ratio_pct": 0.030867,
       "open_price": 1211.44,
-      "high_price": 1225.15,
+      "high_price": 1243.16,
       "low_price": 1177.56,
       "prev_price": 1231.09,
       "name": "科创50",
@@ -97,13 +97,13 @@
     {
       "thscode": "000905.SH",
       "ticker": "1B0905",
-      "volume": 10227650400,
-      "turnover": 190369370000,
-      "last_price": 6088.42,
-      "price_change": 82.34,
-      "price_change_ratio_pct": 1.370944,
+      "volume": 11280337600,
+      "turnover": 209626170000,
+      "last_price": 6126.3,
+      "price_change": 120.22,
+      "price_change_ratio_pct": 2.001638,
       "open_price": 5932.57,
-      "high_price": 6099.76,
+      "high_price": 6155.8,
       "low_price": 5899.96,
       "prev_price": 6006.08,
       "name": "中证500",
@@ -112,13 +112,13 @@
     {
       "thscode": "000852.SH",
       "ticker": "1B0852",
-      "volume": 16078425000,
-      "turnover": 218613180000,
-      "last_price": 5770.27,
-      "price_change": 121.64,
-      "price_change_ratio_pct": 2.153443,
+      "volume": 17604214000,
+      "turnover": 240044360000,
+      "last_price": 5808.21,
+      "price_change": 159.58,
+      "price_change_ratio_pct": 2.82511,
       "open_price": 5563.29,
-      "high_price": 5778.65,
+      "high_price": 5840.66,
       "low_price": 5541.97,
       "prev_price": 5648.63,
       "name": "中证1000",
@@ -127,11 +127,11 @@
     {
       "thscode": "000016.SH",
       "ticker": "1B0016",
-      "volume": 4012676900,
-      "turnover": 101184753000,
-      "last_price": 2754.14,
-      "price_change": -31.78,
-      "price_change_ratio_pct": -1.140736,
+      "volume": 4300121000,
+      "turnover": 110137182000,
+      "last_price": 2759.81,
+      "price_change": -26.11,
+      "price_change_ratio_pct": -0.937213,
       "open_price": 2767.91,
       "high_price": 2767.91,
       "low_price": 2734.17,
@@ -142,13 +142,13 @@
     {
       "thscode": "399005.SZ",
       "ticker": "399005",
-      "volume": 3105686300,
-      "turnover": 74704110000,
-      "last_price": 6669.3347,
-      "price_change": 52.374,
-      "price_change_ratio_pct": 0.791511,
+      "volume": 3412269300,
+      "turnover": 82003131000,
+      "last_price": 6699.0979,
+      "price_change": 82.1372,
+      "price_change_ratio_pct": 1.241313,
       "open_price": 6531.6616,
-      "high_price": 6679.1399,
+      "high_price": 6727.9022,
       "low_price": 6496.6772,
       "prev_price": 6616.9607,
       "name": "中小100",
@@ -157,13 +157,13 @@
     {
       "thscode": "000010.SH",
       "ticker": "1B0007",
-      "volume": 9895213400,
-      "turnover": 185667730000,
-      "last_price": 8914.76,
-      "price_change": -68.77,
-      "price_change_ratio_pct": -0.765512,
+      "volume": 10667820300,
+      "turnover": 201940390000,
+      "last_price": 8937.44,
+      "price_change": -46.09,
+      "price_change_ratio_pct": -0.51305,
       "open_price": 8943.73,
-      "high_price": 8943.73,
+      "high_price": 8961.41,
       "low_price": 8827.46,
       "prev_price": 8983.53,
       "name": "上证180",
@@ -172,13 +172,13 @@
     {
       "thscode": "399673.SZ",
       "ticker": "399673",
-      "volume": 1466950700,
-      "turnover": 97008603000,
-      "last_price": 2250.4338,
-      "price_change": 57.6383,
-      "price_change_ratio_pct": 2.628531,
+      "volume": 1629768200,
+      "turnover": 106399739000,
+      "last_price": 2269.2813,
+      "price_change": 76.4858,
+      "price_change_ratio_pct": 3.48805,
       "open_price": 2176.2699,
-      "high_price": 2256.3144,
+      "high_price": 2276.6215,
       "low_price": 2171.0793,
       "prev_price": 2192.7955,
       "name": "创业板50",
@@ -187,13 +187,13 @@
     {
       "thscode": "000903.SH",
       "ticker": "1B0903",
-      "volume": 5871524000,
-      "turnover": 184188520000,
-      "last_price": 3776.95,
-      "price_change": -16.21,
-      "price_change_ratio_pct": -0.427348,
+      "volume": 6437802400,
+      "turnover": 200648040000,
+      "last_price": 3790.1,
+      "price_change": -3.06,
+      "price_change_ratio_pct": -0.080672,
       "open_price": 3768.96,
-      "high_price": 3784.59,
+      "high_price": 3799.85,
       "low_price": 3732.32,
       "prev_price": 3793.16,
       "name": "中证100",
@@ -202,13 +202,13 @@
     {
       "thscode": "000009.SH",
       "ticker": "1B0009",
-      "volume": 6447825900,
-      "turnover": 112176629000,
-      "last_price": 5634.62,
-      "price_change": 51.23,
-      "price_change_ratio_pct": 0.917543,
+      "volume": 7095869100,
+      "turnover": 123051992000,
+      "last_price": 5665.12,
+      "price_change": 81.73,
+      "price_change_ratio_pct": 1.463806,
       "open_price": 5519.54,
-      "high_price": 5645.84,
+      "high_price": 5692.36,
       "low_price": 5491.44,
       "prev_price": 5583.39,
       "name": "上证380",
@@ -217,11 +217,11 @@
     {
       "thscode": "881101.TI",
       "ticker": "881101",
-      "volume": 638654350,
-      "turnover": 3542659800,
-      "last_price": 3577.543,
-      "price_change": 37.336,
-      "price_change_ratio_pct": 1.054628,
+      "volume": 686509760,
+      "turnover": 3807378000,
+      "last_price": 3585.537,
+      "price_change": 45.33,
+      "price_change_ratio_pct": 1.280434,
       "open_price": 3491.282,
       "high_price": 3604.717,
       "low_price": 3463.885,
@@ -232,13 +232,13 @@
     {
       "thscode": "881102.TI",
       "ticker": "881102",
-      "volume": 956007150,
-      "turnover": 5401493700,
-      "last_price": 2563.298,
-      "price_change": 20.638,
-      "price_change_ratio_pct": 0.81167,
+      "volume": 1024801810,
+      "turnover": 5843637400,
+      "last_price": 2574.518,
+      "price_change": 31.858,
+      "price_change_ratio_pct": 1.25294,
       "open_price": 2516.587,
-      "high_price": 2574.44,
+      "high_price": 2583.411,
       "low_price": 2491.361,
       "prev_price": 2542.66,
       "name": "养殖业",
@@ -247,13 +247,13 @@
     {
       "thscode": "881103.TI",
       "ticker": "881103",
-      "volume": 1017664040,
-      "turnover": 5997025100,
-      "last_price": 3271.123,
-      "price_change": 58.736,
-      "price_change_ratio_pct": 1.828422,
+      "volume": 1062446940,
+      "turnover": 6342493400,
+      "last_price": 3282.878,
+      "price_change": 70.491,
+      "price_change_ratio_pct": 2.19435,
       "open_price": 3186.521,
-      "high_price": 3273.699,
+      "high_price": 3293.17,
       "low_price": 3160.877,
       "prev_price": 3212.387,
       "name": "农产品加工",
@@ -262,11 +262,11 @@
     {
       "thscode": "881105.TI",
       "ticker": "881105",
-      "volume": 973468310,
-      "turnover": 7024426400,
-      "last_price": 2592.556,
-      "price_change": -16.963,
-      "price_change_ratio_pct": -0.650043,
+      "volume": 1048043650,
+      "turnover": 7572229400,
+      "last_price": 2595.226,
+      "price_change": -14.293,
+      "price_change_ratio_pct": -0.547725,
       "open_price": 2583.442,
       "high_price": 2610.512,
       "low_price": 2547.671,
@@ -277,13 +277,13 @@
     {
       "thscode": "881107.TI",
       "ticker": "881107",
-      "volume": 336430690,
-      "turnover": 2611396300,
-      "last_price": 1398.159,
-      "price_change": -9.414,
-      "price_change_ratio_pct": -0.668811,
+      "volume": 356579050,
+      "turnover": 2800362200,
+      "last_price": 1397.851,
+      "price_change": -9.722,
+      "price_change_ratio_pct": -0.690692,
       "open_price": 1387.76,
-      "high_price": 1403.833,
+      "high_price": 1404.337,
       "low_price": 1367.897,
       "prev_price": 1407.573,
       "name": "油气开采及服务",
@@ -292,13 +292,13 @@
     {
       "thscode": "881108.TI",
       "ticker": "881108",
-      "volume": 856915460,
-      "turnover": 6318264000,
-      "last_price": 2604.561,
-      "price_change": 10.023,
-      "price_change_ratio_pct": 0.386312,
+      "volume": 918285010,
+      "turnover": 6784235200,
+      "last_price": 2615.962,
+      "price_change": 21.424,
+      "price_change_ratio_pct": 0.825735,
       "open_price": 2551.953,
-      "high_price": 2615.538,
+      "high_price": 2625.439,
       "low_price": 2509.226,
       "prev_price": 2594.538,
       "name": "化学原料",
@@ -307,13 +307,13 @@
     {
       "thscode": "881109.TI",
       "ticker": "881109",
-      "volume": 1572849100,
-      "turnover": 20278965000,
-      "last_price": 5651.345,
-      "price_change": 85.834,
-      "price_change_ratio_pct": 1.542248,
+      "volume": 1686687100,
+      "turnover": 21750616000,
+      "last_price": 5681.8,
+      "price_change": 116.289,
+      "price_change_ratio_pct": 2.089458,
       "open_price": 5470.041,
-      "high_price": 5660.995,
+      "high_price": 5704.136,
       "low_price": 5378.565,
       "prev_price": 5565.511,
       "name": "化学制品",
@@ -322,13 +322,13 @@
     {
       "thscode": "000819.SH",
       "ticker": "1B0819",
-      "volume": 1960824200,
-      "turnover": 32972450000,
-      "last_price": 6381.58,
-      "price_change": 154.76,
-      "price_change_ratio_pct": 2.485378,
+      "volume": 2118169500,
+      "turnover": 35626152000,
+      "last_price": 6396.25,
+      "price_change": 169.43,
+      "price_change_ratio_pct": 2.720972,
       "open_price": 6246.53,
-      "high_price": 6406.09,
+      "high_price": 6417.25,
       "low_price": 6178.37,
       "prev_price": 6226.82,
       "name": "有色金属",
@@ -337,13 +337,13 @@
     {
       "thscode": "881112.TI",
       "ticker": "881112",
-      "volume": 1157367400,
-      "turnover": 3935977700,
-      "last_price": 1253.261,
-      "price_change": -7.96,
-      "price_change_ratio_pct": -0.631134,
+      "volume": 1279562710,
+      "turnover": 4333896400,
+      "last_price": 1257.256,
+      "price_change": -3.965,
+      "price_change_ratio_pct": -0.314378,
       "open_price": 1248.379,
-      "high_price": 1257.714,
+      "high_price": 1262.417,
       "low_price": 1226.775,
       "prev_price": 1261.221,
       "name": "钢铁",
@@ -352,13 +352,13 @@
     {
       "thscode": "881114.TI",
       "ticker": "881114",
-      "volume": 229002880,
-      "turnover": 3837642700,
-      "last_price": 10120.208,
-      "price_change": 297.343,
-      "price_change_ratio_pct": 3.02705,
+      "volume": 252124450,
+      "turnover": 4244786700,
+      "last_price": 10212.067,
+      "price_change": 389.202,
+      "price_change_ratio_pct": 3.962205,
       "open_price": 9664.502,
-      "high_price": 10136.382,
+      "high_price": 10253.158,
       "low_price": 9526.647,
       "prev_price": 9822.865,
       "name": "金属新材料",
@@ -367,13 +367,13 @@
     {
       "thscode": "881115.TI",
       "ticker": "881115",
-      "volume": 1067891750,
-      "turnover": 11001569100,
-      "last_price": 4642.98,
-      "price_change": 27.535,
-      "price_change_ratio_pct": 0.596584,
+      "volume": 1167568280,
+      "turnover": 12132321800,
+      "last_price": 4658.647,
+      "price_change": 43.202,
+      "price_change_ratio_pct": 0.936031,
       "open_price": 4549.337,
-      "high_price": 4653.351,
+      "high_price": 4679.222,
       "low_price": 4471.188,
       "prev_price": 4615.445,
       "name": "建筑材料",
@@ -382,13 +382,13 @@
     {
       "thscode": "881116.TI",
       "ticker": "881116",
-      "volume": 2427388200,
-      "turnover": 14108187000,
-      "last_price": 3318.626,
-      "price_change": 13.859,
-      "price_change_ratio_pct": 0.419364,
+      "volume": 2613905500,
+      "turnover": 15278453000,
+      "last_price": 3331.394,
+      "price_change": 26.627,
+      "price_change_ratio_pct": 0.805715,
       "open_price": 3248.623,
-      "high_price": 3324.944,
+      "high_price": 3347.667,
       "low_price": 3187.635,
       "prev_price": 3304.767,
       "name": "建筑装饰",
@@ -397,13 +397,13 @@
     {
       "thscode": "881117.TI",
       "ticker": "881117",
-      "volume": 2547386800,
-      "turnover": 36919254000,
-      "last_price": 7149.643,
-      "price_change": 268.685,
-      "price_change_ratio_pct": 3.904762,
+      "volume": 2754292800,
+      "turnover": 40018385000,
+      "last_price": 7202.873,
+      "price_change": 321.915,
+      "price_change_ratio_pct": 4.678346,
       "open_price": 6771.313,
-      "high_price": 7158.695,
+      "high_price": 7232.537,
       "low_price": 6728.028,
       "prev_price": 6880.958,
       "name": "通用设备",
@@ -412,13 +412,13 @@
     {
       "thscode": "881118.TI",
       "ticker": "881118",
-      "volume": 1759414900,
-      "turnover": 21844949000,
-      "last_price": 5729.273,
-      "price_change": 138.474,
-      "price_change_ratio_pct": 2.47682,
+      "volume": 1908670600,
+      "turnover": 23934908000,
+      "last_price": 5765.776,
+      "price_change": 174.977,
+      "price_change_ratio_pct": 3.129732,
       "open_price": 5496.908,
-      "high_price": 5734.906,
+      "high_price": 5787.856,
       "low_price": 5437.288,
       "prev_price": 5590.799,
       "name": "专用设备",
@@ -427,13 +427,13 @@
     {
       "thscode": "881121.TI",
       "ticker": "881121",
-      "volume": 2728724300,
-      "turnover": 154701530000,
-      "last_price": 11756.551,
-      "price_change": 261.423,
-      "price_change_ratio_pct": 2.274207,
+      "volume": 3008138800,
+      "turnover": 170808960000,
+      "last_price": 11897.668,
+      "price_change": 402.54,
+      "price_change_ratio_pct": 3.501831,
       "open_price": 11240.12,
-      "high_price": 11788.549,
+      "high_price": 11979.017,
       "low_price": 11092.912,
       "prev_price": 11495.128,
       "name": "半导体",
@@ -442,13 +442,13 @@
     {
       "thscode": "881122.TI",
       "ticker": "881122",
-      "volume": 2720336900,
-      "turnover": 24531011000,
-      "last_price": 4208.506,
-      "price_change": 105.083,
-      "price_change_ratio_pct": 2.560862,
+      "volume": 2986762500,
+      "turnover": 26791479000,
+      "last_price": 4243.808,
+      "price_change": 140.385,
+      "price_change_ratio_pct": 3.421168,
       "open_price": 4028.375,
-      "high_price": 4215.715,
+      "high_price": 4261.471,
       "low_price": 3982.516,
       "prev_price": 4103.423,
       "name": "光学光电子",
@@ -457,13 +457,13 @@
     {
       "thscode": "881123.TI",
       "ticker": "881123",
-      "volume": 446674370,
-      "turnover": 7438150400,
-      "last_price": 14592.806,
-      "price_change": 401.516,
-      "price_change_ratio_pct": 2.829313,
+      "volume": 492398530,
+      "turnover": 8257266500,
+      "last_price": 14757.821,
+      "price_change": 566.531,
+      "price_change_ratio_pct": 3.992104,
       "open_price": 13932.839,
-      "high_price": 14619.484,
+      "high_price": 14839.697,
       "low_price": 13760.534,
       "prev_price": 14191.29,
       "name": "其他电子",
@@ -472,13 +472,13 @@
     {
       "thscode": "881124.TI",
       "ticker": "881124",
-      "volume": 1319626160,
-      "turnover": 27804120000,
-      "last_price": 9435.781,
-      "price_change": 313.669,
-      "price_change_ratio_pct": 3.438557,
+      "volume": 1433451900,
+      "turnover": 30490247000,
+      "last_price": 9505.011,
+      "price_change": 382.899,
+      "price_change_ratio_pct": 4.197482,
       "open_price": 8960.164,
-      "high_price": 9446.378,
+      "high_price": 9550.273,
       "low_price": 8860.486,
       "prev_price": 9122.112,
       "name": "消费电子",
@@ -487,13 +487,13 @@
     {
       "thscode": "881125.TI",
       "ticker": "881125",
-      "volume": 658559970,
-      "turnover": 5661658600,
-      "last_price": 2145.265,
-      "price_change": -15.561,
-      "price_change_ratio_pct": -0.720141,
+      "volume": 713168300,
+      "turnover": 6172321900,
+      "last_price": 2151.43,
+      "price_change": -9.396,
+      "price_change_ratio_pct": -0.434834,
       "open_price": 2146.978,
-      "high_price": 2150.603,
+      "high_price": 2157.64,
       "low_price": 2096.624,
       "prev_price": 2160.826,
       "name": "汽车整车",
@@ -502,13 +502,13 @@
     {
       "thscode": "881126.TI",
       "ticker": "881126",
-      "volume": 2730992000,
-      "turnover": 38973766000,
-      "last_price": 4736.374,
-      "price_change": 172.752,
-      "price_change_ratio_pct": 3.785414,
+      "volume": 2942269100,
+      "turnover": 41724903000,
+      "last_price": 4765.715,
+      "price_change": 202.093,
+      "price_change_ratio_pct": 4.428347,
       "open_price": 4499.721,
-      "high_price": 4739.891,
+      "high_price": 4783.617,
       "low_price": 4470.806,
       "prev_price": 4563.622,
       "name": "汽车零部件",
@@ -517,13 +517,13 @@
     {
       "thscode": "881128.TI",
       "ticker": "881128",
-      "volume": 202006780,
-      "turnover": 2193875600,
-      "last_price": 937.055,
-      "price_change": 12.848,
-      "price_change_ratio_pct": 1.390165,
+      "volume": 218312580,
+      "turnover": 2428142400,
+      "last_price": 942.059,
+      "price_change": 17.852,
+      "price_change_ratio_pct": 1.931602,
       "open_price": 912.815,
-      "high_price": 937.872,
+      "high_price": 944.967,
       "low_price": 899.862,
       "prev_price": 924.207,
       "name": "汽车服务及其他",
@@ -532,13 +532,13 @@
     {
       "thscode": "881129.TI",
       "ticker": "881129",
-      "volume": 1492474300,
-      "turnover": 79253217000,
-      "last_price": 6484.546,
-      "price_change": 200.348,
-      "price_change_ratio_pct": 3.188124,
+      "volume": 1626314100,
+      "turnover": 85708565000,
+      "last_price": 6535.582,
+      "price_change": 251.384,
+      "price_change_ratio_pct": 4.000256,
       "open_price": 6152.486,
-      "high_price": 6497.393,
+      "high_price": 6570.742,
       "low_price": 6081.846,
       "prev_price": 6284.198,
       "name": "通信设备",
@@ -547,13 +547,13 @@
     {
       "thscode": "881130.TI",
       "ticker": "881130",
-      "volume": 866437260,
-      "turnover": 16121292000,
-      "last_price": 3136.765,
-      "price_change": 93.606,
-      "price_change_ratio_pct": 3.075948,
+      "volume": 961429480,
+      "turnover": 17618574000,
+      "last_price": 3158.505,
+      "price_change": 115.346,
+      "price_change_ratio_pct": 3.790338,
       "open_price": 2998.937,
-      "high_price": 3141.362,
+      "high_price": 3168.773,
       "low_price": 2970.687,
       "prev_price": 3043.159,
       "name": "计算机设备",
@@ -562,13 +562,13 @@
     {
       "thscode": "881131.TI",
       "ticker": "881131",
-      "volume": 685675460,
-      "turnover": 11204520900,
-      "last_price": 6624.344,
-      "price_change": 86.198,
-      "price_change_ratio_pct": 1.318386,
+      "volume": 739152580,
+      "turnover": 12204522600,
+      "last_price": 6658.085,
+      "price_change": 119.939,
+      "price_change_ratio_pct": 1.83445,
       "open_price": 6441.25,
-      "high_price": 6629.338,
+      "high_price": 6688.277,
       "low_price": 6331.584,
       "prev_price": 6538.146,
       "name": "白色家电",
@@ -577,13 +577,13 @@
     {
       "thscode": "881132.TI",
       "ticker": "881132",
-      "volume": 265733000,
-      "turnover": 2172343500,
-      "last_price": 3820.502,
-      "price_change": 84.965,
-      "price_change_ratio_pct": 2.274506,
+      "volume": 288731000,
+      "turnover": 2363934800,
+      "last_price": 3833.301,
+      "price_change": 97.764,
+      "price_change_ratio_pct": 2.617134,
       "open_price": 3670.257,
-      "high_price": 3829.551,
+      "high_price": 3869.26,
       "low_price": 3623.066,
       "prev_price": 3735.537,
       "name": "黑色家电",
@@ -592,13 +592,13 @@
     {
       "thscode": "881133.TI",
       "ticker": "881133",
-      "volume": 457884720,
-      "turnover": 6091737100,
-      "last_price": 4317.498,
-      "price_change": 36.196,
-      "price_change_ratio_pct": 0.845444,
+      "volume": 490809830,
+      "turnover": 6545921100,
+      "last_price": 4323.593,
+      "price_change": 42.291,
+      "price_change_ratio_pct": 0.987807,
       "open_price": 4227.855,
-      "high_price": 4323.731,
+      "high_price": 4340.355,
       "low_price": 4182.52,
       "prev_price": 4281.302,
       "name": "饮料制造",
@@ -607,13 +607,13 @@
     {
       "thscode": "881134.TI",
       "ticker": "881134",
-      "volume": 705208930,
-      "turnover": 6813324300,
-      "last_price": 4249.756,
-      "price_change": 25.929,
-      "price_change_ratio_pct": 0.613875,
+      "volume": 759074120,
+      "turnover": 7340996200,
+      "last_price": 4261.924,
+      "price_change": 38.097,
+      "price_change_ratio_pct": 0.901955,
       "open_price": 4173.66,
-      "high_price": 4256.504,
+      "high_price": 4275.781,
       "low_price": 4123.662,
       "prev_price": 4223.827,
       "name": "食品加工制造",
@@ -622,13 +622,13 @@
     {
       "thscode": "881135.TI",
       "ticker": "881135",
-      "volume": 580012810,
-      "turnover": 3285474300,
-      "last_price": 1980.081,
-      "price_change": 28.575,
-      "price_change_ratio_pct": 1.464254,
+      "volume": 603472520,
+      "turnover": 3455866200,
+      "last_price": 1987.429,
+      "price_change": 35.923,
+      "price_change_ratio_pct": 1.840783,
       "open_price": 1923.657,
-      "high_price": 1984.177,
+      "high_price": 1994.856,
       "low_price": 1900.769,
       "prev_price": 1951.506,
       "name": "纺织制造",
@@ -637,13 +637,13 @@
     {
       "thscode": "881136.TI",
       "ticker": "881136",
-      "volume": 881743710,
-      "turnover": 6203264100,
-      "last_price": 2377.406,
-      "price_change": 43.998,
-      "price_change_ratio_pct": 1.885568,
+      "volume": 936287800,
+      "turnover": 6606798400,
+      "last_price": 2382.05,
+      "price_change": 48.642,
+      "price_change_ratio_pct": 2.08459,
       "open_price": 2300.706,
-      "high_price": 2382.814,
+      "high_price": 2392.241,
       "low_price": 2270.558,
       "prev_price": 2333.408,
       "name": "服装家纺",
@@ -652,13 +652,13 @@
     {
       "thscode": "881137.TI",
       "ticker": "881137",
-      "volume": 540710750,
-      "turnover": 2289243600,
-      "last_price": 1655.398,
-      "price_change": 9.853,
-      "price_change_ratio_pct": 0.598768,
+      "volume": 560440240,
+      "turnover": 2401319800,
+      "last_price": 1659.173,
+      "price_change": 13.628,
+      "price_change_ratio_pct": 0.828175,
       "open_price": 1624.299,
-      "high_price": 1660.381,
+      "high_price": 1665.369,
       "low_price": 1590.503,
       "prev_price": 1645.545,
       "name": "造纸",
@@ -667,13 +667,13 @@
     {
       "thscode": "881138.TI",
       "ticker": "881138",
-      "volume": 537839470,
-      "turnover": 3849487800,
-      "last_price": 3477.854,
-      "price_change": 42.699,
-      "price_change_ratio_pct": 1.243001,
+      "volume": 582021950,
+      "turnover": 4217322200,
+      "last_price": 3492.887,
+      "price_change": 57.732,
+      "price_change_ratio_pct": 1.680623,
       "open_price": 3385.695,
-      "high_price": 3485.233,
+      "high_price": 3508.911,
       "low_price": 3316.274,
       "prev_price": 3435.155,
       "name": "包装印刷",
@@ -682,13 +682,13 @@
     {
       "thscode": "881139.TI",
       "ticker": "881139",
-      "volume": 626173640,
-      "turnover": 6043205400,
-      "last_price": 3264.515,
-      "price_change": 56.378,
-      "price_change_ratio_pct": 1.757344,
+      "volume": 664038810,
+      "turnover": 6430202000,
+      "last_price": 3277.796,
+      "price_change": 69.659,
+      "price_change_ratio_pct": 2.171322,
       "open_price": 3162.274,
-      "high_price": 3271.162,
+      "high_price": 3291.503,
       "low_price": 3105.699,
       "prev_price": 3208.137,
       "name": "家居用品",
@@ -697,13 +697,13 @@
     {
       "thscode": "881140.TI",
       "ticker": "881140",
-      "volume": 1562232300,
-      "turnover": 17227850000,
-      "last_price": 5069.314,
-      "price_change": 70.245,
-      "price_change_ratio_pct": 1.405162,
+      "volume": 1701088700,
+      "turnover": 18926842000,
+      "last_price": 5089.057,
+      "price_change": 89.988,
+      "price_change_ratio_pct": 1.800095,
       "open_price": 4934.228,
-      "high_price": 5077.778,
+      "high_price": 5112.66,
       "low_price": 4874.575,
       "prev_price": 4999.069,
       "name": "化学制药",
@@ -712,13 +712,13 @@
     {
       "thscode": "881141.TI",
       "ticker": "881141",
-      "volume": 705303310,
-      "turnover": 6714079200,
-      "last_price": 2757.235,
-      "price_change": 10.514,
-      "price_change_ratio_pct": 0.382784,
+      "volume": 762253180,
+      "turnover": 7234878300,
+      "last_price": 2765.957,
+      "price_change": 19.236,
+      "price_change_ratio_pct": 0.700326,
       "open_price": 2708.012,
-      "high_price": 2760.112,
+      "high_price": 2776.164,
       "low_price": 2684.213,
       "prev_price": 2746.721,
       "name": "中药",
@@ -727,13 +727,13 @@
     {
       "thscode": "881142.TI",
       "ticker": "881142",
-      "volume": 338068000,
-      "turnover": 6663677400,
-      "last_price": 5088.595,
-      "price_change": 106.393,
-      "price_change_ratio_pct": 2.135461,
+      "volume": 369484970,
+      "turnover": 7309646900,
+      "last_price": 5106.995,
+      "price_change": 124.793,
+      "price_change_ratio_pct": 2.504776,
       "open_price": 4926.327,
-      "high_price": 5093.557,
+      "high_price": 5135.577,
       "low_price": 4891.219,
       "prev_price": 4982.202,
       "name": "生物制品",
@@ -742,13 +742,13 @@
     {
       "thscode": "881143.TI",
       "ticker": "881143",
-      "volume": 285380550,
-      "turnover": 2479406800,
-      "last_price": 4024.933,
-      "price_change": 40.53,
-      "price_change_ratio_pct": 1.017216,
+      "volume": 310578820,
+      "turnover": 2721290500,
+      "last_price": 4040.867,
+      "price_change": 56.464,
+      "price_change_ratio_pct": 1.417126,
       "open_price": 3935.269,
-      "high_price": 4031.047,
+      "high_price": 4051.202,
       "low_price": 3883.061,
       "prev_price": 3984.403,
       "name": "医药商业",
@@ -757,13 +757,13 @@
     {
       "thscode": "881144.TI",
       "ticker": "881144",
-      "volume": 601049880,
-      "turnover": 11917390900,
-      "last_price": 9165.599,
-      "price_change": 151.687,
-      "price_change_ratio_pct": 1.68281,
+      "volume": 647766710,
+      "turnover": 12901558400,
+      "last_price": 9201.497,
+      "price_change": 187.585,
+      "price_change_ratio_pct": 2.081061,
       "open_price": 8904.46,
-      "high_price": 9177.409,
+      "high_price": 9248.134,
       "low_price": 8806.442,
       "prev_price": 9013.912,
       "name": "医疗器械",
@@ -772,13 +772,13 @@
     {
       "thscode": "881145.TI",
       "ticker": "881145",
-      "volume": 3205377200,
-      "turnover": 19842103000,
-      "last_price": 1672.453,
-      "price_change": -9.617,
-      "price_change_ratio_pct": -0.571736,
+      "volume": 3499404700,
+      "turnover": 21546890000,
+      "last_price": 1677.495,
+      "price_change": -4.575,
+      "price_change_ratio_pct": -0.271986,
       "open_price": 1667.585,
-      "high_price": 1678.721,
+      "high_price": 1683.286,
       "low_price": 1634.515,
       "prev_price": 1682.07,
       "name": "电力",
@@ -787,13 +787,13 @@
     {
       "thscode": "881146.TI",
       "ticker": "881146",
-      "volume": 257915070,
-      "turnover": 2111427100,
-      "last_price": 1632.596,
-      "price_change": 15.649,
-      "price_change_ratio_pct": 0.967812,
+      "volume": 279408670,
+      "turnover": 2277320200,
+      "last_price": 1635.834,
+      "price_change": 18.887,
+      "price_change_ratio_pct": 1.168065,
       "open_price": 1603.669,
-      "high_price": 1636.437,
+      "high_price": 1640.826,
       "low_price": 1590.625,
       "prev_price": 1616.947,
       "name": "燃气",
@@ -802,13 +802,13 @@
     {
       "thscode": "881148.TI",
       "ticker": "881148",
-      "volume": 804030370,
-      "turnover": 5614392200,
-      "last_price": 1160.839,
-      "price_change": 0.358,
-      "price_change_ratio_pct": 0.030849,
+      "volume": 884704060,
+      "turnover": 6101742600,
+      "last_price": 1163.516,
+      "price_change": 3.035,
+      "price_change_ratio_pct": 0.261529,
       "open_price": 1153.688,
-      "high_price": 1162.288,
+      "high_price": 1167.822,
       "low_price": 1144.433,
       "prev_price": 1160.481,
       "name": "港口航运",
@@ -817,13 +817,13 @@
     {
       "thscode": "881149.TI",
       "ticker": "881149",
-      "volume": 958339990,
-      "turnover": 4824840100,
-      "last_price": 1302.241,
-      "price_change": -3.971,
-      "price_change_ratio_pct": -0.304009,
+      "volume": 1006373650,
+      "turnover": 5090923800,
+      "last_price": 1304.407,
+      "price_change": -1.805,
+      "price_change_ratio_pct": -0.138186,
       "open_price": 1294.083,
-      "high_price": 1304.335,
+      "high_price": 1308.041,
       "low_price": 1280.523,
       "prev_price": 1306.212,
       "name": "公路铁路运输",
@@ -832,13 +832,13 @@
     {
       "thscode": "881151.TI",
       "ticker": "881151",
-      "volume": 365127450,
-      "turnover": 1683595800,
-      "last_price": 1714.822,
-      "price_change": -3.054,
-      "price_change_ratio_pct": -0.177778,
+      "volume": 401354950,
+      "turnover": 1873835400,
+      "last_price": 1722.953,
+      "price_change": 5.077,
+      "price_change_ratio_pct": 0.295539,
       "open_price": 1707.857,
-      "high_price": 1718.558,
+      "high_price": 1725.398,
       "low_price": 1698.138,
       "prev_price": 1717.876,
       "name": "机场航运",
@@ -847,13 +847,13 @@
     {
       "thscode": "881152.TI",
       "ticker": "881152",
-      "volume": 539203420,
-      "turnover": 4025780000,
-      "last_price": 4420.453,
-      "price_change": -6.08,
-      "price_change_ratio_pct": -0.137354,
+      "volume": 580122590,
+      "turnover": 4347296700,
+      "last_price": 4432.735,
+      "price_change": 6.202,
+      "price_change_ratio_pct": 0.14011,
       "open_price": 4371.147,
-      "high_price": 4432.447,
+      "high_price": 4449.891,
       "low_price": 4279.042,
       "prev_price": 4426.533,
       "name": "物流",
@@ -862,13 +862,13 @@
     {
       "thscode": "881153.TI",
       "ticker": "881153",
-      "volume": 2659109300,
-      "turnover": 7439868100,
-      "last_price": 1354.72,
-      "price_change": -2.386,
-      "price_change_ratio_pct": -0.175815,
+      "volume": 2839549700,
+      "turnover": 8041239700,
+      "last_price": 1357.806,
+      "price_change": 0.7,
+      "price_change_ratio_pct": 0.05158,
       "open_price": 1339.855,
-      "high_price": 1358.604,
+      "high_price": 1364.694,
       "low_price": 1308.302,
       "prev_price": 1357.106,
       "name": "房地产",
@@ -877,11 +877,11 @@
     {
       "thscode": "881155.TI",
       "ticker": "881155",
-      "volume": 4113960600,
-      "turnover": 34253393000,
-      "last_price": 1464.288,
-      "price_change": -6.333,
-      "price_change_ratio_pct": -0.430634,
+      "volume": 4360831200,
+      "turnover": 36441102000,
+      "last_price": 1468.236,
+      "price_change": -2.385,
+      "price_change_ratio_pct": -0.162176,
       "open_price": 1463.836,
       "high_price": 1476.899,
       "low_price": 1452.872,
@@ -892,11 +892,11 @@
     {
       "thscode": "881156.TI",
       "ticker": "881156",
-      "volume": 163465320,
-      "turnover": 5808127100,
-      "last_price": 1935.591,
-      "price_change": -43.409,
-      "price_change_ratio_pct": -2.193482,
+      "volume": 182275220,
+      "turnover": 6391912900,
+      "last_price": 1941.636,
+      "price_change": -37.364,
+      "price_change_ratio_pct": -1.888024,
       "open_price": 1970.127,
       "high_price": 1970.127,
       "low_price": 1935.114,
@@ -907,13 +907,13 @@
     {
       "thscode": "881157.TI",
       "ticker": "881157",
-      "volume": 1334840500,
-      "turnover": 13430149000,
-      "last_price": 1287.604,
-      "price_change": -1.258,
-      "price_change_ratio_pct": -0.097605,
+      "volume": 1539752000,
+      "turnover": 15456059000,
+      "last_price": 1295.426,
+      "price_change": 6.564,
+      "price_change_ratio_pct": 0.509286,
       "open_price": 1285.385,
-      "high_price": 1294.759,
+      "high_price": 1300.459,
       "low_price": 1276.25,
       "prev_price": 1288.862,
       "name": "证券",
@@ -922,13 +922,13 @@
     {
       "thscode": "881158.TI",
       "ticker": "881158",
-      "volume": 1452579700,
-      "turnover": 7331523100,
-      "last_price": 1586.042,
-      "price_change": 23.081,
-      "price_change_ratio_pct": 1.476748,
+      "volume": 1553856100,
+      "turnover": 7852305600,
+      "last_price": 1588.228,
+      "price_change": 25.267,
+      "price_change_ratio_pct": 1.616611,
       "open_price": 1544.351,
-      "high_price": 1589.031,
+      "high_price": 1595.976,
       "low_price": 1518.335,
       "prev_price": 1562.961,
       "name": "零售",
@@ -937,13 +937,13 @@
     {
       "thscode": "881159.TI",
       "ticker": "881159",
-      "volume": 166395580,
-      "turnover": 823831590,
-      "last_price": 2137.694,
-      "price_change": -0.423,
-      "price_change_ratio_pct": -0.019784,
+      "volume": 178450720,
+      "turnover": 891085100,
+      "last_price": 2141.228,
+      "price_change": 3.111,
+      "price_change_ratio_pct": 0.145502,
       "open_price": 2110.544,
-      "high_price": 2142.928,
+      "high_price": 2152.869,
       "low_price": 2060.592,
       "prev_price": 2138.117,
       "name": "贸易",
@@ -952,13 +952,13 @@
     {
       "thscode": "881160.TI",
       "ticker": "881160",
-      "volume": 353293720,
-      "turnover": 2256541100,
-      "last_price": 2322.901,
-      "price_change": 16.592,
-      "price_change_ratio_pct": 0.719418,
+      "volume": 373207570,
+      "turnover": 2408980500,
+      "last_price": 2326.633,
+      "price_change": 20.324,
+      "price_change_ratio_pct": 0.881235,
       "open_price": 2274.965,
-      "high_price": 2328.01,
+      "high_price": 2336.086,
       "low_price": 2239.113,
       "prev_price": 2306.309,
       "name": "旅游及酒店",
@@ -967,13 +967,13 @@
     {
       "thscode": "881162.TI",
       "ticker": "881162",
-      "volume": 1200765420,
-      "turnover": 12399197300,
-      "last_price": 2184.922,
-      "price_change": 38.38,
-      "price_change_ratio_pct": 1.787992,
+      "volume": 1272016800,
+      "turnover": 13207446200,
+      "last_price": 2197.465,
+      "price_change": 50.923,
+      "price_change_ratio_pct": 2.372327,
       "open_price": 2106.683,
-      "high_price": 2191.02,
+      "high_price": 2209.075,
       "low_price": 2071.571,
       "prev_price": 2146.542,
       "name": "通信服务",
@@ -982,13 +982,13 @@
     {
       "thscode": "881164.TI",
       "ticker": "881164",
-      "volume": 2701104800,
-      "turnover": 29441847000,
-      "last_price": 2575.334,
-      "price_change": 119.828,
-      "price_change_ratio_pct": 4.879972,
+      "volume": 2884501700,
+      "turnover": 31436019000,
+      "last_price": 2576.688,
+      "price_change": 121.182,
+      "price_change_ratio_pct": 4.935113,
       "open_price": 2412.14,
-      "high_price": 2586.68,
+      "high_price": 2598.164,
       "low_price": 2398.739,
       "prev_price": 2455.506,
       "name": "文化传媒",
@@ -997,13 +997,13 @@
     {
       "thscode": "881165.TI",
       "ticker": "881165",
-      "volume": 384127030,
-      "turnover": 2342910600,
-      "last_price": 1844.979,
-      "price_change": -10.625,
-      "price_change_ratio_pct": -0.57259,
+      "volume": 409208210,
+      "turnover": 2530690100,
+      "last_price": 1852.692,
+      "price_change": -2.912,
+      "price_change_ratio_pct": -0.15693,
       "open_price": 1804.244,
-      "high_price": 1850.79,
+      "high_price": 1862.117,
       "low_price": 1771.872,
       "prev_price": 1855.604,
       "name": "综合",
@@ -1012,13 +1012,13 @@
     {
       "thscode": "881166.TI",
       "ticker": "881166",
-      "volume": 731648740,
-      "turnover": 14832163000,
-      "last_price": 1664.819,
-      "price_change": 27.771,
-      "price_change_ratio_pct": 1.696407,
+      "volume": 805102050,
+      "turnover": 16323866000,
+      "last_price": 1673.242,
+      "price_change": 36.194,
+      "price_change_ratio_pct": 2.210931,
       "open_price": 1617.616,
-      "high_price": 1665.79,
+      "high_price": 1680.769,
       "low_price": 1596.752,
       "prev_price": 1637.048,
       "name": "军工装备",
@@ -1027,13 +1027,13 @@
     {
       "thscode": "881167.TI",
       "ticker": "881167",
-      "volume": 84710841,
-      "turnover": 2207091300,
-      "last_price": 22277.281,
-      "price_change": 534.925,
-      "price_change_ratio_pct": 2.46029,
+      "volume": 92373554,
+      "turnover": 2415506300,
+      "last_price": 22407.931,
+      "price_change": 665.575,
+      "price_change_ratio_pct": 3.061191,
       "open_price": 21430.983,
-      "high_price": 22360.146,
+      "high_price": 22562.6,
       "low_price": 21168.556,
       "prev_price": 21742.356,
       "name": "非金属材料",
@@ -1042,13 +1042,13 @@
     {
       "thscode": "881168.TI",
       "ticker": "881168",
-      "volume": 1559843900,
-      "turnover": 13397169500,
-      "last_price": 3252.469,
-      "price_change": 46.908,
-      "price_change_ratio_pct": 1.463332,
+      "volume": 1691703200,
+      "turnover": 14575460000,
+      "last_price": 3264.144,
+      "price_change": 58.583,
+      "price_change_ratio_pct": 1.827543,
       "open_price": 3185.203,
-      "high_price": 3261.221,
+      "high_price": 3275.801,
       "low_price": 3128.731,
       "prev_price": 3205.561,
       "name": "工业金属",
@@ -1057,13 +1057,13 @@
     {
       "thscode": "881169.TI",
       "ticker": "881169",
-      "volume": 760385570,
-      "turnover": 15319036000,
-      "last_price": 3980.637,
-      "price_change": 164.413,
-      "price_change_ratio_pct": 4.308264,
+      "volume": 801796400,
+      "turnover": 16121651000,
+      "last_price": 3978.264,
+      "price_change": 162.04,
+      "price_change_ratio_pct": 4.246082,
       "open_price": 3895.22,
-      "high_price": 4001.521,
+      "high_price": 4002.514,
       "low_price": 3802.596,
       "prev_price": 3816.224,
       "name": "贵金属",
@@ -1072,13 +1072,13 @@
     {
       "thscode": "881170.TI",
       "ticker": "881170",
-      "volume": 467354200,
-      "turnover": 12446696400,
-      "last_price": 6121.814,
-      "price_change": 132.211,
-      "price_change_ratio_pct": 2.207342,
+      "volume": 515261330,
+      "turnover": 13814406000,
+      "last_price": 6158.023,
+      "price_change": 168.42,
+      "price_change_ratio_pct": 2.811873,
       "open_price": 5901.817,
-      "high_price": 6134.805,
+      "high_price": 6184.696,
       "low_price": 5821.785,
       "prev_price": 5989.603,
       "name": "小金属",
@@ -1087,13 +1087,13 @@
     {
       "thscode": "881171.TI",
       "ticker": "881171",
-      "volume": 767586290,
-      "turnover": 29504708000,
-      "last_price": 22055.578,
-      "price_change": 1157.55,
-      "price_change_ratio_pct": 5.539039,
+      "volume": 846791860,
+      "turnover": 32670539000,
+      "last_price": 22256.911,
+      "price_change": 1358.883,
+      "price_change_ratio_pct": 6.502446,
       "open_price": 20582.785,
-      "high_price": 22079.294,
+      "high_price": 22370.239,
       "low_price": 20548.604,
       "prev_price": 20898.028,
       "name": "自动化设备",
@@ -1102,13 +1102,13 @@
     {
       "thscode": "881172.TI",
       "ticker": "881172",
-      "volume": 767055320,
-      "turnover": 19783198000,
-      "last_price": 59091.172,
-      "price_change": 1578.14,
-      "price_change_ratio_pct": 2.743969,
+      "volume": 830153650,
+      "turnover": 21618183000,
+      "last_price": 59903.155,
+      "price_change": 2390.123,
+      "price_change_ratio_pct": 4.155794,
       "open_price": 56321.237,
-      "high_price": 59344.529,
+      "high_price": 60148.865,
       "low_price": 55079.877,
       "prev_price": 57513.032,
       "name": "电子化学品",
@@ -1117,13 +1117,13 @@
     {
       "thscode": "881173.TI",
       "ticker": "881173",
-      "volume": 255785260,
-      "turnover": 4980898200,
-      "last_price": 3877.433,
-      "price_change": 62.594,
-      "price_change_ratio_pct": 1.640803,
+      "volume": 269488920,
+      "turnover": 5262916200,
+      "last_price": 3895.892,
+      "price_change": 81.053,
+      "price_change_ratio_pct": 2.124677,
       "open_price": 3757.685,
-      "high_price": 3883.907,
+      "high_price": 3914.214,
       "low_price": 3706.524,
       "prev_price": 3814.839,
       "name": "小家电",
@@ -1132,13 +1132,13 @@
     {
       "thscode": "881174.TI",
       "ticker": "881174",
-      "volume": 172673760,
-      "turnover": 1542613200,
-      "last_price": 5152.398,
-      "price_change": 6.654,
-      "price_change_ratio_pct": 0.129311,
+      "volume": 182026630,
+      "turnover": 1625285000,
+      "last_price": 5165.137,
+      "price_change": 19.393,
+      "price_change_ratio_pct": 0.376875,
       "open_price": 5086.23,
-      "high_price": 5156.563,
+      "high_price": 5189.483,
       "low_price": 4980.389,
       "prev_price": 5145.744,
       "name": "厨卫电器",
@@ -1147,13 +1147,13 @@
     {
       "thscode": "881175.TI",
       "ticker": "881175",
-      "volume": 991648480,
-      "turnover": 16563219000,
-      "last_price": 17012.904,
-      "price_change": 795.454,
-      "price_change_ratio_pct": 4.904926,
+      "volume": 1068468670,
+      "turnover": 18155526000,
+      "last_price": 17043.276,
+      "price_change": 825.826,
+      "price_change_ratio_pct": 5.092206,
       "open_price": 15958.365,
-      "high_price": 17058.219,
+      "high_price": 17171.806,
       "low_price": 15913.358,
       "prev_price": 16217.45,
       "name": "医疗服务",
@@ -1162,13 +1162,13 @@
     {
       "thscode": "881177.TI",
       "ticker": "881177",
-      "volume": 280927360,
-      "turnover": 2753018600,
-      "last_price": 7184.182,
-      "price_change": 166.284,
-      "price_change_ratio_pct": 2.369427,
+      "volume": 300180340,
+      "turnover": 2959643800,
+      "last_price": 7210.909,
+      "price_change": 193.011,
+      "price_change_ratio_pct": 2.750268,
       "open_price": 6913.748,
-      "high_price": 7209.105,
+      "high_price": 7248.395,
       "low_price": 6813.307,
       "prev_price": 7017.898,
       "name": "互联网电商",
@@ -1177,13 +1177,13 @@
     {
       "thscode": "881178.TI",
       "ticker": "881178",
-      "volume": 324392430,
-      "turnover": 1632970600,
-      "last_price": 3453.682,
-      "price_change": 69.311,
-      "price_change_ratio_pct": 2.047973,
+      "volume": 346274520,
+      "turnover": 1736245500,
+      "last_price": 3467.602,
+      "price_change": 83.231,
+      "price_change_ratio_pct": 2.459275,
       "open_price": 3321.869,
-      "high_price": 3464.962,
+      "high_price": 3487.163,
       "low_price": 3288.248,
       "prev_price": 3384.371,
       "name": "教育",
@@ -1192,13 +1192,13 @@
     {
       "thscode": "881179.TI",
       "ticker": "881179",
-      "volume": 319163920,
-      "turnover": 3375238500,
-      "last_price": 15632.795,
-      "price_change": 272.411,
-      "price_change_ratio_pct": 1.773465,
+      "volume": 342237060,
+      "turnover": 3662408200,
+      "last_price": 15686.686,
+      "price_change": 326.302,
+      "price_change_ratio_pct": 2.124309,
       "open_price": 15146.156,
-      "high_price": 15653.183,
+      "high_price": 15770.986,
       "low_price": 14955.186,
       "prev_price": 15360.384,
       "name": "其他社会服务",
@@ -1207,13 +1207,13 @@
     {
       "thscode": "881180.TI",
       "ticker": "881180",
-      "volume": 706005480,
-      "turnover": 5744354100,
-      "last_price": 3036.622,
-      "price_change": 7.908,
-      "price_change_ratio_pct": 0.261101,
+      "volume": 751800390,
+      "turnover": 6109473000,
+      "last_price": 3040.216,
+      "price_change": 11.502,
+      "price_change_ratio_pct": 0.379765,
       "open_price": 3002.107,
-      "high_price": 3045.544,
+      "high_price": 3054.248,
       "low_price": 2943.812,
       "prev_price": 3028.714,
       "name": "石油加工贸易",
@@ -1222,13 +1222,13 @@
     {
       "thscode": "881181.TI",
       "ticker": "881181",
-      "volume": 1492638300,
-      "turnover": 8912315300,
-      "last_price": 3231.027,
-      "price_change": 44.429,
-      "price_change_ratio_pct": 1.394246,
+      "volume": 1582329500,
+      "turnover": 9554602500,
+      "last_price": 3240.731,
+      "price_change": 54.133,
+      "price_change_ratio_pct": 1.698771,
       "open_price": 3133.697,
-      "high_price": 3234.176,
+      "high_price": 3255.106,
       "low_price": 3094.1,
       "prev_price": 3186.598,
       "name": "环境治理",
@@ -1237,13 +1237,13 @@
     {
       "thscode": "881182.TI",
       "ticker": "881182",
-      "volume": 172824060,
-      "turnover": 2739628900,
-      "last_price": 4040.084,
-      "price_change": 43.303,
-      "price_change_ratio_pct": 1.083447,
+      "volume": 183812830,
+      "turnover": 2930758800,
+      "last_price": 4058.117,
+      "price_change": 61.336,
+      "price_change_ratio_pct": 1.534635,
       "open_price": 3939.201,
-      "high_price": 4045.818,
+      "high_price": 4073.087,
       "low_price": 3899.044,
       "prev_price": 3996.781,
       "name": "美容护理",
@@ -1252,13 +1252,13 @@
     {
       "thscode": "881263.TI",
       "ticker": "881263",
-      "volume": 699947150,
-      "turnover": 6038574300,
-      "last_price": 3868.756,
-      "price_change": 23.363,
-      "price_change_ratio_pct": 0.607558,
+      "volume": 753840890,
+      "turnover": 6532544100,
+      "last_price": 3882.816,
+      "price_change": 37.423,
+      "price_change_ratio_pct": 0.973191,
       "open_price": 3811.2,
-      "high_price": 3878.129,
+      "high_price": 3894.33,
       "low_price": 3757.988,
       "prev_price": 3845.393,
       "name": "农化制品",
@@ -1267,13 +1267,13 @@
     {
       "thscode": "881264.TI",
       "ticker": "881264",
-      "volume": 341554380,
-      "turnover": 2690834500,
-      "last_price": 2970.898,
-      "price_change": 22.28,
-      "price_change_ratio_pct": 0.755608,
+      "volume": 370623560,
+      "turnover": 2933203000,
+      "last_price": 2984.742,
+      "price_change": 36.124,
+      "price_change_ratio_pct": 1.225116,
       "open_price": 2912.149,
-      "high_price": 2980.736,
+      "high_price": 2995.41,
       "low_price": 2863.894,
       "prev_price": 2948.618,
       "name": "化学纤维",
@@ -1282,13 +1282,13 @@
     {
       "thscode": "881265.TI",
       "ticker": "881265",
-      "volume": 842073560,
-      "turnover": 13211234100,
-      "last_price": 8439.011,
-      "price_change": 272.362,
-      "price_change_ratio_pct": 3.335052,
+      "volume": 910590070,
+      "turnover": 14251568000,
+      "last_price": 8507.542,
+      "price_change": 340.893,
+      "price_change_ratio_pct": 4.174209,
       "open_price": 8032.609,
-      "high_price": 8450.318,
+      "high_price": 8547.349,
       "low_price": 7960.367,
       "prev_price": 8166.649,
       "name": "塑料制品",
@@ -1297,13 +1297,13 @@
     {
       "thscode": "881266.TI",
       "ticker": "881266",
-      "volume": 130188354,
-      "turnover": 1504922700,
-      "last_price": 10598.163,
-      "price_change": 99.753,
-      "price_change_ratio_pct": 0.950172,
+      "volume": 145847600,
+      "turnover": 1697355900,
+      "last_price": 10685.939,
+      "price_change": 187.529,
+      "price_change_ratio_pct": 1.786261,
       "open_price": 10362.319,
-      "high_price": 10627.258,
+      "high_price": 10725.005,
       "low_price": 10131.53,
       "prev_price": 10498.41,
       "name": "橡胶制品",
@@ -1312,13 +1312,13 @@
     {
       "thscode": "881267.TI",
       "ticker": "881267",
-      "volume": 163900390,
-      "turnover": 4447317100,
-      "last_price": 20054.015,
-      "price_change": 383.684,
-      "price_change_ratio_pct": 1.950572,
+      "volume": 180155790,
+      "turnover": 4896345100,
+      "last_price": 20178.728,
+      "price_change": 508.397,
+      "price_change_ratio_pct": 2.584588,
       "open_price": 19384.542,
-      "high_price": 20127.175,
+      "high_price": 20243.374,
       "low_price": 19175.653,
       "prev_price": 19670.331,
       "name": "能源金属",
@@ -1327,13 +1327,13 @@
     {
       "thscode": "881268.TI",
       "ticker": "881268",
-      "volume": 555716410,
-      "turnover": 5591639900,
-      "last_price": 2639.611,
-      "price_change": 67.8,
-      "price_change_ratio_pct": 2.636275,
+      "volume": 590549110,
+      "turnover": 6020062500,
+      "last_price": 2652.038,
+      "price_change": 80.227,
+      "price_change_ratio_pct": 3.119475,
       "open_price": 2551.508,
-      "high_price": 2641.113,
+      "high_price": 2661.786,
       "low_price": 2542.487,
       "prev_price": 2571.811,
       "name": "工程机械",
@@ -1342,13 +1342,13 @@
     {
       "thscode": "881269.TI",
       "ticker": "881269",
-      "volume": 298261550,
-      "turnover": 2328323100,
-      "last_price": 861.271,
-      "price_change": 4.127,
-      "price_change_ratio_pct": 0.481483,
+      "volume": 329729950,
+      "turnover": 2561157800,
+      "last_price": 864.032,
+      "price_change": 6.888,
+      "price_change_ratio_pct": 0.803599,
       "open_price": 847.255,
-      "high_price": 863.5,
+      "high_price": 868.43,
       "low_price": 827.837,
       "prev_price": 857.144,
       "name": "轨交设备",
@@ -1357,13 +1357,13 @@
     {
       "thscode": "881270.TI",
       "ticker": "881270",
-      "volume": 1943824400,
-      "turnover": 68063023000,
-      "last_price": 18588.941,
-      "price_change": 707.215,
-      "price_change_ratio_pct": 3.954959,
+      "volume": 2087154300,
+      "turnover": 74022669000,
+      "last_price": 18747.978,
+      "price_change": 866.252,
+      "price_change_ratio_pct": 4.844342,
       "open_price": 17646.383,
-      "high_price": 18632.849,
+      "high_price": 18849.252,
       "low_price": 17565.509,
       "prev_price": 17881.726,
       "name": "元件",
@@ -1372,13 +1372,13 @@
     {
       "thscode": "881271.TI",
       "ticker": "881271",
-      "volume": 2235590300,
-      "turnover": 30262639000,
-      "last_price": 9781.584,
-      "price_change": 207.544,
-      "price_change_ratio_pct": 2.167779,
+      "volume": 2422801600,
+      "turnover": 32919819000,
+      "last_price": 9846.52,
+      "price_change": 272.48,
+      "price_change_ratio_pct": 2.846029,
       "open_price": 9401.955,
-      "high_price": 9800.359,
+      "high_price": 9893.832,
       "low_price": 9303.025,
       "prev_price": 9574.04,
       "name": "IT服务",
@@ -1387,13 +1387,13 @@
     {
       "thscode": "881272.TI",
       "ticker": "881272",
-      "volume": 1452082500,
-      "turnover": 24647569000,
-      "last_price": 1542.453,
-      "price_change": 35.889,
-      "price_change_ratio_pct": 2.382176,
+      "volume": 1582695400,
+      "turnover": 27226115000,
+      "last_price": 1554.254,
+      "price_change": 47.69,
+      "price_change_ratio_pct": 3.165481,
       "open_price": 1486.272,
-      "high_price": 1545.52,
+      "high_price": 1562.39,
       "low_price": 1464.159,
       "prev_price": 1506.564,
       "name": "软件开发",
@@ -1402,13 +1402,13 @@
     {
       "thscode": "881273.TI",
       "ticker": "881273",
-      "volume": 149260340,
-      "turnover": 10558190600,
-      "last_price": 1962.959,
-      "price_change": 11.04,
-      "price_change_ratio_pct": 0.565597,
+      "volume": 160061660,
+      "turnover": 11253818200,
+      "last_price": 1968.901,
+      "price_change": 16.982,
+      "price_change_ratio_pct": 0.870016,
       "open_price": 1947.195,
-      "high_price": 1969.426,
+      "high_price": 1971.942,
       "low_price": 1925.356,
       "prev_price": 1951.919,
       "name": "白酒",
@@ -1417,13 +1417,13 @@
     {
       "thscode": "881274.TI",
       "ticker": "881274",
-      "volume": 1849917700,
-      "turnover": 10694698100,
-      "last_price": 1468.447,
-      "price_change": 104.23,
-      "price_change_ratio_pct": 7.64028,
+      "volume": 1968654500,
+      "turnover": 11421926500,
+      "last_price": 1472.147,
+      "price_change": 107.93,
+      "price_change_ratio_pct": 7.911498,
       "open_price": 1325.722,
-      "high_price": 1474.383,
+      "high_price": 1481.933,
       "low_price": 1325.722,
       "prev_price": 1364.217,
       "name": "影视院线",
@@ -1432,13 +1432,13 @@
     {
       "thscode": "881275.TI",
       "ticker": "881275",
-      "volume": 925303550,
-      "turnover": 6758960900,
-      "last_price": 8169.357,
-      "price_change": 390.6,
-      "price_change_ratio_pct": 5.021368,
+      "volume": 1006532740,
+      "turnover": 7386407100,
+      "last_price": 8170.737,
+      "price_change": 391.98,
+      "price_change_ratio_pct": 5.039108,
       "open_price": 7622.456,
-      "high_price": 8198.234,
+      "high_price": 8238.001,
       "low_price": 7622.456,
       "prev_price": 7778.757,
       "name": "游戏",
@@ -1447,13 +1447,13 @@
     {
       "thscode": "881276.TI",
       "ticker": "881276",
-      "volume": 567471610,
-      "turnover": 10156376700,
-      "last_price": 8766.36,
-      "price_change": 210.059,
-      "price_change_ratio_pct": 2.455021,
+      "volume": 615321460,
+      "turnover": 11084068700,
+      "last_price": 8827.124,
+      "price_change": 270.823,
+      "price_change_ratio_pct": 3.165188,
       "open_price": 8422.977,
-      "high_price": 8775.33,
+      "high_price": 8875.964,
       "low_price": 8297.801,
       "prev_price": 8556.301,
       "name": "军工电子",
@@ -1462,13 +1462,13 @@
     {
       "thscode": "881277.TI",
       "ticker": "881277",
-      "volume": 299665440,
-      "turnover": 4624582200,
-      "last_price": 2705.825,
-      "price_change": 132.154,
-      "price_change_ratio_pct": 5.134844,
+      "volume": 337731030,
+      "turnover": 5009789200,
+      "last_price": 2723.591,
+      "price_change": 149.92,
+      "price_change_ratio_pct": 5.825142,
       "open_price": 2533.652,
-      "high_price": 2706.487,
+      "high_price": 2732.783,
       "low_price": 2527.182,
       "prev_price": 2573.671,
       "name": "电机",
@@ -1477,13 +1477,13 @@
     {
       "thscode": "881278.TI",
       "ticker": "881278",
-      "volume": 1329661090,
-      "turnover": 15189781000,
-      "last_price": 4953.409,
-      "price_change": 69.051,
-      "price_change_ratio_pct": 1.413717,
+      "volume": 1450826000,
+      "turnover": 16562186000,
+      "last_price": 4977.651,
+      "price_change": 93.293,
+      "price_change_ratio_pct": 1.910036,
       "open_price": 4813.802,
-      "high_price": 4958.827,
+      "high_price": 4998.819,
       "low_price": 4740.408,
       "prev_price": 4884.358,
       "name": "电网设备",
@@ -1492,13 +1492,13 @@
     {
       "thscode": "881279.TI",
       "ticker": "881279",
-      "volume": 1098904750,
-      "turnover": 13339786700,
-      "last_price": 5494.451,
-      "price_change": 90.964,
-      "price_change_ratio_pct": 1.683431,
+      "volume": 1197967540,
+      "turnover": 14704152000,
+      "last_price": 5520.96,
+      "price_change": 117.473,
+      "price_change_ratio_pct": 2.174022,
       "open_price": 5325.38,
-      "high_price": 5507.369,
+      "high_price": 5552.237,
       "low_price": 5260.115,
       "prev_price": 5403.487,
       "name": "光伏设备",
@@ -1507,13 +1507,13 @@
     {
       "thscode": "881280.TI",
       "ticker": "881280",
-      "volume": 375082090,
-      "turnover": 4063189100,
-      "last_price": 3287.654,
-      "price_change": 45.135,
-      "price_change_ratio_pct": 1.391973,
+      "volume": 411217720,
+      "turnover": 4479847700,
+      "last_price": 3303.973,
+      "price_change": 61.454,
+      "price_change_ratio_pct": 1.895255,
       "open_price": 3191.779,
-      "high_price": 3290.62,
+      "high_price": 3320.12,
       "low_price": 3149.377,
       "prev_price": 3242.519,
       "name": "风电设备",
@@ -1522,13 +1522,13 @@
     {
       "thscode": "881281.TI",
       "ticker": "881281",
-      "volume": 1031490950,
-      "turnover": 25979105000,
-      "last_price": 13732.433,
-      "price_change": 363.777,
-      "price_change_ratio_pct": 2.721119,
+      "volume": 1145217630,
+      "turnover": 28826689000,
+      "last_price": 13828.999,
+      "price_change": 460.343,
+      "price_change_ratio_pct": 3.44345,
       "open_price": 13149.075,
-      "high_price": 13742.715,
+      "high_price": 13892.505,
       "low_price": 13091.092,
       "prev_price": 13368.656,
       "name": "电池",
@@ -1537,13 +1537,13 @@
     {
       "thscode": "881282.TI",
       "ticker": "881282",
-      "volume": 331238770,
-      "turnover": 5853120700,
-      "last_price": 4400.458,
-      "price_change": 66.647,
-      "price_change_ratio_pct": 1.537838,
+      "volume": 365675900,
+      "turnover": 6500740200,
+      "last_price": 4433.191,
+      "price_change": 99.38,
+      "price_change_ratio_pct": 2.293132,
       "open_price": 4256.719,
-      "high_price": 4409.093,
+      "high_price": 4457.409,
       "low_price": 4189.431,
       "prev_price": 4333.811,
       "name": "其他电源设备",
@@ -1552,13 +1552,13 @@
     {
       "thscode": "881283.TI",
       "ticker": "881283",
-      "volume": 443466500,
-      "turnover": 2594181900,
-      "last_price": 905.642,
-      "price_change": 2.761,
-      "price_change_ratio_pct": 0.305799,
+      "volume": 488089950,
+      "turnover": 2860645800,
+      "last_price": 910.462,
+      "price_change": 7.581,
+      "price_change_ratio_pct": 0.839646,
       "open_price": 893.096,
-      "high_price": 908.808,
+      "high_price": 914.209,
       "low_price": 883.533,
       "prev_price": 902.881,
       "name": "多元金融",
@@ -1567,13 +1567,13 @@
     {
       "thscode": "881284.TI",
       "ticker": "881284",
-      "volume": 299999150,
-      "turnover": 3327232700,
-      "last_price": 1080.337,
-      "price_change": 28.66,
-      "price_change_ratio_pct": 2.725171,
+      "volume": 316743680,
+      "turnover": 3507609500,
+      "last_price": 1084.305,
+      "price_change": 32.628,
+      "price_change_ratio_pct": 3.102473,
       "open_price": 1034.596,
-      "high_price": 1081.683,
+      "high_price": 1088.873,
       "low_price": 1015.32,
       "prev_price": 1051.677,
       "name": "环保设备",
@@ -1582,21 +1582,21 @@
   ],
   "market": {
     "count": 5584,
-    "up": 4062,
-    "down": 1331,
-    "flat": 177,
+    "up": 4370,
+    "down": 1052,
+    "flat": 148,
     "no_price": 14,
-    "limit_up": 110,
-    "limit_down": 6,
-    "turnover": 1174073514772.8,
-    "volume": 85377092304.0,
-    "avg_ratio": 1.982398446319569,
+    "limit_up": 133,
+    "limit_down": 4,
+    "turnover": 1278178869604.1,
+    "volume": 92279438624.0,
+    "avg_ratio": 2.519335837881508,
     "top_gainers": [
       {
         "thscode": "920067.BJ",
         "name": "",
-        "ratio": 77.763605,
-        "last_price": 41.81
+        "ratio": 76.615646,
+        "last_price": 41.54
       },
       {
         "thscode": "920690.BJ",
@@ -1605,10 +1605,22 @@
         "last_price": 22.67
       },
       {
+        "thscode": "920157.BJ",
+        "name": "",
+        "ratio": 20.14295,
+        "last_price": 55.47
+      },
+      {
         "thscode": "300006.SZ",
         "name": "",
         "ratio": 20.054945,
         "last_price": 8.74
+      },
+      {
+        "thscode": "300007.SZ",
+        "name": "",
+        "ratio": 20.013298,
+        "last_price": 36.1
       },
       {
         "thscode": "301318.SZ",
@@ -1639,32 +1651,20 @@
         "name": "",
         "ratio": 20,
         "last_price": 31.44
-      },
-      {
-        "thscode": "301000.SZ",
-        "name": "",
-        "ratio": 20,
-        "last_price": 30.48
-      },
-      {
-        "thscode": "301261.SZ",
-        "name": "",
-        "ratio": 20,
-        "last_price": 66.66
       }
     ],
     "top_losers": [
       {
         "thscode": "300872.SZ",
         "name": "",
-        "ratio": -20.035461,
-        "last_price": 9.02
+        "ratio": -18.794326,
+        "last_price": 9.16
       },
       {
         "thscode": "688066.SH",
         "name": "",
-        "ratio": -12.633833,
-        "last_price": 4.08
+        "ratio": -13.276231,
+        "last_price": 4.05
       },
       {
         "thscode": "600759.SH",
@@ -1691,103 +1691,103 @@
         "last_price": 22.68
       },
       {
-        "thscode": "603073.SH",
-        "name": "",
-        "ratio": -9.810127,
-        "last_price": 14.25
-      },
-      {
         "thscode": "601339.SH",
         "name": "",
         "ratio": -9.706258,
         "last_price": 7.07
       },
       {
-        "thscode": "600180.SH",
+        "thscode": "603073.SH",
         "name": "",
-        "ratio": -9.090909,
-        "last_price": 0.5
+        "ratio": -9.620253,
+        "last_price": 14.28
       },
       {
         "thscode": "300832.SZ",
         "name": "",
-        "ratio": -8.834586,
-        "last_price": 58.2
+        "ratio": -8.129699,
+        "last_price": 58.65
+      },
+      {
+        "thscode": "600180.SH",
+        "name": "",
+        "ratio": -7.272727,
+        "last_price": 0.51
       }
     ],
     "total": 5584
   },
   "hk": {
-    "generated": "2026-11-23T05:43:43.198406+00:00",
-    "data_timestamp": 1795411720000,
+    "generated": "2026-11-23T05:59:25.606021+00:00",
+    "data_timestamp": 1795412664000,
     "rows": [
       {
         "thscode": "hkHSI",
         "name": "恒生指数",
-        "last_price": 22366.96,
+        "last_price": 22370.27,
         "prev_price": 22410.8,
         "open_price": 22168.19,
         "high_price": 22380.78,
         "low_price": 21998.05,
-        "price_change": -43.84,
-        "price_change_ratio_pct": -0.2,
-        "volume": 14752563.9344,
-        "turnover": 14752563.934,
-        "quote_time": "2026/11/23 13:28:37",
+        "price_change": -40.53,
+        "price_change_ratio_pct": -0.18,
+        "volume": 15767837.2883,
+        "turnover": 15767837.288,
+        "quote_time": "2026/11/23 13:44:20",
         "currency": "HKD",
         "is_index": true,
-        "quote_ms": 1795411717000
+        "quote_ms": 1795412660000
       },
       {
         "thscode": "hkHSCEI",
         "name": "国企指数",
-        "last_price": 7531.8,
+        "last_price": 7531.32,
         "prev_price": 7554.37,
         "open_price": 7472.52,
         "high_price": 7535.9,
         "low_price": 7406.35,
-        "price_change": -22.57,
-        "price_change_ratio_pct": -0.3,
-        "volume": 4738780.7981,
-        "turnover": 4738780.798,
-        "quote_time": "2026/11/23 13:28:36",
+        "price_change": -23.05,
+        "price_change_ratio_pct": -0.31,
+        "volume": 5022711.7784,
+        "turnover": 5022711.778,
+        "quote_time": "2026/11/23 13:44:20",
         "currency": "HKD",
         "is_index": true,
-        "quote_ms": 1795411716000
+        "quote_ms": 1795412660000
       },
       {
         "thscode": "hkHSTECH",
         "name": "恒生科技指数",
-        "last_price": 3506.75,
+        "last_price": 3513.48,
         "prev_price": 3511.14,
         "open_price": 3443.76,
-        "high_price": 3509.15,
+        "high_price": 3513.48,
         "low_price": 3395.38,
-        "price_change": -4.39,
-        "price_change_ratio_pct": -0.13,
-        "volume": 4135177.2549,
-        "turnover": 4135177.255,
-        "quote_time": "2026/11/23 13:28:36",
+        "price_change": 2.34,
+        "price_change_ratio_pct": 0.07,
+        "volume": 4402951.0972,
+        "turnover": 4402951.097,
+        "quote_time": "2026/11/23 13:44:20",
         "currency": "HKD",
         "is_index": true,
-        "quote_ms": 1795411716000
+        "quote_ms": 1795412660000
       },
       {
         "thscode": "hk00700",
         "name": "腾讯控股",
-        "last_price": 342.6,
+        "last_price": 342.2,
         "prev_price": 344.0,
         "open_price": 335.0,
         "high_price": 343.4,
         "low_price": 333.0,
-        "price_change": -1.4,
-        "price_change_ratio_pct": -0.41,
-        "volume": 22129618.0,
-        "turnover": 7446194155.18,
-        "quote_time": "2026/11/23 13:28:37",
+        "price_change": -1.8,
+        "price_change_ratio_pct": -0.52,
+        "volume": 23516200.0,
+        "turnover": 7920112439.28,
+        "quote_time": "2026/11/23 13:44:23",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795411717000
+        "quote_ms": 1795412663000
       },
       {
         "thscode": "hk09988",
@@ -1799,523 +1799,523 @@
         "low_price": 79.5,
         "price_change": 0.0,
         "price_change_ratio_pct": 0.0,
-        "volume": 84955341.0,
-        "turnover": 6887587520.25,
-        "quote_time": "2026/11/23 13:28:40",
+        "volume": 90562851.0,
+        "turnover": 7353874854.95,
+        "quote_time": "2026/11/23 13:44:24",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795411720000
+        "quote_ms": 1795412664000
       },
       {
         "thscode": "hk03690",
         "name": "美团-W",
-        "last_price": 66.1,
+        "last_price": 66.45,
         "prev_price": 66.5,
         "open_price": 65.95,
-        "high_price": 66.1,
+        "high_price": 66.5,
         "low_price": 63.0,
-        "price_change": -0.4,
-        "price_change_ratio_pct": -0.6,
-        "volume": 43799730.0,
-        "turnover": 2815636506.55,
-        "quote_time": "2026/11/23 13:28:40",
+        "price_change": -0.05,
+        "price_change_ratio_pct": -0.08,
+        "volume": 46882862.0,
+        "turnover": 3019414764.55,
+        "quote_time": "2026/11/23 13:44:24",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795411720000
+        "quote_ms": 1795412664000
       },
       {
         "thscode": "hk01810",
         "name": "小米集团-W",
-        "last_price": 27.58,
+        "last_price": 27.56,
         "prev_price": 27.64,
         "open_price": 27.16,
         "high_price": 27.64,
         "low_price": 26.8,
-        "price_change": -0.06,
-        "price_change_ratio_pct": -0.22,
-        "volume": 72827933.0,
-        "turnover": 1978904392.76,
-        "quote_time": "2026/11/23 13:28:40",
+        "price_change": -0.08,
+        "price_change_ratio_pct": -0.29,
+        "volume": 77470212.0,
+        "turnover": 2106397816.64,
+        "quote_time": "2026/11/23 13:44:23",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795411720000
+        "quote_ms": 1795412663000
       },
       {
         "thscode": "hk09618",
         "name": "京东集团-SW",
-        "last_price": 97.4,
+        "last_price": 97.65,
         "prev_price": 97.95,
         "open_price": 97.95,
         "high_price": 98.0,
         "low_price": 95.25,
-        "price_change": -0.55,
-        "price_change_ratio_pct": -0.56,
-        "volume": 6813437.0,
-        "turnover": 657644783.0,
-        "quote_time": "2026/11/23 13:28:34",
+        "price_change": -0.3,
+        "price_change_ratio_pct": -0.31,
+        "volume": 7066128.0,
+        "turnover": 682261126.3,
+        "quote_time": "2026/11/23 13:44:22",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795411714000
+        "quote_ms": 1795412662000
       },
       {
         "thscode": "hk09999",
         "name": "网易",
-        "last_price": 160.3,
+        "last_price": 160.4,
         "prev_price": 154.0,
         "open_price": 156.8,
         "high_price": 160.6,
         "low_price": 155.1,
-        "price_change": 6.3,
-        "price_change_ratio_pct": 4.09,
-        "volume": 7911114.0,
-        "turnover": 1248908886.02,
-        "quote_time": "2026/11/23 13:28:37",
+        "price_change": 6.4,
+        "price_change_ratio_pct": 4.16,
+        "volume": 8190514.0,
+        "turnover": 1293621741.32,
+        "quote_time": "2026/11/23 13:44:13",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795411717000
+        "quote_ms": 1795412653000
       },
       {
         "thscode": "hk01024",
         "name": "快手-W",
-        "last_price": 20.16,
+        "last_price": 20.24,
         "prev_price": 20.42,
         "open_price": 19.8,
         "high_price": 20.42,
         "low_price": 19.45,
-        "price_change": -0.26,
-        "price_change_ratio_pct": -1.27,
-        "volume": 46623245.0,
-        "turnover": 927588267.62,
-        "quote_time": "2026/11/23 13:28:40",
+        "price_change": -0.18,
+        "price_change_ratio_pct": -0.88,
+        "volume": 49335545.0,
+        "turnover": 982250580.22,
+        "quote_time": "2026/11/23 13:44:23",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795411720000
+        "quote_ms": 1795412663000
       },
       {
         "thscode": "hk00981",
         "name": "中芯国际",
-        "last_price": 48.52,
+        "last_price": 48.72,
         "prev_price": 49.12,
         "open_price": 48.1,
         "high_price": 49.56,
         "low_price": 46.62,
-        "price_change": -0.6,
-        "price_change_ratio_pct": -1.22,
-        "volume": 68048961.0,
-        "turnover": 3265946574.35,
-        "quote_time": "2026/11/23 13:28:37",
+        "price_change": -0.4,
+        "price_change_ratio_pct": -0.81,
+        "volume": 71507161.0,
+        "turnover": 3433169974.35,
+        "quote_time": "2026/11/23 13:44:24",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795411717000
+        "quote_ms": 1795412664000
       },
       {
         "thscode": "hk01211",
         "name": "比亚迪股份",
-        "last_price": 61.95,
+        "last_price": 61.9,
         "prev_price": 62.35,
         "open_price": 61.5,
         "high_price": 61.95,
         "low_price": 59.7,
-        "price_change": -0.4,
-        "price_change_ratio_pct": -0.64,
-        "volume": 17808253.0,
-        "turnover": 1079019028.2,
-        "quote_time": "2026/11/23 13:28:36",
+        "price_change": -0.45,
+        "price_change_ratio_pct": -0.72,
+        "volume": 18472847.0,
+        "turnover": 1120077863.7,
+        "quote_time": "2026/11/23 13:44:24",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795411716000
+        "quote_ms": 1795412664000
       },
       {
         "thscode": "hk02020",
         "name": "安踏体育",
-        "last_price": 80.45,
+        "last_price": 80.55,
         "prev_price": 81.05,
         "open_price": 80.15,
         "high_price": 80.8,
         "low_price": 79.55,
-        "price_change": -0.6,
-        "price_change_ratio_pct": -0.74,
-        "volume": 6346085.0,
-        "turnover": 508315594.5,
-        "quote_time": "2026/11/23 13:28:39",
+        "price_change": -0.5,
+        "price_change_ratio_pct": -0.62,
+        "volume": 6911885.0,
+        "turnover": 553847714.5,
+        "quote_time": "2026/11/23 13:44:21",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795411719000
+        "quote_ms": 1795412661000
       },
       {
         "thscode": "hk00388",
         "name": "香港交易所",
-        "last_price": 351.4,
+        "last_price": 352.0,
         "prev_price": 357.0,
         "open_price": 352.0,
         "high_price": 353.2,
         "low_price": 345.2,
-        "price_change": -5.6,
-        "price_change_ratio_pct": -1.57,
-        "volume": 4360377.0,
-        "turnover": 1519131790.63,
-        "quote_time": "2026/11/23 13:28:39",
+        "price_change": -5.0,
+        "price_change_ratio_pct": -1.4,
+        "volume": 4506304.0,
+        "turnover": 1570412169.73,
+        "quote_time": "2026/11/23 13:44:20",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795411719000
+        "quote_ms": 1795412660000
       },
       {
         "thscode": "hk00005",
         "name": "汇丰控股",
-        "last_price": 129.5,
+        "last_price": 129.4,
         "prev_price": 129.2,
         "open_price": 126.8,
         "high_price": 129.9,
         "low_price": 126.1,
-        "price_change": 0.3,
-        "price_change_ratio_pct": 0.23,
-        "volume": 9072421.0,
-        "turnover": 1161598557.4,
-        "quote_time": "2026/11/23 13:28:40",
+        "price_change": 0.2,
+        "price_change_ratio_pct": 0.15,
+        "volume": 9324217.0,
+        "turnover": 1194172184.4,
+        "quote_time": "2026/11/23 13:44:13",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795411720000
+        "quote_ms": 1795412653000
       },
       {
         "thscode": "hk00939",
         "name": "建设银行",
-        "last_price": 10.33,
+        "last_price": 10.32,
         "prev_price": 10.48,
         "open_price": 10.4,
         "high_price": 10.43,
         "low_price": 10.18,
-        "price_change": -0.15,
-        "price_change_ratio_pct": -1.43,
-        "volume": 197737520.0,
-        "turnover": 2038818087.76,
-        "quote_time": "2026/11/23 13:28:23",
+        "price_change": -0.16,
+        "price_change_ratio_pct": -1.53,
+        "volume": 203950091.0,
+        "turnover": 2102953697.38,
+        "quote_time": "2026/11/23 13:44:17",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795411703000
+        "quote_ms": 1795412657000
       },
       {
         "thscode": "hk01398",
         "name": "工商银行",
-        "last_price": 7.775,
+        "last_price": 7.76,
         "prev_price": 7.885,
         "open_price": 7.83,
         "high_price": 7.87,
         "low_price": 7.72,
-        "price_change": -0.11,
-        "price_change_ratio_pct": -1.4,
-        "volume": 148952142.0,
-        "turnover": 1160131099.255,
-        "quote_time": "2026/11/23 13:28:40",
+        "price_change": -0.125,
+        "price_change_ratio_pct": -1.59,
+        "volume": 156789191.0,
+        "turnover": 1220969455.82,
+        "quote_time": "2026/11/23 13:44:23",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795411720000
+        "quote_ms": 1795412663000
       },
       {
         "thscode": "hk02318",
         "name": "中国平安",
-        "last_price": 49.76,
+        "last_price": 49.62,
         "prev_price": 49.7,
         "open_price": 49.5,
         "high_price": 49.84,
         "low_price": 49.22,
-        "price_change": 0.06,
-        "price_change_ratio_pct": 0.12,
-        "volume": 19640432.0,
-        "turnover": 973490098.1,
-        "quote_time": "2026/11/23 13:28:32",
+        "price_change": -0.08,
+        "price_change_ratio_pct": -0.16,
+        "volume": 20550432.0,
+        "turnover": 1018676134.1,
+        "quote_time": "2026/11/23 13:44:12",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795411712000
+        "quote_ms": 1795412652000
       },
       {
         "thscode": "hk00883",
         "name": "中国海洋石油",
-        "last_price": 21.32,
+        "last_price": 21.34,
         "prev_price": 21.7,
         "open_price": 21.5,
         "high_price": 21.68,
-        "low_price": 21.28,
-        "price_change": -0.38,
-        "price_change_ratio_pct": -1.75,
-        "volume": 44152680.0,
-        "turnover": 946604468.86,
-        "quote_time": "2026/11/23 13:28:40",
+        "low_price": 21.24,
+        "price_change": -0.36,
+        "price_change_ratio_pct": -1.66,
+        "volume": 47789780.0,
+        "turnover": 1024096338.86,
+        "quote_time": "2026/11/23 13:44:08",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795411720000
+        "quote_ms": 1795412648000
       },
       {
         "thscode": "hk00857",
         "name": "中国石油股份",
-        "last_price": 10.01,
+        "last_price": 9.98,
         "prev_price": 10.07,
         "open_price": 10.04,
         "high_price": 10.11,
         "low_price": 9.955,
-        "price_change": -0.06,
-        "price_change_ratio_pct": -0.6,
-        "volume": 44235664.0,
-        "turnover": 444609787.51,
-        "quote_time": "2026/11/23 13:28:40",
+        "price_change": -0.09,
+        "price_change_ratio_pct": -0.89,
+        "volume": 50201664.0,
+        "turnover": 504226017.51,
+        "quote_time": "2026/11/23 13:44:23",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795411720000
+        "quote_ms": 1795412663000
       },
       {
         "thscode": "hk00386",
         "name": "中国石油化工股份",
-        "last_price": 4.625,
+        "last_price": 4.62,
         "prev_price": 4.665,
         "open_price": 4.65,
         "high_price": 4.65,
         "low_price": 4.59,
-        "price_change": -0.04,
-        "price_change_ratio_pct": -0.86,
-        "volume": 42473872.0,
-        "turnover": 196135589.77,
-        "quote_time": "2026/11/23 13:28:22",
+        "price_change": -0.045,
+        "price_change_ratio_pct": -0.96,
+        "volume": 44433872.0,
+        "turnover": 205192609.77,
+        "quote_time": "2026/11/23 13:43:56",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795411702000
+        "quote_ms": 1795412636000
       },
       {
         "thscode": "hk00762",
         "name": "中国联通",
-        "last_price": 5.25,
+        "last_price": 5.235,
         "prev_price": 5.345,
         "open_price": 5.32,
         "high_price": 5.35,
         "low_price": 5.235,
-        "price_change": -0.095,
-        "price_change_ratio_pct": -1.78,
-        "volume": 17086020.0,
-        "turnover": 90087314.9,
-        "quote_time": "2026/11/23 13:28:35",
+        "price_change": -0.11,
+        "price_change_ratio_pct": -2.06,
+        "volume": 17760020.0,
+        "turnover": 93618894.9,
+        "quote_time": "2026/11/23 13:44:24",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795411715000
+        "quote_ms": 1795412664000
       },
       {
         "thscode": "hk01088",
         "name": "中国神华",
-        "last_price": 41.92,
+        "last_price": 41.94,
         "prev_price": 42.0,
         "open_price": 41.9,
-        "high_price": 41.98,
+        "high_price": 42.04,
         "low_price": 41.4,
-        "price_change": -0.08,
-        "price_change_ratio_pct": -0.19,
-        "volume": 3809492.0,
-        "turnover": 159060354.14,
-        "quote_time": "2026/11/23 13:28:35",
+        "price_change": -0.06,
+        "price_change_ratio_pct": -0.14,
+        "volume": 4135992.0,
+        "turnover": 172761688.14,
+        "quote_time": "2026/11/23 13:44:18",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795411715000
+        "quote_ms": 1795412658000
       }
     ],
     "errors": [],
-    "data_time": "2026-11-23T05:28:40Z"
+    "data_time": "2026-11-23T05:44:24Z"
   },
   "limit_up": [
     {
+      "thscode": "600243.SH",
+      "name": "*ST海华",
+      "last_price": 2.73,
+      "price_change_ratio_pct": 10.0806,
+      "limit_up_time": "13:56",
+      "limit_up_reason": "",
+      "continue_day_text": "首板",
+      "seal_money": 3272178.0
+    },
+    {
+      "thscode": "001326.SZ",
+      "name": "联域股份",
+      "last_price": 57.2,
+      "price_change_ratio_pct": 10.0,
+      "limit_up_time": "13:48",
+      "limit_up_reason": "",
+      "continue_day_text": "首板",
+      "seal_money": 20214480.0
+    },
+    {
+      "thscode": "002046.SZ",
+      "name": "国机精工",
+      "last_price": 30.56,
+      "price_change_ratio_pct": 10.0072,
+      "limit_up_time": "13:48",
+      "limit_up_reason": "",
+      "continue_day_text": "首板",
+      "seal_money": 46026691.0
+    },
+    {
+      "thscode": "603175.SH",
+      "name": "超颖电子",
+      "last_price": 89.32,
+      "price_change_ratio_pct": 10.0,
+      "limit_up_time": "13:48",
+      "limit_up_reason": "",
+      "continue_day_text": "首板",
+      "seal_money": 11513348.0
+    },
+    {
+      "thscode": "603166.SH",
+      "name": "福达股份",
+      "last_price": 9.82,
+      "price_change_ratio_pct": 9.9664,
+      "limit_up_time": "13:47",
+      "limit_up_reason": "",
+      "continue_day_text": "首板",
+      "seal_money": 13656674.0
+    },
+    {
+      "thscode": "002979.SZ",
+      "name": "雷赛智能",
+      "last_price": 45.71,
+      "price_change_ratio_pct": 10.012,
+      "limit_up_time": "13:45",
+      "limit_up_reason": "",
+      "continue_day_text": "首板",
+      "seal_money": 18695390.0
+    },
+    {
+      "thscode": "603127.SH",
+      "name": "昭衍新药",
+      "last_price": 35.44,
+      "price_change_ratio_pct": 9.9938,
+      "limit_up_time": "13:45",
+      "limit_up_reason": "",
+      "continue_day_text": "首板",
+      "seal_money": 69621880.0
+    },
+    {
+      "thscode": "001331.SZ",
+      "name": "胜通能源",
+      "last_price": 28.05,
+      "price_change_ratio_pct": 10.0,
+      "limit_up_time": "13:44",
+      "limit_up_reason": "机器人产业链+七腾机器人控股+LNG运贸",
+      "continue_day_text": "首板",
+      "seal_money": 29805930.0
+    },
+    {
+      "thscode": "002249.SZ",
+      "name": "大洋电机",
+      "last_price": 6.53,
+      "price_change_ratio_pct": 9.9327,
+      "limit_up_time": "13:44",
+      "limit_up_reason": "其它",
+      "continue_day_text": "首板",
+      "seal_money": 59567966.0
+    },
+    {
+      "thscode": "002565.SZ",
+      "name": "顺灏股份",
+      "last_price": 8.09,
+      "price_change_ratio_pct": 10.068,
+      "limit_up_time": "13:44",
+      "limit_up_reason": "太空算力+特种防伪环保纸",
+      "continue_day_text": "首板",
+      "seal_money": 104224279.0
+    },
+    {
+      "thscode": "002747.SZ",
+      "name": "埃斯顿",
+      "last_price": 26.68,
+      "price_change_ratio_pct": 10.0206,
+      "limit_up_time": "13:44",
+      "limit_up_reason": "人形机器人+工业机器人+控股股东增持",
+      "continue_day_text": "首板",
+      "seal_money": 247931900.0
+    },
+    {
+      "thscode": "003028.SZ",
+      "name": "振邦智能",
+      "last_price": 22.0,
+      "price_change_ratio_pct": 10.0,
+      "limit_up_time": "13:44",
+      "limit_up_reason": "其它",
+      "continue_day_text": "首板",
+      "seal_money": 28710000.0
+    },
+    {
+      "thscode": "300007.SZ",
+      "name": "汉威科技",
+      "last_price": 36.1,
+      "price_change_ratio_pct": 20.0133,
+      "limit_up_time": "13:44",
+      "limit_up_reason": "人形机器人+柔性触觉+气体传感器",
+      "continue_day_text": "首板",
+      "seal_money": 42413890.0
+    },
+    {
+      "thscode": "603051.SH",
+      "name": "鹿山新材",
+      "last_price": 20.9,
+      "price_change_ratio_pct": 10.0,
+      "limit_up_time": "13:44",
+      "limit_up_reason": "其它",
+      "continue_day_text": "首板",
+      "seal_money": 24279530.0
+    },
+    {
+      "thscode": "603337.SH",
+      "name": "杰克科技",
+      "last_price": 38.94,
+      "price_change_ratio_pct": 10.0,
+      "limit_up_time": "13:44",
+      "limit_up_reason": "人形机器人+缝制机械+机器人测试",
+      "continue_day_text": "首板",
+      "seal_money": 25408350.0
+    },
+    {
+      "thscode": "688836.SH",
+      "name": "宇树科技-W",
+      "last_price": 708.0,
+      "price_change_ratio_pct": 20.0,
+      "limit_up_time": "13:44",
+      "limit_up_reason": "人形机器人+物理AI+具身智能",
+      "continue_day_text": "首板",
+      "seal_money": 865540620.0
+    },
+    {
+      "thscode": "600592.SH",
+      "name": "龙溪股份",
+      "last_price": 13.98,
+      "price_change_ratio_pct": 9.9921,
+      "limit_up_time": "13:43",
+      "limit_up_reason": "其它",
+      "continue_day_text": "首板",
+      "seal_money": 22327458.0
+    },
+    {
+      "thscode": "601177.SH",
+      "name": "杭齿前进",
+      "last_price": 12.31,
+      "price_change_ratio_pct": 10.0089,
+      "limit_up_time": "13:43",
+      "limit_up_reason": "人形机器人关节组件+船用齿轮箱",
+      "continue_day_text": "首板",
+      "seal_money": 31762262.0
+    },
+    {
+      "thscode": "603283.SH",
+      "name": "赛腾股份",
+      "last_price": 38.1,
+      "price_change_ratio_pct": 9.9885,
+      "limit_up_time": "13:43",
+      "limit_up_reason": "HBM检测+三星供货+电路板设备+三季报增长",
+      "continue_day_text": "首板",
+      "seal_money": 74595990.0
+    },
+    {
       "thscode": "001400.SZ",
       "name": "江顺科技",
-      "last_price": 66.1,
-      "price_change_ratio_pct": 9.0759,
-      "limit_up_time": "13:42",
-      "limit_up_reason": "",
-      "continue_day_text": "首板",
-      "seal_money": 0.0
-    },
-    {
-      "thscode": "603683.SH",
-      "name": "晶华新材",
-      "last_price": 13.12,
-      "price_change_ratio_pct": 9.9749,
-      "limit_up_time": "13:42",
-      "limit_up_reason": "",
-      "continue_day_text": "首板",
-      "seal_money": 55034464.0
-    },
-    {
-      "thscode": "000559.SZ",
-      "name": "万向钱潮",
-      "last_price": 10.53,
-      "price_change_ratio_pct": 10.0313,
-      "limit_up_time": "13:40",
-      "limit_up_reason": "",
-      "continue_day_text": "首板",
-      "seal_money": 168515800.0
-    },
-    {
-      "thscode": "301529.SZ",
-      "name": "福赛科技",
-      "last_price": 154.8,
-      "price_change_ratio_pct": 20.0,
-      "limit_up_time": "13:40",
-      "limit_up_reason": "",
-      "continue_day_text": "首板",
-      "seal_money": 230726300.0
-    },
-    {
-      "thscode": "603131.SH",
-      "name": "上海沪工",
-      "last_price": 13.01,
-      "price_change_ratio_pct": 9.9746,
-      "limit_up_time": "13:40",
-      "limit_up_reason": "",
-      "continue_day_text": "首板",
-      "seal_money": 62596314.0
-    },
-    {
-      "thscode": "688004.SH",
-      "name": "博汇科技",
-      "last_price": 31.2,
-      "price_change_ratio_pct": 20.0,
-      "limit_up_time": "13:39",
-      "limit_up_reason": "",
-      "continue_day_text": "首板",
-      "seal_money": 57684931.0
-    },
-    {
-      "thscode": "301265.SZ",
-      "name": "华新科技",
-      "last_price": 24.79,
-      "price_change_ratio_pct": 19.9903,
-      "limit_up_time": "13:38",
-      "limit_up_reason": "",
-      "continue_day_text": "首板",
-      "seal_money": 97000791.0
-    },
-    {
-      "thscode": "603901.SH",
-      "name": "永创智能",
-      "last_price": 9.68,
+      "last_price": 66.66,
       "price_change_ratio_pct": 10.0,
-      "limit_up_time": "13:37",
-      "limit_up_reason": "",
+      "limit_up_time": "13:42",
+      "limit_up_reason": "3D打印+铝挤压模具",
       "continue_day_text": "首板",
-      "seal_money": 48684592.0
-    },
-    {
-      "thscode": "001266.SZ",
-      "name": "宏英智能",
-      "last_price": 29.46,
-      "price_change_ratio_pct": 10.0075,
-      "limit_up_time": "13:28",
-      "limit_up_reason": "其它",
-      "continue_day_text": "首板",
-      "seal_money": 9530310.0
-    },
-    {
-      "thscode": "300006.SZ",
-      "name": "莱美药业",
-      "last_price": 8.74,
-      "price_change_ratio_pct": 20.0549,
-      "limit_up_time": "13:27",
-      "limit_up_reason": "纳米炭铁+卡纳琳+创新药+三季报减亏",
-      "continue_day_text": "首板",
-      "seal_money": 268993940.0
-    },
-    {
-      "thscode": "001330.SZ",
-      "name": "博纳影业",
-      "last_price": 5.43,
-      "price_change_ratio_pct": 9.919,
-      "limit_up_time": "13:26",
-      "limit_up_reason": "AI影视+AI短剧+院线影院+三季报减亏",
-      "continue_day_text": "首板",
-      "seal_money": 94782279.0
-    },
-    {
-      "thscode": "603598.SH",
-      "name": "引力传媒",
-      "last_price": 18.24,
-      "price_change_ratio_pct": 10.0121,
-      "limit_up_time": "13:26",
-      "limit_up_reason": "AI营销+AI短剧+广告营销",
-      "continue_day_text": "首板",
-      "seal_money": 88126560.0
-    },
-    {
-      "thscode": "603728.SH",
-      "name": "鸣志电器",
-      "last_price": 48.97,
-      "price_change_ratio_pct": 9.9955,
-      "limit_up_time": "13:26",
-      "limit_up_reason": "",
-      "continue_day_text": "首板",
-      "seal_money": 142821010.0
-    },
-    {
-      "thscode": "002896.SZ",
-      "name": "中大力德",
-      "last_price": 53.2,
-      "price_change_ratio_pct": 10.0083,
-      "limit_up_time": "13:25",
-      "limit_up_reason": "人形机器人+精密减速器+关节模组",
-      "continue_day_text": "首板",
-      "seal_money": 182980710.0
-    },
-    {
-      "thscode": "003021.SZ",
-      "name": "兆威机电",
-      "last_price": 84.51,
-      "price_change_ratio_pct": 9.9961,
-      "limit_up_time": "13:25",
-      "limit_up_reason": "人形机器人+灵巧手+微型传动",
-      "continue_day_text": "首板",
-      "seal_money": 310499880.0
-    },
-    {
-      "thscode": "603533.SH",
-      "name": "掌阅科技",
-      "last_price": 24.94,
-      "price_change_ratio_pct": 10.0132,
-      "limit_up_time": "13:25",
-      "limit_up_reason": "AI短剧+短剧出海",
-      "continue_day_text": "首板",
-      "seal_money": 184428510.0
-    },
-    {
-      "thscode": "002173.SZ",
-      "name": "创新医疗",
-      "last_price": 14.39,
-      "price_change_ratio_pct": 10.0153,
-      "limit_up_time": "13:23",
-      "limit_up_reason": "其它",
-      "continue_day_text": "首板",
-      "seal_money": 70687997.0
-    },
-    {
-      "thscode": "688585.SH",
-      "name": "上纬新材",
-      "last_price": 178.99,
-      "price_change_ratio_pct": 19.9987,
-      "limit_up_time": "13:23",
-      "limit_up_reason": "人形机器人+战略合作+智元入主+风电树脂",
-      "continue_day_text": "首板",
-      "seal_money": 355052800.0
-    },
-    {
-      "thscode": "301502.SZ",
-      "name": "华阳智能",
-      "last_price": 55.68,
-      "price_change_ratio_pct": 20.0,
-      "limit_up_time": "13:22",
-      "limit_up_reason": "机器人关节模组+无框电机+微特电机",
-      "continue_day_text": "首板",
-      "seal_money": 38825664.0
-    },
-    {
-      "thscode": "603286.SH",
-      "name": "日盈电子",
-      "last_price": 48.94,
-      "price_change_ratio_pct": 10.0022,
-      "limit_up_time": "13:22",
-      "limit_up_reason": "人形机器人+电子皮肤+汽车洗涤系统",
-      "continue_day_text": "首板",
-      "seal_money": 69915684.0
+      "seal_money": 6687331.2
     }
   ],
   "rrg": {
@@ -2342,14 +2342,14 @@
       {
         "thscode": "881270.TI",
         "name": "元件",
-        "rs_ratio": 150.15,
+        "rs_ratio": 150.19,
         "rs_mom": 103.11,
-        "distance": 50.25,
+        "distance": 50.28,
         "quadrant": 1,
         "quadrant_name": "领先",
         "prev_quadrant": 1,
-        "today_pct": 3.95,
-        "close": 18588.94,
+        "today_pct": 4.84,
+        "close": 18747.98,
         "trail": [
           [
             158.65,
@@ -2372,7 +2372,7 @@
             103.25
           ],
           [
-            150.15,
+            150.19,
             103.11
           ]
         ]
@@ -2380,14 +2380,14 @@
       {
         "thscode": "881175.TI",
         "name": "医疗服务",
-        "rs_ratio": 123.44,
+        "rs_ratio": 123.43,
         "rs_mom": 117.95,
-        "distance": 29.52,
+        "distance": 29.51,
         "quadrant": 1,
         "quadrant_name": "领先",
         "prev_quadrant": 1,
-        "today_pct": 4.9,
-        "close": 17012.9,
+        "today_pct": 5.09,
+        "close": 17043.28,
         "trail": [
           [
             122.71,
@@ -2410,7 +2410,7 @@
             118.32
           ],
           [
-            123.44,
+            123.43,
             117.95
           ]
         ]
@@ -2418,14 +2418,14 @@
       {
         "thscode": "881274.TI",
         "name": "影视院线",
-        "rs_ratio": 107.45,
+        "rs_ratio": 107.44,
         "rs_mom": 125.31,
-        "distance": 26.39,
+        "distance": 26.38,
         "quadrant": 1,
         "quadrant_name": "领先",
         "prev_quadrant": 1,
-        "today_pct": 7.64,
-        "close": 1468.45,
+        "today_pct": 7.91,
+        "close": 1472.15,
         "trail": [
           [
             103.57,
@@ -2448,7 +2448,7 @@
             124.43
           ],
           [
-            107.45,
+            107.44,
             125.31
           ]
         ]
@@ -2456,14 +2456,14 @@
       {
         "thscode": "881155.TI",
         "name": "银行",
-        "rs_ratio": 122.08,
+        "rs_ratio": 122.07,
         "rs_mom": 113.28,
-        "distance": 25.77,
+        "distance": 25.76,
         "quadrant": 1,
         "quadrant_name": "领先",
         "prev_quadrant": 1,
-        "today_pct": -0.43,
-        "close": 1464.29,
+        "today_pct": -0.16,
+        "close": 1468.24,
         "trail": [
           [
             116.4,
@@ -2486,7 +2486,7 @@
             113.15
           ],
           [
-            122.08,
+            122.07,
             113.28
           ]
         ]
@@ -2494,14 +2494,14 @@
       {
         "thscode": "881164.TI",
         "name": "文化传媒",
-        "rs_ratio": 109.91,
+        "rs_ratio": 109.89,
         "rs_mom": 121.58,
-        "distance": 23.75,
+        "distance": 23.74,
         "quadrant": 1,
         "quadrant_name": "领先",
         "prev_quadrant": 1,
-        "today_pct": 4.88,
-        "close": 2575.33,
+        "today_pct": 4.94,
+        "close": 2576.69,
         "trail": [
           [
             107.3,
@@ -2524,7 +2524,7 @@
             121.62
           ],
           [
-            109.91,
+            109.89,
             121.58
           ]
         ]
@@ -2532,14 +2532,14 @@
       {
         "thscode": "881148.TI",
         "name": "港口航运",
-        "rs_ratio": 114.12,
+        "rs_ratio": 114.11,
         "rs_mom": 103.02,
-        "distance": 14.44,
+        "distance": 14.42,
         "quadrant": 1,
         "quadrant_name": "领先",
         "prev_quadrant": 1,
-        "today_pct": 0.03,
-        "close": 1160.84,
+        "today_pct": 0.26,
+        "close": 1163.52,
         "trail": [
           [
             112.02,
@@ -2562,7 +2562,7 @@
             103.04
           ],
           [
-            114.12,
+            114.11,
             103.02
           ]
         ]
@@ -2570,14 +2570,14 @@
       {
         "thscode": "881171.TI",
         "name": "自动化设备",
-        "rs_ratio": 113.01,
+        "rs_ratio": 113.04,
         "rs_mom": 100.13,
-        "distance": 13.01,
+        "distance": 13.04,
         "quadrant": 1,
         "quadrant_name": "领先",
         "prev_quadrant": 4,
-        "today_pct": 5.54,
-        "close": 22055.58,
+        "today_pct": 6.5,
+        "close": 22256.91,
         "trail": [
           [
             114.88,
@@ -2600,7 +2600,7 @@
             99.52
           ],
           [
-            113.01,
+            113.04,
             100.13
           ]
         ]
@@ -2608,14 +2608,14 @@
       {
         "thscode": "881132.TI",
         "name": "黑色家电",
-        "rs_ratio": 107.34,
+        "rs_ratio": 107.33,
         "rs_mom": 107.7,
         "distance": 10.64,
         "quadrant": 1,
         "quadrant_name": "领先",
         "prev_quadrant": 1,
-        "today_pct": 2.27,
-        "close": 3820.5,
+        "today_pct": 2.62,
+        "close": 3833.3,
         "trail": [
           [
             104.69,
@@ -2638,7 +2638,7 @@
             107.05
           ],
           [
-            107.34,
+            107.33,
             107.7
           ]
         ]
@@ -2646,14 +2646,14 @@
       {
         "thscode": "881149.TI",
         "name": "公路铁路运输",
-        "rs_ratio": 104.71,
+        "rs_ratio": 104.69,
         "rs_mom": 109.29,
-        "distance": 10.42,
+        "distance": 10.41,
         "quadrant": 1,
         "quadrant_name": "领先",
         "prev_quadrant": 1,
-        "today_pct": -0.3,
-        "close": 1302.24,
+        "today_pct": -0.14,
+        "close": 1304.41,
         "trail": [
           [
             101.3,
@@ -2676,7 +2676,7 @@
             109.06
           ],
           [
-            104.71,
+            104.69,
             109.29
           ]
         ]
@@ -2690,8 +2690,8 @@
         "quadrant": 1,
         "quadrant_name": "领先",
         "prev_quadrant": 1,
-        "today_pct": 2.37,
-        "close": 7184.18,
+        "today_pct": 2.75,
+        "close": 7210.91,
         "trail": [
           [
             109.16,
@@ -2722,14 +2722,14 @@
       {
         "thscode": "881265.TI",
         "name": "塑料制品",
-        "rs_ratio": 108.22,
+        "rs_ratio": 108.24,
         "rs_mom": 101.39,
-        "distance": 8.34,
+        "distance": 8.36,
         "quadrant": 1,
         "quadrant_name": "领先",
         "prev_quadrant": 1,
-        "today_pct": 3.34,
-        "close": 8439.01,
+        "today_pct": 4.17,
+        "close": 8507.54,
         "trail": [
           [
             109.32,
@@ -2752,7 +2752,7 @@
             101.24
           ],
           [
-            108.22,
+            108.24,
             101.39
           ]
         ]
@@ -2760,14 +2760,14 @@
       {
         "thscode": "881180.TI",
         "name": "石油加工贸易",
-        "rs_ratio": 107.04,
+        "rs_ratio": 107.02,
         "rs_mom": 102.93,
-        "distance": 7.62,
+        "distance": 7.6,
         "quadrant": 1,
         "quadrant_name": "领先",
         "prev_quadrant": 1,
-        "today_pct": 0.26,
-        "close": 3036.62,
+        "today_pct": 0.38,
+        "close": 3040.22,
         "trail": [
           [
             106.11,
@@ -2790,7 +2790,7 @@
             103.11
           ],
           [
-            107.04,
+            107.02,
             102.93
           ]
         ]
@@ -2798,14 +2798,14 @@
       {
         "thscode": "881117.TI",
         "name": "通用设备",
-        "rs_ratio": 103.4,
+        "rs_ratio": 103.42,
         "rs_mom": 101.01,
-        "distance": 3.55,
+        "distance": 3.56,
         "quadrant": 1,
         "quadrant_name": "领先",
         "prev_quadrant": 1,
-        "today_pct": 3.9,
-        "close": 7149.64,
+        "today_pct": 4.68,
+        "close": 7202.87,
         "trail": [
           [
             105.24,
@@ -2828,7 +2828,7 @@
             100.78
           ],
           [
-            103.4,
+            103.42,
             101.01
           ]
         ]
@@ -2836,14 +2836,14 @@
       {
         "thscode": "881115.TI",
         "name": "建筑材料",
-        "rs_ratio": 102.99,
+        "rs_ratio": 102.98,
         "rs_mom": 100.05,
-        "distance": 2.99,
+        "distance": 2.98,
         "quadrant": 1,
         "quadrant_name": "领先",
         "prev_quadrant": 1,
-        "today_pct": 0.6,
-        "close": 4642.98,
+        "today_pct": 0.94,
+        "close": 4658.65,
         "trail": [
           [
             103.26,
@@ -2866,7 +2866,7 @@
             100.02
           ],
           [
-            102.99,
+            102.98,
             100.05
           ]
         ]
@@ -2874,14 +2874,14 @@
       {
         "thscode": "881135.TI",
         "name": "纺织制造",
-        "rs_ratio": 100.53,
+        "rs_ratio": 100.52,
         "rs_mom": 100.48,
         "distance": 0.71,
         "quadrant": 1,
         "quadrant_name": "领先",
         "prev_quadrant": 1,
-        "today_pct": 1.46,
-        "close": 1980.08,
+        "today_pct": 1.84,
+        "close": 1987.43,
         "trail": [
           [
             99.85,
@@ -2904,7 +2904,7 @@
             100.63
           ],
           [
-            100.53,
+            100.52,
             100.48
           ]
         ]
@@ -2912,14 +2912,14 @@
       {
         "thscode": "881172.TI",
         "name": "电子化学品",
-        "rs_ratio": 140.66,
+        "rs_ratio": 140.72,
         "rs_mom": 78.43,
-        "distance": 46.02,
+        "distance": 46.08,
         "quadrant": 4,
         "quadrant_name": "疲软",
         "prev_quadrant": 4,
-        "today_pct": 2.74,
-        "close": 59091.17,
+        "today_pct": 4.16,
+        "close": 59903.15,
         "trail": [
           [
             144.08,
@@ -2942,7 +2942,7 @@
             77.9
           ],
           [
-            140.66,
+            140.72,
             78.43
           ]
         ]
@@ -2950,14 +2950,14 @@
       {
         "thscode": "881121.TI",
         "name": "半导体",
-        "rs_ratio": 122.98,
+        "rs_ratio": 123.02,
         "rs_mom": 79.32,
-        "distance": 30.91,
+        "distance": 30.95,
         "quadrant": 4,
         "quadrant_name": "疲软",
         "prev_quadrant": 4,
-        "today_pct": 2.27,
-        "close": 11756.55,
+        "today_pct": 3.5,
+        "close": 11897.67,
         "trail": [
           [
             125.42,
@@ -2980,7 +2980,7 @@
             78.72
           ],
           [
-            122.98,
+            123.02,
             79.32
           ]
         ]
@@ -2988,14 +2988,14 @@
       {
         "thscode": "881107.TI",
         "name": "油气开采及服务",
-        "rs_ratio": 122.51,
+        "rs_ratio": 122.48,
         "rs_mom": 98.44,
-        "distance": 22.56,
+        "distance": 22.53,
         "quadrant": 4,
         "quadrant_name": "疲软",
         "prev_quadrant": 4,
-        "today_pct": -0.67,
-        "close": 1398.16,
+        "today_pct": -0.69,
+        "close": 1397.85,
         "trail": [
           [
             121.44,
@@ -3018,7 +3018,7 @@
             98.72
           ],
           [
-            122.51,
+            122.48,
             98.44
           ]
         ]
@@ -3026,14 +3026,14 @@
       {
         "thscode": "881169.TI",
         "name": "贵金属",
-        "rs_ratio": 116.75,
+        "rs_ratio": 116.72,
         "rs_mom": 85.17,
-        "distance": 22.37,
+        "distance": 22.35,
         "quadrant": 4,
         "quadrant_name": "疲软",
         "prev_quadrant": 4,
-        "today_pct": 4.31,
-        "close": 3980.64,
+        "today_pct": 4.25,
+        "close": 3978.26,
         "trail": [
           [
             120.83,
@@ -3056,7 +3056,7 @@
             85.75
           ],
           [
-            116.75,
+            116.72,
             85.17
           ]
         ]
@@ -3066,12 +3066,12 @@
         "name": "小金属",
         "rs_ratio": 116.55,
         "rs_mom": 84.99,
-        "distance": 22.34,
+        "distance": 22.35,
         "quadrant": 4,
         "quadrant_name": "疲软",
         "prev_quadrant": 4,
-        "today_pct": 2.21,
-        "close": 6121.81,
+        "today_pct": 2.81,
+        "close": 6158.02,
         "trail": [
           [
             120.79,
@@ -3102,14 +3102,14 @@
       {
         "thscode": "881105.TI",
         "name": "煤炭开采加工",
-        "rs_ratio": 119.97,
+        "rs_ratio": 119.94,
         "rs_mom": 96.36,
-        "distance": 20.29,
+        "distance": 20.27,
         "quadrant": 4,
         "quadrant_name": "疲软",
         "prev_quadrant": 4,
-        "today_pct": -0.65,
-        "close": 2592.56,
+        "today_pct": -0.55,
+        "close": 2595.23,
         "trail": [
           [
             117.2,
@@ -3132,7 +3132,7 @@
             96.55
           ],
           [
-            119.97,
+            119.94,
             96.36
           ]
         ]
@@ -3140,14 +3140,14 @@
       {
         "thscode": "881123.TI",
         "name": "其他电子",
-        "rs_ratio": 107.13,
+        "rs_ratio": 107.17,
         "rs_mom": 82.06,
-        "distance": 19.31,
+        "distance": 19.32,
         "quadrant": 4,
         "quadrant_name": "疲软",
         "prev_quadrant": 4,
-        "today_pct": 2.83,
-        "close": 14592.81,
+        "today_pct": 3.99,
+        "close": 14757.82,
         "trail": [
           [
             109.88,
@@ -3170,7 +3170,7 @@
             81.75
           ],
           [
-            107.13,
+            107.17,
             82.06
           ]
         ]
@@ -3178,14 +3178,14 @@
       {
         "thscode": "881146.TI",
         "name": "燃气",
-        "rs_ratio": 111.95,
+        "rs_ratio": 111.93,
         "rs_mom": 96.91,
-        "distance": 12.34,
+        "distance": 12.33,
         "quadrant": 4,
         "quadrant_name": "疲软",
         "prev_quadrant": 4,
-        "today_pct": 0.97,
-        "close": 1632.6,
+        "today_pct": 1.17,
+        "close": 1635.83,
         "trail": [
           [
             109.81,
@@ -3208,7 +3208,7 @@
             96.93
           ],
           [
-            111.95,
+            111.93,
             96.91
           ]
         ]
@@ -3216,14 +3216,14 @@
       {
         "thscode": "881145.TI",
         "name": "电力",
-        "rs_ratio": 110.96,
+        "rs_ratio": 110.95,
         "rs_mom": 95.85,
-        "distance": 11.72,
+        "distance": 11.71,
         "quadrant": 4,
         "quadrant_name": "疲软",
         "prev_quadrant": 4,
-        "today_pct": -0.57,
-        "close": 1672.45,
+        "today_pct": -0.27,
+        "close": 1677.49,
         "trail": [
           [
             109.3,
@@ -3246,7 +3246,7 @@
             95.79
           ],
           [
-            110.96,
+            110.95,
             95.85
           ]
         ]
@@ -3254,14 +3254,14 @@
       {
         "thscode": "881167.TI",
         "name": "非金属材料",
-        "rs_ratio": 107.87,
+        "rs_ratio": 107.88,
         "rs_mom": 94.47,
         "distance": 9.62,
         "quadrant": 4,
         "quadrant_name": "疲软",
         "prev_quadrant": 4,
-        "today_pct": 2.46,
-        "close": 22277.28,
+        "today_pct": 3.06,
+        "close": 22407.93,
         "trail": [
           [
             110.49,
@@ -3284,7 +3284,7 @@
             94.11
           ],
           [
-            107.87,
+            107.88,
             94.47
           ]
         ]
@@ -3292,14 +3292,14 @@
       {
         "thscode": "881278.TI",
         "name": "电网设备",
-        "rs_ratio": 101.34,
+        "rs_ratio": 101.35,
         "rs_mom": 91.34,
         "distance": 8.76,
         "quadrant": 4,
         "quadrant_name": "疲软",
         "prev_quadrant": 4,
-        "today_pct": 1.41,
-        "close": 4953.41,
+        "today_pct": 1.91,
+        "close": 4977.65,
         "trail": [
           [
             102.56,
@@ -3322,7 +3322,7 @@
             91.55
           ],
           [
-            101.34,
+            101.35,
             91.34
           ]
         ]
@@ -3330,14 +3330,14 @@
       {
         "thscode": "881129.TI",
         "name": "通信设备",
-        "rs_ratio": 107.0,
+        "rs_ratio": 107.01,
         "rs_mom": 95.41,
-        "distance": 8.37,
+        "distance": 8.38,
         "quadrant": 4,
         "quadrant_name": "疲软",
         "prev_quadrant": 4,
-        "today_pct": 3.19,
-        "close": 6484.55,
+        "today_pct": 4.0,
+        "close": 6535.58,
         "trail": [
           [
             113.29,
@@ -3360,7 +3360,7 @@
             95.71
           ],
           [
-            107.0,
+            107.01,
             95.41
           ]
         ]
@@ -3368,14 +3368,14 @@
       {
         "thscode": "881284.TI",
         "name": "环保设备",
-        "rs_ratio": 106.14,
+        "rs_ratio": 106.13,
         "rs_mom": 96.81,
         "distance": 6.91,
         "quadrant": 4,
         "quadrant_name": "疲软",
         "prev_quadrant": 4,
-        "today_pct": 2.73,
-        "close": 1080.34,
+        "today_pct": 3.1,
+        "close": 1084.31,
         "trail": [
           [
             106.49,
@@ -3398,7 +3398,7 @@
             97.12
           ],
           [
-            106.14,
+            106.13,
             96.81
           ]
         ]
@@ -3406,14 +3406,14 @@
       {
         "thscode": "881122.TI",
         "name": "光学光电子",
-        "rs_ratio": 105.82,
+        "rs_ratio": 105.84,
         "rs_mom": 98.06,
-        "distance": 6.14,
+        "distance": 6.15,
         "quadrant": 4,
         "quadrant_name": "疲软",
         "prev_quadrant": 4,
-        "today_pct": 2.56,
-        "close": 4208.51,
+        "today_pct": 3.42,
+        "close": 4243.81,
         "trail": [
           [
             107.4,
@@ -3436,7 +3436,7 @@
             97.75
           ],
           [
-            105.82,
+            105.84,
             98.06
           ]
         ]
@@ -3444,14 +3444,14 @@
       {
         "thscode": "881124.TI",
         "name": "消费电子",
-        "rs_ratio": 103.28,
+        "rs_ratio": 103.29,
         "rs_mom": 97.67,
-        "distance": 4.02,
+        "distance": 4.04,
         "quadrant": 4,
         "quadrant_name": "疲软",
         "prev_quadrant": 4,
-        "today_pct": 3.44,
-        "close": 9435.78,
+        "today_pct": 4.2,
+        "close": 9505.01,
         "trail": [
           [
             104.83,
@@ -3474,7 +3474,7 @@
             97.26
           ],
           [
-            103.28,
+            103.29,
             97.67
           ]
         ]
@@ -3488,8 +3488,8 @@
         "quadrant": 4,
         "quadrant_name": "疲软",
         "prev_quadrant": 4,
-        "today_pct": 0.39,
-        "close": 2604.56,
+        "today_pct": 0.83,
+        "close": 2615.96,
         "trail": [
           [
             100.37,
@@ -3520,14 +3520,14 @@
       {
         "thscode": "881267.TI",
         "name": "能源金属",
-        "rs_ratio": 87.97,
+        "rs_ratio": 87.98,
         "rs_mom": 66.67,
-        "distance": 35.44,
+        "distance": 35.43,
         "quadrant": 3,
         "quadrant_name": "滞后",
         "prev_quadrant": 3,
-        "today_pct": 1.95,
-        "close": 20054.01,
+        "today_pct": 2.58,
+        "close": 20178.73,
         "trail": [
           [
             88.23,
@@ -3550,7 +3550,7 @@
             66.63
           ],
           [
-            87.97,
+            87.98,
             66.67
           ]
         ]
@@ -3558,14 +3558,14 @@
       {
         "thscode": "000819.SH",
         "name": "有色金属",
-        "rs_ratio": 91.67,
+        "rs_ratio": 91.66,
         "rs_mom": 72.91,
         "distance": 28.34,
         "quadrant": 3,
         "quadrant_name": "滞后",
         "prev_quadrant": 3,
-        "today_pct": 2.49,
-        "close": 6381.58,
+        "today_pct": 2.72,
+        "close": 6396.25,
         "trail": [
           [
             94.08,
@@ -3588,7 +3588,7 @@
             72.97
           ],
           [
-            91.67,
+            91.66,
             72.91
           ]
         ]
@@ -3602,8 +3602,8 @@
         "quadrant": 3,
         "quadrant_name": "滞后",
         "prev_quadrant": 3,
-        "today_pct": -0.72,
-        "close": 2145.26,
+        "today_pct": -0.43,
+        "close": 2151.43,
         "trail": [
           [
             74.66,
@@ -3634,14 +3634,14 @@
       {
         "thscode": "881281.TI",
         "name": "电池",
-        "rs_ratio": 86.98,
+        "rs_ratio": 86.99,
         "rs_mom": 79.33,
-        "distance": 24.43,
+        "distance": 24.42,
         "quadrant": 3,
         "quadrant_name": "滞后",
         "prev_quadrant": 3,
-        "today_pct": 2.72,
-        "close": 13732.43,
+        "today_pct": 3.44,
+        "close": 13829.0,
         "trail": [
           [
             86.33,
@@ -3664,7 +3664,7 @@
             78.63
           ],
           [
-            86.98,
+            86.99,
             79.33
           ]
         ]
@@ -3678,8 +3678,8 @@
         "quadrant": 3,
         "quadrant_name": "滞后",
         "prev_quadrant": 3,
-        "today_pct": -0.18,
-        "close": 1714.82,
+        "today_pct": 0.3,
+        "close": 1722.95,
         "trail": [
           [
             80.66,
@@ -3716,8 +3716,8 @@
         "quadrant": 3,
         "quadrant_name": "滞后",
         "prev_quadrant": 3,
-        "today_pct": 1.39,
-        "close": 3287.65,
+        "today_pct": 1.9,
+        "close": 3303.97,
         "trail": [
           [
             85.91,
@@ -3750,12 +3750,12 @@
         "name": "钢铁",
         "rs_ratio": 86.49,
         "rs_mom": 91.64,
-        "distance": 15.88,
+        "distance": 15.89,
         "quadrant": 3,
         "quadrant_name": "滞后",
         "prev_quadrant": 3,
-        "today_pct": -0.63,
-        "close": 1253.26,
+        "today_pct": -0.31,
+        "close": 1257.26,
         "trail": [
           [
             86.08,
@@ -3792,8 +3792,8 @@
         "quadrant": 3,
         "quadrant_name": "滞后",
         "prev_quadrant": 4,
-        "today_pct": 1.46,
-        "close": 3252.47,
+        "today_pct": 1.83,
+        "close": 3264.14,
         "trail": [
           [
             101.69,
@@ -3824,14 +3824,14 @@
       {
         "thscode": "881282.TI",
         "name": "其他电源设备",
-        "rs_ratio": 89.9,
+        "rs_ratio": 89.91,
         "rs_mom": 88.28,
-        "distance": 15.47,
+        "distance": 15.46,
         "quadrant": 3,
         "quadrant_name": "滞后",
         "prev_quadrant": 3,
-        "today_pct": 1.54,
-        "close": 4400.46,
+        "today_pct": 2.29,
+        "close": 4433.19,
         "trail": [
           [
             91.22,
@@ -3854,7 +3854,7 @@
             87.95
           ],
           [
-            89.9,
+            89.91,
             88.28
           ]
         ]
@@ -3868,8 +3868,8 @@
         "quadrant": 3,
         "quadrant_name": "滞后",
         "prev_quadrant": 3,
-        "today_pct": 1.68,
-        "close": 5494.45,
+        "today_pct": 2.17,
+        "close": 5520.96,
         "trail": [
           [
             91.17,
@@ -3900,14 +3900,14 @@
       {
         "thscode": "881159.TI",
         "name": "贸易",
-        "rs_ratio": 85.91,
+        "rs_ratio": 85.89,
         "rs_mom": 97.32,
-        "distance": 14.35,
+        "distance": 14.36,
         "quadrant": 3,
         "quadrant_name": "滞后",
         "prev_quadrant": 3,
-        "today_pct": -0.02,
-        "close": 2137.69,
+        "today_pct": 0.15,
+        "close": 2141.23,
         "trail": [
           [
             85.22,
@@ -3930,7 +3930,7 @@
             97.38
           ],
           [
-            85.91,
+            85.89,
             97.32
           ]
         ]
@@ -3938,14 +3938,14 @@
       {
         "thscode": "881276.TI",
         "name": "军工电子",
-        "rs_ratio": 88.34,
+        "rs_ratio": 88.35,
         "rs_mom": 97.81,
-        "distance": 11.87,
+        "distance": 11.86,
         "quadrant": 3,
         "quadrant_name": "滞后",
         "prev_quadrant": 3,
-        "today_pct": 2.46,
-        "close": 8766.36,
+        "today_pct": 3.17,
+        "close": 8827.12,
         "trail": [
           [
             91.8,
@@ -3968,7 +3968,7 @@
             98.18
           ],
           [
-            88.34,
+            88.35,
             97.81
           ]
         ]
@@ -3976,14 +3976,14 @@
       {
         "thscode": "881114.TI",
         "name": "金属新材料",
-        "rs_ratio": 91.68,
-        "rs_mom": 93.04,
-        "distance": 10.85,
+        "rs_ratio": 91.7,
+        "rs_mom": 93.05,
+        "distance": 10.83,
         "quadrant": 3,
         "quadrant_name": "滞后",
         "prev_quadrant": 3,
-        "today_pct": 3.03,
-        "close": 10120.21,
+        "today_pct": 3.96,
+        "close": 10212.07,
         "trail": [
           [
             94.12,
@@ -4006,22 +4006,22 @@
             92.75
           ],
           [
-            91.68,
-            93.04
+            91.7,
+            93.05
           ]
         ]
       },
       {
         "thscode": "881165.TI",
         "name": "综合",
-        "rs_ratio": 91.68,
+        "rs_ratio": 91.67,
         "rs_mom": 95.01,
         "distance": 9.71,
         "quadrant": 3,
         "quadrant_name": "滞后",
         "prev_quadrant": 3,
-        "today_pct": -0.57,
-        "close": 1844.98,
+        "today_pct": -0.16,
+        "close": 1852.69,
         "trail": [
           [
             91.01,
@@ -4044,7 +4044,7 @@
             95.11
           ],
           [
-            91.68,
+            91.67,
             95.01
           ]
         ]
@@ -4052,14 +4052,14 @@
       {
         "thscode": "881153.TI",
         "name": "房地产",
-        "rs_ratio": 91.0,
+        "rs_ratio": 90.99,
         "rs_mom": 97.17,
-        "distance": 9.43,
+        "distance": 9.44,
         "quadrant": 3,
         "quadrant_name": "滞后",
         "prev_quadrant": 3,
-        "today_pct": -0.18,
-        "close": 1354.72,
+        "today_pct": 0.05,
+        "close": 1357.81,
         "trail": [
           [
             90.38,
@@ -4082,7 +4082,7 @@
             97.34
           ],
           [
-            91.0,
+            90.99,
             97.17
           ]
         ]
@@ -4092,12 +4092,12 @@
         "name": "农化制品",
         "rs_ratio": 92.84,
         "rs_mom": 94.76,
-        "distance": 8.87,
+        "distance": 8.88,
         "quadrant": 3,
         "quadrant_name": "滞后",
         "prev_quadrant": 3,
-        "today_pct": 0.61,
-        "close": 3868.76,
+        "today_pct": 0.97,
+        "close": 3882.82,
         "trail": [
           [
             92.49,
@@ -4134,8 +4134,8 @@
         "quadrant": 3,
         "quadrant_name": "滞后",
         "prev_quadrant": 3,
-        "today_pct": 1.24,
-        "close": 3477.85,
+        "today_pct": 1.68,
+        "close": 3492.89,
         "trail": [
           [
             95.45,
@@ -4166,14 +4166,14 @@
       {
         "thscode": "881137.TI",
         "name": "造纸",
-        "rs_ratio": 94.47,
+        "rs_ratio": 94.46,
         "rs_mom": 99.21,
-        "distance": 5.59,
+        "distance": 5.6,
         "quadrant": 3,
         "quadrant_name": "滞后",
         "prev_quadrant": 3,
-        "today_pct": 0.6,
-        "close": 1655.4,
+        "today_pct": 0.83,
+        "close": 1659.17,
         "trail": [
           [
             94.89,
@@ -4196,7 +4196,7 @@
             99.42
           ],
           [
-            94.47,
+            94.46,
             99.21
           ]
         ]
@@ -4204,14 +4204,14 @@
       {
         "thscode": "881116.TI",
         "name": "建筑装饰",
-        "rs_ratio": 95.04,
+        "rs_ratio": 95.03,
         "rs_mom": 97.8,
         "distance": 5.43,
         "quadrant": 3,
         "quadrant_name": "滞后",
         "prev_quadrant": 3,
-        "today_pct": 0.42,
-        "close": 3318.63,
+        "today_pct": 0.81,
+        "close": 3331.39,
         "trail": [
           [
             94.72,
@@ -4234,7 +4234,7 @@
             97.9
           ],
           [
-            95.04,
+            95.03,
             97.8
           ]
         ]
@@ -4242,14 +4242,14 @@
       {
         "thscode": "881136.TI",
         "name": "服装家纺",
-        "rs_ratio": 95.37,
+        "rs_ratio": 95.36,
         "rs_mom": 98.45,
-        "distance": 4.88,
+        "distance": 4.89,
         "quadrant": 3,
         "quadrant_name": "滞后",
         "prev_quadrant": 3,
-        "today_pct": 1.89,
-        "close": 2377.41,
+        "today_pct": 2.08,
+        "close": 2382.05,
         "trail": [
           [
             94.52,
@@ -4272,7 +4272,7 @@
             98.64
           ],
           [
-            95.37,
+            95.36,
             98.45
           ]
         ]
@@ -4280,14 +4280,14 @@
       {
         "thscode": "881181.TI",
         "name": "环境治理",
-        "rs_ratio": 96.76,
+        "rs_ratio": 96.75,
         "rs_mom": 96.65,
         "distance": 4.66,
         "quadrant": 3,
         "quadrant_name": "滞后",
         "prev_quadrant": 3,
-        "today_pct": 1.39,
-        "close": 3231.03,
+        "today_pct": 1.7,
+        "close": 3240.73,
         "trail": [
           [
             96.24,
@@ -4310,7 +4310,7 @@
             96.75
           ],
           [
-            96.76,
+            96.75,
             96.65
           ]
         ]
@@ -4318,14 +4318,14 @@
       {
         "thscode": "881118.TI",
         "name": "专用设备",
-        "rs_ratio": 95.44,
+        "rs_ratio": 95.45,
         "rs_mom": 99.33,
-        "distance": 4.61,
+        "distance": 4.6,
         "quadrant": 3,
         "quadrant_name": "滞后",
         "prev_quadrant": 3,
-        "today_pct": 2.48,
-        "close": 5729.27,
+        "today_pct": 3.13,
+        "close": 5765.78,
         "trail": [
           [
             96.5,
@@ -4348,7 +4348,7 @@
             99.31
           ],
           [
-            95.44,
+            95.45,
             99.33
           ]
         ]
@@ -4358,12 +4358,12 @@
         "name": "保险",
         "rs_ratio": 95.81,
         "rs_mom": 99.26,
-        "distance": 4.25,
+        "distance": 4.26,
         "quadrant": 3,
         "quadrant_name": "滞后",
         "prev_quadrant": 3,
-        "today_pct": -2.19,
-        "close": 1935.59,
+        "today_pct": -1.89,
+        "close": 1941.64,
         "trail": [
           [
             94.71,
@@ -4394,14 +4394,14 @@
       {
         "thscode": "881109.TI",
         "name": "化学制品",
-        "rs_ratio": 98.31,
+        "rs_ratio": 98.32,
         "rs_mom": 99.38,
-        "distance": 1.8,
+        "distance": 1.79,
         "quadrant": 3,
         "quadrant_name": "滞后",
         "prev_quadrant": 3,
-        "today_pct": 1.54,
-        "close": 5651.35,
+        "today_pct": 2.09,
+        "close": 5681.8,
         "trail": [
           [
             98.42,
@@ -4424,7 +4424,7 @@
             99.4
           ],
           [
-            98.31,
+            98.32,
             99.38
           ]
         ]
@@ -4432,14 +4432,14 @@
       {
         "thscode": "881273.TI",
         "name": "白酒",
-        "rs_ratio": 82.71,
+        "rs_ratio": 82.7,
         "rs_mom": 115.79,
         "distance": 23.42,
         "quadrant": 2,
         "quadrant_name": "改善",
         "prev_quadrant": 2,
-        "today_pct": 0.57,
-        "close": 1962.96,
+        "today_pct": 0.87,
+        "close": 1968.9,
         "trail": [
           [
             78.63,
@@ -4462,7 +4462,7 @@
             114.81
           ],
           [
-            82.71,
+            82.7,
             115.79
           ]
         ]
@@ -4470,14 +4470,14 @@
       {
         "thscode": "881178.TI",
         "name": "教育",
-        "rs_ratio": 83.66,
+        "rs_ratio": 83.65,
         "rs_mom": 112.94,
         "distance": 20.85,
         "quadrant": 2,
         "quadrant_name": "改善",
         "prev_quadrant": 2,
-        "today_pct": 2.05,
-        "close": 3453.68,
+        "today_pct": 2.46,
+        "close": 3467.6,
         "trail": [
           [
             83.92,
@@ -4500,7 +4500,7 @@
             114.23
           ],
           [
-            83.66,
+            83.65,
             112.94
           ]
         ]
@@ -4508,14 +4508,14 @@
       {
         "thscode": "881174.TI",
         "name": "厨卫电器",
-        "rs_ratio": 91.62,
+        "rs_ratio": 91.61,
         "rs_mom": 118.15,
         "distance": 20.0,
         "quadrant": 2,
         "quadrant_name": "改善",
         "prev_quadrant": 2,
-        "today_pct": 0.13,
-        "close": 5152.4,
+        "today_pct": 0.38,
+        "close": 5165.14,
         "trail": [
           [
             90.1,
@@ -4538,7 +4538,7 @@
             118.23
           ],
           [
-            91.62,
+            91.61,
             118.15
           ]
         ]
@@ -4546,14 +4546,14 @@
       {
         "thscode": "881272.TI",
         "name": "软件开发",
-        "rs_ratio": 84.44,
-        "rs_mom": 111.25,
-        "distance": 19.2,
+        "rs_ratio": 84.46,
+        "rs_mom": 111.26,
+        "distance": 19.19,
         "quadrant": 2,
         "quadrant_name": "改善",
         "prev_quadrant": 2,
-        "today_pct": 2.38,
-        "close": 1542.45,
+        "today_pct": 3.17,
+        "close": 1554.25,
         "trail": [
           [
             84.46,
@@ -4576,22 +4576,22 @@
             111.37
           ],
           [
-            84.44,
-            111.25
+            84.46,
+            111.26
           ]
         ]
       },
       {
         "thscode": "881266.TI",
         "name": "橡胶制品",
-        "rs_ratio": 81.36,
+        "rs_ratio": 81.37,
         "rs_mom": 102.86,
-        "distance": 18.86,
+        "distance": 18.84,
         "quadrant": 2,
         "quadrant_name": "改善",
         "prev_quadrant": 2,
-        "today_pct": 0.95,
-        "close": 10598.16,
+        "today_pct": 1.79,
+        "close": 10685.94,
         "trail": [
           [
             82.13,
@@ -4614,7 +4614,7 @@
             102.94
           ],
           [
-            81.36,
+            81.37,
             102.86
           ]
         ]
@@ -4628,8 +4628,8 @@
         "quadrant": 2,
         "quadrant_name": "改善",
         "prev_quadrant": 2,
-        "today_pct": 1.64,
-        "close": 3877.43,
+        "today_pct": 2.12,
+        "close": 3895.89,
         "trail": [
           [
             92.56,
@@ -4660,14 +4660,14 @@
       {
         "thscode": "881160.TI",
         "name": "旅游及酒店",
-        "rs_ratio": 84.41,
-        "rs_mom": 104.73,
-        "distance": 16.29,
+        "rs_ratio": 84.4,
+        "rs_mom": 104.72,
+        "distance": 16.3,
         "quadrant": 2,
         "quadrant_name": "改善",
         "prev_quadrant": 2,
-        "today_pct": 0.72,
-        "close": 2322.9,
+        "today_pct": 0.88,
+        "close": 2326.63,
         "trail": [
           [
             83.84,
@@ -4690,8 +4690,8 @@
             104.61
           ],
           [
-            84.41,
-            104.73
+            84.4,
+            104.72
           ]
         ]
       },
@@ -4704,8 +4704,8 @@
         "quadrant": 2,
         "quadrant_name": "改善",
         "prev_quadrant": 2,
-        "today_pct": 1.83,
-        "close": 3271.12,
+        "today_pct": 2.19,
+        "close": 3282.88,
         "trail": [
           [
             87.75,
@@ -4742,8 +4742,8 @@
         "quadrant": 2,
         "quadrant_name": "改善",
         "prev_quadrant": 2,
-        "today_pct": 1.08,
-        "close": 4040.08,
+        "today_pct": 1.53,
+        "close": 4058.12,
         "trail": [
           [
             86.34,
@@ -4780,8 +4780,8 @@
         "quadrant": 2,
         "quadrant_name": "改善",
         "prev_quadrant": 2,
-        "today_pct": 2.14,
-        "close": 5088.6,
+        "today_pct": 2.5,
+        "close": 5106.99,
         "trail": [
           [
             95.8,
@@ -4812,14 +4812,14 @@
       {
         "thscode": "881271.TI",
         "name": "IT服务",
-        "rs_ratio": 88.26,
+        "rs_ratio": 88.27,
         "rs_mom": 105.69,
         "distance": 13.04,
         "quadrant": 2,
         "quadrant_name": "改善",
         "prev_quadrant": 2,
-        "today_pct": 2.17,
-        "close": 9781.58,
+        "today_pct": 2.85,
+        "close": 9846.52,
         "trail": [
           [
             87.93,
@@ -4842,7 +4842,7 @@
             105.73
           ],
           [
-            88.26,
+            88.27,
             105.69
           ]
         ]
@@ -4850,14 +4850,14 @@
       {
         "thscode": "881133.TI",
         "name": "饮料制造",
-        "rs_ratio": 98.06,
+        "rs_ratio": 98.05,
         "rs_mom": 112.18,
         "distance": 12.33,
         "quadrant": 2,
         "quadrant_name": "改善",
         "prev_quadrant": 2,
-        "today_pct": 0.85,
-        "close": 4317.5,
+        "today_pct": 0.99,
+        "close": 4323.59,
         "trail": [
           [
             97.92,
@@ -4880,7 +4880,7 @@
             112.62
           ],
           [
-            98.06,
+            98.05,
             112.18
           ]
         ]
@@ -4888,14 +4888,14 @@
       {
         "thscode": "881126.TI",
         "name": "汽车零部件",
-        "rs_ratio": 87.95,
+        "rs_ratio": 87.96,
         "rs_mom": 102.31,
-        "distance": 12.27,
+        "distance": 12.26,
         "quadrant": 2,
         "quadrant_name": "改善",
         "prev_quadrant": 2,
-        "today_pct": 3.79,
-        "close": 4736.37,
+        "today_pct": 4.43,
+        "close": 4765.72,
         "trail": [
           [
             88.79,
@@ -4918,7 +4918,7 @@
             101.9
           ],
           [
-            87.95,
+            87.96,
             102.31
           ]
         ]
@@ -4926,14 +4926,14 @@
       {
         "thscode": "881158.TI",
         "name": "零售",
-        "rs_ratio": 89.74,
+        "rs_ratio": 89.73,
         "rs_mom": 106.13,
-        "distance": 11.95,
+        "distance": 11.96,
         "quadrant": 2,
         "quadrant_name": "改善",
         "prev_quadrant": 2,
-        "today_pct": 1.48,
-        "close": 1586.04,
+        "today_pct": 1.62,
+        "close": 1588.23,
         "trail": [
           [
             91.18,
@@ -4956,7 +4956,7 @@
             106.28
           ],
           [
-            89.74,
+            89.73,
             106.13
           ]
         ]
@@ -4970,8 +4970,8 @@
         "quadrant": 2,
         "quadrant_name": "改善",
         "prev_quadrant": 2,
-        "today_pct": 1.7,
-        "close": 1664.82,
+        "today_pct": 2.21,
+        "close": 1673.24,
         "trail": [
           [
             92.24,
@@ -5004,12 +5004,12 @@
         "name": "汽车服务及其他",
         "rs_ratio": 92.31,
         "rs_mom": 107.53,
-        "distance": 10.77,
+        "distance": 10.76,
         "quadrant": 2,
         "quadrant_name": "改善",
         "prev_quadrant": 2,
-        "today_pct": 1.39,
-        "close": 937.05,
+        "today_pct": 1.93,
+        "close": 942.06,
         "trail": [
           [
             92.05,
@@ -5046,8 +5046,8 @@
         "quadrant": 2,
         "quadrant_name": "改善",
         "prev_quadrant": 2,
-        "today_pct": 1.68,
-        "close": 9165.6,
+        "today_pct": 2.08,
+        "close": 9201.5,
         "trail": [
           [
             95.59,
@@ -5084,8 +5084,8 @@
         "quadrant": 2,
         "quadrant_name": "改善",
         "prev_quadrant": 2,
-        "today_pct": 1.76,
-        "close": 3264.51,
+        "today_pct": 2.17,
+        "close": 3277.8,
         "trail": [
           [
             90.66,
@@ -5116,14 +5116,14 @@
       {
         "thscode": "881269.TI",
         "name": "轨交设备",
-        "rs_ratio": 95.06,
+        "rs_ratio": 95.05,
         "rs_mom": 108.91,
         "distance": 10.19,
         "quadrant": 2,
         "quadrant_name": "改善",
         "prev_quadrant": 2,
-        "today_pct": 0.48,
-        "close": 861.27,
+        "today_pct": 0.8,
+        "close": 864.03,
         "trail": [
           [
             94.92,
@@ -5146,7 +5146,7 @@
             108.82
           ],
           [
-            95.06,
+            95.05,
             108.91
           ]
         ]
@@ -5160,8 +5160,8 @@
         "quadrant": 2,
         "quadrant_name": "改善",
         "prev_quadrant": 2,
-        "today_pct": 1.41,
-        "close": 5069.31,
+        "today_pct": 1.8,
+        "close": 5089.06,
         "trail": [
           [
             93.54,
@@ -5192,14 +5192,14 @@
       {
         "thscode": "881283.TI",
         "name": "多元金融",
-        "rs_ratio": 91.35,
+        "rs_ratio": 91.36,
         "rs_mom": 104.85,
         "distance": 9.91,
         "quadrant": 2,
         "quadrant_name": "改善",
         "prev_quadrant": 2,
-        "today_pct": 0.31,
-        "close": 905.64,
+        "today_pct": 0.84,
+        "close": 910.46,
         "trail": [
           [
             91.47,
@@ -5222,7 +5222,7 @@
             105.02
           ],
           [
-            91.35,
+            91.36,
             104.85
           ]
         ]
@@ -5230,14 +5230,14 @@
       {
         "thscode": "881134.TI",
         "name": "食品加工制造",
-        "rs_ratio": 94.13,
+        "rs_ratio": 94.12,
         "rs_mom": 107.04,
         "distance": 9.17,
         "quadrant": 2,
         "quadrant_name": "改善",
         "prev_quadrant": 2,
-        "today_pct": 0.61,
-        "close": 4249.76,
+        "today_pct": 0.9,
+        "close": 4261.92,
         "trail": [
           [
             93.22,
@@ -5260,7 +5260,7 @@
             106.94
           ],
           [
-            94.13,
+            94.12,
             107.04
           ]
         ]
@@ -5268,14 +5268,14 @@
       {
         "thscode": "881162.TI",
         "name": "通信服务",
-        "rs_ratio": 91.95,
+        "rs_ratio": 91.96,
         "rs_mom": 104.3,
         "distance": 9.12,
         "quadrant": 2,
         "quadrant_name": "改善",
         "prev_quadrant": 2,
-        "today_pct": 1.79,
-        "close": 2184.92,
+        "today_pct": 2.37,
+        "close": 2197.47,
         "trail": [
           [
             90.31,
@@ -5298,7 +5298,7 @@
             104.47
           ],
           [
-            91.95,
+            91.96,
             104.3
           ]
         ]
@@ -5306,14 +5306,14 @@
       {
         "thscode": "881152.TI",
         "name": "物流",
-        "rs_ratio": 93.63,
+        "rs_ratio": 93.62,
         "rs_mom": 105.65,
         "distance": 8.52,
         "quadrant": 2,
         "quadrant_name": "改善",
         "prev_quadrant": 2,
-        "today_pct": -0.14,
-        "close": 4420.45,
+        "today_pct": 0.14,
+        "close": 4432.73,
         "trail": [
           [
             92.96,
@@ -5336,7 +5336,7 @@
             105.69
           ],
           [
-            93.63,
+            93.62,
             105.65
           ]
         ]
@@ -5344,14 +5344,14 @@
       {
         "thscode": "881157.TI",
         "name": "证券",
-        "rs_ratio": 92.76,
+        "rs_ratio": 92.77,
         "rs_mom": 103.93,
-        "distance": 8.24,
+        "distance": 8.23,
         "quadrant": 2,
         "quadrant_name": "改善",
         "prev_quadrant": 2,
-        "today_pct": -0.1,
-        "close": 1287.6,
+        "today_pct": 0.51,
+        "close": 1295.43,
         "trail": [
           [
             91.5,
@@ -5374,7 +5374,7 @@
             103.58
           ],
           [
-            92.76,
+            92.77,
             103.93
           ]
         ]
@@ -5382,14 +5382,14 @@
       {
         "thscode": "881130.TI",
         "name": "计算机设备",
-        "rs_ratio": 91.92,
+        "rs_ratio": 91.93,
         "rs_mom": 101.11,
-        "distance": 8.16,
+        "distance": 8.15,
         "quadrant": 2,
         "quadrant_name": "改善",
         "prev_quadrant": 2,
-        "today_pct": 3.08,
-        "close": 3136.76,
+        "today_pct": 3.79,
+        "close": 3158.51,
         "trail": [
           [
             93.04,
@@ -5412,7 +5412,7 @@
             101.29
           ],
           [
-            91.92,
+            91.93,
             101.11
           ]
         ]
@@ -5420,14 +5420,14 @@
       {
         "thscode": "881275.TI",
         "name": "游戏",
-        "rs_ratio": 97.26,
+        "rs_ratio": 97.24,
         "rs_mom": 107.51,
         "distance": 8.0,
         "quadrant": 2,
         "quadrant_name": "改善",
         "prev_quadrant": 2,
-        "today_pct": 5.02,
-        "close": 8169.36,
+        "today_pct": 5.04,
+        "close": 8170.74,
         "trail": [
           [
             96.17,
@@ -5450,7 +5450,7 @@
             106.82
           ],
           [
-            97.26,
+            97.24,
             107.51
           ]
         ]
@@ -5458,14 +5458,14 @@
       {
         "thscode": "881141.TI",
         "name": "中药",
-        "rs_ratio": 94.67,
+        "rs_ratio": 94.66,
         "rs_mom": 105.66,
         "distance": 7.78,
         "quadrant": 2,
         "quadrant_name": "改善",
         "prev_quadrant": 2,
-        "today_pct": 0.38,
-        "close": 2757.24,
+        "today_pct": 0.7,
+        "close": 2765.96,
         "trail": [
           [
             92.86,
@@ -5488,7 +5488,7 @@
             105.86
           ],
           [
-            94.67,
+            94.66,
             105.66
           ]
         ]
@@ -5496,14 +5496,14 @@
       {
         "thscode": "881101.TI",
         "name": "种植业与林业",
-        "rs_ratio": 95.84,
+        "rs_ratio": 95.83,
         "rs_mom": 105.8,
-        "distance": 7.13,
+        "distance": 7.14,
         "quadrant": 2,
         "quadrant_name": "改善",
         "prev_quadrant": 2,
-        "today_pct": 1.05,
-        "close": 3577.54,
+        "today_pct": 1.28,
+        "close": 3585.54,
         "trail": [
           [
             96.31,
@@ -5526,7 +5526,7 @@
             106.78
           ],
           [
-            95.84,
+            95.83,
             105.8
           ]
         ]
@@ -5540,8 +5540,8 @@
         "quadrant": 2,
         "quadrant_name": "改善",
         "prev_quadrant": 2,
-        "today_pct": 2.64,
-        "close": 2639.61,
+        "today_pct": 3.12,
+        "close": 2652.04,
         "trail": [
           [
             92.84,
@@ -5574,12 +5574,12 @@
         "name": "医药商业",
         "rs_ratio": 93.11,
         "rs_mom": 101.07,
-        "distance": 6.97,
+        "distance": 6.98,
         "quadrant": 2,
         "quadrant_name": "改善",
         "prev_quadrant": 2,
-        "today_pct": 1.02,
-        "close": 4024.93,
+        "today_pct": 1.42,
+        "close": 4040.87,
         "trail": [
           [
             94.54,
@@ -5610,14 +5610,14 @@
       {
         "thscode": "881179.TI",
         "name": "其他社会服务",
-        "rs_ratio": 94.36,
+        "rs_ratio": 94.35,
         "rs_mom": 103.36,
-        "distance": 6.56,
+        "distance": 6.57,
         "quadrant": 2,
         "quadrant_name": "改善",
         "prev_quadrant": 2,
-        "today_pct": 1.77,
-        "close": 15632.8,
+        "today_pct": 2.12,
+        "close": 15686.69,
         "trail": [
           [
             94.17,
@@ -5640,7 +5640,7 @@
             103.52
           ],
           [
-            94.36,
+            94.35,
             103.36
           ]
         ]
@@ -5654,8 +5654,8 @@
         "quadrant": 2,
         "quadrant_name": "改善",
         "prev_quadrant": 2,
-        "today_pct": 0.81,
-        "close": 2563.3,
+        "today_pct": 1.25,
+        "close": 2574.52,
         "trail": [
           [
             93.76,
@@ -5686,14 +5686,14 @@
       {
         "thscode": "881277.TI",
         "name": "电机",
-        "rs_ratio": 96.43,
+        "rs_ratio": 96.44,
         "rs_mom": 102.59,
-        "distance": 4.41,
+        "distance": 4.4,
         "quadrant": 2,
         "quadrant_name": "改善",
         "prev_quadrant": 2,
-        "today_pct": 5.13,
-        "close": 2705.82,
+        "today_pct": 5.83,
+        "close": 2723.59,
         "trail": [
           [
             97.11,
@@ -5716,7 +5716,7 @@
             101.98
           ],
           [
-            96.43,
+            96.44,
             102.59
           ]
         ]
@@ -5730,8 +5730,8 @@
         "quadrant": 2,
         "quadrant_name": "改善",
         "prev_quadrant": 2,
-        "today_pct": 1.32,
-        "close": 6624.34,
+        "today_pct": 1.83,
+        "close": 6658.09,
         "trail": [
           [
             97.28,
@@ -5768,8 +5768,8 @@
         "quadrant": 2,
         "quadrant_name": "改善",
         "prev_quadrant": 2,
-        "today_pct": 0.76,
-        "close": 2970.9,
+        "today_pct": 1.23,
+        "close": 2984.74,
         "trail": [
           [
             97.78,
@@ -5826,43 +5826,43 @@
         {
           "thscode": "881270.TI",
           "name": "元件",
-          "today_pct": 3.95,
-          "rs_ratio": 150.15,
+          "today_pct": 4.84,
+          "rs_ratio": 150.19,
           "rs_mom": 103.11
         },
         {
           "thscode": "881175.TI",
           "name": "医疗服务",
-          "today_pct": 4.9,
-          "rs_ratio": 123.44,
+          "today_pct": 5.09,
+          "rs_ratio": 123.43,
           "rs_mom": 117.95
         },
         {
           "thscode": "881274.TI",
           "name": "影视院线",
-          "today_pct": 7.64,
-          "rs_ratio": 107.45,
+          "today_pct": 7.91,
+          "rs_ratio": 107.44,
           "rs_mom": 125.31
         },
         {
           "thscode": "881155.TI",
           "name": "银行",
-          "today_pct": -0.43,
-          "rs_ratio": 122.08,
+          "today_pct": -0.16,
+          "rs_ratio": 122.07,
           "rs_mom": 113.28
         },
         {
           "thscode": "881164.TI",
           "name": "文化传媒",
-          "today_pct": 4.88,
-          "rs_ratio": 109.91,
+          "today_pct": 4.94,
+          "rs_ratio": 109.89,
           "rs_mom": 121.58
         },
         {
           "thscode": "881148.TI",
           "name": "港口航运",
-          "today_pct": 0.03,
-          "rs_ratio": 114.12,
+          "today_pct": 0.26,
+          "rs_ratio": 114.11,
           "rs_mom": 103.02
         }
       ]
@@ -5870,10 +5870,10 @@
     "narrative": [
       "今日 91 个板块：领先 15 · 改善 36 · 滞后 24 · 疲软 16（前一交易日 领先 14 · 改善 36 · 滞后 23 · 疲软 18）。",
       "新进领先 自动化设备——象限迁移比涨跌幅更早一步。",
-      "信号 A（领先象限里离中心最远的前 6 个）：元件 +3.95%（RS 150.2 / 动量 103.1）、医疗服务 +4.90%（RS 123.4 / 动量 118.0）、影视院线 +7.64%（RS 107.5 / 动量 125.3）、银行 -0.43%（RS 122.1 / 动量 113.3）、文化传媒 +4.88%（RS 109.9 / 动量 121.6）、港口航运 +0.03%（RS 114.1 / 动量 103.0）。",
-      "今日涨幅前五：影视院线 +7.64%、自动化设备 +5.54%、电机 +5.13%、游戏 +5.02%、医疗服务 +4.90% ——其中 5 个落在领先/改善象限，涨势有轮动承接。",
+      "信号 A（领先象限里离中心最远的前 6 个）：元件 +4.84%（RS 150.2 / 动量 103.1）、医疗服务 +5.09%（RS 123.4 / 动量 118.0）、影视院线 +7.91%（RS 107.4 / 动量 125.3）、银行 -0.16%（RS 122.1 / 动量 113.3）、文化传媒 +4.94%（RS 109.9 / 动量 121.6）、港口航运 +0.26%（RS 114.1 / 动量 103.0）。",
+      "今日涨幅前五：影视院线 +7.91%、自动化设备 +6.50%、电机 +5.83%、医疗服务 +5.09%、游戏 +5.04% ——其中 5 个落在领先/改善象限，涨势有轮动承接。",
       "疲软象限（RS-Ratio > 100 但动量已跌破中枢，强势在衰减）：电子化学品、半导体、油气开采及服务、贵金属、小金属 等 16 个；今日仍在涨的：电子化学品、半导体、贵金属、小金属、其他电子、燃气、非金属材料、电网设备、通信设备、环保设备、光学光电子、消费电子、化学原料，追高要留一半清醒。",
-      "滞后象限里今日最弱：保险 -2.19%、汽车整车 -0.72%、钢铁 -0.63%（相对强度与动量都在中枢下方）。"
+      "滞后象限里今日最弱：保险 -1.89%、汽车整车 -0.43%、钢铁 -0.31%（相对强度与动量都在中枢下方）。"
     ]
   },
   "cross": null,
