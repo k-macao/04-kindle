@@ -40,6 +40,24 @@ def parse(text):
     return ElementTree.fromstring(text.encode("utf-8"))
 
 
+def intelligence_fields(analysis, rank=1, score=82, entity="半导体行业"):
+    return {
+        "analysis": analysis,
+        "impact_matrix": [{"entity": entity, "ticker": "", "type": "行业",
+                           "tier": "直接", "direction": "正面", "horizon": "短期",
+                           "confidence": 72, "reason": "政策变化可能影响行业订单"}],
+        "evidence": {"status": "单一报道", "strength": 58,
+                     "consensus": "暂无独立互证", "basis": "当前仅见一个 RSS 来源",
+                     "scope": "当前输入 1 个 RSS 来源"},
+        "priority": {"importance": 80, "urgency": 70, "novelty": 65,
+                     "reason": "影响对象明确且需要及时核验", "evidence_strength": 58,
+                     "freshness": 90, "interest_relevance": 80, "score": score},
+        "priority_score": score,
+        "priority_rank": rank,
+        "interest_matches": ["行业：半导体"],
+    }
+
+
 class FeedStructureTest(unittest.TestCase):
     def build(self, data=None, **kwargs):
         folder = tempfile.mkdtemp()
@@ -104,6 +122,19 @@ class FeedStructureTest(unittest.TestCase):
         stamps = [parsedate_to_datetime(item.findtext("pubDate"))
                   for item in root.findall("./channel/item")]
         self.assertEqual(stamps, sorted(stamps, reverse=True))
+
+    def test_daily_priority_precedes_recency_and_survives_small_limit(self):
+        data = payload(count=12)
+        chain = ("线索：重点事件；事实：摘要明确提到变化；推断：影响仍需验证；"
+                 "影响：相关行业可能受影响；验证：等待后续公告。")
+        # 0 是最早的一条，却是每日精选第一名；max_items=3 也不能在按时间截断时丢掉它。
+        data["items"][0].update(intelligence_fields(chain, rank=1, score=91))
+        info, _path, root = self.build(data, min_items=1, max_items=3)
+        items = root.findall("./channel/item")
+        self.assertEqual(info["items"], 3)
+        self.assertIn("第 0 条", items[0].findtext("title"))
+        self.assertTrue(items[0].findtext("title").startswith("【精选01·91】"))
+        self.assertIn("每日精选置顶", root.findtext("./channel/description"))
 
     def test_pubdate_is_rfc822_utc(self):
         _info, _path, root = self.build()
@@ -180,6 +211,13 @@ class ItemContentTest(unittest.TestCase):
         self.assertNotIn("\n", item.findtext("title"))
         self.assertEqual(item.findtext("title"), "上半句 下半句")
 
+    def test_priority_badge_keeps_equation_news_marker_first(self):
+        chain = ("线索：加密市场变化；事实：摘要记录了事件；推断：影响仍待确认；"
+                 "影响：数字资产或受影响；验证：观察后续数据。")
+        item = self.one(title="【方程式新闻】加密市场消息",
+                        **intelligence_fields(chain, rank=2, score=79))
+        self.assertTrue(item.findtext("title").startswith("【方程式新闻】【精选02·79】"))
+
     def test_empty_summary_is_omitted(self):
         self.assertIsNone(self.one(summary="").find("description"))
 
@@ -192,19 +230,22 @@ class ItemContentTest(unittest.TestCase):
     def test_analysis_is_appended_to_rss_body(self):
         chain = ("线索：政策公布；事实：文件列出新要求；推断：执行成本或变化；"
                  "影响：相关行业需留意；验证：跟踪配套细则。")
-        item = self.one(analysis=chain)
+        item = self.one(**intelligence_fields(chain))
         description = item.findtext("description")
         self.assertIn("AI 线索分析", description)
-        self.assertEqual(description.count("<p>"), 7)  # 摘要、分析标题、五个线索环节
-        for label in ("线索：", "事实：", "推断：", "影响：", "验证："):
+        self.assertGreaterEqual(description.count("<p>"), 11)
+        for label in ("线索：", "事实：", "推断：", "影响：", "验证：",
+                      "资产影响矩阵", "证据与共识：", "每日优先级：", "关注命中："):
             self.assertIn(f"<p>{label}", description)
+        self.assertIn("半导体行业", description)
+        self.assertTrue(item.findtext("title").startswith("【精选01·82】"))
 
     def test_lite_summary_limit_does_not_truncate_analysis(self):
         chain = ("线索：明确的政策线索；事实：公告已发布；推断：执行环节可能变化；"
                  "影响：行业参与者需观察；验证：等待实施细则。")
         data = payload(count=1)
         data["items"][0]["summary"] = "摘要内容" * 50
-        data["items"][0]["analysis"] = chain
+        data["items"][0].update(intelligence_fields(chain))
         folder = Path(tempfile.mkdtemp())
         _info, path = build_feed.build(data, folder, now=NOW, min_items=1, desc_limit=20)
         item = parse(path.read_text(encoding="utf-8")).find("./channel/item")
@@ -288,9 +329,12 @@ class EscapingTest(unittest.TestCase):
 
 
 class AnalysisGuardTest(unittest.TestCase):
-    def item(self, analysis):
+    def item(self, analysis, structured=True):
         data = payload(count=1)
-        data["items"][0]["analysis"] = analysis
+        if structured:
+            data["items"][0].update(intelligence_fields(analysis))
+        else:
+            data["items"][0]["analysis"] = analysis
         folder = Path(tempfile.mkdtemp())
         _info, path = build_feed.build(data, folder, now=NOW, min_items=1)
         return parse(path.read_text(encoding="utf-8")).find("./channel/item")
@@ -304,6 +348,13 @@ class AnalysisGuardTest(unittest.TestCase):
     def test_analysis_check_rejects_missing_clue(self):
         item = self.item("线索：有线索，但遗漏其余环节。")
         with self.assertRaisesRegex(ValueError, "第 1 条缺少 AI 线索分析标签"):
+            build_feed.check_analysis_fields([item])
+
+    def test_analysis_check_rejects_legacy_chain_without_new_intelligence(self):
+        chain = ("线索：市场成交额变化；事实：指数早盘收涨；推断：风险偏好可能改善；"
+                 "影响：相关板块或受关注；验证：观察后续成交与行业数据。")
+        item = self.item(chain, structured=False)
+        with self.assertRaisesRegex(ValueError, "资产影响矩阵"):
             build_feed.check_analysis_fields([item])
 
 
@@ -325,7 +376,7 @@ class AnalysisDegradeTest(unittest.TestCase):
         chain = ("线索：政策公布；事实：文件列出新要求；推断：执行成本或变化；"
                  "影响：相关行业需留意；验证：跟踪配套细则。")
         data = payload(count=1)
-        data["items"][0]["analysis"] = chain
+        data["items"][0].update(intelligence_fields(chain))
         folder = Path(tempfile.mkdtemp())
         _info, path = build_feed.build(data, folder, now=NOW, min_items=1)
         item = parse(path.read_text(encoding="utf-8")).find("./channel/item")
@@ -335,7 +386,7 @@ class AnalysisDegradeTest(unittest.TestCase):
         chain = ("线索：政策公布；事实：文件列出新要求；推断：执行成本或变化；"
                  "影响：相关行业需留意；验证：跟踪配套细则。")
         data = payload(count=2)
-        data["items"][0]["analysis"] = chain
+        data["items"][0].update(intelligence_fields(chain))
         folder = Path(tempfile.mkdtemp())
         _info, path = build_feed.build(data, folder, now=NOW, min_items=1)
         items = parse(path.read_text(encoding="utf-8")).findall("./channel/item")

@@ -15,12 +15,13 @@ https://cdn.jsdelivr.net/gh/k-macao/04-kindle@main/site/news.xml            ← 
 
 | 文件 | 内容 | 谁用 |
 | --- | --- | --- |
-| `site/news.xml` | **聚合 RSS**：所有源合成一个标准 feed，英文条目中英并列（最多 300 条） | 阅读器订阅、KOReader 新闻下载器 |
-| `site/news-lite.xml` | 同源精简版：最多 60 条、摘要截到 140 字（约 40 KB） | 慢设备、老设备 |
-| `site/news-test.xml` | 连通性测试版：只有 3 条（约 3 KB） | 先验线路与证书，再谈内容 |
+| `site/news.xml` | **聚合 RSS**：所有源合成一个标准 feed，英文中译、资产/证据分析与每日精选置顶（最多 300 条） | 阅读器订阅、KOReader 新闻下载器 |
+| `site/news-lite.xml` | 同源精简版：最多 60 条、摘要截到 140 字，保留完整 AI 情报 | 慢设备、老设备 |
+| `site/news-test.xml` | 连通性测试版：只有 3 条，保留完整 AI 情报 | 先验线路与证书，再谈内容 |
 | `site/eqn-news.xml` | **方程式新闻专属 feed**：只收 EQN，标题带 `【方程式新闻】` | 单独订阅后建立独立目录 |
 | `site/news_seen.json` | 最近 7 天推过的标题指纹 | 抓取时跨天去重，不进 feed |
 | `site/news_zh_cache.json` | 英文标题/摘要的中文译文缓存 | 重译同一句英文时直接命中，省额度、译文稳定 |
+| `config/news_interests.json` | 自选股、行业、主题与每日精选条数 | 计算自选相关性和前十优先级；可直接编辑 |
 
 完整版原先限制 150 条，是为了控制 KOReader 一次下载的 EPUB 数量和 feed 体积；现在源目录已有
 25 个源、每源最多取 12 条，150 会把成功抓到的后半批新闻截掉，因此改为 **300 条**。XML 仍受
@@ -82,7 +83,8 @@ python tools/fetch_news.py --out news_data.json               # 抓一轮，写�
 python tools/translate_news.py --data news_data.json \
        --cache site/news_zh_cache.json                        # 英文条目补中文（就地写回）
 DEEPSEEK_API_KEY=… python tools/analyze_news.py \
-       --data news_data.json --cache site/news_analysis_cache.json  # 每条生成线索链分析
+       --data news_data.json --cache site/news_analysis_cache.json \
+       --interests config/news_interests.json                  # 线索 + 影响 + 证据 + 优先级
 python tools/build_feed.py --data news_data.json --out site   # 聚合 RSS：site/news.xml
 ```
 
@@ -99,8 +101,9 @@ python tools/build_news.py --data news_data.json --out site   # site/news.epub +
 自建实例放最前面。
 
 `news_data.json` 是中间产物：抓取和排版分开，排版可以离线反复调。`news_data.json` 里每条是
-`{title, link, published, summary, source, group, lang}`（英译中之后多 `title_zh` / `summary_zh`，
-AI 分析之后多 `analysis` / `analysis_model`），
+`{title, link, published, summary, source, group, lang}`（英译中之后多 `title_zh` / `summary_zh`；
+AI 分析之后多 `analysis`、`impact_matrix`、`evidence`、`priority`、`interest_matches` 与
+`analysis_model`），
 `sources` 里记着每个源这次用的实例、抓到几条、失败原因，`instances_used` 记着哪个实例供了多少条
 ——出问题先看这里。
 
@@ -118,25 +121,39 @@ AI 分析之后多 `analysis` / `analysis_model`），
 - 渲染时中英并列：RSS 标题写成 `English Title｜中文：译文`，摘要是「中文：… 原文：…」——
   阅读器的列表页只显示标题，译文不接在标题上等于没翻；EPUB（手动生成时）标题下多一行「中文：…」。
 
-## 1.2 每条新闻的 AI 线索分析
+## 1.2 AI 情报：线索、资产影响、证据与每日精选
 
-发布前由 DeepSeek 对每条新闻写一段中文分析，并作为 RSS 正文的一部分；摘要、分析标题和五个环节分别排成独立段落，阅读器打开后逐段换行。分析格式固定为
-**线索 → 事实 → 推断 → 影响 → 验证**。模型只看这条 RSS 的标题、摘要、来源与时间：不联网补事实，
-推断会明确标作推断；线索不足时也必须说明不足，不做无依据预测或买卖建议。
+发布前由 DeepSeek 对每条新闻输出严格 JSON，RSS 正文按段显示四层结果：
+
+1. **五段线索链**：固定为 **线索 → 事实 → 推断 → 影响 → 验证**；
+2. **资产影响矩阵**：最多 3 个公司、行业、资产、国家/地区或政策对象，逐个注明直接/间接、
+   正面/负面/中性/双向/不确定、影响期限、置信度与传导条件；代码只有原始标题/摘要明确给出时才允许写；
+3. **证据与共识评级**：标记官方材料、单一报道、报道引述多方、传闻/未证实、来源冲突或线索有限，
+   并给证据强度与报道内一致/分歧。评级边界始终写明「当前输入 1 个 RSS 来源」；同一期再用保守的标题
+   相似度找不同发布方的相近表述。同一媒体的多个 RSS 路由只算一个发布方，结果明确注明「不等于已确认
+   独立采编」，也不会仅因转载数量提高证据分；
+4. **每日优先级**：按潜在影响 30% + 紧迫度 15% + 新颖度 10% + 证据强度 15% + 新鲜度 15% +
+   自选相关性 15% 合成 0–100 分，把前 10 条置顶并在标题加 `【精选01·分数】`。其余条目继续按时间倒序。
+
+模型只看该条 RSS 的标题、摘要、来源与时间，不联网补事实；线索不足必须说明，不做无依据预测或买卖建议。
+重要性、紧迫度、新颖度由模型给出，其余维度和总分由代码复算，避免模型自行决定自选命中或总排名。
+
+自选配置在 `config/news_interests.json`，分为 `stocks`、`sectors`、`topics`，每项可写名称与别名；
+`top_n` 可调整精选条数。默认清单沿用行情面板的港股龙头，并关注 AI、半导体、互联网、新能源、金融、
+能源、医药、消费、港股、南向资金、美元利率、人民币、中国政策与加密资产。改这个文件不会让旧新闻
+重新调用模型：自选匹配和总分每轮都会在缓存结果上重新计算。
 
 - Actions 使用仓库 Secret **`DEEPSEEK_API_KEY`**，默认 DeepSeek `deepseek-chat`；密钥不进代码、不进日志。
 - 一批 5 条，请求间隔 1 秒；相同新闻按标题、摘要、来源、链接等字段命中
-  `site/news_analysis_cache.json`，避免每天为重复新闻重新计费。
-- 输出预算按批次大小算（`200 + 1000 × 条数`，上限 8000），并且认 `finish_reason=length`：
-  某批写得长被截断时**对半拆小重试**，坏掉的只该是那一条，不是整份 feed。
-  写死成 2600 时，5 条一超长就整批 JSON 缺括号，昨天还在用的 feed 就白白停更一天。
-- **分析这一层允许失败，但不许悄悄少分析**：这一步 `continue-on-error: true`，失败时
-  channel 描述会写「本期 AI 线索分析未生成（分析接口调用失败）」，条目就是原文 + 译文。
-  产物自检要求「要么每条都有完整线索链，要么一条都没有且 channel 里写明原因」，
+  `site/news_analysis_cache.json`，避免每天为重复新闻重新计费。缓存保存结构化分析，不保存最终自选排名。
+- 输出预算按批次大小算（`300 + 1500 × 条数`，上限 8000），并且认 `finish_reason=length`：
+  某批写得长被截断时**对半拆小重试**，坏掉的只该是一条，不是整份 feed。
+- 每一项枚举、0–100 分、文本长度与完整字段都会校验；资产矩阵、证据或优先级缺一项都不冒充成功。
+- **分析这一层允许失败，但不许悄悄少分析**：失败时 channel 描述会写「本期 AI 线索分析未生成」，
+  条目退回原文 + 译文。产物自检要求「要么每条都有完整四层结果，要么一条都没有且写明原因」，
   **一半有一半没有的夹生 feed 一律不发布**。
-- 失败原因会写成一条 `::error` 注解（`gh api repos/…/check-runs/<id>/annotations` 能读到），
-  余额用完、429、格式不合都能直接看，不用翻日志。
-- `news-lite.xml` / `news-test.xml` 会保留完整分析链，只截短新闻摘要。
+- 失败原因会写成一条 `::error` 注解；余额用完、429、格式不合都能直接看，不用翻日志。
+- `news-lite.xml` / `news-test.xml` 保留完整情报段落，只截短新闻摘要；精简版也先保留每日精选，再补最新条目。
 
 抓取时的三个时间约定：
 
@@ -165,11 +182,14 @@ KOReader 的新闻下载器（`epubdownloadbackend.lua`）判失败的口径很�
 
 所以先按体积试，能把范围缩到「线路/证书」还是「体积/超时」：
 
-| 顺序 | 文件 | 体积 | 能下载说明什么 |
+| 顺序 | 文件 | 相对体积 | 能下载说明什么 |
 | --- | --- | --- | --- |
-| 1 | `news-test.xml` | 约 3 KB | 线路与证书都通，问题在体积或内容 |
-| 2 | `news-lite.xml` | 约 40 KB | 大 feed 超时或有解析负担 |
-| 3 | `news.xml` | 约 140 KB | 全部正常 |
+| 1 | `news-test.xml` | 最小（3 条） | 线路与证书都通，问题在体积或内容 |
+| 2 | `news-lite.xml` | 中等（60 条） | 大 feed 超时或有解析负担 |
+| 3 | `news.xml` | 最大（最多 300 条） | 全部正常 |
+
+具体字节数会随当天摘要与 AI 情报长度变化，不能再用旧版「只有线索链」时的固定 KB 估计；
+`site/feed-mirrors.json` 会记录当轮每份文件的真实大小。
 
 三个文件都有同样的四个入口（见 2.2），所以是「体积 × 入口」的组合，哪一格通就用哪一格。
 
