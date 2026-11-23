@@ -115,6 +115,7 @@ class CatalogTest(unittest.TestCase):
         self.assertEqual(source["name"], "方程式新闻 · 加密快讯")
         self.assertEqual(source["group"], "global")
         self.assertEqual(source["lang"], "zh")
+        self.assertEqual(source["title_prefix"], "【方程式新闻】")
         self.assertEqual(source["feed"], "https://api.eqn.news/public/rss")
         self.assertNotIn("route", source)
 
@@ -246,6 +247,15 @@ class ParseFeedTest(unittest.TestCase):
         items = fetch_news.parse_feed(payload, source())
         self.assertEqual(items[0]["title"], "标题 两格")
 
+    def test_source_title_prefix_marks_items_without_repeating_equal_summary(self):
+        marked = {**source("EQN", "global", lang="zh"),
+                  "title_prefix": "【方程式新闻】"}
+        items = fetch_news.parse_feed(RSS_TWO.encode(), marked)
+        self.assertTrue(all(item["title"].startswith("【方程式新闻】") for item in items))
+        self.assertEqual(items[0]["title"],
+                         "【方程式新闻】恒指收涨 1.2%，南向资金净买入 24 亿")
+        self.assertEqual(items[1]["summary"], "")
+
 
 class RouteUrlTest(unittest.TestCase):
     def test_plain_route(self):
@@ -319,6 +329,19 @@ class CollectTest(unittest.TestCase):
         self.assertEqual(len(items), 1)
         self.assertEqual(items[0]["published"], "2026-11-06T17:00:00Z")
         self.assertEqual(items[0]["source"], "A")
+
+    def test_marked_source_survives_cross_source_title_deduplication(self):
+        shared = rss_with(["同一条加密市场消息"])
+        eqn = {**source("EQN", "global", route="/eqn"),
+               "title_prefix": "【方程式新闻】"}
+        items, _reports = fetch_news.collect(
+            sources=[source("A", route="/a"), eqn],
+            instances=["https://rsshub.app"],
+            fetch=feed_fetch({"/a": shared, "/eqn": shared}), now=NOW,
+            max_age_hours=24, log=lambda *_: None)
+        self.assertEqual(len(items), 2)
+        self.assertIn("【方程式新闻】同一条加密市场消息",
+                      [item["title"] for item in items])
 
     def test_per_source_cap(self):
         payload = rss_with([f"第 {index} 条新闻标题" for index in range(30)])

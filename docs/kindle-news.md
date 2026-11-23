@@ -286,7 +286,7 @@ NetNewsWire / Feedly / Reeder / Inoreader 之类的阅读器。设备上如果 `
 | | 格隆汇·日热文 | `/gelonghui/hot-article` |
 | | 第一财经·最新 | `/yicai/latest` |
 | | 财新周刊 | `/caixin/weekly` |
-| 全球 | 方程式新闻·加密快讯 | `https://api.eqn.news/public/rss`（原生 RSS） |
+| 全球 | 方程式新闻·加密快讯（标题前加 `【方程式新闻】`） | `https://api.eqn.news/public/rss`（原生 RSS） |
 | | 彭博社·市场 | `/bloomberg/markets` |
 | | 彭博社·加密 | `/bloomberg/crypto` |
 | | 彭博社·经济 | `/bloomberg/economics` |
