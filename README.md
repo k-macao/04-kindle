@@ -90,8 +90,13 @@ https://cdn.jsdelivr.net/gh/k-macao/04-kindle@main/site/news.xml             ←
 
 四条挂在不同主机上，设备上一条不通就换下一条。同一目录下还有两份「救急」文件：
 `news-lite.xml`（60 条、摘要截断，约 40 KB）和 `news-test.xml`（3 条、约 3 KB，只验线路与证书），
-路径把文件名换掉即可。每轮跑完会把三份 × 七个入口逐条取一遍，结果写在 `site/feed-mirrors.json`，
-设备报「內容下載失敗」时先看这份表。
+路径把文件名换掉即可。每轮跑完会把这些 feed 的七个入口逐条取一遍，结果写在
+`site/feed-mirrors.json`，设备报「內容下載失敗」时先看这份表。
+
+**方程式新闻单独订阅**：在 KOReader 新闻下载器里再添加
+`https://raw.githubusercontent.com/k-macao/04-kindle/main/site/eqn-news.xml`，设备会建立独立的
+`koreader/news/方程式新闻` 目录；网络不通时用
+`https://cdn.jsdelivr.net/gh/k-macao/04-kindle@main/site/eqn-news.xml`。
 
 源目录在 `tools/news_sources.py`，25 条源（24 条 RSSHub 路由 + 1 条原生 RSS）分五组：财经快讯
 （财联社电报、华尔街见闻的要闻/A 股/港股快讯、金十、同花顺、第一财经简报、新浪股市滚动）、

@@ -251,10 +251,16 @@ def check_device_fields(parsed_items):
 
 def build(payload, out_dir, min_items=10, max_items=build_news.MAX_ITEMS, now=None,
           title=FEED_TITLE, self_url=DEFAULT_SELF_URL, site_url=DEFAULT_SITE_URL,
-          filename="news.xml", desc_limit=None, analysis_note=""):
-    """生成 site/news.xml，返回 (info, path)。条目不足或 XML 不自洽时抛 ValueError。"""
+          filename="news.xml", desc_limit=None, analysis_note="", only_sources=None):
+    """生成 RSS；``only_sources`` 可把一个来源单独发布成专属订阅。"""
     now = now or datetime.now(timezone.utc)
-    items = dedupe_guid_items(build_news.prune(payload.get("items") or [], max_items))
+    wanted = {str(key) for key in (only_sources or []) if str(key)}
+    raw_items = payload.get("items") or []
+    reports = payload.get("sources") or []
+    if wanted:
+        raw_items = [item for item in raw_items if str(item.get("source") or "") in wanted]
+        reports = [report for report in reports if str(report.get("key") or "") in wanted]
+    items = dedupe_guid_items(build_news.prune(raw_items, max_items))
     if len(items) < min_items:
         raise ValueError(f"有效条目 {len(items)} 条，少于下限 {min_items}")
     xml = render(items, now, title=title, self_url=self_url, site_url=site_url,
@@ -277,7 +283,6 @@ def build(payload, out_dir, min_items=10, max_items=build_news.MAX_ITEMS, now=No
     target = out / filename
     target.write_text(xml, encoding="utf-8")
     newest = fetch_news.parse_published(items[0].get("published") or "")
-    reports = payload.get("sources") or []
     info = {
         "file": target.name,
         "items": len(items),
@@ -311,6 +316,8 @@ def parse_args(argv=None):
                     help="摘要最多保留多少字（默认不限；精简版用 140）")
     ap.add_argument("--analysis-note", default="",
                     help="channel 里的补充说明（分析接口挂掉时写一句「本期未生成线索分析」）")
+    ap.add_argument("--only-source", action="append", default=[],
+                    help="只发布指定来源 key；可重复，例如 --only-source EQN")
     return ap.parse_args(argv)
 
 
@@ -322,7 +329,8 @@ def main(argv=None):
                            max_items=args.max_items, title=args.title,
                            self_url=args.self_url, site_url=args.site_url,
                            filename=args.filename, desc_limit=args.desc_limit,
-                           analysis_note=args.analysis_note)
+                           analysis_note=args.analysis_note,
+                           only_sources=args.only_source)
     except (OSError, ValueError, json.JSONDecodeError) as exc:
         print(f"生成失败：{exc}", file=sys.stderr)
         return 1

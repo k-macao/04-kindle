@@ -39,8 +39,8 @@ REPO = "k-macao/04-kindle"
 USER_AGENT = "004-kindle-feed-check/1.0"
 MAX_BYTES = 4 * 1024 * 1024
 
-# 同一份 feed 的三种体积：完整版、精简版（给慢设备）、连通性测试版（几 KB）。
-FILES = ("news.xml", "news-lite.xml", "news-test.xml")
+# 聚合 feed 的三种体积 + 方程式新闻专属 feed。
+FILES = ("news.xml", "news-lite.xml", "news-test.xml", "eqn-news.xml")
 
 # 顺序＝推荐给设备的尝试顺序：先 GitHub 自家（DigiCert），再 jsDelivr 的各端点。
 HOSTS = (
