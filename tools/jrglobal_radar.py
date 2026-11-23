@@ -700,11 +700,11 @@ def render_radar_epub(radar, brief=False, esc=None):
         ("DRAM / NAND", f"{fmt_ratio(kr.get('dram_yoy_pct'))} / {fmt_ratio(kr.get('nand_yoy_pct'))}"),
         ("WSTS 全球月销", fmt_ratio(wsts.get("global_yoy_pct"))),
     ):
-        parts.append(f"<tr><td>{esc(label)}</td><td><b>{esc(value)}</b></td></tr>")
+        parts.append(f"<tr><td>{esc(label)}</td><td>{esc(value)}</td></tr>")
     for row in tw[:3]:
         parts.append(
             f"<tr><td>{esc(str(row.get('name') or '').split(' ')[0])}</td>"
-            f"<td><b>{esc(fmt_ratio(row.get('yoy_pct')))}</b></td></tr>"
+            f"<td>{esc(fmt_ratio(row.get('yoy_pct')))}</td></tr>"
         )
     parts.append("</table>")
 
@@ -716,10 +716,10 @@ def render_radar_epub(radar, brief=False, esc=None):
         ocpi_value = f"{float(row.get('ocpi') or 0):.2f}"
         parts.append(
             f"<tr><td>{esc(row.get('gpu'))}</td>"
-            f"<td><b>OCPI {esc(ocpi_value)}</b></td></tr>"
+            f"<td>OCPI {esc(ocpi_value)}</td></tr>"
         )
     parts.append(
-        f"<tr><td>企业 AI 采用率</td><td><b>{esc(fmt_ratio(ramp.get('overall_pct')))}</b></td></tr>"
+        f"<tr><td>企业 AI 采用率</td><td>{esc(fmt_ratio(ramp.get('overall_pct')))}</td></tr>"
     )
     parts.append("</table>")
 
@@ -733,7 +733,7 @@ def render_radar_epub(radar, brief=False, esc=None):
             name = row.get("name") or ""
             if "（" in name:
                 name = name.split("（", 1)[1].rstrip("）")
-            parts.append(f"<tr><td>{esc(name)}</td><td><b>{esc(value)}</b></td></tr>")
+            parts.append(f"<tr><td>{esc(name)}</td><td>{esc(value)}</td></tr>")
         parts.append("</table>")
     return parts
 
