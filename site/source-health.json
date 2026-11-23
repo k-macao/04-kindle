@@ -1,5 +1,5 @@
 {
-  "checked": "2026-11-22T02:55:59+00:00",
+  "checked": "2026-11-23T03:37:40+00:00",
   "providers": [
     "direct",
     "rsshub",
@@ -8,13 +8,12 @@
     "bridge"
   ],
   "summary": {
-    "ok": 24,
+    "ok": 23,
     "total": 24,
-    "items": 181,
+    "items": 197,
     "by_provider": {
       "direct": 4,
-      "rsshub": 17,
-      "mirror": 3
+      "rsshub": 19
     }
   },
   "sources": [
@@ -41,7 +40,7 @@
       "group": "flash",
       "ok": true,
       "provider": "direct",
-      "count": 11,
+      "count": 12,
       "error": "",
       "attempts": [
         {
@@ -58,7 +57,7 @@
       "group": "flash",
       "ok": true,
       "provider": "direct",
-      "count": 10,
+      "count": 12,
       "error": "",
       "attempts": [
         {
@@ -75,7 +74,7 @@
       "group": "flash",
       "ok": true,
       "provider": "direct",
-      "count": 5,
+      "count": 7,
       "error": "",
       "attempts": [
         {
@@ -92,7 +91,7 @@
       "group": "flash",
       "ok": true,
       "provider": "rsshub",
-      "count": 8,
+      "count": 9,
       "error": "",
       "attempts": [
         {
@@ -109,7 +108,7 @@
       "group": "flash",
       "ok": true,
       "provider": "rsshub",
-      "count": 12,
+      "count": 10,
       "error": "",
       "attempts": [
         {
@@ -125,19 +124,13 @@
       "name": "新浪 · 股市滚动",
       "group": "flash",
       "ok": true,
-      "provider": "mirror",
+      "provider": "rsshub",
       "count": 12,
       "error": "",
       "attempts": [
         {
           "provider": "rsshub",
           "label": "https://rsshub.rss.tips",
-          "ok": false,
-          "error": "The read operation timed out"
-        },
-        {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
           "ok": true,
           "error": ""
         }
@@ -183,7 +176,7 @@
       "group": "depth",
       "ok": true,
       "provider": "rsshub",
-      "count": 11,
+      "count": 12,
       "error": "",
       "attempts": [
         {
@@ -200,7 +193,7 @@
       "group": "depth",
       "ok": true,
       "provider": "rsshub",
-      "count": 0,
+      "count": 7,
       "error": "",
       "attempts": [
         {
@@ -217,7 +210,7 @@
       "group": "depth",
       "ok": true,
       "provider": "rsshub",
-      "count": 8,
+      "count": 12,
       "error": "",
       "attempts": [
         {
@@ -234,7 +227,7 @@
       "group": "depth",
       "ok": true,
       "provider": "rsshub",
-      "count": 3,
+      "count": 1,
       "error": "",
       "attempts": [
         {
@@ -251,7 +244,7 @@
       "group": "flash",
       "ok": true,
       "provider": "rsshub",
-      "count": 3,
+      "count": 7,
       "error": "",
       "attempts": [
         {
@@ -284,19 +277,13 @@
       "name": "彭博社 · 市场",
       "group": "global",
       "ok": true,
-      "provider": "mirror",
+      "provider": "rsshub",
       "count": 12,
       "error": "",
       "attempts": [
         {
           "provider": "rsshub",
           "label": "https://rsshub.rss.tips",
-          "ok": false,
-          "error": "The read operation timed out"
-        },
-        {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
           "ok": true,
           "error": ""
         }
@@ -308,7 +295,7 @@
       "group": "global",
       "ok": true,
       "provider": "rsshub",
-      "count": 7,
+      "count": 6,
       "error": "",
       "attempts": [
         {
@@ -323,16 +310,58 @@
       "key": "GOV_ZHENGCE",
       "name": "中国政府网 · 最新政策",
       "group": "politics",
-      "ok": true,
-      "provider": "rsshub",
+      "ok": false,
+      "provider": "",
       "count": 0,
-      "error": "",
+      "error": "rsshub/https://rsshub.rss.tips: 解析出 20 条，7 天窗口内 0 条；mirror/https://rsshub.isrss.com: 解析出 20 条，7 天窗口内 0 条；mirror/https://rsshub.cups.moe: 解析出 20 条，7 天窗口内 0 条",
       "attempts": [
         {
           "provider": "rsshub",
           "label": "https://rsshub.rss.tips",
-          "ok": true,
-          "error": ""
+          "ok": false,
+          "error": "解析出 20 条，窗口内 0 条"
+        },
+        {
+          "provider": "mirror",
+          "label": "https://rsshub.isrss.com",
+          "ok": false,
+          "error": "解析出 20 条，窗口内 0 条"
+        },
+        {
+          "provider": "mirror",
+          "label": "https://rsshub.cups.moe",
+          "ok": false,
+          "error": "解析出 20 条，窗口内 0 条"
+        },
+        {
+          "provider": "mirror",
+          "label": "https://rsshub.app",
+          "ok": false,
+          "error": "HTTP Error 403: Forbidden"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.org/bridge01",
+          "ok": false,
+          "error": "解析出 10 条，窗口内 0 条"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.org/bridge01",
+          "ok": false,
+          "error": "HTTP Error 500: Internal Server Error"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.flossboxin.org.in",
+          "ok": false,
+          "error": "<urlopen error [Errno 101] Network is unreachable>"
+        },
+        {
+          "provider": "bridge",
+          "label": "RSS-Bridge rss-bridge.flossboxin.org.in",
+          "ok": false,
+          "error": "<urlopen error [Errno 101] Network is unreachable>"
         }
       ]
     },
@@ -376,7 +405,7 @@
       "group": "politics",
       "ok": true,
       "provider": "rsshub",
-      "count": 11,
+      "count": 10,
       "error": "",
       "attempts": [
         {
@@ -409,19 +438,13 @@
       "name": "Psyche · Ideas",
       "group": "thought",
       "ok": true,
-      "provider": "mirror",
+      "provider": "rsshub",
       "count": 4,
       "error": "",
       "attempts": [
         {
           "provider": "rsshub",
           "label": "https://rsshub.rss.tips",
-          "ok": false,
-          "error": "The read operation timed out"
-        },
-        {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
           "ok": true,
           "error": ""
         }
