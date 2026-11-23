@@ -626,13 +626,14 @@ class CrossRenderTest(unittest.TestCase):
         payload["sector_cross"] = section
         return payload
 
-    def test_text_panel_has_the_cross_section_at_the_end(self):
+    def test_text_panel_puts_compact_volume_price_results_first(self):
         text = build_stocks.render_txt(self._payload(), "2026-11-19 15:10:00")
-        self.assertIn("【板块横截面】", text)
+        self.assertIn("【结果 · 量价】", text)
+        self.assertIn("[市场]", text)
+        self.assertIn("[量价]", text)
         self.assertNotIn("【板块轮动 · RRG】", text)
-        self.assertLess(text.index("【涨停池】"), text.index("【板块横截面】"))
-        self.assertLess(text.index("【板块横截面】"), text.rindex("不构成投资建议"))
-        self.assertIn("为什么是横截面", text)
+        self.assertLess(text.index("【结果 · 量价】"), text.index("【市场概览】"))
+        self.assertNotIn("为什么是横截面", text)
 
     def test_html_epub_and_check(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -640,34 +641,38 @@ class CrossRenderTest(unittest.TestCase):
             path.write_text(json.dumps(self._payload(), ensure_ascii=False), encoding="utf-8")
             data = build_stocks.build(str(path), tmp)
             self.assertEqual(data["counts"]["cross"], data["cross"]["counts"]["total"])
+            self.assertEqual(data["volume_price"]["counts"]["total"], data["counts"]["cross"])
             self.assertIsNone(data["rrg"])
             html = (Path(tmp) / "stocks.html").read_text(encoding="utf-8")
-            self.assertIn("板块横截面", html)
+            self.assertIn("结果 · 量价分析", html)
+            self.assertIn("result-grid", html)
             self.assertIn("function crossSection", html)
             with zipfile.ZipFile(Path(tmp) / "stocks.epub") as zf:
                 chapter = zf.read("OEBPS/chapter.xhtml").decode("utf-8")
-            self.assertIn("板块横截面", chapter)
-            # 删掉文案 → 自检要报
+            self.assertIn("结果 · 量价分析", chapter)
+            self.assertIn('class="card"', chapter)
+            # 删掉结果卡 → 自检要报
             (Path(tmp) / "stocks.txt").write_text("同花顺行情面板\n", encoding="utf-8")
             problems = build_stocks.check(tmp)
-            self.assertTrue(any("横截面" in problem for problem in problems))
+            self.assertTrue(any("结果卡" in problem for problem in problems))
 
     def test_rrg_wins_when_both_are_present(self):
         payload = self._payload()
         payload["sector_rrg"] = sector_rrg.demo_section()
         text = build_stocks.render_txt(payload, "2026-11-19 15:10:00")
+        self.assertIn("【结果 · 量价】", text)
         self.assertIn("【板块轮动 · RRG】", text)
-        self.assertNotIn("【板块横截面】", text)
-        # 两者同时进清单 → 自检要拦
+        # RRG 与量价结果可以同时显示；旧 cross 兼容字段仍保持互斥。
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "stocks_data.json"
             path.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
             build_stocks.build(str(path), tmp)
             manifest = json.loads((Path(tmp) / "stocks.json").read_text(encoding="utf-8"))
             self.assertIsNotNone(manifest["rrg"])
-            # 互斥由 final_sections 裁决：清单里只留 RRG，横截面不再附带
+            # 互斥由 final_sections 裁决：cross 不再附带，但独立量价结果保留。
             self.assertIsNone(manifest["cross"])
             self.assertEqual(manifest["counts"]["cross"], 0)
+            self.assertIsNotNone(manifest["volume_price"])
             self.assertEqual(build_stocks.check(tmp), [])
 
 
@@ -678,16 +683,15 @@ class RenderTest(unittest.TestCase):
         payload["indices"] = build_stocks._demo_indices(payload)
         return payload
 
-    def test_text_panel_ends_with_rrg(self):
+    def test_text_panel_leads_with_results_and_keeps_compact_rrg(self):
         text = build_stocks.render_txt(self._payload(), "2026-11-20 15:10:00")
+        self.assertIn("【结果 · 量价】", text)
         self.assertIn("【板块轮动 · RRG】", text)
-        # 末尾是它：免责声明之前就是 RRG 段（涨停池在它上面）
-        self.assertLess(text.index("【涨停池】"), text.index("【板块轮动 · RRG】"))
-        # 抬头那行也有免责声明，所以取最后一次出现的位置比
-        self.assertLess(text.index("【板块轮动 · RRG】"), text.rindex("不构成投资建议"))
-        self.assertIn("hugo2046/QuantsPlaybook", text)
+        self.assertLess(text.index("【结果 · 量价】"), text.index("【板块轮动 · RRG】"))
+        self.assertLess(text.index("【板块轮动 · RRG】"), text.index("【市场概览】"))
         self.assertIn("领先(", text)
-        # RRG 段落不该出现买卖字眼
+        self.assertNotIn("hugo2046/QuantsPlaybook", text)
+        # RRG 结果卡不该出现买卖字眼
         rrg_part = text[text.index("【板块轮动 · RRG】"):]
         for word in ("买入", "卖出、", "建议买"):
             self.assertNotIn(word, rrg_part)
@@ -699,13 +703,15 @@ class RenderTest(unittest.TestCase):
                             encoding="utf-8")
             data = build_stocks.build(str(path), tmp)
             html = (Path(tmp) / "stocks.html").read_text(encoding="utf-8")
-            self.assertIn("板块轮动 · RRG", html)
+            self.assertIn("板块轮动结果", html)
             self.assertIn("function rrgSection", html)
-            self.assertIn("rrgTable", html)
+            self.assertIn("resultCard('领先信号'", html)
             self.assertEqual(data["counts"]["rrg"], len(data["rrg"]["rows"]))
+            self.assertIsNotNone(data["volume_price"])
             with zipfile.ZipFile(Path(tmp) / "stocks.epub") as zf:
                 chapter = zf.read("OEBPS/chapter.xhtml").decode("utf-8")
-            self.assertIn("板块轮动 · RRG", chapter)
+            self.assertIn("板块轮动结果", chapter)
+            self.assertIn("结果 · 量价分析", chapter)
             self.assertNotIn("<svg", chapter)   # crengine 不认 SVG
 
     def test_check_catches_a_missing_section(self):
@@ -716,7 +722,7 @@ class RenderTest(unittest.TestCase):
             build_stocks.build(str(path), tmp)
             html_path = Path(tmp) / "stocks.html"
             html_path.write_text(html_path.read_text(encoding="utf-8")
-                                 .replace("板块轮动 · RRG", "板块轮动"), encoding="utf-8")
+                                 .replace("板块轮动结果", "板块轮动"), encoding="utf-8")
             problems = build_stocks.check(tmp)
             self.assertTrue(any("板块轮动" in problem for problem in problems))
 

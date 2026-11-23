@@ -609,127 +609,63 @@ def cross_verify_panel(payload, snapshot=None):
 
 
 def render_radar_txt(radar, brief=False):
-    """生成纯文本版「聪明钱雷达 & AI 数据智库（jrglobal.xyz）」段落。"""
+    """纯文本结果卡：只保留可直接读取的数字与命中，不输出产品说明。"""
     if not radar:
         return []
-    from build_stocks import _wrap_display, fmt_ratio  # 延迟导入避免循环依赖
+    from build_stocks import _wrap_display, fmt_ratio
 
-    lines = [
-        f"【聪明钱雷达 & AI 智库】jrglobal.xyz/tools · {radar.get('report_period') or 'Q3 2026'}"
-    ]
-    cats = radar.get("cn_categories") or []
-    if cats:
-        cat_txt = " · ".join(f"{c['name']}{c['count']}" for c in cats[:6])
-        lines.extend(_wrap_display("覆盖 " + cat_txt + " 及美股 13F 2381 家", width=46, indent="  "))
+    lines = [f"【结果数据】{radar.get('report_period') or '—'}"]
+    matches = radar.get("panel_matches") or []
+    if matches:
+        cells = [
+            f"{row.get('name')} {fmt_ratio(row.get('today_pct'))} ← {row.get('holders_summary')}"
+            for row in matches[:3]
+        ]
+        lines.extend(_wrap_display("[聪明钱] " + " · ".join(cells), width=46, indent="  "))
 
-    # 1) 今日盘面反查命中
-    for m in radar.get("panel_matches") or []:
-        pct_str = fmt_ratio(m.get("today_pct"))
-        lines.extend(_wrap_display(
-            f"盘面反查：{m['name']}({m['code']} {pct_str}·{m['panel_source']}) ← "
-            f"聪明钱重仓：{m['holders_summary']}",
-            width=46, indent="  "
-        ))
-
-    # 2) 公募第一重仓共识
     consensus = radar.get("cn_top1_consensus") or []
     if consensus:
-        top_items = [
-            f"{c['name']}({c['top1_managers']}人第一重仓)"
-            for c in consensus[:5]
-        ]
-        lines.extend(_wrap_display("A股顶流第一重仓共识：" + " · ".join(top_items), width=46, indent="  "))
+        cells = [f"{row.get('name')} {row.get('top1_managers')}人" for row in consensus[:5]]
+        lines.extend(_wrap_display("[机构共识] " + " · ".join(cells), width=46, indent="  "))
 
-    if brief:
-        top3 = " · ".join(f"{c['name']}({c['top1_managers']}人)" for c in consensus[:3])
-        lines = [
-            f"【聪明钱雷达 & AI 智库】jrglobal.xyz/tools · {radar.get('report_period') or 'Q3 2026'}",
-            f"  共识：{top3} · 13F 巴菲特(Apple)/挪威主权(NVDA) · 完整见 stocks.html",
-        ]
-        return lines
-
-    inventory = radar.get("tool_inventory") or tool_inventory(radar)
-    lines.append("  四大工具本次落盘口径（源站全量 / 本地代表样本分开计数）：")
-    for item in inventory:
-        metrics = " · ".join(
-            f"{metric.get('label')} {metric.get('value')}"
-            for metric in item.get("metrics") or [] if metric.get("label")
-        )
+    ai = radar.get("ai_data") or {}
+    kr = ai.get("korea_export") or {}
+    wsts = ai.get("global_semi_wsts") or {}
+    if kr or wsts:
         lines.extend(_wrap_display(
-            f"{item.get('name')}｜{item.get('scope')}｜{metrics}",
-            width=46, indent="  "
-        ))
+            f"[半导体景气] 韩国出口 {fmt_ratio(kr.get('semi_yoy_pct'))}"
+            f" · DRAM {fmt_ratio(kr.get('dram_yoy_pct'))}"
+            f" · NAND {fmt_ratio(kr.get('nand_yoy_pct'))}"
+            f" · WSTS {fmt_ratio(wsts.get('global_yoy_pct'))}",
+            width=46, indent="  "))
 
-    # 完整版：展开 Q3 代表性调仓、美股 13F、AI 数据智库与组合实验室基准
-    gurus = radar.get("cn_gurus") or []
-    if gurus:
-        moves = [
-            "金梓才(745亿,+482%)加仓三环集团/鼎泰高科/大族数控，新建仕佳光子/太辰光",
-            "张明昕(740亿,+411%)加仓生益科技+132%/东山精密+290%/源杰科技+29%，减仓中际旭创/新易盛",
-            "谢治宇(608亿,+70%)翻倍加仓晶合集成+105%至第一重仓，新建药明康德/通富微电，清仓中际旭创/中芯国际",
-            "朱少醒(510亿)加仓中际旭创+70%/泽璟制药+30%，新建长鑫科技16.4亿",
-            "傅鹏博(295亿,+121%)加仓中际旭创+83%，新建联讯仪器，清仓宁德时代",
-        ]
-        for mv in moves:
-            lines.extend(_wrap_display("调仓 · " + mv, width=46, indent="  "))
-
-    us = radar.get("us_13f") or []
-    if us:
-        us_cells = [
-            f"{u['name'].split(' · ')[0]} ${u['aum_usd_b']:.0f}B({u['top1']})"
-            for u in us[:6]
-        ]
-        lines.extend(_wrap_display("美股 13F 大师：" + " · ".join(us_cells), width=46, indent="  "))
-
-    for verify_line in radar.get("supply_chain_verify") or []:
-        lines.extend(_wrap_display(verify_line, width=46, indent="  "))
-
-    ai_data = radar.get("ai_data") or {}
-    chips = ai_data.get("chip_shipments_q3_2026") or []
-    if chips:
-        chip_cells = [
-            f"{row.get('chip')} {row.get('h100e')} / {int(row.get('units') or 0):,}片"
-            for row in chips
-        ]
-        lines.extend(_wrap_display("AI 芯片出货：" + " · ".join(chip_cells), width=46, indent="  "))
-    datacenters = ai_data.get("top_datacenters") or []
-    if datacenters:
-        dc_cells = [
-            f"{row.get('name')}({row.get('owner')}，{row.get('h100e')}，{row.get('power_mw')}MW)"
-            for row in datacenters
-        ]
-        lines.extend(_wrap_display("算力集群：" + " · ".join(dc_cells), width=46, indent="  "))
+    ocpi = ai.get("compute_cost_ocpi") or {}
+    gpus = ocpi.get("gpus") or []
+    ramp = ai.get("enterprise_adoption_ramp") or {}
+    if gpus or ramp:
+        gpu_cells = [f"{row.get('gpu')} {float(row.get('ocpi') or 0):.2f}" for row in gpus[:3]]
+        lines.extend(_wrap_display(
+            "[算力] " + " · ".join(gpu_cells)
+            + (f" · 企业AI采用 {fmt_ratio(ramp.get('overall_pct'))}" if ramp else ""),
+            width=46, indent="  "))
 
     bench = radar.get("portfolio_benchmarks") or []
     if bench:
-        b_cells = [
-            f"{b['name'].split('（')[1].rstrip('）') if '（' in b['name'] else b['name']} "
-            + (f"1Y {b['return_1y_pct']:+.1f}%" if b.get("return_1y_pct") is not None else f"6M {b['return_6m_pct']:+.2f}%")
-            for b in bench[:4]
-        ]
-        lines.extend(_wrap_display("组合实验室基准：" + " · ".join(b_cells), width=46, indent="  "))
-
-    macro = radar.get("macro_data") or DEFAULT_SNAPSHOT.get("macro_data") or {}
-    macro_cells = [
-        f"{row.get('name')} {row.get('count', 0):,}{row.get('unit') or ''}"
-        for row in macro.get("coverage") or []
-    ]
-    if macro_cells:
-        modules = " / ".join(macro.get("modules") or [])
-        lines.extend(_wrap_display(
-            f"宏观看板（{macro.get('scope')}）：" + " · ".join(macro_cells)
-            + (f" · 模块 {modules}" if modules else ""),
-            width=46, indent="  "
-        ))
-        if macro.get("access"):
-            lines.extend(_wrap_display("宏观口径说明：" + macro["access"], width=46, indent="  "))
-
-    lines.append("  四大免费工具：radar / portfolio / macro / aidata.jrglobal.xyz")
+        cells = []
+        for row in bench[:4]:
+            value = (f"1Y {fmt_ratio(row.get('return_1y_pct'))}"
+                     if row.get("return_1y_pct") is not None
+                     else f"6M {fmt_ratio(row.get('return_6m_pct'))}")
+            name = row.get("name") or ""
+            if "（" in name:
+                name = name.split("（", 1)[1].rstrip("）")
+            cells.append(f"{name} {value}")
+        lines.extend(_wrap_display("[组合] " + " · ".join(cells), width=46, indent="  "))
     return lines
 
 
 def render_radar_epub(radar, brief=False, esc=None):
-    """生成 Kindle EPUB 版「聪明钱雷达 & AI 数据智库」XHTML 片段（纯表格，无 flex/grid/SVG）。"""
+    """Kindle 结果卡：纯表格，只放持仓命中、景气数字、算力和组合收益。"""
     if not radar:
         return []
     import html as html_mod
@@ -738,100 +674,67 @@ def render_radar_epub(radar, brief=False, esc=None):
     if esc is None:
         esc = lambda s: html_mod.escape(str(s if s is not None else ""), quote=True)
 
-    parts = [
-        f"<h2>聪明钱雷达 &amp; AI 数据智库（{esc(radar.get('report_period') or 'Q3 2026')}）</h2>",
-        '<p class="meta">来源：Jovian Research (jrglobal.xyz/tools/) · '
-        "覆盖 A 股公募 498 / 牛散 2363 / 私募 4230 / 外资 254 / 社保 99 / 国家队 10 及美股 13F 2381 家</p>",
-    ]
-    inventory = radar.get("tool_inventory") or tool_inventory(radar)
-    if inventory:
-        parts.append('<table class="data"><tr><th>四大工具</th><th>本次落盘口径</th><th>数据规模</th></tr>')
-        for item in inventory:
-            metrics = "；".join(
-                f"{metric.get('label')} {metric.get('value')}"
-                for metric in item.get("metrics") or [] if metric.get("label")
-            )
-            parts.append(
-                f"<tr><td>{esc(item.get('name'))}</td><td>{esc(item.get('scope'))}</td>"
-                f"<td>{esc(metrics)}</td></tr>"
-            )
-        parts.append("</table>")
-    for m in radar.get("panel_matches") or []:
-        parts.append(
-            f"<p><b>盘面反查命中：</b>{esc(m.get('name'))}（{esc(m.get('code'))} "
-            f"{esc(fmt_ratio(m.get('today_pct')))} · {esc(m.get('panel_source'))}）← "
-            f"{esc(m.get('holders_summary'))}</p>"
-        )
+    parts = [f"<h2>结果数据（{esc(radar.get('report_period') or '—')}）</h2>"]
+    matches = radar.get("panel_matches") or []
     consensus = radar.get("cn_top1_consensus") or []
-    if consensus:
-        rows = consensus[:4] if brief else consensus[:8]
-        parts.append('<table class="data"><tr><th>股票</th><th>行业</th>'
-                     "<th>第一重仓经理数</th><th>代表经理与 Q3 动向</th></tr>")
-        for c in rows:
-            mgrs = "、".join((c.get("holders") or [])[:4])
-            note = c.get("note") or ""
-            detail = f"{mgrs}（{note}）" if note else mgrs
-            parts.append(
-                f"<tr><td>{esc(c.get('name'))}</td><td>{esc(c.get('sector'))}</td>"
-                f"<td>{esc(c.get('top1_managers'))} 人</td><td>{esc(detail)}</td></tr>"
-            )
+    parts.append('<table class="card"><tr><th colspan="2">聪明钱 / 机构共识</th></tr>')
+    for row in matches[:3]:
+        parts.append(
+            f"<tr><td>{esc(row.get('name'))} {esc(fmt_ratio(row.get('today_pct')))}</td>"
+            f"<td>{esc(row.get('holders_summary'))}</td></tr>"
+        )
+    for row in consensus[: (3 if brief else 5)]:
+        parts.append(
+            f"<tr><td>{esc(row.get('name'))}</td>"
+            f"<td>{esc(row.get('top1_managers'))} 人第一重仓</td></tr>"
+        )
+    parts.append("</table>")
+
+    ai = radar.get("ai_data") or {}
+    kr = ai.get("korea_export") or {}
+    wsts = ai.get("global_semi_wsts") or {}
+    tw = ai.get("taiwan_semi_2026_10") or []
+    parts.append('<table class="card"><tr><th colspan="2">半导体景气</th></tr>')
+    for label, value in (
+        ("韩国半导体出口", fmt_ratio(kr.get("semi_yoy_pct"))),
+        ("DRAM / NAND", f"{fmt_ratio(kr.get('dram_yoy_pct'))} / {fmt_ratio(kr.get('nand_yoy_pct'))}"),
+        ("WSTS 全球月销", fmt_ratio(wsts.get("global_yoy_pct"))),
+    ):
+        parts.append(f"<tr><td>{esc(label)}</td><td><b>{esc(value)}</b></td></tr>")
+    for row in tw[:3]:
+        parts.append(
+            f"<tr><td>{esc(str(row.get('name') or '').split(' ')[0])}</td>"
+            f"<td><b>{esc(fmt_ratio(row.get('yoy_pct')))}</b></td></tr>"
+        )
+    parts.append("</table>")
+
+    ocpi = ai.get("compute_cost_ocpi") or {}
+    gpus = ocpi.get("gpus") or []
+    ramp = ai.get("enterprise_adoption_ramp") or {}
+    parts.append('<table class="card"><tr><th colspan="2">算力与企业采用</th></tr>')
+    for row in gpus[:3]:
+        ocpi_value = f"{float(row.get('ocpi') or 0):.2f}"
+        parts.append(
+            f"<tr><td>{esc(row.get('gpu'))}</td>"
+            f"<td><b>OCPI {esc(ocpi_value)}</b></td></tr>"
+        )
+    parts.append(
+        f"<tr><td>企业 AI 采用率</td><td><b>{esc(fmt_ratio(ramp.get('overall_pct')))}</b></td></tr>"
+    )
+    parts.append("</table>")
+
+    bench = radar.get("portfolio_benchmarks") or []
+    if bench:
+        parts.append('<table class="card"><tr><th colspan="2">组合收益</th></tr>')
+        for row in bench[: (3 if brief else 5)]:
+            value = (fmt_ratio(row.get("return_1y_pct")) + " / 1Y"
+                     if row.get("return_1y_pct") is not None
+                     else fmt_ratio(row.get("return_6m_pct")) + " / 6M")
+            name = row.get("name") or ""
+            if "（" in name:
+                name = name.split("（", 1)[1].rstrip("）")
+            parts.append(f"<tr><td>{esc(name)}</td><td><b>{esc(value)}</b></td></tr>")
         parts.append("</table>")
-
-    if not brief:
-        us = radar.get("us_13f") or []
-        if us:
-            parts.append('<table class="data"><tr><th>美股 13F 机构/大师</th><th>风格</th>'
-                         "<th>组合市值</th><th>第一重仓</th><th>组合浮盈</th></tr>")
-            for u in us[:7]:
-                aum_str = f"{u.get('aum_usd_b', 0):.1f}"
-                gain_str = f"{u.get('gain_pct', 0):+.1f}%"
-                parts.append(
-                    f"<tr><td>{esc(u.get('name'))}</td><td>{esc(u.get('style'))}</td>"
-                    f"<td>${esc(aum_str)}B</td>"
-                    f"<td>{esc(u.get('top1'))}</td>"
-                    f"<td>{esc(gain_str)}</td></tr>"
-                )
-            parts.append("</table>")
-    for verify_line in (radar.get("supply_chain_verify") or [])[: (1 if brief else 2)]:
-        parts.append(f"<p>{esc(verify_line)}</p>")
-
-    if not brief:
-        ai_data = radar.get("ai_data") or {}
-        chips = ai_data.get("chip_shipments_q3_2026") or []
-        if chips:
-            parts.append('<table class="data"><tr><th>AI 芯片</th><th>H100e</th><th>出货量</th></tr>')
-            for row in chips:
-                units = f"{int(row.get('units') or 0):,}"
-                parts.append(
-                    f"<tr><td>{esc(row.get('chip'))}</td><td>{esc(row.get('h100e'))}</td>"
-                    f"<td>{esc(units)}</td></tr>"
-                )
-            parts.append("</table>")
-
-        bench = radar.get("portfolio_benchmarks") or []
-        if bench:
-            parts.append('<table class="data"><tr><th>组合实验室基准</th><th>1 年</th><th>6 个月</th><th>排名</th></tr>')
-            for row in bench:
-                one_year = "--" if row.get("return_1y_pct") is None else f"{row['return_1y_pct']:+.1f}%"
-                six_month = "--" if row.get("return_6m_pct") is None else f"{row['return_6m_pct']:+.2f}%"
-                rank = "--" if row.get("rank") is None else str(row["rank"])
-                parts.append(
-                    f"<tr><td>{esc(row.get('name'))}</td><td>{esc(one_year)}</td>"
-                    f"<td>{esc(six_month)}</td><td>{esc(rank)}</td></tr>"
-                )
-            parts.append("</table>")
-
-        macro = radar.get("macro_data") or DEFAULT_SNAPSHOT.get("macro_data") or {}
-        macro_rows = macro.get("coverage") or []
-        if macro_rows:
-            parts.append(f"<h3>宏观看板（{esc(macro.get('scope'))}）</h3>")
-            parts.append('<table class="data"><tr><th>目录</th><th>覆盖</th></tr>')
-            for row in macro_rows:
-                value = f"{row.get('count', 0):,}{row.get('unit') or ''}"
-                parts.append(f"<tr><td>{esc(row.get('name'))}</td><td>{esc(value)}</td></tr>")
-            parts.append("</table>")
-            if macro.get("access"):
-                parts.append(f'<p class="meta">{esc(macro.get("access"))}</p>')
     return parts
 
 
