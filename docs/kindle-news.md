@@ -264,9 +264,9 @@ NetNewsWire / Feedly / Reeder / Inoreader 之类的阅读器。设备上如果 `
 
 ## 2. 源目录
 
-源写在 `tools/news_sources.py`，24 条，五个分组：
+源写在 `tools/news_sources.py`，25 条（24 条 RSSHub 路由 + 1 条原生 RSS），五个分组：
 
-| 分组 | 源 | RSSHub 路由 |
+| 分组 | 源 | RSSHub 路由 / 原生 Feed |
 | --- | --- | --- |
 | 快讯 | 财联社·电报 | `/cls/telegraph` |
 | | 华尔街见闻·要闻快讯 | `/wallstreetcn/live/global` |
@@ -282,7 +282,8 @@ NetNewsWire / Feedly / Reeder / Inoreader 之类的阅读器。设备上如果 `
 | | 格隆汇·日热文 | `/gelonghui/hot-article` |
 | | 第一财经·最新 | `/yicai/latest` |
 | | 财新周刊 | `/caixin/weekly` |
-| 全球 | 彭博社·市场 | `/bloomberg/markets` |
+| 全球 | 方程式新闻·加密快讯 | `https://api.eqn.news/public/rss`（原生 RSS） |
+| | 彭博社·市场 | `/bloomberg/markets` |
 | | 彭博社·加密 | `/bloomberg/crypto` |
 | | 彭博社·经济 | `/bloomberg/economics` |
 | 政治 | 中国政府网·最新政策 | `/gov/zhengce/zuixin` |

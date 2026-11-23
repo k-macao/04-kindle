@@ -192,6 +192,15 @@ SOURCES = [
     },
     # ---------------- 三、全球市场与要闻 ----------------
     {
+        "key": "EQN",
+        "name": "方程式新闻 · 加密快讯",
+        "group": "global",
+        "lang": "zh",
+        "feed": "https://api.eqn.news/public/rss",
+        "site": "eqn.news",
+        "note": "EquationNews 官方公开 RSS，华语加密市场快讯；直接读取原生 feed，不经过 RSSHub。",
+    },
+    {
         "key": "BLOOMBERG_CRYPTO",
         "name": "彭博社 · 加密",
         "group": "global",
