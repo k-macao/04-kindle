@@ -1524,14 +1524,14 @@ def render_html():
 
 EPUB_CSS = """body{font-family:sans-serif;line-height:1.5}
 h1{font-size:1.4em;border-bottom:2px solid #000;padding-bottom:4px}
-h2{font-size:1.1em;border-bottom:1px solid #000;padding-bottom:2px;margin-top:1.2em}
+h2{font-size:1.1em;font-weight:normal;border-bottom:1px solid #000;padding-bottom:2px;margin-top:1.2em}
 .meta{font-size:0.85em}
 table.card{border:1px solid #000;width:100%;border-collapse:collapse;margin:8px 0}
 table.card td{padding:3px 6px;vertical-align:top}
-table.card .big{font-size:1.3em;font-weight:bold}
+table.card .big{font-size:1.3em}
 table.data{border-collapse:collapse;width:100%}
 table.data th,table.data td{border:1px solid #999;padding:3px 5px;font-size:0.9em}
-.up{font-weight:bold}.down{font-weight:bold}
+.up,.down{font-weight:normal}
 """
 
 CONTAINER_XML = """<?xml version="1.0" encoding="UTF-8"?>
@@ -1559,8 +1559,8 @@ def render_epub_xhtml(payload, generated_bj, brief=None):
              f'<p class="meta">生成 {esc(generated_bj)} 北京时间 · {esc(status_line(payload))}</p>',
              f'<p class="meta">{esc(DISCLAIMER)}</p>']
     if brief:
-        parts.append('<p class="meta"><b>'
-                     f'{esc(brief_banner(brief, len(sector_indices(payload))))}</b></p>')
+        parts.append('<p class="meta">'
+                     f'{esc(brief_banner(brief, len(sector_indices(payload))))}</p>')
     if not today_has_values(payload):
         parts.append('<p class="meta">注：这一版快照没有成交数据（开盘前/接口给空壳），'
                      '下面显示 -- 与「未成交」，下一轮再看。</p>')
@@ -1576,8 +1576,8 @@ def render_epub_xhtml(payload, generated_bj, brief=None):
         parts.append(f"<h2>结果 · 量价分析（{esc(volume.get('as_of') or '—')}）</h2>")
         parts.append('<table class="card"><tr><th>结果卡</th><th>读数</th></tr>')
         parts.append(
-            f"<tr><td>市场状态</td><td><b>{esc(sent.get('level') or '—')} "
-            f"{esc(sent.get('score'))}/100</b> · 红{counts.get('up', 0)}/绿{counts.get('down', 0)}"
+            f"<tr><td>市场状态</td><td>{esc(sent.get('level') or '—')} "
+            f"{esc(sent.get('score'))}/100 · 红{counts.get('up', 0)}/绿{counts.get('down', 0)}"
             f" · 中位{esc(fmt_ratio(stats.get('median')))} · CSAD {esc(fmt_one(stats.get('csad')))}</td></tr>"
         )
         top_avg, tail_avg = flow.get("top_avg"), flow.get("tail_avg")
@@ -1588,12 +1588,12 @@ def render_epub_xhtml(payload, generated_bj, brief=None):
         else:
             verdict = "量价数据不足"
         parts.append(
-            f"<tr><td>量价结论</td><td><b>{esc(verdict)}</b> · 成交{esc(fmt_turnover(flow.get('total')))}"
+            f"<tr><td>量价结论</td><td>{esc(verdict)} · 成交{esc(fmt_turnover(flow.get('total')))}"
             f" · {esc(flow.get('top_name') or '—')}占{flow.get('top_share', 0):.1f}%"
             f" / 今日{esc(fmt_ratio(flow.get('top_pct')))}</td></tr>"
         )
         parts.append(
-            f"<tr><td>涨停 / 跌停</td><td><b>{market.get('limit_up', 0)} / {market.get('limit_down', 0)}</b>"
+            f"<tr><td>涨停 / 跌停</td><td>{market.get('limit_up', 0)} / {market.get('limit_down', 0)}"
             f" · {esc(sent.get('divergence') or '')}</td></tr>"
         )
         parts.append("</table>")
@@ -1606,12 +1606,12 @@ def render_epub_xhtml(payload, generated_bj, brief=None):
                 parts.append(
                     f"<tr><td>承接 · {esc(row.get('name'))}</td>"
                     f"<td>{esc(fmt_ratio(row.get('overnight_pct')))} → "
-                    f"<b>{esc(fmt_ratio(row.get('intraday_pct')))}</b> / {esc(fmt_one(row.get('clv')))}</td></tr>"
+                    f"{esc(fmt_ratio(row.get('intraday_pct')))} / {esc(fmt_one(row.get('clv')))}</td></tr>"
                 )
             for row in fades[: (3 if brief else 5)]:
                 parts.append(
                     f"<tr><td>派发 · {esc(row.get('name'))}</td>"
-                    f"<td>{esc(row.get('tag') or '')} · 日内<b>{esc(fmt_ratio(row.get('intraday_pct')))}</b>"
+                    f"<td>{esc(row.get('tag') or '')} · 日内{esc(fmt_ratio(row.get('intraday_pct')))}"
                     f" / {esc(fmt_one(row.get('clv')))}</td></tr>"
                 )
             parts.append("</table>")
@@ -1621,7 +1621,7 @@ def render_epub_xhtml(payload, generated_bj, brief=None):
             parts.append('<table class="card"><tr><th>赚钱主线</th><th>数量</th></tr>')
             for row in themes[:4]:
                 parts.append(
-                    f"<tr><td>{esc(row.get('name'))}</td><td><b>{row.get('count', 0)} 只</b></td></tr>"
+                    f"<tr><td>{esc(row.get('name'))}</td><td>{row.get('count', 0)} 只</td></tr>"
                 )
             parts.append("</table>")
 
@@ -1750,7 +1750,7 @@ def render_epub_xhtml(payload, generated_bj, brief=None):
         parts.append('<table class="card"><tr><th>象限</th><th>数量</th></tr>')
         for key, label in (("leading", "领先"), ("improving", "改善"),
                            ("weakening", "疲软"), ("lagging", "滞后")):
-            parts.append(f"<tr><td>{label}</td><td><b>{counts.get(key, 0)}</b></td></tr>")
+            parts.append(f"<tr><td>{label}</td><td>{counts.get(key, 0)}</td></tr>")
         parts.append("</table>")
         signal = (section.get("signal") or {}).get("picks") or []
         if signal:
@@ -1758,7 +1758,7 @@ def render_epub_xhtml(payload, generated_bj, brief=None):
             for row in signal[:6]:
                 parts.append(
                     f"<tr><td>{esc(row.get('name'))}</td>"
-                    f"<td><b>{esc(fmt_ratio(row.get('today_pct')))}</b></td></tr>"
+                    f"<td>{esc(fmt_ratio(row.get('today_pct')))}</td></tr>"
                 )
             parts.append("</table>")
 

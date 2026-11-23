@@ -379,12 +379,17 @@ class BuildTest(unittest.TestCase):
                 self.assertEqual(names[0], "mimetype")
                 self.assertEqual(zf.read("mimetype"), b"application/epub+zip")
                 chapter = zf.read("OEBPS/chapter.xhtml").decode("utf-8")
+                style = zf.read("OEBPS/style.css").decode("utf-8")
             self.assertIn("同花顺行情面板", chapter)
             self.assertIn("市场概览", chapter)
             self.assertIn("恒生指数", chapter)
             self.assertIn("种植业与林业", chapter)
             self.assertIn("<table", chapter)
             self.assertIn("腾讯公开行情接口", chapter)
+            # EPUB 数字统一常规字重，不使用粗体标签或粗体数值样式。
+            self.assertNotIn("<b>", chapter)
+            self.assertNotIn("font-weight:bold", style)
+            self.assertIn("h2{font-size:1.1em;font-weight:normal", style)
             # crengine 不认 flex/grid，EPUB 里不能出现
             self.assertNotIn("display:grid", chapter)
             self.assertNotIn("display: grid", chapter)
@@ -1258,6 +1263,7 @@ class JrglobalRadarTest(unittest.TestCase):
         self.assertIn("组合收益", xhtml)
         self.assertIn("晶合集成", xhtml)
         self.assertNotIn("四大工具", xhtml)
+        self.assertNotIn("<b>", xhtml)
         for banned in ("display:grid", "display:flex", "<svg"):
             self.assertNotIn(banned, xhtml)
 
