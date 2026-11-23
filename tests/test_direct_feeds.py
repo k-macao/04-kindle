@@ -346,6 +346,10 @@ class WorkflowTest(unittest.TestCase):
     def test_fetch_step_asks_for_every_layer(self):
         self.assertIn("--providers direct,rsshub,mirror,native,bridge", self.text)
 
+    def test_full_feed_limit_is_300(self):
+        self.assertIn('MAX_ITEMS: "300"', self.text)
+        self.assertIn('--max-items "$MAX_ITEMS"', self.text)
+
     def test_health_file_is_written_and_committed(self):
         self.assertIn("--health site/source-health.json", self.text)
         self.assertIn("site/source-health.json", self.text.split("git add", 1)[1])

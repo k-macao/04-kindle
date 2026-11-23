@@ -31,6 +31,7 @@
             RSS-Bridge 代取」，任何一层成功就停；route / feed 仍然要留，当后面几跳的退路
     site    站点域名，只用于「这条源挂了，去问 Radar 该换哪个路由」（tools/radar_discover.py）
     lang    zh / en：标 en 的条目会被 tools/translate_news.py 自动补中文译文
+    title_prefix  可选：给该源每条标题加固定标记；用于需要在聚合列表里明确露出来源的 feed
     max_age_hours  可选的单源时间窗（默认用全局 --max-age-hours 的 24 小时）。政策文件、
                    哲学随笔本来就是周更甚至月更，用 24 小时窗口只会「解析出 30 条、收 0 条」；
                    放宽窗口后靠 site/news_seen.json 的标题指纹保证不重复推。
@@ -196,6 +197,7 @@ SOURCES = [
         "name": "方程式新闻 · 加密快讯",
         "group": "global",
         "lang": "zh",
+        "title_prefix": "【方程式新闻】",
         "feed": "https://api.eqn.news/public/rss",
         "site": "eqn.news",
         "note": "EquationNews 官方公开 RSS，华语加密市场快讯；直接读取原生 feed，不经过 RSSHub。",

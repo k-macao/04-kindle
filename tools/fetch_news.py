@@ -323,6 +323,11 @@ def parse_feed(payload, source=None):
                                          "content", "encoded"), SUMMARY_MAX)
         if summary and summary.lower() == title.lower():
             summary = ""
+        # 个别原生 feed 需要在 KOReader 的聚合文件列表里明确露出来源。前缀在摘要去重后加，
+        # 避免「摘要本来就等于标题」时因为前缀不同而重复显示一遍；同时让跨源去重保留该条。
+        prefix = clean_text((source or {}).get("title_prefix", ""))
+        if prefix and not title.startswith(prefix):
+            title = clean_text(prefix + title, TITLE_MAX)
         # link 只放真的能用浏览器打开的地址；金十快讯只有 guid，就从 guid 里还原详情页。
         # 注意千万别把 `jin10:index:…` 这种非 URL 写进 <link>：KOReader 的新闻下载器
         # 会拿它当 base_url 去拼相对链接，而缺 <link> 的条目更糟——它直接索引 nil 报错，

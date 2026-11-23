@@ -68,6 +68,11 @@ class FeedStructureTest(unittest.TestCase):
         self.assertEqual(len(root.findall("./channel/item")), info["items"])
         self.assertEqual(info["items"], 12)
 
+    def test_default_full_feed_limit_is_300(self):
+        info, _path, root = self.build(payload(count=320), min_items=1)
+        self.assertEqual(info["items"], 300)
+        self.assertEqual(len(root.findall("./channel/item")), 300)
+
     def test_duplicate_article_links_are_emitted_once(self):
         data = payload(count=3)
         data["items"][1]["link"] = data["items"][0]["link"]
