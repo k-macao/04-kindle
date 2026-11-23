@@ -464,6 +464,12 @@ class PruneTest(unittest.TestCase):
                  for index in range(20)]
         self.assertEqual(len(build_news.prune(items, max_items=3)), 3)
 
+    def test_full_feed_default_is_300_items(self):
+        items = [{"title": f"新闻标题第 {index} 条", "published": "2026-11-07T00:00:00Z"}
+                 for index in range(320)]
+        self.assertEqual(build_news.MAX_ITEMS, 300)
+        self.assertEqual(len(build_news.prune(items)), 300)
+
 
 class GroupedTest(unittest.TestCase):
     def test_empty_group_is_skipped_and_numbering_stays_consecutive(self):

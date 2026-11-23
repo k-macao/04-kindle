@@ -51,7 +51,8 @@ concurrency:
 
 env:
   MIN_ITEMS: "10"
-  MAX_ITEMS: "150"
+  # 完整 feed 放开到 300；老设备仍可用下面单独生成的 60 条 news-lite.xml。
+  MAX_ITEMS: "300"
   # RSSHub 实例，逗号分隔，顺序＝优先级：官方 rsshub.app 第一，后面是公共镜像。
   # 官方实例对 Actions 出口 IP 回 403 时，抓取脚本会先探活（/healthz）再把它挪到队尾，
   # 所以「先接官方」与「官方挂了也能出报」不冲突；自建实例请放在最前面。

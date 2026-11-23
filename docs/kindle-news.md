@@ -15,11 +15,15 @@ https://cdn.jsdelivr.net/gh/k-macao/04-kindle@main/site/news.xml            ← 
 
 | 文件 | 内容 | 谁用 |
 | --- | --- | --- |
-| `site/news.xml` | **聚合 RSS**：所有源合成一个标准 feed，英文条目中英并列（约 140 KB / 150 条） | 阅读器订阅、KOReader 新闻下载器 |
+| `site/news.xml` | **聚合 RSS**：所有源合成一个标准 feed，英文条目中英并列（最多 300 条） | 阅读器订阅、KOReader 新闻下载器 |
 | `site/news-lite.xml` | 同源精简版：最多 60 条、摘要截到 140 字（约 40 KB） | 慢设备、老设备 |
 | `site/news-test.xml` | 连通性测试版：只有 3 条（约 3 KB） | 先验线路与证书，再谈内容 |
 | `site/news_seen.json` | 最近 7 天推过的标题指纹 | 抓取时跨天去重，不进 feed |
 | `site/news_zh_cache.json` | 英文标题/摘要的中文译文缓存 | 重译同一句英文时直接命中，省额度、译文稳定 |
+
+完整版原先限制 150 条，是为了控制 KOReader 一次下载的 EPUB 数量和 feed 体积；现在源目录已有
+25 个源、每源最多取 12 条，150 会把成功抓到的后半批新闻截掉，因此改为 **300 条**。XML 仍受
+4 MiB 硬上限保护；设备较慢时继续使用最多 60 条的 `news-lite.xml`。
 
 > 工作流**只生成 xml**。日报 EPUB / 清单 / 纯文本（`site/news.epub`、`site/news.json`、
 > `site/news.txt`）不再自动产出，仓库里也不再保留——`tools/build_news.py` 还在，需要那本书时

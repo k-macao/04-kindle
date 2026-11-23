@@ -38,7 +38,9 @@ from build_epub import (BEIJING, garbled_ratio, normalize, parse_data_time,  # n
                         write_epub)
 
 TITLE = "004 新闻订阅"
-MAX_ITEMS = 150
+# 25 个源每源最多收 12 条，完整档上限放到 300，避免抓到了却在发布前被截掉。
+# build_feed 另有 4 MiB 硬上限；慢设备继续订阅最多 60 条的 news-lite.xml。
+MAX_ITEMS = 300
 CN_NUMERALS = "一二三四五六七八九十"
 GARBLED_DOC_RATIO = 0.02
 
