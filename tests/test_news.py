@@ -117,6 +117,7 @@ class CatalogTest(unittest.TestCase):
         self.assertEqual(source["lang"], "zh")
         self.assertEqual(source["title_prefix"], "【方程式新闻】")
         self.assertEqual(source["feed"], "https://api.eqn.news/public/rss")
+        self.assertEqual(source["max_age_hours"], 168)
         self.assertNotIn("route", source)
 
 

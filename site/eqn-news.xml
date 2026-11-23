@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>方程式新闻</title>
+    <link>https://eqn.news/</link>
+    <atom:link href="https://raw.githubusercontent.com/k-macao/04-kindle/main/site/eqn-news.xml" rel="self" type="application/rss+xml"/>
+    <description>每天 07:00（北京时间）从 RSSHub 抓取并合并的财经、政治与哲学思想新闻，英文条目附中文译文，本次 1 条。</description>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 23 Nov 2026 20:02:13 +0000</lastBuildDate>
+    <generator>04-kindle tools/build_feed.py</generator>
+    <ttl>60</ttl>
+    <item>
+      <title>【方程式新闻】*英伟达董事会恢复黄仁勋总裁、首席执行官及董事会职务：彭博社</title>
+      <link>https://eqn.news/main/16935</link>
+      <guid isPermaLink="true">https://eqn.news/main/16935</guid>
+      <pubDate>Mon, 23 Nov 2026 13:56:07 +0000</pubDate>
+      <category>全球市场与要闻</category>
+      <source url="https://eqn.news">方程式新闻 · 加密快讯</source>
+      <description>&lt;p&gt;*英伟达董事会恢复黄仁勋总裁、首席执行官及董事会职务：彭博社 AI 信息总览 11月8日，英伟达联合创始人黄仁勋向员工承认有婚外情。董事会调查他是否被外国情报机构盯上。他11日辞职，由财务总监克雷斯暂代。美国总统特朗普22日晚呼吁重新聘用他。（英伟达、唐纳德·特朗普） 完整内容：https://eqn.news/main/16935 AI 生成，仅供参考&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称英伟达董事会恢复黄仁勋总裁、首席执行官及董事会职务，来源标注为彭博社；摘要称黄仁勋11月8日向员工承认婚外情、董事会调查其是否被外国情报机构盯上、他11日辞职由财务总监克雷斯暂代、特朗普22日晚呼吁重新聘用他，并注明“AI 生成，仅供参考”。&lt;/p&gt;&lt;p&gt;事实：报道明确说董事会已恢复其职务，并叙述了辞职、暂代与特朗普呼吁等经过。&lt;/p&gt;&lt;p&gt;推断：标题与摘要构成“辞职—呼吁—复职”的叙事链，但摘要自标AI生成，且未说明董事会调查结论，复职与调查结果之间的关系无法确认。&lt;/p&gt;&lt;p&gt;影响：若属实，英伟达公司治理与高管稳定性、投资者对董事会决策的关注可能受影响；条件是该报道获独立信源证实。&lt;/p&gt;&lt;p&gt;验证：需核对彭博社原文、英伟达官方公告或监管文件；目前缺少独立验证材料，线索有限。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

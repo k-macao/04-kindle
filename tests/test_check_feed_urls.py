@@ -156,12 +156,14 @@ class KoreaderRuleTest(unittest.TestCase):
 
 
 class UrlsTest(unittest.TestCase):
-    def test_three_files_times_hosts(self):
+    def test_all_files_times_hosts(self):
         urls = check_feed_urls.feed_urls()
         self.assertEqual(len(urls), len(check_feed_urls.HOSTS) * len(check_feed_urls.FILES))
         keys = [key for key, _label, _url in urls]
         self.assertIn("raw/news-lite.xml", keys)
         self.assertIn("release/news-test.xml", keys)
+        self.assertIn("raw/eqn-news.xml", keys)
+        self.assertIn("release/eqn-news.xml", keys)
         raw = [url for key, _label, url in urls if key == "raw/news-lite.xml"][0]
         self.assertTrue(raw.endswith("/site/news-lite.xml"))
 

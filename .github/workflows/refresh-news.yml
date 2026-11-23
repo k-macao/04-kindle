@@ -174,7 +174,25 @@ jobs:
             --title "004 新闻订阅（连通性测试）" --self-url "${base}news-test.xml" \
             --analysis-note "${ANALYSIS_NOTE:-}"
 
-      - name: 产物自检（三份 feed：可解析、条数、guid、中文配对、self 地址）
+      # 单独订阅后 KOReader 会建立 `koreader/news/方程式新闻`，不再埋在几百条聚合新闻里。
+      # 如果当天没有新条目，保留仓库里的上一版专属 feed，不让目录忽然消失。
+      - name: 生成方程式新闻专属 RSS
+        run: |
+          set -euo pipefail
+          base="${FEED_SELF_URL%news.xml}"
+          if python tools/build_feed.py --data news_data.json --out site \
+            --filename eqn-news.xml --only-source EQN --min-items 1 --max-items 30 \
+            --title "方程式新闻" --site-url "https://eqn.news/" \
+            --self-url "${base}eqn-news.xml" --analysis-note "${ANALYSIS_NOTE:-}"; then
+            echo "方程式新闻专属 feed 已更新"
+          elif [ -f site/eqn-news.xml ]; then
+            echo "::warning title=方程式新闻本轮无新稿::保留上一版 site/eqn-news.xml"
+          else
+            echo "::error::首次生成方程式新闻专属 feed 失败，且没有旧文件可保留"
+            exit 1
+          fi
+
+      - name: 产物自检（四份 feed：可解析、条数、guid、中文配对、self 地址）
         run: |
           python - <<'PY'
           import os
@@ -189,7 +207,8 @@ jobs:
           cjk = re.compile(r"[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]")
           base = os.environ.get("FEED_SELF_URL", "")
           minimum = int(os.environ.get("MIN_ITEMS", "10"))
-          targets = (("news.xml", minimum), ("news-lite.xml", 1), ("news-test.xml", 1))
+          targets = (("news.xml", minimum), ("news-lite.xml", 1),
+                     ("news-test.xml", 1), ("eqn-news.xml", 1))
           problems = []
           lines = []
 
@@ -244,6 +263,12 @@ jobs:
                   problems.append(f"{name} {exc}")
 
               titles = [item.findtext("title") or "" for item in items]
+              if name == "eqn-news.xml":
+                  if (channel.findtext("title") or "") != "方程式新闻":
+                      problems.append("eqn-news.xml 的频道标题不是方程式新闻")
+                  unmarked = [title for title in titles if not title.startswith("【方程式新闻】")]
+                  if unmarked:
+                      problems.append(f"eqn-news.xml 有 {len(unmarked)} 条标题缺少来源标记")
               paired = sum(1 for title in titles if "｜中文：" in title)
               untranslated = [title for title in titles if not cjk.search(title)]
               lines.append(f"{name}: {len(items)} 条 / {path.stat().st_size} 字节 / "
@@ -264,7 +289,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           # 只提交 feed、标题指纹、译文缓存、AI 分析缓存与源健康表。
-          git add site/news.xml site/news-lite.xml site/news-test.xml \
+          git add site/news.xml site/news-lite.xml site/news-test.xml site/eqn-news.xml \
                   site/news_seen.json site/news_zh_cache.json \
                   site/news_analysis_cache.json site/source-health.json
           read -r items paired built <<<"$(python - <<'PY'
@@ -293,11 +318,11 @@ jobs:
         run: |
           set -euo pipefail
           tag=news-feed
-          for name in news.xml news-lite.xml news-test.xml; do cp "site/$name" "$name"; done
+          for name in news.xml news-lite.xml news-test.xml eqn-news.xml; do cp "site/$name" "$name"; done
           if gh release view "$tag" >/dev/null 2>&1; then
-            gh release upload "$tag" news.xml news-lite.xml news-test.xml --clobber
+            gh release upload "$tag" news.xml news-lite.xml news-test.xml eqn-news.xml --clobber
           else
-            gh release create "$tag" news.xml news-lite.xml news-test.xml \
+            gh release create "$tag" news.xml news-lite.xml news-test.xml eqn-news.xml \
               --title "每日新闻聚合 RSS（每天 07:00 更新）" \
               --notes "订阅地址：https://github.com/k-macao/04-kindle/releases/download/news-feed/news.xml"
           fi

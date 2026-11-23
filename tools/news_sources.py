@@ -200,6 +200,7 @@ SOURCES = [
         "title_prefix": "【方程式新闻】",
         "feed": "https://api.eqn.news/public/rss",
         "site": "eqn.news",
+        "max_age_hours": 168,
         "note": "EquationNews 官方公开 RSS，华语加密市场快讯；直接读取原生 feed，不经过 RSSHub。",
     },
     {

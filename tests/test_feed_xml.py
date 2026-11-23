@@ -73,6 +73,22 @@ class FeedStructureTest(unittest.TestCase):
         self.assertEqual(info["items"], 300)
         self.assertEqual(len(root.findall("./channel/item")), 300)
 
+    def test_only_source_builds_a_dedicated_feed(self):
+        data = payload(count=3, source="CLS")
+        eqn = payload(count=2, source="EQN", group="global")
+        for index, item in enumerate(eqn["items"]):
+            item["title"] = f"【方程式新闻】专属消息 {index}"
+            item["link"] = f"https://eqn.news/main/{index}"
+        data["items"].extend(eqn["items"])
+        data["sources"] = [{"key": "CLS", "ok": True}, {"key": "EQN", "ok": True}]
+        info, _path, root = self.build(data, min_items=1, only_sources=["EQN"],
+                                       filename="eqn-news.xml", title="方程式新闻")
+        items = root.findall("./channel/item")
+        self.assertEqual(info["items"], 2)
+        self.assertEqual(info["sources_total"], 1)
+        self.assertTrue(all((item.findtext("title") or "").startswith("【方程式新闻】")
+                            for item in items))
+
     def test_duplicate_article_links_are_emitted_once(self):
         data = payload(count=3)
         data["items"][1]["link"] = data["items"][0]["link"]

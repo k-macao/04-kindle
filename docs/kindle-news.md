@@ -18,12 +18,23 @@ https://cdn.jsdelivr.net/gh/k-macao/04-kindle@main/site/news.xml            ← 
 | `site/news.xml` | **聚合 RSS**：所有源合成一个标准 feed，英文条目中英并列（最多 300 条） | 阅读器订阅、KOReader 新闻下载器 |
 | `site/news-lite.xml` | 同源精简版：最多 60 条、摘要截到 140 字（约 40 KB） | 慢设备、老设备 |
 | `site/news-test.xml` | 连通性测试版：只有 3 条（约 3 KB） | 先验线路与证书，再谈内容 |
+| `site/eqn-news.xml` | **方程式新闻专属 feed**：只收 EQN，标题带 `【方程式新闻】` | 单独订阅后建立独立目录 |
 | `site/news_seen.json` | 最近 7 天推过的标题指纹 | 抓取时跨天去重，不进 feed |
 | `site/news_zh_cache.json` | 英文标题/摘要的中文译文缓存 | 重译同一句英文时直接命中，省额度、译文稳定 |
 
 完整版原先限制 150 条，是为了控制 KOReader 一次下载的 EPUB 数量和 feed 体积；现在源目录已有
 25 个源、每源最多取 12 条，150 会把成功抓到的后半批新闻截掉，因此改为 **300 条**。XML 仍受
 4 MiB 硬上限保护；设备较慢时继续使用最多 60 条的 `news-lite.xml`。
+
+方程式新闻不再只埋在聚合目录里。在 KOReader 新闻下载器中单独添加：
+
+```
+https://raw.githubusercontent.com/k-macao/04-kindle/main/site/eqn-news.xml
+```
+
+KOReader 会建立 `koreader/news/方程式新闻`；备用地址为
+`https://cdn.jsdelivr.net/gh/k-macao/04-kindle@main/site/eqn-news.xml`。专属 feed 本轮没有新稿时保留上一版，
+不会让目录忽然消失；源时间窗放宽到 7 天，首次订阅能看到更多条目。
 
 > 工作流**只生成 xml**。日报 EPUB / 清单 / 纯文本（`site/news.epub`、`site/news.json`、
 > `site/news.txt`）不再自动产出，仓库里也不再保留——`tools/build_news.py` 还在，需要那本书时

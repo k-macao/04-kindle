@@ -350,6 +350,12 @@ class WorkflowTest(unittest.TestCase):
         self.assertIn('MAX_ITEMS: "300"', self.text)
         self.assertIn('--max-items "$MAX_ITEMS"', self.text)
 
+    def test_equation_news_gets_a_dedicated_feed(self):
+        self.assertIn("--filename eqn-news.xml --only-source EQN", self.text)
+        self.assertIn('--title "方程式新闻"', self.text)
+        self.assertIn("site/eqn-news.xml", self.text.split("git add", 1)[1])
+        self.assertIn("news-test.xml eqn-news.xml --clobber", self.text)
+
     def test_health_file_is_written_and_committed(self):
         self.assertIn("--health site/source-health.json", self.text)
         self.assertIn("site/source-health.json", self.text.split("git add", 1)[1])
