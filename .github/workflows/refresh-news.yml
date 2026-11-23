@@ -41,6 +41,7 @@ on:
       - "tools/radar_discover.py"
       - "tools/translate_news.py"
       - "tools/analyze_news.py"
+      - "config/news_interests.json"
 
 permissions:
   contents: write
@@ -128,14 +129,16 @@ jobs:
           python tools/translate_news.py --data news_data.json
           --cache site/news_zh_cache.json --max-items 10000 --strict
 
-      # 每条新闻先做线索链分析；API Key 放在仓库 Actions Secret，不写入仓库。
+      # 每条新闻生成线索链 + 资产影响矩阵 + 证据/共识评级；随后结合
+      # config/news_interests.json 的自选股、行业与主题计算每日优先级。
+      # API Key 放在仓库 Actions Secret，不写入仓库。
       #
       # 允许这一步失败：分析是「加值」，不是「新闻本身」。写成致命步骤时，接口一挂
       # （余额用完 / 429 / 模型把某批写太长被截断），整份 feed 就停更一天——2026-11-20
       # 那次红就是这样，第二天读者手上还是旧 feed。
       # 但也不能悄悄少分析：这一步失败时 channel 描述会写「本期未生成线索分析」，
       # 产物自检要求「要么每条都有，要么一条都没有且有这句说明」，夹生的 feed 照旧不发。
-      - name: DeepSeek 为每条新闻生成线索分析
+      - name: DeepSeek 生成资产影响、证据评级与每日优先级
         id: analysis
         continue-on-error: true
         env:
@@ -143,6 +146,7 @@ jobs:
         run: >-
           python tools/analyze_news.py --data news_data.json
           --cache site/news_analysis_cache.json
+          --interests config/news_interests.json
 
       - name: 分析失败时的说明（不拦住发布，只把话说清楚）
         if: steps.analysis.outcome == 'failure'

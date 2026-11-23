@@ -13,7 +13,8 @@
   `<source url="站点">名称</source>`）和一句摘要；
 - **英文条目中英并列**：`tools/translate_news.py` 补过 `title_zh` 的，标题写成
   `English Title｜中文标题`，摘要有译文时写「中文：… 原文：…」，读者不必点进原文；
-- **每条新闻带 AI 线索分析**：`analysis` 字段按「线索→事实→推断→影响→验证」写入 RSS 正文；
+- **每条新闻带 AI 情报**：五段线索链、资产影响矩阵、证据/共识评级和优先级写入 RSS 正文；
+- 每日精选在 feed 顶部按名次排列，标题加 `【精选01·分数】`，其余条目继续按时间倒序；
 - `guid` 用原文链接（`isPermaLink="true"`），没有链接的用标题指纹的
   `urn:004:news:<hash>`——同一个链接在读者端不会重复出现；
 - `lastBuildDate` 是这次生成的时间，`ttl` 建议阅读器每小时回来看一次；
@@ -96,7 +97,7 @@ def guid_for_item(item):
 
 
 def dedupe_guid_items(items):
-    """按最终 guid 去重；同一上游文章被多个 RSS 路由重复推送时保留最新项。"""
+    """按最终 guid 去重；输入已按优先级/时间排好，所以保留位置最靠前的一项。"""
     unique = []
     seen = set()
     for item in items:
@@ -108,11 +109,84 @@ def dedupe_guid_items(items):
     return unique
 
 
+def prioritize_items(items):
+    """每日精选先按 rank 置顶，其余仍按发布时间新→旧；无 AI 分析时完全等同时间排序。"""
+    def stamp(item):
+        moment = fetch_news.parse_published(item.get("published") or "")
+        return moment.timestamp() if moment else 0.0
+
+    def key(item):
+        rank = item.get("priority_rank")
+        if isinstance(rank, int) and not isinstance(rank, bool) and rank > 0:
+            return (0, rank, -stamp(item))
+        return (1, 0, -stamp(item))
+
+    return sorted(items, key=key)
+
+
+def _priority_title(title, item):
+    rank = item.get("priority_rank")
+    score = item.get("priority_score")
+    if not (isinstance(rank, int) and rank > 0 and isinstance(score, int)):
+        return title
+    badge = f"【精选{rank:02d}·{score}】"
+    # 方程式专属 feed 的来源标记必须继续放在标题最前，设备目录与发布自检都依赖它。
+    eqn = "【方程式新闻】"
+    if title.startswith(eqn):
+        return eqn + badge + title[len(eqn):]
+    return badge + title
+
+
+def _intelligence_blocks(item):
+    """把结构化情报压成适合电子墨水阅读器的短段落。"""
+    impacts = item.get("impact_matrix")
+    evidence = item.get("evidence")
+    priority = item.get("priority")
+    if not isinstance(impacts, list) or not isinstance(evidence, dict) \
+            or not isinstance(priority, dict):
+        return []
+
+    blocks = ["资产影响矩阵"]
+    if impacts:
+        for impact in impacts:
+            if not isinstance(impact, dict):
+                continue
+            entity = str(impact.get("entity") or "未命名对象")
+            ticker = str(impact.get("ticker") or "")
+            if ticker:
+                entity += f"（{ticker}）"
+            blocks.append(
+                f"{impact.get('tier', '—')}｜{entity}｜{impact.get('type', '—')}｜"
+                f"{impact.get('direction', '—')}｜{impact.get('horizon', '—')}｜"
+                f"置信 {impact.get('confidence', 0)}/100：{impact.get('reason', '—')}")
+    else:
+        blocks.append("未从当前标题与摘要识别出可核对的财经影响对象。")
+
+    cross_note = evidence.get("cross_source_note") or "未执行跨发布方标题比对"
+    blocks.append(
+        f"证据与共识：{evidence.get('status', '—')}｜强度 {evidence.get('strength', 0)}/100｜"
+        f"{evidence.get('consensus', '—')}；{evidence.get('basis', '—')}"
+        f"（{evidence.get('scope', '当前输入 1 个 RSS 来源')}）。跨源线索：{cross_note}。")
+    rank = item.get("priority_rank")
+    rank_text = f"精选第 {rank} 名｜" if isinstance(rank, int) and rank > 0 else ""
+    blocks.append(
+        f"每日优先级：{rank_text}总分 {priority.get('score', item.get('priority_score', 0))}/100｜"
+        f"影响 {priority.get('importance', 0)} · 紧迫 {priority.get('urgency', 0)} · "
+        f"新颖 {priority.get('novelty', 0)} · 证据 {priority.get('evidence_strength', evidence.get('strength', 0))} · "
+        f"新鲜 {priority.get('freshness', 0)} · 自选 {priority.get('interest_relevance', 0)}；"
+        f"{priority.get('reason', '—')}")
+    matches = item.get("interest_matches")
+    if isinstance(matches, list) and matches:
+        blocks.append("关注命中：" + "、".join(str(value) for value in matches))
+    return blocks
+
+
 def item_xml(item, names, sites, desc_limit=None, fallback_link=DEFAULT_SITE_URL):
     """一条新闻对应一个 <item>；缺什么就省什么，不写空标签。"""
     # 英文条目把中文接在标题后面：阅读器的列表页只显示标题，译文必须在这里才看得见。
     title_zh = build_news.normalize(str(item.get("title_zh") or ""))
     shown = f"{item['title']}｜中文：{title_zh}" if title_zh else item["title"]
+    shown = _priority_title(shown, item)
     # 标题里绝不能留换行：设备端用 <title>…</title> 抠书名，跨行就抠不到（见 check_device_fields）。
     shown = " ".join(str(shown).split())
     title = xml_text(shown)
@@ -159,7 +233,8 @@ def item_xml(item, names, sites, desc_limit=None, fallback_link=DEFAULT_SITE_URL
         analysis = " ".join(line.strip() for line in analysis.splitlines() if line.strip())
         clue_parts = [part.strip() for part in re.split(
             r"(?=(?:线索|事实|推断|影响|验证)：)", analysis) if part.strip()]
-        blocks = ([description] if description else []) + ["AI 线索分析"] + clue_parts
+        blocks = (([description] if description else []) + ["AI 线索分析"] + clue_parts
+                  + _intelligence_blocks(item))
         html_description = "".join(
             f"<p>{html_mod.escape(block, quote=False)}</p>" for block in blocks)
         parts.append(f"      <description>{xml_text(html_description)}</description>")
@@ -176,6 +251,10 @@ def render(items, now, title=FEED_TITLE, self_url=DEFAULT_SELF_URL, site_url=DEF
     stamp = rfc822(now)
     description = (f"每天 07:00（北京时间）从 RSSHub 抓取并合并的财经、政治与哲学思想新闻，"
                    f"英文条目附中文译文，本次 {len(items)} 条。")
+    selected = sum(1 for item in items if isinstance(item.get("priority_rank"), int)
+                   and item.get("priority_rank") > 0)
+    if selected:
+        description += f" AI 已按资产影响、证据、新鲜度与自选相关性将 {selected} 条每日精选置顶。"
     # 分析接口挂了就如实写在 channel 里：宁可当天没有线索分析，也不能让读者以为
     # 每一条都分析过（工作流的自检也认这句话，见 refresh-news.yml）。
     if analysis_note:
@@ -198,7 +277,8 @@ def render(items, now, title=FEED_TITLE, self_url=DEFAULT_SELF_URL, site_url=DEF
     return "\n".join(head + body + ["  </channel>", "</rss>", ""])
 
 
-ANALYSIS_REQUIRED_LABELS = ("AI 线索分析", "线索：", "事实：", "推断：", "影响：", "验证：")
+ANALYSIS_REQUIRED_LABELS = ("AI 线索分析", "线索：", "事实：", "推断：", "影响：", "验证：",
+                            "资产影响矩阵", "证据与共识：", "每日优先级：")
 
 
 def check_analysis_fields(parsed_items, allow_absent=False):
@@ -260,7 +340,10 @@ def build(payload, out_dir, min_items=10, max_items=build_news.MAX_ITEMS, now=No
     if wanted:
         raw_items = [item for item in raw_items if str(item.get("source") or "") in wanted]
         reports = [report for report in reports if str(report.get("key") or "") in wanted]
-    items = dedupe_guid_items(build_news.prune(raw_items, max_items))
+    # 先对全部候选去重，再把每日精选置顶，最后才按完整版/精简版上限截断；否则一条
+    # 稍早但真正重要的精选会在 60 条精简版的时间截断阶段被提前丢掉。
+    cleaned = build_news.prune(raw_items, max(len(raw_items), max_items))
+    items = dedupe_guid_items(prioritize_items(cleaned))[:max_items]
     if len(items) < min_items:
         raise ValueError(f"有效条目 {len(items)} 条，少于下限 {min_items}")
     xml = render(items, now, title=title, self_url=self_url, site_url=site_url,
@@ -282,7 +365,8 @@ def build(payload, out_dir, min_items=10, max_items=build_news.MAX_ITEMS, now=No
     out.mkdir(parents=True, exist_ok=True)
     target = out / filename
     target.write_text(xml, encoding="utf-8")
-    newest = fetch_news.parse_published(items[0].get("published") or "")
+    moments = [fetch_news.parse_published(item.get("published") or "") for item in items]
+    newest = max((moment for moment in moments if moment is not None), default=None)
     info = {
         "file": target.name,
         "items": len(items),

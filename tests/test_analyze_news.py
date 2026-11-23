@@ -20,6 +20,19 @@ def clue(title):
             "验证：观察后续公开数据和当事方公告。")
 
 
+def intelligence(title, importance=70, entity="相关行业"):
+    return {
+        "analysis": clue(title),
+        "impact_matrix": [{"entity": entity, "ticker": "", "type": "行业",
+                           "tier": "直接", "direction": "不确定", "horizon": "短期",
+                           "confidence": 65, "reason": "事件变化可能先传导到相关行业"}],
+        "evidence": {"status": "单一报道", "strength": 55,
+                     "consensus": "暂无独立互证", "basis": "当前仅一个 RSS 来源"},
+        "priority": {"importance": importance, "urgency": 60, "novelty": 50,
+                     "reason": "潜在影响范围与时效性居中"},
+    }
+
+
 def payload(count=3):
     return {"items": [{"title": f"新闻{index}", "summary": f"摘要{index}",
                        "source": "CLS", "group": "flash",
@@ -34,7 +47,7 @@ def fake_deepseek(calls=None, omit_id=None):
             calls.append((api_key, request, timeout))
         content = request["messages"][1]["content"]
         batch = json.loads(content.split("\n", 1)[1])["items"]
-        rows = [{"id": item["id"], "analysis": clue(item["title"])}
+        rows = [{"id": item["id"], **intelligence(item["title"])}
                 for item in batch if item["id"] != omit_id]
         return {"choices": [{"message": {"content": json.dumps(
             {"items": rows}, ensure_ascii=False)}}]}
@@ -55,6 +68,9 @@ class AnalyzePayloadTest(unittest.TestCase):
         self.assertTrue(all(all(label in item["analysis"]
                                 for label in analyze_news.REQUIRED_LABELS)
                             for item in data["items"]))
+        self.assertTrue(all(item["impact_matrix"] and item["evidence"] and item["priority"]
+                            for item in data["items"]))
+        self.assertEqual({item["priority_rank"] for item in data["items"]}, set(range(1, 7)))
         self.assertEqual(calls[0][0], "test-key")
 
     def test_cache_prevents_repeat_api_calls(self):
@@ -73,6 +89,7 @@ class AnalyzePayloadTest(unittest.TestCase):
         self.assertEqual(second["cached"], 2)
         self.assertEqual(len(calls), 1)
         self.assertEqual(second_data["items"][0]["analysis"], data["items"][0]["analysis"])
+        self.assertNotIn("score", next(iter(cache.values()))["priority"])
 
     def test_missing_api_key_fails_closed(self):
         with self.assertRaisesRegex(analyze_news.AnalysisError, "DEEPSEEK_API_KEY"):
@@ -112,10 +129,10 @@ class AnalyzePayloadTest(unittest.TestCase):
                 return {"choices": [{"finish_reason": "length",
                                      "message": {"content": "{\"items\": [{\"id\": 0, \"anal"}}]}
             return {"choices": [{"finish_reason": "stop",
-                                 "message": {"content": json.dumps(
-                                     {"items": [{"id": items[0]["id"],
-                                                 "analysis": clue(items[0]["title"])}]},
-                                     ensure_ascii=False)}}]}
+                                  "message": {"content": json.dumps(
+                                      {"items": [{"id": items[0]["id"],
+                                                  **intelligence(items[0]["title"])}]},
+                                      ensure_ascii=False)}}]}
 
         data = payload(4)
         log = []
@@ -158,10 +175,77 @@ class AnalyzePayloadTest(unittest.TestCase):
         from tempfile import TemporaryDirectory
         with TemporaryDirectory() as directory:
             path = Path(directory) / "analysis.json"
-            cache = {"abc": {"analysis": clue("测试新闻"), "model": "deepseek-chat",
+            cache = {"abc": {**intelligence("测试新闻"), "model": "deepseek-chat",
                              "updated": NOW.isoformat()}}
             analyze_news.save_cache(cache, path, now=NOW)
             self.assertEqual(analyze_news.load_cache(path), cache)
+
+    def test_ticker_is_kept_only_when_it_appears_in_source_text(self):
+        def response(_key, request, _timeout):
+            items = json.loads(request["messages"][1]["content"].split("\n", 1)[1])["items"]
+            rows = []
+            for source in items:
+                row = {"id": source["id"], **intelligence(source["title"], entity="腾讯控股")}
+                row["impact_matrix"][0].update(type="公司", ticker="00700")
+                rows.append(row)
+            return {"choices": [{"message": {"content": json.dumps({"items": rows},
+                                                                      ensure_ascii=False)}}]}
+        data = payload(2)
+        data["items"][0]["title"] = "腾讯控股（00700）发布公告"
+        data["items"][1]["title"] = "腾讯发布公告"
+        cache = {}
+        analyze_news.analyze_payload(data, "key", cache=cache, fetch=response, delay=0,
+                                     log=lambda *_: None, now=NOW)
+        self.assertEqual(data["items"][0]["impact_matrix"][0]["ticker"], "00700")
+        self.assertEqual(data["items"][1]["impact_matrix"][0]["ticker"], "")
+        self.assertEqual([row["impact_matrix"][0]["ticker"] for row in cache.values()],
+                         ["00700", ""])
+
+    def test_invalid_evidence_score_is_rejected(self):
+        def response(_key, request, _timeout):
+            item = json.loads(request["messages"][1]["content"].split("\n", 1)[1])["items"][0]
+            row = {"id": item["id"], **intelligence(item["title"])}
+            row["evidence"]["strength"] = 101
+            return {"choices": [{"message": {"content": json.dumps({"items": [row]},
+                                                                      ensure_ascii=False)}}]}
+        with self.assertRaisesRegex(analyze_news.AnalysisError, "证据强度"):
+            analyze_news.analyze_payload(payload(1), "key", fetch=response, delay=0,
+                                         log=lambda *_: None)
+
+    def test_interest_match_boosts_priority_and_is_visible(self):
+        data = payload(2)
+        data["items"][0]["title"] = "腾讯发布人工智能新产品"
+        interests = {"top_n": 1,
+                     "stocks": [{"name": "腾讯控股", "aliases": ["腾讯"]}],
+                     "sectors": [], "topics": []}
+        analyze_news.analyze_payload(data, "key", fetch=fake_deepseek(), delay=0,
+                                     log=lambda *_: None, now=NOW, interests=interests)
+        first = data["items"][0]
+        second = data["items"][1]
+        self.assertEqual(first["interest_matches"], ["自选股：腾讯控股"])
+        self.assertEqual(first["priority"]["interest_relevance"], 100)
+        self.assertGreater(first["priority_score"], second["priority_score"])
+        self.assertEqual(first["priority_rank"], 1)
+        self.assertNotIn("priority_rank", second)
+
+    def test_cross_source_similarity_does_not_treat_same_publisher_routes_as_independent(self):
+        data = payload(3)
+        data["items"][0].update(title="美联储宣布降息25个基点", source="CLS")
+        data["items"][1].update(title="美联储降息25个基点", source="WSCN_LIVE")
+        data["items"][2].update(title="美联储降息25基点", source="WSCN_NEWS")
+        stats = analyze_news.analyze_payload(data, "key", fetch=fake_deepseek(), delay=0,
+                                             log=lambda *_: None, now=NOW)
+        evidence = data["items"][0]["evidence"]
+        self.assertEqual(stats["cross_source"], 3)
+        self.assertEqual(evidence["cross_source_count"], 1)
+        self.assertEqual(evidence["cross_source_publishers"], ["WSCN"])
+        self.assertIn("不等于已确认独立采编", evidence["cross_source_note"])
+
+    def test_default_interest_file_is_valid(self):
+        interests = analyze_news.load_interests(ROOT / "config" / "news_interests.json")
+        self.assertEqual(interests["top_n"], 10)
+        self.assertTrue(any(row["name"] == "腾讯控股" for row in interests["stocks"]))
+        self.assertTrue(any(row["name"] == "港股" for row in interests["topics"]))
 
 
 if __name__ == "__main__":
