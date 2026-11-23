@@ -4,37 +4,35 @@
     <title>004 新闻订阅（连通性测试）</title>
     <link>https://github.com/k-macao/04-kindle</link>
     <atom:link href="https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news-test.xml" rel="self" type="application/rss+xml"/>
-    <description>每天 07:00（北京时间）从 RSSHub 抓取并合并的财经、政治与哲学思想新闻，英文条目附中文译文，本次 3 条。</description>
+    <description>每天 07:00（北京时间）从 RSSHub 抓取并合并的财经、政治与哲学思想新闻，英文条目附中文译文，本次 3 条。 本期 AI 线索分析未生成（分析接口调用失败），只保留原文与中文译文。</description>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 23 Nov 2026 20:07:27 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 23 Nov 2026 20:35:31 +0000</lastBuildDate>
     <generator>04-kindle tools/build_feed.py</generator>
     <ttl>60</ttl>
     <item>
-      <title>20年期美国国债收益率跌至5.334%，为11月10日以来最低，上次持平于5.34%。</title>
-      <link>https://wallstreetcn.com/livenews/3204487</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3204487</guid>
-      <pubDate>Mon, 23 Nov 2026 20:04:41 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
-      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称20年期美国国债收益率跌至5.334%，为11月10日以来最低，并提及上次持平于5.34%；摘要为空，线索有限。&lt;/p&gt;&lt;p&gt;事实：报道明确给出该收益率水平5.334%及“11月10日以来最低”的时间比较。&lt;/p&gt;&lt;p&gt;推断：标题暗示收益率较此前有所下行，但未提供前值、变动幅度或原因。&lt;/p&gt;&lt;p&gt;影响：可能影响关注美债长端利率的投资者与利率敏感资产，具体方向需更多数据确认。&lt;/p&gt;&lt;p&gt;验证：需核对同一时点其他来源的20年期美债收益率报价及历史序列，目前缺少摘要与背景材料。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>美国20年期国债收益率跌至5.334%，创11月10日以来新低，最新报5.34%。</title>
-      <link>https://flash.jin10.com/detail/20261124040353194800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261124040353194800</guid>
-      <pubDate>Mon, 23 Nov 2026 20:03:53 +0000</pubDate>
+      <title>金十整理：从乔布斯到黄仁勋 科技巨头掌门人为何总能回归？</title>
+      <link>https://flash.jin10.com/detail/20261124043056035800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261124043056035800</guid>
+      <pubDate>Mon, 23 Nov 2026 20:30:56 +0000</pubDate>
       <category>中文财经快讯</category>
       <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称美国20年期国债收益率跌至5.334%，创11月10日以来新低，最新报5.34%；摘要为空，线索有限。&lt;/p&gt;&lt;p&gt;事实：报道明确给出5.334%的低点与5.34%的最新报价，并称创11月10日以来新低。&lt;/p&gt;&lt;p&gt;推断：标题同时出现“跌至5.334%”与“最新报5.34%”，两者略有差异，可能反映盘中低点与最新价的不同时点，但报道未说明。&lt;/p&gt;&lt;p&gt;影响：可能影响美债长端利率相关交易与定价参考，具体影响取决于后续走势。&lt;/p&gt;&lt;p&gt;验证：需核对报价时点、数据来源及与其他来源的一致性，目前缺少验证材料。&lt;/p&gt;</description>
+      <description>在辞去首席执行官职务不到两周后，黄仁勋重新执掌英伟达。这种离职后又重返领导岗位的情况并不罕见。以下是五个值得关注的先例： 1. 奥尔特曼，OpenAI ： 20…</description>
     </item>
     <item>
-      <title>财联社11月24日电，美国20年期国债收益率降至5.334%，为11月10日以来最低，最新持平于5.34%。</title>
-      <link>https://www.cls.cn/detail/2542368</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2542368</guid>
-      <pubDate>Mon, 23 Nov 2026 20:02:55 +0000</pubDate>
+      <title>美国国家航空航天局（NASA）寻求合作伙伴，力争2030年前建成月球核反应堆。</title>
+      <link>https://wallstreetcn.com/livenews/3204492</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3204492</guid>
+      <pubDate>Mon, 23 Nov 2026 20:27:45 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+    </item>
+    <item>
+      <title>财联社11月24日电，NASA寻求合作伙伴，以在2030年前建造月球核反应堆。</title>
+      <link>https://www.cls.cn/detail/2542372</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2542372</guid>
+      <pubDate>Mon, 23 Nov 2026 20:25:55 +0000</pubDate>
       <category>中文财经快讯</category>
       <source url="https://cls.cn">财联社 · 电报</source>
-      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称财联社11月24日电，美国20年期国债收益率降至5.334%，为11月10日以来最低，最新持平于5.34%；摘要为空，线索有限。&lt;/p&gt;&lt;p&gt;事实：报道明确给出5.334%的收益率、11月10日以来最低的表述，以及最新持平于5.34%。&lt;/p&gt;&lt;p&gt;推断：标题中“降至5.334%”与“最新持平于5.34%”并存，可能指盘中触及低点后最新价持平于5.34%，但报道未解释。&lt;/p&gt;&lt;p&gt;影响：可能影响美债长端利率的关注者，具体影响需结合更多市场信息。&lt;/p&gt;&lt;p&gt;验证：需核对发布时间对应的报价时点及数据来源，目前缺少摘要与背景材料。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

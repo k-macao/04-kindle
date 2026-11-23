@@ -1,5 +1,5 @@
 {
-  "checked": "2026-11-23T20:05:22+00:00",
+  "checked": "2026-11-23T20:34:32+00:00",
   "providers": [
     "direct",
     "rsshub",
@@ -13,9 +13,8 @@
     "items": 218,
     "by_provider": {
       "direct": 4,
-      "rsshub": 17,
-      "native": 1,
-      "mirror": 1
+      "rsshub": 18,
+      "native": 1
     }
   },
   "sources": [
@@ -42,7 +41,7 @@
       "group": "flash",
       "ok": true,
       "provider": "direct",
-      "count": 12,
+      "count": 11,
       "error": "",
       "attempts": [
         {
@@ -127,7 +126,7 @@
       "group": "flash",
       "ok": true,
       "provider": "rsshub",
-      "count": 10,
+      "count": 11,
       "error": "",
       "attempts": [
         {
@@ -374,7 +373,7 @@
       "ok": false,
       "provider": "",
       "count": 0,
-      "error": "rsshub/https://rsshub.rss.tips: 解析出 20 条，7 天窗口内 0 条；mirror/https://rsshub.isrss.com: 解析出 20 条，7 天窗口内 0 条；mirror/https://rsshub.cups.moe: 解析出 20 条，7 天窗口内 0 条",
+      "error": "rsshub/https://rsshub.rss.tips: 解析出 20 条，7 天窗口内 0 条；mirror/https://rsshub.isrss.com: 解析出 20 条，7 天窗口内 0 条；mirror/https://rsshub.cups.moe: XML 解析失败：syntax error: line 1, column 0",
       "attempts": [
         {
           "provider": "rsshub",
@@ -392,7 +391,7 @@
           "provider": "mirror",
           "label": "https://rsshub.cups.moe",
           "ok": false,
-          "error": "解析出 20 条，窗口内 0 条"
+          "error": "XML 解析失败：syntax error: line 1, column 0"
         },
         {
           "provider": "mirror",
@@ -465,19 +464,13 @@
       "name": "彭博社 · 政治",
       "group": "politics",
       "ok": true,
-      "provider": "mirror",
+      "provider": "rsshub",
       "count": 12,
       "error": "",
       "attempts": [
         {
           "provider": "rsshub",
           "label": "https://rsshub.rss.tips",
-          "ok": false,
-          "error": "The read operation timed out"
-        },
-        {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
           "ok": true,
           "error": ""
         }
