@@ -105,9 +105,18 @@ class CatalogTest(unittest.TestCase):
             with self.subTest(group=key):
                 self.assertTrue(news_sources.sources_in(key))
 
-    def test_routes_are_unique(self):
-        routes = [item["route"] for item in news_sources.SOURCES]
-        self.assertEqual(len(routes), len(set(routes)))
+    def test_source_urls_are_unique(self):
+        urls = [item.get("route") or item.get("feed") for item in news_sources.SOURCES]
+        self.assertTrue(all(urls))
+        self.assertEqual(len(urls), len(set(urls)))
+
+    def test_eqn_uses_the_official_native_feed(self):
+        source = next(item for item in news_sources.SOURCES if item["key"] == "EQN")
+        self.assertEqual(source["name"], "方程式新闻 · 加密快讯")
+        self.assertEqual(source["group"], "global")
+        self.assertEqual(source["lang"], "zh")
+        self.assertEqual(source["feed"], "https://api.eqn.news/public/rss")
+        self.assertNotIn("route", source)
 
 
 class ProbeTest(unittest.TestCase):
