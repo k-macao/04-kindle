@@ -1,5 +1,5 @@
 {
-  "checked": "2026-11-23T19:43:42+00:00",
+  "checked": "2026-11-23T20:05:22+00:00",
   "providers": [
     "direct",
     "rsshub",
@@ -10,12 +10,12 @@
   "summary": {
     "ok": 23,
     "total": 25,
-    "items": 207,
+    "items": 218,
     "by_provider": {
       "direct": 4,
-      "rsshub": 8,
-      "mirror": 10,
-      "native": 1
+      "rsshub": 17,
+      "native": 1,
+      "mirror": 1
     }
   },
   "sources": [
@@ -59,7 +59,7 @@
       "group": "flash",
       "ok": true,
       "provider": "direct",
-      "count": 12,
+      "count": 11,
       "error": "",
       "attempts": [
         {
@@ -76,7 +76,7 @@
       "group": "flash",
       "ok": true,
       "provider": "direct",
-      "count": 10,
+      "count": 8,
       "error": "",
       "attempts": [
         {
@@ -93,7 +93,7 @@
       "group": "flash",
       "ok": true,
       "provider": "rsshub",
-      "count": 10,
+      "count": 11,
       "error": "",
       "attempts": [
         {
@@ -196,7 +196,7 @@
       "ok": false,
       "provider": "",
       "count": 0,
-      "error": "rsshub/https://rsshub.rss.tips: 解析出 10 条，24 小时窗口内 0 条；mirror/https://rsshub.isrss.com: 解析出 10 条，24 小时窗口内 0 条；mirror/https://rsshub.cups.moe: XML 解析失败：syntax error: line 1, column 0",
+      "error": "rsshub/https://rsshub.rss.tips: 解析出 10 条，24 小时窗口内 0 条；mirror/https://rsshub.isrss.com: 解析出 10 条，24 小时窗口内 0 条；mirror/https://rsshub.cups.moe: 解析出 10 条，24 小时窗口内 0 条",
       "attempts": [
         {
           "provider": "rsshub",
@@ -214,7 +214,7 @@
           "provider": "mirror",
           "label": "https://rsshub.cups.moe",
           "ok": false,
-          "error": "XML 解析失败：syntax error: line 1, column 0"
+          "error": "解析出 10 条，窗口内 0 条"
         },
         {
           "provider": "mirror",
@@ -253,19 +253,13 @@
       "name": "第一财经 · 最新",
       "group": "depth",
       "ok": true,
-      "provider": "mirror",
+      "provider": "rsshub",
       "count": 12,
       "error": "",
       "attempts": [
         {
           "provider": "rsshub",
           "label": "https://rsshub.rss.tips",
-          "ok": false,
-          "error": "The read operation timed out"
-        },
-        {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
           "ok": true,
           "error": ""
         }
@@ -294,7 +288,7 @@
       "group": "flash",
       "ok": true,
       "provider": "rsshub",
-      "count": 8,
+      "count": 10,
       "error": "",
       "attempts": [
         {
@@ -311,7 +305,7 @@
       "group": "global",
       "ok": true,
       "provider": "native",
-      "count": 1,
+      "count": 12,
       "error": "",
       "attempts": [
         {
@@ -327,19 +321,13 @@
       "name": "彭博社 · 加密",
       "group": "global",
       "ok": true,
-      "provider": "mirror",
+      "provider": "rsshub",
       "count": 2,
       "error": "",
       "attempts": [
         {
           "provider": "rsshub",
           "label": "https://rsshub.rss.tips",
-          "ok": false,
-          "error": "The read operation timed out"
-        },
-        {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
           "ok": true,
           "error": ""
         }
@@ -350,19 +338,13 @@
       "name": "彭博社 · 市场",
       "group": "global",
       "ok": true,
-      "provider": "mirror",
+      "provider": "rsshub",
       "count": 12,
       "error": "",
       "attempts": [
         {
           "provider": "rsshub",
           "label": "https://rsshub.rss.tips",
-          "ok": false,
-          "error": "The read operation timed out"
-        },
-        {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
           "ok": true,
           "error": ""
         }
@@ -373,19 +355,13 @@
       "name": "彭博社 · 经济",
       "group": "global",
       "ok": true,
-      "provider": "mirror",
+      "provider": "rsshub",
       "count": 12,
       "error": "",
       "attempts": [
         {
           "provider": "rsshub",
           "label": "https://rsshub.rss.tips",
-          "ok": false,
-          "error": "The read operation timed out"
-        },
-        {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
           "ok": true,
           "error": ""
         }
@@ -398,8 +374,14 @@
       "ok": false,
       "provider": "",
       "count": 0,
-      "error": "mirror/https://rsshub.isrss.com: 解析出 20 条，7 天窗口内 0 条；mirror/https://rsshub.cups.moe: 解析出 20 条，7 天窗口内 0 条；mirror/https://rsshub.app: HTTP Error 403: Forbidden",
+      "error": "rsshub/https://rsshub.rss.tips: 解析出 20 条，7 天窗口内 0 条；mirror/https://rsshub.isrss.com: 解析出 20 条，7 天窗口内 0 条；mirror/https://rsshub.cups.moe: 解析出 20 条，7 天窗口内 0 条",
       "attempts": [
+        {
+          "provider": "rsshub",
+          "label": "https://rsshub.rss.tips",
+          "ok": false,
+          "error": "解析出 20 条，窗口内 0 条"
+        },
         {
           "provider": "mirror",
           "label": "https://rsshub.isrss.com",
@@ -422,7 +404,7 @@
           "provider": "bridge",
           "label": "RSS-Bridge rss-bridge.org/bridge01",
           "ok": false,
-          "error": "HTTP Error 500: Internal Server Error"
+          "error": "解析出 10 条，窗口内 0 条"
         },
         {
           "provider": "bridge",
@@ -449,13 +431,13 @@
       "name": "外交部 · 发言人表态",
       "group": "politics",
       "ok": true,
-      "provider": "mirror",
+      "provider": "rsshub",
       "count": 1,
       "error": "",
       "attempts": [
         {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
+          "provider": "rsshub",
+          "label": "https://rsshub.rss.tips",
           "ok": true,
           "error": ""
         }
@@ -466,13 +448,13 @@
       "name": "联合早报 · 国际",
       "group": "politics",
       "ok": true,
-      "provider": "mirror",
+      "provider": "rsshub",
       "count": 12,
       "error": "",
       "attempts": [
         {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
+          "provider": "rsshub",
+          "label": "https://rsshub.rss.tips",
           "ok": true,
           "error": ""
         }
@@ -488,6 +470,12 @@
       "error": "",
       "attempts": [
         {
+          "provider": "rsshub",
+          "label": "https://rsshub.rss.tips",
+          "ok": false,
+          "error": "The read operation timed out"
+        },
+        {
           "provider": "mirror",
           "label": "https://rsshub.isrss.com",
           "ok": true,
@@ -500,13 +488,13 @@
       "name": "Aeon · 哲学",
       "group": "thought",
       "ok": true,
-      "provider": "mirror",
+      "provider": "rsshub",
       "count": 3,
       "error": "",
       "attempts": [
         {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
+          "provider": "rsshub",
+          "label": "https://rsshub.rss.tips",
           "ok": true,
           "error": ""
         }
@@ -517,13 +505,13 @@
       "name": "Psyche · Ideas",
       "group": "thought",
       "ok": true,
-      "provider": "mirror",
+      "provider": "rsshub",
       "count": 4,
       "error": "",
       "attempts": [
         {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
+          "provider": "rsshub",
+          "label": "https://rsshub.rss.tips",
           "ok": true,
           "error": ""
         }
@@ -534,13 +522,13 @@
       "name": "爱思想 · 最近更新",
       "group": "thought",
       "ok": true,
-      "provider": "mirror",
+      "provider": "rsshub",
       "count": 12,
       "error": "",
       "attempts": [
         {
-          "provider": "mirror",
-          "label": "https://rsshub.isrss.com",
+          "provider": "rsshub",
+          "label": "https://rsshub.rss.tips",
           "ok": true,
           "error": ""
         }
