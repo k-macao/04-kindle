@@ -6,9 +6,17 @@
     <atom:link href="https://raw.githubusercontent.com/k-macao/04-kindle/main/site/eqn-news.xml" rel="self" type="application/rss+xml"/>
     <description>每天 07:00（北京时间）从 RSSHub 抓取并合并的财经、政治与哲学思想新闻，英文条目附中文译文，本次 12 条。 本期 AI 线索分析未生成（分析接口调用失败），只保留原文与中文译文。</description>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 23 Nov 2026 20:35:31 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 24 Nov 2026 06:58:05 +0000</lastBuildDate>
     <generator>04-kindle tools/build_feed.py</generator>
     <ttl>60</ttl>
+    <item>
+      <title>【方程式新闻】[新增市场] 新增 Orochi Network(ON)、Sanctum(SANC)、Subsquid(SQD) 韩元市场</title>
+      <link>https://eqn.news/main/17114</link>
+      <guid isPermaLink="true">https://eqn.news/main/17114</guid>
+      <pubDate>Tue, 24 Nov 2026 03:45:36 +0000</pubDate>
+      <category>全球市场与要闻</category>
+      <source url="https://eqn.news">方程式新闻 · 加密快讯</source>
+    </item>
     <item>
       <title>【方程式新闻】*英伟达董事会恢复黄仁勋总裁、首席执行官及董事会职务：彭博社</title>
       <link>https://eqn.news/main/16935</link>
@@ -104,15 +112,6 @@
       <category>全球市场与要闻</category>
       <source url="https://eqn.news">方程式新闻 · 加密快讯</source>
       <description>*德国法官提议，若被告交出价值26亿美元的40,000 BTC，则撤销Movie2K案：DPA *此前4月的提议是移交约56,000 BTC并缓刑 *政府此前于2024年夏季以29亿美元出售了Movie2K的50,000 BTC *被告将保留约16,000 BTC… AI 信息总览 德国盗版影视网站Movie2k案主被告被控洗钱。萨克森州2024年夏出售其交出的近5万BTC，获26.4亿欧元；2026年4月，法官曾提议认罪并再交5.7万…</description>
-    </item>
-    <item>
-      <title>【方程式新闻】Binance Futures 将上线多个 TradFi USDⓈ 保证金永续合约（2026-11-18）</title>
-      <link>https://eqn.news/main/15684</link>
-      <guid isPermaLink="true">https://eqn.news/main/15684</guid>
-      <pubDate>Wed, 18 Nov 2026 06:15:26 +0000</pubDate>
-      <category>全球市场与要闻</category>
-      <source url="https://eqn.news">方程式新闻 · 加密快讯</source>
-      <description>Binance Futures 将上线多个 TradFi USDⓈ 保证金永续合约（2026-11-18） AI 摘要 • 11-18 09:30-09:55 (UTC) 分批上线 SOXX、IGV、ARTY、IBIT 等USDT永续 • 最高杠杆20x，资金费率上限±2.00% AI 生成，仅供参考</description>
     </item>
   </channel>
 </rss>

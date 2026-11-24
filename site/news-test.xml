@@ -6,33 +6,34 @@
     <atom:link href="https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news-test.xml" rel="self" type="application/rss+xml"/>
     <description>每天 07:00（北京时间）从 RSSHub 抓取并合并的财经、政治与哲学思想新闻，英文条目附中文译文，本次 3 条。 本期 AI 线索分析未生成（分析接口调用失败），只保留原文与中文译文。</description>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 23 Nov 2026 20:35:31 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 24 Nov 2026 06:58:05 +0000</lastBuildDate>
     <generator>04-kindle tools/build_feed.py</generator>
     <ttl>60</ttl>
     <item>
-      <title>金十整理：从乔布斯到黄仁勋 科技巨头掌门人为何总能回归？</title>
-      <link>https://flash.jin10.com/detail/20261124043056035800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261124043056035800</guid>
-      <pubDate>Mon, 23 Nov 2026 20:30:56 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>在辞去首席执行官职务不到两周后，黄仁勋重新执掌英伟达。这种离职后又重返领导岗位的情况并不罕见。以下是五个值得关注的先例： 1. 奥尔特曼，OpenAI ： 20…</description>
+      <title>流动性退潮！SOFR异动背后，美股绞杀结束了吗？？？</title>
+      <link>https://wallstreetcn.com/member/articles/3786454</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/member/articles/3786454</guid>
+      <pubDate>Tue, 24 Nov 2026 06:59:29 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
+      <description>目前影响市场的两个最重要因素，是流动性状况的变化，以及通胀和利率前景。随着美元流动性和利率日益收紧，此前股市的支撑力量快速消失。 这一收紧在利率层面表现为：AI…</description>
     </item>
     <item>
-      <title>美国国家航空航天局（NASA）寻求合作伙伴，力争2030年前建成月球核反应堆。</title>
-      <link>https://wallstreetcn.com/livenews/3204492</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3204492</guid>
-      <pubDate>Mon, 23 Nov 2026 20:27:45 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+      <title>从“十四五”跨越到“十五五”蓝图：解析高质量发展“国寿样本”</title>
+      <link>https://www.yicai.com/news/103452077.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/news/103452077.html</guid>
+      <pubDate>Tue, 24 Nov 2026 06:53:06 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://yicai.com">第一财经 · 最新</source>
+      <description>保险的价值是什么？ 对个体而言，它提供了风险来临时的一份保障；对国家而言，它是社会治理的一张安全网。人们常用“经济减震器、社会稳定器”来形容保险的功能——减震与…</description>
     </item>
     <item>
-      <title>财联社11月24日电，NASA寻求合作伙伴，以在2030年前建造月球核反应堆。</title>
-      <link>https://www.cls.cn/detail/2542372</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2542372</guid>
-      <pubDate>Mon, 23 Nov 2026 20:25:55 +0000</pubDate>
+      <title>创业板指尾盘翻绿，早盘一度涨超4%。</title>
+      <link>https://wallstreetcn.com/livenews/3204742</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3204742</guid>
+      <pubDate>Tue, 24 Nov 2026 06:52:35 +0000</pubDate>
       <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
+      <source url="https://wallstreetcn.com">华尔街见闻 · A 股快讯</source>
     </item>
   </channel>
 </rss>

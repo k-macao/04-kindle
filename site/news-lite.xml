@@ -6,535 +6,536 @@
     <atom:link href="https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news-lite.xml" rel="self" type="application/rss+xml"/>
     <description>每天 07:00（北京时间）从 RSSHub 抓取并合并的财经、政治与哲学思想新闻，英文条目附中文译文，本次 60 条。 本期 AI 线索分析未生成（分析接口调用失败），只保留原文与中文译文。</description>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 23 Nov 2026 20:35:31 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 24 Nov 2026 06:58:05 +0000</lastBuildDate>
     <generator>04-kindle tools/build_feed.py</generator>
     <ttl>60</ttl>
     <item>
-      <title>金十整理：从乔布斯到黄仁勋 科技巨头掌门人为何总能回归？</title>
-      <link>https://flash.jin10.com/detail/20261124043056035800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261124043056035800</guid>
-      <pubDate>Mon, 23 Nov 2026 20:30:56 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>在辞去首席执行官职务不到两周后，黄仁勋重新执掌英伟达。这种离职后又重返领导岗位的情况并不罕见。以下是五个值得关注的先例： 1. 奥尔特曼，OpenAI ： 2023年，OpenAI董事会突然解雇奥尔特曼，理由是担忧他在与董事会沟通时不够坦诚。这一决定引发员工集体反抗：超过700名…</description>
+      <title>流动性退潮！SOFR异动背后，美股绞杀结束了吗？？？</title>
+      <link>https://wallstreetcn.com/member/articles/3786454</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/member/articles/3786454</guid>
+      <pubDate>Tue, 24 Nov 2026 06:59:29 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
+      <description>目前影响市场的两个最重要因素，是流动性状况的变化，以及通胀和利率前景。随着美元流动性和利率日益收紧，此前股市的支撑力量快速消失。 这一收紧在利率层面表现为：AI资本开支热潮增加了经济中的资本需求，对中性利率（以10年期1个月隔夜指数掉期利率衡量）构成上行压力；但美联储鹰派预期使终…</description>
     </item>
     <item>
-      <title>美国国家航空航天局（NASA）寻求合作伙伴，力争2030年前建成月球核反应堆。</title>
-      <link>https://wallstreetcn.com/livenews/3204492</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3204492</guid>
-      <pubDate>Mon, 23 Nov 2026 20:27:45 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+      <title>从“十四五”跨越到“十五五”蓝图：解析高质量发展“国寿样本”</title>
+      <link>https://www.yicai.com/news/103452077.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/news/103452077.html</guid>
+      <pubDate>Tue, 24 Nov 2026 06:53:06 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://yicai.com">第一财经 · 最新</source>
+      <description>保险的价值是什么？ 对个体而言，它提供了风险来临时的一份保障；对国家而言，它是社会治理的一张安全网。人们常用“经济减震器、社会稳定器”来形容保险的功能——减震与稳定，而这也恰恰是极速变化时代里的稀缺品。 过去五年，作为行业“头雁”，中国人寿保险股份有限公司（以下简称“中国人寿”）…</description>
     </item>
     <item>
-      <title>财联社11月24日电，NASA寻求合作伙伴，以在2030年前建造月球核反应堆。</title>
-      <link>https://www.cls.cn/detail/2542372</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2542372</guid>
-      <pubDate>Mon, 23 Nov 2026 20:25:55 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-    </item>
-    <item>
-      <title>美参议院调查万斯 涉委内瑞拉石油交易利益输送疑云</title>
-      <link>https://flash.jin10.com/detail/20261124041851242800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261124041851242800</guid>
-      <pubDate>Mon, 23 Nov 2026 20:18:51 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>金十数据11月24日讯，据路透社报道，一封信函显示， 美国参议院一个委员会正在调查美国副总统万斯是否在将一项利润丰厚的委内瑞拉石油交易授予大宗商品贸易巨头维多集团的过程中发挥了作用 。在美国今年1月入侵委内瑞拉并抓获该国威权领导人马杜罗的一周前，万斯曾与维多集团交易员John A…</description>
-    </item>
-    <item>
-      <title>Anthropic推出面向软件工程师的新产品Claude Ship，新增两款AI代理工具PR Steward和Claud</title>
-      <link>https://flash.jin10.com/detail/20261124041653624800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261124041653624800</guid>
-      <pubDate>Mon, 23 Nov 2026 20:16:53 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>Anthropic推出面向软件工程师的新产品Claude Ship，新增两款AI代理工具PR Steward和Claude Approvals，帮助开发团队自动处理代码审查及修复工作。</description>
-    </item>
-    <item>
-      <title>英伟达反弹引爆杠杆交易风险 做空投资者损失惨重</title>
-      <link>https://flash.jin10.com/detail/20261124041611332800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261124041611332800</guid>
-      <pubDate>Mon, 23 Nov 2026 20:16:11 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>金十数据11月24日讯，对于押注英伟达股价下跌的投资者而言，周一的大幅反弹让原本获利丰厚的交易变成了一场惨重的亏损。GraniteShares 2倍做空英伟达每日ETF一度暴跌73%。该基金旨在提供英伟达股票每日涨跌幅反向两倍的收益，资产规模约1亿美元。受此前人工智能龙头企业英伟…</description>
-    </item>
-    <item>
-      <title>美元指数涨约0.5%，自去年4月以来首次涨穿104</title>
-      <link>https://wallstreetcn.com/livenews/3204491</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3204491</guid>
-      <pubDate>Mon, 23 Nov 2026 20:15:00 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
-      <description>周一（11月23日）纽约尾盘，ICE美元指数涨0.49%，报104.320点，日内交投区间为103.475-104.530点，北京时间16:30微跌刷新日低，随后持续上扬，为2025年4月2日以来首次突破104，01:56逼近2025年3月26日盘中最高位104.683、当年2月…</description>
-    </item>
-    <item>
-      <title>据路透：美国参议院国土安全小组委员会正在调查美国副总统万斯与委内瑞拉石油合同的关系。</title>
-      <link>https://flash.jin10.com/detail/20261124041243750800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261124041243750800</guid>
-      <pubDate>Mon, 23 Nov 2026 20:12:43 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-    </item>
-    <item>
-      <title>财联社11月24日电，Anthropic表示，Claude Ship现已在Claude Team和Enterprise</title>
-      <link>https://www.cls.cn/detail/2542370</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2542370</guid>
-      <pubDate>Mon, 23 Nov 2026 20:10:55 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-      <description>财联社11月24日电，Anthropic表示，Claude Ship现已在Claude Team和Enterprise 套餐中提供，用于Github上的代码仓库。</description>
-    </item>
-    <item>
-      <title>美国财政部：外国投资者对美国近期国债票据及长期债券拍卖的需求表现不一。</title>
-      <link>https://flash.jin10.com/detail/20261124041020066800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261124041020066800</guid>
-      <pubDate>Mon, 23 Nov 2026 20:10:20 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-    </item>
-    <item>
-      <title>Anthropic推出Claude Ship PR Automation测试版。</title>
-      <link>https://wallstreetcn.com/livenews/3204490</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3204490</guid>
-      <pubDate>Mon, 23 Nov 2026 20:09:04 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
-    </item>
-    <item>
-      <title>富国将美国大盘股上调至“最看好”评级 上周暴跌提供加仓机会</title>
-      <link>https://www.cls.cn/detail/2542369</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2542369</guid>
-      <pubDate>Mon, 23 Nov 2026 20:07:02 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-      <description>【富国将美国大盘股上调至“最看好”评级 上周暴跌提供加仓机会】财联社11月24日电，富国银行将美国大盘股从“看好”上调至“最看好”评级，称上周暴跌提供加仓机会。富国表示，标普500指数7,000点可能是第一道关键关口，在这一水平，风险回报开始变得更具吸引力，建议逐步增持股票，而不…</description>
-    </item>
-    <item>
-      <title>富国银行：将美国大盘股上调至“最看好”评级，上周暴跌提供加仓机会。</title>
-      <link>https://wallstreetcn.com/livenews/3204488</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3204488</guid>
-      <pubDate>Mon, 23 Nov 2026 20:05:28 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
-    </item>
-    <item>
-      <title>30年期美债收益率跌超3.4个基点</title>
-      <link>https://wallstreetcn.com/livenews/3204487</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3204487</guid>
-      <pubDate>Mon, 23 Nov 2026 20:04:41 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
-      <description>周一（11月23日）纽约尾盘，美国10年期国债收益率跌2.20个基点，报4.9218%，亚太尾盘以来冲高回落，北京时间21:53跌至4.9058%刷新日低，之后随着黄仁勋获准重新担任英伟达CEO的消息而短线反弹、22:07刷新日高至4.9797%，之后持续回撤。 两年期美债收益率…</description>
-    </item>
-    <item>
-      <title>美国20年期国债收益率跌至5.334%，创11月10日以来新低，最新报5.34%。</title>
-      <link>https://flash.jin10.com/detail/20261124040353194800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261124040353194800</guid>
-      <pubDate>Mon, 23 Nov 2026 20:03:53 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-    </item>
-    <item>
-      <title>财联社11月24日电，美国20年期国债收益率降至5.334%，为11月10日以来最低。</title>
-      <link>https://www.cls.cn/detail/2542368</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2542368</guid>
-      <pubDate>Mon, 23 Nov 2026 20:02:55 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-    </item>
-    <item>
-      <title>黄仁勋复职后首次返回英伟达总部 称第二次担任CEO会做得更好</title>
-      <link>https://flash.jin10.com/detail/20261124040239649800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261124040239649800</guid>
-      <pubDate>Mon, 23 Nov 2026 20:02:39 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>金十数据11月24日讯，据Business Insider报道，黄仁勋周一重返英伟达(NVDA.O)位于加州圣克拉拉的总部，受到员工热烈欢迎，现场员工高喊“Jensen！Jensen！”。黄仁勋多次将手放在胸前，表示这是自己重返工作的第一天，并为此前的一系列风波向员工致歉，称“第…</description>
-    </item>
-    <item>
-      <title>礼来交易主管：公司正全力押注肿瘤领域</title>
-      <link>https://wallstreetcn.com/livenews/3204485</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3204485</guid>
-      <pubDate>Mon, 23 Nov 2026 20:00:54 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
-      <description>礼来公司商务拓展与肿瘤业务主管Jake Van Naarden表示，礼来目前有八款肿瘤药物正处于或即将进入后期开发阶段，有望在未来五年内上市。其中一半源于礼来内部研发，其余则来自外部交易。其中三款药物明年可能公布后期临床结果，包括礼来的乳腺癌口服药Inluriyo，以及针对肺癌、…</description>
-    </item>
-    <item>
-      <title>以色列利库德集团与正直党启动第三轮组阁谈判</title>
-      <link>https://flash.jin10.com/detail/20261124035946982800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261124035946982800</guid>
-      <pubDate>Mon, 23 Nov 2026 19:59:46 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>金十数据11月24日讯，当地时间23日晚，据以色列方面消息，以色列看守政府总理内塔尼亚胡领导的利库德集团与受命组建政府的正直党领导人埃森科特所派谈判代表，已开始就组建联合政府举行第三次会晤。据悉，两党谈判团队曾于22日举行长达4小时的第二轮会谈，并在一周前举行了首次接触。目前双方…</description>
-    </item>
-    <item>
-      <title>卡塔尔首相兼外交大臣对半岛电视台表示：中东局势无法承受美国和伊朗之间新的升级。</title>
-      <link>https://wallstreetcn.com/livenews/3204484</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3204484</guid>
-      <pubDate>Mon, 23 Nov 2026 19:58:25 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
-    </item>
-    <item>
-      <title>芝加哥大豆期货涨约0.7%，大豆油跌超1.1%</title>
-      <link>https://wallstreetcn.com/livenews/3204483</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3204483</guid>
-      <pubDate>Mon, 23 Nov 2026 19:58:06 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
-      <description>周一（11月23日）纽约尾盘，彭博谷物分类指数涨0.36%，报29.4574点。 CBOT玉米期货涨0.06%，CBOT小麦期货涨0.30%。 CBOT大豆期货涨0.68%，报12.2750美元/蒲式耳，全天处于上涨状态，北京时间23:27出现一波短线拉升行情、23:39刷新日高…</description>
-    </item>
-    <item>
-      <title>财联社11月24日电，花旗将生物制药公司Kymera的目标价从150美元上调至185美元。</title>
-      <link>https://www.cls.cn/detail/2542367</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2542367</guid>
-      <pubDate>Mon, 23 Nov 2026 19:56:26 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-    </item>
-    <item>
-      <title>前城堡气象主管揭示与厄尔尼诺相关的“变数”</title>
-      <link>https://wallstreetcn.com/livenews/3204482</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3204482</guid>
-      <pubDate>Mon, 23 Nov 2026 19:54:54 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
-      <description>Ken Griffin旗下对冲基金Citadel（城堡）原气象台主管（直至去年）克林格曼（Nicholas Klingaman）表示，一种鲜为人知的气象现象可能即将使与太平洋正在形成的强厄尔尼诺现象相关的预测变得复杂。 克林格曼预计，MJO（马登-朱利安振荡，Madden-Jul…</description>
-    </item>
-    <item>
-      <title>Trump Halts Detonation in Iowa, Puts Onus on Incoming Governor｜中文：特朗普停止爱荷华州爆炸，将责任交给即将上任的州长</title>
-      <link>https://www.bloomberg.com/news/articles/2026-11-23/trump-halts-detonation-in-iowa-puts-onus-on-incoming-governor</link>
-      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-23/trump-halts-detonation-in-iowa-puts-onus-on-incoming-governor</guid>
-      <pubDate>Mon, 23 Nov 2026 19:53:38 +0000</pubDate>
-      <category>政治与政策</category>
-      <source url="https://bloomberg.com">彭博社 · 政治</source>
-      <description>中文：唐纳德·特朗普总统表示，爱荷华州陆军设施中储存的危险材料的受控引爆工作已暂停，等待上诉法院的裁决以及该州即将上任的民主党州长的同意……
-原文：A controlled detonation of hazardous materials stored at an Army f…</description>
-    </item>
-    <item>
-      <title>美国芝加哥一机场因缺少空管员一度实施“地面停飞”</title>
-      <link>https://wallstreetcn.com/livenews/3204481</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3204481</guid>
-      <pubDate>Mon, 23 Nov 2026 19:51:34 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
-      <description>美国芝加哥奥黑尔国际机场23日因空中交通管制人员不足，对前往该机场的航班实施临时停飞措施。不过，该限制生效后两小时即告解除。 据美国媒体23日报道，美国联邦航空局当天上午宣布，由于空管人员配备不足，暂停飞往芝加哥奥黑尔国际机场的航班。这一“地面停飞”措施于美国中部时间10时40分…</description>
-    </item>
-    <item>
-      <title>Nvidia at 'Heart' of National Security, AI Future, Says Christopher Smart｜中文：Christopher Smart 表示，Nvidia 是国家安全和人工智能未来的“核心</title>
-      <link>https://www.bloomberg.com/news/videos/2026-11-23/nvidia-at-heart-of-natsec-ai-future-says-smart-video</link>
-      <guid isPermaLink="true">https://www.bloomberg.com/news/videos/2026-11-23/nvidia-at-heart-of-natsec-ai-future-says-smart-video</guid>
-      <pubDate>Mon, 23 Nov 2026 19:51:05 +0000</pubDate>
-      <category>政治与政策</category>
-      <source url="https://bloomberg.com">彭博社 · 政治</source>
-      <description>中文：阿布罗斯集团（Arbroath Group）创始人、奥巴马政府期间国家经济委员会前总统特别助理克里斯托弗·斯马特（Christopher Smart）表示，特朗普推动恢复黄仁勋（Jensen Huang）担任......
-原文：Christopher Smart, foun…</description>
-    </item>
-    <item>
-      <title>三星2027至2029年存储产能据悉大部分已被锁定 部分客户寻求将长约延至2031年</title>
-      <link>https://www.cls.cn/detail/2542366</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2542366</guid>
-      <pubDate>Mon, 23 Nov 2026 19:46:13 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-      <description>【三星2027至2029年存储产能据悉大部分已被锁定 部分客户寻求将长约延至2031年】财联社11月24日电，有知情人士透露，三星电子2027年至2029年的存储产能已近售罄，部分客户正推动将长约延至2031年。主要存储厂商目前仅能满足客户约60%至70%的需求。</description>
-    </item>
-    <item>
-      <title>美国财政部：作为经济孤立行动的一部分，财政部对二十多家伊朗外币兑换所、掩护公司和关键人员实施制裁，旨在全面打击伊朗的全球</title>
-      <link>https://flash.jin10.com/detail/20261124034611593800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261124034611593800</guid>
-      <pubDate>Mon, 23 Nov 2026 19:46:11 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>美国财政部：作为经济孤立行动的一部分，财政部对二十多家伊朗外币兑换所、掩护公司和关键人员实施制裁，旨在全面打击伊朗的全球影子银行网络。随着伊朗经济持续受到严厉经济制裁的冲击，石油收入不断下降，伊朗政权的影子银行网络协助者越来越无法将日益减少的出口收入汇回国内。</description>
-    </item>
-    <item>
-      <title>布伦特原油期货结算价为每桶89.37美元，下跌3.20美元，跌幅3.46%。</title>
-      <link>https://flash.jin10.com/detail/20261124034248684800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261124034248684800</guid>
-      <pubDate>Mon, 23 Nov 2026 19:42:48 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-    </item>
-    <item>
-      <title>现货黄金涨幅收窄至3%以内，现报3642.5美元/盎司，日内最高一度升至约3690美元附近。</title>
-      <link>https://flash.jin10.com/detail/20261124034217441800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261124034217441800</guid>
-      <pubDate>Mon, 23 Nov 2026 19:42:17 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-    </item>
-    <item>
-      <title>黄仁勋重返英伟达总部</title>
-      <link>https://finance.sina.com.cn/stock/usstock/c/2026-11-24/doc-inizuhxq2065696.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/usstock/c/2026-11-24/doc-inizuhxq2065696.shtml</guid>
-      <pubDate>Mon, 23 Nov 2026 19:34:51 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>专题：英伟达官宣恢复黄仁勋总裁、CEO及董事会职务 援引一段来自员工的视频报道称，黄仁勋已返回英伟达总部，员工欢呼迎接。 该视频报道称，黄仁勋对员工表示，第二次担任CEO，他会做得更好。 .appendQr_wrap{border:1px solid #E6E6E6;paddin…</description>
-    </item>
-    <item>
-      <title>WTI原油期货结算价为每桶80.17美元，跌幅3.88%。</title>
-      <link>https://news.10jqka.com.cn/20261124/c682126161.shtml</link>
-      <guid isPermaLink="true">https://news.10jqka.com.cn/20261124/c682126161.shtml</guid>
-      <pubDate>Mon, 23 Nov 2026 19:32:51 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
-    </item>
-    <item>
-      <title>财联社11月24日电，WTI原油期货结算价为每桶80.17美元，跌幅3.88%；布伦特原油期货结算价为每桶89.37美元</title>
-      <link>https://www.cls.cn/detail/2542365</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2542365</guid>
-      <pubDate>Mon, 23 Nov 2026 19:32:08 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-      <description>财联社11月24日电，WTI原油期货结算价为每桶80.17美元，跌幅3.88%；布伦特原油期货结算价为每桶89.37美元，跌幅3.46%。</description>
-    </item>
-    <item>
-      <title>美国2年期国债发行中标收益率低于发行前交易水平 显示需求略超预期</title>
-      <link>https://finance.sina.com.cn/stock/usstock/c/2026-11-24/doc-inizuhxs8020042.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/usstock/c/2026-11-24/doc-inizuhxs8020042.shtml</guid>
-      <pubDate>Mon, 23 Nov 2026 19:31:38 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>专题：英伟达官宣恢复黄仁勋总裁、CEO及董事会职务 美国财政部发行690亿美元2年期国债，中标收益率为4.700%，略低于纽约时间下午1点投标截止时4.703%的发行前交易水平，显示需求略超预期。当时该期限收益率日内上涨约5个基点，发行结果公布后市场反应不大，2s10s利差仍接近…</description>
-    </item>
-    <item>
-      <title>美国原油期货收跌将近3.9%，布油跌破90美元关口</title>
-      <link>https://wallstreetcn.com/livenews/3204479</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3204479</guid>
-      <pubDate>Mon, 23 Nov 2026 19:30:55 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
-      <description>WTI 1月原油期货收跌3.24美元，跌幅3.88%，报80.17美元/桶，收于三个月低点，受中东供应增加及利比亚输油管道恢复输油影响，这抵消了市场对该地区航运和炼油厂遭遇袭击的担忧。 布伦特1月原油期货收跌3.20美元，跌幅3.46%，报89.37美元/桶。 NYMEX 12月…</description>
-    </item>
-    <item>
-      <title>英伟达强势反弹凸显投资者两难 减持巨头虽能抗跌却可能错失反弹</title>
-      <link>https://finance.sina.com.cn/stock/usstock/c/2026-11-24/doc-inizuhxq2063770.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/usstock/c/2026-11-24/doc-inizuhxq2063770.shtml</guid>
-      <pubDate>Mon, 23 Nov 2026 19:30:30 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>专题：英伟达官宣恢复黄仁勋总裁、CEO及董事会职务 周一股市的大幅反弹暴露出在由少数科技巨头主导的市场中投资者面临的最新陷阱：市场暴跌时，卖出这些股票固然可以起到保护作用，却也可能因此错失随后的反弹。 黄仁勋重新出任首席执行官后，英伟达股价飙升逾30%。截至纽约时间下午12：30…</description>
-    </item>
-    <item>
-      <title>黄仁勋戏剧性重返英伟达掌舵 特朗普介入推动其复职</title>
-      <link>https://finance.sina.com.cn/stock/usstock/c/2026-11-24/doc-inizuhxu0347227.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/usstock/c/2026-11-24/doc-inizuhxu0347227.shtml</guid>
-      <pubDate>Mon, 23 Nov 2026 19:26:03 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>专题：英伟达官宣恢复黄仁勋总裁、CEO及董事会职务 英伟达董事会恢复黄仁勋的领导职务，上演企业史上最令人震惊的高管回归之一，并推动公司股价创下数十年来最大涨幅。 英伟达董事会周一意外发布声明称，黄仁勋在因丑闻离任不到两周后，将重新担任公司总裁兼首席执行官。美国总统唐纳德·特朗普此…</description>
-    </item>
-    <item>
-      <title>在岸人民币兑美元（CNY）收报6.6667元，较上周五夜盘收盘涨47点</title>
-      <link>https://news.10jqka.com.cn/20261124/c682126158.shtml</link>
-      <guid isPermaLink="true">https://news.10jqka.com.cn/20261124/c682126158.shtml</guid>
-      <pubDate>Mon, 23 Nov 2026 19:24:44 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
-      <description>在岸人民币兑美元（CNY）北京时间03:00收报6.6667元，较上周五夜盘收盘涨47点。成交量594.77亿美元。</description>
-    </item>
-    <item>
-      <title>Everyone Surprised by Huang’s Return: ProShares’ Kang｜中文：每个人都对黄的回归感到惊讶：ProShares 的 Kang</title>
-      <link>https://www.bloomberg.com/news/videos/2026-11-23/everyone-surprised-by-huang-s-return-proshares-kang-video</link>
-      <guid isPermaLink="true">https://www.bloomberg.com/news/videos/2026-11-23/everyone-surprised-by-huang-s-return-proshares-kang-video</guid>
-      <pubDate>Mon, 23 Nov 2026 19:23:35 +0000</pubDate>
-      <category>全球市场与要闻</category>
-      <source url="https://bloomberg.com">彭博社 · 市场</source>
-      <description>中文：ProShares 战术产品执行董事 Inkoo Kang 与 Scarlet Fu 和 Eric Balchunas 一起参与“彭博 ETF IQ”。他们讨论了 ProShares Ultra NVDA ETF（股票代码：NVDB）和该公司新的 Anthropic ETF…</description>
-    </item>
-    <item>
-      <title>英伟达董事会恢复黄仁勋职务据悉未事先征询公司高级管理层意见</title>
-      <link>https://finance.sina.com.cn/stock/usstock/c/2026-11-24/doc-inizuhxn5282873.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/usstock/c/2026-11-24/doc-inizuhxn5282873.shtml</guid>
-      <pubDate>Mon, 23 Nov 2026 19:19:21 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>专题：英伟达官宣恢复黄仁勋总裁、CEO及董事会职务 据知情人士透露，英伟达董事会出人意料地将黄仁勋复职的举动并未事先征询公司高级管理层的意见，后者直到最后一刻才获知该消息。 知情人士表示，在美国总统特朗普向董事会成员施加政治压力后，相关决定于周日下午作出。由于讨论属于非公开信息，…</description>
-    </item>
-    <item>
-      <title>财联社11月24日电，在岸人民币兑美元（CNY）北京时间03:00收报6.6667元，较上周五夜盘收盘涨47点。成交量5</title>
-      <link>https://www.cls.cn/detail/2542364</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2542364</guid>
-      <pubDate>Mon, 23 Nov 2026 19:12:52 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-      <description>财联社11月24日电，在岸人民币兑美元（CNY）北京时间03:00收报6.6667元，较上周五夜盘收盘涨47点。成交量594.77亿美元。</description>
-    </item>
-    <item>
-      <title>迪士尼、ESPN与美国职业橄榄球大联盟将把第61届超级碗引入IMAX影院。</title>
-      <link>https://news.10jqka.com.cn/20261124/c682126151.shtml</link>
-      <guid isPermaLink="true">https://news.10jqka.com.cn/20261124/c682126151.shtml</guid>
-      <pubDate>Mon, 23 Nov 2026 19:11:16 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
-      <description>迪士尼、ESPN与美国职业橄榄球大联盟将把第61届超级碗引入IMAX影院(新浪财经)</description>
-    </item>
-    <item>
-      <title>财联社11月24日电，迪士尼、ESPN与美国职业橄榄球大联盟将把第61届超级碗引入IMAX影院。</title>
-      <link>https://www.cls.cn/detail/2542363</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2542363</guid>
-      <pubDate>Mon, 23 Nov 2026 19:10:11 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-    </item>
-    <item>
-      <title>在岸人民币兑美元北京时间03:00收报6.6667，较上一交易日夜盘收盘涨47点。</title>
-      <link>https://wallstreetcn.com/livenews/3204476</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3204476</guid>
-      <pubDate>Mon, 23 Nov 2026 19:09:52 +0000</pubDate>
+      <title>创业板指尾盘翻绿，早盘一度涨超4%。</title>
+      <link>https://wallstreetcn.com/livenews/3204742</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3204742</guid>
+      <pubDate>Tue, 24 Nov 2026 06:52:35 +0000</pubDate>
       <category>中文财经快讯</category>
       <source url="https://wallstreetcn.com">华尔街见闻 · A 股快讯</source>
     </item>
     <item>
-      <title>苹果准备在假日季推出红色HomePod mini和AirPods Max</title>
-      <link>https://www.cls.cn/detail/2542362</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2542362</guid>
-      <pubDate>Mon, 23 Nov 2026 19:07:08 +0000</pubDate>
+      <title>黑龙江：引导金融机构加强对创新药企业的投融资支持 鼓励商业保险扩大创新药支付范围</title>
+      <link>https://wallstreetcn.com/livenews/3204741</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3204741</guid>
+      <pubDate>Tue, 24 Nov 2026 06:52:24 +0000</pubDate>
       <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-      <description>【苹果准备在假日季推出红色HomePod mini和AirPods Max】财联社11月24日电，苹果正在准备推出入门级扬声器和高端耳机的红色版本，重启与苹果公司长期合作的Product(RED)产品线。新款HomePod mini 2将采用红色网状外壳，而AirPods Max…</description>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+      <description>黑龙江省人民政府印发《黑龙江省卫生健康发展“十五五”规划》，其中提出，支持创新药和医疗器械发展。支持医疗机构与科研院所、企业协同开展创新药临床试验和医疗器械研发，促进基础研究成果向临床诊疗方案转化。加快细胞和基因治疗药物、新型抗体、新型疫苗、核酸药物、放射性药物等应用，提升应急疫…</description>
     </item>
     <item>
-      <title>特朗普火速力挺黄仁勋复职：正确且恰当决定，我一手促成，美政府无证据表明他有违法行为</title>
-      <link>https://wallstreetcn.com/articles/3786540</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/articles/3786540</guid>
-      <pubDate>Mon, 23 Nov 2026 19:06:08 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
-      <description>英伟达宣布董事会决定恢复黄仁勋总裁、首席执行官（CEO）及董事职务后不到10分钟，美国总统特朗普便公开力挺这一决定，还自称黄仁勋回归是他一手促成。 据新华社，特朗普23日在社交媒体发文说，英伟达董事会让黄仁勋重新担任CEO一职是“正确且恰当的决定”。他表示，美国政府没有理由认为黄…</description>
-    </item>
-    <item>
-      <title>财联社11月24日电，恒生指数主连夜盘收涨0.7%，报22527点；恒生科技指数主连夜盘收涨1.85%，报3573点。</title>
-      <link>https://www.cls.cn/detail/2542361</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2542361</guid>
-      <pubDate>Mon, 23 Nov 2026 19:01:17 +0000</pubDate>
+      <title>联合国：自八月以来，超过36万也门人流离失所。限制必须解除，确保为被围困的塔伊兹居民提供安全的人道主义通道。</title>
+      <link>https://flash.jin10.com/detail/20261124145131458800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261124145131458800</guid>
+      <pubDate>Tue, 24 Nov 2026 06:51:31 +0000</pubDate>
       <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
     </item>
     <item>
-      <title>Citadel Securities Says 2018 Playbook Warns of More Market Pain｜中文：Citadel 证券称 2018 年行动手册警告市场将遭受更多痛苦</title>
-      <link>https://www.bloomberg.com/news/articles/2026-11-23/citadel-securities-says-2018-playbook-warns-of-more-market-pain</link>
-      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-23/citadel-securities-says-2018-playbook-warns-of-more-market-pain</guid>
-      <pubDate>Mon, 23 Nov 2026 19:01:08 +0000</pubDate>
+      <title>《孟加拉国加入“一带一路”倡议十周年蓝皮书》在达卡发布</title>
+      <link>https://flash.jin10.com/detail/20261124145101564800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261124145101564800</guid>
+      <pubDate>Tue, 24 Nov 2026 06:51:01 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>金十数据11月24日讯，《孟加拉国加入“一带一路”倡议十周年蓝皮书》23日在孟加拉国首都达卡发布。报告回顾了过去十年孟中共建“一带一路”合作成果，认为双方在基础设施建设、经贸投资等领域合作取得显著成效，未来有望进一步向技术创新、产业升级和人才培养等领域拓展。中国驻孟加拉国使馆临时…</description>
+    </item>
+    <item>
+      <title>市值蒸发6000亿美元后，英伟达董事会火速请回黄仁勋。这场戏剧性风波揭示了科技巨头的一大治理盲区……</title>
+      <link>https://xnews.jin10.com/details/235918</link>
+      <guid isPermaLink="true">https://xnews.jin10.com/details/235918</guid>
+      <pubDate>Tue, 24 Nov 2026 06:50:39 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+    </item>
+    <item>
+      <title>AI投资情绪回暖，新兴市场股市创下7月以来最大涨幅</title>
+      <link>https://flash.jin10.com/detail/20261124145029718800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261124145029718800</guid>
+      <pubDate>Tue, 24 Nov 2026 06:50:29 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>金十数据11月24日讯，随着黄仁勋重新出任英伟达首席执行官，投资者纷纷买入人工智能相关股票，推动新兴市场股市创下7月以来最大涨幅。MSCI新兴市场指数上涨近4%，创7月31日以来最大单日涨幅，并结束连续八个交易日的下跌。台积电、三星电子和SK海力士合计贡献了该指数约60%的涨幅。…</description>
+    </item>
+    <item>
+      <title>1. 10月欧洲市场车企表现出炉：特斯拉增长83.5%，比亚迪增长逾一倍。 2. 特斯拉中国推出升级版“特从容”金融方案</title>
+      <link>https://flash.jin10.com/detail/20261124144934395800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261124144934395800</guid>
+      <pubDate>Tue, 24 Nov 2026 06:49:34 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>1. 10月欧洲市场车企表现出炉：特斯拉增长83.5%，比亚迪增长逾一倍。 2. 特斯拉中国推出升级版“特从容”金融方案，Model 3和Model Y首付3.99万元起。 3. 大众汽车启动新一轮劳资谈判，裁员与削减成本引发罢工威胁。 4. 沙利文：预测2030年全球L4级轻型…</description>
+    </item>
+    <item>
+      <title>Copper Rally Fades as Demand Worries Deepen｜中文：随着对需求担忧加深，铜价上涨势头减弱</title>
+      <link>https://www.bloomberg.com/news/videos/2026-11-24/copper-rally-fades-as-demand-worries-deepen-video</link>
+      <guid isPermaLink="true">https://www.bloomberg.com/news/videos/2026-11-24/copper-rally-fades-as-demand-worries-deepen-video</guid>
+      <pubDate>Tue, 24 Nov 2026 06:49:13 +0000</pubDate>
       <category>全球市场与要闻</category>
       <source url="https://bloomberg.com">彭博社 · 市场</source>
-      <description>中文：Citadel 证券的策略师警告称，随着美联储变得越来越强硬，金融市场正在发出增长前景黯淡的信号，这与 2018 年底大幅抛售之前的情况相呼应……
-原文：Strategists at Citadel Securities warned that financial mark…</description>
+      <description>中文：受黄仁勋回归英伟达公司消息的提振，铜价曾录得单日涨幅，但随后回吐涨幅，伦敦铜价回落至每吨12,000美元的水平。彭博社的Mark Cranfield对当前形势进行了详细分析。（来源：彭博社）
+原文：Copper erased a one-day gain sparked b…</description>
     </item>
     <item>
-      <title>恒生指数主连夜盘收涨0.7%，报22527点。 恒生科技指数主连夜盘收涨1.85%，报3573点。</title>
-      <link>https://wallstreetcn.com/livenews/3204472</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3204472</guid>
-      <pubDate>Mon, 23 Nov 2026 19:00:14 +0000</pubDate>
+      <title>基金生态重构走向纵深，多元主体共探“科技—产业—金融”良性循环新路径</title>
+      <link>https://www.yicai.com/news/103452071.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/news/103452071.html</guid>
+      <pubDate>Tue, 24 Nov 2026 06:48:37 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://yicai.com">第一财经 · 最新</source>
+      <description>当前，中国资本市场正经历一轮结构性变化，耐心资本加快培育，基金生态深度重构，硬科技投资从赛道共识走向产业纵深。如何更好构建良性循环的“科技—产业—金融”体系，是市场深入探讨的重要议题。 11月20日，由平安银行和第一财经联合主办的“2026年基金生态大会”在上海隆重召开，吸引企业…</description>
+    </item>
+    <item>
+      <title>黑龙江：为育龄人群提供生育力评估和分类指导 努力保持适度生育水平</title>
+      <link>https://www.cls.cn/detail/2542810</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2542810</guid>
+      <pubDate>Tue, 24 Nov 2026 06:47:54 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+      <description>【黑龙江：为育龄人群提供生育力评估和分类指导 努力保持适度生育水平】财联社11月24日电，黑龙江省人民政府印发《黑龙江省卫生健康发展“十五五”规划》。其中提到，实施生育率提升专项行动，优化补贴、保险、医疗、住房保障等全方位生育支持举措。为育龄人群提供生育力评估和分类指导，规范不孕…</description>
+    </item>
+    <item>
+      <title>里昂：维持英伟达“跑赢大市”评级，目标价255美元，投资者信心有待恢复</title>
+      <link>https://www.cls.cn/detail/2542808</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2542808</guid>
+      <pubDate>Tue, 24 Nov 2026 06:47:47 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+      <description>【里昂：维持英伟达“跑赢大市”评级，目标价255美元，投资者信心有待恢复】财联社11月24日电，里昂发表研报指，英伟达创办人黄仁勋重掌公司，对人工智能乐观派而言，事态发展带来带来重燃市场活力的希望，但股价反弹后，投资者仍将对董事会行动、持续内部调查、媒体报道的证监会调查，以及由黄…</description>
+    </item>
+    <item>
+      <title>预告：AI巨浪之下：繁荣还是崩塌？取决于人的选择丨两说</title>
+      <link>https://www.yicai.com/video/103452069.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/video/103452069.html</guid>
+      <pubDate>Tue, 24 Nov 2026 06:47:02 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://yicai.com">第一财经 · 最新</source>
+      <description>“我们的生产力将会提高，但它归属于那些持有公司股份的人、拥有知识产权的人，而那些原先在工作的人突然发现自己手头一无所有。”在2026上海外滩年会期间，前世界银行首席经济学家、康奈尔大学经济学教授考希克·巴苏（Kaushik Basu）接受东方卫视《两说》专访时，对AI时代的经济图…</description>
+    </item>
+    <item>
+      <title>赛诺菲将以每股175美元现金收购制药商Insmed</title>
+      <link>https://finance.sina.com.cn/stock/usstock/c/2026-11-24/doc-inizvkme7759770.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/stock/usstock/c/2026-11-24/doc-inizvkme7759770.shtml</guid>
+      <pubDate>Tue, 24 Nov 2026 06:46:40 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>赛诺菲 （Sanofi）表示，已同意收购美国制药商Insmed，以扩大其在免疫学和罕见病领域的产品组合。 这家制药公司表示，将以每股175美元的价格收购Insmed全部流通股，交易总金额达410亿美元。 赛诺菲表示，该交易已获得双方公司董事会批准。 .appendQr_wrap{…</description>
+    </item>
+    <item>
+      <title>英伟达大涨只是巧合？标普500回调后12个月平均涨10%</title>
+      <link>https://flash.jin10.com/detail/20261124144554950800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261124144554950800</guid>
+      <pubDate>Tue, 24 Nov 2026 06:45:54 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+    </item>
+    <item>
+      <title>黄仁勋复职难消市场疑虑，AI概念股反弹恐难持续</title>
+      <link>https://flash.jin10.com/detail/20261124144524567800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261124144524567800</guid>
+      <pubDate>Tue, 24 Nov 2026 06:45:24 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>金十数据11月24日讯，据外媒报道，黄仁勋回归英伟达的消息推动相关公司股价上涨，但涨幅不足以弥补其自黄仁勋辞职以来的累计跌幅。这表明，投资者对于英伟达向客户提供融资的前景以及整个AI交易市场仍心存疑虑。黄仁勋复职还可能引发监管问题，并使外界对英伟达董事会的独立性产生质疑。Coun…</description>
+    </item>
+    <item>
+      <title>【电报解读】大唐集团核电公司增资183%，全球在建核电装机规模创35年最高水平，这家公司是集团旗下核能唯一资产整合与上市平台</title>
+      <link>https://www.cls.cn/detail/2542803</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2542803</guid>
+      <pubDate>Tue, 24 Nov 2026 06:45:06 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+    </item>
+    <item>
+      <title>今年前十个月访港旅客量近4600万人次 同比上升12%</title>
+      <link>https://flash.jin10.com/detail/20261124144431203800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261124144431203800</guid>
+      <pubDate>Tue, 24 Nov 2026 06:44:31 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>金十数据11月24日讯，香港旅游发展局24日公布，今年前十个月访港旅客接近4600万人次，同比增加12%。其中，内地旅客约3587万人次，同比上升14%。数据显示，在国庆假期和各项盛事活动的带动下，今年10月访港旅客约513万人次，同比上升12%。其中，内地旅客约397万人次，同…</description>
+    </item>
+    <item>
+      <title>安徽发行7年期一般债地方债，规模74.0000亿元，发行利率1.4400%，边际倍数1.66倍，倍数预期1.44； 安徽发行10年期一般债地方债，规模28.3050亿元，发行利率1.590...</title>
+      <link>https://wallstreetcn.com/livenews/3204737</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3204737</guid>
+      <pubDate>Tue, 24 Nov 2026 06:44:01 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+      <description>安徽发行7年期一般债地方债，规模74.0000亿元，发行利率1.4400%，边际倍数1.66倍，倍数预期1.44； 安徽发行10年期一般债地方债，规模28.3050亿元，发行利率1.5900%，边际倍数1.52倍，倍数预期1.59； 安徽发行15年期普通专项地方债，规模8.288…</description>
+    </item>
+    <item>
+      <title>黄仁勋回归带动首尔股市反弹逾6%</title>
+      <link>https://finance.sina.com.cn/stock/usstock/c/2026-11-24/doc-inizvkmh0086625.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/stock/usstock/c/2026-11-24/doc-inizvkmh0086625.shtml</guid>
+      <pubDate>Tue, 24 Nov 2026 06:43:03 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>周二，韩国股市反弹逾6%，从此前连续两个交易日的暴跌中回升。随着黄仁勋回归执掌英伟达引发全球市场乐观情绪，芯片制造商股价大幅上涨。韩元兑美元汇率走高。 韩国综合股价指数（KOSPI）上涨297.49点，涨幅6.32%，收于5006.03点，盘中一度升至5065.74点。 随着上涨…</description>
+    </item>
+    <item>
+      <title>英国首相伯纳姆：未经全民公投重新加入欧盟是不可想象的</title>
+      <link>https://finance.sina.com.cn/stock/usstock/c/2026-11-24/doc-inizvkme7757675.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/stock/usstock/c/2026-11-24/doc-inizvkme7757675.shtml</guid>
+      <pubDate>Tue, 24 Nov 2026 06:42:45 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>当地时间11月23日，英国首相安迪·伯纳姆（Andy Burnham）在议会表示，英国若要重新加入欧盟，必须再次举行全民公投。不过，他目前并无重新举行脱欧公投的计划，其政府现阶段仍致力于加强英国与欧盟之间的合作关系。 英国保守党议员伯纳德·詹金（Bernard Jenkin）在下…</description>
+    </item>
+    <item>
+      <title>美国长端收益率回落，短端加息预期依然坚挺</title>
+      <link>https://flash.jin10.com/detail/20261124144145569800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261124144145569800</guid>
+      <pubDate>Tue, 24 Nov 2026 06:41:45 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+    </item>
+    <item>
+      <title>德国去年对欧盟预算净贡献149亿欧元 位居成员国首位</title>
+      <link>https://flash.jin10.com/detail/20261124144141152800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261124144141152800</guid>
+      <pubDate>Tue, 24 Nov 2026 06:41:41 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>金十数据11月24日讯，据德国经济研究所（IW）的一项研究，德国去年仍是欧盟预算最大的净出资国，其缴纳的资金比获得的拨款多出149亿欧元，这一增长主要归因于欧盟整体预算规模扩大。法国位居第二，净贡献额约为54亿欧元，其次是意大利的33亿欧元。波兰是最大净受益国，获得67亿欧元，其…</description>
+    </item>
+    <item>
+      <title>澳新银行预测澳央行明年6月启动降息</title>
+      <link>https://www.cls.cn/detail/2542804</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2542804</guid>
+      <pubDate>Tue, 24 Nov 2026 06:41:40 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+      <description>【澳新银行预测澳央行明年6月启动降息】财联社11月24日电，澳新银行（ANZ）11月24日发布澳大利亚经济研究报告。报告预测，澳大利亚储备银行（央行）将于2027年6月启动降息，随后于同年8月再次降息25个基点，将现金利率降至4.35%。2028年2月，澳央行可能进一步降息25个…</description>
+    </item>
+    <item>
+      <title>腾远钴业，大涨15%！刚果（金）再发出口禁令</title>
+      <link>https://www.gelonghui.com/p/7538801</link>
+      <guid isPermaLink="true">https://www.gelonghui.com/p/7538801</guid>
+      <pubDate>Tue, 24 Nov 2026 06:41:19 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://gelonghui.com">格隆汇 · 推荐</source>
+      <description>钴金属概念集体异动！ 今天，钴金属概念集体异动！ 截至发文， 腾远钴业大涨15%，寒锐钴业涨超8.6%，华友钴业涨幅同步站上5%，格林美、盛屯矿业等产业链标的跟涨。 本轮行情的直接触发点，来自刚果（金）战略矿产市场监管局ARECOMS于11月23日发布的公告。公告明确， 自11月…</description>
+    </item>
+    <item>
+      <title>华为大折叠全球发货量突破1200万</title>
+      <link>https://wallstreetcn.com/livenews/3204736</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3204736</guid>
+      <pubDate>Tue, 24 Nov 2026 06:41:01 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+      <description>11月24日，华为常务董事、产品投资评审委员会主任、终端BG董事长余承东在新品发布会上宣布，华为大折叠手机全球发货量突破1200万台。（界面）</description>
+    </item>
+    <item>
+      <title>欧洲10月新车注册量同比增长3.4%，特斯拉销量大增近77%</title>
+      <link>https://finance.sina.com.cn/stock/usstock/c/2026-11-24/doc-inizvkme7756401.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/stock/usstock/c/2026-11-24/doc-inizvkme7756401.shtml</guid>
+      <pubDate>Tue, 24 Nov 2026 06:40:26 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>11月24日，欧洲汽车制造商协会（ACEA）公布的数据显示，10月欧洲新车注册量同比增长3.4%至128万辆，主要受到混合动力及纯电动汽车需求增长的推动。汽车制造商方面， 特斯拉 销量同比大幅回升， BMW YY&gt; 宝马 表现优于欧洲主要汽车制造商，而大众、斯特兰蒂斯及 雷诺 的…</description>
+    </item>
+    <item>
+      <title>一天开板8次，算力牛股，涨停后炸板</title>
+      <link>https://finance.sina.com.cn/jjxw/2026-11-24/doc-inizvkmk8995223.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/jjxw/2026-11-24/doc-inizvkmk8995223.shtml</guid>
+      <pubDate>Tue, 24 Nov 2026 06:39:37 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>热点栏目 自选股 数据中心 行情中心 资金流向 模拟交易 客户端 今日午后，算力芯片概念异动拉升， 华东重机 午后涨停后炸板，一度走出8天6板，该股盘中开板8次，成交额超40亿元，资金分歧较大。 旋极信息 、 云天励飞 、 芯原股份 、 寒武纪 、 天普股份 （维权） 、 摩尔线…</description>
+    </item>
+    <item>
+      <title>SpaceX与特斯拉推进3.5万亿美元合并谈判，五名董事负责协商交易条款，最快年底达成协议</title>
+      <link>https://finance.sina.com.cn/stock/usstock/c/2026-11-24/doc-inizvkmh0084703.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/stock/usstock/c/2026-11-24/doc-inizvkmh0084703.shtml</guid>
+      <pubDate>Tue, 24 Nov 2026 06:39:28 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>11月24日，消息人士透露，SpaceX与 特斯拉 已分别成立特别委员会，由五名董事负责协商潜在的全股票合并交易，合并后的企业集团估值可能达到3.5万亿美元，有望成为全球企业并购史上规模最大的交易。双方正就业务估值、换股比例及公司治理结构展开谈判，最快可能于今年年底达成协议，但目…</description>
+    </item>
+    <item>
+      <title>财联社11月24日电，纽约期金日内跌1%，现报3614美元/盎司。</title>
+      <link>https://www.cls.cn/detail/2542802</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2542802</guid>
+      <pubDate>Tue, 24 Nov 2026 06:39:14 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+    </item>
+    <item>
+      <title>上市12天遭长电科技旗下公司索赔3.6亿元 芯德半导体迎专利大考，禁售风险重于赔偿</title>
+      <link>https://finance.sina.com.cn/stock/aigcy/2026-11-24/doc-inizvkmh0082886.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/stock/aigcy/2026-11-24/doc-inizvkmh0082886.shtml</guid>
+      <pubDate>Tue, 24 Nov 2026 06:35:53 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>上市首日收涨28.38%的热度尚未消散，芯德半导体便迎来一场高额专利诉讼。 11月22日，江苏芯德半导体科技股份有限公司公告称，公司于11月18日收到江苏省南京市中级人民法院送达的六份起诉状。 长电科技 全资子公司江阴长电先进封装有限公司（下称“长电先进”）以六项发明专利被侵犯为…</description>
+    </item>
+    <item>
+      <title>拜登现身机场身体虚弱</title>
+      <link>https://wallstreetcn.com/livenews/3204735</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3204735</guid>
+      <pubDate>Tue, 24 Nov 2026 06:34:50 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+      <description>据《纽约邮报》报道，当地时间11月23日，美国前总统乔·拜登与前第一夫人吉尔·拜登现身费城国际机场，被拍到登上一辆警用巡逻车。据悉，两人此行旨在前往马萨诸塞州的楠塔基特岛，参加家族一年一度的感恩节聚会。报道同时指出，拜登目前正与前列腺癌作斗争，身体状况较为虚弱。（国是直通车）</description>
+    </item>
+    <item>
+      <title>财联社11月24日电，赛诺菲将以每股175美元现金的价格收购INSMED。</title>
+      <link>https://www.cls.cn/detail/2542799</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2542799</guid>
+      <pubDate>Tue, 24 Nov 2026 06:34:20 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+    </item>
+    <item>
+      <title>【盘中宝】AI技术加速向多个场景渗透，该行业或是细分板块中AI落地兑现最快环节之一，这家企业提供全流程解决方案</title>
+      <link>https://www.cls.cn/detail/2542790</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2542790</guid>
+      <pubDate>Tue, 24 Nov 2026 06:34:18 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+    </item>
+    <item>
+      <title>特朗普：黄仁勋已经与妻子解决了两人之间的问题</title>
+      <link>https://finance.sina.com.cn/stock/usstock/c/2026-11-24/doc-inizvkmk8991234.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/stock/usstock/c/2026-11-24/doc-inizvkmk8991234.shtml</guid>
+      <pubDate>Tue, 24 Nov 2026 06:33:56 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>在谈及黄仁勋此前涉及的婚外情争议时，特朗普表示，他并不认同黄仁勋此前选择辞职的处理方式，并认为婚外情争议吸引了大量公众关注，使整个事件变得更加复杂。 “你知道，这里面涉及性，而性比股票更能吸引眼球。”特朗普说道。 特朗普同时透露，黄仁勋与妻子洛丽（Lori Huang）已经解决了…</description>
+    </item>
+    <item>
+      <title>50万悬赏、韩国教育部长辞职…AI作弊搅动韩国高考，李在明呼吁全面改革</title>
+      <link>https://www.yicai.com/news/103452051.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/news/103452051.html</guid>
+      <pubDate>Tue, 24 Nov 2026 06:33:53 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://yicai.com">第一财经 · 最新</source>
+      <description>每年11月中旬举行的年度大学修学能力考试是韩国社会的“头等大事”，是韩国的高考，今年的考试却被人工智能（AI）搅得天翻地覆。 本年度韩国高考已于19日举行，约55万名考生参加。考生须在一天内完成全部科目测试。应届毕业生、往届毕业生及通过特殊资格考试的学生均可报名参加。考试期间也会…</description>
+    </item>
+    <item>
+      <title>赛诺菲将以每股175美元现金的价格收购美国药企Insmed。</title>
+      <link>https://wallstreetcn.com/livenews/3204734</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3204734</guid>
+      <pubDate>Tue, 24 Nov 2026 06:33:49 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+    </item>
+    <item>
+      <title>不立案不更正？凤凰航运营收跨期拖四年，审计预警早已响起</title>
+      <link>https://finance.sina.com.cn/stock/aigcy/2026-11-24/doc-inizvkmi2214667.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/stock/aigcy/2026-11-24/doc-inizvkmi2214667.shtml</guid>
+      <pubDate>Tue, 24 Nov 2026 06:33:39 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>登录新浪财经APP 搜索【信披】查看更多考评等级 被中国证监会立案调查14天后， 凤凰航运 （维权） 终于对跨期收入、成本给出了量化答案。 11月20日，凤凰航运披露《前期会计差错更正及追溯调整公告》，确认部分营业收入及营业成本存在入账跨期，导致2022年至2025年财务报表中的…</description>
+    </item>
+    <item>
+      <title>欧洲化肥供应商因能源价格飙升而关闭工厂</title>
+      <link>https://finance.sina.com.cn/stock/usstock/c/2026-11-24/doc-inizvkmk8990950.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/stock/usstock/c/2026-11-24/doc-inizvkmk8990950.shtml</guid>
+      <pubDate>Tue, 24 Nov 2026 06:33:30 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>由于能源价格居高不下，欧洲面临失去大部分关键合成氨产能的风险，化肥生产商将因此更加依赖国际供应商。 大宗商品价格评估机构Argus的数据显示，欧洲至少已有500万吨合成氨年产能停产，相当于欧洲总产能的28%。但该机构根据“可靠的市场情报”估计，实际停产比例更接近35%。与此同时，…</description>
+    </item>
+    <item>
+      <title>广东：1—10月份全省社会消费品零售总额同比增长1.2%</title>
+      <link>https://www.yicai.com/news/103452054.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/news/103452054.html</guid>
+      <pubDate>Tue, 24 Nov 2026 06:33:18 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://yicai.com">第一财经 · 最新</source>
+      <description>广东省统计局发布数据，1—10月份，全省社会消费品零售总额同比增长1.2%。按经营单位所在地分，城镇消费品零售额增长1.4%，乡村消费品零售额下降1.0%。按消费类型分，限额以上单位商品零售额增长0.7%，限额以上单位餐饮收入增长3.4%。基本生活类和部分升级类商品销售增长较快，…</description>
+    </item>
+    <item>
+      <title>AI行情提振加息预期，美元指数高位震荡暗藏回调风险</title>
+      <link>https://finance.sina.com.cn/money/forex/hbfx/2026-11-24/doc-inizvkme7743523.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/money/forex/hbfx/2026-11-24/doc-inizvkme7743523.shtml</guid>
+      <pubDate>Tue, 24 Nov 2026 06:33:05 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>汇通财经APP讯—— 周二（11月24日）欧洲早盘时段， 美元指数 交投于104.30附近，日内走势略微偏弱，但点位仍处在2025年3月以来的高位区间。 黄仁勋重回英伟达首席执行官岗位带动AI板块再度走强，市场风险偏好修复，推升美联储继续加息的预期，也限制了 美元指数 的下行空间…</description>
+    </item>
+    <item>
+      <title>三艘油轮触雷，布伦特原油为何只跌不涨？</title>
+      <link>https://finance.sina.com.cn/money/forex/hbfx/2026-11-24/doc-inizvkmk8975949.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/money/forex/hbfx/2026-11-24/doc-inizvkmk8975949.shtml</guid>
+      <pubDate>Tue, 24 Nov 2026 06:32:43 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>汇通财经APP讯—— 周二（11月24日）亚洲时段， 布伦特原油 期货震荡走低，一度触及88.22美元 /桶，创8 月 下旬以来最低，当前交投于88.85美元/桶附近，跌约0.5%。 伊朗方面称三艘油轮在霍尔木兹海峡触雷起火，美国据报正调查多达50艘能源船只遭网络攻击的可能。以往…</description>
+    </item>
+    <item>
+      <title>日经225指数收盘上涨3.9%，报58,644.63点。 日本东证指数收盘上涨2.5%，报3,764.88点。 韩国KOSPI指数收涨6.32%，三星电子、SK海力士均涨超6%。</title>
+      <link>https://wallstreetcn.com/livenews/3204732</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3204732</guid>
+      <pubDate>Tue, 24 Nov 2026 06:31:50 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+    </item>
+    <item>
+      <title>日韩股市集体收涨</title>
+      <link>https://news.10jqka.com.cn/20261124/c682147841.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261124/c682147841.shtml</guid>
+      <pubDate>Tue, 24 Nov 2026 06:31:38 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>日经225指数收涨3.91%，报58644.63点。韩国综指收涨6.32%，报5006.03点。</description>
+    </item>
+    <item>
+      <title>韩国KOSPI指数收涨6.32% 日经225指数收涨3.91%</title>
+      <link>https://www.cls.cn/detail/2542797</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2542797</guid>
+      <pubDate>Tue, 24 Nov 2026 06:31:08 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+      <description>【韩国KOSPI指数收涨6.32% 日经225指数收涨3.91%】财联社11月24日电，韩国KOSPI指数收涨6.32%，报5006.03点。三星电子、SK海力士收涨6.7%。日经225指数收涨3.91%，报58644.63点。芯片与半导体设备板块领涨，爱德万测试涨12.45%，…</description>
+    </item>
+    <item>
+      <title>农业农村部：全国农产品批发市场猪肉平均价格为14.89元/公斤 比昨天上升0.3%</title>
+      <link>https://www.cls.cn/detail/2542795</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2542795</guid>
+      <pubDate>Tue, 24 Nov 2026 06:30:10 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+      <description>【农业农村部：全国农产品批发市场猪肉平均价格为14.89元/公斤 比昨天上升0.3%】财联社11月24日电，据农业农村部监测，截至今日14:00时，全国农产品批发市场猪肉平均价格为14.89元/公斤，比昨天上升0.3%；鸡蛋9.30元/公斤，比昨天下降1.6%。</description>
+    </item>
+    <item>
+      <title>江苏省生物制造产业联盟成立</title>
+      <link>https://www.cls.cn/detail/2542794</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2542794</guid>
+      <pubDate>Tue, 24 Nov 2026 06:29:54 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+      <description>【江苏省生物制造产业联盟成立】财联社11月24日电，江苏省生物制造产业联盟成立暨产业发展大会11月23日下午举行。联盟成员单位共计170家，涵盖全省生物制造领域的骨干企业、高校院所、科研单位、金融机构等，覆盖生物制造主要细分领域和重点地区。 (新华日报)</description>
+    </item>
+    <item>
+      <title>黄仁勋复职，美国国会一片哗然：民主党誓言彻查特朗普和英伟达，共和党也不买账</title>
+      <link>https://wallstreetcn.com/articles/3786577</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/articles/3786577</guid>
+      <pubDate>Tue, 24 Nov 2026 06:29:52 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
+      <description>英伟达董事会在特朗普直接施压下宣布黄仁勋复职，在华盛顿引爆罕见的两党联合抵制。国会参众两院议员纷纷誓言深化调查，要求黄仁勋公开宣誓作证，围绕这家芯片巨头的疑云正迅速演变为一场政治风暴。 据参考消息、中新网报道 ，11月23日，黄仁勋复职后， 参议院民主党领袖查克·舒默表示，民主党…</description>
+    </item>
+    <item>
+      <title>韩国对华汽车贸易逆差创新高</title>
+      <link>https://news.10jqka.com.cn/20261124/c682147793.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261124/c682147793.shtml</guid>
+      <pubDate>Tue, 24 Nov 2026 06:28:48 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>今年韩国自华汽车进口额，与对华汽车贸易逆差双双创历年最高纪录。韩国贸易协会和韩国产业通商部22日发布的数据显示，今年1月至10月，韩国对华汽车贸易逆差42.3056亿美元，同比大增92.7%，已远超去年全年规模。 今年前10个月，韩国对华汽车出口额为1.6877亿美元，同比减少3…</description>
+    </item>
+    <item>
+      <title>Neuralink临床演示：瘫痪受试者可凭意念游玩《GTA VI》</title>
+      <link>https://www.cls.cn/detail/2542792</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2542792</guid>
+      <pubDate>Tue, 24 Nov 2026 06:27:02 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+      <description>【Neuralink临床演示：瘫痪受试者可凭意念游玩《GTA VI》】《科创板日报》24日讯， 马斯克旗下脑机接口公司Neuralink近日公布了最新临床案例：一名脊髓损伤致四肢瘫痪的受试者，凭借植入式脑机接口游玩《GTA VI》，无需实体手柄，仅凭意念即可实现一套包含双摇杆、十…</description>
+    </item>
+    <item>
+      <title>Emerging Market Stocks Rally as Huang’s Return Revives AI Trade｜中文：随着黄仁勋的回归重振人工智能板块，新兴市场股市上涨</title>
+      <link>https://www.bloomberg.com/news/articles/2026-11-24/emerging-market-stocks-rally-as-huang-s-return-revives-ai-trade</link>
+      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-24/emerging-market-stocks-rally-as-huang-s-return-revives-ai-trade</guid>
+      <pubDate>Tue, 24 Nov 2026 06:26:44 +0000</pubDate>
+      <category>全球市场与要闻</category>
+      <source url="https://bloomberg.com">彭博社 · 市场</source>
+      <description>中文：新兴市场股票录得7月以来的最大涨幅，原因是投资者在Jensen Huang重掌英伟达公司（Nvidia Corp.）后纷纷抢购人工智能股
+原文：Emerging-market stocks rallied the most since July as investors s…</description>
+    </item>
+    <item>
+      <title>财经对话：黄仁勋回归能否扭转AI资产抛售潮？（林世稳）</title>
+      <link>https://www.yicai.com/video/103452043.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/video/103452043.html</guid>
+      <pubDate>Tue, 24 Nov 2026 06:26:09 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://yicai.com">第一财经 · 最新</source>
+    </item>
+    <item>
+      <title>直通公司：阳光电源砸1亿至5亿回购，能止住腰斩的跌势？（钱启敏）</title>
+      <link>https://www.yicai.com/video/103452040.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/video/103452040.html</guid>
+      <pubDate>Tue, 24 Nov 2026 06:24:47 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://yicai.com">第一财经 · 最新</source>
+    </item>
+    <item>
+      <title>中证1000ETF南方(512100)、中证500ETF南方(510500)午后成交显著放量。</title>
+      <link>https://wallstreetcn.com/livenews/3204730</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3204730</guid>
+      <pubDate>Tue, 24 Nov 2026 06:24:04 +0000</pubDate>
       <category>中文财经快讯</category>
       <source url="https://wallstreetcn.com">华尔街见闻 · A 股快讯</source>
     </item>
     <item>
-      <title>黄仁勋表示他会成为更优秀的CEO。</title>
-      <link>https://news.10jqka.com.cn/20261124/c682126119.shtml</link>
-      <guid isPermaLink="true">https://news.10jqka.com.cn/20261124/c682126119.shtml</guid>
-      <pubDate>Mon, 23 Nov 2026 18:51:56 +0000</pubDate>
+      <title>1124 交易进行时11点</title>
+      <link>https://www.yicai.com/video/103452035.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/video/103452035.html</guid>
+      <pubDate>Tue, 24 Nov 2026 06:23:28 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://yicai.com">第一财经 · 最新</source>
+    </item>
+    <item>
+      <title>广东：1-10月份全省规模以上工业增加值同比增长6.1%</title>
+      <link>https://wallstreetcn.com/livenews/3204729</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3204729</guid>
+      <pubDate>Tue, 24 Nov 2026 06:23:17 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+      <description>广东省统计局发布数据，1—10月份，全省规模以上工业增加值同比增长6.1%。分门类看，计算机、通信和其他电子设备制造业增加值增长11.4%，电气机械和器材制造业增长5.0%，电力、热力生产和供应业增长9.2%，汽车制造业增长11.9%，专业设备制造业、通用设备制造业分别增长14.…</description>
+    </item>
+    <item>
+      <title>个股诊断：长鑫科技：国内存储龙头，估值相比国外龙头偏高，中长期谨防估值和业绩双杀。徐工机械：业绩优估值合理，但近年市场风格偏成长，对传统行业资金关注度...</title>
+      <link>https://www.yicai.com/video/103452034.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/video/103452034.html</guid>
+      <pubDate>Tue, 24 Nov 2026 06:21:24 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://yicai.com">第一财经 · 最新</source>
+      <description>个股诊断：长鑫科技：国内存储龙头，估值相比国外龙头偏高，中长期谨防估值和业绩双杀。徐工机械：业绩优估值合理，但近年市场风格偏成长，对传统行业资金关注度不高（杨勇）</description>
+    </item>
+    <item>
+      <title>“大空头”伯里在黄仁勋复职前卖出英伟达看跌期权</title>
+      <link>https://news.10jqka.com.cn/20261124/c682147649.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261124/c682147649.shtml</guid>
+      <pubDate>Tue, 24 Nov 2026 06:20:49 +0000</pubDate>
       <category>中文财经快讯</category>
       <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
-      <description>英伟达员工视频显示，黄仁勋返回公司总部。黄仁勋表示他会成为更优秀的CEO。(财联社)</description>
+      <description>在周一市场大涨之前，电影《大空头》原型投资者迈克尔·伯里于上周五卖出了其持有的75%英伟达看跌期权，并转而买入了看涨期权。伯里透露，他最初卖出了一半的英伟达看跌期权；随后，在有报道称SEC执法人员正在审查这家芯片制造商可能存在的会计问题后，他又抛售了另外25%的看跌期权。他还买入…</description>
     </item>
     <item>
-      <title>马斯克承认SpaceX AI研发落后，出租算力比自研Grok更赚钱</title>
-      <link>https://wallstreetcn.com/articles/3786545</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/articles/3786545</guid>
-      <pubDate>Mon, 23 Nov 2026 18:49:03 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
-      <description>SpaceX的人工智能业务正面临一个深层矛盾：靠向竞争对手出租算力获利，远比发展自有AI产品更赚钱。 据《纽约时报》报道， 马斯克已向员工坦承，公司在AI研发上正在落后，这使得将算力对外出租比用于自研产品更具商业价值。 Anthropic每月向SpaceX支付约31亿美元购买算力…</description>
-    </item>
-    <item>
-      <title>黄仁勋回归“比肥皂剧精彩”！华尔街争论他是否“大到不能解雇”、英伟达董事会是否向资本低头</title>
-      <link>https://wallstreetcn.com/articles/3786544</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/articles/3786544</guid>
-      <pubDate>Mon, 23 Nov 2026 18:48:51 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
-      <description>英伟达董事会宣布黄仁勋辞职仅11天后便一致决定恢复其职务，这场戏剧性反转引发华尔街热议，也将创始人权力、公司治理与政治干预企业决策的争议推至台前。 美东时间11月23日周一，英伟达宣布，董事会一致决定即刻恢复黄仁勋的总裁、CEO及董事职务。该司称，在与黄仁勋进行一系列讨论和会面后…</description>
-    </item>
-    <item>
-      <title>黄仁勋回归点燃科技债反弹，全球信用风险指标大幅回落</title>
-      <link>https://wallstreetcn.com/articles/3786543</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/articles/3786543</guid>
-      <pubDate>Mon, 23 Nov 2026 18:46:41 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
-      <description>全球信用市场周一全面上扬。随着英伟达董事会宣布恢复Jensen Huang的首席执行官职务，科技公司债券强势反弹，信用风险指标录得数月来最大单日改善，为投资者提供了一定程度的喘息空间。 衡量投资级信用风险的CDX投资级指数利差周一盘中跌幅创4月8日以来最大单日降幅。欧洲高评级与高…</description>
-    </item>
-    <item>
-      <title>Huang’s Return Followed Unprecedented Intervention by Trump｜中文：黄在特朗普前所未有的干预后回归</title>
-      <link>https://www.bloomberg.com/news/articles/2026-11-23/huang-s-return-followed-unprecedented-intervention-by-trump</link>
-      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-23/huang-s-return-followed-unprecedented-intervention-by-trump</guid>
-      <pubDate>Mon, 23 Nov 2026 18:42:48 +0000</pubDate>
-      <category>政治与政策</category>
-      <source url="https://bloomberg.com">彭博社 · 政治</source>
-      <description>中文：唐纳德·特朗普总统和他对人工智能友好的盟友相信，只有黄仁勋才能重振英伟达公司的命运并扭转股市的大幅下滑。因此，他们开始努力恢复这家陷入困境的科技巨头的实力
-原文：President Donald Trump and his AI-friendly allies believ…</description>
-    </item>
-    <item>
-      <title>国际铜业研究组织（ICSG）：2026年9月全球精炼铜市场出现3万吨供应缺口</title>
-      <link>https://news.10jqka.com.cn/20261124/c682126099.shtml</link>
-      <guid isPermaLink="true">https://news.10jqka.com.cn/20261124/c682126099.shtml</guid>
-      <pubDate>Mon, 23 Nov 2026 18:42:37 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
-      <description>国际铜业研究组织（ICSG）：2026年9月全球精炼铜市场出现3万吨供应缺口。（新浪财经）</description>
-    </item>
-    <item>
-      <title>欧洲债市：德债走高 油价跌破每桶90美元</title>
-      <link>https://finance.sina.com.cn/stock/usstock/c/2026-11-24/doc-inizuhxq2043653.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/usstock/c/2026-11-24/doc-inizuhxq2043653.shtml</guid>
-      <pubDate>Mon, 23 Nov 2026 18:42:34 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>欧洲债券上涨，原油价格大跌逾4%，至每桶88.60美元，为8月底以来最低水平。 意大利国债与德国国债收益率差收窄4个基点，至106个基点；法国国债与德国国债收益率差收窄7个基点，至150个基点。 德国两年期国债收益率上涨1个基点，至3.07%，盘中一度上涨4个基点；黄仁勋恢复担任…</description>
-    </item>
-    <item>
-      <title>黄仁勋下周将赴美国参议院公开作证</title>
-      <link>https://finance.sina.com.cn/stock/usstock/c/2026-11-24/doc-inizuhxq2043334.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/usstock/c/2026-11-24/doc-inizuhxq2043334.shtml</guid>
-      <pubDate>Mon, 23 Nov 2026 18:42:01 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>刚刚复任英伟达首席执行官的黄仁勋将于12月3日在美国参议院一个重要委员会面前公开作证，该委员会主席在声明中表示。 本月早些时候，参议院银行委员会要求黄仁勋出席作证。黄仁勋周一复任CEO后，该委员会仍在继续调查此事。 参议院银行委员会主席Tim Scott周一宣布，这场听证会将重点…</description>
-    </item>
-    <item>
-      <title>摩根士丹利认为，2027年证券化信贷市场将迎来利好因素</title>
-      <link>https://news.10jqka.com.cn/20261124/c682126085.shtml</link>
-      <guid isPermaLink="true">https://news.10jqka.com.cn/20261124/c682126085.shtml</guid>
-      <pubDate>Mon, 23 Nov 2026 18:39:07 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
-      <description>摩根士丹利认为，2027年证券化信贷市场将迎来利好因素。（新浪财经）</description>
-    </item>
-    <item>
-      <title>Houston Hedge Fund Aspire Hires Two PJM Power, Gas Traders｜中文：休斯顿对冲基金 Aspire 聘用两名 PJM 电力、天然气交易员</title>
-      <link>https://www.bloomberg.com/news/articles/2026-11-23/houston-hedge-fund-aspire-hires-two-pjm-power-gas-traders</link>
-      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-23/houston-hedge-fund-aspire-hires-two-pjm-power-gas-traders</guid>
-      <pubDate>Mon, 23 Nov 2026 18:33:41 +0000</pubDate>
+      <title>South Korea Considers Potential $3 Billion Dollar Bond Sale｜中文：韩国考虑可能发行30亿美元的债券</title>
+      <link>https://www.bloomberg.com/news/articles/2026-11-24/south-korea-considers-potential-3-billion-dollar-bond-sale</link>
+      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-24/south-korea-considers-potential-3-billion-dollar-bond-sale</guid>
+      <pubDate>Tue, 24 Nov 2026 06:20:31 +0000</pubDate>
       <category>全球市场与要闻</category>
       <source url="https://bloomberg.com">彭博社 · 市场</source>
-      <description>中文：Adam Sinn 创立的对冲基金 Aspire Commodities 聘请了两名专注于美国最大电网电力和天然气的交易员，该电网的数据中心繁荣正在推动能源价格大幅波动
-原文：Aspire Commodities, the hedge fund founded by Ada…</description>
-    </item>
-    <item>
-      <title>上期所原油期货2701合约夜盘收跌2.01%，报571.30元人民币/桶。 沪金夜盘收涨2.22%，沪银收涨4.66%。</title>
-      <link>https://wallstreetcn.com/livenews/3204465</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3204465</guid>
-      <pubDate>Mon, 23 Nov 2026 18:30:14 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · A 股快讯</source>
+      <description>中文：韩国正在考虑于1月发行约30亿美元的美元计价债券
+原文：South Korea is considering issuing potentially about $3 billion of dollar-denominated notes in January.</description>
     </item>
   </channel>
 </rss>
