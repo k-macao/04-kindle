@@ -764,6 +764,12 @@ class BuildTest(unittest.TestCase):
                             encoding="utf-8")
             self.assertFalse(stocks_watchdog.catch_up_needed(
                 path, now=parse("2026-11-24T16:40:00Z"), log=lambda *_: None))
+            # 旧版把接口请求时刻当行情时刻，曾把 11-24 收盘写成北京时间 11-25
+            # 00:45；这种「未来交易日」不能算覆盖成功，要重抓纠正。
+            path.write_text(json.dumps({"data_time": "2026-11-24T16:45:50Z"}),
+                            encoding="utf-8")
+            self.assertTrue(stocks_watchdog.catch_up_needed(
+                path, now=parse("2026-11-24T16:50:00Z"), log=lambda *_: None))
 
     def test_close_catch_up_rolls_weekend_back_to_friday(self):
         parse = stocks_watchdog.parse_stamp
@@ -875,6 +881,38 @@ class IndexRowsTest(unittest.TestCase):
         self.assertFalse(out[0]["is_sector"])
         self.assertEqual(out[1]["name"], "种植业与林业")
         self.assertTrue(out[1]["is_sector"])
+
+
+class AShareTimestampTest(unittest.TestCase):
+    """接口信封给请求时间；休市补抓必须显示实际可成交的最后时点。"""
+
+    @staticmethod
+    def bj_ms(text):
+        from datetime import datetime, timedelta, timezone
+        local = datetime.strptime(text, "%Y-%m-%d %H:%M:%S").replace(tzinfo=timezone.utc)
+        return int((local - timedelta(hours=8)).timestamp() * 1000)
+
+    def normalized(self, text):
+        stamp = fetch_stocks.normalize_a_share_timestamp(self.bj_ms(text))
+        from datetime import datetime, timedelta, timezone
+        return (datetime.fromtimestamp(stamp / 1000, tz=timezone.utc)
+                + timedelta(hours=8)).strftime("%Y-%m-%d %H:%M:%S")
+
+    def test_live_request_time_is_kept(self):
+        self.assertEqual(self.normalized("2026-11-24 10:17:23"),
+                         "2026-11-24 10:17:23")
+
+    def test_lunch_and_after_close_are_clamped(self):
+        self.assertEqual(self.normalized("2026-11-24 12:06:18"),
+                         "2026-11-24 11:30:00")
+        self.assertEqual(self.normalized("2026-11-24 16:46:38"),
+                         "2026-11-24 15:00:00")
+
+    def test_next_morning_and_weekend_use_previous_workday_close(self):
+        self.assertEqual(self.normalized("2026-11-25 00:45:50"),
+                         "2026-11-24 15:00:00")
+        self.assertEqual(self.normalized("2026-11-28 10:00:00"),
+                         "2026-11-27 15:00:00")
 
 
 class MarketBreadthTest(unittest.TestCase):
