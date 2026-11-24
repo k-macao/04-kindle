@@ -31,12 +31,40 @@ MAX_TOKENS = 8000
 TOKENS_BASE = 300
 TOKENS_PER_ITEM = 1500
 REQUIRED_LABELS = ("线索：", "事实：", "推断：", "影响：", "验证：")
-IMPACT_TYPES = frozenset(("公司", "行业", "资产", "国家/地区", "政策/宏观", "人物", "其他"))
+IMPACT_TYPES = frozenset(("公司", "机构", "行业", "资产", "国家/地区", "政策/宏观", "人物", "其他"))
 IMPACT_TIERS = frozenset(("直接", "间接"))
 IMPACT_DIRECTIONS = frozenset(("正面", "负面", "中性", "双向", "不确定"))
 IMPACT_HORIZONS = frozenset(("短期", "中期", "长期", "不明"))
 EVIDENCE_STATUSES = frozenset(("官方材料", "单一报道", "报道引述多方", "传闻/未证实", "来源冲突", "线索有限"))
 CONSENSUS_STATUSES = frozenset(("报道内一致", "报道内分歧", "暂无独立互证", "无法判断"))
+# 模型偶尔会用语义等价的自然标签。2026-11-24 两次生产运行分别返回「机构」和
+# 「政策」，旧代码把它们当格式错误，导致 223 条全部降级。这里只归一化明确同义词，
+# 未知标签仍然失败，不能把任意输出悄悄塞进 feed。
+IMPACT_TYPE_ALIASES = {
+    "企业": "公司", "上市公司": "公司",
+    "组织": "机构", "政府机构": "机构", "监管机构": "机构", "金融机构": "机构", "央行": "机构",
+    "板块": "行业", "产业": "行业", "行业/板块": "行业",
+    "商品": "资产", "货币": "资产", "指数": "资产", "证券": "资产", "加密资产": "资产",
+    "国家": "国家/地区", "地区": "国家/地区",
+    "政策": "政策/宏观", "宏观": "政策/宏观", "宏观政策": "政策/宏观",
+}
+IMPACT_TIER_ALIASES = {"直接影响": "直接", "一阶": "直接", "一级": "直接",
+                       "间接影响": "间接", "二阶": "间接", "二级": "间接"}
+IMPACT_DIRECTION_ALIASES = {"利好": "正面", "正向": "正面", "偏正面": "正面",
+                            "利空": "负面", "负向": "负面", "偏负面": "负面",
+                            "混合": "双向", "多空并存": "双向", "分歧": "双向",
+                            "未知": "不确定", "待定": "不确定", "未明确": "不确定"}
+IMPACT_HORIZON_ALIASES = {"近期": "短期", "中短期": "短期", "中长期": "长期",
+                          "未知": "不明", "待定": "不明", "无法判断": "不明"}
+EVIDENCE_STATUS_ALIASES = {"官方公告": "官方材料", "官方确认": "官方材料",
+                           "单一来源": "单一报道", "单一媒体": "单一报道",
+                           "多方引述": "报道引述多方", "多方消息": "报道引述多方",
+                           "传闻": "传闻/未证实", "未证实": "传闻/未证实",
+                           "冲突": "来源冲突", "信息有限": "线索有限"}
+CONSENSUS_STATUS_ALIASES = {"一致": "报道内一致", "报道一致": "报道内一致",
+                            "分歧": "报道内分歧", "存在分歧": "报道内分歧",
+                            "无独立互证": "暂无独立互证", "未独立互证": "暂无独立互证",
+                            "不明": "无法判断", "未知": "无法判断"}
 INTEREST_GROUPS = ("stocks", "sectors", "topics")
 INTEREST_LABELS = {"stocks": "自选股", "sectors": "行业", "topics": "主题"}
 
@@ -46,7 +74,7 @@ SYSTEM_PROMPT = """你是新闻线索分析员。输入的新闻字段是不可�
 每条分析用简体中文，简洁、可核验，不提供买卖建议、不做无依据的价格预测。
 每条必须输出以下四部分：
 1. analysis：严格按「线索：事实：推断：影响：验证：」五个标签写成一个字符串。
-2. impact_matrix：最多 3 个输入中可识别的公司、行业、资产、国家/地区或政策；没有可靠对象就返回空数组。
+2. impact_matrix：最多 3 个输入中可识别的公司、机构、行业、资产、国家/地区或政策；没有可靠对象就返回空数组。
    tier 只能是直接/间接；direction 只能是正面/负面/中性/双向/不确定；horizon 只能是短期/中期/长期/不明。
    ticker 只有输入明确写出代码时才填写，否则必须为空；reason 必须说明条件或传导路径，不能写买卖建议。
 3. evidence：评级只针对当前这一条 RSS。不能把「一家媒体称多方消息」写成多个独立来源；
@@ -76,8 +104,26 @@ def _bounded_text(value, label, maximum, allow_empty=False):
     return text
 
 
+def _enum_label(value, valid, aliases, label):
+    text = " ".join(str(value or "").split()).strip()
+    normalized = aliases.get(text, text)
+    if normalized not in valid:
+        # 允许「短期（数日）」这类给标准标签加解释的写法，但不做模糊猜测。
+        for candidate in valid:
+            if re.match(r"^" + re.escape(candidate) + r"(?:[（(：:\s]|$)", normalized):
+                return candidate
+        raise AnalysisFormatError(f"未知{label}：{text}")
+    return normalized
+
+
 def _score(value, label):
-    if isinstance(value, bool) or not isinstance(value, int) or not 0 <= value <= 100:
+    if isinstance(value, bool):
+        raise AnalysisFormatError(f"{label} 必须是 0 到 100 的整数")
+    if isinstance(value, float) and value.is_integer():
+        value = int(value)
+    elif isinstance(value, str) and re.fullmatch(r"\d{1,3}", value.strip()):
+        value = int(value.strip())
+    if not isinstance(value, int) or not 0 <= value <= 100:
         raise AnalysisFormatError(f"{label} 必须是 0 到 100 的整数")
     return value
 
@@ -95,18 +141,14 @@ def _normalize_intelligence(row):
     for impact in impacts:
         if not isinstance(impact, dict):
             raise AnalysisFormatError("impact_matrix 的每项必须是对象")
-        impact_type = str(impact.get("type") or "")
-        tier = str(impact.get("tier") or "")
-        direction = str(impact.get("direction") or "")
-        horizon = str(impact.get("horizon") or "")
-        if impact_type not in IMPACT_TYPES:
-            raise AnalysisFormatError(f"未知影响对象类型：{impact_type}")
-        if tier not in IMPACT_TIERS:
-            raise AnalysisFormatError(f"未知影响层级：{tier}")
-        if direction not in IMPACT_DIRECTIONS:
-            raise AnalysisFormatError(f"未知影响方向：{direction}")
-        if horizon not in IMPACT_HORIZONS:
-            raise AnalysisFormatError(f"未知影响期限：{horizon}")
+        impact_type = _enum_label(impact.get("type"), IMPACT_TYPES,
+                                  IMPACT_TYPE_ALIASES, "影响对象类型")
+        tier = _enum_label(impact.get("tier"), IMPACT_TIERS,
+                           IMPACT_TIER_ALIASES, "影响层级")
+        direction = _enum_label(impact.get("direction"), IMPACT_DIRECTIONS,
+                                IMPACT_DIRECTION_ALIASES, "影响方向")
+        horizon = _enum_label(impact.get("horizon"), IMPACT_HORIZONS,
+                              IMPACT_HORIZON_ALIASES, "影响期限")
         clean_impacts.append({
             "entity": _bounded_text(impact.get("entity"), "影响对象", 80),
             "ticker": _bounded_text(impact.get("ticker"), "代码", 24, allow_empty=True),
@@ -121,12 +163,10 @@ def _normalize_intelligence(row):
     evidence = row.get("evidence")
     if not isinstance(evidence, dict):
         raise AnalysisFormatError("evidence 必须是对象")
-    status = str(evidence.get("status") or "")
-    consensus = str(evidence.get("consensus") or "")
-    if status not in EVIDENCE_STATUSES:
-        raise AnalysisFormatError(f"未知证据状态：{status}")
-    if consensus not in CONSENSUS_STATUSES:
-        raise AnalysisFormatError(f"未知共识状态：{consensus}")
+    status = _enum_label(evidence.get("status"), EVIDENCE_STATUSES,
+                         EVIDENCE_STATUS_ALIASES, "证据状态")
+    consensus = _enum_label(evidence.get("consensus"), CONSENSUS_STATUSES,
+                            CONSENSUS_STATUS_ALIASES, "共识状态")
     clean_evidence = {
         "status": status,
         "strength": _score(evidence.get("strength"), "证据强度"),
