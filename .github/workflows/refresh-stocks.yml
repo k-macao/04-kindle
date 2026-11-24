@@ -7,15 +7,14 @@ name: Refresh THS stock panel
 #
 # 频率说明：GitHub Actions 的 cron 在这个仓库**极不靠谱**——实测有 4.2 小时 0 次、
 # 也有本该 07:48 跑的班次迟到到 18:34（收盘后 3.5 小时）才跑。所以不能指望
-# cron 卡在开盘那一刻。这里的做法是「一次触发，长期常驻」：
+# cron 卡在开盘那一刻。这里采用「窗口内连续刷新 + 窗口外收盘补抓」：
 #
 #   1. cron / push / 手动 dispatch 任意一次把本工作流叫起来；
-#   2. "常驻自循环" 步骤留在同一个 runner 里：
-#        · 抓取窗口内（北京 09:00–15:30，周一到周五）每 15 分钟抓一轮；
-#        · 窗口外（收盘后、深夜、周末）长睡，每 30 分钟醒一次看一眼；
-#      因为常驻，一次**迟到几小时**的 cron 也不会白跑——它会一直等到次日开盘自己开工。
-#   3. 预算（约 5.5 小时）用完时，如果今天还有活要干，就 workflow_dispatch
-#      把下一棒交给自己（GITHUB_TOKEN 可以触发 dispatch，已实测），接力继续。
+#   2. 抓取窗口内（北京 09:00–15:30，周一到周五）每 15 分钟抓一轮；
+#   3. 若 cron 迟到到收盘后，检查 stocks.json 是否缺最近工作日快照：缺就补抓一次，
+#      不缺就立即退出。不能再让窗口外任务空睡 5.5 小时——实测这样会把后续 cron 全堵在队列里，
+#      反而整整漏掉一个交易日；
+#   4. 盘中预算用完且还没收盘时，workflow_dispatch 把下一棒交给自己继续。
 #
 # refresh-stocks-watchdog.yml 是额外的保险：被叫醒时若发现 data_time 落后
 # >25 分钟（且在该抓的窗口内）就补一枪。
@@ -31,8 +30,8 @@ on:
   schedule:
     # UTC 01:00–07:30 = 北京 09:00–15:30，周一到周五，每 15 分钟一班
     # （分钟错开整点 3/18/33/48，避免和全网整点任务撞车被延迟）。
-    # 注意这只决定「有没有人按第一次按钮」，跑起来之后靠常驻自循环接力；
-    # cron 迟到几小时也不会白费（窗口外它会睡到次日开盘）。
+    # 注意这只决定「有没有人按第一次按钮」；窗口内由自循环接力。
+    # cron 迟到到收盘后也不会白费：缺当天快照就补抓一次，然后立即释放 runner。
     - cron: "3,18,33,48 1-7 * * 1-5"
   workflow_dispatch:
   push:
@@ -51,7 +50,8 @@ permissions:
 
 concurrency:
   group: refresh-stocks
-  cancel-in-progress: false
+  # 定时班次不互相踢掉；但修复代码合并时要立刻替换正在窗口外空等的旧版本。
+  cancel-in-progress: ${{ github.event_name == 'push' }}
 
 jobs:
   refresh:
@@ -114,14 +114,11 @@ jobs:
       # ── 交易时段自循环 ────────────────────────────────────────────────
       # 一次触发，在同一个 runner 里连续刷到预算用完，再 workflow_dispatch 交接下一棒。
       # 每轮：抓取 → 排版 → 自检 → 提交（行情没变不提交）。
-      # ── 常驻自循环 ──────────────────────────────────────────────────
-      # 一次触发后就一直待在 runner 里：抓取窗口内每 15 分钟一轮，窗口外长睡
-      # （每 30 分钟醒一次看一眼），跨过收盘/整夜，次日开盘自动继续，直到预算用完。
-      #
-      # 为什么不在窗口外直接退出：cron 在本仓库会迟到几小时（实测 07:48 那班
-      # 18:34 才跑）。如果窗口外立刻退出，那次触发就白费了；常驻才能把「被迟到
-      # 叫醒」变成「一直活着，开盘自己开工」。
-      - name: 常驻自循环（窗口内每 15 分钟一轮，窗口外长睡，跑满预算交接）
+      # ── 窗口内自循环 / 窗口外补抓 ──────────────────────────────────
+      # 窗口内每 15 分钟一轮；窗口外只在缺最近工作日快照时补抓一次，否则立刻退出。
+      # 旧方案会在窗口外空睡 5.5 小时：11-24 的所有 cron 都被堵到收盘后，面板最终仍停在
+      # 11-23。迟到任务真正该做的是补当天收盘数据，而不是占着 runner 等第二天。
+      - name: 自循环（盘中每 15 分钟；迟到则补抓最近收盘）
         env:
           HITHINK_FINANCE_API_KEY: ${{ secrets.HITHINK_FINANCE_API_KEY }}
           THS_API_KEY: ${{ secrets.THS_API_KEY }}
@@ -144,20 +141,21 @@ jobs:
               break
             fi
 
+            catch_up=0
             if ! python tools/stocks_watchdog.py --in-window; then
-              # 窗口外（收盘后/深夜/周末）：睡一大段再看。
-              # cap 1800 = 最多睡 30 分钟，这样作业里不会出现一次超长 sleep，
-              # 也方便「预算到点」及时收尾；下限 60 秒，避免空转刷日志。
-              nap=$(python tools/stocks_watchdog.py --sleep-until-window 1800)
-              [ $((now + nap)) -gt "$deadline" ] && nap=$((deadline - now))
-              [ "$nap" -lt 60 ] && nap=60
-              [ $((now + nap)) -gt "$deadline" ] && nap=$((deadline - now))
-              echo "窗口外：睡 $((nap / 60)) 分 $((nap % 60)) 秒再看"
-              sleep "$nap"
-              continue
+              # 迟到到收盘后/凌晨：缺最近工作日快照就补一次；已经有就立刻释放 runner。
+              if [ "$round" -eq 0 ] \
+                 && python tools/stocks_watchdog.py --needs-catch-up --manifest site/stocks.json; then
+                catch_up=1
+                echo "窗口外但面板缺最近工作日快照：补抓一轮后退出"
+              else
+                echo "窗口外且面板数据已覆盖最近工作日：本轮结束"
+                break
+              fi
             fi
 
             round=$((round + 1))
+            round_ok=0
             echo "── 第 $round 轮 · $(date -u +%FT%TZ) ──"
 
             # 抓取只负责取回并归一化 → stocks_data.json（不进 Git）；
@@ -184,6 +182,7 @@ jobs:
                 new_hash=$(python -c "import json;print(json.load(open('site/stocks.json'))['data_hash'])")
                 if [ -n "$old_hash" ] && [ "$old_hash" = "$new_hash" ]; then
                   echo "行情没变（data_hash $new_hash），跳过提交"
+                  round_ok=1
                 else
                   # counts 字段随面板升级变过（stocks → sectors/market/hk），
                   # 这里用 .get 兜底：提交说明拼不出来不该毁掉整轮抓取。
@@ -191,16 +190,31 @@ jobs:
                   stamp=$(python -c "import json;print(json.load(open('site/stocks.json'))['generated'])")
                   git commit -q -m "chore(stocks): 同花顺行情面板刷新（${counts}，生成于 ${stamp} 北京时间）"
                   # push 可能被别的提交抢先（工作流/PR），失败就 rebase 再来一次。
-                  if ! git push -q origin "HEAD:refs/heads/${GITHUB_REF_NAME}"; then
+                  if git push -q origin "HEAD:refs/heads/${GITHUB_REF_NAME}"; then
+                    round_ok=1
+                  else
                     echo "push 被拒，rebase 后重试"
-                    git pull --rebase -q origin "${GITHUB_REF_NAME}" && \
-                      git push -q origin "HEAD:refs/heads/${GITHUB_REF_NAME}" || \
+                    if git pull --rebase -q origin "${GITHUB_REF_NAME}" \
+                       && git push -q origin "HEAD:refs/heads/${GITHUB_REF_NAME}"; then
+                      round_ok=1
+                    else
                       echo "::warning::这一轮没推上去，下一轮再试"
+                    fi
                   fi
                 fi
               else
                 echo "::warning::第 $round 轮排版/自检没过（可能是空壳快照），不提交"
               fi
+            fi
+
+            if [ "$catch_up" -eq 1 ]; then
+              if [ "$round_ok" -ne 1 ]; then
+                echo "::error::收盘补抓没有产出通过自检的面板"
+                echo "ABORT_HANDOFF=1" >> "$GITHUB_ENV"
+                exit 1
+              fi
+              echo "收盘补抓完成，立即释放 runner"
+              break
             fi
 
             # 窗口内 15 分钟一轮；别睡过预算。

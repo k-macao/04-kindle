@@ -7,7 +7,7 @@ GitHub Actions 的 cron 会延迟、负载高时直接丢弃——实测过 ``*/
 
 - 盘中（北京时间周一至周五 09:15–15:05）且落后超过 ``--stale-minutes`` →
   ``gh workflow run refresh-stocks.yml`` 补一轮；
-- 非盘中（收盘后、开盘前、周末）→ 什么都不做，数据本来就停在收盘那一刻；
+- 非盘中通常不补跑；但若上一个应有的交易日收盘快照缺失，允许工作流补抓一次；
 - 已经有一轮在排队/运行 → 不重复补跑。
 
 只做「叫醒」：抓取、排版、提交、判重都在 refresh-stocks.yml 里，逻辑只有一份。
@@ -26,6 +26,7 @@ import subprocess
 import sys
 import time
 from datetime import datetime, timedelta, timezone
+from pathlib import Path
 
 BEIJING_OFFSET = timedelta(hours=8)
 STALE_MINUTES = 25
@@ -75,6 +76,43 @@ def seconds_until_window(now, cap=None):
         delta = (target - beijing).total_seconds()
         return int(min(delta, cap) if cap else delta)
     return int(cap or 3600)
+
+
+def expected_session_date(now):
+    """此刻至少应有哪一个工作日的收盘/最新快照（北京时间日期）。
+
+    开盘前应有前一工作日，交易窗口开始后应有当天；周末退到周五。这里不猜法定
+    节假日——若当天休市，补抓会拿到上一交易日且 data_hash 不变，不会产生假数据。
+    """
+    beijing = now.astimezone(timezone.utc) + BEIJING_OFFSET
+    day = beijing.date()
+    minutes = beijing.hour * 60 + beijing.minute
+    if day.weekday() >= 5 or minutes < LOOP_START_MIN:
+        day -= timedelta(days=1)
+    while day.weekday() >= 5:
+        day -= timedelta(days=1)
+    return day
+
+
+def catch_up_needed(path, now=None, log=print):
+    """窗口外是否缺少最近应有交易日的数据；缺失/坏清单也应尝试补抓一次。"""
+    now = now or datetime.now(timezone.utc)
+    expected = expected_session_date(now)
+    try:
+        data = json.loads(Path(path).read_text(encoding="utf-8"))
+    except (OSError, ValueError) as exc:
+        log(f"面板清单读不到（{exc}）：需要补抓")
+        return True
+    stamp = parse_stamp(data.get("data_time"))
+    if stamp is None:
+        log("面板清单没有可用 data_time：需要补抓")
+        return True
+    actual = (stamp.astimezone(timezone.utc) + BEIJING_OFFSET).date()
+    if actual < expected:
+        log(f"面板数据日期 {actual}，应至少到 {expected}：需要补抓收盘快照")
+        return True
+    log(f"面板数据日期 {actual} 已覆盖应有交易日 {expected}，窗口外无需占用 runner")
+    return False
 
 
 def in_session(now):
@@ -150,7 +188,7 @@ def check(path, now=None, stale_minutes=STALE_MINUTES, repo=None, do_dispatch=Fa
     """看一眼清单，必要时补跑；返回 ("fresh"|"outside"|"busy"|"dispatched"|"nostamp")。"""
     now = now or datetime.now(timezone.utc)
     try:
-        data = json.loads(open(path, encoding="utf-8").read())
+        data = json.loads(Path(path).read_text(encoding="utf-8"))
     except (OSError, ValueError) as exc:
         raise SystemExit(f"读不到 {path}：{exc}")
 
@@ -184,8 +222,9 @@ def main(argv=None):
 
     除了体检，还给 refresh-stocks.yml 的自循环两个小开关：
 
-    ``--check-session``  在交易时段内 → 退出码 0，否则 1（bash 里 `if ...; then` 就能用）；
-    ``--handoff``        仍在交易时段 → ``workflow_dispatch`` 把下一棒交给自己，否则什么都不做。
+    ``--check-session``   在交易时段内 → 退出码 0，否则 1；
+    ``--needs-catch-up``  缺最近工作日快照 → 退出码 0，供迟到的工作流补抓一次；
+    ``--handoff``         仍在交易时段 → ``workflow_dispatch`` 把下一棒交给自己，否则什么都不做。
     """
     parser = argparse.ArgumentParser(description="行情面板体检：落后就补跑一轮")
     parser.add_argument("--manifest", default="site/stocks.json",
@@ -206,7 +245,14 @@ def main(argv=None):
     parser.add_argument("--sleep-until-window", type=int, default=None,
                         metavar="CAP",
                         help="距下一个该干活的时刻还有多少秒（最多 CAP 秒）")
+    parser.add_argument("--needs-catch-up", action="store_true",
+                        help="窗口外缺少最近工作日快照时返回 0，否则返回 1（工作流用）")
     args = parser.parse_args(argv)
+
+    if args.needs_catch_up:
+        now = parse_stamp(args.now) if args.now else None
+        now = now or datetime.now(timezone.utc)
+        return 0 if catch_up_needed(args.manifest, now=now) else 1
 
     if args.in_window:
         now = parse_stamp(args.now) if args.now else None

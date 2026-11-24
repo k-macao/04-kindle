@@ -11,6 +11,14 @@ on:
   schedule:
     - cron: "0 * * * *"
   workflow_dispatch:
+  # 转换/自检/工作流本身改动时立即生成一份，既做真实数据测试，也不用等不可靠的 hourly cron。
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/refresh-epub.yml"
+      - "tools/build_epub.py"
+      - "tools/check_no_status.py"
+      - "kindle_report.py"
 
 permissions:
   contents: write
@@ -108,5 +116,9 @@ jobs:
           stamp=$(python -c "import json;print(json.load(open('site/epub.json'))['generated'])")
           git commit --allow-empty -m "chore(site): 刷新 004 EPUB 与纯文本（更新于 ${stamp}）"
           # 定时运行时 HEAD 就是默认分支；手动指定 ref 运行时是游离 HEAD，
-          # 所以显式推到当前 ref 对应的分支，两种触发方式都能推上去。
-          git push origin "HEAD:refs/heads/${GITHUB_REF_NAME}"
+          # 所以显式推到当前 ref 对应的分支。其它刷新任务可能刚好先推进 main，
+          # 被拒时 rebase 再推，不能抓取/自检都成功却丢掉本轮数据。
+          if ! git push origin "HEAD:refs/heads/${GITHUB_REF_NAME}"; then
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+            git push origin "HEAD:refs/heads/${GITHUB_REF_NAME}"
+          fi

@@ -586,3 +586,20 @@ class DateOnlyFreshnessTest(unittest.TestCase):
         # 不传 kind 时保持旧行为：午夜就是一个时刻（向后兼容既有调用方）。
         ok, _ = be.check_data_age("2026-11-06T00:00:00Z", self.NOW, 12)
         self.assertFalse(ok)
+
+
+class RefreshWorkflowTest(unittest.TestCase):
+    """转换代码一改就跑真实数据；推送撞上别的自动更新时不能丢产物。"""
+
+    def test_code_push_triggers_a_real_epub_refresh(self):
+        workflow = (REPO / ".github" / "workflows" / "refresh-epub.yml").read_text(
+            encoding="utf-8")
+        self.assertIn("push:", workflow)
+        for path in ("tools/build_epub.py", "tools/check_no_status.py", "kindle_report.py"):
+            self.assertIn(f'      - "{path}"', workflow)
+
+    def test_publish_rebases_once_when_main_moved(self):
+        workflow = (REPO / ".github" / "workflows" / "refresh-epub.yml").read_text(
+            encoding="utf-8")
+        self.assertIn('if ! git push origin "HEAD:refs/heads/${GITHUB_REF_NAME}"; then', workflow)
+        self.assertIn("git pull --rebase --autostash", workflow)
