@@ -83,6 +83,39 @@ class NetWiringTest(unittest.TestCase):
         self.assertIn('sig = "stocks_epub_sig"', MAIN)
         self.assertIn("self.settings.stocks_sig = sig", MAIN)
 
+    def test_each_book_has_independent_signature_and_freshness_cache(self):
+        # 报告、新闻、行情是三本独立的书：一份 generated 更新不能误命中另一份缓存。
+        specs = {
+            "doc": ("doc_sig", "data_time", "data_time_kind"),
+            "news": ("news_sig", "news_data_time", "news_data_time_kind"),
+            "stocks": ("stocks_epub_sig", "stocks_data_time", "stocks_data_time_kind"),
+        }
+        for kind, (sig, stamp, precision) in specs.items():
+            with self.subTest(kind=kind):
+                pattern = (rf"{kind}\s*=\s*\{{[^}}]*sig\s*=\s*\"{sig}\"[^}}]*"
+                           rf"data_time\s*=\s*\"{stamp}\"[^}}]*"
+                           rf"data_time_kind\s*=\s*\"{precision}\"")
+                self.assertRegex(MAIN, pattern)
+        self.assertEqual(len({values[0] for values in specs.values()}), len(specs))
+
+    def test_generated_controls_download_but_data_time_is_always_refreshed(self):
+        # 清单 generated 是内容版本签名；data_time/kind 是新鲜度显示，必须在同签名
+        # 快路径之前写入，不能因 EPUB 已缓存就留着旧时间或旧精度。
+        doc = MAIN[MAIN.index("function Report:refreshDoc(kind)"):]
+        doc = doc[:doc.index("\nend\n")]
+        self.assertIn("local sig = manifest.generated", doc)
+        self.assertLess(doc.index("manifest.data_time"), doc.index("if sig == tostring"))
+        self.assertLess(doc.index("manifest.data_time_kind"), doc.index("if sig == tostring"))
+
+        stocks = MAIN[MAIN.index("function Report:refreshStocks()"):]
+        stocks = stocks[:stocks.index("\nend\n")]
+        self.assertIn("local sig = manifest.generated", stocks)
+        self.assertLess(stocks.index("manifest.data_time"), stocks.index("refreshStocksEpub"))
+        self.assertLess(stocks.index("manifest.data_time_kind"), stocks.index("refreshStocksEpub"))
+        # EPUB 与文本回退分别记 sig；卡片下载失败后仍能更新独立的文本缓存。
+        self.assertIn("self.settings.stocks_sig = sig", stocks)
+        self.assertIn("self:refreshStocksEpub(manifest, sig)", stocks)
+
     def test_stocks_epub_prefix_does_not_collide_with_text_cache(self):
         # pruneDocs 按前缀删旧文件：卡片版前缀不能是纯文本缓存的超串，
         # 否则清旧 EPUB 时会把回退用的 octopus004-stocks.txt 一起删掉。

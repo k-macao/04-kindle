@@ -726,9 +726,8 @@ class BuildTest(unittest.TestCase):
             stocks_watchdog.dispatch = original
 
     def test_loop_window_and_nap(self):
-        # 常驻循环的「该不该干活」窗口：北京 09:00–15:30，周一到周五。
-        # 比 in_session（09:15–15:05）宽，且**窗口外不退出**——cron 会迟到几小时，
-        # 一次迟到的触发应该能睡到次日开盘自己开工。
+        # 自循环的「该不该干活」窗口：北京 09:00–15:30，周一到周五。
+        # 比 in_session（09:15–15:05）宽；seconds_until_window 仍供诊断与手工调用。
         parse = stocks_watchdog.parse_stamp
         self.assertTrue(stocks_watchdog.in_loop_window(parse("2026-11-18T01:00:00Z")))   # 09:00
         self.assertFalse(stocks_watchdog.in_loop_window(parse("2026-11-18T00:59:00Z")))  # 08:59
@@ -748,8 +747,47 @@ class BuildTest(unittest.TestCase):
         n = stocks_watchdog.seconds_until_window(friday)
         self.assertAlmostEqual(n / 3600, 64.0, delta=0.1)   # 周五17:00 → 周一09:00 = 64h
 
+    def test_close_catch_up_detects_the_missed_trading_day(self):
+        parse = stocks_watchdog.parse_stamp
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "stocks.json"
+            # 生产事故复现：11-24 的 cron 全迟到到收盘后，但面板还停在 11-23。
+            path.write_text(json.dumps({"data_time": "2026-11-23T07:20:01Z"}),
+                            encoding="utf-8")
+            self.assertTrue(stocks_watchdog.catch_up_needed(
+                path, now=parse("2026-11-24T08:12:43Z"), log=lambda *_: None))  # 北京 16:12
+            # 次日开盘前也应补回昨天遗漏的收盘快照。
+            self.assertTrue(stocks_watchdog.catch_up_needed(
+                path, now=parse("2026-11-24T16:40:00Z"), log=lambda *_: None))  # 北京 00:40
+            # 已经有 11-24 快照就不占 runner。
+            path.write_text(json.dumps({"data_time": "2026-11-24T07:20:01Z"}),
+                            encoding="utf-8")
+            self.assertFalse(stocks_watchdog.catch_up_needed(
+                path, now=parse("2026-11-24T16:40:00Z"), log=lambda *_: None))
+
+    def test_close_catch_up_rolls_weekend_back_to_friday(self):
+        parse = stocks_watchdog.parse_stamp
+        self.assertEqual(stocks_watchdog.expected_session_date(
+            parse("2026-11-21T02:00:00Z")).isoformat(), "2026-11-20")  # 周六
+        self.assertEqual(stocks_watchdog.expected_session_date(
+            parse("2026-11-23T00:30:00Z")).isoformat(), "2026-11-20")  # 周一盘前
+        self.assertEqual(stocks_watchdog.expected_session_date(
+            parse("2026-11-23T08:00:00Z")).isoformat(), "2026-11-23")  # 周一收盘后
+
+    def test_close_catch_up_cli_exit_code(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "stocks.json"
+            path.write_text(json.dumps({"data_time": "2026-11-23T07:20:01Z"}),
+                            encoding="utf-8")
+            args = ["--needs-catch-up", "--manifest", str(path),
+                    "--now", "2026-11-24T08:12:43Z"]
+            self.assertEqual(stocks_watchdog.main(args), 0)
+            path.write_text(json.dumps({"data_time": "2026-11-24T07:20:01Z"}),
+                            encoding="utf-8")
+            self.assertEqual(stocks_watchdog.main(args), 1)
+
     def test_self_loop_guards(self):
-        # 单个 step 里连续跑 6 小时，必须自己会停：无 Key/接口挂了不能空转，
+        # 单个 step 盘中最多连续跑 6 小时，必须自己会停：无 Key/接口挂了不能空转，
         # 连续失败 4 轮就中止并且不交接下一棒。
         #
         # 这里不用 PyYAML：CI 的 runner 上没装，import yaml 会让整步失败
@@ -763,13 +801,16 @@ class BuildTest(unittest.TestCase):
         self.assertLessEqual(int(minutes[0]), 360)                     # 作业上限 6 小时
         # 交接下一棒要用 actions: write
         self.assertRegex(text, r"permissions:\s*\n\s*contents:\s*write\s*\n\s*actions:\s*write")
+        self.assertIn("cancel-in-progress: ${{ github.event_name == 'push' }}", text)
         steps = re.split(r"\n      - name: ", text)
-        loop = [s for s in steps if s.startswith("常驻自循环")][0]
-        # 窗口外不能退出（cron 会迟到几小时），要长睡等开盘
+        loop = [s for s in steps if s.startswith("自循环（盘中")][0]
+        # 窗口外不能再空睡 5.5 小时：缺最近收盘就补一次，否则 break 释放 runner。
         self.assertIn("--in-window", loop)
-        self.assertIn("--sleep-until-window", loop)
-        self.assertNotIn("--check-session", loop, "常驻循环不该用「盘中就退出」的旧判断")
-        self.assertIn("deadline", loop)                               # 有预算上限
+        self.assertIn("--needs-catch-up", loop)
+        self.assertNotIn("--sleep-until-window", loop)
+        self.assertIn('echo "窗口外且面板数据已覆盖最近工作日：本轮结束"', loop)
+        self.assertIn("break", loop)
+        self.assertIn("deadline", loop)                               # 盘中仍有预算上限
         self.assertIn("fails", loop)                                  # 连续失败计数
         self.assertIn("ABORT_HANDOFF=1", loop)                        # 中止标记
         handoff = [s for s in steps if s.startswith("交接下一棒")][0]
