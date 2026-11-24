@@ -48,7 +48,7 @@ import json
 import os
 import sys
 import time
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
@@ -63,6 +63,37 @@ DEFAULT_BASE_URL = "https://fuyao.aicubes.cn"
 # 官方推荐的环境变量名（见 Financial-API README「获取统一 API Key」一节）；
 # 兼容仓库 .env.example 里的 API_KEY，以及仓库 Secret 的 THS_API_KEY / THS_KEY。
 API_KEY_ENV_VARS = ("HITHINK_FINANCE_API_KEY", "THS_API_KEY", "THS_KEY", "API_KEY")
+BEIJING_OFFSET = timedelta(hours=8)
+
+
+def normalize_a_share_timestamp(stamp):
+    """把同花顺信封的请求时间校正为这份 A 股快照实际代表的时点。
+
+    snapshot 的 ``data.timestamp`` 是接口响应时间，不是最后一笔行情时间。盘中二者
+    足够接近；但收盘后补抓时它会变成深夜甚至次日，面板因而曾把 11 月 24 日收盘
+    数据写成 11 月 25 日 00:45 的「精确行情」。休市阶段要钳到最后一个可能成交的
+    时点：午休 11:30、收盘后 15:00、开盘前/周末为上一个工作日 15:00。
+    """
+    if not isinstance(stamp, (int, float)):
+        return None
+    beijing = datetime.fromtimestamp(stamp / 1000, tz=timezone.utc) + BEIJING_OFFSET
+    day = beijing.date()
+    minutes = beijing.hour * 60 + beijing.minute
+    hour_minute = None
+    if day.weekday() >= 5 or minutes < 9 * 60:
+        day -= timedelta(days=1)
+        while day.weekday() >= 5:
+            day -= timedelta(days=1)
+        hour_minute = (15, 0)
+    elif 11 * 60 + 30 <= minutes < 13 * 60:
+        hour_minute = (11, 30)
+    elif minutes >= 15 * 60:
+        hour_minute = (15, 0)
+    if hour_minute is None:
+        return int(stamp)
+    local_as_utc = datetime(day.year, day.month, day.day, *hour_minute,
+                            tzinfo=timezone.utc)
+    return int((local_as_utc - BEIJING_OFFSET).timestamp() * 1000)
 # 可重试的业务码：限流与服务端/上游异常（见 docs/api/README.md 错误表）。
 RETRYABLE_CODES = (4001, 5001, 5002, 5003)
 MAX_ATTEMPTS = 3
@@ -597,7 +628,9 @@ def run_once(args, client):
     # 1) 指数 + 板块（坏代码隔离，某批失败不影响其余）
     rows, bad, index_ts = fetch_index_rows(
         client, codes, log=lambda m: payload["errors"].append(m))
-    payload["index_timestamp"] = index_ts
+    # 同花顺的 timestamp 是请求时刻；收盘补抓时必须钳到实际收盘，否则会把
+    # 11-24 收盘行情伪装成 11-25 凌晨的「精确行情」，并让新鲜度判断失真。
+    payload["index_timestamp"] = normalize_a_share_timestamp(index_ts)
     payload["indices"] = enrich_index_rows(rows, pairs)
     if bad:
         payload["errors"].append(f"这些指数/板块代码无效或接口没返回：{', '.join(bad)}")

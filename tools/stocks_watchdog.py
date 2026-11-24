@@ -111,6 +111,11 @@ def catch_up_needed(path, now=None, log=print):
     if actual < expected:
         log(f"面板数据日期 {actual}，应至少到 {expected}：需要补抓收盘快照")
         return True
+    if actual > expected:
+        # 同花顺信封 timestamp 是请求时刻：旧版在次日凌晨补抓时会把前一日收盘
+        # 错写成「今天」的精确行情。未来日期不是覆盖得更好，而是必须纠正的坏时间。
+        log(f"面板数据日期 {actual} 晚于此刻应有交易日 {expected}：需要重抓纠正时间")
+        return True
     log(f"面板数据日期 {actual} 已覆盖应有交易日 {expected}，窗口外无需占用 runner")
     return False
 
