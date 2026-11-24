@@ -109,6 +109,37 @@ class AnalyzePayloadTest(unittest.TestCase):
             analyze_news.analyze_payload(payload(1), "key", fetch=response,
                                          delay=0, log=lambda *_: None)
 
+    def test_production_enum_variants_are_normalized_without_downgrading_feed(self):
+        """生产曾因「政策」「机构」两个等价标签整批降级，必须兼容但仍输出标准值。"""
+        row = intelligence("政策与央行消息")
+        row["impact_matrix"] = [
+            {"entity": "货币政策", "ticker": "", "type": "政策", "tier": "直接影响",
+             "direction": "利好", "horizon": "短期（数日）", "confidence": "70",
+             "reason": "政策信号可能先影响利率预期"},
+            {"entity": "某央行", "ticker": "", "type": "机构", "tier": "二阶",
+             "direction": "混合", "horizon": "未知", "confidence": 60.0,
+             "reason": "后续执行仍存在双向条件"},
+        ]
+        row["evidence"].update(status="单一来源", consensus="无独立互证", strength="55")
+        clean = analyze_news._normalize_intelligence(row)
+        self.assertEqual(clean["impact_matrix"][0]["type"], "政策/宏观")
+        self.assertEqual(clean["impact_matrix"][0]["tier"], "直接")
+        self.assertEqual(clean["impact_matrix"][0]["direction"], "正面")
+        self.assertEqual(clean["impact_matrix"][0]["horizon"], "短期")
+        self.assertEqual(clean["impact_matrix"][0]["confidence"], 70)
+        self.assertEqual(clean["impact_matrix"][1]["type"], "机构")
+        self.assertEqual(clean["impact_matrix"][1]["tier"], "间接")
+        self.assertEqual(clean["impact_matrix"][1]["direction"], "双向")
+        self.assertEqual(clean["impact_matrix"][1]["horizon"], "不明")
+        self.assertEqual(clean["evidence"]["status"], "单一报道")
+        self.assertEqual(clean["evidence"]["consensus"], "暂无独立互证")
+
+    def test_unknown_enum_still_fails_closed(self):
+        row = intelligence("测试新闻")
+        row["impact_matrix"][0]["type"] = "模型自创类别"
+        with self.assertRaisesRegex(analyze_news.AnalysisFormatError, "未知影响对象类型"):
+            analyze_news._normalize_intelligence(row)
+
     def test_output_budget_scales_with_the_batch(self):
         """写死 max_tokens 会让「某批写得长一点」整批被截断，进而把 feed 停更一天。"""
         one = analyze_news._request_payload([{"id": 0}], "deepseek-chat")
