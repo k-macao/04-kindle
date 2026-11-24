@@ -4,36 +4,37 @@
     <title>004 新闻订阅（连通性测试）</title>
     <link>https://github.com/k-macao/04-kindle</link>
     <atom:link href="https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news-test.xml" rel="self" type="application/rss+xml"/>
-    <description>每天 07:00（北京时间）从 RSSHub 抓取并合并的财经、政治与哲学思想新闻，英文条目附中文译文，本次 3 条。 本期 AI 线索分析未生成（分析接口调用失败），只保留原文与中文译文。</description>
+    <description>每天 07:00（北京时间）从 RSSHub 抓取并合并的财经、政治与哲学思想新闻，英文条目附中文译文，本次 3 条。 AI 已按资产影响、证据、新鲜度与自选相关性将 3 条每日精选置顶。</description>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 24 Nov 2026 06:58:05 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 24 Nov 2026 16:50:14 +0000</lastBuildDate>
     <generator>04-kindle tools/build_feed.py</generator>
     <ttl>60</ttl>
     <item>
-      <title>流动性退潮！SOFR异动背后，美股绞杀结束了吗？？？</title>
-      <link>https://wallstreetcn.com/member/articles/3786454</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/member/articles/3786454</guid>
-      <pubDate>Tue, 24 Nov 2026 06:59:29 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
-      <description>目前影响市场的两个最重要因素，是流动性状况的变化，以及通胀和利率前景。随着美元流动性和利率日益收紧，此前股市的支撑力量快速消失。 这一收紧在利率层面表现为：AI…</description>
+      <title>【精选01·75】费城半导体指数跌幅扩大至8%</title>
+      <link>https://news.10jqka.com.cn/20261124/c682172296.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261124/c682172296.shtml</guid>
+      <pubDate>Tue, 24 Nov 2026 15:27:28 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>&lt;p&gt;费城半导体指数跌幅扩大至8%，报8808.35点。闪迪跌超12%，AMD、美光科技跌超10%，海力士跌超9%，希捷科技跌超8%，恩智浦、应用材料、英特尔、英伟达…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：同花顺快讯称费城半导体指数跌幅扩大至8%，报8808.35点；&lt;/p&gt;&lt;p&gt;事实：报道列出闪迪跌超12%，AMD、美光跌超10%，海力士跌超9%，希捷、恩智浦、应用材料、英特尔、英伟达、西部数据、拉姆研究跌超7%；&lt;/p&gt;&lt;p&gt;推断：半导体板块出现广泛且大幅的同步下跌，但摘要未说明触发原因；&lt;/p&gt;&lt;p&gt;影响：可能反映行业性或宏观性利空冲击，具体传导路径不明；&lt;/p&gt;&lt;p&gt;验证：需交叉核对指数收盘数据及当日市场消息面。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜费城半导体指数｜资产｜负面｜短期｜置信 80/100：报道明确给出指数跌幅8%及成分股普跌&lt;/p&gt;&lt;p&gt;直接｜半导体行业｜行业｜负面｜短期｜置信 75/100：成分股涵盖设计、存储、设备多环节同步大跌&lt;/p&gt;&lt;p&gt;直接｜英伟达｜公司｜负面｜短期｜置信 70/100：报道明确列出英伟达跌超7%&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 60/100｜暂无独立互证；仅同花顺快讯一条，但含具体点位与个股跌幅数据（当前输入 1 个 RSS 来源）。跨源线索：另有 1 个不同发布方标题表述相近；不等于已确认独立采编。&lt;/p&gt;&lt;p&gt;每日优先级：精选第 1 名｜总分 75/100｜影响 75 · 紧迫 85 · 新颖 50 · 证据 60 · 新鲜 90 · 自选 80；半导体板块单日大幅下跌，市场冲击显著且时效性强&lt;/p&gt;&lt;p&gt;关注命中：行业：半导体&lt;/p&gt;</description>
     </item>
     <item>
-      <title>从“十四五”跨越到“十五五”蓝图：解析高质量发展“国寿样本”</title>
-      <link>https://www.yicai.com/news/103452077.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/news/103452077.html</guid>
-      <pubDate>Tue, 24 Nov 2026 06:53:06 +0000</pubDate>
+      <title>【精选02·74】费城半导体指数一度跌超9%</title>
+      <link>https://www.yicai.com/news/103452885.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/news/103452885.html</guid>
+      <pubDate>Tue, 24 Nov 2026 15:55:40 +0000</pubDate>
       <category>中文财经深度</category>
       <source url="https://yicai.com">第一财经 · 最新</source>
-      <description>保险的价值是什么？ 对个体而言，它提供了风险来临时的一份保障；对国家而言，它是社会治理的一张安全网。人们常用“经济减震器、社会稳定器”来形容保险的功能——减震与…</description>
+      <description>&lt;p&gt;费城半导体指数一度跌超9%，报8714.39点。美光科技、AMD跌超11%。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：第一财经报道，费城半导体指数一度跌超9%，报8714.39点，美光科技、AMD跌超11%。&lt;/p&gt;&lt;p&gt;事实：费城半导体指数盘中一度跌超9%，美光与AMD跌幅超11%。&lt;/p&gt;&lt;p&gt;推断：半导体板块出现剧烈抛售，可能由宏观、行业或个股事件触发，但摘要未说明原因。&lt;/p&gt;&lt;p&gt;影响：对半导体行业及相关公司构成短期负面冲击，若持续可能影响市场风险偏好。&lt;/p&gt;&lt;p&gt;验证：需核对指数收盘数据、下跌触发因素及后续报道。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜费城半导体指数｜资产｜负面｜短期｜置信 75/100：报道明确指数一度跌超9%，属直接价格事实&lt;/p&gt;&lt;p&gt;直接｜美光科技｜公司｜负面｜短期｜置信 70/100：报道称跌超11%，但未写股票代码，跌幅为盘中数据&lt;/p&gt;&lt;p&gt;直接｜AMD｜公司｜负面｜短期｜置信 70/100：报道称跌超11%，未写代码，属盘中跌幅&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 65/100｜暂无独立互证；仅第一财经一条RSS，给出指数点位与个股跌幅，未说明原因（当前输入 1 个 RSS 来源）。跨源线索：另有 1 个不同发布方标题表述相近；不等于已确认独立采编。&lt;/p&gt;&lt;p&gt;每日优先级：精选第 2 名｜总分 74/100｜影响 70 · 紧迫 75 · 新颖 55 · 证据 65 · 新鲜 100 · 自选 80；半导体指数盘中暴跌属重大市场波动，时效性强但缺原因&lt;/p&gt;&lt;p&gt;关注命中：行业：半导体&lt;/p&gt;</description>
     </item>
     <item>
-      <title>创业板指尾盘翻绿，早盘一度涨超4%。</title>
-      <link>https://wallstreetcn.com/livenews/3204742</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3204742</guid>
-      <pubDate>Tue, 24 Nov 2026 06:52:35 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · A 股快讯</source>
+      <title>【精选03·74】小米三季度经调整净利润下滑近六成 预计明年存储成本仍承压</title>
+      <link>https://www.caixin.com/2026-11-24/102508402.html</link>
+      <guid isPermaLink="true">https://www.caixin.com/2026-11-24/102508402.html</guid>
+      <pubDate>Tue, 24 Nov 2026 14:22:15 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://caixin.com">财新 · 最新</source>
+      <description>&lt;p&gt;卢伟冰认为DRAM供需紧张局面短期内难以缓解，手机平均售价将继续提升，汽车业务亦将面临成本上涨压力 南京，一家小米汽车门店。图：视觉中国 【财新网】 存储成本持…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：财新报道小米集团（01810.HK）2026年三季度财报及卢伟冰对存储成本的表态。&lt;/p&gt;&lt;p&gt;事实：三季度营收1072.40亿元，同比降5.2%、环比降1.5%；经调整净利润48.84亿元，同比降56.8%、环比降21.5%；卢伟冰称DRAM供需紧张短期难缓解，手机均价将继续提升，汽车业务面临成本上涨压力。&lt;/p&gt;&lt;p&gt;推断：存储涨价同时挤压手机与汽车业务毛利，利润下滑幅度显著大于营收，成本与投入是主要压力来源。&lt;/p&gt;&lt;p&gt;影响：短期盈利承压，手机提价或部分对冲成本，汽车业务成本传导能力待观察。&lt;/p&gt;&lt;p&gt;验证：后续季度财报的毛利率、手机ASP、汽车业务成本与交付数据。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜小米集团（01810.HK）｜公司｜负面｜短期｜置信 75/100：存储成本上涨叠加汽车业务成本压力，已体现在经调整净利润同比大幅下滑&lt;/p&gt;&lt;p&gt;间接｜DRAM/存储芯片行业｜行业｜双向｜中期｜置信 55/100：供需紧张推升存储价格，利好存储厂商营收、抬升终端厂商成本，传导取决于紧张持续时间&lt;/p&gt;&lt;p&gt;间接｜智能手机行业｜行业｜不确定｜中期｜置信 45/100：厂商称将通过提升平均售价转嫁成本，实际需求承受力未在摘要中体现&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 70/100｜暂无独立互证；仅财新一条RSS，但引用了公司财报数据与高管公开表态，属可核验的一手信息转述（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：精选第 3 名｜总分 74/100｜影响 70 · 紧迫 60 · 新颖 50 · 证据 70 · 新鲜 90 · 自选 100；头部科技公司利润大幅下滑且明确预警存储成本持续承压，对行业成本预期有指示意义&lt;/p&gt;&lt;p&gt;关注命中：自选股：小米集团-W、行业：人工智能、行业：半导体&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
