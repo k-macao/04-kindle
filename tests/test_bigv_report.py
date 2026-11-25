@@ -46,7 +46,8 @@ class SummarizeTest(unittest.TestCase):
         self.assertEqual(a["dimensions"], {"观点": 1, "采访": 1})
         self.assertEqual(a["latest"], "2026-11-24")
         self.assertEqual(s["coverage"], {"US": {"people": 1, "with_items": 1},
-                                         "CN": {"people": 2, "with_items": 1}})
+                                         "CN": {"people": 2, "with_items": 1},
+                                         "HK": {"people": 0, "with_items": 0}})
         self.assertEqual(s["dims_seen"], ["观点", "采访", "报道"])
         self.assertIn("发言", s["dims_missing"])
 
@@ -85,10 +86,29 @@ class ValidateTest(unittest.TestCase):
         with self.assertRaises(br.DataError):
             br.validate(doc, {"items": []})
 
+    def test_ai_prob_out_of_range(self):
+        doc = people_doc()
+        doc["people"][0]["ai_bull_prob"] = 1.5
+        with self.assertRaises(br.DataError):
+            br.validate(doc, {"items": []})
+
     def test_valid_passes(self):
         people, items = br.validate(people_doc(), self._items())
         self.assertEqual(len(people), 3)
         self.assertEqual(len(items), 1)
+
+
+class AiViewTest(unittest.TestCase):
+    def test_labels(self):
+        self.assertEqual(br.ai_view_label(0.7), "偏多 70%")
+        self.assertEqual(br.ai_view_label(0.3), "偏空 70%")
+        self.assertEqual(br.ai_view_label(0.5), "偏多 50%")
+        self.assertEqual(br.ai_view_label(None), "—")
+
+    def test_report_header_says_it_is_ai_judgement(self):
+        text = br.render_markdown(br.summarize(people_doc()["people"], [], "2026-11-25", 5))
+        self.assertIn(br.AI_VIEW_NOTE, text)
+        self.assertIn("AI 多空判断", text)
 
 
 class RenderTest(unittest.TestCase):
@@ -149,7 +169,7 @@ class StocksPanelTest(unittest.TestCase):
     def test_default_files_build_a_section(self):
         section, error = self.bs.bigv_section({"data_timestamp": 1_764_000_000_000})
         self.assertIsNone(error)
-        self.assertEqual(len(section["rows"]), 20)
+        self.assertEqual(len(section["rows"]), 106)
         self.assertRegex(section["window"][1], r"^\d{4}-\d{2}-\d{2}$")
 
     def test_hash_changes_when_items_change(self):

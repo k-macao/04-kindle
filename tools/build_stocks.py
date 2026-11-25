@@ -1079,6 +1079,7 @@ def render_bigv_text(section, brief=False):
     start, end = section["window"]
     cov = section["coverage"]
     lines = [f"【大 V 观点 · 近五天】（{start} 至 {end}）",
+             "  注：多空概率是 AI 判断，不是本人表态。",
              "  " + " · ".join(f"{bigv_report.MARKETS[m]} {cov[m]['with_items']}/{cov[m]['people']} 位有记录"
                               for m in bigv_report.MARKETS) + f" · 共 {section['items_in_window']} 条"]
     if not section["items_in_window"]:
@@ -1937,7 +1938,7 @@ if(!n)h+='<p class="meta">窗口内没有条目：数据需每日往 bigv/items.
 h+='<table class="card"><tr><th>人物</th><th>条数</th><th>最近要点</th></tr>';
 rows.forEach(function(r){
 var f=(r.items||[])[0];
-var who=esc(r.name)+' <span class="muted">'+(r.market==='US'?'美股':'A 股')+' · '+esc(r.org)+'</span>';
+var who=esc(r.name)+' <span class="muted">'+(r.market==='US'?'美股':(r.market==='HK'?'港股':'A 股'))+' · '+esc(r.org)+'</span>';
 var what=f?esc(f.date)+' · '+esc(f.dimension)+'：'+esc(f.summary)+' <a href="'+esc(f.url)+'">原文</a>':'<span class="muted">五天内未找到公开观点</span>';
 h+='<tr><td>'+who+'</td><td>'+(r.count||0)+'</td><td>'+what+'</td></tr>';});
 h+='</table>';
