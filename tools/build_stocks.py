@@ -742,7 +742,8 @@ def decision_section(payload):
     rrg = rrg_section(payload)
     sentiment = volume.get("sentiment") or {}
     sentiment_score = _finite(sentiment.get("score"))
-    sentiment_score = 50.0 if sentiment_score is None else sentiment_score
+    risk_data_ready = sentiment_score is not None
+    sentiment_score = 0.0 if sentiment_score is None else sentiment_score
 
     counts = (rrg.get("counts") or {}) if rrg else {}
     total = sum(int(counts.get(key) or 0)
@@ -759,7 +760,8 @@ def decision_section(payload):
 
     market = volume.get("market") or {}
     limit_up, limit_down = market.get("limit_up"), market.get("limit_down")
-    reasons = [f"盘面情绪 {int(round(sentiment_score))}/100 · {sentiment.get('level') or '未知'}"]
+    reasons = ([f"盘面情绪 {int(round(sentiment_score))}/100 · {sentiment.get('level') or '未知'}"]
+               if risk_data_ready else ["当日风险数据不足，不允许据此开新风险"])
     if total:
         favourable = (counts.get("leading") or 0) + (counts.get("improving") or 0)
         reasons.append(f"RRG 领先/改善 {favourable}/{total}")
@@ -778,13 +780,18 @@ def decision_section(payload):
         reasons.append(f"{len(fades)} 个板块出现派发警告")
     score = max(0, min(100, int(round(score))))
 
-    if score >= 65:
+    if not risk_data_ready:
+        mode, label, stance = "defense", "数据不足", "不开新风险，等待完整市场宽度与情绪数据"
+        cap = 0
+    elif score >= 65:
         mode, label, stance = "attack", "进攻", "可分批试仓，只参与最强方向"
+        cap = RISK_POSITION_CAP[mode]
     elif score >= 45:
         mode, label, stance = "neutral", "中性", "只看最强方向，小仓等待确认"
+        cap = RISK_POSITION_CAP[mode]
     else:
         mode, label, stance = "defense", "防守", "不开新方向，只观察并管理已有风险"
-    cap = RISK_POSITION_CAP[mode]
+        cap = RISK_POSITION_CAP[mode]
     if sentiment_score >= 80 and mode == "attack":
         cap = min(cap, 45)
         stance = "盘面过热：保持进攻观察，但不追高"
