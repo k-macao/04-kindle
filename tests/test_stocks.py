@@ -1241,6 +1241,16 @@ class DecisionSectionTest(unittest.TestCase):
         self.assertEqual(decision["risk"]["max_position_pct"], 45)
         self.assertIn("不追高", decision["risk"]["stance"])
 
+    def test_missing_risk_data_never_defaults_to_neutral_position(self):
+        payload = self._payload()
+        payload["volume_price"].pop("sentiment")
+        decision = build_stocks.decision_section(payload)
+        self.assertEqual(decision["risk"]["mode"], "defense")
+        self.assertEqual(decision["risk"]["label"], "数据不足")
+        self.assertEqual(decision["risk"]["max_position_pct"], 0)
+        self.assertTrue(all(row["status"] == "仅观察"
+                            for row in decision["opportunities"]))
+
     def test_all_outputs_share_the_same_decision(self):
         payload = self._payload()
         manifest = build_stocks.manifest(payload, "2026-11-24T08:00:00Z", view="full")
