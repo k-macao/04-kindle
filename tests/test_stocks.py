@@ -366,6 +366,14 @@ class BuildTest(unittest.TestCase):
             self.assertIn("function spark(", page)
             self.assertIn("function limitRows(", page)
             self.assertIn("result-grid", page)
+            self.assertIn("function decisionSection", page)
+            self.assertIn("d.decision", page)
+            manifest = json.loads((out / "stocks.json").read_text(encoding="utf-8"))
+            self.assertIn(manifest["decision"]["risk"]["mode"],
+                          ("attack", "neutral", "defense"))
+            panel = (out / "stocks.txt").read_text(encoding="utf-8")
+            self.assertIn("【风险开关】", panel)
+            self.assertIn("【板块机会池】", panel)
             self.assertIn("数据已过期，请先核对上方行情时间", page)
             self.assertNotIn("定时任务被延迟或丢弃", page)
 
@@ -1154,6 +1162,106 @@ class SectorTextLayoutTest(unittest.TestCase):
         self.assertLessEqual(build_stocks._display_width(long_name), 14)
 
 
+class DecisionSectionTest(unittest.TestCase):
+    """风险开关先管仓位，机会池同时保留持续领先与改善候选。"""
+
+    @staticmethod
+    def _row(index, quadrant, score, today=0.5, prev=None):
+        if quadrant == 1:
+            ratio, mom, qname, point = 104 + score, 102 + score, "领先", [104, 103]
+        elif quadrant == 2:
+            ratio, mom, qname, point = 99 - score / 10, 102 + score, "改善", [99, 103]
+        else:
+            ratio, mom, qname, point = 97, 97, "滞后", [97, 97]
+        return {
+            "thscode": f"881{index:03d}.TI", "name": f"板块{index}",
+            "quadrant": quadrant, "quadrant_name": qname,
+            "prev_quadrant": quadrant if prev is None else prev,
+            "rs_ratio": ratio, "rs_mom": mom, "today_pct": today,
+            "trail": [point] * 6,
+        }
+
+    def _payload(self, sentiment=72):
+        rows = [
+            self._row(1, 1, 5, 4.5), self._row(2, 1, 4, 0.8),
+            self._row(3, 1, 3, 1.2), self._row(4, 1, 2, 0.2),
+            self._row(5, 2, 5, 1.0, prev=3), self._row(6, 2, 4, 0.5),
+            self._row(7, 2, 3, -0.2), self._row(8, 3, 0, -1.0),
+        ]
+        return {
+            "indices": [], "market": None, "limit_up": [],
+            "volume_price": {
+                "as_of": "2026-11-24", "counts": {"total": 8, "up": 6, "down": 2},
+                "stats": {"median": 0.4, "mean": 0.5, "csad": 0.6},
+                "market": {"up": 3600, "down": 1700, "limit_up": 65, "limit_down": 4},
+                "sentiment": {"score": sentiment,
+                              "level": "活跃" if sentiment >= 60 else "防守"},
+                "intraday": {
+                    "true_support": [{"name": "板块1"}],
+                    "fade_warning": [{"name": "板块3", "tag": "放量长上影"}],
+                },
+                "winners": [{"thscode": "881001.TI", "name": "板块1", "today_pct": 1.2}],
+            },
+            "rrg": {
+                "as_of": "2026-11-24", "rows": rows,
+                "counts": {"leading": 4, "improving": 3, "weakening": 0, "lagging": 1},
+            },
+        }
+
+    def test_attack_switch_has_a_conservative_position_cap(self):
+        decision = build_stocks.decision_section(self._payload())
+        risk = decision["risk"]
+        self.assertEqual(risk["mode"], "attack")
+        self.assertEqual(risk["label"], "进攻")
+        self.assertEqual(risk["max_position_pct"], 60)
+        self.assertEqual(risk["single_trade_risk_pct"], 0.5)
+
+    def test_defense_forces_every_candidate_to_observation_only(self):
+        decision = build_stocks.decision_section(self._payload(sentiment=15))
+        self.assertEqual(decision["risk"]["mode"], "defense")
+        self.assertEqual(decision["risk"]["max_position_pct"], 10)
+        self.assertTrue(decision["opportunities"])
+        self.assertTrue(all(row["status"] == "仅观察"
+                            for row in decision["opportunities"]))
+
+    def test_pool_contains_leaders_and_early_improvers_without_chasing(self):
+        decision = build_stocks.decision_section(self._payload())
+        pool = decision["opportunities"]
+        self.assertEqual(len(pool), 5)
+        self.assertLessEqual(sum(row["quadrant"] == "领先" for row in pool), 3)
+        self.assertEqual(sum(row["quadrant"] == "改善" for row in pool), 2)
+        self.assertEqual([row["rank"] for row in pool], [1, 2, 3, 4, 5])
+        overheated = next(row for row in pool if row["name"] == "板块1")
+        self.assertIn(overheated["status"], ("等待回落", "等待确认"))
+        self.assertTrue(overheated["risks"])
+
+    def test_overheat_reduces_the_attack_cap(self):
+        decision = build_stocks.decision_section(self._payload(sentiment=85))
+        self.assertEqual(decision["risk"]["mode"], "attack")
+        self.assertEqual(decision["risk"]["max_position_pct"], 45)
+        self.assertIn("不追高", decision["risk"]["stance"])
+
+    def test_all_outputs_share_the_same_decision(self):
+        payload = self._payload()
+        manifest = build_stocks.manifest(payload, "2026-11-24T08:00:00Z", view="full")
+        self.assertEqual(manifest["decision"]["risk"]["label"], "进攻")
+        text = build_stocks.render_txt(payload, "2026-11-24 16:00:00")
+        self.assertIn("【风险开关】进攻", text)
+        self.assertIn("【板块机会池】5 个", text)
+        self.assertIn("不是买入指令", text)
+        xhtml = build_stocks.render_epub_xhtml(payload, "2026-11-24 16:00:00")
+        self.assertIn("风险开关与板块机会池", xhtml)
+        self.assertIn("总仓≤60%", xhtml)
+        page = build_stocks.render_html()
+        self.assertIn("function decisionSection", page)
+        self.assertIn("d.decision", page)
+
+    def test_risk_switch_changes_the_panel_hash(self):
+        first = self._payload(sentiment=72)
+        second = self._payload(sentiment=15)
+        self.assertNotEqual(build_stocks.data_hash(first), build_stocks.data_hash(second))
+
+
 class WeekendBriefModeTest(unittest.TestCase):
     """周末与法定节假日出精简版；工作日（含盘前、收盘后、抓取延迟）保留完整版。"""
 
@@ -1238,9 +1346,9 @@ class WeekendBriefModeTest(unittest.TestCase):
         self.assertIn("半导体材料/封测/存储 11", brief_txt)
         self.assertNotIn("样本00", brief_txt)
         self.assertIn("样本00", full_txt)
-        # 行数明显缩短（完整版 > 110 行，精简版 <= 65 行）
+        # 行数明显缩短；新增风险开关/机会池后精简版仍控制在 80 行内。
         self.assertGreater(len(full_txt.splitlines()), 110)
-        self.assertLessEqual(len(brief_txt.splitlines()), 65)
+        self.assertLessEqual(len(brief_txt.splitlines()), 80)
         # EPUB 同样精简，且 JSON 清单保留全量 91 个板块与 20 只涨停
         xhtml = build_stocks.render_epub_xhtml(payload, "2026-11-21 12:00:00", brief=brief)
         self.assertIn("精简：抗跌前 5 / 杀跌前 5", xhtml)
