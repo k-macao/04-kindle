@@ -792,7 +792,7 @@ def decision_section(payload):
     else:
         mode, label, stance = "defense", "防守", "不开新方向，只观察并管理已有风险"
         cap = RISK_POSITION_CAP[mode]
-    if sentiment_score >= 80 and mode == "attack":
+    if (sentiment_score >= 75 or sentiment.get("level") == "过热") and mode == "attack":
         cap = min(cap, 45)
         stance = "盘面过热：保持进攻观察，但不追高"
         reasons.append("情绪过热，仓位上限主动下调")

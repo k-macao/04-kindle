@@ -1236,7 +1236,8 @@ class DecisionSectionTest(unittest.TestCase):
         self.assertTrue(overheated["risks"])
 
     def test_overheat_reduces_the_attack_cap(self):
-        decision = build_stocks.decision_section(self._payload(sentiment=85))
+        # _cross_sentiment 从 75 分起标「过热」，仓位闸门必须使用同一条边界。
+        decision = build_stocks.decision_section(self._payload(sentiment=75))
         self.assertEqual(decision["risk"]["mode"], "attack")
         self.assertEqual(decision["risk"]["max_position_pct"], 45)
         self.assertIn("不追高", decision["risk"]["stance"])
