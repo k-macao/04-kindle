@@ -29,7 +29,7 @@ local Wake = dofile(dir .. "wake.lua")
 local Net = dofile(dir .. "net.lua")
 local Screen = Device.screen
 local DEFAULT_URL = "https://k-macao.github.io/004/kindle.txt"
-local PLUGIN_VERSION = "0.9.1"
+local PLUGIN_VERSION = "0.9.2"
 local MAX_BYTES = 2 * 1024 * 1024
 local MANIFEST_MAX = 256 * 1024
 -- stocks.json 同时带 91 个板块与 A/H 龙头 26 周压缩量价，已不再是小清单；
@@ -123,18 +123,9 @@ local function emergencyStopped()
     return data ~= nil and data.emergency_stop == true
 end
 
--- 没有挂在实际界面上的「后台壳」：退出菜单/阅读器后它不显示、不拦截 touch，
--- 但能收 onResume/onSuspend，定时器也不会被某次 ReaderUI 重建顺手带走。
-local Session = WidgetContainer:extend{ name = "octopus004-session", is_doc_only = false }
-function Session:init()
-    -- 0x0、不画任何东西：只是留在 UIManager 里当事件与定时器的宿主。
-    self.dimen = Geom:new{ x = 0, y = 0, w = 0, h = 0 }
-end
-function Session:onResume() if self.on_resume then self.on_resume() end end
-function Session:onSuspend() if self.on_suspend then self.on_suspend() end end
-function Session:onCloseWidget()
-    if self.on_close then self.on_close() end
-end
+-- 不要为了后台计时向 UIManager:show() 放一个“0x0 隐形窗口”：KOReader 只把触摸
+-- 事件交给最上层窗口，尺寸为零也可能挡住整块屏幕。定时器直接挂 UIManager，换
+-- ReaderUI 时由设置里的接力标记让新插件实例重建即可。
 
 local function dataDir()
     return DataStorage:getDataDir()
@@ -212,7 +203,10 @@ function Report:init()
     self.image_dir = dataDir() .. "/octopus004-pages"
     self.page_index = 1
     self.page_count = tonumber(self.settings.image_count) or 0
-    if self.ui and self.ui.menu then self.ui.menu:registerToMainMenu(self) end
+    if self.ui and self.ui.menu then
+        self.menu = self.ui.menu
+        self.ui.menu:registerToMainMenu(self)
+    end
     -- 紧急停止：设置文件里写了 emergency_stop = true 就什么都不做（菜单里可以再关掉）。
     if self.settings.emergency_stop then
         self.settings.enabled = false
@@ -222,10 +216,11 @@ function Report:init()
         logger.warn("004: emergency_stop is set, the plugin stays idle")
         return
     end
-    -- openDoc/showReader 会销毁旧 ReaderUI，也会顺手取消旧实例的计时器。新实例看到
-    -- resume_after_reader_swap 后，立即接管后台壳并检查一次；这不是再次开书，所以
-    -- 不会形成 init → openDoc → init 的循环。
-    if self.settings.enabled and self.settings.resume_after_reader_swap == true then
+    -- openDoc/showReader 或用户切换书籍会销毁旧 ReaderUI，也会顺手取消旧实例的
+    -- 计时器。同一进程的新实例看到接力标记/session_started 后立即检查一次；这不是
+    -- 再次开书，所以不会形成 init → openDoc → init 的循环。
+    if self.settings.enabled
+            and (self.settings.resume_after_reader_swap == true or session_started) then
         UIManager:scheduleIn(2, function()
             -- showReader 返回后，旧实例还会提交新 EPUB 的 sig/data_time。这里重新打开
             -- 设置文件，不能拿 init 时读到的旧表整份写回去覆盖那些新值。
@@ -422,31 +417,23 @@ function Report:attachToHost()
 end
 
 function Report:onCloseWidget()
-    -- Preserve enabled state for next KOReader launch, but restore the user's screensaver.
+    -- Preserve enabled state for the replacement ReaderUI, but cancel callbacks owned by
+    -- this dying instance. The next instance resumes from session_started/the swap marker.
     self.gen = (self.gen or 0) + 1
     self.wake:cancel(); self.wake:kindle_hold(false); self.wake:release_awake()
     self:releaseScreen()
     if self.dashboard then UIManager:close(self.dashboard); self.dashboard = nil end
-    -- 自己关掉（ReaderUI 被 showReader 换掉时也会走这里）：在跑的话过一会儿重新挂
-    -- 后台壳继续计时，别把定时器留在已经消失的界面里。这里不调 stop()，
-    -- 否则一换界面（显示模式、打开书）就把自动阅读停了。
-    if self.settings.enabled then UIManager:scheduleIn(5, function() self:ensureSession() end) end
 end
 
--- 后台壳：不显示、不挡操作，只负责收 onResume/onSuspend 和挂菜单。
+-- 只把菜单挂到当前宿主。绝不能 UIManager:show 一个隐形 Widget 当“后台壳”：
+-- 它会成为最上层窗口并吞掉 Kindle 全屏触摸。计时器本来就是 UIManager 全局任务。
 function Report:ensureSession()
     if not self.settings.enabled then return end
     self:attachToHost()
-    if self.session_shown and not self.session_closed then return end
-    local session = Session:new{}
-    session.on_resume = function() self:onResume() end
-    session.on_close = function() self.session_closed = true end
-    local wake = self.wake
-    session.on_suspend = function() wake:cancel() end
-    UIManager:show(session)
-    self.session_widget = session
-    self.session_shown = true
-    self.session_closed = false
+end
+
+function Report:onSuspend()
+    self.wake:cancel()
 end
 
 function Report:onResume()

@@ -228,7 +228,9 @@ https://raw.githubusercontent.com/k-macao/04-kindle/main/site/stocks.json
 EPUB 里点屏幕打开的是 KOReader 阅读器菜单，不是纯文本面板的浮动菜单。因此
 **工具 → 004 Report** 里固定提供 `Refresh now (starts if idle)`：即使 Status 显示
 `Auto-start: off · now: idle`，也能一键启动并刷新；想重启后继续自动运行，再打开
-`Auto-start on launch`。
+`Auto-start on launch`。0.9.2 又移除了原先通过 `UIManager:show()` 放置的 0×0 后台窗口：
+该窗口在部分 KOReader/Kindle 组合上仍会成为最上层并吞掉全屏触摸；现在只保留全局定时任务
+与 ReaderUI 接力，不再放任何隐形触摸层。
 
 EPUB 版是一串表格：市场概览 → 指数 → 板块（按涨跌幅，标「涨 N 跌 M」）→
 港股 → 涨停池 → 板块轮动 RRG。crengine 不认 flex/grid/SVG，所以 Kindle 上**只有表格和标题**，

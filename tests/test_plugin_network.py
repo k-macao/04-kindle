@@ -226,7 +226,7 @@ class NetWiringTest(unittest.TestCase):
         self.assertIn("self.settings.resume_after_reader_swap = true", open_doc)
         init = MAIN[MAIN.index("function Report:init()"):]
         init = init[:init.index("\nend\n")]
-        self.assertIn("self.settings.resume_after_reader_swap == true", init)
+        self.assertIn("self.settings.resume_after_reader_swap == true or session_started", init)
         self.assertIn("local latest_store, latest = loadSettings()", init)
         self.assertIn("self.store, self.settings = latest_store, latest", init)
         self.assertIn("patchSettings({ resume_after_reader_swap = false })", init)
@@ -277,18 +277,26 @@ class NetWiringTest(unittest.TestCase):
         self.assertIn("function Report:toggleEmergencyStop()", MAIN)
         self.assertIn('"Stop everything (emergency): "', MAIN)
 
-    def test_session_widget_keeps_timers_alive_across_readerui_swap(self):
-        # 后台壳：不显示但能收 onResume/onSuspend；ReaderUI 被换掉后能重新挂上，
-        # 并且把菜单挂到当前宿主上，否则被 EPUB 模式困住时够不着 Stop。
-        self.assertIn('local Session = WidgetContainer:extend{ name = "octopus004-session"', MAIN)
+    def test_runtime_handoff_never_shows_an_invisible_touch_blocking_widget(self):
+        # 0×0 Widget 仍可能成为 UIManager 最上层并吞掉全屏触摸；后台计时不能 show 它。
+        self.assertNotIn('local Session = WidgetContainer:extend{ name = "octopus004-session"', MAIN)
         self.assertIn("function Report:ensureSession()", MAIN)
         self.assertIn("function Report:attachToHost()", MAIN)
+        ensure = MAIN[MAIN.index("function Report:ensureSession()"):]
+        ensure = ensure[:ensure.index("\nend\n")]
+        self.assertIn("self:attachToHost()", ensure)
+        self.assertNotIn("UIManager:show", ensure)
+        self.assertNotIn("Session:new", MAIN)
+        self.assertIn("function Report:onSuspend()", MAIN)
         start = MAIN[MAIN.index("function Report:start()"):]
         start = start[:start.index("\n    self:refresh(true)")]
         self.assertIn("self:ensureSession()", start)
         finish = MAIN[MAIN.index("        self.next_due = os.time() + INTERVAL"):]
         finish = finish[:finish.index("\n    end\n")]
         self.assertIn("if self.settings.enabled then self:ensureSession() end", finish)
+        close = MAIN[MAIN.index("function Report:onCloseWidget()"):]
+        close = close[:close.index("\nend\n")]
+        self.assertNotIn("scheduleIn", close)
 
     def test_stop_is_reachable_and_writes_its_reason(self):
         body = MAIN[MAIN.index("function Report:stop(silent)"):]
@@ -300,7 +308,7 @@ class NetWiringTest(unittest.TestCase):
     def test_version_was_bumped(self):
         meta = (PLUGIN / "_meta.lua").read_text(encoding="utf-8")
         version = re.search(r'version = "([\d.]+)"', meta).group(1)
-        self.assertGreaterEqual(tuple(int(part) for part in version.split(".")), (0, 9, 1))
+        self.assertGreaterEqual(tuple(int(part) for part in version.split(".")), (0, 9, 2))
         self.assertIn(f'local PLUGIN_VERSION = "{version}"', MAIN)
 
 
