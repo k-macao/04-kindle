@@ -1,12 +1,12 @@
 {
-  "generated": "2026-11-25T07:09:31Z",
+  "generated": "2026-11-25T07:25:13Z",
   "doc": "stocks.txt",
   "epub": "stocks.epub",
   "title": "同花顺行情面板",
-  "data_timestamp": 1795590000000,
-  "data_time": "2026-11-25T07:00:00Z",
+  "data_timestamp": 1795590609000,
+  "data_time": "2026-11-25T07:10:09Z",
   "data_time_kind": "exact",
-  "data_hash": "b4f7c9955d382dec",
+  "data_hash": "d609829b1b0bb53f",
   "demo": false,
   "view": null,
   "counts": {
@@ -1719,314 +1719,314 @@
     "total": 5584
   },
   "hk": {
-    "generated": "2026-11-25T07:09:30.559549+00:00",
-    "data_timestamp": 1795589667000,
+    "generated": "2026-11-25T07:25:11.917449+00:00",
+    "data_timestamp": 1795590609000,
     "rows": [
       {
         "thscode": "hkHSI",
         "name": "恒生指数",
-        "last_price": 22033.98,
+        "last_price": 22055.34,
         "prev_price": 22219.65,
         "open_price": 22252.81,
         "high_price": 22507.83,
-        "low_price": 22028.07,
-        "price_change": -185.67,
-        "price_change_ratio_pct": -0.84,
-        "volume": 16779864.2392,
-        "turnover": 16779864.239,
-        "quote_time": "2026/11/25 14:54:27",
+        "low_price": 22003.81,
+        "price_change": -164.31,
+        "price_change_ratio_pct": -0.74,
+        "volume": 17728203.128,
+        "turnover": 17728203.128,
+        "quote_time": "2026/11/25 15:10:09",
         "currency": "HKD",
         "is_index": true,
-        "quote_ms": 1795589667000
+        "quote_ms": 1795590609000
       },
       {
         "thscode": "hkHSCEI",
         "name": "国企指数",
-        "last_price": 7403.03,
+        "last_price": 7411.36,
         "prev_price": 7452.56,
         "open_price": 7478.39,
         "high_price": 7569.1,
-        "low_price": 7400.84,
-        "price_change": -49.53,
-        "price_change_ratio_pct": -0.66,
-        "volume": 5362813.0211,
-        "turnover": 5362813.021,
-        "quote_time": "2026/11/25 14:54:26",
+        "low_price": 7393.57,
+        "price_change": -41.2,
+        "price_change_ratio_pct": -0.55,
+        "volume": 5654527.8262,
+        "turnover": 5654527.826,
+        "quote_time": "2026/11/25 15:10:08",
         "currency": "HKD",
         "is_index": true,
-        "quote_ms": 1795589666000
+        "quote_ms": 1795590608000
       },
       {
         "thscode": "hkHSTECH",
         "name": "恒生科技指数",
-        "last_price": 3399.54,
+        "last_price": 3398.57,
         "prev_price": 3466.87,
         "open_price": 3452.73,
         "high_price": 3554.36,
-        "low_price": 3397.52,
-        "price_change": -67.33,
-        "price_change_ratio_pct": -1.94,
-        "volume": 5041735.9244,
-        "turnover": 5041735.924,
-        "quote_time": "2026/11/25 14:54:26",
+        "low_price": 3388.66,
+        "price_change": -68.3,
+        "price_change_ratio_pct": -1.97,
+        "volume": 5282314.2597,
+        "turnover": 5282314.26,
+        "quote_time": "2026/11/25 15:10:08",
         "currency": "HKD",
         "is_index": true,
-        "quote_ms": 1795589666000
+        "quote_ms": 1795590608000
       },
       {
         "thscode": "hk00700",
         "name": "腾讯控股",
-        "last_price": 339.2,
+        "last_price": 338.6,
         "prev_price": 341.6,
         "open_price": 339.8,
         "high_price": 348.0,
-        "low_price": 338.2,
-        "price_change": -2.4,
-        "price_change_ratio_pct": -0.7,
-        "volume": 17539843.0,
-        "turnover": 6006960428.89,
-        "quote_time": "2026/11/25 14:54:23",
+        "low_price": 337.6,
+        "price_change": -3.0,
+        "price_change_ratio_pct": -0.88,
+        "volume": 18695406.0,
+        "turnover": 6398130055.79,
+        "quote_time": "2026/11/25 15:10:06",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795589663000
+        "quote_ms": 1795590606000
       },
       {
         "thscode": "hk09988",
         "name": "阿里巴巴-W",
-        "last_price": 81.65,
+        "last_price": 81.7,
         "prev_price": 82.2,
         "open_price": 82.65,
         "high_price": 84.85,
-        "low_price": 81.55,
-        "price_change": -0.55,
-        "price_change_ratio_pct": -0.67,
-        "volume": 64574138.0,
-        "turnover": 5362057847.35,
-        "quote_time": "2026/11/25 14:54:21",
+        "low_price": 81.5,
+        "price_change": -0.5,
+        "price_change_ratio_pct": -0.61,
+        "volume": 67946538.0,
+        "turnover": 5637385987.6,
+        "quote_time": "2026/11/25 15:10:06",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795589661000
+        "quote_ms": 1795590606000
       },
       {
         "thscode": "hk03690",
         "name": "美团-W",
-        "last_price": 61.35,
+        "last_price": 61.4,
         "prev_price": 64.2,
         "open_price": 63.8,
         "high_price": 66.25,
-        "low_price": 61.15,
-        "price_change": -2.85,
-        "price_change_ratio_pct": -4.44,
-        "volume": 61632554.0,
-        "turnover": 3921628080.25,
-        "quote_time": "2026/11/25 14:54:23",
+        "low_price": 61.05,
+        "price_change": -2.8,
+        "price_change_ratio_pct": -4.36,
+        "volume": 64897588.0,
+        "turnover": 4121622957.05,
+        "quote_time": "2026/11/25 15:10:06",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795589663000
+        "quote_ms": 1795590606000
       },
       {
         "thscode": "hk01810",
         "name": "小米集团-W",
-        "last_price": 26.82,
+        "last_price": 26.76,
         "prev_price": 26.5,
         "open_price": 26.86,
         "high_price": 28.66,
-        "low_price": 26.78,
-        "price_change": 0.32,
-        "price_change_ratio_pct": 1.21,
-        "volume": 202725445.0,
-        "turnover": 5623047917.66,
-        "quote_time": "2026/11/25 14:54:23",
+        "low_price": 26.7,
+        "price_change": 0.26,
+        "price_change_ratio_pct": 0.98,
+        "volume": 208984945.0,
+        "turnover": 5790678331.66,
+        "quote_time": "2026/11/25 15:10:05",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795589663000
+        "quote_ms": 1795590605000
       },
       {
         "thscode": "hk09618",
         "name": "京东集团-SW",
-        "last_price": 100.5,
+        "last_price": 100.7,
         "prev_price": 97.05,
         "open_price": 100.3,
         "high_price": 104.0,
         "low_price": 100.2,
-        "price_change": 3.45,
-        "price_change_ratio_pct": 3.55,
-        "volume": 10429753.0,
-        "turnover": 1067676439.85,
-        "quote_time": "2026/11/25 14:54:23",
+        "price_change": 3.65,
+        "price_change_ratio_pct": 3.76,
+        "volume": 11143689.0,
+        "turnover": 1139516701.5,
+        "quote_time": "2026/11/25 15:10:06",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795589663000
+        "quote_ms": 1795590606000
       },
       {
         "thscode": "hk09999",
         "name": "网易",
-        "last_price": 158.5,
+        "last_price": 159.1,
         "prev_price": 156.0,
         "open_price": 156.3,
         "high_price": 161.3,
         "low_price": 156.3,
-        "price_change": 2.5,
-        "price_change_ratio_pct": 1.6,
-        "volume": 10160034.0,
-        "turnover": 1611482154.7,
-        "quote_time": "2026/11/25 14:54:22",
+        "price_change": 3.1,
+        "price_change_ratio_pct": 1.99,
+        "volume": 10531734.0,
+        "turnover": 1670492976.1,
+        "quote_time": "2026/11/25 15:10:05",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795589662000
+        "quote_ms": 1795590605000
       },
       {
         "thscode": "hk01024",
         "name": "快手-W",
-        "last_price": 19.77,
+        "last_price": 19.68,
         "prev_price": 19.73,
         "open_price": 19.67,
         "high_price": 20.86,
         "low_price": 19.56,
-        "price_change": 0.04,
-        "price_change_ratio_pct": 0.2,
-        "volume": 55008228.0,
-        "turnover": 1115880662.58,
-        "quote_time": "2026/11/25 14:54:21",
+        "price_change": -0.05,
+        "price_change_ratio_pct": -0.25,
+        "volume": 57050528.0,
+        "turnover": 1156114445.88,
+        "quote_time": "2026/11/25 15:10:05",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795589661000
+        "quote_ms": 1795590605000
       },
       {
         "thscode": "hk00981",
         "name": "中芯国际",
-        "last_price": 45.84,
+        "last_price": 45.78,
         "prev_price": 49.0,
         "open_price": 48.06,
         "high_price": 49.5,
-        "low_price": 45.66,
-        "price_change": -3.16,
-        "price_change_ratio_pct": -6.45,
-        "volume": 72982372.0,
-        "turnover": 3457613201.0,
-        "quote_time": "2026/11/25 14:54:23",
+        "low_price": 45.52,
+        "price_change": -3.22,
+        "price_change_ratio_pct": -6.57,
+        "volume": 75934902.0,
+        "turnover": 3592651605.0,
+        "quote_time": "2026/11/25 15:10:05",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795589663000
+        "quote_ms": 1795590605000
       },
       {
         "thscode": "hk01211",
         "name": "比亚迪股份",
-        "last_price": 58.45,
+        "last_price": 58.4,
         "prev_price": 60.3,
         "open_price": 60.0,
         "high_price": 61.3,
-        "low_price": 58.2,
-        "price_change": -1.85,
-        "price_change_ratio_pct": -3.07,
-        "volume": 25477384.0,
-        "turnover": 1522318851.5,
-        "quote_time": "2026/11/25 14:54:18",
+        "low_price": 57.95,
+        "price_change": -1.9,
+        "price_change_ratio_pct": -3.15,
+        "volume": 27147884.0,
+        "turnover": 1619651236.1,
+        "quote_time": "2026/11/25 15:09:59",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795589658000
+        "quote_ms": 1795590599000
       },
       {
         "thscode": "hk02020",
         "name": "安踏体育",
-        "last_price": 81.0,
+        "last_price": 81.1,
         "prev_price": 80.4,
         "open_price": 80.5,
         "high_price": 82.4,
         "low_price": 80.5,
-        "price_change": 0.6,
-        "price_change_ratio_pct": 0.75,
-        "volume": 4421747.0,
-        "turnover": 360668888.75,
-        "quote_time": "2026/11/25 14:54:20",
+        "price_change": 0.7,
+        "price_change_ratio_pct": 0.87,
+        "volume": 4633723.0,
+        "turnover": 377852543.55,
+        "quote_time": "2026/11/25 15:09:59",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795589660000
+        "quote_ms": 1795590599000
       },
       {
         "thscode": "hk00388",
         "name": "香港交易所",
-        "last_price": 347.8,
+        "last_price": 348.4,
         "prev_price": 352.6,
         "open_price": 355.0,
         "high_price": 357.2,
-        "low_price": 347.4,
-        "price_change": -4.8,
-        "price_change_ratio_pct": -1.36,
-        "volume": 2056929.0,
-        "turnover": 725029982.15,
-        "quote_time": "2026/11/25 14:54:22",
+        "low_price": 347.0,
+        "price_change": -4.2,
+        "price_change_ratio_pct": -1.19,
+        "volume": 2229609.0,
+        "turnover": 785058928.95,
+        "quote_time": "2026/11/25 15:10:06",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795589662000
+        "quote_ms": 1795590606000
       },
       {
         "thscode": "hk00005",
         "name": "汇丰控股",
-        "last_price": 129.4,
+        "last_price": 129.5,
         "prev_price": 130.6,
         "open_price": 129.2,
         "high_price": 131.3,
         "low_price": 128.7,
-        "price_change": -1.2,
-        "price_change_ratio_pct": -0.92,
-        "volume": 8834427.0,
-        "turnover": 1152902363.1,
-        "quote_time": "2026/11/25 14:54:23",
+        "price_change": -1.1,
+        "price_change_ratio_pct": -0.84,
+        "volume": 9778203.0,
+        "turnover": 1275025457.2,
+        "quote_time": "2026/11/25 15:09:52",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795589663000
+        "quote_ms": 1795590592000
       },
       {
         "thscode": "hk00939",
         "name": "建设银行",
-        "last_price": 10.2,
+        "last_price": 10.23,
         "prev_price": 10.25,
         "open_price": 10.3,
         "high_price": 10.43,
         "low_price": 10.15,
-        "price_change": -0.05,
-        "price_change_ratio_pct": -0.49,
-        "volume": 206780997.0,
-        "turnover": 2115829121.69,
-        "quote_time": "2026/11/25 14:54:20",
+        "price_change": -0.02,
+        "price_change_ratio_pct": -0.2,
+        "volume": 223201397.0,
+        "turnover": 2283381083.69,
+        "quote_time": "2026/11/25 15:10:03",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795589660000
+        "quote_ms": 1795590603000
       },
       {
         "thscode": "hk01398",
         "name": "工商银行",
-        "last_price": 7.645,
+        "last_price": 7.66,
         "prev_price": 7.685,
         "open_price": 7.71,
         "high_price": 7.765,
         "low_price": 7.57,
-        "price_change": -0.04,
-        "price_change_ratio_pct": -0.52,
-        "volume": 151682751.0,
-        "turnover": 1159639350.97,
-        "quote_time": "2026/11/25 14:54:13",
+        "price_change": -0.025,
+        "price_change_ratio_pct": -0.33,
+        "volume": 164477965.0,
+        "turnover": 1257530508.77,
+        "quote_time": "2026/11/25 15:10:03",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795589653000
+        "quote_ms": 1795590603000
       },
       {
         "thscode": "hk02318",
         "name": "中国平安",
-        "last_price": 50.15,
+        "last_price": 50.2,
         "prev_price": 50.2,
         "open_price": 50.45,
         "high_price": 51.0,
         "low_price": 50.05,
-        "price_change": -0.05,
-        "price_change_ratio_pct": -0.1,
-        "volume": 22573296.0,
-        "turnover": 1140836556.25,
-        "quote_time": "2026/11/25 14:54:23",
+        "price_change": 0.0,
+        "price_change_ratio_pct": 0.0,
+        "volume": 24293899.0,
+        "turnover": 1227099486.05,
+        "quote_time": "2026/11/25 15:10:04",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795589663000
+        "quote_ms": 1795590604000
       },
       {
         "thscode": "hk00883",
@@ -2038,29 +2038,29 @@
         "low_price": 20.7,
         "price_change": -0.1,
         "price_change_ratio_pct": -0.48,
-        "volume": 53725272.0,
-        "turnover": 1124710683.74,
-        "quote_time": "2026/11/25 14:54:23",
+        "volume": 55682994.0,
+        "turnover": 1165364216.94,
+        "quote_time": "2026/11/25 15:10:04",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795589663000
+        "quote_ms": 1795590604000
       },
       {
         "thscode": "hk00857",
         "name": "中国石油股份",
-        "last_price": 9.39,
+        "last_price": 9.395,
         "prev_price": 9.57,
         "open_price": 9.57,
         "high_price": 9.78,
-        "low_price": 9.385,
-        "price_change": -0.18,
-        "price_change_ratio_pct": -1.88,
-        "volume": 90618188.0,
-        "turnover": 865245318.2,
-        "quote_time": "2026/11/25 14:54:16",
+        "low_price": 9.375,
+        "price_change": -0.175,
+        "price_change_ratio_pct": -1.83,
+        "volume": 95776188.0,
+        "turnover": 913722760.2,
+        "quote_time": "2026/11/25 15:09:59",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795589656000
+        "quote_ms": 1795590599000
       },
       {
         "thscode": "hk00386",
@@ -2072,50 +2072,50 @@
         "low_price": 4.38,
         "price_change": -0.095,
         "price_change_ratio_pct": -2.12,
-        "volume": 108473882.0,
-        "turnover": 482294742.255,
-        "quote_time": "2026/11/25 14:54:16",
+        "volume": 114994882.0,
+        "turnover": 510913017.255,
+        "quote_time": "2026/11/25 15:10:05",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795589656000
+        "quote_ms": 1795590605000
       },
       {
         "thscode": "hk00762",
         "name": "中国联通",
-        "last_price": 5.17,
+        "last_price": 5.185,
         "prev_price": 5.22,
         "open_price": 5.22,
         "high_price": 5.285,
         "low_price": 5.17,
-        "price_change": -0.05,
-        "price_change_ratio_pct": -0.96,
-        "volume": 21458104.0,
-        "turnover": 112386640.885,
-        "quote_time": "2026/11/25 14:54:14",
+        "price_change": -0.035,
+        "price_change_ratio_pct": -0.67,
+        "volume": 21890975.0,
+        "turnover": 114627267.825,
+        "quote_time": "2026/11/25 15:10:04",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795589654000
+        "quote_ms": 1795590604000
       },
       {
         "thscode": "hk01088",
         "name": "中国神华",
-        "last_price": 40.06,
+        "last_price": 40.14,
         "prev_price": 40.3,
         "open_price": 40.5,
         "high_price": 40.86,
         "low_price": 39.86,
-        "price_change": -0.24,
-        "price_change_ratio_pct": -0.6,
-        "volume": 10068624.0,
-        "turnover": 406715058.1,
-        "quote_time": "2026/11/25 14:54:14",
+        "price_change": -0.16,
+        "price_change_ratio_pct": -0.4,
+        "volume": 10579134.0,
+        "turnover": 427177040.3,
+        "quote_time": "2026/11/25 15:10:04",
         "currency": "HKD",
         "is_index": false,
-        "quote_ms": 1795589654000
+        "quote_ms": 1795590604000
       }
     ],
     "errors": [],
-    "data_time": "2026-11-25T06:54:27Z"
+    "data_time": "2026-11-25T07:10:09Z"
   },
   "limit_up": [
     {
@@ -2124,9 +2124,9 @@
       "last_price": 17.82,
       "price_change_ratio_pct": 10.0,
       "limit_up_time": "14:54",
-      "limit_up_reason": "其它",
+      "limit_up_reason": "高阶HDI+算力+光模块PCB+人形机器人",
       "continue_day_text": "5连板",
-      "seal_money": 7334712.0
+      "seal_money": 7311546.0
     },
     {
       "thscode": "603360.SH",
@@ -2146,7 +2146,7 @@
       "limit_up_time": "14:23",
       "limit_up_reason": "AI漫剧+出版发行+黑龙江国资",
       "continue_day_text": "首板",
-      "seal_money": 3819721.0
+      "seal_money": 4036045.0
     },
     {
       "thscode": "600722.SH",
@@ -2156,7 +2156,7 @@
       "limit_up_time": "13:36",
       "limit_up_reason": "甲醇+风电项目",
       "continue_day_text": "2连板",
-      "seal_money": 6284385.0
+      "seal_money": 7367945.0
     },
     {
       "thscode": "300290.SZ",
@@ -2164,9 +2164,9 @@
       "last_price": 5.1,
       "price_change_ratio_pct": 20.0,
       "limit_up_time": "13:24",
-      "limit_up_reason": "违规担保化解+河南国资",
+      "limit_up_reason": "AI医疗+违规担保化解+河南国资",
       "continue_day_text": "首板",
-      "seal_money": 29070.0
+      "seal_money": 91290.0
     },
     {
       "thscode": "600229.SH",
@@ -2176,7 +2176,7 @@
       "limit_up_time": "13:01",
       "limit_up_reason": "AIGC+IP运营+数字文化体验+青岛国资",
       "continue_day_text": "首板",
-      "seal_money": 169874.0
+      "seal_money": 227220.0
     },
     {
       "thscode": "600088.SH",
@@ -2186,7 +2186,7 @@
       "limit_up_time": "11:24",
       "limit_up_reason": "短剧+AI应用+央企传媒",
       "continue_day_text": "首板",
-      "seal_money": 3007056.0
+      "seal_money": 3081632.0
     },
     {
       "thscode": "002144.SZ",
@@ -2196,7 +2196,7 @@
       "limit_up_time": "11:02",
       "limit_up_reason": "汽车内饰+按摩机器人+超声诊断+碳纤维",
       "continue_day_text": "首板",
-      "seal_money": 2613224.0
+      "seal_money": 2611408.0
     },
     {
       "thscode": "002820.SZ",
@@ -2206,7 +2206,7 @@
       "limit_up_time": "10:41",
       "limit_up_reason": "休闲食品+非遗麻花+国企改革",
       "continue_day_text": "首板",
-      "seal_money": 1716182.0
+      "seal_money": 1686058.0
     },
     {
       "thscode": "603122.SH",
@@ -2216,7 +2216,7 @@
       "limit_up_time": "10:36",
       "limit_up_reason": "医药商业+两岸医疗+AI医疗",
       "continue_day_text": "首板",
-      "seal_money": 261331.0
+      "seal_money": 391492.0
     },
     {
       "thscode": "000078.SZ",
@@ -2226,7 +2226,7 @@
       "limit_up_time": "10:33",
       "limit_up_reason": "资金占用整改+医药商业+物流配送",
       "continue_day_text": "首板",
-      "seal_money": 67850.0
+      "seal_money": 112690.0
     },
     {
       "thscode": "000826.SZ",
@@ -2236,7 +2236,7 @@
       "limit_up_time": "10:23",
       "limit_up_reason": "预重整推进+数字环卫+无人驾驶环卫",
       "continue_day_text": "首板",
-      "seal_money": 267579.0
+      "seal_money": 294840.0
     },
     {
       "thscode": "000756.SZ",
@@ -2246,7 +2246,7 @@
       "limit_up_time": "10:20",
       "limit_up_reason": "流感+阿尔茨海默病+解热镇痛",
       "continue_day_text": "首板",
-      "seal_money": 1456768.0
+      "seal_money": 1414208.0
     },
     {
       "thscode": "300703.SZ",
@@ -2256,7 +2256,7 @@
       "limit_up_time": "10:15",
       "limit_up_reason": "祈福文创+IP文创+AI玩具+国企改革",
       "continue_day_text": "3连板",
-      "seal_money": 6370620.0
+      "seal_money": 6651860.0
     },
     {
       "thscode": "002069.SZ",
@@ -2266,7 +2266,7 @@
       "limit_up_time": "10:14",
       "limit_up_reason": "水产养殖+海洋牧场+国企改革",
       "continue_day_text": "首板",
-      "seal_money": 371700.0
+      "seal_money": 381612.0
     },
     {
       "thscode": "000838.SZ",
@@ -2276,7 +2276,7 @@
       "limit_up_time": "10:13",
       "limit_up_reason": "预重整+再生资源+房地产+战略合作",
       "continue_day_text": "首板",
-      "seal_money": 405752.0
+      "seal_money": 398516.0
     },
     {
       "thscode": "600829.SH",
@@ -2286,7 +2286,7 @@
       "limit_up_time": "10:10",
       "limit_up_reason": "医药商业+流感+超跌反弹",
       "continue_day_text": "首板",
-      "seal_money": 599046.0
+      "seal_money": 489137.0
     },
     {
       "thscode": "002642.SZ",
@@ -2296,7 +2296,7 @@
       "limit_up_time": "10:08",
       "limit_up_reason": "存储设备集采+算力服务+国企",
       "continue_day_text": "首板",
-      "seal_money": 0.0
+      "seal_money": 122976.0
     },
     {
       "thscode": "301066.SZ",
@@ -2306,7 +2306,7 @@
       "limit_up_time": "10:07",
       "limit_up_reason": "丝绸文创+AIGC+回购完毕",
       "continue_day_text": "首板",
-      "seal_money": 885430.0
+      "seal_money": 851032.0
     },
     {
       "thscode": "601086.SH",
@@ -2316,7 +2316,7 @@
       "limit_up_time": "10:06",
       "limit_up_reason": "零售+三季报增长",
       "continue_day_text": "首板",
-      "seal_money": 4880500.0
+      "seal_money": 5158925.0
     }
   ],
   "rrg": {
@@ -6124,29 +6124,29 @@
     "themes": [
       {
         "name": "其他",
-        "count": 7,
+        "count": 6,
         "examples": [
-          "中京电子",
           "中视传媒",
-          "桂发祥"
+          "桂发祥",
+          "新华制药"
         ]
       },
       {
         "name": "并购重组/国资",
-        "count": 6,
+        "count": 5,
         "examples": [
           "龙版传媒",
-          "ST荣科",
-          "城市传媒"
+          "城市传媒",
+          "*ST启环"
         ]
       },
       {
         "name": "医药",
-        "count": 3,
+        "count": 4,
         "examples": [
+          "ST荣科",
           "合富中国",
-          "ST海王",
-          "人民同泰"
+          "ST海王"
         ]
       },
       {
@@ -6155,6 +6155,13 @@
         "examples": [
           "百傲化学",
           "荣联科技"
+        ]
+      },
+      {
+        "name": "算力/液冷/数据中心",
+        "count": 1,
+        "examples": [
+          "中京电子"
         ]
       },
       {
@@ -6275,8 +6282,8 @@
       "first_board_count": 16,
       "early_count": 0,
       "afternoon_count": 6,
-      "total_seal_yi": 0.41,
-      "median_seal_wan": 74.0
+      "total_seal_yi": 0.43,
+      "median_seal_wan": 67.0
     },
     "sentiment": {
       "score": 33,
@@ -6287,7 +6294,7 @@
         "extremes": 12.5,
         "support": 2.1,
         "ladder": 15.0,
-        "seal": 0.4
+        "seal": 0.3
       }
     },
     "narrative": [
@@ -6295,9 +6302,9 @@
       "九成板块翻绿、离散度还不到 1.5 → 这是整体减仓式的普跌，不是板块间搬家；这种日子里「谁抗跌」多是仓位效应，别当成风格切换。",
       "沪深300 -1.65% vs 中证1000 -4.44%（差 +2.79 个百分点）→ 权重抗跌、小盘杀跌。",
       "成交额前 20 平均 -4.33%、后 20 平均 -2.74%——成交越活跃跌得越多，量是出货不是承接；最大的一块是半导体，占两市成交 12.9%，今日 -7.89%。",
-      "涨停 20 只里，7 只集中在「其他」（中京电子、中视传媒、桂发祥）；其次 并购重组/国资 6 只、医药 3 只——赚钱效应就看这几条链。",
+      "涨停 20 只里，6 只集中在「其他」（中视传媒、桂发祥、新华制药）；其次 并购重组/国资 5 只、医药 4 只——赚钱效应就看这几条链。",
       "隔夜 vs 日内（APM 日内动量拆分）：冲高回落/派发预警：半导体（放量长上影，日内 -5.65%，分位 0.00）、通信设备（放量长上影，日内 -2.51%，分位 0.00）、元件（放量长上影，日内 -2.84%，分位 0.00）。",
-      "情绪温度 33/100（防守：宽度 3/25 · 极值 12/25 · 日内承接 2/20 · 连板 15/15 · 封板 0/15）；最高 5 连板（中京电子），连板 4 / 首板 16，封单合计 0.41 亿。"
+      "情绪温度 33/100（防守：宽度 3/25 · 极值 12/25 · 日内承接 2/20 · 连板 15/15 · 封板 0/15）；最高 5 连板（中京电子），连板 4 / 首板 16，封单合计 0.43 亿。"
     ]
   },
   "decision": {
