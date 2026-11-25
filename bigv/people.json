@@ -3,37 +3,500 @@
   "criteria": "机构策略分析师 / 基金管理人，美股与 A 股各 50 位（目标）。同级别按「大型机构首席或策略负责人」优先；无法严格同级的在 note 里注明。",
   "ai_view_note": "多空概率（ai_bull_prob）是 AI 依据该人近五天条目的语气作出的判断，不是本人表态，仅供参考。",
   "people": [
-    {"id": "tomlee", "market": "US", "name": "Tom Lee", "org": "Fundstrat", "role": "联合创始人、研究主管", "note": "用户指定的参照对象", "ai_bull_prob": 0.7},
-    {"id": "wilson", "market": "US", "name": "Michael Wilson", "org": "摩根士丹利", "role": "首席美股策略师", "note": "", "ai_bull_prob": 0.75},
-    {"id": "subramanian", "market": "US", "name": "Savita Subramanian", "org": "美国银行", "role": "美股与量化策略主管", "note": "", "ai_bull_prob": 0.5},
-    {"id": "yardeni", "market": "US", "name": "Ed Yardeni", "org": "Yardeni Research", "role": "总裁、首席投资策略师", "note": "", "ai_bull_prob": 0.6},
-    {"id": "thorne", "market": "US", "name": "James Thorne", "org": "Wellington-Altus", "role": "策略师", "note": "", "ai_bull_prob": 0.8},
-    {"id": "detrick", "market": "US", "name": "Ryan Detrick", "org": "Carson Group", "role": "首席市场策略师", "note": "", "ai_bull_prob": 0.7},
-    {"id": "siegel", "market": "US", "name": "Jeremy Siegel", "org": "宾大沃顿商学院", "role": "金融学教授（学术身份，非机构策略）", "note": "与机构策略师不完全同级，保留是为了覆盖「长期主义」视角", "ai_bull_prob": 0.7},
-    {"id": "newton", "market": "US", "name": "Mark Newton", "org": "Fundstrat", "role": "技术策略负责人", "note": "", "ai_bull_prob": 0.45},
-    {"id": "cramer", "market": "US", "name": "Jim Cramer", "org": "CNBC 投资俱乐部", "role": "主持人、投资组合负责人（媒体身份）", "note": "媒体人物，不是机构策略；保留是因为是高关注度的财经大 V", "ai_bull_prob": 0.7},
-    {"id": "brown", "market": "US", "name": "Josh Brown", "org": "Ritholtz Wealth Management", "role": "首席执行官", "note": "", "ai_bull_prob": 0.6},
-    {"id": "lakos-bujas", "market": "US", "name": "Dubravko Lakos-Bujas", "org": "摩根大通", "role": "策略团队负责人（据报道文中称）", "note": "", "ai_bull_prob": 0.8},
-    {"id": "ackman", "market": "US", "name": "Bill Ackman", "org": "潘兴广场资本", "role": "创始人兼首席执行官（对冲基金经理）", "note": "", "ai_bull_prob": 0.3},
-    {"id": "ivascyn", "market": "US", "name": "Daniel Ivascyn", "org": "Pimco", "role": "首席投资官", "note": "", "ai_bull_prob": 0.35},
-    {"id": "matejka", "market": "US", "name": "Mislav Matejka", "org": "摩根大通", "role": "全球股票策略主管", "note": "五天内未找到公开观点", "ai_bull_prob": null},
-    {"id": "calvasina", "market": "US", "name": "Lori Calvasina", "org": "加拿大皇家银行资本市场", "role": "美股策略主管", "note": "五天内未找到公开观点", "ai_bull_prob": null},
-    {"id": "snider", "market": "US", "name": "Ben Snider", "org": "高盛", "role": "首席美股策略师", "note": "最近一次找到的是 11 月 20 日（CNBC 引述，窗口外）", "ai_bull_prob": null},
-    {"id": "chen-guo", "market": "CN", "name": "陈果", "org": "东方财富证券", "role": "研究所副所长、首席策略官", "note": "", "ai_bull_prob": 0.6},
-    {"id": "wu-kaida", "market": "CN", "name": "吴开达", "org": "天风证券", "role": "首席策略分析师", "note": "", "ai_bull_prob": 0.6},
-    {"id": "huang-yanming", "market": "CN", "name": "黄燕铭", "org": "东方证券", "role": "研究所所长", "note": "", "ai_bull_prob": 0.55},
-    {"id": "lu-zhe", "market": "CN", "name": "芦哲", "org": "东吴证券", "role": "首席经济学家", "note": "", "ai_bull_prob": 0.65},
-    {"id": "liu-chenming", "market": "CN", "name": "刘晨明", "org": "广发证券", "role": "策略首席分析师", "note": "", "ai_bull_prob": 0.65},
-    {"id": "zhang-jiqiang", "market": "CN", "name": "张继强", "org": "华泰证券", "role": "研究所所长、固收首席", "note": "固收首席，不是股票策略；保留是因为其观点直接谈 A 股中长期", "ai_bull_prob": 0.75},
-    {"id": "yue-yang", "market": "CN", "name": "岳阳", "org": "华创证券", "role": "电子首席分析师", "note": "行业首席，不是策略；保留是因为其观点谈 AI 硬件景气", "ai_bull_prob": 0.5},
-    {"id": "bao-chengchao", "market": "CN", "name": "包承超", "org": "中信证券", "role": "首席策略师", "note": "", "ai_bull_prob": 0.7},
-    {"id": "wu-xinkun", "market": "CN", "name": "吴信坤", "org": "国信证券", "role": "策略首席分析师", "note": "", "ai_bull_prob": 0.7},
-    {"id": "li-zhan", "market": "CN", "name": "李湛", "org": "招商基金", "role": "首席（基金公司）", "note": "", "ai_bull_prob": 0.6},
-    {"id": "liao-bo", "market": "CN", "name": "廖博", "org": "东北证券", "role": "宏观首席分析师", "note": "", "ai_bull_prob": 0.6},
-    {"id": "li-bei", "market": "CN", "name": "李蓓", "org": "个人投资者（公开发帖）", "role": "投资人，非机构", "note": "非机构身份，按公开发帖计入", "ai_bull_prob": 0.85},
-    {"id": "li-haoyang", "market": "CN", "name": "李昊阳", "org": "招商证券", "role": "首席策略分析师", "note": "", "ai_bull_prob": 0.6},
-    {"id": "mou-yiling", "market": "CN", "name": "牟一凌", "org": "国金证券", "role": "首席策略官", "note": "", "ai_bull_prob": 0.6},
-    {"id": "li-qiusuo", "market": "CN", "name": "李求索", "org": "中金公司", "role": "国内策略首席分析师", "note": "最近一次找到的是 11 月 1 日", "ai_bull_prob": null},
-    {"id": "fu-jingtao", "market": "CN", "name": "傅静涛", "org": "申万宏源", "role": "A 股策略首席分析师", "note": "最近一次找到的是 11 月 9 日", "ai_bull_prob": null}
+    {
+      "id": "tomlee",
+      "market": "US",
+      "name": "Tom Lee",
+      "org": "Fundstrat",
+      "role": "联合创始人、研究主管",
+      "note": "用户指定的参照对象",
+      "ai_bull_prob": 0.7
+    },
+    {
+      "id": "wilson",
+      "market": "US",
+      "name": "Michael Wilson",
+      "org": "摩根士丹利",
+      "role": "首席美股策略师",
+      "note": "",
+      "ai_bull_prob": 0.75
+    },
+    {
+      "id": "subramanian",
+      "market": "US",
+      "name": "Savita Subramanian",
+      "org": "美国银行",
+      "role": "美股与量化策略主管",
+      "note": "",
+      "ai_bull_prob": 0.5
+    },
+    {
+      "id": "yardeni",
+      "market": "US",
+      "name": "Ed Yardeni",
+      "org": "Yardeni Research",
+      "role": "总裁、首席投资策略师",
+      "note": "",
+      "ai_bull_prob": 0.6
+    },
+    {
+      "id": "thorne",
+      "market": "US",
+      "name": "James Thorne",
+      "org": "Wellington-Altus",
+      "role": "策略师",
+      "note": "",
+      "ai_bull_prob": 0.8
+    },
+    {
+      "id": "detrick",
+      "market": "US",
+      "name": "Ryan Detrick",
+      "org": "Carson Group",
+      "role": "首席市场策略师",
+      "note": "",
+      "ai_bull_prob": 0.7
+    },
+    {
+      "id": "siegel",
+      "market": "US",
+      "name": "Jeremy Siegel",
+      "org": "宾大沃顿商学院",
+      "role": "金融学教授（学术身份，非机构策略）",
+      "note": "与机构策略师不完全同级，保留是为了覆盖「长期主义」视角",
+      "ai_bull_prob": 0.7
+    },
+    {
+      "id": "newton",
+      "market": "US",
+      "name": "Mark Newton",
+      "org": "Fundstrat",
+      "role": "技术策略负责人",
+      "note": "",
+      "ai_bull_prob": 0.45
+    },
+    {
+      "id": "cramer",
+      "market": "US",
+      "name": "Jim Cramer",
+      "org": "CNBC 投资俱乐部",
+      "role": "主持人、投资组合负责人（媒体身份）",
+      "note": "媒体人物，不是机构策略；保留是因为是高关注度的财经大 V",
+      "ai_bull_prob": 0.7
+    },
+    {
+      "id": "brown",
+      "market": "US",
+      "name": "Josh Brown",
+      "org": "Ritholtz Wealth Management",
+      "role": "首席执行官",
+      "note": "",
+      "ai_bull_prob": 0.6
+    },
+    {
+      "id": "lakos-bujas",
+      "market": "US",
+      "name": "Dubravko Lakos-Bujas",
+      "org": "摩根大通",
+      "role": "策略团队负责人（据报道文中称）",
+      "note": "",
+      "ai_bull_prob": 0.8
+    },
+    {
+      "id": "ackman",
+      "market": "US",
+      "name": "Bill Ackman",
+      "org": "潘兴广场资本",
+      "role": "创始人兼首席执行官（对冲基金经理）",
+      "note": "",
+      "ai_bull_prob": 0.3
+    },
+    {
+      "id": "ivascyn",
+      "market": "US",
+      "name": "Daniel Ivascyn",
+      "org": "Pimco",
+      "role": "首席投资官",
+      "note": "",
+      "ai_bull_prob": 0.35
+    },
+    {
+      "id": "matejka",
+      "market": "US",
+      "name": "Mislav Matejka",
+      "org": "摩根大通",
+      "role": "全球股票策略主管",
+      "note": "11 月 16 日欧洲盈利报告（窗口外）；窗口内未找到观点",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "calvasina",
+      "market": "US",
+      "name": "Lori Calvasina",
+      "org": "加拿大皇家银行资本市场",
+      "role": "美股策略主管",
+      "note": "11 月 2–5 日播客与 CNBC 采访（窗口外）；窗口内未找到观点",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "snider",
+      "market": "US",
+      "name": "Ben Snider",
+      "org": "高盛",
+      "role": "首席美股策略师",
+      "note": "11 月 23 日客户报告（Investing.com）",
+      "ai_bull_prob": 0.55
+    },
+    {
+      "id": "chen-guo",
+      "market": "CN",
+      "name": "陈果",
+      "org": "东方财富证券",
+      "role": "研究所副所长、首席策略官",
+      "note": "",
+      "ai_bull_prob": 0.6
+    },
+    {
+      "id": "wu-kaida",
+      "market": "CN",
+      "name": "吴开达",
+      "org": "天风证券",
+      "role": "首席策略分析师",
+      "note": "",
+      "ai_bull_prob": 0.6
+    },
+    {
+      "id": "huang-yanming",
+      "market": "CN",
+      "name": "黄燕铭",
+      "org": "东方证券",
+      "role": "研究所所长",
+      "note": "",
+      "ai_bull_prob": 0.55
+    },
+    {
+      "id": "lu-zhe",
+      "market": "CN",
+      "name": "芦哲",
+      "org": "东吴证券",
+      "role": "首席经济学家",
+      "note": "",
+      "ai_bull_prob": 0.65
+    },
+    {
+      "id": "liu-chenming",
+      "market": "CN",
+      "name": "刘晨明",
+      "org": "广发证券",
+      "role": "策略首席分析师",
+      "note": "",
+      "ai_bull_prob": 0.65
+    },
+    {
+      "id": "zhang-jiqiang",
+      "market": "CN",
+      "name": "张继强",
+      "org": "华泰证券",
+      "role": "研究所所长、固收首席",
+      "note": "固收首席，不是股票策略；保留是因为其观点直接谈 A 股中长期",
+      "ai_bull_prob": 0.75
+    },
+    {
+      "id": "yue-yang",
+      "market": "CN",
+      "name": "岳阳",
+      "org": "华创证券",
+      "role": "电子首席分析师",
+      "note": "行业首席，不是策略；保留是因为其观点谈 AI 硬件景气",
+      "ai_bull_prob": 0.5
+    },
+    {
+      "id": "bao-chengchao",
+      "market": "CN",
+      "name": "包承超",
+      "org": "中信证券",
+      "role": "首席策略师",
+      "note": "",
+      "ai_bull_prob": 0.7
+    },
+    {
+      "id": "wu-xinkun",
+      "market": "CN",
+      "name": "吴信坤",
+      "org": "国信证券",
+      "role": "策略首席分析师",
+      "note": "",
+      "ai_bull_prob": 0.7
+    },
+    {
+      "id": "li-zhan",
+      "market": "CN",
+      "name": "李湛",
+      "org": "招商基金",
+      "role": "首席（基金公司）",
+      "note": "",
+      "ai_bull_prob": 0.6
+    },
+    {
+      "id": "liao-bo",
+      "market": "CN",
+      "name": "廖博",
+      "org": "东北证券",
+      "role": "宏观首席分析师",
+      "note": "",
+      "ai_bull_prob": 0.6
+    },
+    {
+      "id": "li-bei",
+      "market": "CN",
+      "name": "李蓓",
+      "org": "个人投资者（公开发帖）",
+      "role": "投资人，非机构",
+      "note": "非机构身份，按公开发帖计入",
+      "ai_bull_prob": 0.85
+    },
+    {
+      "id": "li-haoyang",
+      "market": "CN",
+      "name": "李昊阳",
+      "org": "招商证券",
+      "role": "首席策略分析师",
+      "note": "",
+      "ai_bull_prob": 0.6
+    },
+    {
+      "id": "mou-yiling",
+      "market": "CN",
+      "name": "牟一凌",
+      "org": "国金证券",
+      "role": "首席策略官",
+      "note": "",
+      "ai_bull_prob": 0.6
+    },
+    {
+      "id": "li-qiusuo",
+      "market": "CN",
+      "name": "李求索",
+      "org": "中金公司",
+      "role": "国内策略首席分析师",
+      "note": "最近一次找到的是 11 月 1 日",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "fu-jingtao",
+      "market": "CN",
+      "name": "傅静涛",
+      "org": "申万宏源",
+      "role": "A 股策略首席分析师",
+      "note": "最近一次找到的是 11 月 9 日",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "chadha",
+      "market": "US",
+      "name": "Binky Chadha",
+      "org": "Deutsche Bank",
+      "role": "首席美股策略师",
+      "note": "",
+      "ai_bull_prob": 0.85
+    },
+    {
+      "id": "ives",
+      "market": "US",
+      "name": "Dan Ives",
+      "org": "Yorkville Ives & Co.",
+      "role": "科技分析师",
+      "note": "",
+      "ai_bull_prob": 0.9
+    },
+    {
+      "id": "elerian",
+      "market": "US",
+      "name": "Mohamed El-Erian",
+      "org": "Allianz",
+      "role": "首席经济顾问",
+      "note": "",
+      "ai_bull_prob": 0.45
+    },
+    {
+      "id": "dalio",
+      "market": "US",
+      "name": "Ray Dalio",
+      "org": "Bridgewater Associates",
+      "role": "创始人",
+      "note": "",
+      "ai_bull_prob": 0.35
+    },
+    {
+      "id": "bianco",
+      "market": "US",
+      "name": "Jim Bianco",
+      "org": "Bianco Research",
+      "role": "宏观策略师",
+      "note": "",
+      "ai_bull_prob": 0.4
+    },
+    {
+      "id": "degraaf",
+      "market": "US",
+      "name": "Jeff deGraaf",
+      "org": "Renaissance Macro Research",
+      "role": "技术研究负责人",
+      "note": "",
+      "ai_bull_prob": 0.5
+    },
+    {
+      "id": "hackett",
+      "market": "US",
+      "name": "Mark Hackett",
+      "org": "Nationwide",
+      "role": "首席市场策略师",
+      "note": "",
+      "ai_bull_prob": 0.7
+    },
+    {
+      "id": "trainer",
+      "market": "US",
+      "name": "David Trainer",
+      "org": "New Constructs",
+      "role": "投资研究负责人",
+      "note": "",
+      "ai_bull_prob": 0.2
+    },
+    {
+      "id": "ramchandani",
+      "market": "US",
+      "name": "Karan Ramchandani",
+      "org": "Post Oak Group",
+      "role": "管理合伙人",
+      "note": "",
+      "ai_bull_prob": 0.4
+    },
+    {
+      "id": "buchbinder",
+      "market": "US",
+      "name": "Jeffrey Buchbinder",
+      "org": "LPL Financial",
+      "role": "首席股票策略师",
+      "note": "",
+      "ai_bull_prob": 0.8
+    },
+    {
+      "id": "stoltzfus",
+      "market": "US",
+      "name": "John Stoltzfus",
+      "org": "Oppenheimer",
+      "role": "首席投资策略师",
+      "note": "11 月 9 日 CNBC 引述（窗口外）",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "bannister",
+      "market": "US",
+      "name": "Barry Bannister",
+      "org": "Stifel",
+      "role": "首席股票策略师",
+      "note": "",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "sonders",
+      "market": "US",
+      "name": "Liz Ann Sonders",
+      "org": "Charles Schwab",
+      "role": "首席投资策略师",
+      "note": "11 月 20 日 Bloomberg 视频（窗口外）",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "hartnett",
+      "market": "US",
+      "name": "Michael Hartnett",
+      "org": "Bank of America",
+      "role": "首席全球投资策略师",
+      "note": "11 月 16 日 Flow Show 引述（窗口外）",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "cathie-wood",
+      "market": "US",
+      "name": "Cathie Wood",
+      "org": "ARK Invest",
+      "role": "首席执行官",
+      "note": "11 月 20 日 CNBC 采访（窗口外）",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "dwyer",
+      "market": "US",
+      "name": "Tony Dwyer",
+      "org": "Canaccord Genuity",
+      "role": "首席市场策略师",
+      "note": "",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "marks",
+      "market": "US",
+      "name": "Howard Marks",
+      "org": "Oaktree Capital",
+      "role": "联合创始人",
+      "note": "11 月 11 日备忘录（窗口外）；11 月 21 日的文章为转载",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "chronert",
+      "market": "US",
+      "name": "Scott Chronert",
+      "org": "Citi",
+      "role": "美股策略师",
+      "note": "11 月 21 日 BNN 采访仅见标题，内容未核实",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "kantrowitz",
+      "market": "US",
+      "name": "Michael Kantrowitz",
+      "org": "Piper Sandler",
+      "role": "首席投资策略师",
+      "note": "11 月 3 日（窗口外）",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "belski",
+      "market": "US",
+      "name": "Brian Belski",
+      "org": "BMO Capital Markets",
+      "role": "首席投资策略师",
+      "note": "",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "emanuel",
+      "market": "US",
+      "name": "Julian Emanuel",
+      "org": "Evercore ISI",
+      "role": "首席股票与量化策略师",
+      "note": "11 月 10–11 日（窗口外）",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "debusschere",
+      "market": "US",
+      "name": "Dennis DeBusschere",
+      "org": "22V Research",
+      "role": "首席市场策略师",
+      "note": "",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "wang-fang",
+      "market": "CN",
+      "name": "王芳",
+      "org": "中泰证券",
+      "role": "研究所联席所长",
+      "note": "电子行业首席",
+      "ai_bull_prob": 0.8
+    }
   ]
 }

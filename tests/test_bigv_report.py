@@ -168,7 +168,7 @@ class StocksPanelTest(unittest.TestCase):
     def test_default_files_build_a_section(self):
         section, error = self.bs.bigv_section({"data_timestamp": 1_764_000_000_000})
         self.assertIsNone(error)
-        self.assertEqual(len(section["rows"]), 32)
+        self.assertEqual(len(section["rows"]), 55)
         self.assertRegex(section["window"][1], r"^\d{4}-\d{2}-\d{2}$")
 
     def test_hash_changes_when_items_change(self):
