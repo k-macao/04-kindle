@@ -43,6 +43,8 @@ on:
       - "tools/build_stocks.py"
       - "tools/ah_leaders.py"
       - "tools/sector_rrg.py"
+      - "tools/ew_sdm.py"
+      - "tools/timing_quants.py"
       - "tools/market_watchlist.py"
       - "tools/fetch_hk.py"
 

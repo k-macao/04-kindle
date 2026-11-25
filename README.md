@@ -176,6 +176,19 @@ warm-up 行数也照它的算法说明核过；参数默认研报口径 220/60/2
 并在面板上写明。清单在 `tools/market_watchlist.py`，详见
 [docs/kindle-stocks.md](docs/kindle-stocks.md)。
 
+板块情绪 **EW-SDM**（单日横截面）：策略来自
+[autumn-go/strategy-factor-dashboard](https://github.com/autumn-go/strategy-factor-dashboard)
+的 `ews_engine.py`，用本轮全 A 快照、涨停池和成分股算每个板块的「涨跌幅 × 情绪 × 连板杠杆」，
+实现在 `tools/ew_sdm.py`；没有炸板数据，所以负反馈规则不生效。详见
+[docs/kindle-stocks.md](docs/kindle-stocks.md) 第 6b 节。
+
+指数择时 **ICU 均线 + QRS**：策略来自 GitHub
+[hugo2046/QuantsPlaybook](https://github.com/hugo2046/QuantsPlaybook)
+的「C-择时类」（ICU均线、RSRS 择时），用宽基指数日 K 的最高、最低价和收盘价算每个指数的
+ICU 状态（收盘上穿买、下穿卖）和 QRS 状态（上穿 +0.7 开、下穿 -0.7 平），实现在
+`tools/timing_quants.py`（标准库，Siegel 重复中位数自己写，已对照 scipy 与原仓库
+`QRSCreator` 核过数）。详见 [docs/kindle-stocks.md](docs/kindle-stocks.md) 第 6c 节。
+
 ### 结果卡 · 量价分析 · 四工具数据
 
 面板首屏只放结果卡，不再铺方法说明：**市场状态、量价结论、真承接、派发预警、强弱结果、
