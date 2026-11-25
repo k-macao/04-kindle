@@ -340,6 +340,24 @@ var h='<div class="result-card"><div class="label">'+esc(label)+'</div>'+
 (rows||[]).forEach(function(row){
 h+='<div class="metric"><span>'+esc(row[0])+'</span><span class="'+esc(row[2]||'')+'">'+esc(row[1])+'</span></div>';});
 return h+'</div>';}
+function decisionSection(d,brief){
+if(!d||!d.risk)return '';
+var risk=d.risk||{},ops=d.opportunities||[];
+var h='<section class="result-section"><h2>风险开关与板块机会池<span class="muted"> '+esc(d.as_of||'')+'</span></h2>';
+var reasonRows=(risk.reasons||[]).slice(0,brief?3:5).map(function(x){return ['依据',x];});
+h+='<div class="result-grid">';
+h+=resultCard('风险开关',(risk.label||'--')+' '+(risk.score==null?'--':risk.score)+'/100',
+'纪律仓位 ≤ '+(risk.max_position_pct||0)+'% · '+(risk.stance||''),reasonRows,
+risk.mode==='defense'?'down':(risk.mode==='attack'?'up':''));
+ops.slice(0,brief?3:5).forEach(function(o){
+var rows=[['状态',o.status||'仅观察'],['今日',ratio(o.today_pct)],
+['失效',o.invalidation||'强势条件消失']];
+if(o.risks&&o.risks.length)rows.push(['风险',o.risks.join('、'),'down']);
+h+=resultCard('#'+o.rank+' · '+o.name,(o.score||0)+'/100 · '+(o.role||o.quadrant||''),
+(o.reasons||[]).slice(0,3).join(' · '),rows,o.status==='仅观察'?'down':'');});
+h+='</div><p class="src">机会池是观察顺序，不是买入指令；仓位为通用纪律上限，单笔风险模板 ≤ '+
+Number(risk.single_trade_risk_pct||0.5).toFixed(1)+'%。</p></section>';
+return h;}
 function volumeVerdict(flow){
 var a=flow.top_avg,b=flow.tail_avg;
 if(typeof a!=='number'||typeof b!=='number')return '量价数据不足';
@@ -450,7 +468,8 @@ return resultCard('持仓结果',item.name,(item.code||'')+' · '+(item.sector||
 function render(d){
 var h='';
 var brief=!!(d.view&&d.view.mode==='brief');
-// 结果置顶：先看量价与关键数据卡，再往下查行情明细。
+// 结果置顶：先决定能不能开新风险，再看量价证据和行情明细。
+if(d.decision&&d.decision.risk)h+=decisionSection(d.decision,brief);
 if(d.volume_price&&d.volume_price.counts)h+=crossSection(d.volume_price,brief);
 else if(d.cross&&d.cross.counts)h+=crossSection(d.cross,brief);
 if(d.radar)h+=radarSection(d.radar,brief);
