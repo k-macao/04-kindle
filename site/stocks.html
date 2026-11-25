@@ -442,6 +442,48 @@ h+=resultCard('赚钱主线',lead.name||'--',lead.count?((lead.count||0)+' 只 �
 h+='</div></section>';
 return h;}
 
+function timingSection(t){
+var rows=(t&&t.rows)||[];
+if(!rows.length)return '';
+var h='<section><h2>指数择时 · ICU 均线 / RSRS(QRS)<span class="muted"> '+rows.length+' 个'+(t.as_of?' · '+esc(t.as_of):'')+'</span></h2>';
+h+='<p class="meta">ICU(5)：收盘上穿买、下穿卖。QRS：上穿 +0.7 开、下穿 -0.7 平。</p>';
+h+='<table class="card"><tr><th>指数</th><th>收盘</th><th>ICU</th><th>状态</th><th>QRS</th><th>状态</th></tr>';
+rows.forEach(function(r){
+var cross=r.icu_last_cross?(r.icu_last_cross.side+r.icu_last_cross.bars_ago+'日前'):'近期无穿越';
+h+='<tr><td>'+esc(r.name)+'</td><td>'+num(r.close,2)+'</td><td>'+num(r.icu,2)+'</td><td>'+esc(r.icu_state||'--')+'<br><span class="muted">'+esc(cross)+'</span></td><td>'+(r.qrs==null?'--':(r.qrs>0?'+':'')+num(r.qrs,2))+'</td><td>'+esc(r.qrs_state||'--')+'</td></tr>';});
+h+='</table>';
+(t.notes||[]).forEach(function(n){h+='<p class="meta">'+esc(n)+'</p>';});
+return h+'</section>';}
+
+function ewSection(e){
+var cov=e.coverage||{};
+var ok=(e.rows||[]).filter(function(r){return r.status==='ok';});
+if(!ok.length)return '';
+var byScore=ok.slice().sort(function(a,b){return b.final_score-a.final_score;});
+var strong=byScore.slice(0,6),weak=byScore.slice().reverse().slice(0,6);
+function line(r){var st=r.max_streak?('最高'+r.max_streak+'板'):'无连板';
+return '<tr><td>'+esc(r.name)+'</td><td>'+(r.final_score>0?'+':'')+num(r.final_score,2)+'</td><td>'+(r.momentum>0?'+':'')+num(r.momentum,2)+'%</td><td>'+num(r.emotion_diff,2)+'</td><td>'+(r.limit_up_count||0)+' · '+st+'</td></tr>';}
+var head='<tr><th>板块</th><th>分</th><th>涨跌</th><th>情绪</th><th>涨停 · 连板</th></tr>';
+var h='<section><h2>板块情绪 · EW-SDM<span class="muted"> 共 '+ok.length+' 个'+(e.as_of?' · '+esc(e.as_of):'')+'</span></h2>';
+h+='<p class="meta">分 = 涨跌幅 × 情绪 × 连板杠杆；分为 0 = 板块内没有涨停、也没有涨超 3% 的股票。覆盖 '+(cov.sectors_ok||0)+'/'+(cov.sectors||0)+' 个板块，成分股 '+(cov.priced||0)+'/'+(cov.members||0)+' 只。</p>';
+h+='<h3>强</h3><table class="card">'+head+strong.map(line).join('')+'</table>';
+h+='<h3>弱</h3><table class="card">'+head+weak.map(line).join('')+'</table>';
+(e.notes||[]).forEach(function(n){h+='<p class="meta">'+esc(n)+'</p>';});
+return h+'</section>';}
+
+function bigvSection(b){
+var rows=b.rows||[],n=b.items_in_window||0,w=b.window||['',''];
+var h='<section><h2>大 V 观点 · 近五天<span class="muted"> '+esc(w[0])+' 至 '+esc(w[1])+'</span></h2>';
+if(!n)h+='<p class="meta">窗口内没有条目：数据需每日往 bigv/items.json 追加。</p>';
+h+='<table class="card"><tr><th>人物</th><th>条数</th><th>最近要点</th></tr>';
+rows.forEach(function(r){
+var f=(r.items||[])[0];
+var who=esc(r.name)+' <span class="muted">'+(r.market==='US'?'美股':'A 股')+' · '+esc(r.org)+'</span>';
+var what=f?esc(f.date)+' · '+esc(f.dimension)+'：'+esc(f.summary)+' <a href="'+esc(f.url)+'">原文</a>':'<span class="muted">五天内未找到公开观点</span>';
+h+='<tr><td>'+who+'</td><td>'+(r.count||0)+'</td><td>'+what+'</td></tr>';});
+h+='</table>';
+return h+'</section>';}
+
 function rrgSection(g,brief){
 var rows=g.rows||[];
 if(!rows.length)return '';
@@ -555,6 +597,9 @@ else h+='<section><h2>涨停池（'+d.limit_up.length+
 '）· 按封板时间</h2>'+limitRows(d.limit_up)+'</section>';}
 // RRG 是量价结果之外的中期轮动补充；没有日 K 时不再重复输出同一份横截面。
 if(d.rrg&&d.rrg.rows&&d.rrg.rows.length)h+=rrgSection(d.rrg,brief);
+if(d.timing&&d.timing.rows&&d.timing.rows.length)h+=timingSection(d.timing);
+if(d.ew_sdm&&d.ew_sdm.rows&&d.ew_sdm.rows.length)h+=ewSection(d.ew_sdm);
+if(d.bigv&&d.bigv.rows)h+=bigvSection(d.bigv);
 (d.errors||[]).forEach(function(e){h+='<p>注：'+esc(e)+'</p>';});
 document.getElementById('main').innerHTML=h||'<p>暂无数据</p>';
 var demo=d.demo?'【演示数据】':'';
