@@ -30,7 +30,7 @@ DEFAULT_ITEMS = ROOT / "bigv" / "items.json"
 DEFAULT_OUT = ROOT / "bigv" / "report"
 
 DIMENSIONS = ["发言", "观点", "评论", "采访", "报道", "视频", "文章", "直播", "互动", "讨论"]
-MARKETS = {"US": "美股", "CN": "A 股"}
+MARKETS = {"US": "美股", "CN": "A 股", "HK": "港股"}
 _ISO = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 AI_VIEW_NOTE = "多空概率是 AI 依据该人近五天条目的语气作出的判断，不是本人表态，仅供参考。"
 
@@ -124,7 +124,7 @@ def render_markdown(s: dict) -> str:
            "",
            f"**注意：{AI_VIEW_NOTE}**",
            "",
-           f"名单进度：目标美股、A 股各 50 位（共 100 位）；当前名单 {len(s['rows'])} 位，尚未达到目标。"
+           f"名单进度：目标 100 位（美股、A 股各 50 位为基准，港股为补充来源）；当前名单 {len(s['rows'])} 位，尚未达到目标。"
            "名单标准：机构策略分析师、基金管理人。个别人与「同级别」不完全一致，在表格备注里说明。",
            ""]
     for m, label in MARKETS.items():

@@ -497,6 +497,195 @@
       "role": "研究所联席所长",
       "note": "电子行业首席",
       "ai_bull_prob": 0.8
+    },
+    {
+      "id": "lichangfeng",
+      "market": "CN",
+      "name": "李长风",
+      "org": "联博基金",
+      "role": "市场策略负责人",
+      "note": "",
+      "ai_bull_prob": 0.6
+    },
+    {
+      "id": "wangzonghao",
+      "market": "CN",
+      "name": "王宗豪",
+      "org": "瑞银",
+      "role": "中国股票策略研究主管",
+      "note": "",
+      "ai_bull_prob": 0.7
+    },
+    {
+      "id": "songjin",
+      "market": "CN",
+      "name": "宋劲",
+      "org": "野村东方国际证券",
+      "role": "A股首席策略师",
+      "note": "",
+      "ai_bull_prob": 0.4
+    },
+    {
+      "id": "lidaxiao",
+      "market": "CN",
+      "name": "李大霄",
+      "org": "前券商首席经济学家",
+      "role": "",
+      "note": "",
+      "ai_bull_prob": 0.7
+    },
+    {
+      "id": "luoxiaoming",
+      "market": "CN",
+      "name": "罗晓鸣",
+      "org": "恒创天下投资",
+      "role": "投资总监",
+      "note": "",
+      "ai_bull_prob": 0.65
+    },
+    {
+      "id": "xiafanjie",
+      "market": "CN",
+      "name": "夏凡捷",
+      "org": "中信建投证券",
+      "role": "首席策略分析师",
+      "note": "",
+      "ai_bull_prob": 0.6
+    },
+    {
+      "id": "yangchao",
+      "market": "CN",
+      "name": "杨超",
+      "org": "中国银河证券",
+      "role": "首席策略分析师",
+      "note": "",
+      "ai_bull_prob": 0.7
+    },
+    {
+      "id": "zhaowei",
+      "market": "CN",
+      "name": "赵伟",
+      "org": "申万宏源证券",
+      "role": "首席经济学家",
+      "note": "",
+      "ai_bull_prob": 0.6
+    },
+    {
+      "id": "fengliu",
+      "market": "CN",
+      "name": "冯柳",
+      "org": "高毅邻山（公募/私募基金经理）",
+      "role": "基金经理",
+      "note": "窗口内未找到；最近的公开持仓与观点为 8 月和 10 月的报道（窗口外）",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "zhushaoxing",
+      "market": "CN",
+      "name": "朱少醒",
+      "org": "富国基金",
+      "role": "基金经理",
+      "note": "窗口内未找到；最近的季报观点为 10 月（窗口外）",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "chen-gang",
+      "market": "CN",
+      "name": "陈刚",
+      "org": "东吴证券",
+      "role": "首席策略分析师",
+      "note": "11 月 16 日策略报告（窗口外）",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "slimmon",
+      "market": "US",
+      "name": "Andrew Slimmon",
+      "org": "Morgan Stanley",
+      "role": "",
+      "note": "",
+      "ai_bull_prob": 0.4
+    },
+    {
+      "id": "kenwell",
+      "market": "US",
+      "name": "Bret Kenwell",
+      "org": "eToro",
+      "role": "美股投资策略师",
+      "note": "",
+      "ai_bull_prob": 0.45
+    },
+    {
+      "id": "cox",
+      "market": "US",
+      "name": "Jamie Cox",
+      "org": "Harris Financial Group",
+      "role": "管理合伙人",
+      "note": "",
+      "ai_bull_prob": 0.35
+    },
+    {
+      "id": "gundlach",
+      "market": "US",
+      "name": "Jeffrey Gundlach",
+      "org": "DoubleLine Capital",
+      "role": "首席执行官",
+      "note": "11 月 12–15 日观点（窗口外）",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "kleintop",
+      "market": "US",
+      "name": "Jeffrey Kleintop",
+      "org": "Charles Schwab",
+      "role": "首席全球投资策略师",
+      "note": "窗口内未找到；可查到的访谈为 2025 年（窗口外）",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "hochiming",
+      "market": "HK",
+      "name": "何志明",
+      "org": "香港市场分析师（Longbridge 专家观点）",
+      "role": "",
+      "note": "",
+      "ai_bull_prob": 0.3
+    },
+    {
+      "id": "zengyongjian",
+      "market": "HK",
+      "name": "曾永健",
+      "org": "香港市场分析师（Longbridge 报道引述）",
+      "role": "",
+      "note": "",
+      "ai_bull_prob": 0.3
+    },
+    {
+      "id": "garner",
+      "market": "HK",
+      "name": "Jonathan Garner",
+      "org": "摩根士丹利（亚洲及新兴市场策略主管，香港）",
+      "role": "",
+      "note": "窗口内未找到；可查到的观点为 2021 年（窗口外）",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "kingerlau",
+      "market": "HK",
+      "name": "Kinger Lau",
+      "org": "高盛（中国股票策略主管）",
+      "role": "",
+      "note": "窗口内未找到；最近的降级报告为 6 月 3 日（窗口外）",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "liu-gang",
+      "market": "HK",
+      "name": "刘刚",
+      "org": "中金公司（首席海外与港股策略分析师）",
+      "role": "",
+      "note": "窗口内未找到；最近的采访为 12 月 5 日（2025 年，窗口外）",
+      "ai_bull_prob": null
     }
   ]
 }

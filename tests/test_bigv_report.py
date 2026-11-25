@@ -46,7 +46,8 @@ class SummarizeTest(unittest.TestCase):
         self.assertEqual(a["dimensions"], {"观点": 1, "采访": 1})
         self.assertEqual(a["latest"], "2026-11-24")
         self.assertEqual(s["coverage"], {"US": {"people": 1, "with_items": 1},
-                                         "CN": {"people": 2, "with_items": 1}})
+                                         "CN": {"people": 2, "with_items": 1},
+                                         "HK": {"people": 0, "with_items": 0}})
         self.assertEqual(s["dims_seen"], ["观点", "采访", "报道"])
         self.assertIn("发言", s["dims_missing"])
 
@@ -168,7 +169,7 @@ class StocksPanelTest(unittest.TestCase):
     def test_default_files_build_a_section(self):
         section, error = self.bs.bigv_section({"data_timestamp": 1_764_000_000_000})
         self.assertIsNone(error)
-        self.assertEqual(len(section["rows"]), 55)
+        self.assertEqual(len(section["rows"]), 76)
         self.assertRegex(section["window"][1], r"^\d{4}-\d{2}-\d{2}$")
 
     def test_hash_changes_when_items_change(self):
