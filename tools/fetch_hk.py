@@ -30,16 +30,21 @@ import argparse
 import json
 import sys
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.error import HTTPError, URLError
+from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+import ah_leaders  # noqa: E402
 import market_watchlist  # noqa: E402
 
 BASE_URL = "https://qt.gtimg.cn/q="
+HISTORY_URL = "https://web.ifzq.gtimg.cn/appstock/app/hkfqkline/get"
+AH_RANK_URL = "https://stock.gtimg.cn/data/hk_rank.php"
 USER_AGENT = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
               "(KHTML, like Gecko) Chrome/120 Safari/537.36")
 MAX_ATTEMPTS = 3
@@ -145,35 +150,40 @@ def fetch_payload(codes=None, indices=None, stocks=None, fetch=None, timeout=30,
         return payload
 
     names = dict(wanted)
-    url = base_url + ",".join(code for code, _ in wanted)
     headers = {"User-Agent": USER_AGENT, "Referer": "https://finance.qq.com/"}
-    text, last_error = None, None
-    for attempt in range(1, MAX_ATTEMPTS + 1):
-        try:
-            raw = fetch(url, headers, timeout)
-        except HTTPError as exc:
-            last_error = f"腾讯行情 HTTP {exc.code}"
-            if exc.code < 500 or attempt == MAX_ATTEMPTS:
-                break
-            sleep(2 ** (attempt - 1))
+    rows = []
+    # 腾讯批量接口不公开硬上限；A/H 候选可能超过 100 只，按 50 个拆开，避免
+    # URL 太长或服务端悄悄截掉后半段。某一批失败不挡其它批。
+    for offset in range(0, len(wanted), 50):
+        chunk = wanted[offset:offset + 50]
+        url = base_url + ",".join(code for code, _ in chunk)
+        text, last_error = None, None
+        for attempt in range(1, MAX_ATTEMPTS + 1):
+            try:
+                raw = fetch(url, headers, timeout)
+            except HTTPError as exc:
+                last_error = f"腾讯行情 HTTP {exc.code}"
+                if exc.code < 500 or attempt == MAX_ATTEMPTS:
+                    break
+                sleep(2 ** (attempt - 1))
+                continue
+            except (URLError, TimeoutError, OSError) as exc:
+                last_error = f"连接腾讯行情失败：{exc}"
+                if attempt == MAX_ATTEMPTS:
+                    break
+                sleep(2 ** (attempt - 1))
+                continue
+            try:
+                text = raw.decode("gbk")
+            except UnicodeDecodeError:
+                text = raw.decode("gb18030", "replace")
+            break
+        if text is None:
+            payload["errors"].append(
+                f"腾讯行情第 {offset // 50 + 1} 批失败：{last_error or '无响应'}")
             continue
-        except (URLError, TimeoutError, OSError) as exc:
-            last_error = f"连接腾讯行情失败：{exc}"
-            if attempt == MAX_ATTEMPTS:
-                break
-            sleep(2 ** (attempt - 1))
-            continue
-        try:
-            text = raw.decode("gbk")
-        except UnicodeDecodeError:
-            text = raw.decode("gb18030", "replace")
-        break
+        rows.extend(parse_response(text))
 
-    if text is None:
-        payload["errors"].append(last_error or "腾讯行情无响应")
-        return payload
-
-    rows = parse_response(text)
     for row in rows:
         # 腾讯不给中文名时用清单里的兜底名。
         if not row.get("name"):
@@ -189,6 +199,128 @@ def fetch_payload(codes=None, indices=None, stocks=None, fetch=None, timeout=30,
     if missing:
         payload["errors"].append(f"腾讯行情缺这些标的：{', '.join(missing)}")
     return payload
+
+
+def parse_history_response(raw, code, days=130):
+    """腾讯港股前复权 K 线响应 → 紧凑 OHLCV；解析失败返回空列表。"""
+    try:
+        payload = json.loads(raw.decode("utf-8") if isinstance(raw, bytes) else raw)
+    except (UnicodeDecodeError, ValueError, TypeError):
+        return []
+    node = (payload.get("data") or {}).get(code) or {}
+    source = node.get("qfqday") or node.get("day") or []
+    bars = []
+    for item in source:
+        if not isinstance(item, list) or len(item) < 6:
+            continue
+        try:
+            date_ms = int(datetime.strptime(str(item[0]), "%Y-%m-%d")
+                          .replace(tzinfo=timezone.utc).timestamp() * 1000)
+        except (TypeError, ValueError):
+            continue
+        # 腾讯 qfqday：[日期, 开, 收, 高, 低, 量, …, 换手, 成交额/万]
+        turnover = _num(item[8]) * 10000 if len(item) > 8 and _num(item[8]) is not None else None
+        bar = ah_leaders.compact_bar(
+            date_ms, _num(item[1]), _num(item[3]), _num(item[4]), _num(item[2]),
+            _num(item[5]), turnover)
+        if bar:
+            bars.append(bar)
+    bars.sort(key=lambda row: row[ah_leaders.DATE])
+    return bars[-days:] if days and days > 0 else bars
+
+
+def _history_one(code, days, fetch, timeout, base_url, sleep):
+    params = {"param": f"{code},day,,,{max(days, 1)},qfq"}
+    url = base_url + "?" + urlencode(params)
+    headers = {"User-Agent": USER_AGENT, "Referer": "https://web.ifzq.gtimg.cn/"}
+    last_error = None
+    for attempt in range(1, MAX_ATTEMPTS + 1):
+        try:
+            bars = parse_history_response(fetch(url, headers, timeout), code, days)
+            if not bars:
+                raise ValueError("没有有效 K 线")
+            return bars, None
+        except (HTTPError, URLError, TimeoutError, OSError, ValueError) as exc:
+            last_error = str(exc)
+            if attempt < MAX_ATTEMPTS:
+                sleep(2 ** (attempt - 1))
+    return [], f"{code} 港股半年 K 线失败：{last_error or '无响应'}"
+
+
+def fetch_history(codes, days=130, fetch=None, timeout=20, sleep=time.sleep,
+                  base_url=HISTORY_URL, workers=6):
+    """并发取多只港股半年日线，返回 ``(history, errors)``；单只失败不挡其它公司。"""
+    unique = list(dict.fromkeys(code for code in codes if str(code).startswith("hk")))
+    if not unique or not days or days <= 0:
+        return {}, []
+    fetch = fetch or _default_fetch
+    history, errors = {}, []
+    with ThreadPoolExecutor(max_workers=max(1, min(workers, len(unique)))) as pool:
+        jobs = {pool.submit(_history_one, code, days, fetch, timeout, base_url, sleep): code
+                for code in unique}
+        for job in as_completed(jobs):
+            code = jobs[job]
+            try:
+                bars, error = job.result()
+            except Exception as exc:  # noqa: BLE001 单只异常不能拖掉整段
+                bars, error = [], f"{code} 港股半年 K 线失败：{exc}"
+            if bars:
+                history[code] = bars
+            if error:
+                errors.append(error)
+    return history, sorted(errors)
+
+
+def _parse_rank_payload(raw):
+    try:
+        text = raw.decode("gb18030") if isinstance(raw, bytes) else str(raw)
+        body = text[text.find("{"):text.rfind("}") + 1]
+        return json.loads(body) if body else {}
+    except (UnicodeDecodeError, ValueError):
+        return {}
+
+
+def fetch_ah_names(fetch=None, timeout=20, sleep=time.sleep, base_url=AH_RANK_URL):
+    """腾讯 A+H 榜单 → ``{H代码: 公司名}``，用于发现静态代码表之后的新上市公司。"""
+    fetch = fetch or _default_fetch
+    headers = {"User-Agent": USER_AGENT,
+               "Referer": "https://stockapp.finance.qq.com/mstats/"}
+    names, errors = {}, []
+    pages = 1
+    page = 0
+    while page < pages:
+        params = {"board": "A_H", "metric": "price", "pageSize": 100,
+                  "reqPage": page, "order": "decs", "var_name": "list_data"}
+        url = base_url + "?" + urlencode(params)
+        data = None
+        last_error = None
+        for attempt in range(1, MAX_ATTEMPTS + 1):
+            try:
+                data = _parse_rank_payload(fetch(url, headers, timeout))
+                if not data:
+                    raise ValueError("无有效榜单")
+                break
+            except (HTTPError, URLError, TimeoutError, OSError, ValueError) as exc:
+                last_error = str(exc)
+                if attempt < MAX_ATTEMPTS:
+                    sleep(2 ** (attempt - 1))
+        if not data:
+            errors.append(f"腾讯 AH 名单第 {page + 1} 页失败：{last_error or '无响应'}")
+            break
+        block = data.get("data") or {}
+        pages = max(1, int(block.get("page_count") or 1))
+        for raw_row in block.get("page_data") or []:
+            text = raw_row[0] if isinstance(raw_row, list) and raw_row else raw_row
+            fields = str(text or "").split("~")
+            if len(fields) < 2:
+                continue
+            code = fields[0].strip()
+            if code.isdigit():
+                code = "hk" + code.zfill(5)
+            if code.startswith("hk") and fields[1].strip():
+                names[code] = fields[1].strip()
+        page += 1
+    return names, errors
 
 
 def main(argv=None):

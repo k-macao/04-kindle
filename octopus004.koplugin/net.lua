@@ -149,6 +149,67 @@ function M.bust(url, epoch)
     return stripQuery(url) .. "?v=" .. tostring(stamp)
 end
 
+--- stocks.json 是网页全量数据；Kindle 多镜像探测改读同目录的小清单，省流量。
+--- 自定义文件名保持原样，兼容用户自己的行情服务。
+function M.compactManifest(url)
+    if type(url) ~= "string" then return url end
+    local clean = stripQuery(url)
+    if clean:match("/stocks%.json$") then
+        return (clean:gsub("/stocks%.json$", "/stocks-manifest.json"))
+    end
+    return url
+end
+
+-- UTC ISO-8601 秒数。这里重复一份小型 days-from-civil，保持 net.lua 仍是纯模块，
+-- 测试不需要加载 KOReader。清单新鲜度比较绝不能依赖 Kindle 的本地时区。
+local function utcEpoch(y, mo, d, h, mi, sec)
+    y = (mo <= 2) and (y - 1) or y
+    local era = math.floor(y / 400)
+    local yoe = y - era * 400
+    local mp = (mo + 9) % 12
+    local doy = math.floor((153 * mp + 2) / 5) + d - 1
+    local doe = yoe * 365 + math.floor(yoe / 4) - math.floor(yoe / 100) + doy
+    return (era * 146097 + doe - 719468) * 86400 + h * 3600 + mi * 60 + sec
+end
+
+function M.isoSeconds(value)
+    local y, mo, d, h, mi, sec = tostring(value or ""):match(
+        "^(%d%d%d%d)-(%d%d)-(%d%d)T(%d%d):(%d%d):(%d%d)Z$")
+    if not y then return nil end
+    y, mo, d, h, mi, sec = tonumber(y), tonumber(mo), tonumber(d),
+                           tonumber(h), tonumber(mi), tonumber(sec)
+    if mo < 1 or mo > 12 or h > 23 or mi > 59 or sec > 59 then return nil end
+    local month_days = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 }
+    if mo == 2 and (y % 400 == 0 or (y % 4 == 0 and y % 100 ~= 0)) then
+        month_days[2] = 29
+    end
+    if d < 1 or d > month_days[mo] then return nil end
+    return utcEpoch(y, mo, d, h, mi, sec)
+end
+
+--- 比较两份清单的新鲜度：先比真实数据时间，再比生成时间。
+--- 返回 1 = a 更新，-1 = b 更新，0 = 无法区分。生成得晚但数据更旧不能胜出。
+function M.compareFreshness(a, b)
+    a, b = a or {}, b or {}
+    local ad, bd = M.isoSeconds(a.data_time), M.isoSeconds(b.data_time)
+    if ad and bd and ad ~= bd then return ad > bd and 1 or -1 end
+    if ad and not bd then return 1 end
+    if bd and not ad then return -1 end
+    local ag, bg = M.isoSeconds(a.generated), M.isoSeconds(b.generated)
+    if ag and bg and ag ~= bg then return ag > bg and 1 or -1 end
+    if ag and not bg then return 1 end
+    if bg and not ag then return -1 end
+    return 0
+end
+
+--- 候选是否会让本地已接受快照倒退。floor 可只带 data_time/generated。
+function M.isRollback(candidate, floor)
+    if type(floor) ~= "table" then return false end
+    local has_floor = M.isoSeconds(floor.data_time) or M.isoSeconds(floor.generated)
+    if not has_floor then return false end
+    return M.compareFreshness(candidate, floor) < 0
+end
+
 --- 把底层错误翻成一句能照着查的话；认不出就原样返回。
 function M.hint(err)
     local text = tostring(err or ""):lower()

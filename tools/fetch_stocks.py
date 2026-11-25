@@ -18,11 +18,13 @@ REST 接口约定（见仓库 ``docs/api/README.md``）：
   ``4001``（限流）与 ``5xxx``（服务端/上游）退避重试，最多 3 次；
 - 空值是 ``null``（未披露），不补零、不拿模拟数据顶。
 
-这里只用三个接口：
+这里只用这些公开接口：
 
 - ``GET /api/a-share/prices/snapshot?thscodes=…`` —— 自选股最新价、涨跌幅、
   开高低收、成交量/额（一次请求带回全部自选股）；
 - ``GET /api/a-share-index/prices/snapshot?thscodes=…`` —— 宽基指数快照；
+- ``GET /api/a-share-index/constituents/ths-stock-list`` —— 91 个板块当前成分股，
+  每 7 天落盘缓存一次，用来筛 A/H 同公司候选；
 - ``GET /api/a-share/special-data/limit-up-pool`` —— 当日涨停池（情绪面，
   失败不挡主行情，只记进 ``errors``）；
 - ``GET /api/a-share/prices/historical-batch`` 与指数同名接口 —— 最近
@@ -56,6 +58,7 @@ from urllib.request import Request, urlopen
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+import ah_leaders  # noqa: E402
 import market_watchlist  # noqa: E402
 import sector_rrg  # noqa: E402
 
@@ -314,6 +317,94 @@ def fetch_history(client, path, codes, days, now_ms=None):
             if isinstance(group, dict) and group.get("thscode"):
                 history[str(group["thscode"])] = normalize_history_group(group, days)
     return history
+
+
+def normalize_ohlcv_history_group(group, keep):
+    """同花顺历史组 → 紧凑 OHLCV 日线，供 A/H 龙头半年量价跟踪。"""
+    if not isinstance(group, dict):
+        return []
+    bars = []
+    for raw in group.get("item") or []:
+        if not isinstance(raw, dict):
+            continue
+        bar = ah_leaders.compact_bar(
+            raw.get("date_ms"), _num(raw.get("open_price")),
+            _num(raw.get("high_price")), _num(raw.get("low_price")),
+            _num(raw.get("close_price")), _num(raw.get("volume")),
+            _num(raw.get("turnover")))
+        if bar:
+            bars.append(bar)
+    bars.sort(key=lambda row: row[ah_leaders.DATE])
+    return bars[-keep:] if keep and keep > 0 else bars
+
+
+def fetch_ohlcv_history(client, codes, days, now_ms=None):
+    """A 股批量半年 OHLCV；未知/退市代码不会拖掉同批其它有效代码。"""
+    if not codes or not days or days <= 0:
+        return {}
+    now_ms = now_ms or int(datetime.now(timezone.utc).timestamp() * 1000)
+    start_ms = now_ms - (days * 2 + 10) * 24 * 3600 * 1000
+    history = {}
+    unique = list(dict.fromkeys(code for code in codes if code))
+    for offset in range(0, len(unique), 10):
+        chunk = unique[offset:offset + 10]
+        data = client.get("/api/a-share/prices/historical-batch", {
+            "thscodes": ",".join(chunk), "interval": "1d",
+            "start": start_ms, "end": now_ms, "adjust": "forward"})
+        for group in data.get("item") or []:
+            if isinstance(group, dict) and group.get("thscode"):
+                history[str(group["thscode"])] = normalize_ohlcv_history_group(group, days)
+    return history
+
+
+def _load_sector_members_cache(path, max_age_days=7, now=None):
+    if not path:
+        return {}, False
+    try:
+        cached = json.loads(Path(path).read_text(encoding="utf-8"))
+        updated = datetime.strptime(str(cached.get("updated") or ""), "%Y-%m-%d").date()
+        today = (now or datetime.now(timezone.utc)).date()
+        members = cached.get("sectors") or {}
+        return (members if isinstance(members, dict) else {}), (today - updated).days <= max_age_days
+    except (OSError, ValueError, TypeError):
+        return {}, False
+
+
+def fetch_sector_members(client, sectors, cache_path=None, max_age_days=7, now=None):
+    """取 91 个行业板块成分，带 7 天落盘缓存；单板块失败沿用旧值并明确报错。"""
+    cached, fresh = _load_sector_members_cache(cache_path, max_age_days=max_age_days, now=now)
+    wanted = [code for code, _ in sectors]
+    if fresh and all(code in cached for code in wanted):
+        return {code: cached.get(code) or [] for code in wanted}, []
+
+    members, errors = dict(cached), []
+    changed = False
+    for code, name in sectors:
+        try:
+            data = client.get("/api/a-share-index/constituents/ths-stock-list",
+                              {"thscode": code})
+            rows = []
+            for item in data.get("item") or []:
+                if not isinstance(item, dict) or not item.get("thscode"):
+                    continue
+                rows.append({"thscode": str(item["thscode"]),
+                             "name": str(item.get("name") or "")})
+            if rows:
+                members[code] = rows
+                changed = True
+            elif code not in members:
+                errors.append(f"{name}成分股为空")
+        except ThsError as exc:
+            errors.append(f"{name}成分股未更新：{exc}"
+                          + ("（沿用缓存）" if code in members else ""))
+    if cache_path and (changed or not Path(cache_path).is_file()):
+        path = Path(cache_path)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        stamp = (now or datetime.now(timezone.utc)).strftime("%Y-%m-%d")
+        path.write_text(json.dumps({"updated": stamp, "sectors": members},
+                                   ensure_ascii=False, indent=1) + "\n",
+                        encoding="utf-8")
+    return {code: members.get(code) or [] for code in wanted}, errors
 
 
 # RRG 要一年半的日 K（研报口径 319 根），比迷你走势图的 20 根重得多：91 个板块
@@ -607,6 +698,76 @@ def enrich_index_rows(rows, pairs, sector_codes=None):
     return out
 
 
+def fetch_ah_leader_panel(client, sectors, market_rows, history_days=130,
+                          members_cache=None):
+    """抓 A/H 同公司龙头段；任何子源失败都降级成缺口说明，不拖垮主面板。"""
+    import fetch_hk  # noqa: E402 延迟导入，保持纯 A 股测试不依赖腾讯
+
+    members, member_errors = fetch_sector_members(
+        client, sectors, cache_path=members_cache)
+    pair_map = dict(market_watchlist.AH_PAIRS)
+    errors = list(member_errors)
+
+    # 静态代码对解决「A/H 简称不一样」；腾讯实时 AH 榜单再按保守的同名规则补
+    # 新上市公司。只在名称唯一时补，宁可漏掉也不把两家公司误配成同一家公司。
+    try:
+        h_names, name_errors = fetch_hk.fetch_ah_names()
+        errors.extend(name_errors)
+        by_name = {}
+        for h_code, name in h_names.items():
+            key = ah_leaders.normalize_name(name)
+            if key:
+                by_name.setdefault(key, []).append(h_code)
+        for rows in members.values():
+            for item in rows:
+                a_code = item.get("thscode")
+                choices = by_name.get(ah_leaders.normalize_name(item.get("name"))) or []
+                if a_code and a_code not in pair_map and len(choices) == 1:
+                    pair_map[a_code] = choices[0]
+    except Exception as exc:  # noqa: BLE001 名单发现失败时静态映射仍可用
+        errors.append(f"腾讯 AH 实时名单未获取，沿用已知代码对：{exc}")
+
+    candidate_codes = sorted({
+        item.get("thscode") for rows in members.values() for item in rows
+        if item.get("thscode") in pair_map
+    })
+    if not candidate_codes:
+        selected = ah_leaders.select_sector_leaders(
+            sectors, members, pair_map, {}, market_rows=market_rows)
+        section = ah_leaders.build_section(
+            sectors, selected, {}, {}, market_rows=market_rows, errors=errors)
+        return section, {}
+
+    # 先批量验 H 股仍有实时行情；退市/无效的旧映射不参与“龙头”竞争。
+    h_pairs = list(dict.fromkeys((pair_map[code], "") for code in candidate_codes))
+    h_quotes_payload = fetch_hk.fetch_payload(indices=[], stocks=h_pairs)
+    errors.extend(h_quotes_payload.get("errors") or [])
+    h_rows = h_quotes_payload.get("rows") or []
+    valid_h = {row.get("thscode") for row in h_rows}
+    pair_map = {a: h for a, h in pair_map.items() if h in valid_h}
+    candidate_codes = [code for code in candidate_codes if code in pair_map]
+
+    try:
+        a_history = fetch_ohlcv_history(client, candidate_codes, history_days)
+        missing_a = [code for code in candidate_codes
+                     if len(a_history.get(code) or []) < min(20, history_days)]
+        if missing_a:
+            errors.append(f"{len(missing_a)} 个 A/H 候选缺少完整 20 日 A 股成交额")
+    except ThsError as exc:
+        a_history = {}
+        errors.append(f"A股龙头半年 K 线未获取：{exc}")
+    selected = ah_leaders.select_sector_leaders(
+        sectors, members, pair_map, a_history, market_rows=market_rows)
+    selected_h = sorted({row.get("h_code") for row in selected
+                         if row.get("status") == "ok" and row.get("h_code")})
+    h_history, history_errors = fetch_hk.fetch_history(selected_h, days=history_days)
+    errors.extend(history_errors)
+    section = ah_leaders.build_section(
+        sectors, selected, a_history, h_history,
+        market_rows=market_rows, hk_rows=h_rows, errors=errors)
+    return section, ah_leaders.sidecar_companies(section, a_history, h_history)
+
+
 def run_once(args, client):
     """抓一轮并写出 stocks_data.json。
 
@@ -635,7 +796,9 @@ def run_once(args, client):
     if bad:
         payload["errors"].append(f"这些指数/板块代码无效或接口没返回：{', '.join(bad)}")
 
-    # 2) 全 A 市场概览（分页取尽；失败留 null，不挡指数）
+    # 2) 全 A 市场概览（分页取尽；失败留 null，不挡指数）。原始逐股行不进产物，
+    # 但会在本轮内给 A/H 龙头补当前行情，并作为历史缺失时的成交额回退。
+    market_rows = []
     if not args.no_market:
         try:
             market_rows, total = fetch_full_market(
@@ -647,7 +810,20 @@ def run_once(args, client):
         except ThsError as exc:
             payload["errors"].append(f"全市场快照失败：{exc}")
 
-    # 3) 涨停池（情绪面，失败不挡主行情）
+    # 3) 每板块 A/H 同公司龙头：按 A 股近 20 日平均成交额动态选；完整半年
+    # 日线留给 sidecar，主清单只放 26 周压缩趋势，避免 Kindle 每 7 分钟拉几 MB。
+    if not getattr(args, "no_ah_leaders", True):
+        try:
+            section, companies = fetch_ah_leader_panel(
+                client, list(market_watchlist.SECTORS), market_rows,
+                history_days=getattr(args, "ah_history_days", 130),
+                members_cache=getattr(args, "ah_members_cache", "site/ah_sector_members.json"))
+            payload["ah_leaders"] = section
+            payload["ah_leader_history"] = companies
+        except Exception as exc:  # noqa: BLE001 龙头段失败不该挡住指数/市场面板
+            payload["errors"].append(f"A/H 龙头段未生成：{exc}")
+
+    # 4) 涨停池（情绪面，失败不挡主行情）
     if not args.no_limit_up and args.limit_up_size:
         try:
             data = client.get("/api/a-share/special-data/limit-up-pool", {
@@ -750,6 +926,12 @@ def main(argv=None):
                         help="不取全 A 市场概览（5584 只，省时间）")
     parser.add_argument("--no-hk", action="store_true",
                         help="不取港股（腾讯公开接口）")
+    parser.add_argument("--no-ah-leaders", action="store_true",
+                        help="不取每板块 A/H 同公司龙头及半年量价（省请求）")
+    parser.add_argument("--ah-history-days", type=int, default=130,
+                        help="A/H 龙头保留的日 K 根数（默认 130，约半年）")
+    parser.add_argument("--ah-members-cache", default="site/ah_sector_members.json",
+                        help="板块成分 7 天缓存（减少 91 个逐板块请求）")
     parser.add_argument("--limit-up-size", type=int,
                         default=20,
                         help="涨停池取前几名")

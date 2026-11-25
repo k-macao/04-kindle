@@ -72,6 +72,20 @@ class NetWiringTest(unittest.TestCase):
         self.assertLess(find("local function utcEpoch"),
                         find("local function isoSeconds"))
 
+    def test_stocks_manifest_checks_all_mirrors_and_chooses_freshest(self):
+        body = MAIN[MAIN.index("function Report:fetchStocksManifest()"):]
+        body = body[:body.index("\nfunction Report:stocksSignature")]
+        self.assertIn("for _, url in ipairs(urls) do", body)
+        self.assertIn("STOCKS_MANIFEST_TIMEOUT", body)
+        self.assertIn("STOCKS_MANIFEST_MAX", body)
+        self.assertIn("Net.compactManifest(url)", body)
+        self.assertIn("code == 404 and request_url ~= url", body)
+        self.assertIn("Net.compareFreshness(decoded, best) > 0", body)
+        self.assertIn("Net.isRollback(best, floor)", body)
+        self.assertIn("All online manifests are older than cache", body)
+        # 不能退回旧的首个 HTTP 200 策略。
+        self.assertNotIn("self:httpGetAny(urls, MANIFEST_MAX)", body)
+
     def test_stocks_epub_goes_through_the_reader_pipeline(self):
         # 行情卡片版：清单里有 epub 就下载成书交给阅读器，失败才回退纯文本。
         self.assertIn("function Report:refreshStocksEpub(manifest, sig)", MAIN)
@@ -98,23 +112,29 @@ class NetWiringTest(unittest.TestCase):
                 self.assertRegex(MAIN, pattern)
         self.assertEqual(len({values[0] for values in specs.values()}), len(specs))
 
-    def test_generated_controls_download_but_data_time_is_always_refreshed(self):
-        # 清单 generated 是内容版本签名；data_time/kind 是新鲜度显示，必须在同签名
-        # 快路径之前写入，不能因 EPUB 已缓存就留着旧时间或旧精度。
+    def test_content_hash_controls_download_and_freshness_commits_with_content(self):
+        # 普通报告仍以 generated 做版本；行情优先用 data_hash，避免只重排时间变化就
+        # 重下 EPUB。stocks 的 data_time 只能在 EPUB/TXT 可用后 accept，不能先写新
+        # 时间、屏幕却仍开着旧书。
         doc = MAIN[MAIN.index("function Report:refreshDoc(kind)"):]
         doc = doc[:doc.index("\nend\n")]
         self.assertIn("local sig = manifest.generated", doc)
         self.assertLess(doc.index("manifest.data_time"), doc.index("if sig == tostring"))
-        self.assertLess(doc.index("manifest.data_time_kind"), doc.index("if sig == tostring"))
+
+        signature = MAIN[MAIN.index("function Report:stocksSignature(manifest)"):]
+        signature = signature[:signature.index("\nend\n")]
+        self.assertIn("manifest.data_hash or manifest.generated", signature)
+        accept = MAIN[MAIN.index("function Report:acceptStocksManifest(manifest)"):]
+        accept = accept[:accept.index("\nend\n")]
+        self.assertIn("self.settings.stocks_generated = manifest.generated", accept)
+        self.assertIn("self.settings.stocks_data_time = manifest.data_time", accept)
 
         stocks = MAIN[MAIN.index("function Report:refreshStocks()"):]
-        stocks = stocks[:stocks.index("\nend\n")]
-        self.assertIn("local sig = manifest.generated", stocks)
-        self.assertLess(stocks.index("manifest.data_time"), stocks.index("refreshStocksEpub"))
-        self.assertLess(stocks.index("manifest.data_time_kind"), stocks.index("refreshStocksEpub"))
-        # EPUB 与文本回退分别记 sig；卡片下载失败后仍能更新独立的文本缓存。
+        stocks = stocks[:stocks.index("\nfunction Report:refreshText()")]
+        self.assertIn("local sig = self:stocksSignature(manifest)", stocks)
         self.assertIn("self.settings.stocks_sig = sig", stocks)
         self.assertIn("self:refreshStocksEpub(manifest, sig)", stocks)
+        self.assertIn("self:acceptStocksManifest(manifest)", stocks)
 
     def test_stocks_epub_prefix_does_not_collide_with_text_cache(self):
         # pruneDocs 按前缀删旧文件：卡片版前缀不能是纯文本缓存的超串，
@@ -133,6 +153,17 @@ class NetWiringTest(unittest.TestCase):
         start = start[:start.index("\nend\n")]
         self.assertIn("self:openDoc(spec, current)", start)
         self.assertIn("lfs.attributes(current, \"mode\") == \"file\"", start)
+
+    def test_cached_signature_still_reopens_an_outdated_stocks_epub(self):
+        body = MAIN[MAIN.index("function Report:refreshStocksEpub(manifest, sig)"):]
+        body = body[:body.index("\nfunction Report:refreshStocks()")]
+        self.assertIn("if self:docIsOpen(spec) then", body)
+        self.assertIn("name:sub(1, #spec.prefix) == spec.prefix", body)
+        self.assertIn("self:openDoc(spec, current)", body)
+        # 清旧文件时保护 ReaderUI 实际仍打开的路径，不能先把屏幕上的旧书删掉。
+        prune = MAIN[MAIN.index("function Report:pruneDocs(keep, prefix)"):]
+        prune = prune[:prune.index("\nend\n")]
+        self.assertIn("entry ~= open_name", prune)
 
     def test_stocks_mode_keeps_reader_awake(self):
         self.assertIn("function Report:usesReader()", MAIN)
