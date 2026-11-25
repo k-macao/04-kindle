@@ -105,5 +105,69 @@ class RenderTest(unittest.TestCase):
         self.assertEqual(br._cell("a|b"), "a\\|b")
 
 
+class StocksPanelTest(unittest.TestCase):
+    """大 V 段接进股票面板：文本、清单、指纹、坏文件不挡行情。"""
+
+    def setUp(self):
+        import build_stocks
+        self.bs = build_stocks
+
+    def _section(self):
+        items = [item("a", "2026-11-24", summary="看多一"), item("a", "2026-11-23", summary="看多二"),
+                 item("b", "2026-11-22", "报道", summary="报道乙")]
+        return br.summarize(people_doc()["people"], items, "2026-11-25", 5)
+
+    def test_text_full_shows_two_per_person_and_brief_one(self):
+        sec = self._section()
+        full = "\n".join(self.bs.render_bigv_text(sec))
+        brief = "\n".join(self.bs.render_bigv_text(sec, brief=True))
+        self.assertIn("看多一", full)
+        self.assertIn("看多二", full)
+        self.assertIn("看多一", brief)
+        self.assertNotIn("看多二", brief)
+        self.assertIn("A 股五天内未找到：丙", full)
+
+    def test_empty_window_says_so(self):
+        sec = br.summarize(people_doc()["people"], [], "2026-11-25", 5)
+        text = "\n".join(self.bs.render_bigv_text(sec))
+        self.assertIn("窗口内没有条目", text)
+
+    def test_bad_file_is_isolated(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            bad = Path(tmp) / "items.json"
+            bad.write_text('{"items": [{"person": "nobody"}]}', encoding="utf-8")
+            old = br.DEFAULT_ITEMS
+            br.DEFAULT_ITEMS = bad
+            try:
+                section, error = self.bs.bigv_section({"data_timestamp": None})
+            finally:
+                br.DEFAULT_ITEMS = old
+        self.assertIsNone(section)
+        self.assertIn("大 V 观点未生成", error)
+
+    def test_default_files_build_a_section(self):
+        section, error = self.bs.bigv_section({"data_timestamp": 1_764_000_000_000})
+        self.assertIsNone(error)
+        self.assertEqual(len(section["rows"]), 20)
+        self.assertRegex(section["window"][1], r"^\d{4}-\d{2}-\d{2}$")
+
+    def test_hash_changes_when_items_change(self):
+        base = {"bigv": self._section()}
+        changed = {"bigv": br.summarize(people_doc()["people"], [item("a", "2026-11-24", summary="不同")],
+                                        "2026-11-25", 5)}
+        self.assertNotEqual(self.bs.data_hash(base), self.bs.data_hash(changed))
+
+    def test_demo_build_writes_the_section(self):
+        import json
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            self.bs.build(demo=True, out_dir=tmp)
+            txt = (Path(tmp) / "stocks.txt").read_text(encoding="utf-8")
+            manifest = json.loads((Path(tmp) / "stocks.json").read_text(encoding="utf-8"))
+        self.assertIn("【大 V 观点 · 近五天】", txt)
+        self.assertIsNotNone(manifest.get("bigv"))
+
+
 if __name__ == "__main__":
     unittest.main()

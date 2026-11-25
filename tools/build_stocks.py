@@ -43,6 +43,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import ah_leaders  # noqa: E402
 import ew_sdm  # noqa: E402
 import timing_quants  # noqa: E402
+import bigv_report  # noqa: E402
 import jrglobal_radar  # noqa: E402
 import sector_rrg  # noqa: E402
 
@@ -1050,6 +1051,52 @@ def render_cross_text(section, brief=None):
     return lines
 
 
+BIGV_WINDOW_DAYS = 5
+
+
+def bigv_section(payload):
+    """大 V / 策略分析师近五天观点（``bigv/people.json`` + ``bigv/items.json``）。
+
+    返回 ``(段落 dict 或 None, 错误文字或 None)``：文件坏了只记一条错误，不挡行情面板。
+    窗口截止日取数据时间的北京日期（取不到就用现在的北京日期）。
+    """
+    try:
+        people, items = bigv_report.validate(
+            bigv_report.load_json(bigv_report.DEFAULT_PEOPLE),
+            bigv_report.load_json(bigv_report.DEFAULT_ITEMS))
+    except (OSError, ValueError, KeyError) as exc:
+        return None, f"大 V 观点未生成：{exc}"
+    as_of = (sector_rrg.beijing_day(payload.get("data_timestamp")
+                                    or payload.get("index_timestamp"))
+             or (datetime.now(timezone.utc) + timedelta(hours=8)).strftime("%Y-%m-%d"))
+    return bigv_report.summarize(people, items, as_of, BIGV_WINDOW_DAYS), None
+
+
+def render_bigv_text(section, brief=False):
+    """纯文本版大 V 段。周末精简版每人只留最近一条。"""
+    if not section:
+        return []
+    start, end = section["window"]
+    cov = section["coverage"]
+    lines = [f"【大 V 观点 · 近五天】（{start} 至 {end}）",
+             "  " + " · ".join(f"{bigv_report.MARKETS[m]} {cov[m]['with_items']}/{cov[m]['people']} 位有记录"
+                              for m in bigv_report.MARKETS) + f" · 共 {section['items_in_window']} 条"]
+    if not section["items_in_window"]:
+        lines.append("  窗口内没有条目：数据需每日往 bigv/items.json 追加。")
+    for market, label in bigv_report.MARKETS.items():
+        rows = [r for r in section["rows"] if r["market"] == market]
+        for row in rows:
+            shown = row["items"][:1] if brief else row["items"][:2]
+            for it in shown:
+                lines.append(f"  {label} · {row['name']}（{row['org']}）{it['date'][5:]} · "
+                             f"{it['dimension']}：{it['summary']}")
+        missing = [row["name"] for row in rows if not row["items"]]
+        if missing:
+            lines.append(f"  {label}五天内未找到：" + "、".join(missing))
+    lines.append("")
+    return lines
+
+
 def data_hash(payload, view=None):
     """行情指纹：价格/涨跌幅/条数/历史收盘变了才变，供工作流跳过无变化的提交。
 
@@ -1111,6 +1158,7 @@ def data_hash(payload, view=None):
              (((row.get("h") or {}).get("weekly") or [[None]])[-1][0]))
             for row in leaders_part.get("rows") or []
         ],
+        "bigv": payload.get("bigv") or None,
         "data_timestamp": payload.get("data_timestamp"),
     }
     raw = json.dumps(core, ensure_ascii=False, sort_keys=True)
@@ -1168,6 +1216,8 @@ def manifest(payload, generated, view=None):
         "ew_sdm": payload.get("ew_sdm") or None,
         # 指数择时 ICU 均线 + QRS（见 tools/timing_quants.py）；没算出来就是 null。
         "timing": payload.get("timing") or None,
+        # 大 V / 策略分析师近五天观点（见 bigv/ 与 tools/bigv_report.py）；读不到就是 null。
+        "bigv": payload.get("bigv") or None,
         # 日 K 不够时的兼容段；量价结果则无论有没有 RRG 都独立输出。
         "cross": cross_part or None,
         "volume_price": volume_part or None,
@@ -1258,6 +1308,10 @@ def render_txt(payload, generated, brief=None):
     if timing_part:
         lines.extend(timing_quants.render_text_lines(timing_part, brief=brief))
         lines.append("")
+
+    # 大 V 观点（近五天）：紧跟择时段。
+    if payload.get("bigv"):
+        lines.extend(render_bigv_text(payload["bigv"], brief=brief))
 
     # Jovian Research (jrglobal.xyz/tools/) 聪明钱雷达 + AI 数据智库 + 组合实验室
     radar = radar_section(payload)
@@ -1876,6 +1930,19 @@ h+='<h3>弱</h3><table class="card">'+head+weak.map(line).join('')+'</table>';
 (e.notes||[]).forEach(function(n){h+='<p class="meta">'+esc(n)+'</p>';});
 return h+'</section>';}
 
+function bigvSection(b){
+var rows=b.rows||[],n=b.items_in_window||0,w=b.window||['',''];
+var h='<section><h2>大 V 观点 · 近五天<span class="muted"> '+esc(w[0])+' 至 '+esc(w[1])+'</span></h2>';
+if(!n)h+='<p class="meta">窗口内没有条目：数据需每日往 bigv/items.json 追加。</p>';
+h+='<table class="card"><tr><th>人物</th><th>条数</th><th>最近要点</th></tr>';
+rows.forEach(function(r){
+var f=(r.items||[])[0];
+var who=esc(r.name)+' <span class="muted">'+(r.market==='US'?'美股':'A 股')+' · '+esc(r.org)+'</span>';
+var what=f?esc(f.date)+' · '+esc(f.dimension)+'：'+esc(f.summary)+' <a href="'+esc(f.url)+'">原文</a>':'<span class="muted">五天内未找到公开观点</span>';
+h+='<tr><td>'+who+'</td><td>'+(r.count||0)+'</td><td>'+what+'</td></tr>';});
+h+='</table>';
+return h+'</section>';}
+
 function rrgSection(g,brief){
 var rows=g.rows||[];
 if(!rows.length)return '';
@@ -1991,6 +2058,7 @@ else h+='<section><h2>涨停池（'+d.limit_up.length+
 if(d.rrg&&d.rrg.rows&&d.rrg.rows.length)h+=rrgSection(d.rrg,brief);
 if(d.timing&&d.timing.rows&&d.timing.rows.length)h+=timingSection(d.timing);
 if(d.ew_sdm&&d.ew_sdm.rows&&d.ew_sdm.rows.length)h+=ewSection(d.ew_sdm);
+if(d.bigv&&d.bigv.rows)h+=bigvSection(d.bigv);
 (d.errors||[]).forEach(function(e){h+='<p>注：'+esc(e)+'</p>';});
 document.getElementById('main').innerHTML=h||'<p>暂无数据</p>';
 var demo=d.demo?'【演示数据】':'';
@@ -2359,6 +2427,22 @@ def render_epub_xhtml(payload, generated_bj, brief=None):
         for note in timing_part.get("notes") or []:
             parts.append(f'<p class="meta">{esc(note)}</p>')
 
+    # 大 V 观点（近五天）：人物一行，最近一条要点。
+    bigv_part = payload.get("bigv")
+    if bigv_part and bigv_part.get("rows") is not None:
+        bw = bigv_part.get("window") or ["", ""]
+        parts.append(f"<h2>大 V 观点 · 近五天（{esc(bw[0])} 至 {esc(bw[1])}）</h2>")
+        if not bigv_part.get("items_in_window"):
+            parts.append('<p class="meta">窗口内没有条目：数据需每日往 bigv/items.json 追加。</p>')
+        parts.append('<table class="card"><tr><th>人物</th><th>条数</th><th>最近要点</th></tr>')
+        for row in bigv_part["rows"]:
+            first = (row.get("items") or [None])[0]
+            what = (f"{esc(first['date'])} · {esc(first['dimension'])}：{esc(first['summary'])}"
+                    f"（{esc(first['source'])}）" if first else "五天内未找到公开观点")
+            parts.append(f"<tr><td>{esc(row.get('name'))}（{esc(row.get('org'))}）</td>"
+                         f"<td>{row.get('count') or 0}</td><td>{what}</td></tr>")
+        parts.append("</table>")
+
     # 板块情绪 EW-SDM：强 / 弱各取 6 个（与纯文本同口径），口径说明放在表下。
     ew_part = payload.get("ew_sdm")
     ok_rows = [r for r in (ew_part or {}).get("rows") or [] if r.get("status") == "ok"]
@@ -2568,6 +2652,13 @@ def check(out_dir):
             problems.append("清单里有 timing，但 stocks.html 没有指数择时")
         if txt_path.is_file() and "指数择时" not in txt_path.read_text(encoding="utf-8"):
             problems.append("清单里有 timing，但 stocks.txt 没有指数择时段")
+    bigv = data.get("bigv") or {}
+    if bigv.get("rows") is not None and bigv.get("window"):
+        page = html_path.read_text(encoding="utf-8") if html_path.is_file() else ""
+        if "大 V 观点" not in page:
+            problems.append("清单里有 bigv，但 stocks.html 没有大 V 观点段")
+        if txt_path.is_file() and "大 V 观点" not in txt_path.read_text(encoding="utf-8"):
+            problems.append("清单里有 bigv，但 stocks.txt 没有大 V 观点段")
     view = data.get("view") or {}
     if view.get("mode") == "brief" and txt_path.is_file():
         if "【周末精简版" not in txt_path.read_text(encoding="utf-8"):
@@ -2587,6 +2678,8 @@ def check(out_dir):
                 chapter = zf.read("OEBPS/chapter.xhtml").decode("utf-8")
                 if TITLE not in chapter:
                     problems.append("stocks.epub 章节里没有面板标题")
+                if (data.get("bigv") or {}).get("window") and "大 V 观点" not in chapter:
+                    problems.append("清单里有 bigv，但 stocks.epub 没有大 V 观点段")
                 if "风险开关与板块机会池" not in chapter:
                     problems.append("stocks.epub 章节里没有风险开关或板块机会池")
                 if leader_rows and "A/H 龙头半年量价" not in chapter:
@@ -2765,6 +2858,12 @@ def build(data_path=None, out_dir="site", demo=False, demo_cross=False, view=Non
         payload.pop("ah_leader_history", None)  # 保留磁盘上与旧段一致的完整日线
         payload.setdefault("errors", []).append(
             "A/H 龙头本轮子源失败或覆盖骤降，沿用上一份已验证半年量价缓存")
+
+    # 大 V 观点（近五天，读 bigv/*.json）：失败只记错误，不挡行情。
+    bigv_part, bigv_error = bigv_section(payload)
+    payload["bigv"] = bigv_part
+    if bigv_error:
+        payload.setdefault("errors", []).append(bigv_error)
 
     # 清单里的 generated 与 epub.json 同形（ISO-8601 UTC），只做签名用；
     # 文本面板上显示北京时间文字。
