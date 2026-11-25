@@ -580,15 +580,6 @@
       "ai_bull_prob": null
     },
     {
-      "id": "zhushaoxing",
-      "market": "CN",
-      "name": "朱少醒",
-      "org": "富国基金",
-      "role": "基金经理",
-      "note": "窗口内未找到；最近的季报观点为 10 月（窗口外）",
-      "ai_bull_prob": null
-    },
-    {
       "id": "chen-gang",
       "market": "CN",
       "name": "陈刚",
@@ -702,8 +693,8 @@
       "name": "章盟主（章建平）",
       "org": "游资（席位：国泰海通上海江苏路营业部）",
       "role": "游资",
-      "note": "知名游资；席位动向不等于本人发言，ai_bull_prob 留空",
-      "ai_bull_prob": null
+      "note": "知名游资；11-24 有个人发言（新浪转载「积极第二天」），ai_bull_prob 依据该发言；11-25 龙虎榜席位动向不等于本人发言",
+      "ai_bull_prob": 0.75
     },
     {
       "id": "xiaoyaoge",
@@ -760,24 +751,6 @@
       "ai_bull_prob": null
     },
     {
-      "id": "zhao-jianping",
-      "market": "CN",
-      "name": "赵建平",
-      "org": "自然人牛散",
-      "role": "牛散",
-      "note": "窗口内未找到；11-02 三季报持仓（窗口外）",
-      "ai_bull_prob": null
-    },
-    {
-      "id": "zhang-suqin",
-      "market": "CN",
-      "name": "张素芬（夏重阳夫妇）",
-      "org": "自然人牛散",
-      "role": "牛散",
-      "note": "窗口内未找到；11-02 三季报持仓（窗口外）",
-      "ai_bull_prob": null
-    },
-    {
       "id": "zhao-laoge",
       "market": "CN",
       "name": "赵老哥（赵强）",
@@ -810,8 +783,8 @@
       "name": "方新侠",
       "org": "游资（席位：中信证券西安朱雀大街）",
       "role": "游资",
-      "note": "窗口内未找到",
-      "ai_bull_prob": null
+      "note": "游资；11-24 有个人发言（新浪转载「11.24全天思路」），ai_bull_prob 依据该发言",
+      "ai_bull_prob": 0.6
     },
     {
       "id": "sun-ge",
@@ -856,24 +829,6 @@
       "org": "游资（席位：光大证券佛山绿景路营业部）",
       "role": "游资",
       "note": "窗口内未找到",
-      "ai_bull_prob": null
-    },
-    {
-      "id": "chen-fashu",
-      "market": "CN",
-      "name": "陈发树",
-      "org": "自然人牛散",
-      "role": "牛散",
-      "note": "窗口内未找到；11-02 三季报持仓（窗口外）",
-      "ai_bull_prob": null
-    },
-    {
-      "id": "xu-kaidong",
-      "market": "CN",
-      "name": "徐开东",
-      "org": "自然人牛散",
-      "role": "牛散",
-      "note": "窗口内未找到；2026 年一季报持仓（窗口外）",
       "ai_bull_prob": null
     },
     {
@@ -947,6 +902,51 @@
       "role": "科技分析师",
       "note": "卖方分析师，对英伟达维持持有评级",
       "ai_bull_prob": 0.35
+    },
+    {
+      "id": "song-jin",
+      "market": "CN",
+      "name": "宋劲",
+      "org": "野村东方国际证券",
+      "role": "A 股首席策略师",
+      "note": "11-25 21 财经报道中的观点",
+      "ai_bull_prob": 0.45
+    },
+    {
+      "id": "wang-zonghao",
+      "market": "CN",
+      "name": "王宗豪",
+      "org": "瑞银（UBS）中国股票策略研究主管",
+      "role": "策略研究主管",
+      "note": "11-25 21 财经报道中的观点（MSCI 中国目标点位）",
+      "ai_bull_prob": 0.75
+    },
+    {
+      "id": "li-changfeng",
+      "market": "CN",
+      "name": "李长风",
+      "org": "联博基金",
+      "role": "市场策略负责人",
+      "note": "11-25 21 财经报道中的观点",
+      "ai_bull_prob": 0.7
+    },
+    {
+      "id": "chen-hongbing",
+      "market": "CN",
+      "name": "陈红兵",
+      "org": "美通私募",
+      "role": "私募董事长",
+      "note": "11-25 国际金融报报道中的观点",
+      "ai_bull_prob": 0.6
+    },
+    {
+      "id": "long-fang",
+      "market": "CN",
+      "name": "龙舫",
+      "org": "钜阵资本",
+      "role": "首席投资官",
+      "note": "11-25 国际金融报报道中的观点",
+      "ai_bull_prob": 0.45
     }
   ]
 }
