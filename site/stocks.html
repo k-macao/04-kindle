@@ -20,6 +20,15 @@ section h2{font-size:19px;border-bottom:2px solid #000;padding-bottom:4px;margin
 .cards.index{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
 .cards.sector{grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:6px}
 .cards.hk{grid-template-columns:repeat(auto-fill,minmax(158px,1fr))}
+.leader-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:9px}
+.leader-card{border:2px solid #000;padding:8px;break-inside:avoid}
+.leader-card h3{font-size:15px;margin:0 0 5px;border-bottom:1px solid #999;padding-bottom:3px}
+.leader-pair{font-size:12px;color:#444;margin-bottom:5px}
+.leader-markets{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.leader-market{border:1px solid #aaa;padding:5px;font-size:11.5px}
+.leader-market .ticker{font-size:13px;font-weight:bold}
+.leader-market svg{display:block;width:100%;height:58px;margin:3px 0}
+.leader-market .metrics{line-height:1.45}
 .result-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:9px;margin:10px 0}
 .result-card{border:2px solid #000;background:#fff;padding:10px;min-height:132px}
 .result-card .label{font-size:12px;color:#555;border-bottom:1px solid #bbb;padding-bottom:3px}
@@ -271,6 +280,41 @@ esc(String(r.thscode||'').replace(/^hk/,''))+'</span></div><div class="body">'+
 (empty?'':ratio(r.price_change_ratio_pct)+' '+change(r.price_change))+'</div>'+
 '<table class="kv"><tr><td>成交额</td><td>'+money(r.turnover)+'</td></tr>'+
 '<tr><td>成交量</td><td>'+vol(r.volume)+'</td></tr></table></div></div>';}
+function weeklyChart(market){
+var bars=(market&&market.weekly)||[];
+if(bars.length<2)return '<div class="muted">半年 K 线不足</div>';
+var closes=bars.map(function(b){return Number(b[4]);});
+var volumes=bars.map(function(b){return Number(b[5]||0);});
+var lo=Math.min.apply(null,closes),hi=Math.max.apply(null,closes),span=(hi-lo)||1;
+var vmax=Math.max.apply(null,volumes)||1,w=145,h=58,priceH=36,step=w/Math.max(1,bars.length-1);
+var points=closes.map(function(v,i){return (i*step).toFixed(1)+','+
+(2+(hi-v)/span*(priceH-5)).toFixed(1);}).join(' ');
+var bw=Math.max(1,w/bars.length-1),svg='<svg viewBox="0 0 '+w+' '+h+'" aria-label="26周量价趋势">';
+volumes.forEach(function(v,i){var bh=(v/vmax)*16;svg+='<rect x="'+(i*w/bars.length).toFixed(1)+
+'" y="'+(h-bh).toFixed(1)+'" width="'+bw.toFixed(1)+'" height="'+bh.toFixed(1)+'" fill="#bbb"/>';});
+svg+='<line x1="0" y1="'+priceH+'" x2="'+w+'" y2="'+priceH+'" stroke="#999" stroke-width="0.5"/>'+
+'<polyline points="'+points+'" fill="none" stroke="#000" stroke-width="1.8"/></svg>';
+return svg;}
+function ahMarket(label,code,market){
+var m=(market&&market.metrics)||{},q=(market&&market.quote)||{};
+return '<div class="leader-market"><div class="ticker">'+esc(label+' '+code)+' · '+pos(q.last_price)+'</div>'+
+weeklyChart(market)+'<div class="metrics">半年 '+ratio(m.return_6m_pct)+' · 回撤 '+ratio(m.max_drawdown_pct)+'<br>'+
+'20日均额 '+money(m.avg_turnover_20)+' · '+esc(m.signal||'数据不足')+'</div></div>';}
+function ahLeaderSection(g){
+if(!g||!g.rows||!g.rows.length)return '';
+var c=g.coverage||{},h='<section><h2>A/H 龙头半年量价<span class="muted"> 板块 '+
+(c.sectors||g.rows.length)+' · 命中 '+(c.matched||0)+' · 无同公司 '+(c.unmatched||0)+'</span></h2>'+
+'<p class="src">同一家公司同时有 A/H 股；在板块当前成分内按 A 股近20日平均成交额动态选 1 只。'+
+'线=周收盘，柱=周成交量；完整约130根日线见 stocks-leaders.json。</p><div class="leader-grid">';
+if(g.errors&&g.errors.length)h+='<p class="src">A/H 子源提示 '+g.errors.length+' 条：'+esc(g.errors[0])+'</p>';
+g.rows.forEach(function(r){
+h+='<div class="leader-card"><h3>'+esc(r.sector_name||r.sector_code)+'</h3>';
+if(r.status!=='ok'){h+='<div class="muted">暂无可验证的 A/H 同公司成分股</div></div>';return;}
+var ac=String(r.a_code||'').split('.')[0],hc=String(r.h_code||'').replace(/^hk/,'');
+h+='<div class="leader-pair">'+esc(r.name||r.a_code)+' · A'+esc(ac)+' / H'+esc(hc)+
+' · '+esc(r.selection_basis||'')+'</div><div class="leader-markets">'+
+ahMarket('A',ac,r.a)+ahMarket('H',hc,r.h)+'</div></div>';});
+return h+'</div></section>';}
 function limitRows(rows){
 var h='<table class="data"><tr><th>名称</th><th>最新</th><th>涨跌幅</th><th>封板</th>'+
 '<th>原因</th><th>连板</th><th>封单额</th></tr>';
@@ -493,6 +537,7 @@ h+='</section>';}
 else{
 h+='<section><h2>板块（'+sectors.length+'）· 按涨跌幅</h2><div class="cards sector">';
 sorted.forEach(function(r){h+=sectorCard(r);});h+='</div></section>';}}
+if(d.ah_leaders&&d.ah_leaders.rows)h+=ahLeaderSection(d.ah_leaders);
 var hkRows=((d.hk||{}).rows||[]);
 if(hkRows.length){
 var hi=[],hs=[];

@@ -1,0 +1,22 @@
+{
+  "schema": 2,
+  "generated": "2026-11-25T14:06:48Z",
+  "doc": "stocks.txt",
+  "epub": "stocks.epub",
+  "title": "同花顺行情面板",
+  "data_time": "2026-11-25T10:31:03Z",
+  "data_time_kind": "exact",
+  "data_hash": "e1247cf2043be546",
+  "demo": false,
+  "counts": {
+    "indices": 13,
+    "sectors": 91,
+    "market": 5584,
+    "hk": 23,
+    "limit_up": 20,
+    "rrg": 91,
+    "cross": 0,
+    "volume_price": 91
+  },
+  "leader_history": "stocks-leaders.json"
+}
