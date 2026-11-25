@@ -31,6 +31,10 @@ local Screen = Device.screen
 local DEFAULT_URL = "https://k-macao.github.io/004/kindle.txt"
 local MAX_BYTES = 2 * 1024 * 1024
 local MANIFEST_MAX = 256 * 1024
+-- stocks.json 同时带 91 个板块与 A/H 龙头 26 周压缩量价，已不再是小清单；
+-- 完整 130 根日线仍在 sidecar，不由 Kindle 每 7 分钟下载。
+local STOCKS_MANIFEST_MAX = 2 * 1024 * 1024
+local STOCKS_MANIFEST_TIMEOUT = 8
 local PAGE_MAX = 4 * 1024 * 1024
 local PAGES_TOTAL_MAX = 64 * 1024 * 1024
 local MAX_PAGES = 60
@@ -72,7 +76,9 @@ local function intervalText()
     if INTERVAL % 60 == 0 then return string.format("%dm", INTERVAL / 60) end
     return string.format("%ds", INTERVAL)
 end
-local WIFI_WAIT = 90
+-- stocks 清单会短超时探测多个镜像再择优，随后还可能下载 EPUB；90 秒会在有效的
+-- 第二个正文镜像返回前误杀整轮。上限只放宽 watchdog，不改变每个请求自己的超时。
+local WIFI_WAIT = 135
 -- 设备上显示的时间统一为北京时间（UTC+8），与设备本地时区无关。
 local BEIJING_OFFSET = 8 * 3600
 
@@ -636,22 +642,132 @@ function Report:fetchDocManifest(spec)
     return decoded
 end
 
--- 行情面板清单：site/stocks.json，字段与 EPUB 清单同形（generated 签名 + doc
--- 相对路径 + data_time），所以校验规则共用；只是错误提示要说人话。
+-- 行情面板不能再「第一个 HTTP 200 就算成功」：raw / Pages / CDN 可能短暂处于
+-- 不同发布代。逐个短超时读取并解析，按 data_time → generated 选择最新有效清单；
+-- 本地已有可用缓存时拒绝倒退。正文下载仍走首个成功镜像，避免重复拉大 EPUB。
 function Report:fetchStocksManifest()
     local urls = self:urlCandidates(self.settings.stocks_url or "")
     if #urls == 0 then return nil, "Set the stocks manifest URL first" end
-    local body, err, used = self:httpGetAny(urls, MANIFEST_MAX)
-    if not body then return nil, err end
-    local decoded
-    local ok = pcall(function() decoded = require("rapidjson").decode(body) end)
-    if not ok or type(decoded) ~= "table" then return nil, "Invalid manifest JSON" end
-    if type(decoded.doc) ~= "string" or decoded.doc == "" then return nil, "Manifest has no doc entry" end
-    if type(decoded.generated) ~= "string" or decoded.generated == "" then
-        return nil, "Manifest has no generated stamp"
+    local attempts, best, best_url = {}, nil, nil
+    for _, url in ipairs(urls) do
+        local request_url = Net.compactManifest(url)
+        local body, err, code, response_headers = self:httpGet(
+            Net.bust(request_url), STOCKS_MANIFEST_MAX, nil, STOCKS_MANIFEST_TIMEOUT)
+        -- 升级过渡：旧部署还没有 stocks-manifest.json 时只在 404 后回退全量；
+        -- 一旦小清单发布，常态就是 6 个小响应，而不是每 7 分钟下载 6 份全量行情。
+        if not body and code == 404 and request_url ~= url then
+            body, err, code, response_headers = self:httpGet(
+                Net.bust(url), STOCKS_MANIFEST_MAX, nil, STOCKS_MANIFEST_TIMEOUT)
+            request_url = url
+        end
+        local attempt = { url = url, request_url = request_url,
+            err = err, code = code, headers = response_headers }
+        attempts[#attempts + 1] = attempt
+        if body then
+            local decoded
+            local ok = pcall(function() decoded = require("rapidjson").decode(body) end)
+            if not ok or type(decoded) ~= "table" then
+                attempt.err = "Invalid manifest JSON"
+            elseif type(decoded.doc) ~= "string" or decoded.doc == "" then
+                attempt.err = "Manifest has no doc entry"
+            elseif type(decoded.generated) ~= "string" or not Net.isoSeconds(decoded.generated) then
+                attempt.err = "Manifest has invalid generated stamp"
+            elseif decoded.data_time ~= nil and not Net.isoSeconds(decoded.data_time) then
+                attempt.err = "Manifest has invalid data_time"
+            else
+                decoded.base = url
+                attempt.manifest = decoded
+                if not best or Net.compareFreshness(decoded, best) > 0 then
+                    best, best_url = decoded, url
+                end
+            end
+        end
     end
-    decoded.base = used
-    return decoded
+    self.last_attempts = attempts
+    if not best then
+        local parts = {}
+        for index = 1, math.min(#attempts, 2) do
+            parts[#parts + 1] = string.format("%s → %s", attempts[index].url,
+                tostring(attempts[index].err or "invalid manifest"))
+        end
+        local summary = table.concat(parts, "；")
+        if #attempts > 2 then
+            summary = summary .. string.format("；另 %d 个地址也失败", #attempts - 2)
+        end
+        return nil, summary .. "（没有有效行情清单）"
+    end
+
+    local spec = DOC_KINDS.stocks
+    local current = self.settings[spec.file]
+    local have_epub = current and lfs.attributes(current, "mode") == "file"
+    local have_text = self:readStocksCache() ~= nil
+    local old_generated = self.settings.stocks_generated
+    if not old_generated then
+        local epub_sig = tostring(self.settings[spec.sig] or "")
+        local text_sig = tostring(self.settings.stocks_sig or "")
+        old_generated = Net.compareFreshness({ generated = epub_sig },
+            { generated = text_sig }) >= 0 and epub_sig or text_sig
+    end
+    local floor = {
+        data_time = self.settings.stocks_data_time,
+        generated = old_generated,
+    }
+    if (have_epub or have_text) and Net.isRollback(best, floor) then
+        local cached = tostring(floor.data_time or floor.generated or "unknown")
+        local offered = tostring(best.data_time or best.generated or "unknown")
+        return nil, "All online manifests are older than cache (online " .. offered
+            .. ", cache " .. cached .. "); keeping cached panel"
+    end
+    best.asset_bases = {}
+    for _, attempt in ipairs(attempts) do
+        local candidate = attempt.manifest
+        local same_content = candidate and (
+            (best.data_hash ~= nil and candidate.data_hash == best.data_hash)
+            or candidate.generated == best.generated)
+        if same_content then best.asset_bases[#best.asset_bases + 1] = attempt.url end
+    end
+    self.last_via = best_url
+    self.last_manifest_generated = best.generated
+    return best
+end
+
+function Report:stocksAssetCandidates(manifest, field)
+    local path = manifest[field]
+    local list, resolved, seen = {}, {}, {}
+    local bases = manifest.asset_bases or { manifest.base or self.settings.stocks_url }
+    local function add(url)
+        if url and not seen[url] and #list < Net.MAX_MIRRORS then
+            seen[url] = true; list[#list + 1] = url
+        end
+    end
+    -- 先放每个「同一内容版本」清单自己的正文地址，再用其 GitHub 镜像补满。
+    for _, base in ipairs(bases) do
+        local url = resolveURL(base, path)
+        resolved[#resolved + 1] = url
+        add(url)
+    end
+    for _, url in ipairs(resolved) do
+        for _, mirror in ipairs(self:urlCandidates(url)) do add(mirror) end
+    end
+    return list
+end
+
+function Report:stocksSignature(manifest)
+    -- data_hash 是正文语义指纹；工作流只重排相同数据时 generated 会变，但不用让
+    -- Kindle 重下同一本书。老清单没有 data_hash 才回退 generated。
+    return tostring(manifest.data_hash or manifest.generated or "")
+end
+
+function Report:acceptStocksManifest(manifest)
+    self.settings.stocks_generated = manifest.generated
+    self.settings.stocks_data_hash = manifest.data_hash
+    self.settings.stocks_manifest_via = manifest.base
+    if type(manifest.data_time) == "string" then
+        self.settings.stocks_data_time = manifest.data_time
+    end
+    if type(manifest.data_time_kind) == "string" then
+        self.settings.stocks_data_time_kind = manifest.data_time_kind
+    end
 end
 
 -- 行情面板 EPUB 卡片版：与 refreshDoc 同形（新文件名从头打开、旧文件清理），
@@ -661,13 +777,25 @@ function Report:refreshStocksEpub(manifest, sig)
     local current = self.settings[spec.file]
     local have = current and lfs.attributes(current, "mode") == "file"
     if sig == tostring(self.settings[spec.sig] or "") and have then
+        self:acceptStocksManifest(manifest)
         self:save()
-        self:turnDocPage(spec)
+        if self:docIsOpen(spec) then
+            self:turnDocPage(spec)
+        else
+            -- 上一轮可能已经把新文件写好，却在 showReader() 时被 ReaderUI 重建打断；
+            -- 如果屏幕上仍是旧的 stocks-card EPUB，这一轮必须再切一次，不能只看 sig。
+            local open = self.ui and self.ui.document and self.ui.document.file
+            local name = open and open:match("([^/]+)$")
+            if name and name:sub(1, #spec.prefix) == spec.prefix then
+                self:openDoc(spec, current)
+            end
+        end
         return
     end
     local url = resolveURL(manifest.base or self.settings.stocks_url, manifest.epub)
     if not url:match("^https://") then error("Document URL is not HTTPS") end
-    local body, download_error = self:httpGetAny(self:urlCandidates(url), DOC_MAX)
+    local body, download_error = self:httpGetAny(
+        self:stocksAssetCandidates(manifest, "epub"), DOC_MAX)
     if not body then error(download_error) end
     if #body < 512 or body:sub(1, 2) ~= "PK" then error("Downloaded file is not an EPUB") end
     local seq = (tonumber(self.settings[spec.seq]) or 0) + 1
@@ -683,20 +811,20 @@ function Report:refreshStocksEpub(manifest, sig)
     end
     self.settings[spec.seq] = seq
     self.settings[spec.file_name] = name
-    self.settings[spec.sig] = sig
+    -- 不要先删屏幕上仍打开的旧书；pruneDocs 会保护实际打开路径。新书真正交给
+    -- ReaderUI 后才提交 sig/data_time，showReader 失败则下一轮仍会重试。
     self:pruneDocs(name, spec.prefix)
     self:save()
     self:openDoc(spec, target)
+    self.settings[spec.sig] = sig
+    self:acceptStocksManifest(manifest)
+    self:save()
 end
 
 function Report:refreshStocks()
     local manifest, err = self:fetchStocksManifest()
     if not manifest then error(err) end
-    local sig = manifest.generated
-    if type(manifest.data_time) == "string" then self.settings.stocks_data_time = manifest.data_time end
-    if type(manifest.data_time_kind) == "string" then
-        self.settings.stocks_data_time_kind = manifest.data_time_kind
-    end
+    local sig = self:stocksSignature(manifest)
     self.last_check = os.time()
     -- 清单里有 epub 就打开卡片版（交给阅读器排版）；没有或下载失败才回退纯文本。
     if type(manifest.epub) == "string" and manifest.epub ~= "" then
@@ -706,6 +834,7 @@ function Report:refreshStocks()
     end
     local cached = self:readStocksCache()
     if sig == tostring(self.settings.stocks_sig or "") and cached then
+        self:acceptStocksManifest(manifest)
         self:save()
         if not self.box then self:showText(cached, false)
         else self:advance() end
@@ -713,7 +842,8 @@ function Report:refreshStocks()
     end
     local url = resolveURL(manifest.base or self.settings.stocks_url, manifest.doc)
     if not url:match("^https://") then error("Document URL is not HTTPS") end
-    local body, download_error = self:httpGetAny(self:urlCandidates(url), MAX_BYTES)
+    local body, download_error = self:httpGetAny(
+        self:stocksAssetCandidates(manifest, "doc"), MAX_BYTES)
     if not body then error(download_error) end
     if #body == 0 then error("Downloaded panel is empty") end
     local temp = self.stocks_cache_path .. ".tmp"
@@ -725,6 +855,7 @@ function Report:refreshStocks()
         os.remove(temp); error("Cannot save panel cache")
     end
     self.settings.stocks_sig = sig
+    self:acceptStocksManifest(manifest)
     self:save()
     self:showText(body, false)
 end
@@ -769,6 +900,18 @@ function Report:refreshImage()
     if not self.dashboard then self:showPage(false) else self:advance() end
 end
 
+function Report:stocksCacheLabel()
+    local stamp = tostring(self.settings.stocks_data_time or "")
+    local epoch = Net.isoSeconds(stamp)
+    if not epoch then return stamp ~= "" and stamp or "unknown time" end
+    local age = math.max(0, os.time() - epoch)
+    local age_text
+    if age >= 86400 then age_text = string.format("%.0f days old", age / 86400)
+    elseif age >= 3600 then age_text = string.format("%.0f hours old", age / 3600)
+    else age_text = string.format("%.0f minutes old", age / 60) end
+    return beijing(epoch, "%Y-%m-%d %H:%M:%S") .. " Beijing, " .. age_text
+end
+
 function Report:refresh(interactive)
     if self.in_cycle or not self.settings.enabled then return end
     self.in_cycle = true; self.wake:cancel(); self.wake:kindle_hold(true)
@@ -778,6 +921,9 @@ function Report:refresh(interactive)
     local function finish(error_message)
         if gen ~= self.gen then return end
         UIManager:unschedule(watchdog)
+        if error_message and self:isStocksMode() then
+            error_message = tostring(error_message) .. "\nCached snapshot: " .. self:stocksCacheLabel()
+        end
         self.gen = self.gen + 1; self.in_cycle = false; self.last_error = error_message
         if self.header then
             local state = error_message and "OFFLINE / CACHED" or "ONLINE"
@@ -944,11 +1090,13 @@ end
 
 function Report:pruneDocs(keep, prefix)
     local dir = dataDir()
+    local open = self.ui and self.ui.document and self.ui.document.file
+    local open_name = open and open:match("([^/]+)$")
     local ok, iter, state = pcall(lfs.dir, dir)
     if not ok or type(iter) ~= "function" then return end
     for entry in iter, state do
         if type(entry) == "string" and prefix and entry:sub(1, #prefix) == prefix
-                and entry ~= keep then
+                and entry ~= keep and entry ~= open_name then
             os.remove(dir .. "/" .. entry)
         end
     end
@@ -1001,13 +1149,15 @@ function Report:diagnose()
     local urls = self:urlCandidates(manifest_url)
     if #urls == 0 then self:note("Fill the manifest URL first"); return end
     local lines = { "Manifest: " .. tostring(manifest_url) }
+    local cap = self:isStocksMode() and STOCKS_MANIFEST_MAX or MANIFEST_MAX
     for _, url in ipairs(urls) do
         local started = os.time()
-        local body, err = self:httpGet(Net.bust(url), MANIFEST_MAX, nil, 10)
+        local request_url = self:isStocksMode() and Net.compactManifest(url) or url
+        local body, err = self:httpGet(Net.bust(request_url), cap, nil, 10)
         local spent = os.time() - started
         local status = body and string.format("OK %d B", #body)
             or string.format("%s (%ds)", tostring(err), spent)
-        lines[#lines + 1] = url:gsub("^https://", "") .. "\n  " .. status
+        lines[#lines + 1] = request_url:gsub("^https://", "") .. "\n  " .. status
     end
     lines[#lines + 1] = "Tap Refresh now to retry."
     self:note(table.concat(lines, "\n"))
@@ -1071,10 +1221,23 @@ function Report:status()
             page = page .. string.format("\n  tried %d URLs, ok: %s", #self.last_attempts,
                 tostring((self.last_via or "-"):gsub("^https://", "")))
         end
-    elseif self:isStocksMode() and self.settings.stocks_file_name then
+    elseif self:isStocksMode() then
         local stocks_spec = DOC_KINDS.stocks
-        page = "\nSTOCKS: " .. tostring(self.settings.stocks_file_name)
-            .. (self:docIsOpen(stocks_spec) and " (open)" or " (closed)")
+        if self.settings.stocks_epub_file_name then
+            local actual = self.ui and self.ui.document and self.ui.document.file
+            local actual_name = actual and actual:match("([^/]+)$")
+            local old_open = actual_name
+                and actual_name:sub(1, #stocks_spec.prefix) == stocks_spec.prefix
+                and not self:docIsOpen(stocks_spec)
+            page = "\nSTOCKS: " .. tostring(self.settings.stocks_epub_file_name)
+                .. (self:docIsOpen(stocks_spec) and " (open)"
+                    or (old_open and " (OUTDATED EPUB STILL OPEN)" or " (closed)"))
+        else
+            page = "\nSTOCKS: text cache "
+                .. (self:readStocksCache() and "(available)" or "(missing)")
+        end
+        page = page .. "\n  accepted: " .. tostring(self.settings.stocks_generated or "-")
+            .. "\n  via: " .. tostring((self.settings.stocks_manifest_via or "-"):gsub("^https://", ""))
     elseif self:isImageMode() then
         page = "\nPage " .. tostring(self.page_index or 0) .. "/" .. tostring(self.page_count or 0)
         local pw, ph
@@ -1129,6 +1292,16 @@ function Report:setURL(kind)
                 self.settings[spec.key] = url
                 -- clear 已经是这个来源自己的 sig 键，换 URL 就等于作废旧缓存。
                 self.settings[spec.clear] = nil
+                if kind == "stocks" then
+                    -- 行情有 EPUB / TXT 两套签名，还有防倒退水位。用户主动换源时全部
+                    -- 作废，否则新地址会被旧地址的 data_time 误判成“禁止倒退”。
+                    self.settings.stocks_sig = nil
+                    self.settings.stocks_generated = nil
+                    self.settings.stocks_data_hash = nil
+                    self.settings.stocks_data_time = nil
+                    self.settings.stocks_data_time_kind = nil
+                    self.settings.stocks_manifest_via = nil
+                end
                 self:save()
                 UIManager:close(dialog)
             end } } },

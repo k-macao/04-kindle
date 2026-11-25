@@ -22,7 +22,7 @@ def main(argv=None):
     if problems:
         print("；".join(problems), file=sys.stderr)
         return 1
-    print(f"自检通过 · {out}/stocks.json + stocks.html + stocks.epub + stocks.txt")
+    print(f"自检通过 · {out}/stocks.json + stocks-manifest.json + stocks.html + stocks.epub + stocks.txt")
     return 0
 
 

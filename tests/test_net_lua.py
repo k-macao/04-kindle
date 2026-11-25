@@ -109,6 +109,48 @@ class NetLuaTest(unittest.TestCase):
     def test_bust_replaces_existing_query(self):
         self.assertNotIn("?v=1&", self.net.bust(JSD + "?v=1", 600))
 
+    def test_compact_stocks_manifest_preserves_custom_urls(self):
+        stocks = "https://raw.githubusercontent.com/k-macao/04-kindle/main/site/stocks.json"
+        self.assertEqual(self.net.compactManifest(stocks),
+                         stocks.replace("stocks.json", "stocks-manifest.json"))
+        self.assertEqual(self.net.compactManifest(stocks + "?old=1"),
+                         stocks.replace("stocks.json", "stocks-manifest.json"))
+        custom = "https://example.com/panel.json"
+        self.assertEqual(self.net.compactManifest(custom), custom)
+
+    def test_manifest_freshness_prefers_data_time_before_generated(self):
+        newer_data = self.lua.table_from({
+            "data_time": "2026-11-25T07:16:38Z",
+            "generated": "2026-11-25T07:20:00Z",
+        })
+        newer_build_but_old_data = self.lua.table_from({
+            "data_time": "2026-11-23T07:16:38Z",
+            "generated": "2026-11-25T08:20:00Z",
+        })
+        self.assertEqual(self.net.compareFreshness(newer_data, newer_build_but_old_data), 1)
+        self.assertEqual(self.net.compareFreshness(newer_build_but_old_data, newer_data), -1)
+
+    def test_manifest_freshness_uses_generated_as_tiebreaker(self):
+        first = self.lua.table_from({
+            "data_time": "2026-11-25T07:16:38Z",
+            "generated": "2026-11-25T07:20:00Z",
+        })
+        second = self.lua.table_from({
+            "data_time": "2026-11-25T07:16:38Z",
+            "generated": "2026-11-25T07:31:43Z",
+        })
+        self.assertEqual(self.net.compareFreshness(second, first), 1)
+        self.assertFalse(self.net.isRollback(second, first))
+        self.assertTrue(self.net.isRollback(first, second))
+
+    def test_iso_comparison_does_not_depend_on_device_timezone(self):
+        self.assertEqual(self.net.isoSeconds("1970-01-01T00:00:00Z"), 0)
+        self.assertEqual(self.net.isoSeconds("2026-11-25T07:31:43Z")
+                         - self.net.isoSeconds("2026-11-25T07:30:43Z"), 60)
+        self.assertIsNone(self.net.isoSeconds("2026-11-25"))
+        self.assertIsNone(self.net.isoSeconds("2026-02-30T07:30:43Z"))
+        self.assertIsNotNone(self.net.isoSeconds("2024-02-29T07:30:43Z"))
+
     def test_hint_translates_common_failures(self):
         cases = {
             "network failure": "镜像",

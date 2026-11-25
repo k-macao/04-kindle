@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
-"""把 stocks_data.json 排成四份产物：清单、Kindle 纯文本、网页面板、EPUB 卡片版。
+"""把 stocks_data.json 排成全量/轻量清单、日线 sidecar、Kindle 文本、网页与 EPUB。
 
     python tools/build_stocks.py --data stocks_data.json --out site
     python tools/build_stocks.py --demo --out site   # 没 Key 时先看版式
 
-四份产物（都在 ``site/`` 下，跟着仓库走）：
+产物都在 ``site/`` 下，跟着仓库走：
 
-- ``stocks.json`` —— 清单 + 数据二合一：``generated`` 是 Kindle 插件的签名
+- ``stocks.json`` —— 清单 + 数据二合一：``generated`` 是发布时间，``data_hash`` 是正文指纹
   （变了才重下正文），``doc`` 指向 ``stocks.txt``，``epub`` 指向 ``stocks.epub``，
-  ``data_time`` 是快照的数据时间（不是生成时间），``data_hash`` 供工作流判断
+  ``data_time`` 是快照的数据时间（不是生成时间），``data_hash`` 也供工作流判断
   「行情没变就不提交」；
+- ``stocks-manifest.json`` —— Kindle 多镜像择优用的轻量清单，不携带全量行情；
+- ``stocks-leaders.json`` —— A/H 龙头约 130 根完整日线，主清单只保留 26 周压缩趋势；
 - ``stocks.txt`` —— Kindle 纯文本面板（电子墨水友好：白底黑字、▲▼ + 正负号，
   不靠颜色传信息）；
 - ``stocks.html`` —— 浏览器卡片仪表盘：指数卡 + 自选股卡（带近 20 日迷你走势图）
@@ -18,7 +20,7 @@
 - ``stocks.epub`` —— Kindle 字模式卡片版：同一套数据排成表格卡片，交给
   KOReader 阅读器显示（crengine 不认 flex/grid/SVG，所以迷你图只出现在网页面板）。
 
-四份产物最后都多一段【板块轮动 · RRG】：数据由 ``tools/sector_rrg.py`` 算好放进
+三端可读正文最后都多一段【板块轮动 · RRG】：数据由 ``tools/sector_rrg.py`` 算好放进
 ``stocks_data.json`` 的 ``sector_rrg`` 字段（策略来自 GitHub ``hugo2046/QuantsPlaybook``，
 见那个模块的文档），这里只负责排版——网页除了表格还画一张灰度四象限图，
 Kindle 纯文本/EPUB 只有文字与表格。
@@ -38,10 +40,12 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+import ah_leaders  # noqa: E402
 import jrglobal_radar  # noqa: E402
 import sector_rrg  # noqa: E402
 
 TITLE = "同花顺行情面板"
+DATA_SCHEMA = 2  # v2：轻量清单 + A/H 龙头半年量价 sidecar
 DISCLAIMER = "仅供信息展示，不构成投资建议"
 BEIJING = timezone.utc  # 北京时间 = UTC+8 固定偏移，不用 tzdata
 # 服务端抓取间隔（分钟）：与 .github/workflows/refresh-stocks.yml 的 cron 一致
@@ -423,6 +427,50 @@ def fmt_seal(value):
     if value is None:
         return ""
     return f"封单{fmt_turnover(value)}"
+
+
+def ah_leader_section(payload):
+    section = payload.get("ah_leaders")
+    return section if isinstance(section, dict) else {}
+
+
+def _trend(values, width=13):
+    """数字序列压成黑白字符趋势；Kindle 不依赖 SVG 也能看半年方向。"""
+    values = [value for value in values if isinstance(value, (int, float))]
+    if len(values) < 2:
+        return "--"
+    if len(values) > width:
+        step = len(values) / width
+        values = [values[min(len(values) - 1, int(i * step))] for i in range(width)]
+    low, high = min(values), max(values)
+    if high == low:
+        return "▄" * len(values)
+    blocks = "▁▂▃▄▅▆▇█"
+    return "".join(blocks[min(7, int((value - low) / (high - low) * 7))]
+                   for value in values)
+
+
+def _weekly_trends(market):
+    weekly = (market or {}).get("weekly") or []
+    closes = [bar[ah_leaders.CLOSE] for bar in weekly
+              if isinstance(bar, list) and len(bar) > ah_leaders.VOLUME
+              and isinstance(bar[ah_leaders.CLOSE], (int, float))]
+    volumes = [bar[ah_leaders.VOLUME] for bar in weekly
+               if isinstance(bar, list) and len(bar) > ah_leaders.VOLUME
+               and isinstance(bar[ah_leaders.VOLUME], (int, float))]
+    return _trend(closes), _trend(volumes)
+
+
+def _leader_market_text(label, market):
+    metrics = (market or {}).get("metrics") or {}
+    quote = (market or {}).get("quote") or {}
+    price_trend, volume_trend = _weekly_trends(market)
+    return (f"  {label} 现{fmt_pos(quote.get('last_price'))} "
+            f"半年{fmt_ratio(metrics.get('return_6m_pct'))} "
+            f"回撤{fmt_ratio(metrics.get('max_drawdown_pct'))} "
+            f"20日均额{fmt_turnover(metrics.get('avg_turnover_20'))} "
+            f"{metrics.get('signal') or '数据不足'}\n"
+            f"    价{price_trend} 量{volume_trend}")
 
 
 def _sector_codes():
@@ -1011,9 +1059,11 @@ def data_hash(payload, view=None):
     volume_part = volume_price_section(payload)
     radar_part = radar_section(payload)
     decision_part = decision_section(payload)
+    leaders_part = ah_leader_section(payload)
     mode = (view.get("mode") if isinstance(view, dict)
             else ("brief" if view == "brief" else "full"))
     core = {
+        "schema": DATA_SCHEMA,
         "view": mode or "full",
         "indices": [(r.get("thscode"), r.get("last_price"),
                      r.get("price_change_ratio_pct")) for r in payload.get("indices") or []],
@@ -1049,6 +1099,16 @@ def data_hash(payload, view=None):
             "opportunities": [(row.get("thscode"), row.get("score"), row.get("status"))
                               for row in decision_part.get("opportunities") or []],
         },
+        "ah_leaders": [
+            (row.get("sector_code"), row.get("status"), row.get("a_code"), row.get("h_code"),
+             ((row.get("a") or {}).get("quote") or {}).get("last_price"),
+             ((row.get("h") or {}).get("quote") or {}).get("last_price"),
+             ((row.get("a") or {}).get("metrics") or {}).get("return_6m_pct"),
+             ((row.get("h") or {}).get("metrics") or {}).get("return_6m_pct"),
+             (((row.get("a") or {}).get("weekly") or [[None]])[-1][0]),
+             (((row.get("h") or {}).get("weekly") or [[None]])[-1][0]))
+            for row in leaders_part.get("rows") or []
+        ],
         "data_timestamp": payload.get("data_timestamp"),
     }
     raw = json.dumps(core, ensure_ascii=False, sort_keys=True)
@@ -1059,6 +1119,7 @@ def manifest(payload, generated, view=None):
     rrg_part, cross_part = final_sections(payload)
     volume_part = volume_price_section(payload)
     decision_part = decision_section(payload)
+    leaders_part = ah_leader_section(payload)
     if isinstance(view, dict):
         brief = view
     else:
@@ -1070,6 +1131,7 @@ def manifest(payload, generated, view=None):
         data_time = datetime.fromtimestamp(
             data_ms / 1000, tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     return {
+        "schema": DATA_SCHEMA,
         "generated": generated,
         "doc": "stocks.txt",
         "epub": "stocks.epub",
@@ -1105,11 +1167,22 @@ def manifest(payload, generated, view=None):
         "volume_price": volume_part or None,
         # 风险开关与观察池和三端正文同源，设备只拉 JSON 也能直接读取。
         "decision": decision_part,
+        # 每板块都保留一行；没有 A/H 同公司时 status=no_match，绝不硬凑。
+        # 主清单只放 26 周压缩趋势；完整约 130 根日线在 sidecar，省 Kindle 流量。
+        "ah_leaders": leaders_part or None,
+        "leader_history": "stocks-leaders.json" if leaders_part.get("rows") else None,
         # Jovian Research (jrglobal.xyz/tools/) 聪明钱雷达 + AI 数据智库 + 组合实验室
         "radar": radar_section(payload),
         "history": payload.get("history") or {},
         "errors": payload.get("errors") or [],
     }
+
+
+def compact_manifest(data):
+    """给 Kindle 多镜像择优的小清单；避免每 7 分钟从 6 个源重复拉全量 JSON。"""
+    keys = ("schema", "generated", "doc", "epub", "title", "data_time", "data_time_kind",
+            "data_hash", "demo", "view", "counts", "leader_history")
+    return {key: data.get(key) for key in keys if data.get(key) is not None}
 
 
 def core_indices(payload):
@@ -1233,6 +1306,30 @@ def render_txt(payload, generated, brief=None):
                 lines.append((_pad_display(cells[i], col_w) + right).rstrip())
             lines.append("")
 
+    leaders = ah_leader_section(payload)
+    leader_rows = leaders.get("rows") or []
+    if leader_rows:
+        coverage = leaders.get("coverage") or {}
+        lines.append(f"【A/H 龙头半年量价】板块 {coverage.get('sectors', len(leader_rows))}"
+                     f" · 命中 {coverage.get('matched', 0)}"
+                     f" · 无 A/H 同公司 {coverage.get('unmatched', 0)}")
+        lines.append("规则：同一家公司同时有 A/H 股；板块成分内按 A 股近20日平均成交额选 1 只")
+        for row in leader_rows:
+            sector = row.get("sector_name") or row.get("sector_code") or ""
+            if row.get("status") != "ok":
+                lines.append(f"{sector}｜暂无可验证的 A/H 同公司成分股")
+                continue
+            h_code = str(row.get("h_code") or "").replace("hk", "")
+            lines.append(f"{sector}｜{row.get('name') or row.get('a_code')} "
+                         f"A{str(row.get('a_code') or '').split('.')[0]} / H{h_code}")
+            lines.extend(_leader_market_text("A", row.get("a")).splitlines())
+            lines.extend(_leader_market_text("H", row.get("h")).splitlines())
+        leader_errors = leaders.get("errors") or []
+        if leader_errors:
+            lines.append(f"A/H 子源提示 {len(leader_errors)} 条：{leader_errors[0]}")
+        lines.append("完整约130根 A/H 日线见 stocks-leaders.json；此处为最近26周压缩趋势。")
+        lines.append("")
+
     hk = payload.get("hk") or {}
     hk_rows = hk.get("rows") or []
     if hk_rows:
@@ -1310,6 +1407,15 @@ section h2{font-size:19px;border-bottom:2px solid #000;padding-bottom:4px;margin
 .cards.index{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
 .cards.sector{grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:6px}
 .cards.hk{grid-template-columns:repeat(auto-fill,minmax(158px,1fr))}
+.leader-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:9px}
+.leader-card{border:2px solid #000;padding:8px;break-inside:avoid}
+.leader-card h3{font-size:15px;margin:0 0 5px;border-bottom:1px solid #999;padding-bottom:3px}
+.leader-pair{font-size:12px;color:#444;margin-bottom:5px}
+.leader-markets{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.leader-market{border:1px solid #aaa;padding:5px;font-size:11.5px}
+.leader-market .ticker{font-size:13px;font-weight:bold}
+.leader-market svg{display:block;width:100%;height:58px;margin:3px 0}
+.leader-market .metrics{line-height:1.45}
 .result-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:9px;margin:10px 0}
 .result-card{border:2px solid #000;background:#fff;padding:10px;min-height:132px}
 .result-card .label{font-size:12px;color:#555;border-bottom:1px solid #bbb;padding-bottom:3px}
@@ -1561,6 +1667,41 @@ esc(String(r.thscode||'').replace(/^hk/,''))+'</span></div><div class="body">'+
 (empty?'':ratio(r.price_change_ratio_pct)+' '+change(r.price_change))+'</div>'+
 '<table class="kv"><tr><td>成交额</td><td>'+money(r.turnover)+'</td></tr>'+
 '<tr><td>成交量</td><td>'+vol(r.volume)+'</td></tr></table></div></div>';}
+function weeklyChart(market){
+var bars=(market&&market.weekly)||[];
+if(bars.length<2)return '<div class="muted">半年 K 线不足</div>';
+var closes=bars.map(function(b){return Number(b[4]);});
+var volumes=bars.map(function(b){return Number(b[5]||0);});
+var lo=Math.min.apply(null,closes),hi=Math.max.apply(null,closes),span=(hi-lo)||1;
+var vmax=Math.max.apply(null,volumes)||1,w=145,h=58,priceH=36,step=w/Math.max(1,bars.length-1);
+var points=closes.map(function(v,i){return (i*step).toFixed(1)+','+
+(2+(hi-v)/span*(priceH-5)).toFixed(1);}).join(' ');
+var bw=Math.max(1,w/bars.length-1),svg='<svg viewBox="0 0 '+w+' '+h+'" aria-label="26周量价趋势">';
+volumes.forEach(function(v,i){var bh=(v/vmax)*16;svg+='<rect x="'+(i*w/bars.length).toFixed(1)+
+'" y="'+(h-bh).toFixed(1)+'" width="'+bw.toFixed(1)+'" height="'+bh.toFixed(1)+'" fill="#bbb"/>';});
+svg+='<line x1="0" y1="'+priceH+'" x2="'+w+'" y2="'+priceH+'" stroke="#999" stroke-width="0.5"/>'+
+'<polyline points="'+points+'" fill="none" stroke="#000" stroke-width="1.8"/></svg>';
+return svg;}
+function ahMarket(label,code,market){
+var m=(market&&market.metrics)||{},q=(market&&market.quote)||{};
+return '<div class="leader-market"><div class="ticker">'+esc(label+' '+code)+' · '+pos(q.last_price)+'</div>'+
+weeklyChart(market)+'<div class="metrics">半年 '+ratio(m.return_6m_pct)+' · 回撤 '+ratio(m.max_drawdown_pct)+'<br>'+
+'20日均额 '+money(m.avg_turnover_20)+' · '+esc(m.signal||'数据不足')+'</div></div>';}
+function ahLeaderSection(g){
+if(!g||!g.rows||!g.rows.length)return '';
+var c=g.coverage||{},h='<section><h2>A/H 龙头半年量价<span class="muted"> 板块 '+
+(c.sectors||g.rows.length)+' · 命中 '+(c.matched||0)+' · 无同公司 '+(c.unmatched||0)+'</span></h2>'+
+'<p class="src">同一家公司同时有 A/H 股；在板块当前成分内按 A 股近20日平均成交额动态选 1 只。'+
+'线=周收盘，柱=周成交量；完整约130根日线见 stocks-leaders.json。</p><div class="leader-grid">';
+if(g.errors&&g.errors.length)h+='<p class="src">A/H 子源提示 '+g.errors.length+' 条：'+esc(g.errors[0])+'</p>';
+g.rows.forEach(function(r){
+h+='<div class="leader-card"><h3>'+esc(r.sector_name||r.sector_code)+'</h3>';
+if(r.status!=='ok'){h+='<div class="muted">暂无可验证的 A/H 同公司成分股</div></div>';return;}
+var ac=String(r.a_code||'').split('.')[0],hc=String(r.h_code||'').replace(/^hk/,'');
+h+='<div class="leader-pair">'+esc(r.name||r.a_code)+' · A'+esc(ac)+' / H'+esc(hc)+
+' · '+esc(r.selection_basis||'')+'</div><div class="leader-markets">'+
+ahMarket('A',ac,r.a)+ahMarket('H',hc,r.h)+'</div></div>';});
+return h+'</div></section>';}
 function limitRows(rows){
 var h='<table class="data"><tr><th>名称</th><th>最新</th><th>涨跌幅</th><th>封板</th>'+
 '<th>原因</th><th>连板</th><th>封单额</th></tr>';
@@ -1783,6 +1924,7 @@ h+='</section>';}
 else{
 h+='<section><h2>板块（'+sectors.length+'）· 按涨跌幅</h2><div class="cards sector">';
 sorted.forEach(function(r){h+=sectorCard(r);});h+='</div></section>';}}
+if(d.ah_leaders&&d.ah_leaders.rows)h+=ahLeaderSection(d.ah_leaders);
 var hkRows=((d.hk||{}).rows||[]);
 if(hkRows.length){
 var hi=[],hs=[];
@@ -2044,6 +2186,47 @@ def render_epub_xhtml(payload, generated_bj, brief=None):
         else:
             index_table(sectors, f"板块 · 涨 {up} 跌 {len(sectors) - up}")
 
+    leaders = ah_leader_section(payload)
+    leader_rows = leaders.get("rows") or []
+    if leader_rows:
+        coverage = leaders.get("coverage") or {}
+        parts.append(f"<h2>A/H 龙头半年量价（命中 {coverage.get('matched', 0)} / "
+                     f"板块 {coverage.get('sectors', len(leader_rows))}）</h2>")
+        parts.append('<p class="meta">同一家公司同时有 A/H 股；板块成分内按 A 股近20日'
+                     '平均成交额选 1 只。价/量为最近26周压缩趋势，完整日线见 '
+                     'stocks-leaders.json。</p>')
+        leader_errors = leaders.get("errors") or []
+        if leader_errors:
+            parts.append(f'<p class="meta">A/H 子源提示 {len(leader_errors)} 条：'
+                         f'{esc(leader_errors[0])}</p>')
+        parts.append('<table class="data"><tr><th>板块 / 龙头</th><th>A 半年</th>'
+                     '<th>H 半年</th><th>量价状态</th></tr>')
+        for row in leader_rows:
+            sector = row.get("sector_name") or row.get("sector_code") or ""
+            if row.get("status") != "ok":
+                parts.append(f'<tr><td>{esc(sector)}</td>'
+                             '<td colspan="3">暂无可验证的 A/H 同公司成分股</td></tr>')
+                continue
+            am = (row.get("a") or {}).get("metrics") or {}
+            hm = (row.get("h") or {}).get("metrics") or {}
+            ac = str(row.get("a_code") or "").split(".")[0]
+            hc = str(row.get("h_code") or "").replace("hk", "")
+            ap, av = _weekly_trends(row.get("a"))
+            hp, hv = _weekly_trends(row.get("h"))
+            parts.append(
+                f'<tr><td>{esc(sector)} · {esc(row.get("name"))}<br/>'
+                f'A{esc(ac)} / H{esc(hc)}</td>'
+                f'<td>{esc(fmt_ratio(am.get("return_6m_pct")))}<br/>'
+                f'回撤 {esc(fmt_ratio(am.get("max_drawdown_pct")))}</td>'
+                f'<td>{esc(fmt_ratio(hm.get("return_6m_pct")))}<br/>'
+                f'回撤 {esc(fmt_ratio(hm.get("max_drawdown_pct")))}</td>'
+                f'<td>A {esc(am.get("signal") or "数据不足")}<br/>'
+                f'H {esc(hm.get("signal") or "数据不足")}</td></tr>'
+                f'<tr><td colspan="4">A 价{esc(ap)} 量{esc(av)}<br/>'
+                f'H 价{esc(hp)} 量{esc(hv)}</td></tr>'
+            )
+        parts.append("</table>")
+
     hk = payload.get("hk") or {}
     hk_rows = hk.get("rows") or []
     if hk_rows:
@@ -2185,9 +2368,22 @@ def check(out_dir):
         data = json.loads(manifest_path.read_text(encoding="utf-8"))
     except ValueError as exc:
         return [f"stocks.json 解析失败：{exc}"]
-    for key in ("generated", "doc", "title", "data_hash", "counts"):
+    for key in ("schema", "generated", "doc", "title", "data_hash", "counts"):
         if not data.get(key):
             problems.append(f"stocks.json 缺少 {key}")
+    compact_path = out / "stocks-manifest.json"
+    if not compact_path.is_file():
+        problems.append("缺少 stocks-manifest.json")
+    else:
+        try:
+            compact = json.loads(compact_path.read_text(encoding="utf-8"))
+            for key in ("schema", "generated", "doc", "epub", "data_time", "data_hash"):
+                if compact.get(key) != data.get(key):
+                    problems.append(f"stocks-manifest.json 的 {key} 与主清单不一致")
+            if "indices" in compact or "ah_leaders" in compact:
+                problems.append("stocks-manifest.json 不应携带全量行情")
+        except ValueError as exc:
+            problems.append(f"stocks-manifest.json 解析失败：{exc}")
     if data.get("doc") != "stocks.txt":
         problems.append("stocks.json 的 doc 不是 stocks.txt")
     counts = data.get("counts") or {}
@@ -2235,6 +2431,28 @@ def check(out_dir):
     page = html_path.read_text(encoding="utf-8") if html_path.is_file() else ""
     if "function decisionSection" not in page or "d.decision" not in page:
         problems.append("stocks.html 没有风险开关或板块机会池")
+    leaders = data.get("ah_leaders") or {}
+    leader_rows = leaders.get("rows") or []
+    if leader_rows:
+        coverage = leaders.get("coverage") or {}
+        if len(leader_rows) != coverage.get("sectors"):
+            problems.append("A/H 龙头行数与板块覆盖数不一致")
+        if any(row.get("status") not in ("ok", "no_match") for row in leader_rows):
+            problems.append("A/H 龙头存在未知状态")
+        if "function ahLeaderSection" not in page or "weeklyChart" not in page:
+            problems.append("stocks.html 没有 A/H 龙头周量价图")
+        if "【A/H 龙头半年量价】" not in text_body:
+            problems.append("stocks.txt 没有 A/H 龙头半年量价段")
+        sidecar_path = out / str(data.get("leader_history") or "stocks-leaders.json")
+        if not sidecar_path.is_file():
+            problems.append("清单有 A/H 龙头但缺少 stocks-leaders.json")
+        else:
+            try:
+                sidecar = json.loads(sidecar_path.read_text(encoding="utf-8"))
+                if not isinstance(sidecar.get("companies"), dict):
+                    problems.append("stocks-leaders.json 缺少 companies")
+            except ValueError as exc:
+                problems.append(f"stocks-leaders.json 解析失败：{exc}")
     if cross.get("counts") and (data.get("rrg") or {}).get("rows"):
         # 两者互斥：量化分析段只显示一个，清单里不该同时有两段
         problems.append("清单里 rrg 与 cross 同时存在")
@@ -2268,6 +2486,8 @@ def check(out_dir):
                     problems.append("stocks.epub 章节里没有面板标题")
                 if "风险开关与板块机会池" not in chapter:
                     problems.append("stocks.epub 章节里没有风险开关或板块机会池")
+                if leader_rows and "A/H 龙头半年量价" not in chapter:
+                    problems.append("stocks.epub 章节里没有 A/H 龙头半年量价")
         except zipfile.BadZipFile as exc:
             problems.append(f"stocks.epub 不是有效 EPUB：{exc}")
     return problems
@@ -2416,6 +2636,33 @@ def build(data_path=None, out_dir="site", demo=False, demo_cross=False, view=Non
                 "这一轮快照没有任何成交数据（空壳），不覆盖上一份有效面板"
                 "（上一份数据时间 " + (beijing_text(previous.get("data_timestamp")) or "未知")
                 + " 北京时间）；等有成交的下一轮再写")
+    # A/H 的腾讯/成分股链路是独立子源：一轮临时失败不能把上一份几十个已验证
+    # 龙头刷成 91 行“暂无”。覆盖骤降且本轮有错误时沿用上一段，正文明确标缓存。
+    previous = _previous_payload(out_dir)
+    old_leaders = (previous or {}).get("ah_leaders") or {}
+    new_leaders = ah_leader_section(payload)
+    old_matched = (old_leaders.get("coverage") or {}).get("matched") or 0
+    new_matched = (new_leaders.get("coverage") or {}).get("matched") or 0
+    def complete_leaders(section):
+        return sum(
+            row.get("status") == "ok"
+            and (((row.get("a") or {}).get("metrics") or {}).get("bars") or 0) >= 20
+            and (((row.get("h") or {}).get("metrics") or {}).get("bars") or 0) >= 20
+            for row in (section.get("rows") or []))
+    old_complete = complete_leaders(old_leaders)
+    new_complete = complete_leaders(new_leaders)
+    leader_failed = any("A/H 龙头段未生成" in str(error)
+                        for error in payload.get("errors") or [])
+    leader_degraded = (
+        bool(new_leaders.get("errors")) and (
+            (old_matched > 0 and new_matched < old_matched * 0.5)
+            or (old_complete > 0 and new_complete < old_complete * 0.5)))
+    if old_leaders.get("rows") and (leader_failed or leader_degraded):
+        payload["ah_leaders"] = old_leaders
+        payload.pop("ah_leader_history", None)  # 保留磁盘上与旧段一致的完整日线
+        payload.setdefault("errors", []).append(
+            "A/H 龙头本轮子源失败或覆盖骤降，沿用上一份已验证半年量价缓存")
+
     # 清单里的 generated 与 epub.json 同形（ISO-8601 UTC），只做签名用；
     # 文本面板上显示北京时间文字。
     generated = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -2426,8 +2673,23 @@ def build(data_path=None, out_dir="site", demo=False, demo_cross=False, view=Non
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
     data = manifest(payload, generated, view=(brief if brief is not None else effective_mode))
+    # 完整半年日线单独落盘：Kindle 的主清单只带 26 周压缩趋势，避免每 7 分钟
+    # 重拉所有 130 根；网页/研究脚本需要逐日 OHLCV 时再读这个 sidecar。
+    if "ah_leader_history" in payload:
+        sidecar = {
+            "generated": generated, "data_time": data.get("data_time"),
+            "window": "约130个交易日，前复权；字段见每家公司 fields",
+            "selection": (ah_leader_section(payload).get("selection") or ""),
+            "companies": payload.get("ah_leader_history") or {},
+        }
+        (out / "stocks-leaders.json").write_text(
+            json.dumps(sidecar, ensure_ascii=False, separators=(",", ":")) + "\n",
+            encoding="utf-8")
     (out / "stocks.json").write_text(
         json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (out / "stocks-manifest.json").write_text(
+        json.dumps(compact_manifest(data), ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8")
     (out / "stocks.txt").write_text(
         render_txt(payload, now_beijing_text(), brief=brief), encoding="utf-8")
     (out / "stocks.html").write_text(render_html(), encoding="utf-8")
@@ -2437,10 +2699,12 @@ def build(data_path=None, out_dir="site", demo=False, demo_cross=False, view=Non
     if problems:
         raise ValueError("产物自检不过：" + "；".join(problems))
     counts = data["counts"]
-    print(f"已生成 {out}/stocks.json、stocks.txt、stocks.html、stocks.epub"
+    print(f"已生成 {out}/stocks.json、stocks-manifest.json、stocks.txt、stocks.html、stocks.epub"
           f"（指数 {counts['indices']} / 板块 {counts['sectors']}"
           f" / 全市场 {counts['market']} / 港股 {counts['hk']}"
           f" / 涨停 {counts['limit_up']}"
+          + (f" / A/H龙头 {(data.get('ah_leaders') or {}).get('coverage', {}).get('matched', 0)}"
+             if (data.get("ah_leaders") or {}).get("rows") else "")
           + (f" / RRG {counts['rrg']}" if counts.get("rrg") else "")
           + (f" / 横截面 {counts['cross']}" if counts.get("cross") else "")
           + (f" / 周末精简版（{brief['reason']}）" if brief else "")

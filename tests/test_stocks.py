@@ -15,6 +15,7 @@ from urllib.error import HTTPError, URLError
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 
+import ah_leaders  # noqa: E402
 import build_stocks  # noqa: E402
 import fetch_stocks
 import stocks_watchdog  # noqa: E402
@@ -312,6 +313,10 @@ class BuildTest(unittest.TestCase):
                                           "volume_price": 0})
         self.assertEqual(data["market"]["up"], 2861)
         self.assertEqual(data["hk"]["data_time"], "2026-07-17T08:13:11Z")
+        compact = build_stocks.compact_manifest(data)
+        self.assertEqual(compact["data_hash"], data["data_hash"])
+        self.assertNotIn("indices", compact)
+        self.assertNotIn("market", compact)
         text = build_stocks.render_txt(payload, "2026-11-17 15:00:00")
         self.assertIn("同花顺行情面板", text)
         # 一屏监视的四段都在，且不再有「自选股」
@@ -347,7 +352,8 @@ class BuildTest(unittest.TestCase):
             data_path.write_text(json.dumps(self._payload()), encoding="utf-8")
             out = Path(tmp) / "site"
             build_stocks.build(str(data_path), str(out))
-            for name in ("stocks.json", "stocks.txt", "stocks.html", "stocks.epub"):
+            for name in ("stocks.json", "stocks-manifest.json", "stocks.txt",
+                         "stocks.html", "stocks.epub"):
                 self.assertTrue((out / name).is_file(), name)
             self.assertEqual(build_stocks.check(str(out)), [])
             page = (out / "stocks.html").read_text(encoding="utf-8")
@@ -1026,6 +1032,204 @@ TENCENT_TEXT = (
 )
 
 
+class AhLeaderTest(unittest.TestCase):
+    @staticmethod
+    def bars(days=130, start=10.0, volume=1000.0, turnover=1e8):
+        return [[1700000000000 + i * 86400000, start + i * 0.05,
+                 start + i * 0.08, start + i * 0.02, start + i * 0.06,
+                 volume + i * 10, turnover + i * 1e6] for i in range(days)]
+
+    def test_half_year_metrics_and_weekly_compression(self):
+        bars = self.bars()
+        metrics = ah_leaders.metrics(bars)
+        self.assertEqual(metrics["bars"], 130)
+        self.assertGreater(metrics["return_6m_pct"], 0)
+        self.assertLessEqual(metrics["max_drawdown_pct"], 0)
+        self.assertIsNotNone(metrics["avg_turnover_20"])
+        weekly = ah_leaders.weekly_bars(bars)
+        self.assertLessEqual(len(weekly), 26)
+        self.assertEqual(weekly[-1][ah_leaders.CLOSE], bars[-1][ah_leaders.CLOSE])
+        self.assertGreater(weekly[-1][ah_leaders.VOLUME], bars[-1][ah_leaders.VOLUME])
+
+    def test_ohlcv_normalizer_keeps_all_volume_price_fields(self):
+        group = {"item": [{"date_ms": 1700000000000, "open_price": "10",
+                            "high_price": 12, "low_price": 9, "close_price": 11,
+                            "volume": 1234, "turnover": 5678}]}
+        bars = fetch_stocks.normalize_ohlcv_history_group(group, 130)
+        self.assertEqual(bars[0], [1700000000000, 10.0, 12.0, 9.0, 11.0, 1234.0, 5678.0])
+
+    def test_sector_members_use_seven_day_disk_cache(self):
+        class Client:
+            def __init__(self):
+                self.calls = 0
+            def get(self, path, params):
+                self.calls += 1
+                return {"item": [{"thscode": "688981.SH", "name": "中芯国际"}]}
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "members.json"
+            client = Client()
+            sectors = [("881121.TI", "半导体")]
+            first, errors = fetch_stocks.fetch_sector_members(
+                client, sectors, cache_path=path)
+            self.assertEqual(errors, [])
+            self.assertEqual(first["881121.TI"][0]["thscode"], "688981.SH")
+            self.assertEqual(client.calls, 1)
+            second_client = Client()
+            second, errors = fetch_stocks.fetch_sector_members(
+                second_client, sectors, cache_path=path)
+            self.assertEqual(second, first)
+            self.assertEqual(errors, [])
+            self.assertEqual(second_client.calls, 0)
+
+    def test_each_sector_gets_one_row_and_no_match_is_honest(self):
+        sectors = [("881121.TI", "半导体"), ("881178.TI", "教育")]
+        members = {
+            "881121.TI": [{"thscode": "688981.SH", "name": "中芯国际"},
+                           {"thscode": "600036.SH", "name": "招商银行"}],
+            "881178.TI": [{"thscode": "000001.SZ", "name": "平安银行"}],
+        }
+        histories = {"688981.SH": self.bars(turnover=2e8),
+                     "600036.SH": self.bars(turnover=1e8)}
+        selected = ah_leaders.select_sector_leaders(
+            sectors, members,
+            {"688981.SH": "hk00981", "600036.SH": "hk03968"}, histories)
+        self.assertEqual(len(selected), 2)
+        self.assertEqual(selected[0]["a_code"], "688981.SH")
+        self.assertEqual(selected[0]["selection_basis"], "A股近20日平均成交额")
+        self.assertEqual(selected[1]["status"], "no_match")
+        self.assertIn("没有", selected[1]["reason"])
+
+    def test_leader_ranking_requires_twenty_complete_turnover_days(self):
+        sectors = [("881121.TI", "半导体")]
+        members = {"881121.TI": [
+            {"thscode": "688981.SH", "name": "中芯国际"},
+            {"thscode": "600036.SH", "name": "招商银行"},
+        ]}
+        selected = ah_leaders.select_sector_leaders(
+            sectors, members,
+            {"688981.SH": "hk00981", "600036.SH": "hk03968"},
+            {"688981.SH": self.bars(turnover=1e8),
+             "600036.SH": self.bars(turnover=9e9)[-19:]},
+            market_rows=[{"thscode": "600036.SH", "turnover": 99e9}])
+        self.assertEqual(selected[0]["a_code"], "688981.SH")
+        self.assertEqual(selected[0]["selection_basis"], "A股近20日平均成交额")
+
+    def test_section_has_both_markets_and_sidecar_dedupes_company(self):
+        bars = self.bars()
+        selected = [
+            {"sector_code": "881121.TI", "sector_name": "半导体", "status": "ok",
+             "name": "中芯国际", "a_code": "688981.SH", "h_code": "hk00981"},
+            {"sector_code": "881123.TI", "sector_name": "其他电子", "status": "ok",
+             "name": "中芯国际", "a_code": "688981.SH", "h_code": "hk00981"},
+        ]
+        section = ah_leaders.build_section(
+            [(r["sector_code"], r["sector_name"]) for r in selected], selected,
+            {"688981.SH": bars}, {"hk00981": bars},
+            market_rows=[{"thscode": "688981.SH", "last_price": 100}],
+            hk_rows=[{"thscode": "hk00981", "last_price": 20}])
+        self.assertEqual(section["coverage"]["matched"], 2)
+        self.assertEqual(section["coverage"]["companies"], 1)
+        self.assertLessEqual(len(section["rows"][0]["a"]["weekly"]), 26)
+        sidecar = ah_leaders.sidecar_companies(
+            section, {"688981.SH": bars}, {"hk00981": bars})
+        self.assertEqual(list(sidecar), ["688981.SH"])
+        self.assertEqual(len(sidecar["688981.SH"]["a"]), 130)
+
+    def test_build_preserves_previous_leaders_on_subsource_collapse(self):
+        payload = BuildTest()._payload()
+        bars = self.bars()
+        selected = [{"sector_code": "881121.TI", "sector_name": "半导体", "status": "ok",
+                     "name": "中芯国际", "a_code": "688981.SH", "h_code": "hk00981"}]
+        payload["ah_leaders"] = ah_leaders.build_section(
+            [("881121.TI", "半导体")], selected,
+            {"688981.SH": bars}, {"hk00981": bars})
+        payload["ah_leader_history"] = ah_leaders.sidecar_companies(
+            payload["ah_leaders"], {"688981.SH": bars}, {"hk00981": bars})
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "site"
+            source = Path(tmp) / "good.json"
+            source.write_text(json.dumps(payload), encoding="utf-8")
+            build_stocks.build(source, out)
+            old_sidecar = (out / "stocks-leaders.json").read_text(encoding="utf-8")
+
+            failed = BuildTest()._payload()
+            failed["ah_leaders"] = ah_leaders.build_section(
+                [("881121.TI", "半导体")],
+                [{"sector_code": "881121.TI", "sector_name": "半导体",
+                  "status": "no_match", "reason": "临时无行情"}], {}, {},
+                errors=["腾讯行情临时失败"])
+            failed["ah_leader_history"] = {}
+            source.write_text(json.dumps(failed), encoding="utf-8")
+            rebuilt = build_stocks.build(source, out)
+            self.assertEqual(rebuilt["ah_leaders"]["coverage"]["matched"], 1)
+            self.assertEqual((out / "stocks-leaders.json").read_text(encoding="utf-8"),
+                             old_sidecar)
+            self.assertIn("沿用上一份", (out / "stocks.txt").read_text(encoding="utf-8"))
+
+    def test_build_preserves_previous_leaders_when_h_history_collapses(self):
+        payload = BuildTest()._payload()
+        bars = self.bars()
+        selected = [{"sector_code": "881121.TI", "sector_name": "半导体", "status": "ok",
+                     "name": "中芯国际", "a_code": "688981.SH", "h_code": "hk00981"}]
+        payload["ah_leaders"] = ah_leaders.build_section(
+            [("881121.TI", "半导体")], selected,
+            {"688981.SH": bars}, {"hk00981": bars})
+        payload["ah_leader_history"] = ah_leaders.sidecar_companies(
+            payload["ah_leaders"], {"688981.SH": bars}, {"hk00981": bars})
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "site"
+            source = Path(tmp) / "data.json"
+            source.write_text(json.dumps(payload), encoding="utf-8")
+            build_stocks.build(source, out)
+            old_sidecar = (out / "stocks-leaders.json").read_text(encoding="utf-8")
+
+            failed = BuildTest()._payload()
+            failed["ah_leaders"] = ah_leaders.build_section(
+                [("881121.TI", "半导体")], selected,
+                {"688981.SH": bars}, {}, errors=["港股半年 K 线全部失败"])
+            failed["ah_leader_history"] = ah_leaders.sidecar_companies(
+                failed["ah_leaders"], {"688981.SH": bars}, {})
+            source.write_text(json.dumps(failed), encoding="utf-8")
+            rebuilt = build_stocks.build(source, out)
+            self.assertEqual(
+                rebuilt["ah_leaders"]["rows"][0]["h"]["metrics"]["bars"], 130)
+            self.assertEqual((out / "stocks-leaders.json").read_text(encoding="utf-8"),
+                             old_sidecar)
+            self.assertIn("沿用上一份", (out / "stocks.txt").read_text(encoding="utf-8"))
+
+    def test_build_writes_daily_sidecar_and_all_three_views(self):
+        payload = BuildTest()._payload()
+        bars = self.bars()
+        selected = [{"sector_code": "881121.TI", "sector_name": "半导体", "status": "ok",
+                     "name": "中芯国际", "a_code": "688981.SH", "h_code": "hk00981",
+                     "selection_basis": "A股近20日平均成交额"},
+                    {"sector_code": "881178.TI", "sector_name": "教育",
+                     "status": "no_match", "reason": "当前成分股中没有可验证的 A/H 同公司"}]
+        payload["ah_leaders"] = ah_leaders.build_section(
+            [("881121.TI", "半导体"), ("881178.TI", "教育")], selected,
+            {"688981.SH": bars}, {"hk00981": bars},
+            market_rows=[{"thscode": "688981.SH", "last_price": 100}],
+            hk_rows=[{"thscode": "hk00981", "last_price": 20}])
+        payload["ah_leader_history"] = ah_leaders.sidecar_companies(
+            payload["ah_leaders"], {"688981.SH": bars}, {"hk00981": bars})
+        with tempfile.TemporaryDirectory() as tmp:
+            source = Path(tmp) / "in.json"
+            source.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
+            out = Path(tmp) / "site"
+            data = build_stocks.build(source, out)
+            self.assertEqual(build_stocks.check(out), [])
+            self.assertEqual(data["leader_history"], "stocks-leaders.json")
+            daily = json.loads((out / "stocks-leaders.json").read_text(encoding="utf-8"))
+            self.assertEqual(len(daily["companies"]["688981.SH"]["a"]), 130)
+            self.assertIn("【A/H 龙头半年量价】", (out / "stocks.txt").read_text(encoding="utf-8"))
+            self.assertIn("function ahLeaderSection", (out / "stocks.html").read_text(encoding="utf-8"))
+            import zipfile
+            with zipfile.ZipFile(out / "stocks.epub") as zf:
+                chapter = zf.read("OEBPS/chapter.xhtml").decode("utf-8")
+            self.assertIn("A/H 龙头半年量价", chapter)
+            self.assertIn("暂无可验证", chapter)
+
+
 class HkTest(unittest.TestCase):
     def test_parse_lines(self):
         import fetch_hk
@@ -1069,6 +1273,51 @@ class HkTest(unittest.TestCase):
         self.assertEqual(payload["rows"], [])
         self.assertTrue(payload["errors"])
 
+    def test_large_quote_universe_is_chunked_at_fifty(self):
+        import fetch_hk
+        calls = []
+        codes = [f"hk{i:05d}" for i in range(1, 52)]
+        def fake_fetch(url, headers, timeout):
+            calls.append(url)
+            batch = url.split("q=", 1)[1].split(",")
+            return "".join(_tencent_line(
+                code, code, 10, 9, 9.5, 10.2, 9.4, 1, 1, 1000)
+                for code in batch).encode("gbk")
+        payload = fetch_hk.fetch_payload(codes=codes, indices=[], stocks=[],
+                                         fetch=fake_fetch)
+        self.assertEqual(len(calls), 2)
+        self.assertEqual(len(payload["rows"]), 51)
+        self.assertEqual(payload["errors"], [])
+
+    def test_hk_half_year_history_parses_ohlcv_and_turnover(self):
+        import fetch_hk
+        body = {"code": 0, "data": {"hk00981": {"qfqday": [
+            ["2026-11-20", "20", "21", "22", "19", "1000", "", "1.2", "3.5"],
+            ["2026-11-21", "21", "22", "23", "20", "1200", "", "1.3", "4.0"],
+        ]}}}
+        bars = fetch_hk.parse_history_response(json.dumps(body).encode(), "hk00981")
+        self.assertEqual(len(bars), 2)
+        self.assertEqual(bars[0][ah_leaders.CLOSE], 21)
+        self.assertEqual(bars[0][ah_leaders.VOLUME], 1000)
+        self.assertEqual(bars[0][ah_leaders.TURNOVER], 35000)
+
+        def fake_fetch(url, headers, timeout):
+            return json.dumps(body).encode()
+        history, errors = fetch_hk.fetch_history(
+            ["hk00981"], days=130, fetch=fake_fetch, sleep=lambda s: None, workers=1)
+        self.assertEqual(errors, [])
+        self.assertEqual(len(history["hk00981"]), 2)
+
+    def test_dynamic_ah_name_list_parses_jsonp(self):
+        import fetch_hk
+        response = ('list_data={"data":{"page_count":1,"page_data":'
+                    '[["00981~中芯国际~1"],["03750~宁德时代~1"]]}};').encode("gbk")
+        names, errors = fetch_hk.fetch_ah_names(
+            fetch=lambda url, headers, timeout: response, sleep=lambda s: None)
+        self.assertEqual(errors, [])
+        self.assertEqual(names["hk00981"], "中芯国际")
+        self.assertEqual(names["hk03750"], "宁德时代")
+
 
 class WatchlistTest(unittest.TestCase):
     def test_codes_well_formed_and_unique(self):
@@ -1096,6 +1345,15 @@ class WatchlistTest(unittest.TestCase):
         self.assertEqual(len(mw.HK_STOCKS), 20)
         for code, name in mw.HK_INDICES + mw.HK_STOCKS:
             self.assertRegex(code, r"^hk[0-9A-Z]+$", name)
+
+    def test_ah_pairs_are_well_formed_unique_and_include_smic(self):
+        import market_watchlist as mw
+        self.assertGreater(len(mw.AH_PAIRS), 100)
+        self.assertEqual(len(mw.AH_PAIRS), len({a for a, _ in mw.AH_PAIRS}))
+        for a_code, h_code in mw.AH_PAIRS:
+            self.assertRegex(a_code, r"^\d{6}\.(SH|SZ)$")
+            self.assertRegex(h_code, r"^hk\d{5}$")
+        self.assertIn(("688981.SH", "hk00981"), mw.AH_PAIRS)
 
 
 class SectorClassificationTest(unittest.TestCase):
