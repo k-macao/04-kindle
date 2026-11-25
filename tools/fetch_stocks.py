@@ -59,6 +59,7 @@ from urllib.request import Request, urlopen
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import ah_leaders  # noqa: E402
+import ew_sdm  # noqa: E402
 import market_watchlist  # noqa: E402
 import sector_rrg  # noqa: E402
 
@@ -469,6 +470,27 @@ def build_rrg(client, rows, days=340, cache_minutes=60, top_n=6, preset_key="",
     return section, notes + more
 
 
+def build_ew_sdm(client, sectors, market_rows, limit_pool, members_cache=None,
+                 pool_size=0, market_limit_up=None, as_of=""):
+    """全 A 快照 + 涨停池 + 行业成分股 → EW-SDM 段落（见 ``tools/ew_sdm.py``）。
+
+    成分股走 ``fetch_sector_members`` 的 7 天落盘缓存（与 A/H 龙头共用同一份），
+    缓存过期时才逐个板块请求；失败的板块会写进段落的 notes。
+    """
+    members, errors = fetch_sector_members(client, sectors, cache_path=members_cache)
+    quotes = ew_sdm.quotes_from_market(market_rows, _num)
+    limits = ew_sdm.limits_from_pool(limit_pool)
+    member_codes = {m.get("thscode") for code, _ in sectors
+                    for m in (members.get(code) or []) if isinstance(m, dict)}
+    priced = sum(1 for code in member_codes if code in quotes)
+    notes = ew_sdm.build_notes(pool_size, market_limit_up, priced, len(member_codes))
+    if errors:
+        notes.append("成分股未更新，沿用缓存：" + "；".join(errors[:3]))
+    return ew_sdm.build_section(
+        sectors, members, quotes, limits, as_of=as_of, pool_size=pool_size,
+        market_limit_up=market_limit_up, notes=notes)
+
+
 def build_cross(payload, as_of=None, why=""):
     """单日横截面读数（RRG 的降级口径）。返回 (section | None, notes)。"""
     return sector_rrg.build_cross_section(
@@ -823,14 +845,20 @@ def run_once(args, client):
         except Exception as exc:  # noqa: BLE001 龙头段失败不该挡住指数/市场面板
             payload["errors"].append(f"A/H 龙头段未生成：{exc}")
 
-    # 4) 涨停池（情绪面，失败不挡主行情）
+    # 4) 涨停池（情绪面，失败不挡主行情）。EW-SDM 要的连板数需要覆盖市场全部
+    #    涨停，所以池子多取一些；面板上的涨停表仍只显示前 limit_up_size 只。
+    limit_pool = []
+    ew_enabled = not getattr(args, "no_ew_sdm", False)
     if not args.no_limit_up and args.limit_up_size:
+        pool_size = max(args.limit_up_size,
+                        getattr(args, "ew_pool_size", 0) if ew_enabled else 0)
         try:
             data = client.get("/api/a-share/special-data/limit-up-pool", {
-                "page": 1, "size": args.limit_up_size,
+                "page": 1, "size": pool_size,
                 "sort_field": "limit_up_time", "sort_dir": "desc"})
-            payload["limit_up"] = [r for r in (
+            limit_pool = [r for r in (
                 normalize_limit_up(e) for e in data.get("item") or []) if r]
+            payload["limit_up"] = limit_pool[:args.limit_up_size]
         except ThsError as exc:
             payload["errors"].append(f"涨停池失败：{exc}")
 
@@ -865,6 +893,20 @@ def run_once(args, client):
                 payload["errors"].append(
                     "板块轮动 RRG 未生成：" + ("；".join(notes) or "未知原因"))
                 payload["errors"].extend(cross_notes)
+
+    # 4b) 板块情绪 EW-SDM（单日横截面，用本轮全 A 快照 + 涨停池 + 成分股缓存）。
+    #     独立失败：情绪段挂了不挡指数、RRG 与港股。
+    if ew_enabled and market_rows:
+        try:
+            payload["ew_sdm"] = build_ew_sdm(
+                client, list(market_watchlist.SECTORS), market_rows, limit_pool,
+                members_cache=getattr(args, "ah_members_cache", "site/ah_sector_members.json"),
+                pool_size=(len(limit_pool) if limit_pool else 0),
+                market_limit_up=(payload.get("market") or {}).get("limit_up"),
+                as_of=(sector_rrg.beijing_day(payload["index_timestamp"])
+                       if isinstance(payload.get("index_timestamp"), (int, float)) else ""))
+        except Exception as exc:  # noqa: BLE001 情绪段失败不该挡住其余段落
+            payload["errors"].append(f"板块情绪 EW-SDM 未生成：{exc}")
 
     # 5) 港股（腾讯源，独立失败，不拖垮 A 股）
     if not args.no_hk:
@@ -939,6 +981,10 @@ def main(argv=None):
                         help="卡片迷你走势图取最近几根日 K（0=不取）")
     parser.add_argument("--no-rrg", action="store_true",
                         help="不算板块轮动 RRG（省掉板块长期日 K 的 10 次批量请求）")
+    parser.add_argument("--no-ew-sdm", action="store_true",
+                        help="不算板块情绪 EW-SDM（默认算，用全 A 快照 + 涨停池）")
+    parser.add_argument("--ew-pool-size", type=int, default=ew_sdm.DEFAULT_POOL_SIZE,
+                        help="EW-SDM 用的涨停池大小（需覆盖市场涨停，默认 100）")
     parser.add_argument("--rrg-days", type=int, default=340,
                         help="RRG 用的板块日 K 根数（研报口径 220/60/20 需 319 根）")
     parser.add_argument("--rrg-cache-minutes", type=float, default=60,

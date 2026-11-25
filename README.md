@@ -176,6 +176,12 @@ warm-up 行数也照它的算法说明核过；参数默认研报口径 220/60/2
 并在面板上写明。清单在 `tools/market_watchlist.py`，详见
 [docs/kindle-stocks.md](docs/kindle-stocks.md)。
 
+板块情绪 **EW-SDM**（单日横截面）：策略来自
+[autumn-go/strategy-factor-dashboard](https://github.com/autumn-go/strategy-factor-dashboard)
+的 `ews_engine.py`，用本轮全 A 快照、涨停池和成分股算每个板块的「涨跌幅 × 情绪 × 连板杠杆」，
+实现在 `tools/ew_sdm.py`；没有炸板数据，所以负反馈规则不生效。详见
+[docs/kindle-stocks.md](docs/kindle-stocks.md) 第 6b 节。
+
 ### 结果卡 · 量价分析 · 四工具数据
 
 面板首屏只放结果卡，不再铺方法说明：**市场状态、量价结论、真承接、派发预警、强弱结果、

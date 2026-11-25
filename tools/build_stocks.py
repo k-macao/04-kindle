@@ -41,6 +41,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import ah_leaders  # noqa: E402
+import ew_sdm  # noqa: E402
 import jrglobal_radar  # noqa: E402
 import sector_rrg  # noqa: E402
 
@@ -1162,6 +1163,8 @@ def manifest(payload, generated, view=None):
         "limit_up": payload.get("limit_up") or [],
         # 板块轮动整段进清单（网页要自己画四象限图；Kindle 只用文字与表格）
         "rrg": rrg_part or None,
+        # 板块情绪 EW-SDM（单日横截面，见 tools/ew_sdm.py）；没算出来就是 null。
+        "ew_sdm": payload.get("ew_sdm") or None,
         # 日 K 不够时的兼容段；量价结果则无论有没有 RRG 都独立输出。
         "cross": cross_part or None,
         "volume_price": volume_part or None,
@@ -1239,6 +1242,12 @@ def render_txt(payload, generated, brief=None):
     section = rrg_section(payload)
     if section:
         lines.extend(render_rrg_text(section, brief=brief))
+        lines.append("")
+
+    # 板块情绪 EW-SDM（单日横截面）：紧跟 RRG，周末精简版只留强弱各 3 行。
+    ew_part = payload.get("ew_sdm")
+    if ew_part:
+        lines.extend(ew_sdm.render_text_lines(ew_part, limit=3 if brief else 6))
         lines.append("")
 
     # Jovian Research (jrglobal.xyz/tools/) 聪明钱雷达 + AI 数据智库 + 组合实验室
@@ -2288,6 +2297,25 @@ def render_epub_xhtml(payload, generated_bj, brief=None):
                     f"<td>{esc(fmt_ratio(row.get('today_pct')))}</td></tr>"
                 )
             parts.append("</table>")
+
+    # 板块情绪 EW-SDM：强 / 弱各取 6 个（与纯文本同口径），口径说明放在表下。
+    ew_part = payload.get("ew_sdm")
+    ok_rows = [r for r in (ew_part or {}).get("rows") or [] if r.get("status") == "ok"]
+    if ok_rows:
+        parts.append(f"<h2>板块情绪 · EW-SDM（共 {len(ok_rows)} 个板块）</h2>")
+        parts.append('<table class="card"><tr><th>板块</th><th>分</th><th>涨跌</th>'
+                     '<th>情绪</th><th>连板</th></tr>')
+        shown = ok_rows[:6] + [r for r in ok_rows[::-1][:6] if r not in ok_rows[:6]]
+        for row in shown:
+            parts.append(
+                f"<tr><td>{esc(row.get('name'))}</td>"
+                f"<td>{row.get('final_score', 0):+.2f}</td>"
+                f"<td>{esc(fmt_ratio(row.get('momentum')))}</td>"
+                f"<td>{row.get('emotion_diff', 0):.2f}</td>"
+                f"<td>{row.get('max_streak') or '--'}</td></tr>")
+        parts.append("</table>")
+        for note in ew_part.get("notes") or []:
+            parts.append(f'<p class="meta">{esc(note)}</p>')
 
 
     for error in payload.get("errors") or []:
