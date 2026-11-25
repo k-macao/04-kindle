@@ -561,6 +561,252 @@ def radar_section(payload):
     return jrglobal_radar.cross_verify_panel(payload, snapshot=snap)
 
 
+# 风险开关不是收益承诺，而是把「该不该开新仓」放在选板块之前。仓位上限是保守的
+# 纪律模板，不知道用户资金、回撤承受力时绝不能输出满仓/梭哈式指令。
+RISK_POSITION_CAP = {"attack": 60, "neutral": 30, "defense": 10}
+OPPORTUNITY_LIMIT = 5
+
+
+def _finite(value):
+    """有限浮点数；bool 不是行情数字。"""
+    if value is None or isinstance(value, bool):
+        return None
+    try:
+        number = float(value)
+    except (TypeError, ValueError):
+        return None
+    return number if number == number and abs(number) != float("inf") else None
+
+
+def _percentile(value, values):
+    """0–1 横截面百分位；同值取中间名次，避免代码顺序影响分数。"""
+    value = _finite(value)
+    ordered = sorted(v for v in (_finite(item) for item in values) if v is not None)
+    if value is None or not ordered:
+        return 0.0
+    if len(ordered) == 1:
+        return 0.5
+    lower = sum(1 for item in ordered if item < value)
+    equal = sum(1 for item in ordered if item == value)
+    return (lower + (equal - 1) / 2.0) / (len(ordered) - 1)
+
+
+def _trail_persistence(row):
+    """RRG 最近轨迹中位于领先/改善象限的点数与总点数。"""
+    quadrants = []
+    for point in row.get("trail") or []:
+        if not isinstance(point, (list, tuple)) or len(point) < 2:
+            continue
+        ratio, momentum = _finite(point[0]), _finite(point[1])
+        if ratio is None or momentum is None:
+            continue
+        quadrant = sector_rrg.quadrant_of(ratio, momentum)
+        if quadrant is not None:
+            quadrants.append(quadrant)
+    favourable = sum(1 for quadrant in quadrants if quadrant in (1, 2))
+    return favourable, len(quadrants)
+
+
+def _opportunity_pool(rrg, volume, risk):
+    """从 RRG 持续性、相对强度、当日量价确认中选 3–5 个观察方向。
+
+    只写「重点观察/等待确认/仅观察」，不把板块指数伪装成可直接成交的买入指令。
+    RRG 缺失时退到单日抗跌榜，并明确标低置信度，避免把一天涨幅当趋势。
+    """
+    rows = list((rrg or {}).get("rows") or [])
+    support = {row.get("name"): row for row in
+               ((volume.get("intraday") or {}).get("true_support") or [])}
+    fades = {row.get("name"): row for row in
+             ((volume.get("intraday") or {}).get("fade_warning") or [])}
+    opportunities = []
+
+    if rows:
+        ratio_values = [row.get("rs_ratio") for row in rows]
+        momentum_values = [row.get("rs_mom") for row in rows]
+        pct_values = [row.get("today_pct") for row in rows]
+        for row in rows:
+            quadrant = row.get("quadrant")
+            if quadrant not in (1, 2):
+                continue
+            name = row.get("name") or row.get("thscode") or ""
+            favourable, trail_total = _trail_persistence(row)
+            persist_ratio = favourable / trail_total if trail_total else 0.0
+            score = 30 if quadrant == 1 else 22
+            score += 20 * _percentile(row.get("rs_ratio"), ratio_values)
+            score += 15 * _percentile(row.get("rs_mom"), momentum_values)
+            score += 15 * persist_ratio
+            previous = row.get("prev_quadrant")
+            if quadrant == 1 and previous not in (1, None):
+                transition = "新进领先"
+                score += 10
+            elif quadrant == 1:
+                transition = "保持领先"
+                score += 6
+            elif previous not in (2, None):
+                transition = "新进改善"
+                score += 5
+            else:
+                transition = "保持改善"
+                score += 3
+            score += 10 * _percentile(row.get("today_pct"), pct_values)
+
+            reasons = [f"{row.get('quadrant_name') or ('领先' if quadrant == 1 else '改善')}象限",
+                       transition]
+            if trail_total:
+                reasons.append(f"近{trail_total}期有{favourable}期位于领先/改善")
+            if name in support:
+                score += 8
+                reasons.append("日内真承接")
+            risks = []
+            if name in fades:
+                score -= 18
+                risks.append(fades[name].get("tag") or "冲高回落")
+            today_pct = _finite(row.get("today_pct"))
+            if today_pct is not None and today_pct >= 4:
+                score -= 10
+                risks.append("当日涨幅偏大，避免追高")
+            elif today_pct is not None and today_pct >= 2.5:
+                score -= 5
+                risks.append("短线升温，等待回落确认")
+
+            if risk.get("mode") == "defense":
+                status = "仅观察"
+            elif name in fades:
+                status = "等待确认"
+            elif today_pct is not None and today_pct >= 3:
+                status = "等待回落"
+            elif quadrant == 2:
+                status = "改善观察"
+            else:
+                status = "重点观察"
+            invalidation = ("退出领先象限或 RS-Mom 跌破 100" if quadrant == 1
+                            else "动量重新跌破 100 或转入滞后")
+            opportunities.append({
+                "thscode": row.get("thscode"),
+                "name": name,
+                "score": max(0, min(100, int(round(score)))),
+                "status": status,
+                "role": ("新进领先" if quadrant == 1 and previous not in (1, None)
+                         else ("持续领先" if quadrant == 1 else "改善候选")),
+                "quadrant": row.get("quadrant_name") or ("领先" if quadrant == 1 else "改善"),
+                "today_pct": today_pct,
+                "rs_ratio": _finite(row.get("rs_ratio")),
+                "rs_mom": _finite(row.get("rs_mom")),
+                "persistence": {"favourable": favourable, "samples": trail_total},
+                "reasons": reasons[:4],
+                "risks": risks,
+                "invalidation": invalidation,
+                "confidence": "中期+当日" if trail_total >= 3 else "中期",
+            })
+        opportunities.sort(key=lambda row: (-row["score"], row["name"]))
+        # 机会池同时保留「已经领先」和「正在改善」：全取老主线会稳定但太迟，
+        # 全取改善又容易抄底。3 个领先 + 2 个改善是观察结构，不是仓位分配。
+        leaders = [row for row in opportunities if row.get("quadrant") == "领先"][:3]
+        improving = [row for row in opportunities if row.get("quadrant") == "改善"][:2]
+        selected = leaders + improving
+        selected_codes = {row.get("thscode") for row in selected}
+        for row in opportunities:
+            if len(selected) >= OPPORTUNITY_LIMIT:
+                break
+            if row.get("thscode") not in selected_codes:
+                selected.append(row)
+                selected_codes.add(row.get("thscode"))
+        opportunities = sorted(selected, key=lambda row: (-row["score"], row["name"]))
+    else:
+        # 没有长期日 K 时不装作知道趋势，只给单日相对抗跌线索。
+        for index, row in enumerate((volume.get("winners") or [])[:OPPORTUNITY_LIMIT]):
+            name = row.get("name") or row.get("thscode") or ""
+            pct = _finite(row.get("today_pct"))
+            opportunities.append({
+                "thscode": row.get("thscode"), "name": name,
+                "score": max(0, 50 - index * 4 + (6 if name in support else 0)
+                             - (12 if name in fades else 0)),
+                "status": "仅观察" if risk.get("mode") == "defense" else "等待历史确认",
+                "role": "单日线索",
+                "quadrant": "单日相对强势", "today_pct": pct,
+                "rs_ratio": None, "rs_mom": None,
+                "persistence": {"favourable": 0, "samples": 0},
+                "reasons": ["单日相对抗跌", "缺少可用 RRG 历史"],
+                "risks": ["一天涨跌不能证明趋势"],
+                "invalidation": "下一交易日跌出相对强势前列",
+                "confidence": "低",
+            })
+    for rank, row in enumerate(opportunities[:OPPORTUNITY_LIMIT], 1):
+        row["rank"] = rank
+    return opportunities[:OPPORTUNITY_LIMIT]
+
+
+def decision_section(payload):
+    """风险开关 + 板块机会池，供 JSON/TXT/HTML/EPUB 四端共用。"""
+    volume = volume_price_section(payload)
+    rrg = rrg_section(payload)
+    sentiment = volume.get("sentiment") or {}
+    sentiment_score = _finite(sentiment.get("score"))
+    sentiment_score = 50.0 if sentiment_score is None else sentiment_score
+
+    counts = (rrg.get("counts") or {}) if rrg else {}
+    total = sum(int(counts.get(key) or 0)
+                for key in ("leading", "improving", "weakening", "lagging"))
+    if total:
+        trend_score = 100.0 * (
+            (counts.get("leading") or 0)
+            + 0.65 * (counts.get("improving") or 0)
+            + 0.35 * (counts.get("weakening") or 0)) / total
+        score = 0.70 * sentiment_score + 0.30 * trend_score
+    else:
+        trend_score = None
+        score = sentiment_score
+
+    market = volume.get("market") or {}
+    limit_up, limit_down = market.get("limit_up"), market.get("limit_down")
+    reasons = [f"盘面情绪 {int(round(sentiment_score))}/100 · {sentiment.get('level') or '未知'}"]
+    if total:
+        favourable = (counts.get("leading") or 0) + (counts.get("improving") or 0)
+        reasons.append(f"RRG 领先/改善 {favourable}/{total}")
+    else:
+        reasons.append("RRG 历史不足，风险分只用当日盘面")
+    up, down = market.get("up"), market.get("down")
+    if isinstance(up, (int, float)) and isinstance(down, (int, float)):
+        reasons.append(f"全 A 上涨/下跌 {int(up)}/{int(down)}")
+    if (isinstance(limit_up, (int, float)) and isinstance(limit_down, (int, float))
+            and limit_down >= max(10, limit_up * 1.5)):
+        score -= 8
+        reasons.append(f"跌停 {int(limit_down)} 显著多于涨停 {int(limit_up)}")
+    fades = ((volume.get("intraday") or {}).get("fade_warning") or [])
+    if len(fades) >= 3:
+        score -= 5
+        reasons.append(f"{len(fades)} 个板块出现派发警告")
+    score = max(0, min(100, int(round(score))))
+
+    if score >= 65:
+        mode, label, stance = "attack", "进攻", "可分批试仓，只参与最强方向"
+    elif score >= 45:
+        mode, label, stance = "neutral", "中性", "只看最强方向，小仓等待确认"
+    else:
+        mode, label, stance = "defense", "防守", "不开新方向，只观察并管理已有风险"
+    cap = RISK_POSITION_CAP[mode]
+    if sentiment_score >= 80 and mode == "attack":
+        cap = min(cap, 45)
+        stance = "盘面过热：保持进攻观察，但不追高"
+        reasons.append("情绪过热，仓位上限主动下调")
+
+    risk = {
+        "mode": mode, "label": label, "score": score,
+        "max_position_pct": cap, "stance": stance,
+        "reasons": reasons[:5],
+        "single_trade_risk_pct": 0.5,
+        "note": "仓位是通用纪律模板，不是个性化投资建议",
+    }
+    return {
+        "version": "risk-sector-v1",
+        "as_of": volume.get("as_of") or rrg.get("as_of"),
+        "risk": risk,
+        "opportunities": _opportunity_pool(rrg, volume, risk),
+        "method": "当日市场宽度/涨跌停/收盘位置 + RRG 相对强度与持续性",
+        "note": "机会池是观察顺序，不是买入指令；板块指数不可直接成交",
+    }
+
+
 def _wrap_display(text, width=48, indent="  "):
     """按显示宽度折行（CJK 算 2 列），Kindle 上不会被截断。
 
@@ -619,6 +865,40 @@ def _first_sentences(items, limit=BRIEF_NARRATIVE_LINES):
         if sentence:
             picked.append(sentence + "。")
     return picked
+
+
+def render_decision_text(section, brief=None):
+    """风险开关与机会池的纯文本版；仓位明确写成纪律上限而非收益承诺。"""
+    risk = section.get("risk") or {}
+    lines = [
+        f"【风险开关】{risk.get('label') or '—'} {risk.get('score', '—')}/100"
+        f" · 纪律仓位≤{risk.get('max_position_pct', 0)}%",
+    ]
+    lines.extend(_wrap_display(f"[行动] {risk.get('stance') or '仅观察'}",
+                               width=46, indent="  "))
+    reasons = risk.get("reasons") or []
+    if reasons:
+        lines.extend(_wrap_display("[依据] " + " · ".join(reasons[:3 if brief else 5]),
+                                   width=46, indent="  "))
+    lines.append(f"  [纪律] 单笔风险≤{risk.get('single_trade_risk_pct', 0.5):g}% · 仓位上限不是满仓目标")
+
+    opportunities = section.get("opportunities") or []
+    lines.append(f"【板块机会池】{len(opportunities)} 个 · 观察顺序，不是买入指令")
+    for row in opportunities[:3 if brief else OPPORTUNITY_LIMIT]:
+        pct = fmt_ratio(row.get("today_pct"))
+        lines.append(
+            f"  {row.get('rank')}. {row.get('name')} {row.get('score')}/100"
+            f" · {row.get('role') or row.get('status')} · {row.get('status')} · 今日{pct}"
+        )
+        detail = " / ".join((row.get("reasons") or [])[:3])
+        if row.get("risks"):
+            detail += (" · 风险 " if detail else "风险 ") + "、".join(row["risks"][:2])
+        if detail:
+            lines.extend(_wrap_display(detail, width=44, indent="    "))
+        if not brief:
+            lines.extend(_wrap_display("失效：" + (row.get("invalidation") or "强势条件消失"),
+                                       width=44, indent="    "))
+    return lines
 
 
 def render_rrg_text(section, brief=None):
@@ -723,6 +1003,7 @@ def data_hash(payload, view=None):
     rrg_part, cross_part = final_sections(payload)
     volume_part = volume_price_section(payload)
     radar_part = radar_section(payload)
+    decision_part = decision_section(payload)
     mode = (view.get("mode") if isinstance(view, dict)
             else ("brief" if view == "brief" else "full"))
     core = {
@@ -755,6 +1036,12 @@ def data_hash(payload, view=None):
         # 四工具快照也会独立更新；只看行情价格会把「持仓/AI/月报/组合已更新」误判成无变化。
         # stock_index 是由持仓与共识派生出的冗余索引，排除它以缩短 hash 输入。
         "radar": {key: value for key, value in radar_part.items() if key != "stock_index"},
+        "decision": {
+            "risk": [(decision_part.get("risk") or {}).get(key) for key in
+                     ("mode", "score", "max_position_pct")],
+            "opportunities": [(row.get("thscode"), row.get("score"), row.get("status"))
+                              for row in decision_part.get("opportunities") or []],
+        },
         "data_timestamp": payload.get("data_timestamp"),
     }
     raw = json.dumps(core, ensure_ascii=False, sort_keys=True)
@@ -764,6 +1051,7 @@ def data_hash(payload, view=None):
 def manifest(payload, generated, view=None):
     rrg_part, cross_part = final_sections(payload)
     volume_part = volume_price_section(payload)
+    decision_part = decision_section(payload)
     if isinstance(view, dict):
         brief = view
     else:
@@ -808,6 +1096,8 @@ def manifest(payload, generated, view=None):
         # 日 K 不够时的兼容段；量价结果则无论有没有 RRG 都独立输出。
         "cross": cross_part or None,
         "volume_price": volume_part or None,
+        # 风险开关与观察池和三端正文同源，设备只拉 JSON 也能直接读取。
+        "decision": decision_part,
         # Jovian Research (jrglobal.xyz/tools/) 聪明钱雷达 + AI 数据智库 + 组合实验室
         "radar": radar_section(payload),
         "history": payload.get("history") or {},
@@ -858,7 +1148,10 @@ def render_txt(payload, generated, brief=None):
         lines.append(brief_banner(brief, len(sector_indices(payload))))
     lines.append("")
 
-    # 结果优先：量价卡始终显示；有长期日 K 时再补 RRG，不再输出大段方法说明。
+    # 结果优先：先给「该不该开新风险」和少量观察方向，再给量价证据与 RRG。
+    decision = decision_section(payload)
+    lines.extend(render_decision_text(decision, brief=brief))
+    lines.append("")
     volume = volume_price_section(payload)
     if volume:
         lines.extend(render_cross_text(volume, brief=brief))
@@ -1330,6 +1623,24 @@ var h='<div class="result-card"><div class="label">'+esc(label)+'</div>'+
 (rows||[]).forEach(function(row){
 h+='<div class="metric"><span>'+esc(row[0])+'</span><span class="'+esc(row[2]||'')+'">'+esc(row[1])+'</span></div>';});
 return h+'</div>';}
+function decisionSection(d,brief){
+if(!d||!d.risk)return '';
+var risk=d.risk||{},ops=d.opportunities||[];
+var h='<section class="result-section"><h2>风险开关与板块机会池<span class="muted"> '+esc(d.as_of||'')+'</span></h2>';
+var reasonRows=(risk.reasons||[]).slice(0,brief?3:5).map(function(x){return ['依据',x];});
+h+='<div class="result-grid">';
+h+=resultCard('风险开关',(risk.label||'--')+' '+(risk.score==null?'--':risk.score)+'/100',
+'纪律仓位 ≤ '+(risk.max_position_pct||0)+'% · '+(risk.stance||''),reasonRows,
+risk.mode==='defense'?'down':(risk.mode==='attack'?'up':''));
+ops.slice(0,brief?3:5).forEach(function(o){
+var rows=[['状态',o.status||'仅观察'],['今日',ratio(o.today_pct)],
+['失效',o.invalidation||'强势条件消失']];
+if(o.risks&&o.risks.length)rows.push(['风险',o.risks.join('、'),'down']);
+h+=resultCard('#'+o.rank+' · '+o.name,(o.score||0)+'/100 · '+(o.role||o.quadrant||''),
+(o.reasons||[]).slice(0,3).join(' · '),rows,o.status==='仅观察'?'down':'');});
+h+='</div><p class="src">机会池是观察顺序，不是买入指令；仓位为通用纪律上限，单笔风险模板 ≤ '+
+Number(risk.single_trade_risk_pct||0.5).toFixed(1)+'%。</p></section>';
+return h;}
 function volumeVerdict(flow){
 var a=flow.top_avg,b=flow.tail_avg;
 if(typeof a!=='number'||typeof b!=='number')return '量价数据不足';
@@ -1440,7 +1751,8 @@ return resultCard('持仓结果',item.name,(item.code||'')+' · '+(item.sector||
 function render(d){
 var h='';
 var brief=!!(d.view&&d.view.mode==='brief');
-// 结果置顶：先看量价与关键数据卡，再往下查行情明细。
+// 结果置顶：先决定能不能开新风险，再看量价证据和行情明细。
+if(d.decision&&d.decision.risk)h+=decisionSection(d.decision,brief);
 if(d.volume_price&&d.volume_price.counts)h+=crossSection(d.volume_price,brief);
 else if(d.cross&&d.cross.counts)h+=crossSection(d.cross,brief);
 if(d.radar)h+=radarSection(d.radar,brief);
@@ -1564,6 +1876,31 @@ def render_epub_xhtml(payload, generated_bj, brief=None):
     if not today_has_values(payload):
         parts.append('<p class="meta">注：这一版快照没有成交数据（开盘前/接口给空壳），'
                      '下面显示 -- 与「未成交」，下一轮再看。</p>')
+
+    decision = decision_section(payload)
+    risk = decision.get("risk") or {}
+    parts.append(f"<h2>风险开关与板块机会池（{esc(decision.get('as_of') or '—')}）</h2>")
+    parts.append('<table class="card"><tr><th>风险开关</th><th>纪律上限</th></tr>')
+    parts.append(
+        f"<tr><td>{esc(risk.get('label') or '—')} {esc(risk.get('score'))}/100</td>"
+        f"<td>总仓≤{risk.get('max_position_pct', 0)}% · 单笔风险≤"
+        f"{esc(risk.get('single_trade_risk_pct', 0.5))}%</td></tr>"
+    )
+    parts.append(f"<tr><td colspan=\"2\">{esc(risk.get('stance') or '仅观察')}</td></tr></table>")
+    opportunities = decision.get("opportunities") or []
+    if opportunities:
+        parts.append('<table class="data"><tr><th>#</th><th>板块</th><th>分数</th>'
+                     '<th>状态</th><th>今日</th><th>失效条件</th></tr>')
+        for row in opportunities[:3 if brief else OPPORTUNITY_LIMIT]:
+            parts.append(
+                f"<tr><td>{row.get('rank')}</td><td>{esc(row.get('name'))}"
+                f" · {esc(row.get('role') or '')}</td>"
+                f"<td>{row.get('score')}/100</td><td>{esc(row.get('status'))}</td>"
+                f"<td>{esc(fmt_ratio(row.get('today_pct')))}</td>"
+                f"<td>{esc(row.get('invalidation'))}</td></tr>"
+            )
+        parts.append("</table>")
+    parts.append('<p class="meta">机会池是观察顺序，不是买入指令；仓位是通用纪律模板。</p>')
 
     volume = volume_price_section(payload)
     if volume:
@@ -1871,6 +2208,26 @@ def check(out_dir):
             problems.append("清单里有量价结果，但 stocks.html 没有结果卡")
         if txt_path.is_file() and "【结果 · 量价】" not in txt_path.read_text(encoding="utf-8"):
             problems.append("清单里有量价结果，但 stocks.txt 没有结果卡")
+    decision = data.get("decision") or {}
+    risk = decision.get("risk") or {}
+    if risk.get("mode") not in ("attack", "neutral", "defense"):
+        problems.append("stocks.json 的风险开关缺失或 mode 无效")
+    if not isinstance(risk.get("score"), (int, float)) or not 0 <= risk.get("score", -1) <= 100:
+        problems.append("stocks.json 的风险分不在 0–100")
+    if not isinstance(risk.get("max_position_pct"), (int, float)) \
+            or not 0 <= risk.get("max_position_pct", -1) <= 100:
+        problems.append("stocks.json 的纪律仓位上限无效")
+    opportunities = decision.get("opportunities") or []
+    if len(opportunities) > OPPORTUNITY_LIMIT:
+        problems.append(f"stocks.json 的板块机会池超过 {OPPORTUNITY_LIMIT} 个")
+    if opportunities and [row.get("rank") for row in opportunities] != list(range(1, len(opportunities) + 1)):
+        problems.append("stocks.json 的板块机会池排名不连续")
+    text_body = txt_path.read_text(encoding="utf-8") if txt_path.is_file() else ""
+    if "【风险开关】" not in text_body or "【板块机会池】" not in text_body:
+        problems.append("stocks.txt 没有风险开关或板块机会池")
+    page = html_path.read_text(encoding="utf-8") if html_path.is_file() else ""
+    if "function decisionSection" not in page or "d.decision" not in page:
+        problems.append("stocks.html 没有风险开关或板块机会池")
     if cross.get("counts") and (data.get("rrg") or {}).get("rows"):
         # 两者互斥：量化分析段只显示一个，清单里不该同时有两段
         problems.append("清单里 rrg 与 cross 同时存在")
@@ -1902,6 +2259,8 @@ def check(out_dir):
                 chapter = zf.read("OEBPS/chapter.xhtml").decode("utf-8")
                 if TITLE not in chapter:
                     problems.append("stocks.epub 章节里没有面板标题")
+                if "风险开关与板块机会池" not in chapter:
+                    problems.append("stocks.epub 章节里没有风险开关或板块机会池")
         except zipfile.BadZipFile as exc:
             problems.append(f"stocks.epub 不是有效 EPUB：{exc}")
     return problems
