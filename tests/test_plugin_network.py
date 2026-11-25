@@ -207,6 +207,37 @@ class NetWiringTest(unittest.TestCase):
         self.assertIn('"Auto-start on launch: "', MAIN)
         self.assertIn("function Report:toggleAutostart()", MAIN)
 
+    def test_reader_host_menu_has_refresh_now_and_it_starts_idle_mode(self):
+        # EPUB 是 ReaderUI，不会触发自绘面板的 onTap/menu；主菜单必须能直接刷新。
+        self.assertIn("function Report:refreshNow()", MAIN)
+        refresh = MAIN[MAIN.index("function Report:refreshNow()"):]
+        refresh = refresh[:refresh.index("\nend\n")]
+        self.assertIn("if not self.settings.enabled then", refresh)
+        self.assertIn("self:start()", refresh)
+        self.assertIn("self:refresh(true)", refresh)
+        host = MAIN[MAIN.index("function Report:addToMainMenu(items)"):]
+        self.assertIn('text = "Refresh now (starts if idle)"', host)
+        self.assertIn("self:refreshNow()", host)
+
+    def test_reader_swap_resumes_refresh_and_persists_status(self):
+        # Show report 打开缓存 EPUB 会重建 ReaderUI；新实例要立刻接力，而不是永远 never。
+        open_doc = MAIN[MAIN.index("function Report:openDoc(spec, path)"):]
+        open_doc = open_doc[:open_doc.index("\nend\n")]
+        self.assertIn("self.settings.resume_after_reader_swap = true", open_doc)
+        init = MAIN[MAIN.index("function Report:init()"):]
+        init = init[:init.index("\nend\n")]
+        self.assertIn("self.settings.resume_after_reader_swap == true", init)
+        self.assertIn("local latest_store, latest = loadSettings()", init)
+        self.assertIn("self.store, self.settings = latest_store, latest", init)
+        self.assertIn("patchSettings({ resume_after_reader_swap = false })", init)
+        self.assertIn("self:ensureSession()", init)
+        self.assertIn("self:refresh(false)", init)
+        self.assertIn("self.last_check = tonumber(self.settings.last_check)", init)
+        finish = MAIN[MAIN.index("local function finish(error_message)"):]
+        finish = finish[:finish.index("\n    end\n")]
+        self.assertIn("self.settings.last_check = self.last_check", finish)
+        self.assertIn("self.settings.last_error = error_message", finish)
+
     def test_auto_start_cannot_reopen_the_same_doc_forever(self):
         # 死循环根因：init→start→openDoc→showReader→init 里，只看设置里的
         # autostart_resume 会一遍遍重开。现在有两道闸：进程内标记 session_started，
@@ -269,7 +300,8 @@ class NetWiringTest(unittest.TestCase):
     def test_version_was_bumped(self):
         meta = (PLUGIN / "_meta.lua").read_text(encoding="utf-8")
         version = re.search(r'version = "([\d.]+)"', meta).group(1)
-        self.assertGreaterEqual(tuple(int(part) for part in version.split(".")), (0, 5, 1))
+        self.assertGreaterEqual(tuple(int(part) for part in version.split(".")), (0, 9, 1))
+        self.assertIn(f'local PLUGIN_VERSION = "{version}"', MAIN)
 
 
 if __name__ == "__main__":

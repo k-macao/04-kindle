@@ -29,6 +29,7 @@ local Wake = dofile(dir .. "wake.lua")
 local Net = dofile(dir .. "net.lua")
 local Screen = Device.screen
 local DEFAULT_URL = "https://k-macao.github.io/004/kindle.txt"
+local PLUGIN_VERSION = "0.9.1"
 local MAX_BYTES = 2 * 1024 * 1024
 local MANIFEST_MAX = 256 * 1024
 -- stocks.json 同时带 91 个板块与 A/H 龙头 26 周压缩量价，已不再是小清单；
@@ -199,6 +200,11 @@ function Report:init()
     end
     if self.settings.enabled == nil then self.settings.enabled = false end
     if self.settings.auto_opened_doc then session_opened_doc = true end
+    -- ReaderUI 每次换书都会重新建立插件实例；检查时间/错误不能只存在旧实例内存里，
+    -- 否则 Status 会误报 Last check: never / No error。
+    self.last_check = tonumber(self.settings.last_check)
+    local saved_error = tostring(self.settings.last_error or "")
+    self.last_error = saved_error ~= "" and saved_error or nil
     self.wake = Wake.new({ Device = Device, UIManager = UIManager, logger = logger })
     self.refresh_task = function() self:refresh(false) end
     self.cache_path = dataDir() .. "/octopus004-report.txt"
@@ -216,10 +222,30 @@ function Report:init()
         logger.warn("004: emergency_stop is set, the plugin stays idle")
         return
     end
+    -- openDoc/showReader 会销毁旧 ReaderUI，也会顺手取消旧实例的计时器。新实例看到
+    -- resume_after_reader_swap 后，立即接管后台壳并检查一次；这不是再次开书，所以
+    -- 不会形成 init → openDoc → init 的循环。
+    if self.settings.enabled and self.settings.resume_after_reader_swap == true then
+        UIManager:scheduleIn(2, function()
+            -- showReader 返回后，旧实例还会提交新 EPUB 的 sig/data_time。这里重新打开
+            -- 设置文件，不能拿 init 时读到的旧表整份写回去覆盖那些新值。
+            local latest_store, latest = loadSettings()
+            if latest_store and latest then
+                self.store, self.settings = latest_store, latest
+            end
+            if not self.settings.enabled then return end
+            self.settings.resume_after_reader_swap = false
+            patchSettings({ resume_after_reader_swap = false })
+            self.last_check = tonumber(self.settings.last_check)
+            local latest_error = tostring(self.settings.last_error or "")
+            self.last_error = latest_error ~= "" and latest_error or nil
+            self:ensureSession()
+            self:refresh(false)
+        end)
     -- 自动开始必须同时满足：用户开了 Auto-start、上次是跑着的、而且这个 KOReader
     -- 进程还没自动开过（session_started）。第三条是死循环的根治：showReader() 之后
     -- 插件会重新 init，光看设置会一遍遍重进 start()。
-    if self.settings.autostart and self.settings.autostart_resume and not session_started then
+    elseif self.settings.autostart and self.settings.autostart_resume and not session_started then
         UIManager:scheduleIn(3, function() self:start() end)
     end
 end
@@ -826,6 +852,7 @@ function Report:refreshStocks()
     if not manifest then error(err) end
     local sig = self:stocksSignature(manifest)
     self.last_check = os.time()
+    self.settings.last_check = self.last_check
     -- 清单里有 epub 就打开卡片版（交给阅读器排版）；没有或下载失败才回退纯文本。
     if type(manifest.epub) == "string" and manifest.epub ~= "" then
         local ok, epub_error = pcall(function() self:refreshStocksEpub(manifest, sig) end)
@@ -925,6 +952,12 @@ function Report:refresh(interactive)
             error_message = tostring(error_message) .. "\nCached snapshot: " .. self:stocksCacheLabel()
         end
         self.gen = self.gen + 1; self.in_cycle = false; self.last_error = error_message
+        -- ReaderUI 换书后插件实例会重建；把“确实检查过”和最后错误写进设置，Status
+        -- 才不会回到 never / No error。空字符串表示最近一轮成功。
+        self.last_check = os.time()
+        self.settings.last_check = self.last_check
+        self.settings.last_error = error_message and tostring(error_message) or ""
+        self:save()
         if self.header then
             local state = error_message and "OFFLINE / CACHED" or "ONLINE"
             local checked = self.last_check and beijing(self.last_check, "%m-%d %H:%M") or "--"
@@ -1037,6 +1070,9 @@ function Report:openDoc(spec, path)
     patchSettings({ auto_opened_doc = true })
     self.settings[spec.file] = path
     self.settings[spec.opened_at] = os.time()
+    -- showReader 会换掉整个插件实例；留下接力标记，让新实例马上联网检查并重新挂
+    -- 7 分钟定时器。没有这个标记，屏幕虽打开缓存书，Status 却会永远是 never。
+    if self.settings.enabled then self.settings.resume_after_reader_swap = true end
     self:save()
     -- showReader is documented as the only safe way to build a new ReaderUI
     -- instance; it closes the current one, so our widget instance is replaced.
@@ -1252,7 +1288,7 @@ function Report:status()
     local auto = "\nAuto-start: " .. (self.settings.autostart and "on" or "off")
         .. (self.settings.emergency_stop and " · EMERGENCY STOP" or "")
         .. " · now: " .. (self.settings.enabled and "running" or "idle")
-    self:note("004 (" .. self.settings.display .. ")\n" .. source .. "\n" .. mode .. page .. auto .. data ..
+    self:note("004 v" .. PLUGIN_VERSION .. " (" .. self.settings.display .. ")\n" .. source .. "\n" .. mode .. page .. auto .. data ..
         "\nLast check: " .. checked .. "\n" .. (self.last_error or "No error"))
 end
 
@@ -1370,11 +1406,23 @@ function Report:chooseDisplay()
     UIManager:show(dialog)
 end
 
+function Report:refreshNow()
+    -- EPUB 交给 ReaderUI 后，点屏幕只会打开 KOReader 菜单，进不到自绘面板菜单；
+    -- 因此主菜单也必须有 Refresh now。若当前 idle，这个按钮同时启动服务。
+    if not self.settings.enabled then
+        self.interactive_start = true
+        self:start()
+        self.interactive_start = nil
+    else
+        self:refresh(true)
+    end
+end
+
 function Report:menu()
     local dialog
     dialog = ButtonDialog:new{ buttons = {
         { { text = "Next page", callback = function() UIManager:close(dialog); self:advance() end },
-          { text = "Refresh now", callback = function() UIManager:close(dialog); self:refresh(true) end } },
+          { text = "Refresh now", callback = function() UIManager:close(dialog); self:refreshNow() end } },
         { { text = "Display mode", callback = function() UIManager:close(dialog); self:chooseDisplay() end },
           { text = "Status", callback = function() UIManager:close(dialog); self:status() end } },
         { { text = "Stop", callback = function() UIManager:close(dialog); self:stop() end } },
@@ -1389,6 +1437,7 @@ function Report:addToMainMenu(items)
               if self.settings.enabled then self:stop()
               else self.interactive_start = true; self:start(); self.interactive_start = nil end
           end },
+        { text = "Refresh now (starts if idle)", callback = function() self:refreshNow() end },
         { text_func = function()
               return "Auto-start on launch: " .. (self.settings.autostart and "on" or "off")
           end,
