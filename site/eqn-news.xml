@@ -4,9 +4,9 @@
     <title>方程式新闻</title>
     <link>https://eqn.news/</link>
     <atom:link href="https://raw.githubusercontent.com/k-macao/04-kindle/main/site/eqn-news.xml" rel="self" type="application/rss+xml"/>
-    <description>每天 07:00（北京时间）从 RSSHub 抓取并合并的财经、政治与哲学思想新闻，英文条目附中文译文，本次 12 条。</description>
+    <description>每天 07:00（北京时间）从 RSSHub 抓取并合并的财经、政治与哲学思想新闻，英文条目附中文译文，本次 2 条。</description>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 24 Nov 2026 16:50:14 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 25 Nov 2026 05:30:47 +0000</lastBuildDate>
     <generator>04-kindle tools/build_feed.py</generator>
     <ttl>60</ttl>
     <item>
@@ -16,7 +16,7 @@
       <pubDate>Tue, 24 Nov 2026 13:09:22 +0000</pubDate>
       <category>全球市场与要闻</category>
       <source url="https://eqn.news">方程式新闻 · 加密快讯</source>
-      <description>&lt;p&gt;美国准备提高对中国及其他国家的关税——华尔街日报——路透社 AI 信息总览 2月20日，美国最高法院裁定，《国际紧急经济权力法》未授权总统征收关税。3月11日，美方依据《贸易法》第301条启动制造业产能过剩调查，涉及中国、欧盟、日本等16个经济体。（美国最高法院、美国贸易代表办公室） 完整内容：https://eqn.news/main/17198 AI 生成，仅供参考&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：方程式新闻引述华尔街日报与路透社，称美国准备提高对中国及其他国家的关税，并附AI生成背景。&lt;/p&gt;&lt;p&gt;事实：标题称美国准备提高对中国及其他国家的关税，来源标注为华尔街日报—路透社；摘要提及2月20日美国最高法院裁定《国际紧急经济权力法》未授权总统征收关税，3月11日美方依据《贸易法》第301条启动制造业产能过剩调查，涉及中国、欧盟、日本等16个经济体。&lt;/p&gt;&lt;p&gt;推断：若报道属实，关税路径可能转向301条款等替代法律工具；但摘要为AI生成总览，具体关税范围、税率与时间表未提供。&lt;/p&gt;&lt;p&gt;影响：可能加剧相关经济体贸易摩擦预期，但缺乏细节，难以评估具体行业与规模。&lt;/p&gt;&lt;p&gt;验证：需查阅华尔街日报与路透社原文、美国贸易代表办公室公告及白宫相关文件。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜中国｜国家/地区｜负面｜中期｜置信 45/100：报道称美国准备提高对华关税，若落地将影响双边贸易条件，但细节未明&lt;/p&gt;&lt;p&gt;间接｜欧盟｜国家/地区｜负面｜中期｜置信 35/100：摘要称301调查涉及欧盟等16个经济体，可能扩大关税覆盖范围&lt;/p&gt;&lt;p&gt;直接｜美国贸易代表办公室｜机构｜不确定｜中期｜置信 40/100：报道称依据301条款启动调查，后续是否加征关税取决于调查结论&lt;/p&gt;&lt;p&gt;证据与共识：线索有限｜强度 35/100｜暂无独立互证；单一聚合来源转述华尔街日报与路透社，摘要为AI生成总览，未提供原文链接内容与官方文件（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 63/100｜影响 65 · 紧迫 50 · 新颖 50 · 证据 35 · 新鲜 90 · 自选 80；涉及美国关税政策动向，潜在影响大，但来源为二手聚合且细节不足&lt;/p&gt;&lt;p&gt;关注命中：行业：人工智能&lt;/p&gt;</description>
+      <description>&lt;p&gt;美国准备提高对中国及其他国家的关税——华尔街日报——路透社 AI 信息总览 2月20日，美国最高法院裁定，《国际紧急经济权力法》未授权总统征收关税。3月11日，美方就中国等16个经济体的制造业产能过剩启动301调查。（美国最高法院、美国贸易代表办公室） 完整内容：https://eqn.news/main/17198 AI 生成，仅供参考&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：方程式新闻转述华尔街日报—路透社称美国准备提高对中国及其他国家关税，并附AI生成信息总览；&lt;/p&gt;&lt;p&gt;事实：摘要提及2月20日美国最高法院裁定《国际紧急经济权力法》未授权总统征收关税，3月11日美方就中国等16个经济体制造业产能过剩启动301调查；&lt;/p&gt;&lt;p&gt;推断：若关税上调落地，将影响相关出口链与贸易成本，但标题所述“准备提高”为转述性表述，具体范围、税率与时间未披露；&lt;/p&gt;&lt;p&gt;影响：贸易政策不确定性上升，可能波及制造业出口与供应链布局；&lt;/p&gt;&lt;p&gt;验证：需以美国贸易代表办公室等官方文件及原始报道核实。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;间接｜中国出口制造业｜行业｜负面｜中期｜置信 40/100：若关税上调落地将抬升出口成本，但范围与税率未明，传导存在条件&lt;/p&gt;&lt;p&gt;直接｜美国贸易政策｜政策/宏观｜不确定｜短期｜置信 45/100：报道称准备提高关税，但缺乏官方细节，方向与力度待确认&lt;/p&gt;&lt;p&gt;证据与共识：报道引述多方｜强度 40/100｜暂无独立互证；转述华尔街日报与路透社，且摘要标注AI生成，未见官方原文（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 64/100｜影响 70 · 紧迫 65 · 新颖 50 · 证据 40 · 新鲜 65 · 自选 80；关税与301调查涉及主要经济体贸易关系，但信息为二手转述且细节缺失&lt;/p&gt;&lt;p&gt;关注命中：行业：人工智能&lt;/p&gt;</description>
     </item>
     <item>
       <title>【方程式新闻】ANSEM钱包开始抛售$ANSEM代币，尚不清楚是否遭黑客攻击：链上数据</title>
@@ -25,97 +25,7 @@
       <pubDate>Tue, 24 Nov 2026 09:30:43 +0000</pubDate>
       <category>全球市场与要闻</category>
       <source url="https://eqn.news">方程式新闻 · 加密快讯</source>
-      <description>&lt;p&gt;ANSEM钱包开始抛售$ANSEM代币，尚不清楚是否遭黑客攻击：链上数据 AI 信息总览 6月16日，以交易员Ansem命名的迷因币$ANSEM在Solana链上发行。发行者随即向他的关联钱包转入6.5亿枚，占总供应量的65%。（Bitquery） 完整内容：https://eqn.news/main/17166 AI 生成，仅供参考&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：方程式新闻引述链上数据称ANSEM钱包开始抛售$ANSEM代币，尚不清楚是否遭黑客攻击；&lt;/p&gt;&lt;p&gt;事实：摘要称该迷因币6月16日在Solana链发行，发行者向关联钱包转入6.5亿枚占总供应65%，现出现抛售；&lt;/p&gt;&lt;p&gt;推断：若抛售来自发行者关联钱包，可能引发集中抛压与信任质疑，但黑客攻击与否未证实；&lt;/p&gt;&lt;p&gt;影响：对$ANSEM价格与Solana迷因币情绪可能负面，具体幅度无法判断；&lt;/p&gt;&lt;p&gt;验证：需核对链上交易记录、钱包归属及项目方声明。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜$ANSEM代币｜资产｜负面｜短期｜置信 55/100：报道称关联钱包抛售且该钱包曾持有65%供应量，集中抛售可能形成抛压&lt;/p&gt;&lt;p&gt;间接｜Solana链上迷因币｜行业｜不确定｜短期｜置信 35/100：单一项目事件是否外溢至同类资产取决于后续链上数据与市场情绪&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 40/100｜暂无独立互证；仅一个RSS来源引述链上数据，且标注AI生成仅供参考，黑客攻击未证实（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 56/100｜影响 40 · 紧迫 60 · 新颖 45 · 证据 40 · 新鲜 80 · 自选 80；涉及大额持仓钱包异动，但来源单一且关键事实未证实&lt;/p&gt;&lt;p&gt;关注命中：行业：人工智能&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>【方程式新闻】[新增市场] 新增 Orochi Network(ON)、Sanctum(SANC)、Subsquid(SQD) 韩元市场</title>
-      <link>https://eqn.news/main/17114</link>
-      <guid isPermaLink="true">https://eqn.news/main/17114</guid>
-      <pubDate>Tue, 24 Nov 2026 03:45:36 +0000</pubDate>
-      <category>全球市场与要闻</category>
-      <source url="https://eqn.news">方程式新闻 · 加密快讯</source>
-      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：方程式新闻称新增Orochi Network(ON)、Sanctum(SANC)、Subsquid(SQD)韩元市场；&lt;/p&gt;&lt;p&gt;事实：标题列出三个代币新增韩元交易市场，摘要为空；&lt;/p&gt;&lt;p&gt;推断：可能指某交易所新增韩元计价交易对，但未说明交易所名称与上线时间，无法确认主体；&lt;/p&gt;&lt;p&gt;影响：若属实，可能提升相关代币的韩元流动性，但线索不足；&lt;/p&gt;&lt;p&gt;验证：需确认发布交易所、上线公告及交易对细节。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜Orochi Network（ON）｜资产｜不确定｜短期｜置信 30/100：新增韩元市场若确认，可能改变该代币流动性，但交易所与细节未明&lt;/p&gt;&lt;p&gt;直接｜Sanctum（SANC）｜资产｜不确定｜短期｜置信 30/100：同上，新增市场信息缺乏交易所与时间细节&lt;/p&gt;&lt;p&gt;直接｜Subsquid（SQD）｜资产｜不确定｜短期｜置信 30/100：同上，仅标题提及新增韩元市场&lt;/p&gt;&lt;p&gt;证据与共识：线索有限｜强度 25/100｜无法判断；摘要为空，仅标题提及新增市场，未说明交易所与来源（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 32/100｜影响 30 · 紧迫 35 · 新颖 40 · 证据 25 · 新鲜 65 · 自选 0；新增交易市场属常规信息，但主体与细节缺失，可核验性低&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>【方程式新闻】*英伟达董事会恢复黄仁勋总裁、首席执行官及董事会职务：彭博社</title>
-      <link>https://eqn.news/main/16935</link>
-      <guid isPermaLink="true">https://eqn.news/main/16935</guid>
-      <pubDate>Mon, 23 Nov 2026 13:56:07 +0000</pubDate>
-      <category>全球市场与要闻</category>
-      <source url="https://eqn.news">方程式新闻 · 加密快讯</source>
-      <description>&lt;p&gt;*英伟达董事会恢复黄仁勋总裁、首席执行官及董事会职务：彭博社 AI 信息总览 11月8日，英伟达联合创始人黄仁勋向员工承认有婚外情。董事会调查他是否被外国情报机构盯上。他11日辞职，由财务总监克雷斯暂代。美国总统特朗普22日晚呼吁重新聘用他。（英伟达、唐纳德·特朗普） 完整内容：https://eqn.news/main/16935 AI 生成，仅供参考&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：方程式新闻引述彭博社称英伟达董事会恢复黄仁勋总裁、CEO及董事职务；&lt;/p&gt;&lt;p&gt;事实：标题称董事会恢复其职务，摘要称其11月8日承认婚外情、11日辞职、特朗普22日晚呼吁重新聘用；&lt;/p&gt;&lt;p&gt;推断：该叙述涉及高管丑闻与政治干预，若属实属重大治理事件，但摘要标注AI生成且细节异常，可信度存疑；&lt;/p&gt;&lt;p&gt;影响：若属实可能影响英伟达治理与市场信心，但当前线索不足以确认；&lt;/p&gt;&lt;p&gt;验证：需核对英伟达官方公告、彭博社原文及公司披露文件。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜英伟达｜公司｜不确定｜短期｜置信 25/100：高管职务变动若属实将影响治理预期，但来源为AI生成摘要且未获官方确认&lt;/p&gt;&lt;p&gt;直接｜黄仁勋｜公司｜不确定｜短期｜置信 25/100：个人职务状态报道未经官方证实，方向无法判断&lt;/p&gt;&lt;p&gt;证据与共识：传闻/未证实｜强度 20/100｜无法判断；单一RSS引述彭博社，摘要自标AI生成，含异常细节，无官方材料互证（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 57/100｜影响 70 · 紧迫 60 · 新颖 65 · 证据 20 · 新鲜 35 · 自选 80；若属实为重大公司治理事件，但来源可信度低，需高度谨慎&lt;/p&gt;&lt;p&gt;关注命中：行业：人工智能&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>【方程式新闻】Fusionist Bridge 漏洞被利用，铸造了 10 千万亿枚 $ACE 代币，估计抽走 104 万美元 USDT</title>
-      <link>https://eqn.news/main/16704</link>
-      <guid isPermaLink="true">https://eqn.news/main/16704</guid>
-      <pubDate>Sun, 22 Nov 2026 19:35:42 +0000</pubDate>
-      <category>全球市场与要闻</category>
-      <source url="https://eqn.news">方程式新闻 · 加密快讯</source>
-      <description>&lt;p&gt;Fusionist Bridge 漏洞被利用，铸造了 10 千万亿枚 $ACE 代币，估计抽走 104 万美元 USDT AI 信息总览 北京时间11月23日，链游Fusionist在BNB链上遇袭。攻击者滥用跨链桥铸币权，抛售无抵押代币。其间项目方请用户暂停该链的$ACE转账、交易和跨链。（Blockaid、Fusionist） 完整内容：https://eqn.news/main/16704 AI 生成，仅供参考&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：方程式新闻援引Blockaid与Fusionist称跨链桥漏洞被利用；&lt;/p&gt;&lt;p&gt;事实：Fusionist Bridge在BNB链上遭攻击，攻击者滥用铸币权铸造约10千万亿枚$ACE并抛售，估计抽走104万美元USDT，项目方请用户暂停该链$ACE转账、交易和跨链；&lt;/p&gt;&lt;p&gt;推断：属跨链桥权限设计或私钥管理失效类安全事件，损失规模以报道估计为准；&lt;/p&gt;&lt;p&gt;影响：直接冲击$ACE价格与Fusionist生态信任，并波及BNB链跨链桥安全关注；&lt;/p&gt;&lt;p&gt;验证：需核对链上交易、Fusionist官方公告与Blockaid报告，当前为单一媒体报道。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜Fusionist｜公司｜负面｜短期｜置信 75/100：跨链桥被利用并增发无抵押代币，直接损害项目资产与信誉&lt;/p&gt;&lt;p&gt;直接｜$ACE｜资产｜负面｜短期｜置信 75/100：大量无抵押代币被抛售，报道估计抽走约104万美元USDT&lt;/p&gt;&lt;p&gt;间接｜BNB链跨链桥生态｜行业｜负面｜中期｜置信 45/100：事件暴露跨链桥铸币权限风险，可能引发同类项目安全审视&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 60/100｜暂无独立互证；仅方程式新闻一条RSS，摘要称援引Blockaid与Fusionist，但未提供独立来源链接细节（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 63/100｜影响 65 · 紧迫 80 · 新颖 55 · 证据 60 · 新鲜 35 · 自选 80；安全事件损失明确且项目方已提示暂停操作，时效性强但来源单一&lt;/p&gt;&lt;p&gt;关注命中：行业：人工智能&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>【方程式新闻】Binance Futures 将上线多个 TradFi USDⓈ 保证金永续合约（2026-11-20）</title>
-      <link>https://eqn.news/main/16137</link>
-      <guid isPermaLink="true">https://eqn.news/main/16137</guid>
-      <pubDate>Fri, 20 Nov 2026 06:15:32 +0000</pubDate>
-      <category>全球市场与要闻</category>
-      <source url="https://eqn.news">方程式新闻 · 加密快讯</source>
-      <description>&lt;p&gt;Binance Futures 将上线多个 TradFi USDⓈ 保证金永续合约（2026-11-20） AI 摘要 • 11-20 09:30/09:35/09:40 (UTC) 依次上线 JNJUSDT、AMDLUSDT、NIOUSDT 三个 USDT 本位永续合约，标的分别为强生普通股、GraniteShares 2x Long AMD Daily ETF 和 NIO ADR。 • 三个合约最高杠杆均为 20x，最小名义价值 5…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：方程式新闻称Binance Futures将上线三个TradFi标的USDT本位永续合约；&lt;/p&gt;&lt;p&gt;事实：11月20日09:30/09:35/09:40 UTC依次上线JNJUSDT、AMDLUSDT、NIOUSDT，标的分别为强生普通股、GraniteShares 2x Long AMD Daily ETF和NIO ADR，最高杠杆20x，最小名义价值5美元；&lt;/p&gt;&lt;p&gt;推断：反映加密交易平台扩展股票类衍生品，属产品上线安排而非市场判断；&lt;/p&gt;&lt;p&gt;影响：为相关标的提供加密渠道敞口，可能增加波动传导但规模未知；&lt;/p&gt;&lt;p&gt;验证：需核对币安官方公告，当前为单一媒体报道。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜Binance Futures｜公司｜中性｜短期｜置信 70/100：平台新增合约产品，属业务扩展安排&lt;/p&gt;&lt;p&gt;间接｜强生｜公司｜中性｜短期｜置信 40/100：其普通股成为永续合约标的，可能带来额外交易渠道但影响有限&lt;/p&gt;&lt;p&gt;间接｜蔚来｜公司｜中性｜短期｜置信 40/100：NIO ADR成为合约标的，传导取决于合约交易活跃度&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 55/100｜暂无独立互证；仅方程式新闻一条RSS，摘要为AI生成，未附官方公告原文（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 49/100｜影响 45 · 紧迫 50 · 新颖 55 · 证据 55 · 新鲜 15 · 自选 80；产品上线信息具体，但属常规业务扩展，影响范围有限&lt;/p&gt;&lt;p&gt;关注命中：行业：人工智能&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>【方程式新闻】币安将于2026年11月20日把监控标签扩展至BANK、INIT、MITO、ONE、THE和ZIL，并移除MORPHO和HYPE的种子标签</title>
-      <link>https://eqn.news/main/16129</link>
-      <guid isPermaLink="true">https://eqn.news/main/16129</guid>
-      <pubDate>Fri, 20 Nov 2026 06:00:15 +0000</pubDate>
-      <category>全球市场与要闻</category>
-      <source url="https://eqn.news">方程式新闻 · 加密快讯</source>
-      <description>&lt;p&gt;币安将于2026年11月20日把监控标签扩展至BANK、INIT、MITO、ONE、THE和ZIL，并移除MORPHO和HYPE的种子标签 AI 摘要 • 11-20 起 BANK、INIT、MITO、ONE、THE、ZIL 被加入监控标签。 • 同日 MORPHO、HYPE 从种子标签名单中移除。 • 带监控标签的代币波动和风险明显更高，若不再符合上币标准存在被下架的风险。 AI 生成，仅供参考&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：方程式新闻称币安调整代币标签；&lt;/p&gt;&lt;p&gt;事实：11月20日起BANK、INIT、MITO、ONE、THE、ZIL被加入监控标签，同日MORPHO、HYPE从种子标签名单移除，摘要提示带监控标签代币波动和风险更高、存在下架风险；&lt;/p&gt;&lt;p&gt;推断：属交易所风险管理与上币标准调整，被加入监控标签通常意味着合规或流动性审视加强；&lt;/p&gt;&lt;p&gt;影响：相关代币短期面临流动性与情绪压力，移除种子标签的代币影响方向需视具体规则；&lt;/p&gt;&lt;p&gt;验证：需核对币安官方公告，当前为单一媒体报道。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜币安｜公司｜中性｜短期｜置信 65/100：交易所调整代币标签，属风险管理操作&lt;/p&gt;&lt;p&gt;直接｜BANK、INIT、MITO、ONE、THE、ZIL｜资产｜负面｜短期｜置信 60/100：被加入监控标签，报道提示存在下架风险与更高波动&lt;/p&gt;&lt;p&gt;直接｜MORPHO、HYPE｜资产｜不确定｜短期｜置信 40/100：从种子标签移除，具体规则影响方向未在摘要中说明&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 55/100｜暂无独立互证；仅方程式新闻一条RSS，摘要为AI生成，未附币安公告原文（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 50/100｜影响 50 · 紧迫 55 · 新颖 45 · 证据 55 · 新鲜 15 · 自选 80；涉及多代币标签调整，对相关资产有短期影响但属常规交易所操作&lt;/p&gt;&lt;p&gt;关注命中：行业：人工智能&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>【方程式新闻】*ANTHROPIC开盘报111.50美元，IPO定价83美元：彭博社</title>
-      <link>https://eqn.news/main/16036</link>
-      <guid isPermaLink="true">https://eqn.news/main/16036</guid>
-      <pubDate>Thu, 19 Nov 2026 16:49:03 +0000</pubDate>
-      <category>全球市场与要闻</category>
-      <source url="https://eqn.news">方程式新闻 · 加密快讯</source>
-      <description>&lt;p&gt;*ANTHROPIC开盘报111.50美元，IPO定价83美元：彭博社 AI 信息总览 11月10日，Claude模型开发商Anthropic启动上市路演。公司与现有股东原拟发售8.25亿股，定价区间为每股70至78美元。（Anthropic、美联社） 完整内容：https://eqn.news/main/16036 AI 生成，仅供参考&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：方程式新闻引彭博社称Anthropic开盘报111.50美元、IPO定价83美元；&lt;/p&gt;&lt;p&gt;事实：标题给出开盘价与IPO定价，摘要另称11月10日启动上市路演、原拟发售8.25亿股、定价区间70至78美元；&lt;/p&gt;&lt;p&gt;推断：标题定价83美元高于摘要所述区间上限，摘要与标题存在不一致，且摘要未说明最终定价，报道内部信息需核对；&lt;/p&gt;&lt;p&gt;影响：若IPO属实，将影响AI公司估值参照与一级市场情绪，但当前数据存在矛盾；&lt;/p&gt;&lt;p&gt;验证：需核对彭博社原文与Anthropic官方披露，线索有限。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜Anthropic｜公司｜不确定｜中期｜置信 35/100：报道称其IPO定价与开盘价，但摘要与标题定价区间不一致，事实待核&lt;/p&gt;&lt;p&gt;间接｜AI行业一级市场｜行业｜不确定｜长期｜置信 25/100：若大型AI公司上市属实，可能形成估值参照，当前信息矛盾无法确认&lt;/p&gt;&lt;p&gt;证据与共识：来源冲突｜强度 30/100｜报道内分歧；标题称IPO定价83美元，摘要称原拟定价区间70至78美元，同一RSS内部数据不一致（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 50/100｜影响 65 · 紧迫 40 · 新颖 60 · 证据 30 · 新鲜 15 · 自选 80；涉及知名AI公司IPO，但标题与摘要定价信息矛盾，可信度受限&lt;/p&gt;&lt;p&gt;关注命中：行业：人工智能&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>【方程式新闻】币安已完成 Velodrome Finance (VELODROME) 代币合并至 Aerodrome (AERO) 及 AERO 合约置换</title>
-      <link>https://eqn.news/main/15970</link>
-      <guid isPermaLink="true">https://eqn.news/main/15970</guid>
-      <pubDate>Thu, 19 Nov 2026 09:00:02 +0000</pubDate>
-      <category>全球市场与要闻</category>
-      <source url="https://eqn.news">方程式新闻 · 加密快讯</source>
-      <description>&lt;p&gt;币安已完成 Velodrome Finance (VELODROME) 代币合并至 Aerodrome (AERO) 及 AERO 合约置换 AI 摘要 • VELODROME 合并为 AERO、AERO 合约置换均已完成，新 AERO 代币的充值、提现现已开放。 • 兑换按 1 VELODROME = 0.044 AERO 发放，旧 AERO 按 1:1 置换为新 AERO。 • Base 网络新 AERO 合约地址为 0x3f5bF…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：方程式新闻称币安已完成 Velodrome Finance（VELODROME）代币合并至 Aerodrome（AERO）及 AERO 合约置换；&lt;/p&gt;&lt;p&gt;事实：报道称合并与置换已完成，新 AERO 充值提现开放，兑换比例 1 VELODROME=0.044 AERO，旧 AERO 按 1:1 置换，并给出 Base 网络新合约地址前缀；&lt;/p&gt;&lt;p&gt;推断：这是交易所层面的代币迁移执行公告，涉及持币用户的资产映射与合约地址变更，可能影响相关代币在币安的交易与提现安排；&lt;/p&gt;&lt;p&gt;影响：直接涉及币安、Velodrome、Aerodrome 及 VELODROME/AERO 资产，用户需关注新旧合约与兑换比例；&lt;/p&gt;&lt;p&gt;验证：应以币安官方公告及链上合约地址核对为准，当前仅单一 RSS 来源。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜币安｜公司｜中性｜短期｜置信 70/100：作为执行代币合并与合约置换的交易平台，其公告直接决定用户充值提现安排&lt;/p&gt;&lt;p&gt;直接｜Aerodrome (AERO)｜资产｜双向｜短期｜置信 60/100：合约置换与合并带来新旧代币映射，流动性与合约地址变化可能影响交易&lt;/p&gt;&lt;p&gt;直接｜Velodrome Finance (VELODROME)｜资产｜中性｜短期｜置信 60/100：按 1:0.044 兑换为 AERO，原代币功能并入新资产&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 55/100｜暂无独立互证；仅一个 RSS 来源转述币安操作，未附官方公告原文（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 52/100｜影响 55 · 紧迫 60 · 新颖 45 · 证据 55 · 新鲜 15 · 自选 80；涉及交易所代币迁移执行，对持币用户有时效性但属常规操作&lt;/p&gt;&lt;p&gt;关注命中：行业：人工智能&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>【方程式新闻】StarkNet(STRK)、EigenCloud(EIGEN)、Talus(US)、Request(REQ) 新增交易支持公告（BTC、USDT 市场）</title>
-      <link>https://eqn.news/main/15920</link>
-      <guid isPermaLink="true">https://eqn.news/main/15920</guid>
-      <pubDate>Thu, 19 Nov 2026 06:43:53 +0000</pubDate>
-      <category>全球市场与要闻</category>
-      <source url="https://eqn.news">方程式新闻 · 加密快讯</source>
-      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称 StarkNet(STRK)、EigenCloud(EIGEN)、Talus(US)、Request(REQ) 新增交易支持公告（BTC、USDT 市场）；&lt;/p&gt;&lt;p&gt;事实：仅标题给出新增交易支持与市场对，摘要为空，无上线时间、交易对细节或发布主体说明；&lt;/p&gt;&lt;p&gt;推断：可能为某交易所新增上述代币交易对的上线公告，但具体平台、规则与生效条件均未提供；&lt;/p&gt;&lt;p&gt;影响：若属实，涉及相关代币的可交易渠道扩展，但缺乏细节无法评估实际影响；&lt;/p&gt;&lt;p&gt;验证：需查阅对应交易所官方公告，当前线索有限。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;间接｜StarkNet (STRK)｜资产｜不确定｜短期｜置信 30/100：标题称新增交易支持，但平台与规则未明，传导路径不完整&lt;/p&gt;&lt;p&gt;间接｜EigenCloud (EIGEN)｜资产｜不确定｜短期｜置信 30/100：同上，仅标题提及新增市场，缺乏可核验细节&lt;/p&gt;&lt;p&gt;证据与共识：线索有限｜强度 25/100｜无法判断；摘要为空，仅标题含代币名称与市场类型（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 26/100｜影响 35 · 紧迫 40 · 新颖 35 · 证据 25 · 新鲜 15 · 自选 0；上线类公告通常有时效性，但信息严重不足&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>【方程式新闻】[新增市场] 新增 KNTQ 韩元市场</title>
-      <link>https://eqn.news/main/15873</link>
-      <guid isPermaLink="true">https://eqn.news/main/15873</guid>
-      <pubDate>Thu, 19 Nov 2026 02:59:01 +0000</pubDate>
-      <category>全球市场与要闻</category>
-      <source url="https://eqn.news">方程式新闻 · 加密快讯</source>
-      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题为“[新增市场] 新增 KNTQ 韩元市场”；&lt;/p&gt;&lt;p&gt;事实：仅标题说明新增 KNTQ 韩元市场，摘要为空，未说明发布平台、KNTQ 所指资产及生效时间；&lt;/p&gt;&lt;p&gt;推断：可能为某交易所新增以韩元计价的 KNTQ 交易市场，但主体与资产属性不明；&lt;/p&gt;&lt;p&gt;影响：若属实涉及韩元市场与 KNTQ 资产，但缺乏细节无法判断传导；&lt;/p&gt;&lt;p&gt;验证：需查对应交易所公告，当前线索有限。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;间接｜KNTQ｜资产｜不确定｜短期｜置信 25/100：标题仅称新增韩元市场，资产性质与平台均未说明&lt;/p&gt;&lt;p&gt;证据与共识：线索有限｜强度 20/100｜无法判断；摘要为空，标题信息不足以确认主体与资产（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 20/100｜影响 25 · 紧迫 30 · 新颖 30 · 证据 20 · 新鲜 15 · 自选 0；新增市场类信息但要素缺失，难以评估&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>【方程式新闻】Bitget宣布上线IGVUSDT、ARTYUSDT、CCJUSDT和NEMUSDT股票永续合约</title>
-      <link>https://eqn.news/main/15791</link>
-      <guid isPermaLink="true">https://eqn.news/main/15791</guid>
-      <pubDate>Wed, 18 Nov 2026 14:56:01 +0000</pubDate>
-      <category>全球市场与要闻</category>
-      <source url="https://eqn.news">方程式新闻 · 加密快讯</source>
-      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标题称 Bitget 宣布上线 IGVUSDT、ARTYUSDT、CCJUSDT 和 NEMUSDT 股票永续合约；&lt;/p&gt;&lt;p&gt;事实：仅标题给出平台 Bitget 与四个以 USDT 计价的股票永续合约代码，摘要为空，无上线时间、标的股票与杠杆规则；&lt;/p&gt;&lt;p&gt;推断：可能为 Bitget 扩展股票类永续合约产品线，涉及相关标的的衍生品交易，但标的公司与规则不明；&lt;/p&gt;&lt;p&gt;影响：若属实涉及 Bitget 及对应股票标的的衍生品供给，但缺乏细节无法评估；&lt;/p&gt;&lt;p&gt;验证：需查 Bitget 官方公告确认合约标的与规则，当前线索有限。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜Bitget｜公司｜中性｜短期｜置信 45/100：作为公告主体上线股票永续合约，产品线扩展但细节缺失&lt;/p&gt;&lt;p&gt;间接｜股票永续合约标的（IGV/ARTY/CCJ/NEM）｜资产｜不确定｜短期｜置信 25/100：标题仅列合约代码，未明确对应公司及规则，传导路径不完整&lt;/p&gt;&lt;p&gt;证据与共识：线索有限｜强度 30/100｜无法判断；摘要为空，仅标题含平台与合约代码（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 30/100｜影响 40 · 紧迫 45 · 新颖 40 · 证据 30 · 新鲜 15 · 自选 0；涉及股票永续合约新品上线，但关键要素缺失&lt;/p&gt;</description>
+      <description>&lt;p&gt;ANSEM钱包开始抛售$ANSEM代币，尚不清楚是否遭黑客攻击：链上数据 AI 信息总览 6月16日，以交易员Ansem命名的迷因币$ANSEM在Solana链上发行。发行者随即向他的关联钱包转入6.5亿枚，占总供应量的65%。（Bitquery） 完整内容：https://eqn.news/main/17166 AI 生成，仅供参考&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：方程式新闻引述链上数据称ANSEM钱包开始抛售$ANSEM代币，尚不清楚是否遭黑客攻击；&lt;/p&gt;&lt;p&gt;事实：摘要称该迷因币6月16日在Solana链发行，发行者向关联钱包转入6.5亿枚占总供应65%，现出现抛售；&lt;/p&gt;&lt;p&gt;推断：若抛售来自发行者关联钱包，可能引发集中抛压与信任质疑，但黑客攻击与否未证实；&lt;/p&gt;&lt;p&gt;影响：对$ANSEM价格与Solana迷因币情绪可能负面，具体幅度无法判断；&lt;/p&gt;&lt;p&gt;验证：需核对链上交易记录、钱包归属及项目方声明。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜$ANSEM代币｜资产｜负面｜短期｜置信 55/100：报道称关联钱包抛售且该钱包曾持有65%供应量，集中抛售可能形成抛压&lt;/p&gt;&lt;p&gt;间接｜Solana链上迷因币｜行业｜不确定｜短期｜置信 35/100：单一项目事件是否外溢至同类资产取决于后续链上数据与市场情绪&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 40/100｜暂无独立互证；仅一个RSS来源引述链上数据，且标注AI生成仅供参考，黑客攻击未证实（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 53/100｜影响 40 · 紧迫 60 · 新颖 45 · 证据 40 · 新鲜 65 · 自选 80；涉及大额持仓钱包异动，但来源单一且关键事实未证实&lt;/p&gt;&lt;p&gt;关注命中：行业：人工智能&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
