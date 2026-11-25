@@ -884,6 +884,69 @@
       "role": "投资人",
       "note": "窗口内未找到；本轮搜索未返回窗口内内容",
       "ai_bull_prob": null
+    },
+    {
+      "id": "burry",
+      "market": "US",
+      "name": "Michael Burry",
+      "org": "Scion Asset Management（已于 2025 年底注销）",
+      "role": "投资人（个人 Substack）",
+      "note": "发言来自个人 Substack；2025 年后不再提交 13F，持仓以其自述为准",
+      "ai_bull_prob": 0.6
+    },
+    {
+      "id": "haefele",
+      "market": "US",
+      "name": "Mark Haefele",
+      "org": "UBS Global Wealth Management",
+      "role": "首席投资官",
+      "note": "窗口内有效发言；ai_bull_prob 按原文语气",
+      "ai_bull_prob": 0.65
+    },
+    {
+      "id": "jaywoods",
+      "market": "US",
+      "name": "Jay Woods",
+      "org": "Freedom Capital Markets",
+      "role": "首席市场策略师",
+      "note": "窗口内有效发言",
+      "ai_bull_prob": 0.5
+    },
+    {
+      "id": "reitzes",
+      "market": "US",
+      "name": "Ben Reitzes",
+      "org": "Melius Research",
+      "role": "科技与半导体分析师",
+      "note": "卖方分析师，对英伟达的评级观点",
+      "ai_bull_prob": 0.7
+    },
+    {
+      "id": "schafer",
+      "market": "US",
+      "name": "Rick Schafer",
+      "org": "Oppenheimer",
+      "role": "科技分析师",
+      "note": "卖方分析师，对英伟达的评级观点",
+      "ai_bull_prob": 0.7
+    },
+    {
+      "id": "rasgon",
+      "market": "US",
+      "name": "Stacy Rasgon",
+      "org": "Bernstein",
+      "role": "半导体分析师",
+      "note": "卖方分析师，对英伟达的评级观点",
+      "ai_bull_prob": 0.65
+    },
+    {
+      "id": "gerra",
+      "market": "US",
+      "name": "Tristan Gerra",
+      "org": "Robert W. Baird",
+      "role": "科技分析师",
+      "note": "卖方分析师，对英伟达维持持有评级",
+      "ai_bull_prob": 0.35
     }
   ]
 }

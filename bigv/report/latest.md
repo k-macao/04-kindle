@@ -1,10 +1,10 @@
 # 大 V 与策略分析师：近五天公开观点（2026-11-21 至 2026-11-25）
 
-截至 2026-11-25，窗口内共 65 条。美股 27/43 位有记录；A 股 28/50 位有记录；港股 2/5 位有记录。
+截至 2026-11-25，窗口内共 72 条。美股 34/50 位有记录；A 股 28/50 位有记录；港股 2/5 位有记录。
 
 **注意：多空概率是 AI 依据该人近五天条目的语气作出的判断，不是本人表态，仅供参考。**
 
-名单进度：目标 100 位（美股、A 股各 50 位为基准，港股为补充来源）；当前名单 98 位，尚未达到目标。名单标准：机构策略分析师、基金管理人。个别人与「同级别」不完全一致，在表格备注里说明。
+名单进度：目标 100 位（美股、A 股各 50 位为基准，港股为补充来源）；当前名单 105 位，尚未达到目标。名单标准：机构策略分析师、基金管理人。个别人与「同级别」不完全一致，在表格备注里说明。
 
 ## 美股
 
@@ -53,6 +53,13 @@
 | Jamie Cox | Harris Financial Group | 1 | 观点×1 | 2026-11-25 | 有记录 | 偏空 65% |
 | Jeffrey Gundlach | DoubleLine Capital | 0 | — | — | 五天内未找到公开观点 | — |
 | Jeffrey Kleintop | Charles Schwab | 0 | — | — | 五天内未找到公开观点 | — |
+| Michael Burry | Scion Asset Management（已于 2025 年底注销） | 1 | 观点×1 | 2026-11-25 | 有记录 | 偏多 60% |
+| Mark Haefele | UBS Global Wealth Management | 1 | 观点×1 | 2026-11-24 | 有记录 | 偏多 65% |
+| Jay Woods | Freedom Capital Markets | 1 | 观点×1 | 2026-11-23 | 有记录 | 偏多 50% |
+| Ben Reitzes | Melius Research | 1 | 观点×1 | 2026-11-23 | 有记录 | 偏多 70% |
+| Rick Schafer | Oppenheimer | 1 | 观点×1 | 2026-11-23 | 有记录 | 偏多 70% |
+| Stacy Rasgon | Bernstein | 1 | 观点×1 | 2026-11-23 | 有记录 | 偏多 65% |
+| Tristan Gerra | Robert W. Baird | 1 | 观点×1 | 2026-11-23 | 有记录 | 偏空 65% |
 
 ## A 股
 
@@ -213,6 +220,34 @@
 
 **Jamie Cox**（Harris Financial Group，管理合伙人）
 - 2026-11-25 · 观点 · Harris Financial Group 管理合伙人 Jamie Cox 称，AI 担忧与加息预期叠加，造成了剧烈波动。 [CNN](https://www.cnn.com/2026/11/25/business/ai-sell-off-despite-huang-nvidia-return)
+
+**Michael Burry**（Scion Asset Management（已于 2025 年底注销），投资人（个人 Substack））
+- 2026-11-25 · 观点 · Substack 称“暂时几乎全部做多”，仅保留 Palantir 与 MetLife 的看跌期权，约 25% 仓位为现金；称这是为了在回调后寻找买点，并未明确预测市场见底。 [BeInCrypto（转述 Substack 原文）](https://beincrypto.com/michael-burry-stock-market-recovery-thanksgiving-crash/)
+- 备注：发言来自个人 Substack；2025 年后不再提交 13F，持仓以其自述为准
+
+**Mark Haefele**（UBS Global Wealth Management，首席投资官）
+- 2026-11-24 · 观点 · 认为全球科技股波动不是 AI 投资逻辑已破灭的信号；云增长、使用量与算力需求仍有支撑；预计将出现更大分化，偏向有清晰变现与稳健资产负债表的平台。 [CNBC 直播](https://www.cnbc.com/2026/11/23/stock-market-today-live-updates.html)
+- 备注：窗口内有效发言；ai_bull_prob 按原文语气
+
+**Jay Woods**（Freedom Capital Markets，首席市场策略师）
+- 2026-11-23 · 观点 · 认为黄仁勋回归带来了超跌市场的反弹，但不确定仅凭这一消息能否让市场走出低迷。 [CNBC](https://www.cnbc.com/2026/11/23/nvidia-jensen-huang-ceo-market-rally.html)
+- 备注：窗口内有效发言
+
+**Ben Reitzes**（Melius Research，科技与半导体分析师）
+- 2026-11-23 · 观点 · 将英伟达由持有上调至买入，目标价 220 美元；认为黄仁勋回归大幅缓解了长期担忧，并希望其尽快应对圈内交易、中国销售与继任计划问题。 [CNBC](https://www.cnbc.com/2026/11/23/nvidia-has-reinstated-ceo-jensen-huang-analysts-upgraded-the-stock.html)
+- 备注：卖方分析师，对英伟达的评级观点
+
+**Rick Schafer**（Oppenheimer，科技分析师）
+- 2026-11-23 · 观点 · 将英伟达上调至跑赢大盘，目标价 250 美元；称“黄仁勋回归对 AI 和投资者都是好事”，消除了领导层悬念。 [CNBC](https://www.cnbc.com/2026/11/23/nvidia-has-reinstated-ceo-jensen-huang-analysts-upgraded-the-stock.html)
+- 备注：卖方分析师，对英伟达的评级观点
+
+**Stacy Rasgon**（Bernstein，半导体分析师）
+- 2026-11-23 · 观点 · 将英伟达上调至跑赢大盘，目标价 200 美元；认为对 AI 建设基本面仍持正面看法，但此次风波留下的隐忧可能压制其估值倍数。 [CNBC](https://www.cnbc.com/2026/11/23/nvidia-has-reinstated-ceo-jensen-huang-analysts-upgraded-the-stock.html)
+- 备注：卖方分析师，对英伟达的评级观点
+
+**Tristan Gerra**（Robert W. Baird，科技分析师）
+- 2026-11-23 · 观点 · 维持英伟达持有评级，目标价 200 美元；担心出口规则收紧与 AI 数据中心支出的不确定性，并希望董事会调查更透明。 [TipRanks（转述 Baird 观点）](https://www.tipranks.com/news/is-nvidia-stock-a-buy-after-surging-31-on-jensen-huangs-comeback-heres-what-wall-street-thinks)
+- 备注：卖方分析师，对英伟达维持持有评级
 
 五天内未找到公开观点：Mislav Matejka（11 月 16 日欧洲盈利报告（窗口外）；窗口内未找到观点）、Lori Calvasina（11 月 2–5 日播客与 CNBC 采访（窗口外）；窗口内未找到观点）、John Stoltzfus（11 月 9 日 CNBC 引述（窗口外））、Barry Bannister、Liz Ann Sonders（11 月 20 日 Bloomberg 视频（窗口外））、Michael Hartnett（11 月 16 日 Flow Show 引述（窗口外））、Cathie Wood（11 月 20 日 CNBC 采访（窗口外））、Tony Dwyer、Howard Marks（11 月 11 日备忘录（窗口外）；11 月 21 日的文章为转载）、Scott Chronert（11 月 21 日 BNN 采访仅见标题，内容未核实）、Michael Kantrowitz（11 月 3 日（窗口外））、Brian Belski、Julian Emanuel（11 月 10–11 日（窗口外））、Dennis DeBusschere、Jeffrey Gundlach（11 月 12–15 日观点（窗口外））、Jeffrey Kleintop（窗口内未找到；可查到的访谈为 2025 年（窗口外））。
 
