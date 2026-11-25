@@ -686,6 +686,204 @@
       "role": "",
       "note": "窗口内未找到；最近的采访为 12 月 5 日（2025 年，窗口外）",
       "ai_bull_prob": null
+    },
+    {
+      "id": "danbin",
+      "market": "CN",
+      "name": "但斌",
+      "org": "东方港湾（私募，海外基金主要持美股）",
+      "role": "董事长",
+      "note": "民间私募大佬；主要持仓为海外 AI 相关股，归入 A 股名单",
+      "ai_bull_prob": 0.8
+    },
+    {
+      "id": "zhang-mengzhu",
+      "market": "CN",
+      "name": "章盟主（章建平）",
+      "org": "游资（席位：国泰海通上海江苏路营业部）",
+      "role": "游资",
+      "note": "知名游资；席位动向不等于本人发言，ai_bull_prob 留空",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "xiaoyaoge",
+      "market": "CN",
+      "name": "小瑜哥",
+      "org": "个人投资者（招财小瑜哥，基金复盘博主）",
+      "role": "个人复盘博主",
+      "note": "自称 8 年 A 股经验；个人持仓测算，不构成投资建议",
+      "ai_bull_prob": 0.2
+    },
+    {
+      "id": "tantou",
+      "market": "CN",
+      "name": "谭头论丑（谭头）",
+      "org": "个人投资者（谭头论丑，每日复盘）",
+      "role": "复盘博主",
+      "note": "网名，个人观点；标注为民间复盘，非机构",
+      "ai_bull_prob": 0.5
+    },
+    {
+      "id": "ge-weidong",
+      "market": "CN",
+      "name": "葛卫东（葛老大）",
+      "org": "牛散（混沌投资）",
+      "role": "牛散",
+      "note": "与葛老大为同一人；11-23 报道为三季报持仓，非本人发言，ai_bull_prob 留空",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "liang-hong",
+      "market": "CN",
+      "name": "梁宏",
+      "org": "海南希瓦私募",
+      "role": "首席投资官",
+      "note": "窗口内未找到；11-07 周报（窗口外，2026）。11-22 周报经核对为 2025 年，不计入",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "lin-yuan",
+      "market": "CN",
+      "name": "林园",
+      "org": "深圳林园投资",
+      "role": "董事长",
+      "note": "窗口内未找到；11-20 访谈比窗口早一天（窗口外）",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "liu-xin",
+      "market": "CN",
+      "name": "刘鑫（鑫多多）",
+      "org": "自然人牛散",
+      "role": "牛散",
+      "note": "窗口内未找到；2026-04-23 报道，11-02 三季报持仓（窗口外）",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "zhao-jianping",
+      "market": "CN",
+      "name": "赵建平",
+      "org": "自然人牛散",
+      "role": "牛散",
+      "note": "窗口内未找到；11-02 三季报持仓（窗口外）",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "zhang-suqin",
+      "market": "CN",
+      "name": "张素芬（夏重阳夫妇）",
+      "org": "自然人牛散",
+      "role": "牛散",
+      "note": "窗口内未找到；11-02 三季报持仓（窗口外）",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "zhao-laoge",
+      "market": "CN",
+      "name": "赵老哥（赵强）",
+      "org": "游资（席位：银河证券绍兴营业部）",
+      "role": "游资",
+      "note": "窗口内未找到",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "yangjia",
+      "market": "CN",
+      "name": "炒股养家（林广昌）",
+      "org": "游资（席位：华鑫证券上海宛平南路）",
+      "role": "游资",
+      "note": "窗口内未找到",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "zuoshou-xinyi",
+      "market": "CN",
+      "name": "作手新一",
+      "org": "游资（席位：国泰海通南京太平南路）",
+      "role": "游资",
+      "note": "窗口内未找到",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "fang-xinxia",
+      "market": "CN",
+      "name": "方新侠",
+      "org": "游资（席位：中信证券西安朱雀大街）",
+      "role": "游资",
+      "note": "窗口内未找到",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "sun-ge",
+      "market": "CN",
+      "name": "孙哥（古北路）",
+      "org": "游资",
+      "role": "游资",
+      "note": "窗口内未找到",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "chen-xiaoqun",
+      "market": "CN",
+      "name": "陈小群",
+      "org": "游资（席位：中国银河证券大连黄河路营业部）",
+      "role": "游资",
+      "note": "窗口内未找到；2026-01 报道（窗口外）",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "xiaoe-yu",
+      "market": "CN",
+      "name": "小鳄鱼",
+      "org": "游资",
+      "role": "游资",
+      "note": "窗口内未找到",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "hu-jialou",
+      "market": "CN",
+      "name": "呼家楼",
+      "org": "游资（席位：中信证券上海凯滨路）",
+      "role": "游资",
+      "note": "窗口内未找到",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "foshan-wuyingjiao",
+      "market": "CN",
+      "name": "佛山无影脚",
+      "org": "游资（席位：光大证券佛山绿景路营业部）",
+      "role": "游资",
+      "note": "窗口内未找到",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "chen-fashu",
+      "market": "CN",
+      "name": "陈发树",
+      "org": "自然人牛散",
+      "role": "牛散",
+      "note": "窗口内未找到；11-02 三季报持仓（窗口外）",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "xu-kaidong",
+      "market": "CN",
+      "name": "徐开东",
+      "org": "自然人牛散",
+      "role": "牛散",
+      "note": "窗口内未找到；2026 年一季报持仓（窗口外）",
+      "ai_bull_prob": null
+    },
+    {
+      "id": "wang-yawei",
+      "market": "CN",
+      "name": "王亚伟",
+      "org": "私募（民间）",
+      "role": "投资人",
+      "note": "窗口内未找到；本轮搜索未返回窗口内内容",
+      "ai_bull_prob": null
     }
   ]
 }
