@@ -1079,6 +1079,7 @@ def render_bigv_text(section, brief=False):
     start, end = section["window"]
     cov = section["coverage"]
     lines = [f"【大 V 观点 · 近五天】（{start} 至 {end}）",
+             "  注：多空概率是 AI 判断，不是本人表态。",
              "  " + " · ".join(f"{bigv_report.MARKETS[m]} {cov[m]['with_items']}/{cov[m]['people']} 位有记录"
                               for m in bigv_report.MARKETS) + f" · 共 {section['items_in_window']} 条"]
     if not section["items_in_window"]:

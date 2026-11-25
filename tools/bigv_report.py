@@ -32,6 +32,7 @@ DEFAULT_OUT = ROOT / "bigv" / "report"
 DIMENSIONS = ["发言", "观点", "评论", "采访", "报道", "视频", "文章", "直播", "互动", "讨论"]
 MARKETS = {"US": "美股", "CN": "A 股"}
 _ISO = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+AI_VIEW_NOTE = "多空概率是 AI 依据该人近五天条目的语气作出的判断，不是本人表态，仅供参考。"
 
 
 class DataError(ValueError):
@@ -50,6 +51,9 @@ def validate(people_doc: dict, items_doc: dict) -> tuple[list[dict], list[dict]]
     for p in people:
         if p.get("market") not in MARKETS:
             raise DataError(f"{p.get('id')}: market 只能是 US 或 CN")
+        prob = p.get("ai_bull_prob")
+        if prob is not None and not (isinstance(prob, (int, float)) and 0 <= prob <= 1):
+            raise DataError(f"{p.get('id')}: ai_bull_prob 必须在 0 到 1 之间或为 null")
     items = items_doc.get("items") or []
     for i, it in enumerate(items):
         where = f"items[{i}]"
@@ -85,6 +89,7 @@ def summarize(people: list[dict], items: list[dict], as_of: str, days: int) -> d
         rows.append({"id": p["id"], "market": p["market"], "name": p["name"],
                      "org": p.get("org", ""), "role": p.get("role", ""),
                      "note": p.get("note", ""), "count": len(mine),
+                     "ai_bull_prob": p.get("ai_bull_prob"),
                      "dimensions": dims, "latest": mine[0]["date"] if mine else None,
                      "items": mine})
     seen_dims = {it["dimension"] for it in inside}
@@ -95,6 +100,14 @@ def summarize(people: list[dict], items: list[dict], as_of: str, days: int) -> d
             "items_in_window": len(inside), "coverage": coverage,
             "dims_seen": [d for d in DIMENSIONS if d in seen_dims],
             "dims_missing": [d for d in DIMENSIONS if d not in seen_dims]}
+
+
+def ai_view_label(prob) -> str:
+    """0~1 的多头概率 → 「偏多 70%」「偏空 65%」；没有概率（五天内无记录）返回「—」。"""
+    if prob is None:
+        return "—"
+    lean = "偏多" if prob >= 0.5 else "偏空"
+    return f"{lean} {max(prob, 1 - prob):.0%}"
 
 
 def _cell(text: str) -> str:
@@ -109,18 +122,20 @@ def render_markdown(s: dict) -> str:
            + "；".join(f"{MARKETS[m]} {cov[m]['with_items']}/{cov[m]['people']} 位有记录"
                       for m in MARKETS) + "。",
            "",
-           "名单标准：机构策略分析师、基金管理人（美股、A 股各 10 位）。"
-           "个别人与「同级别」不完全一致，在表格备注里说明。",
+           f"**注意：{AI_VIEW_NOTE}**",
+           "",
+           "名单标准：机构策略分析师、基金管理人（美股、A 股各 50 位为目标，当前已核实 "
+           f"{len(s['rows'])} 位）。个别人与「同级别」不完全一致，在表格备注里说明。",
            ""]
     for m, label in MARKETS.items():
         out += [f"## {label}", "",
-                "| 人物 | 机构 | 条目 | 维度 | 最近 | 状态 |",
-                "| --- | --- | --- | --- | --- | --- |"]
+                "| 人物 | 机构 | 条目 | 维度 | 最近 | 状态 | AI 多空判断 |",
+                "| --- | --- | --- | --- | --- | --- | --- |"]
         for r in (x for x in s["rows"] if x["market"] == m):
             dims = "、".join(f"{d}×{n}" for d, n in r["dimensions"].items()) or "—"
             status = "有记录" if r["count"] else "五天内未找到公开观点"
             out.append(f"| {_cell(r['name'])} | {_cell(r['org'])} | {r['count']} | {dims} | "
-                       f"{r['latest'] or '—'} | {status} |")
+                       f"{r['latest'] or '—'} | {status} | {ai_view_label(r['ai_bull_prob'])} |")
         out.append("")
     out += ["## 逐条要点", ""]
     for m, label in MARKETS.items():

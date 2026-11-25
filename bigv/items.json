@@ -3,19 +3,257 @@
   "collected_on": "2026-11-25",
   "source_note": "沙箱只能访问 GitHub / npm / PyPI，X、YouTube、微博、雪球等平台的内容不能直接抓取。以下条目来自网络搜索结果（新闻报道、转载、研报摘要），每条都附原文链接。每日更新时在此文件末尾追加新条目即可。",
   "items": [
-    {"person": "tomlee", "date": "2026-11-25", "dimension": "报道", "title": "Fundstrat's Tom Lee Sees Limited Downside for US Stocks Through Year-End", "url": "https://tyriantrade.com/social/home/post/13a0f357-31fd-40a1-afe1-360f38d876ef", "summary": "认为 AI 需求是本轮与 2018 年的关键区别，美股年底前下行空间有限；未来 1、3、6 个月对美股风险收益保持正面看法。", "source": "Tyrian Trade"},
-    {"person": "wilson", "date": "2026-11-23", "dimension": "报道", "title": "摩根士丹利：美股回调带来绝佳的买入时机 “我们不会错过”", "url": "https://www.caiwennews.com/article/1714234.shtml", "summary": "标普 500 与道指进入修正区后，策略团队战术层面看多程度为 4 月以来最高，认为盈利与估值都支持反弹。", "source": "财闻网"},
-    {"person": "subramanian", "date": "2026-11-25", "dimension": "观点", "title": "BofA sees the S&P 500 climbing to 7,800 next year, making up lost ground", "url": "https://www.cnbc.com/2026/11/25/bank-of-america-sp-500-outlook.html", "summary": "2027 年底目标 7,800，牛市情景 8,500、熊市情景 6,600；担心供给（IPO）与需求（回购减少、退休资金流出）同时恶化。", "source": "CNBC"},
-    {"person": "yardeni", "date": "2026-11-22", "dimension": "观点", "title": "Yardeni Cuts S&P 500 Target Again, Says Bear Market Is Unlikely", "url": "https://www.bloomberg.com/news/articles/2026-11-22/yardeni-cuts-s-p-500-target-again-says-bear-market-is-unlikely", "summary": "2026 年底目标由 9 月的 7,900 下调至 7,500；认为熊市的可能性不大。", "source": "Bloomberg"},
-    {"person": "thorne", "date": "2026-11-22", "dimension": "观点", "title": "Analyst: Extreme fear in the U.S. stock market may create conditions for the next round of increases", "url": "https://www.chaincatcher.com/en/article/2307040", "summary": "认为极端恐慌为下一轮上涨创造条件；6,900 点是关键斐波那契支撑；若美联储转向宽松，历史上类似情形标普 12 个月中位涨幅约 33.7%。", "source": "ChainCatcher（转载）"},
-    {"person": "detrick", "date": "2026-11-25", "dimension": "采访", "title": "EXCLUSIVE: Ryan Detrick Says Tech Sector Important but Doesn’t Have to Lead — ‘Lifeblood of Bull Market is Rotation’", "url": "https://www.benzinga.com/trading-ideas/long-ideas/26/11/63635768/exclusive-ryan-detrick-says-tech-sector-important-but-doesnt-have-to-lead-lifeblood-of-bull-market-is-rotation", "summary": "认为四年牛市不会很快结束；指数跌 10% 进入修正区，但跌 20% 才算熊市；轮动是牛市的命脉。", "source": "Benzinga"},
-    {"person": "siegel", "date": "2026-11-23", "dimension": "采访", "title": "Stock selloff driven by leverage unwinding, Siegel says, as strong economy supports rebound", "url": "https://www.tokenpost.com/news/investing/62445", "summary": "在 CNBC 采访中称，下跌主要来自动量交易者的杠杆平仓，而非经济或盈利；经济仍强，预计股市反弹。", "source": "TokenPost（转述 CNBC 采访）"},
-    {"person": "chen-guo", "date": "2026-11-24", "dimension": "观点", "title": "A股最新研判来了！暴力反弹，倒计时", "url": "https://www.21jingji.com/article/20261124/herald/8462ec91c2a8a97badcf70c32986cc85.html", "summary": "认为 A 股本次调整主要来自海外波动（担心美联储加息与美国 AI 放缓）；美国 AI 资本开支对中国的传导远小于对美国，应以中期、价值思维应对。", "source": "中国商报（21 经济网转载）"},
-    {"person": "wu-kaida", "date": "2026-11-24", "dimension": "观点", "title": "A股最新研判来了！暴力反弹，倒计时", "url": "https://www.21jingji.com/article/20261124/herald/8462ec91c2a8a97badcf70c32986cc85.html", "summary": "国内科技基本面向好：半导体、电子化学品、自动化设备等板块前三季度收入保持两位数增长，利润增速快于收入。", "source": "中国商报（21 经济网转载）"},
-    {"person": "huang-yanming", "date": "2026-11-24", "dimension": "观点", "title": "A股最新研判来了！暴力反弹，倒计时", "url": "https://www.21jingji.com/article/20261124/herald/8462ec91c2a8a97badcf70c32986cc85.html", "summary": "AI 产业前期需要持续、大规模的资本投入，资金可获得性与成本直接影响节奏；资金供给、电力保障与政策协同是支撑。", "source": "中国商报（21 经济网转载）"},
-    {"person": "lu-zhe", "date": "2026-11-24", "dimension": "观点", "title": "A股最新研判来了！暴力反弹，倒计时", "url": "https://www.21jingji.com/article/20261124/herald/8462ec91c2a8a97badcf70c32986cc85.html", "summary": "资本市场稳市托底持续推进，超跌后的修复窗口或临近。", "source": "中国商报（21 经济网转载）"},
-    {"person": "liu-chenming", "date": "2026-11-22", "dimension": "观点", "title": "十大券商，重磅发声！", "url": "https://www.21jingji.com/article/20261122/herald/5ccec65ef71d15edb57743a2cd8f63a7.html", "summary": "A 股多重积极因素正在积聚：资金结构转向保险、被动 ETF 等中长期力量；长周期考核缓解机构短视。", "source": "中国基金报（21 经济网转载）"},
-    {"person": "zhang-jiqiang", "date": "2026-11-22", "dimension": "观点", "title": "十大券商，重磅发声！", "url": "https://www.21jingji.com/article/20261122/herald/5ccec65ef71d15edb57743a2cd8f63a7.html", "summary": "近期波动主要受全球流动性收缩等外围因素冲击，A 股跌幅明显低于其他市场；从四个角度看多 A 股中长期前景。", "source": "中国基金报（21 经济网转载）"},
-    {"person": "yue-yang", "date": "2026-11-22", "dimension": "观点", "title": "十大券商，重磅发声！", "url": "https://www.21jingji.com/article/20261122/herald/5ccec65ef71d15edb57743a2cd8f63a7.html", "summary": "AI 硬件板块的预期扰动、订单节奏分化与估值回调属于景气上行中的阶段性调整，算力扩容大周期未变。", "source": "中国基金报（21 经济网转载）"}
+    {
+      "person": "tomlee",
+      "date": "2026-11-25",
+      "dimension": "报道",
+      "title": "Fundstrat's Tom Lee Sees Limited Downside for US Stocks Through Year-End",
+      "url": "https://tyriantrade.com/social/home/post/13a0f357-31fd-40a1-afe1-360f38d876ef",
+      "summary": "认为 AI 需求是本轮与 2018 年的关键区别，美股年底前下行空间有限；未来 1、3、6 个月对美股风险收益保持正面看法。",
+      "source": "Tyrian Trade"
+    },
+    {
+      "person": "wilson",
+      "date": "2026-11-23",
+      "dimension": "报道",
+      "title": "摩根士丹利：美股回调带来绝佳的买入时机 “我们不会错过”",
+      "url": "https://www.caiwennews.com/article/1714234.shtml",
+      "summary": "标普 500 与道指进入修正区后，策略团队战术层面看多程度为 4 月以来最高，认为盈利与估值都支持反弹。",
+      "source": "财闻网"
+    },
+    {
+      "person": "subramanian",
+      "date": "2026-11-25",
+      "dimension": "观点",
+      "title": "BofA sees the S&P 500 climbing to 7,800 next year, making up lost ground",
+      "url": "https://www.cnbc.com/2026/11/25/bank-of-america-sp-500-outlook.html",
+      "summary": "2027 年底目标 7,800，牛市情景 8,500、熊市情景 6,600；担心供给（IPO）与需求（回购减少、退休资金流出）同时恶化。",
+      "source": "CNBC"
+    },
+    {
+      "person": "yardeni",
+      "date": "2026-11-22",
+      "dimension": "观点",
+      "title": "Yardeni Cuts S&P 500 Target Again, Says Bear Market Is Unlikely",
+      "url": "https://www.bloomberg.com/news/articles/2026-11-22/yardeni-cuts-s-p-500-target-again-says-bear-market-is-unlikely",
+      "summary": "2026 年底目标由 9 月的 7,900 下调至 7,500；认为熊市的可能性不大。",
+      "source": "Bloomberg"
+    },
+    {
+      "person": "thorne",
+      "date": "2026-11-22",
+      "dimension": "观点",
+      "title": "Analyst: Extreme fear in the U.S. stock market may create conditions for the next round of increases",
+      "url": "https://www.chaincatcher.com/en/article/2307040",
+      "summary": "认为极端恐慌为下一轮上涨创造条件；6,900 点是关键斐波那契支撑；若美联储转向宽松，历史上类似情形标普 12 个月中位涨幅约 33.7%。",
+      "source": "ChainCatcher（转载）"
+    },
+    {
+      "person": "detrick",
+      "date": "2026-11-25",
+      "dimension": "采访",
+      "title": "EXCLUSIVE: Ryan Detrick Says Tech Sector Important but Doesn’t Have to Lead — ‘Lifeblood of Bull Market is Rotation’",
+      "url": "https://www.benzinga.com/trading-ideas/long-ideas/26/11/63635768/exclusive-ryan-detrick-says-tech-sector-important-but-doesnt-have-to-lead-lifeblood-of-bull-market-is-rotation",
+      "summary": "认为四年牛市不会很快结束；指数跌 10% 进入修正区，但跌 20% 才算熊市；轮动是牛市的命脉。",
+      "source": "Benzinga"
+    },
+    {
+      "person": "siegel",
+      "date": "2026-11-23",
+      "dimension": "采访",
+      "title": "Stock selloff driven by leverage unwinding, Siegel says, as strong economy supports rebound",
+      "url": "https://www.tokenpost.com/news/investing/62445",
+      "summary": "在 CNBC 采访中称，下跌主要来自动量交易者的杠杆平仓，而非经济或盈利；经济仍强，预计股市反弹。",
+      "source": "TokenPost（转述 CNBC 采访）"
+    },
+    {
+      "person": "chen-guo",
+      "date": "2026-11-24",
+      "dimension": "观点",
+      "title": "A股最新研判来了！暴力反弹，倒计时",
+      "url": "https://www.21jingji.com/article/20261124/herald/8462ec91c2a8a97badcf70c32986cc85.html",
+      "summary": "认为 A 股本次调整主要来自海外波动（担心美联储加息与美国 AI 放缓）；美国 AI 资本开支对中国的传导远小于对美国，应以中期、价值思维应对。",
+      "source": "中国商报（21 经济网转载）"
+    },
+    {
+      "person": "wu-kaida",
+      "date": "2026-11-24",
+      "dimension": "观点",
+      "title": "A股最新研判来了！暴力反弹，倒计时",
+      "url": "https://www.21jingji.com/article/20261124/herald/8462ec91c2a8a97badcf70c32986cc85.html",
+      "summary": "国内科技基本面向好：半导体、电子化学品、自动化设备等板块前三季度收入保持两位数增长，利润增速快于收入。",
+      "source": "中国商报（21 经济网转载）"
+    },
+    {
+      "person": "huang-yanming",
+      "date": "2026-11-24",
+      "dimension": "观点",
+      "title": "A股最新研判来了！暴力反弹，倒计时",
+      "url": "https://www.21jingji.com/article/20261124/herald/8462ec91c2a8a97badcf70c32986cc85.html",
+      "summary": "AI 产业前期需要持续、大规模的资本投入，资金可获得性与成本直接影响节奏；资金供给、电力保障与政策协同是支撑。",
+      "source": "中国商报（21 经济网转载）"
+    },
+    {
+      "person": "lu-zhe",
+      "date": "2026-11-24",
+      "dimension": "观点",
+      "title": "A股最新研判来了！暴力反弹，倒计时",
+      "url": "https://www.21jingji.com/article/20261124/herald/8462ec91c2a8a97badcf70c32986cc85.html",
+      "summary": "资本市场稳市托底持续推进，超跌后的修复窗口或临近。",
+      "source": "中国商报（21 经济网转载）"
+    },
+    {
+      "person": "liu-chenming",
+      "date": "2026-11-22",
+      "dimension": "观点",
+      "title": "十大券商，重磅发声！",
+      "url": "https://www.21jingji.com/article/20261122/herald/5ccec65ef71d15edb57743a2cd8f63a7.html",
+      "summary": "A 股多重积极因素正在积聚：资金结构转向保险、被动 ETF 等中长期力量；长周期考核缓解机构短视。",
+      "source": "中国基金报（21 经济网转载）"
+    },
+    {
+      "person": "zhang-jiqiang",
+      "date": "2026-11-22",
+      "dimension": "观点",
+      "title": "十大券商，重磅发声！",
+      "url": "https://www.21jingji.com/article/20261122/herald/5ccec65ef71d15edb57743a2cd8f63a7.html",
+      "summary": "近期波动主要受全球流动性收缩等外围因素冲击，A 股跌幅明显低于其他市场；从四个角度看多 A 股中长期前景。",
+      "source": "中国基金报（21 经济网转载）"
+    },
+    {
+      "person": "yue-yang",
+      "date": "2026-11-22",
+      "dimension": "观点",
+      "title": "十大券商，重磅发声！",
+      "url": "https://www.21jingji.com/article/20261122/herald/5ccec65ef71d15edb57743a2cd8f63a7.html",
+      "summary": "AI 硬件板块的预期扰动、订单节奏分化与估值回调属于景气上行中的阶段性调整，算力扩容大周期未变。",
+      "source": "中国基金报（21 经济网转载）"
+    },
+    {
+      "person": "wilson",
+      "date": "2026-11-24",
+      "dimension": "报道",
+      "title": "He correctly said the S&P 500 would fall to 7100; Now, Morgan Stanley's Mike Wilson has another gutsy forecast",
+      "url": "https://www.thestreet.com/investing/he-correctly-said-the-s-now-morgan-stanleys-mike-wilson-has-another-gutsy-forecast",
+      "summary": "标普跌破 7,100–7,300 的区间，他认为这是估值超调；称这是「一直在等的 fat pitch」，标普 16.4 倍 vs 合理 19–19.6 倍；提醒 V 型底比 W 型底更少见、仍有回测低点风险。",
+      "source": "TheStreet"
+    },
+    {
+      "person": "newton",
+      "date": "2026-11-24",
+      "dimension": "观点",
+      "title": "S&P 500 outlook November 2026: Breadth, sectors",
+      "url": "https://fundstratdirect.com/technical-strategy/daily-technical-strategy/2026/11/24/lack-of-follow-through-keeps-the-burden-of-proof-on-the-bulls/",
+      "summary": "周一反弹后缺乏跟进，多方仍需证明；感恩节周流动性薄，关注防御与科技的轮动及 Zweig 广度推力指标。",
+      "source": "Fundstrat Direct"
+    },
+    {
+      "person": "cramer",
+      "date": "2026-11-24",
+      "dimension": "观点",
+      "title": "Jim Cramer says 'the time is now' to put sidelined cash to work",
+      "url": "https://www.cnbc.com/investingclub/2026/11/24/jim-cramer-says-the-time-is-now-to-put-sidelined-cash-to-work.html",
+      "summary": "认为超卖正是机会，「时候到了」把闲置现金投入；认为英伟达回落后仍有买盘，AMD 是很好的买点。",
+      "source": "CNBC Investing Club"
+    },
+    {
+      "person": "brown",
+      "date": "2026-11-24",
+      "dimension": "观点",
+      "title": "Josh Brown's best stocks in the market: SharkNinja, Target and eBay",
+      "url": "https://www.cnbc.com/video/2026/11/24/josh-browns-best-stocks-in-the-market-sharkninja-target-and-ebay.html",
+      "summary": "在 CNBC 午间节目推荐 SharkNinja、Target、eBay 三只股票。",
+      "source": "CNBC"
+    },
+    {
+      "person": "lakos-bujas",
+      "date": "2026-11-24",
+      "dimension": "观点",
+      "title": "JPMorgan bets on an AI supercycle, sets S&P 500 target of 8,200 for 2027",
+      "url": "https://cryptobriefing.com/jpmorgan-ai-supercycle-sp-500-2027/",
+      "summary": "2027 年底目标 8,200（按 19 倍市盈率、EPS 约 430 美元）；认为近期调整来自情绪与去杠杆，而非 AI 需求破裂。",
+      "source": "Cryptobriefing（转载）"
+    },
+    {
+      "person": "ackman",
+      "date": "2026-11-25",
+      "dimension": "观点",
+      "title": "亿万富翁比尔·阿克曼警告：美联储“即将犯下另一个错误”",
+      "url": "https://k.sina.com.cn/article_7857201856_1d45362c001908w1fy.html",
+      "summary": "认为美联储 12 月加息是错误，金融条件已偏紧，可能带来衰退风险。",
+      "source": "新浪财经"
+    },
+    {
+      "person": "ivascyn",
+      "date": "2026-11-25",
+      "dimension": "采访",
+      "title": "新浪美联储热点小时报丨2026年11月25日04时",
+      "url": "https://k.sina.com.cn/article_7857201856_1d45362c001908w1d2.html",
+      "summary": "Pimco 首席投资官称，AI 带来的颠覆性风险提升了债券吸引力；通胀超目标五年以上，投资者准备迎接进一步加息。",
+      "source": "新浪财经（转述采访）"
+    },
+    {
+      "person": "wu-xinkun",
+      "date": "2026-11-24",
+      "dimension": "采访",
+      "title": "新浪A股热点小时报丨2026年11月24日16时",
+      "url": "https://k.sina.com.cn/article_7857201856_1d45362c001908w07x.html",
+      "summary": "稳市政策加力（融资保证金比例下限降至 80%、创业板做市商、降费），有望推动 A 股逐渐企稳。",
+      "source": "证券时报（新浪转载）"
+    },
+    {
+      "person": "li-bei",
+      "date": "2026-11-24",
+      "dimension": "发言",
+      "title": "李蓓出手做多A股，看好中国未来20年大国运！",
+      "url": "https://k.sina.com.cn/article_7857201856_1d45362c001908w07x.html",
+      "summary": "发帖称上周开始卖出宽基指数 put，周五和周一持续买入股指；看好中国未来 20 年的「大国运」。",
+      "source": "财通社（新浪转载）"
+    },
+    {
+      "person": "bao-chengchao",
+      "date": "2026-11-24",
+      "dimension": "采访",
+      "title": "中信证券包承超：市场调整已经前置！优秀龙头股存在估值洼地",
+      "url": "https://k.sina.com.cn/article_7857201856_1d45362c001908w088.html",
+      "summary": "市场调整已经前置，杠铃中段的优秀龙头存在估值洼地；看好明年行情宽度拓展，「行情分散、聚焦龙头」。",
+      "source": "券商中国（新浪转载）"
+    },
+    {
+      "person": "li-zhan",
+      "date": "2026-11-24",
+      "dimension": "观点",
+      "title": "新浪A股热点小时报丨2026年11月24日11时",
+      "url": "https://k.sina.com.cn/article_7857201856_1d45362c001908vzm8.html",
+      "summary": "认为黄仁勋复职修复了 A 股科技板块的风险偏好；短期利好算力、服务器、光模块等 AI 芯片供应链。",
+      "source": "新浪财经（转述）"
+    },
+    {
+      "person": "liao-bo",
+      "date": "2026-11-24",
+      "dimension": "采访",
+      "title": "东北证券廖博：2027年A股结构性机会丰富，科技成长与红利或交替走强",
+      "url": "https://k.sina.com.cn/article_7857201856_1d45362c001908vzr8.html",
+      "summary": "近期波动是流动性再平衡，A 股长期向好趋势未变；大盘蓝筹与低波红利有望吸引趋势性资金。",
+      "source": "券商中国（新浪转载）"
+    },
+    {
+      "person": "li-haoyang",
+      "date": "2026-11-21",
+      "dimension": "采访",
+      "title": "新浪A股热点小时报丨2026年11月21日01时",
+      "url": "https://k.sina.com.cn/article_7857201856_1d45362c001908vmw0.html",
+      "summary": "部分指数回撤已进入历史中等水平；关注估值合理、盈利稳健、有股息的大盘蓝筹，以及调整较大、盈利持续的优质成长。",
+      "source": "中经记者（新浪转载）"
+    },
+    {
+      "person": "mou-yiling",
+      "date": "2026-11-22",
+      "dimension": "观点",
+      "title": "十大券商，重磅发声！",
+      "url": "https://m.21jingji.com/article/20261122/herald/5ccec65ef71d15edb57743a2cd8f63a7.html",
+      "summary": "认为美元紧缩预期可能已到顶，中国非 AI 领域会有更多机会；能源链与有色、化工的部分细分景气延续。",
+      "source": "中国基金报（21 经济网转载）"
+    }
   ]
 }
