@@ -827,6 +827,10 @@ class BuildTest(unittest.TestCase):
         # 窗口外不能再空睡 5.5 小时：缺最近收盘就补一次，否则 break 释放 runner。
         self.assertIn("--in-window", loop)
         self.assertIn("--needs-catch-up", loop)
+        # 收盘后合并代码也必须跑一轮，才能发布新 schema/manifest；机器人只改 site，
+        # 不匹配 workflow 的 push.paths，所以不会自触发成死循环。
+        self.assertIn('[ "$GITHUB_EVENT_NAME" = "push" ]', loop)
+        self.assertIn("强制抓取一轮以发布新 schema/产物", loop)
         self.assertNotIn("--sleep-until-window", loop)
         self.assertIn('echo "窗口外且面板数据已覆盖最近工作日：本轮结束"', loop)
         self.assertIn("break", loop)

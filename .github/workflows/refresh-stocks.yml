@@ -145,8 +145,14 @@ jobs:
 
             catch_up=0
             if ! python tools/stocks_watchdog.py --in-window; then
+              # 行情日期虽新，代码/模板 push 仍可能引入新 schema 或新产物；强制真实抓取
+              # 一轮，否则收盘后合并的 stocks-manifest/sidecar 永远等不到下一交易日。
+              # site-only 的机器人提交不在 on.push.paths 内，不会因此形成无限循环。
+              if [ "$round" -eq 0 ] && [ "$GITHUB_EVENT_NAME" = "push" ]; then
+                catch_up=1
+                echo "窗口外收到代码 push：强制抓取一轮以发布新 schema/产物"
               # 迟到到收盘后/凌晨：缺最近工作日快照就补一次；已经有就立刻释放 runner。
-              if [ "$round" -eq 0 ] \
+              elif [ "$round" -eq 0 ] \
                  && python tools/stocks_watchdog.py --needs-catch-up --manifest site/stocks.json; then
                 catch_up=1
                 echo "窗口外但面板缺最近工作日快照：补抓一轮后退出"
