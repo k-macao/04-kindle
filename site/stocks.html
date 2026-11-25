@@ -478,7 +478,7 @@ if(!n)h+='<p class="meta">窗口内没有条目：数据需每日往 bigv/items.
 h+='<table class="card"><tr><th>人物</th><th>条数</th><th>最近要点</th></tr>';
 rows.forEach(function(r){
 var f=(r.items||[])[0];
-var who=esc(r.name)+' <span class="muted">'+(r.market==='US'?'美股':'A 股')+' · '+esc(r.org)+'</span>';
+var who=esc(r.name)+' <span class="muted">'+(r.market==='US'?'美股':(r.market==='HK'?'港股':'A 股'))+' · '+esc(r.org)+'</span>';
 var what=f?esc(f.date)+' · '+esc(f.dimension)+'：'+esc(f.summary)+' <a href="'+esc(f.url)+'">原文</a>':'<span class="muted">五天内未找到公开观点</span>';
 h+='<tr><td>'+who+'</td><td>'+(r.count||0)+'</td><td>'+what+'</td></tr>';});
 h+='</table>';
