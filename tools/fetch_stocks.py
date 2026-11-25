@@ -30,7 +30,9 @@ REST 接口约定（见仓库 ``docs/api/README.md``）：
 - ``GET /api/a-share/prices/historical-batch`` 与指数同名接口 —— 最近
   ``--history-days`` 根日 K 收盘价，给卡片上的迷你走势图（失败不挡快照）；
   板块另取 ``--rrg-days`` 根（默认 340），喂给 ``tools/sector_rrg.py`` 的
-  RRG 板块轮动（策略来自 GitHub ``hugo2046/QuantsPlaybook``）。
+  RRG 板块轮动（策略来自 GitHub ``hugo2046/QuantsPlaybook``）；宽基指数另取
+  ``--timing-days`` 根（默认 800，带最高/最低价），喂给 ``tools/timing_quants.py``
+  的 ICU 均线 + QRS 择时（``--no-timing`` 关掉）。
 
 快照不返回中文名，名字用 ``GET /api/meta/tickers/search?q=<thscode>`` 逐个补，
 补过的存进 ``site/stocks_names.json`` 缓存，下次不再问（和新闻译文缓存一个路子）。
@@ -60,6 +62,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import ah_leaders  # noqa: E402
 import ew_sdm  # noqa: E402
+import timing_quants  # noqa: E402
 import market_watchlist  # noqa: E402
 import sector_rrg  # noqa: E402
 
@@ -468,6 +471,74 @@ def build_rrg(client, rows, days=340, cache_minutes=60, top_n=6, preset_key="",
         history, sectors, today_prices=prices, today_day=today_day,
         today_pct=pct, top_n=top_n, preset_key=preset_key or None)
     return section, notes + more
+
+
+# 指数择时（ICU 均线 + QRS）要最高/最低价，且 QRS 至少 617 根日线。缓存规则同 RRG：
+# 当天 + TTL + 同一批代码，盘中循环不反复拉几百根 K 线。
+TIMING_CACHE = {"day": "", "stamp": 0.0, "history": {}, "codes": frozenset()}
+
+
+def normalize_index_ohlc_group(group, keep):
+    """指数历史组 → ``[[毫秒, 最高, 最低, 收盘], ...]``（升序，只留最近 keep 根）。缺字段的根直接丢。"""
+    if not isinstance(group, dict):
+        return []
+    bars = []
+    for raw in group.get("item") or []:
+        if not isinstance(raw, dict):
+            continue
+        date_ms = raw.get("date_ms")
+        values = [_num(raw.get("high_price")), _num(raw.get("low_price")),
+                  _num(raw.get("close_price"))]
+        if isinstance(date_ms, (int, float)) and all(v is not None for v in values):
+            bars.append([int(date_ms)] + values)
+    bars.sort(key=lambda row: row[0])
+    return bars[-keep:] if keep and keep > 0 else bars
+
+
+def fetch_index_ohlc(client, codes, days, now_ms=None):
+    """宽基指数批量日线（每批 10 个）→ {代码: [[毫秒, 最高, 最低, 收盘], ...]}。"""
+    if not codes or not days or days <= 0:
+        return {}
+    now_ms = now_ms or int(datetime.now(timezone.utc).timestamp() * 1000)
+    start_ms = now_ms - (days * 2 + 10) * 24 * 3600 * 1000
+    history = {}
+    unique = list(dict.fromkeys(code for code in codes if code))
+    for offset in range(0, len(unique), 10):
+        chunk = unique[offset:offset + 10]
+        data = client.get("/api/a-share-index/prices/historical-batch", {
+            "thscodes": ",".join(chunk), "interval": "1d",
+            "start": start_ms, "end": now_ms, "adjust": "forward"})
+        for group in data.get("item") or []:
+            if isinstance(group, dict) and group.get("thscode"):
+                history[str(group["thscode"])] = normalize_index_ohlc_group(group, days)
+    return history
+
+
+def timing_history(client, codes, days, cache_minutes=60, now=None):
+    """指数择时历史，带当天缓存。返回 (history, 是否命中缓存)。"""
+    now = now or datetime.now(timezone.utc)
+    today = now.strftime("%Y-%m-%d")
+    cache = TIMING_CACHE
+    wanted = frozenset(codes)
+    stamp = now.timestamp()
+    fresh = (cache["history"] and cache["day"] == today and cache["codes"] == wanted
+             and (stamp - cache["stamp"]) < cache_minutes * 60)
+    if fresh:
+        return cache["history"], True
+    history = fetch_index_ohlc(client, list(codes), days)
+    if history:
+        cache.update({"day": today, "stamp": stamp, "history": history, "codes": wanted})
+    return history, False
+
+
+def build_timing(client, indices, days=800, cache_minutes=60, as_of=""):
+    """宽基指数 → 择时段落（见 ``tools/timing_quants.py``）。历史整体取不到时抛 ThsError 由调用方记录。"""
+    codes = [code for code, _ in indices]
+    history, cached = timing_history(client, codes, days, cache_minutes)
+    if not history:
+        raise ThsError("指数日线一条都没取到")
+    notes = ["沿用今天早些时候的指数日线缓存"] if cached else []
+    return timing_quants.build_section(indices, history, as_of=as_of, notes=notes)
 
 
 def build_ew_sdm(client, sectors, market_rows, limit_pool, members_cache=None,
@@ -908,6 +979,18 @@ def run_once(args, client):
         except Exception as exc:  # noqa: BLE001 情绪段失败不该挡住其余段落
             payload["errors"].append(f"板块情绪 EW-SDM 未生成：{exc}")
 
+    # 4c) 指数择时 ICU 均线 + QRS（指数日线 + 最高/最低价；独立失败）
+    if not getattr(args, "no_timing", False):
+        try:
+            payload["timing"] = build_timing(
+                client, list(market_watchlist.INDICES),
+                days=getattr(args, "timing_days", 800),
+                cache_minutes=args.rrg_cache_minutes,
+                as_of=(sector_rrg.beijing_day(payload["index_timestamp"])
+                       if isinstance(payload.get("index_timestamp"), (int, float)) else ""))
+        except Exception as exc:  # noqa: BLE001 择时段失败不该挡住其余段落
+            payload["errors"].append(f"指数择时未生成：{exc}")
+
     # 5) 港股（腾讯源，独立失败，不拖垮 A 股）
     if not args.no_hk:
         try:
@@ -981,6 +1064,10 @@ def main(argv=None):
                         help="卡片迷你走势图取最近几根日 K（0=不取）")
     parser.add_argument("--no-rrg", action="store_true",
                         help="不算板块轮动 RRG（省掉板块长期日 K 的 10 次批量请求）")
+    parser.add_argument("--no-timing", action="store_true",
+                        help="不算指数择时 ICU 均线 / QRS（默认算，用宽基指数日线）")
+    parser.add_argument("--timing-days", type=int, default=800,
+                        help="指数择时取多少根日线（QRS 至少要 617 根，默认 800）")
     parser.add_argument("--no-ew-sdm", action="store_true",
                         help="不算板块情绪 EW-SDM（默认算，用全 A 快照 + 涨停池）")
     parser.add_argument("--ew-pool-size", type=int, default=ew_sdm.DEFAULT_POOL_SIZE,

@@ -466,6 +466,20 @@ class RunOnceTest(unittest.TestCase):
             client = self.Router(self.sectors)
             payload = fetch_stocks.run_once(self.args, client)
             self.assertNotIn("sector_rrg", payload)
+            # 指数择时（timing）也走 historical-batch，但那是指数代码；这里只禁止板块（.TI）日线
+            sector_calls = [call for call in client.calls
+                            if "historical-batch" in call[0]
+                            and ".TI" in str(call[1].get("thscodes", ""))]
+            self.assertFalse(sector_calls)
+
+    def test_no_rrg_and_no_timing_skip_all_history_requests(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            self.args.out = str(Path(tmp) / "stocks_data.json")
+            self.args.no_rrg = True
+            self.args.no_timing = True
+            client = self.Router(self.sectors)
+            payload = fetch_stocks.run_once(self.args, client)
+            self.assertNotIn("timing", payload)
             self.assertFalse([call for call in client.calls
                               if "historical-batch" in call[0]])
 

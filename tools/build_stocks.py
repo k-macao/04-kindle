@@ -42,6 +42,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import ah_leaders  # noqa: E402
 import ew_sdm  # noqa: E402
+import timing_quants  # noqa: E402
 import jrglobal_radar  # noqa: E402
 import sector_rrg  # noqa: E402
 
@@ -1165,6 +1166,8 @@ def manifest(payload, generated, view=None):
         "rrg": rrg_part or None,
         # 板块情绪 EW-SDM（单日横截面，见 tools/ew_sdm.py）；没算出来就是 null。
         "ew_sdm": payload.get("ew_sdm") or None,
+        # 指数择时 ICU 均线 + QRS（见 tools/timing_quants.py）；没算出来就是 null。
+        "timing": payload.get("timing") or None,
         # 日 K 不够时的兼容段；量价结果则无论有没有 RRG 都独立输出。
         "cross": cross_part or None,
         "volume_price": volume_part or None,
@@ -1248,6 +1251,12 @@ def render_txt(payload, generated, brief=None):
     ew_part = payload.get("ew_sdm")
     if ew_part:
         lines.extend(ew_sdm.render_text_lines(ew_part, limit=3 if brief else 6))
+        lines.append("")
+
+    # 指数择时 ICU 均线 + QRS：宽基指数日线算的，周末精简版只留 ICU 行。
+    timing_part = payload.get("timing")
+    if timing_part:
+        lines.extend(timing_quants.render_text_lines(timing_part, brief=brief))
         lines.append("")
 
     # Jovian Research (jrglobal.xyz/tools/) 聪明钱雷达 + AI 数据智库 + 组合实验室
@@ -1838,6 +1847,35 @@ h+=resultCard('赚钱主线',lead.name||'--',lead.count?((lead.count||0)+' 只 �
 h+='</div></section>';
 return h;}
 
+function timingSection(t){
+var rows=(t&&t.rows)||[];
+if(!rows.length)return '';
+var h='<section><h2>指数择时 · ICU 均线 / RSRS(QRS)<span class="muted"> '+rows.length+' 个'+(t.as_of?' · '+esc(t.as_of):'')+'</span></h2>';
+h+='<p class="meta">ICU(5)：收盘上穿买、下穿卖。QRS：上穿 +0.7 开、下穿 -0.7 平。</p>';
+h+='<table class="card"><tr><th>指数</th><th>收盘</th><th>ICU</th><th>状态</th><th>QRS</th><th>状态</th></tr>';
+rows.forEach(function(r){
+var cross=r.icu_last_cross?(r.icu_last_cross.side+r.icu_last_cross.bars_ago+'日前'):'近期无穿越';
+h+='<tr><td>'+esc(r.name)+'</td><td>'+num(r.close,2)+'</td><td>'+num(r.icu,2)+'</td><td>'+esc(r.icu_state||'--')+'<br><span class="muted">'+esc(cross)+'</span></td><td>'+(r.qrs==null?'--':(r.qrs>0?'+':'')+num(r.qrs,2))+'</td><td>'+esc(r.qrs_state||'--')+'</td></tr>';});
+h+='</table>';
+(t.notes||[]).forEach(function(n){h+='<p class="meta">'+esc(n)+'</p>';});
+return h+'</section>';}
+
+function ewSection(e){
+var cov=e.coverage||{};
+var ok=(e.rows||[]).filter(function(r){return r.status==='ok';});
+if(!ok.length)return '';
+var byScore=ok.slice().sort(function(a,b){return b.final_score-a.final_score;});
+var strong=byScore.slice(0,6),weak=byScore.slice().reverse().slice(0,6);
+function line(r){var st=r.max_streak?('最高'+r.max_streak+'板'):'无连板';
+return '<tr><td>'+esc(r.name)+'</td><td>'+(r.final_score>0?'+':'')+num(r.final_score,2)+'</td><td>'+(r.momentum>0?'+':'')+num(r.momentum,2)+'%</td><td>'+num(r.emotion_diff,2)+'</td><td>'+(r.limit_up_count||0)+' · '+st+'</td></tr>';}
+var head='<tr><th>板块</th><th>分</th><th>涨跌</th><th>情绪</th><th>涨停 · 连板</th></tr>';
+var h='<section><h2>板块情绪 · EW-SDM<span class="muted"> 共 '+ok.length+' 个'+(e.as_of?' · '+esc(e.as_of):'')+'</span></h2>';
+h+='<p class="meta">分 = 涨跌幅 × 情绪 × 连板杠杆；分为 0 = 板块内没有涨停、也没有涨超 3% 的股票。覆盖 '+(cov.sectors_ok||0)+'/'+(cov.sectors||0)+' 个板块，成分股 '+(cov.priced||0)+'/'+(cov.members||0)+' 只。</p>';
+h+='<h3>强</h3><table class="card">'+head+strong.map(line).join('')+'</table>';
+h+='<h3>弱</h3><table class="card">'+head+weak.map(line).join('')+'</table>';
+(e.notes||[]).forEach(function(n){h+='<p class="meta">'+esc(n)+'</p>';});
+return h+'</section>';}
+
 function rrgSection(g,brief){
 var rows=g.rows||[];
 if(!rows.length)return '';
@@ -1951,6 +1989,8 @@ else h+='<section><h2>涨停池（'+d.limit_up.length+
 '）· 按封板时间</h2>'+limitRows(d.limit_up)+'</section>';}
 // RRG 是量价结果之外的中期轮动补充；没有日 K 时不再重复输出同一份横截面。
 if(d.rrg&&d.rrg.rows&&d.rrg.rows.length)h+=rrgSection(d.rrg,brief);
+if(d.timing&&d.timing.rows&&d.timing.rows.length)h+=timingSection(d.timing);
+if(d.ew_sdm&&d.ew_sdm.rows&&d.ew_sdm.rows.length)h+=ewSection(d.ew_sdm);
 (d.errors||[]).forEach(function(e){h+='<p>注：'+esc(e)+'</p>';});
 document.getElementById('main').innerHTML=h||'<p>暂无数据</p>';
 var demo=d.demo?'【演示数据】':'';
@@ -2298,6 +2338,27 @@ def render_epub_xhtml(payload, generated_bj, brief=None):
                 )
             parts.append("</table>")
 
+    # 指数择时：ICU 与 QRS 各一张小表（与纯文本同口径）。
+    timing_part = payload.get("timing")
+    if timing_part and timing_part.get("rows"):
+        parts.append("<h2>指数择时 · ICU 均线 / RSRS(QRS)</h2>")
+        parts.append('<table class="card"><tr><th>指数</th><th>收盘</th><th>ICU(5)</th>'
+                     '<th>ICU 状态</th><th>QRS</th><th>QRS 状态</th></tr>')
+        for row in timing_part["rows"]:
+            close = row.get("close")
+            icu = row.get("icu")
+            qrs = row.get("qrs")
+            parts.append(
+                f"<tr><td>{esc(row.get('name'))}</td>"
+                f"<td>{'--' if close is None else f'{close:.2f}'}</td>"
+                f"<td>{'--' if icu is None else f'{icu:.2f}'}</td>"
+                f"<td>{esc(row.get('icu_state') or '--')}</td>"
+                f"<td>{'--' if qrs is None else f'{qrs:+.2f}'}</td>"
+                f"<td>{esc(row.get('qrs_state') or '--')}</td></tr>")
+        parts.append("</table>")
+        for note in timing_part.get("notes") or []:
+            parts.append(f'<p class="meta">{esc(note)}</p>')
+
     # 板块情绪 EW-SDM：强 / 弱各取 6 个（与纯文本同口径），口径说明放在表下。
     ew_part = payload.get("ew_sdm")
     ok_rows = [r for r in (ew_part or {}).get("rows") or [] if r.get("status") == "ok"]
@@ -2493,6 +2554,20 @@ def check(out_dir):
             problems.append("清单里有 rrg，但 stocks.html 没有板块轮动结果")
         if txt_path.is_file() and "板块轮动 · RRG" not in txt_path.read_text(encoding="utf-8"):
             problems.append("清单里有 rrg，但 stocks.txt 没有板块轮动段")
+    ew = data.get("ew_sdm") or {}
+    if ew.get("rows"):
+        page = html_path.read_text(encoding="utf-8") if html_path.is_file() else ""
+        if "板块情绪 · EW-SDM" not in page:
+            problems.append("清单里有 ew_sdm，但 stocks.html 没有板块情绪段")
+        if txt_path.is_file() and "板块情绪 · EW-SDM" not in txt_path.read_text(encoding="utf-8"):
+            problems.append("清单里有 ew_sdm，但 stocks.txt 没有板块情绪段")
+    timing = data.get("timing") or {}
+    if timing.get("rows"):
+        page = html_path.read_text(encoding="utf-8") if html_path.is_file() else ""
+        if "指数择时" not in page:
+            problems.append("清单里有 timing，但 stocks.html 没有指数择时")
+        if txt_path.is_file() and "指数择时" not in txt_path.read_text(encoding="utf-8"):
+            problems.append("清单里有 timing，但 stocks.txt 没有指数择时段")
     view = data.get("view") or {}
     if view.get("mode") == "brief" and txt_path.is_file():
         if "【周末精简版" not in txt_path.read_text(encoding="utf-8"):
