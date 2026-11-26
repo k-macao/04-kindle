@@ -6,35 +6,36 @@
     <atom:link href="https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news-test.xml" rel="self" type="application/rss+xml"/>
     <description>每天 07:00（北京时间）从 RSSHub 抓取并合并的财经、政治与哲学思想新闻，英文条目附中文译文，本次 3 条。 AI 已按资产影响、证据、新鲜度与自选相关性将 3 条每日精选置顶。</description>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 25 Nov 2026 05:30:47 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 26 Nov 2026 05:03:16 +0000</lastBuildDate>
     <generator>04-kindle tools/build_feed.py</generator>
     <ttl>60</ttl>
     <item>
-      <title>【精选01·81】科技股重挫亚太股市，韩股下挫5%，台股指跌8%，三星电子大跌9%，软银重挫16%</title>
-      <link>https://wallstreetcn.com/articles/3786656</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/articles/3786656</guid>
-      <pubDate>Wed, 25 Nov 2026 02:44:14 +0000</pubDate>
+      <title>【精选01·73】标普对英伟达发出治理警示，但黄仁勋的供应链影响力难以交接</title>
+      <link>https://www.yicai.com/news/103455140.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/news/103455140.html</guid>
+      <pubDate>Thu, 26 Nov 2026 04:24:31 +0000</pubDate>
       <category>中文财经深度</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
-      <description>&lt;p&gt;亚太股市周三大幅下跌，此前美国科技股遭遇重创，市场对人工智能投资能否带来足够回报的疑虑再度升温。与此同时，投资者还需消化潜在贸易消息影响。 周三，韩国综合股价指…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：WSCN报道亚太股市周三大幅下跌，提及美国科技股重挫、AI投资回报疑虑升温及潜在贸易消息。&lt;/p&gt;&lt;p&gt;事实：韩国综合股价指数跌5.4%，日经225跌逾3%，MSCI亚太指数跌2%，中国台湾地区股指跌8%至36,892.58点，三星电子跌9%，软银重挫16%；隔夜纳斯达克跌1.5%，英伟达跌近6%，费城半导体指数重挫。&lt;/p&gt;&lt;p&gt;推断：市场正对AI资本开支回报进行重定价，半导体与科技权重高的市场跌幅更大，属风险偏好收缩。&lt;/p&gt;&lt;p&gt;影响：科技股、半导体行业及韩台日相关资产短期承压，波动可能延续。&lt;/p&gt;&lt;p&gt;验证：需核对各指数收盘数据、后续资金流向及AI相关公司财报指引。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜三星电子｜公司｜负面｜短期｜置信 75/100：报道明确其大跌9%，属抛售直接对象&lt;/p&gt;&lt;p&gt;直接｜半导体行业｜行业｜负面｜短期｜置信 70/100：费城半导体指数重挫、英伟达大跌，传导至亚太半导体权重股&lt;/p&gt;&lt;p&gt;直接｜韩国及中国台湾地区股市｜国家/地区｜负面｜短期｜置信 75/100：报道给出具体跌幅，科技权重高放大冲击&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 65/100｜暂无独立互证；当前仅一个RSS来源，数据具体但未获其他来源交叉验证（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：精选第 1 名｜总分 81/100｜影响 80 · 紧迫 85 · 新颖 60 · 证据 65 · 新鲜 90 · 自选 100；亚太主要股指单日巨幅下跌，市场冲击显著且时效性强&lt;/p&gt;&lt;p&gt;关注命中：行业：人工智能、行业：半导体&lt;/p&gt;</description>
+      <source url="https://yicai.com">第一财经 · 最新</source>
+      <description>&lt;p&gt;英伟达CEO黄仁勋重新回到公司管理岗位，但围绕这家AI芯片巨头的治理和供应链问题，并没有因此平息。 当地时间11月25日，标普全球评级将英伟达AA级长期信用评级…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标普全球评级将英伟达AA级长期信用评级列入负面观察；&lt;/p&gt;&lt;p&gt;事实：标普认为黄仁勋辞职后复职（间隔11天）未完全消除外界对英伟达治理机制的疑问，报道称其影响力延伸至全球供应链协调与长期合作关系；&lt;/p&gt;&lt;p&gt;推断：评级机构关注点在公司治理而非短期经营，供应链影响力集中于个人属报道分析性表述；&lt;/p&gt;&lt;p&gt;影响：可能引发市场对治理结构与关键人依赖的讨论，评级是否下调待观察；&lt;/p&gt;&lt;p&gt;验证：需查阅标普评级报告原文及英伟达官方披露。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜英伟达｜公司｜负面｜中期｜置信 65/100：评级被列入负面观察，治理疑问构成信用评估压力，但摘要未提下调概率与时间&lt;/p&gt;&lt;p&gt;间接｜AI芯片供应链｜行业｜不确定｜中期｜置信 35/100：报道称关键人影响力涉及供应链协调，但无具体供应或订单变化信息&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 55/100｜暂无独立互证；仅第一财经一条RSS转述标普行动与报道分析，未附评级报告原文（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：精选第 1 名｜总分 73/100｜影响 70 · 紧迫 55 · 新颖 55 · 证据 55 · 新鲜 100 · 自选 100；涉及头部AI芯片公司信用评级与治理议题，市场关注度高&lt;/p&gt;&lt;p&gt;关注命中：行业：人工智能、行业：半导体&lt;/p&gt;</description>
     </item>
     <item>
-      <title>【精选02·72】黄仁勋行情仅撑一天，日韩股市坐上“跳楼机”！</title>
-      <link>https://www.gelonghui.com/p/7547692</link>
-      <guid isPermaLink="true">https://www.gelonghui.com/p/7547692</guid>
-      <pubDate>Wed, 25 Nov 2026 02:55:27 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://gelonghui.com">格隆汇 · 推荐</source>
-      <description>&lt;p&gt;AI泡沫担忧才是主线？ 黄仁勋的回归，只让全球科技股的反弹撑住了一天。 AI行情画风突变 今天，日韩股市行情急转直下。 昨天涨到熔断的韩股坐上“跳楼机”，盘初一…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：GELONGHUI报道日韩股市急跌，韩国综合指数跌近6%、日经225跌超3%，SK海力士跌逾8%、三星电子跌逾9%、铠侠跌逾14%，韩股侧车触发器年内已激活101次创2002年以来最多。&lt;/p&gt;&lt;p&gt;事实：上述指数与个股跌幅为报道时点数据，来源为单一媒体。&lt;/p&gt;&lt;p&gt;推断：若数据准确，存储与半导体板块领跌显示AI交易拥挤度回撤，波动放大与程序化熔断机制频繁触发相互强化；但“AI泡沫担忧是主线”属媒体归因，非已证实结论。&lt;/p&gt;&lt;p&gt;影响：亚太科技股风险偏好短期收缩，存储产业链估值承压。&lt;/p&gt;&lt;p&gt;验证：需对照交易所官方指数收盘数据与侧车触发统计，并观察后续交易日是否延续。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜韩国综合指数｜资产｜负面｜短期｜置信 60/100：报道时点跌幅近6%且触发熔断，直接反映市场抛压&lt;/p&gt;&lt;p&gt;直接｜SK海力士｜公司｜负面｜短期｜置信 55/100：存储板块领跌，若跌幅属实直接冲击其市值&lt;/p&gt;&lt;p&gt;直接｜三星电子｜公司｜负面｜短期｜置信 55/100：报道称跌逾9%，属半导体权重股同步下挫&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 50/100｜暂无独立互证；仅一个RSS来源，指数与个股数据未与交易所官方数据交叉核对（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：精选第 2 名｜总分 72/100｜影响 65 · 紧迫 75 · 新颖 50 · 证据 50 · 新鲜 90 · 自选 100；盘中熔断与年内触发次数创新高，波动性信号紧迫&lt;/p&gt;&lt;p&gt;关注命中：行业：人工智能、行业：半导体&lt;/p&gt;</description>
+      <title>【精选02·71】Bank of Korea Hikes Rate as AI Boom Powers Growth, Inflation｜中文：人工智能热潮推动经济增长和通胀，韩国央行加息</title>
+      <link>https://www.bloomberg.com/news/articles/2026-11-26/bok-hikes-rate-on-stubborn-inflation-as-ai-boom-drives-growth</link>
+      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-26/bok-hikes-rate-on-stubborn-inflation-as-ai-boom-drives-growth</guid>
+      <pubDate>Thu, 26 Nov 2026 00:50:53 +0000</pubDate>
+      <category>全球市场与要闻</category>
+      <source url="https://bloomberg.com">彭博社 · 经济</source>
+      <description>&lt;p&gt;中文：韩国央行恢复加息，同时大幅上调明年的经济增长预期，这表明随着历史性的半导体繁荣……紧缩周期可能比此前预期持续更久
+原文：The Bank of Korea…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：BLOOMBERG_ECON 报道，韩国央行恢复加息并大幅上调明年经济增长预期，称历史性半导体繁荣可能使紧缩周期比预期更久。&lt;/p&gt;&lt;p&gt;事实：韩国央行加息、上调增长预测，报道将其与半导体景气关联；具体加息幅度与预测数值摘要未给出。&lt;/p&gt;&lt;p&gt;推断：若半导体出口景气持续，韩国央行可能维持偏紧立场以应对通胀，利率路径存在上行延续可能；但幅度与节奏未披露。&lt;/p&gt;&lt;p&gt;影响：对韩国利率、韩元及半导体产业链景气预期构成中期变量。&lt;/p&gt;&lt;p&gt;验证：需核对韩国央行官方利率决议与经济增长预测全文，确认加息幅度与通胀判断。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜韩国央行｜机构｜中性｜短期｜置信 75/100：报道明确其恢复加息并上调增长预测，政策立场转向偏紧&lt;/p&gt;&lt;p&gt;直接｜韩国｜国家/地区｜双向｜中期｜置信 60/100：加息抑制通胀但抬高融资成本，半导体景气支撑增长，方向取决于两者权衡&lt;/p&gt;&lt;p&gt;间接｜半导体行业｜行业｜正面｜中期｜置信 50/100：报道将增长与通胀归因于半导体繁荣，若景气延续将支撑相关出口与盈利预期&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 60/100｜暂无独立互证；仅BLOOMBERG一家报道，未附央行决议原文，具体加息幅度与预测数值缺失（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：精选第 2 名｜总分 71/100｜影响 65 · 紧迫 55 · 新颖 55 · 证据 60 · 新鲜 90 · 自选 100；涉及主要央行货币政策转向与半导体景气判断，具宏观传导性，但细节待官方材料核实&lt;/p&gt;&lt;p&gt;关注命中：行业：人工智能、行业：半导体、主题：中国政策&lt;/p&gt;</description>
     </item>
     <item>
-      <title>【精选03·72】胡塞武装再袭利雅得金融区 11人受伤</title>
-      <link>https://www.zaobao.com.sg/news/world/story20261125-10053121</link>
-      <guid isPermaLink="true">https://www.zaobao.com.sg/news/world/story20261125-10053121</guid>
-      <pubDate>Tue, 24 Nov 2026 23:56:40 +0000</pubDate>
-      <category>政治与政策</category>
-      <source url="https://zaobao.com">联合早报 · 国际</source>
-      <description>&lt;p&gt;沙特称，也门胡塞武装袭击首都利雅得主要商业区一栋大楼，造成11人受伤。 路透社报道，这是不到一周内，胡塞武装第二次袭击利雅得阿卜杜拉国王金融区。胡塞武装上周袭击…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：沙特通讯社称胡塞武装用无人机袭击利雅得阿卜杜拉国王金融区一栋大楼，造成11人受伤，伤者含沙特、印度、尼泊尔、埃及籍；路透社称这是不到一周内第二次袭击该金融区，上周曾袭击PIF总部。&lt;/p&gt;&lt;p&gt;事实：袭击与伤情由沙特官方通讯社发布，联盟发言人马利基在X上确认无人机袭击并警告反击；具体大楼名称未公布。&lt;/p&gt;&lt;p&gt;推断：胡塞武装对沙特首都核心金融区具备重复打击能力，冲突外溢至经济目标的风险上升；但袭击规模、损毁程度与后续升级路径线索有限。&lt;/p&gt;&lt;p&gt;影响：沙特金融区安保与运营成本可能上升，海湾地缘风险溢价短期受关注，能源与航运市场情绪或受扰动。&lt;/p&gt;&lt;p&gt;验证：关注沙特官方后续通报、联盟军事回应、胡塞方面表态及第三方影像核实。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜沙特阿拉伯｜国家/地区｜负面｜短期｜置信 70/100：首都金融区连续遇袭，直接冲击安全环境与投资信心&lt;/p&gt;&lt;p&gt;直接｜阿卜杜拉国王金融区｜行业｜负面｜短期｜置信 65/100：一周内两次被袭，运营与安保成本上升&lt;/p&gt;&lt;p&gt;直接｜胡塞武装｜机构｜不确定｜中期｜置信 55/100：重复袭击显示能力，但后续是否升级取决于联盟反击与谈判&lt;/p&gt;&lt;p&gt;证据与共识：报道引述多方｜强度 60/100｜报道内一致；沙特通讯社为官方来源，路透社转述并补充上周袭击背景，联盟发言人X表态佐证（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：精选第 3 名｜总分 72/100｜影响 70 · 紧迫 75 · 新颖 55 · 证据 60 · 新鲜 90 · 自选 80；首都金融区一周内二次遇袭，具即时地缘与市场扰动性&lt;/p&gt;&lt;p&gt;关注命中：行业：能源&lt;/p&gt;</description>
+      <title>【精选03·69】SpaceX获首张“太空数据中心许可证”，马斯克太空算力愿景更近了</title>
+      <link>https://www.yicai.com/news/103455087.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/news/103455087.html</guid>
+      <pubDate>Thu, 26 Nov 2026 04:07:46 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://yicai.com">第一财经 · 最新</source>
+      <description>&lt;p&gt;当地时间周三，美国联邦通信委员会（FCC）发布公告称，已批准SpaceX组建名为“Starmind（星脑）”的太空数据中心星座，可部署100万颗卫星。 FCC表…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：第一财经报道FCC批准SpaceX组建名为“Starmind（星脑）”的太空数据中心星座，可部署100万颗卫星。&lt;/p&gt;&lt;p&gt;事实：FCC公告称批准SpaceX轨道数据中心申请，称旨在满足AI计算增长需求，为美国监管机构首次批准此类申请；许可要求不迟于2033年11月开始部署，2035年11月前部署最大数量的10%（10万颗），2038年11月前完成50%。&lt;/p&gt;&lt;p&gt;推断：监管许可为项目提供制度前提，但部署规模与时间表跨度长，技术可行性与经济性未在摘要中体现，不能视为算力供给即将落地。&lt;/p&gt;&lt;p&gt;影响：对卫星制造、发射服务与太空算力概念构成长期主题性影响，短期实质供给影响有限。&lt;/p&gt;&lt;p&gt;验证：需核对FCC公告原文、许可条件及SpaceX后续部署进展。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜SpaceX｜公司｜正面｜长期｜置信 65/100：获得FCC轨道数据中心星座许可，但部署节点在2033年后，短期无实质运营&lt;/p&gt;&lt;p&gt;间接｜卫星制造与发射服务行业｜行业｜正面｜长期｜置信 50/100：百万颗卫星规划若推进将带动制造与发射需求，但取决于实际部署进度&lt;/p&gt;&lt;p&gt;直接｜美国联邦通信委员会（FCC）｜机构｜中性｜短期｜置信 60/100：作为审批方首次批准轨道数据中心申请，属监管事实&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 60/100｜暂无独立互证；仅第一财经一条RSS，引述FCC公告内容，未见其他独立来源（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：精选第 3 名｜总分 69/100｜影响 65 · 紧迫 35 · 新颖 80 · 证据 60 · 新鲜 100 · 自选 80；首次批准太空数据中心星座具标志性，但落地周期长&lt;/p&gt;&lt;p&gt;关注命中：行业：人工智能&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
