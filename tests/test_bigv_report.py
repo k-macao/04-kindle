@@ -189,5 +189,46 @@ class StocksPanelTest(unittest.TestCase):
         self.assertIsNotNone(manifest.get("bigv"))
 
 
+class FreshnessTest(unittest.TestCase):
+    def test_ok_when_collected_today_and_items_in_window(self):
+        f = br.freshness("2026-11-25", [item("a", "2026-11-24")], "2026-11-25", 5)
+        self.assertEqual(f["status"], "ok")
+        self.assertEqual(f["problems"], [])
+        self.assertEqual(f["latest_item"], "2026-11-24")
+
+    def test_stale_when_collected_before_as_of(self):
+        f = br.freshness("2026-11-24", [item("a", "2026-11-24")], "2026-11-25", 5)
+        self.assertEqual(f["status"], "stale")
+        self.assertIn("截止日当天的条目可能还没追加", f["problems"][0])
+
+    def test_missing_collected_on_is_flagged(self):
+        f = br.freshness(None, [item("a", "2026-11-24")], "2026-11-25", 5)
+        self.assertEqual(f["status"], "stale")
+        self.assertIn("缺少采集日", f["problems"][0])
+
+    def test_latest_item_before_window_is_flagged(self):
+        f = br.freshness("2026-11-25", [item("a", "2026-11-10")], "2026-11-25", 5)
+        self.assertEqual(f["status"], "stale")
+        self.assertTrue(any("窗口内没有数据" in p for p in f["problems"]))
+
+    def test_no_items_is_flagged(self):
+        f = br.freshness("2026-11-25", [], "2026-11-25", 5)
+        self.assertEqual(f["status"], "stale")
+        self.assertIn("没有任何条目", f["problems"][0])
+
+    def test_summary_and_report_carry_the_check(self):
+        s = br.summarize(people_doc()["people"], [item("a", "2026-11-24")],
+                         "2026-11-25", 5, collected_on="2026-11-24")
+        self.assertEqual(s["freshness"]["status"], "stale")
+        text = br.render_markdown(s)
+        self.assertIn("更新检查：需要注意", text)
+        self.assertIn("采集日 2026-11-24 早于截止日", text)
+
+    def test_ok_line_in_report(self):
+        s = br.summarize(people_doc()["people"], [item("a", "2026-11-25")],
+                         "2026-11-25", 5, collected_on="2026-11-25")
+        self.assertIn("更新检查：正常", br.render_markdown(s))
+
+
 if __name__ == "__main__":
     unittest.main()

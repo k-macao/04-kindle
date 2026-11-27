@@ -1061,15 +1061,16 @@ def bigv_section(payload):
     窗口截止日取数据时间的北京日期（取不到就用现在的北京日期）。
     """
     try:
+        items_doc = bigv_report.load_json(bigv_report.DEFAULT_ITEMS)
         people, items = bigv_report.validate(
-            bigv_report.load_json(bigv_report.DEFAULT_PEOPLE),
-            bigv_report.load_json(bigv_report.DEFAULT_ITEMS))
+            bigv_report.load_json(bigv_report.DEFAULT_PEOPLE), items_doc)
     except (OSError, ValueError, KeyError) as exc:
         return None, f"大 V 观点未生成：{exc}"
     as_of = (sector_rrg.beijing_day(payload.get("data_timestamp")
                                     or payload.get("index_timestamp"))
              or (datetime.now(timezone.utc) + timedelta(hours=8)).strftime("%Y-%m-%d"))
-    return bigv_report.summarize(people, items, as_of, BIGV_WINDOW_DAYS), None
+    return bigv_report.summarize(people, items, as_of, BIGV_WINDOW_DAYS,
+                                 collected_on=items_doc.get("collected_on")), None
 
 
 def render_bigv_text(section, brief=False):
@@ -1080,6 +1081,7 @@ def render_bigv_text(section, brief=False):
     cov = section["coverage"]
     lines = [f"【大 V 观点 · 近五天】（{start} 至 {end}）",
              "  注：多空概率是 AI 判断，不是本人表态。",
+             "  " + bigv_report.freshness_line(section["freshness"]),
              "  " + " · ".join(f"{bigv_report.MARKETS[m]} {cov[m]['with_items']}/{cov[m]['people']} 位有记录"
                               for m in bigv_report.MARKETS) + f" · 共 {section['items_in_window']} 条"]
     if not section["items_in_window"]:
@@ -1935,6 +1937,7 @@ function bigvSection(b){
 var rows=b.rows||[],n=b.items_in_window||0,w=b.window||['',''];
 var h='<section><h2>大 V 观点 · 近五天<span class="muted"> '+esc(w[0])+' 至 '+esc(w[1])+'</span></h2>';
 if(!n)h+='<p class="meta">窗口内没有条目：数据需每日往 bigv/items.json 追加。</p>';
+if(b.freshness&&b.freshness.status!=='ok')h+='<p class="meta">更新检查：'+esc((b.freshness.problems||[]).join('；'))+'</p>';
 h+='<table class="card"><tr><th>人物</th><th>条数</th><th>最近要点</th></tr>';
 rows.forEach(function(r){
 var f=(r.items||[])[0];
@@ -2435,6 +2438,9 @@ def render_epub_xhtml(payload, generated_bj, brief=None):
         parts.append(f"<h2>大 V 观点 · 近五天（{esc(bw[0])} 至 {esc(bw[1])}）</h2>")
         if not bigv_part.get("items_in_window"):
             parts.append('<p class="meta">窗口内没有条目：数据需每日往 bigv/items.json 追加。</p>')
+        fresh = bigv_part.get("freshness") or {}
+        if fresh.get("status") not in (None, "ok"):
+            parts.append(f'<p class="meta">更新检查：{esc("；".join(fresh.get("problems") or []))}</p>')
         parts.append('<table class="card"><tr><th>人物</th><th>条数</th><th>最近要点</th></tr>')
         for row in bigv_part["rows"]:
             first = (row.get("items") or [None])[0]

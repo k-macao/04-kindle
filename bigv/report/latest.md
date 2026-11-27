@@ -1,6 +1,7 @@
-# 大 V 与策略分析师：近五天公开观点（2026-11-21 至 2026-11-25）
+# 大 V 与策略分析师：近五天公开观点（2026-11-24 至 2026-11-28）
 
-截至 2026-11-25，窗口内共 82 条。美股 34/50 位有记录；A 股 37/51 位有记录；港股 2/5 位有记录。
+截至 2026-11-28，窗口内共 71 条。美股 27/50 位有记录；A 股 28/51 位有记录；港股 3/5 位有记录。
+更新检查：正常（采集日 2026-11-28，最新条目 2026-11-27）。
 
 **注意：多空概率是 AI 依据该人近五天条目的语气作出的判断，不是本人表态，仅供参考。**
 
@@ -11,34 +12,34 @@
 | 人物 | 机构 | 条目 | 维度 | 最近 | 状态 | AI 多空判断 |
 | --- | --- | --- | --- | --- | --- | --- |
 | Tom Lee | Fundstrat | 1 | 报道×1 | 2026-11-25 | 有记录 | 偏多 70% |
-| Michael Wilson | 摩根士丹利 | 2 | 报道×2 | 2026-11-24 | 有记录 | 偏多 75% |
+| Michael Wilson | 摩根士丹利 | 1 | 报道×1 | 2026-11-24 | 有记录 | 偏多 75% |
 | Savita Subramanian | 美国银行 | 1 | 观点×1 | 2026-11-25 | 有记录 | 偏多 50% |
-| Ed Yardeni | Yardeni Research | 3 | 观点×3 | 2026-11-25 | 有记录 | 偏多 60% |
-| James Thorne | Wellington-Altus | 2 | 观点×2 | 2026-11-25 | 有记录 | 偏多 80% |
+| Ed Yardeni | Yardeni Research | 2 | 观点×2 | 2026-11-25 | 有记录 | 偏多 60% |
+| James Thorne | Wellington-Altus | 1 | 观点×1 | 2026-11-25 | 有记录 | 偏多 80% |
 | Ryan Detrick | Carson Group | 1 | 采访×1 | 2026-11-25 | 有记录 | 偏多 70% |
-| Jeremy Siegel | 宾大沃顿商学院 | 1 | 采访×1 | 2026-11-23 | 有记录 | 偏多 70% |
+| Jeremy Siegel | 宾大沃顿商学院 | 0 | — | — | 五天内未找到公开观点 | 偏多 70% |
 | Mark Newton | Fundstrat | 1 | 观点×1 | 2026-11-24 | 有记录 | 偏空 55% |
-| Jim Cramer | CNBC 投资俱乐部 | 1 | 观点×1 | 2026-11-24 | 有记录 | 偏多 70% |
-| Josh Brown | Ritholtz Wealth Management | 1 | 观点×1 | 2026-11-24 | 有记录 | 偏多 60% |
+| Jim Cramer | CNBC 投资俱乐部 | 2 | 观点×2 | 2026-11-25 | 有记录 | 偏多 70% |
+| Josh Brown | Ritholtz Wealth Management | 2 | 观点×2 | 2026-11-27 | 有记录 | 偏多 60% |
 | Dubravko Lakos-Bujas | 摩根大通 | 2 | 观点×2 | 2026-11-25 | 有记录 | 偏多 80% |
 | Bill Ackman | 潘兴广场资本 | 1 | 观点×1 | 2026-11-25 | 有记录 | 偏空 70% |
 | Daniel Ivascyn | Pimco | 1 | 采访×1 | 2026-11-25 | 有记录 | 偏空 65% |
 | Mislav Matejka | 摩根大通 | 0 | — | — | 五天内未找到公开观点 | — |
 | Lori Calvasina | 加拿大皇家银行资本市场 | 0 | — | — | 五天内未找到公开观点 | — |
-| Ben Snider | 高盛 | 1 | 观点×1 | 2026-11-23 | 有记录 | 偏多 55% |
+| Ben Snider | 高盛 | 1 | 观点×1 | 2026-11-25 | 有记录 | 偏多 55% |
 | Binky Chadha | Deutsche Bank | 1 | 观点×1 | 2026-11-25 | 有记录 | 偏多 85% |
-| Dan Ives | Yorkville Ives & Co. | 2 | 观点×2 | 2026-11-24 | 有记录 | 偏多 90% |
+| Dan Ives | Yorkville Ives & Co. | 1 | 观点×1 | 2026-11-24 | 有记录 | 偏多 90% |
 | Mohamed El-Erian | Allianz | 1 | 观点×1 | 2026-11-24 | 有记录 | 偏空 55% |
-| Ray Dalio | Bridgewater Associates | 1 | 采访×1 | 2026-11-23 | 有记录 | 偏空 65% |
+| Ray Dalio | Bridgewater Associates | 0 | — | — | 五天内未找到公开观点 | 偏空 65% |
 | Jim Bianco | Bianco Research | 1 | 观点×1 | 2026-11-24 | 有记录 | 偏空 60% |
 | Jeff deGraaf | Renaissance Macro Research | 1 | 采访×1 | 2026-11-25 | 有记录 | 偏多 50% |
-| Mark Hackett | Nationwide | 1 | 观点×1 | 2026-11-21 | 有记录 | 偏多 70% |
-| David Trainer | New Constructs | 1 | 观点×1 | 2026-11-21 | 有记录 | 偏空 80% |
-| Karan Ramchandani | Post Oak Group | 1 | 观点×1 | 2026-11-21 | 有记录 | 偏空 60% |
+| Mark Hackett | Nationwide | 0 | — | — | 五天内未找到公开观点 | 偏多 70% |
+| David Trainer | New Constructs | 1 | 采访×1 | 2026-11-24 | 有记录 | 偏空 80% |
+| Karan Ramchandani | Post Oak Group | 0 | — | — | 五天内未找到公开观点 | 偏空 60% |
 | Jeffrey Buchbinder | LPL Financial | 1 | 观点×1 | 2026-11-24 | 有记录 | 偏多 80% |
 | John Stoltzfus | Oppenheimer | 0 | — | — | 五天内未找到公开观点 | — |
 | Barry Bannister | Stifel | 0 | — | — | 五天内未找到公开观点 | — |
-| Liz Ann Sonders | Charles Schwab | 0 | — | — | 五天内未找到公开观点 | — |
+| Liz Ann Sonders | Charles Schwab | 1 | 采访×1 | 2026-11-24 | 有记录 | — |
 | Michael Hartnett | Bank of America | 0 | — | — | 五天内未找到公开观点 | — |
 | Cathie Wood | ARK Invest | 0 | — | — | 五天内未找到公开观点 | — |
 | Tony Dwyer | Canaccord Genuity | 0 | — | — | 五天内未找到公开观点 | — |
@@ -54,58 +55,58 @@
 | Jeffrey Gundlach | DoubleLine Capital | 0 | — | — | 五天内未找到公开观点 | — |
 | Jeffrey Kleintop | Charles Schwab | 0 | — | — | 五天内未找到公开观点 | — |
 | Michael Burry | Scion Asset Management（已于 2025 年底注销） | 1 | 观点×1 | 2026-11-25 | 有记录 | 偏多 60% |
-| Mark Haefele | UBS Global Wealth Management | 1 | 观点×1 | 2026-11-24 | 有记录 | 偏多 65% |
-| Jay Woods | Freedom Capital Markets | 1 | 观点×1 | 2026-11-23 | 有记录 | 偏多 50% |
-| Ben Reitzes | Melius Research | 1 | 观点×1 | 2026-11-23 | 有记录 | 偏多 70% |
-| Rick Schafer | Oppenheimer | 1 | 观点×1 | 2026-11-23 | 有记录 | 偏多 70% |
-| Stacy Rasgon | Bernstein | 1 | 观点×1 | 2026-11-23 | 有记录 | 偏多 65% |
-| Tristan Gerra | Robert W. Baird | 1 | 观点×1 | 2026-11-23 | 有记录 | 偏空 65% |
+| Mark Haefele | UBS Global Wealth Management | 2 | 观点×2 | 2026-11-26 | 有记录 | 偏多 65% |
+| Jay Woods | Freedom Capital Markets | 0 | — | — | 五天内未找到公开观点 | 偏多 50% |
+| Ben Reitzes | Melius Research | 0 | — | — | 五天内未找到公开观点 | 偏多 70% |
+| Rick Schafer | Oppenheimer | 1 | 观点×1 | 2026-11-24 | 有记录 | 偏多 70% |
+| Stacy Rasgon | Bernstein | 0 | — | — | 五天内未找到公开观点 | 偏多 65% |
+| Tristan Gerra | Robert W. Baird | 0 | — | — | 五天内未找到公开观点 | 偏空 65% |
 
 ## A 股
 
 | 人物 | 机构 | 条目 | 维度 | 最近 | 状态 | AI 多空判断 |
 | --- | --- | --- | --- | --- | --- | --- |
-| 陈果 | 东方财富证券 | 1 | 观点×1 | 2026-11-24 | 有记录 | 偏多 60% |
+| 陈果 | 东方财富证券 | 2 | 观点×2 | 2026-11-27 | 有记录 | 偏多 80% |
 | 吴开达 | 天风证券 | 1 | 观点×1 | 2026-11-24 | 有记录 | 偏多 60% |
 | 黄燕铭 | 东方证券 | 1 | 观点×1 | 2026-11-24 | 有记录 | 偏多 55% |
 | 芦哲 | 东吴证券 | 1 | 观点×1 | 2026-11-24 | 有记录 | 偏多 65% |
-| 刘晨明 | 广发证券 | 1 | 观点×1 | 2026-11-22 | 有记录 | 偏多 65% |
-| 张继强 | 华泰证券 | 1 | 观点×1 | 2026-11-22 | 有记录 | 偏多 75% |
-| 岳阳 | 华创证券 | 1 | 观点×1 | 2026-11-22 | 有记录 | 偏多 50% |
+| 刘晨明 | 广发证券 | 0 | — | — | 五天内未找到公开观点 | 偏多 65% |
+| 张继强 | 华泰证券 | 0 | — | — | 五天内未找到公开观点 | 偏多 75% |
+| 岳阳 | 华创证券 | 0 | — | — | 五天内未找到公开观点 | 偏多 50% |
 | 包承超 | 中信证券 | 1 | 采访×1 | 2026-11-24 | 有记录 | 偏多 70% |
 | 吴信坤 | 国信证券 | 1 | 采访×1 | 2026-11-24 | 有记录 | 偏多 70% |
 | 李湛 | 招商基金 | 1 | 观点×1 | 2026-11-24 | 有记录 | 偏多 60% |
 | 廖博 | 东北证券 | 1 | 采访×1 | 2026-11-24 | 有记录 | 偏多 60% |
 | 李蓓 | 个人投资者（公开发帖） | 1 | 发言×1 | 2026-11-24 | 有记录 | 偏多 85% |
-| 李昊阳 | 招商证券 | 1 | 采访×1 | 2026-11-21 | 有记录 | 偏多 60% |
-| 牟一凌 | 国金证券 | 1 | 观点×1 | 2026-11-22 | 有记录 | 偏多 60% |
-| 李求索 | 中金公司 | 1 | 观点×1 | 2026-11-24 | 有记录 | 偏多 70% |
+| 李昊阳 | 招商证券 | 0 | — | — | 五天内未找到公开观点 | 偏多 60% |
+| 牟一凌 | 国金证券 | 0 | — | — | 五天内未找到公开观点 | 偏多 60% |
+| 李求索 | 中金公司 | 2 | 观点×2 | 2026-11-27 | 有记录 | 偏多 70% |
 | 傅静涛 | 申万宏源 | 0 | — | — | 五天内未找到公开观点 | — |
-| 王芳 | 中泰证券 | 1 | 观点×1 | 2026-11-22 | 有记录 | 偏多 80% |
+| 王芳 | 中泰证券 | 0 | — | — | 五天内未找到公开观点 | 偏多 80% |
 | 李长风 | 联博基金 | 1 | 观点×1 | 2026-11-25 | 有记录 | 偏多 60% |
 | 王宗豪 | 瑞银 | 1 | 观点×1 | 2026-11-25 | 有记录 | 偏多 70% |
 | 宋劲 | 野村东方国际证券 | 1 | 观点×1 | 2026-11-25 | 有记录 | 偏空 60% |
-| 李大霄 | 前券商首席经济学家 | 1 | 采访×1 | 2026-11-25 | 有记录 | 偏多 70% |
+| 李大霄 | 前券商首席经济学家 | 2 | 观点×1、采访×1 | 2026-11-27 | 有记录 | 偏多 70% |
 | 罗晓鸣 | 恒创天下投资 | 1 | 观点×1 | 2026-11-25 | 有记录 | 偏多 65% |
 | 夏凡捷 | 中信建投证券 | 1 | 观点×1 | 2026-11-25 | 有记录 | 偏多 60% |
-| 杨超 | 中国银河证券 | 1 | 采访×1 | 2026-11-23 | 有记录 | 偏多 70% |
-| 赵伟 | 申万宏源证券 | 1 | 观点×1 | 2026-11-22 | 有记录 | 偏多 60% |
+| 杨超 | 中国银河证券 | 0 | — | — | 五天内未找到公开观点 | 偏多 70% |
+| 赵伟 | 申万宏源证券 | 0 | — | — | 五天内未找到公开观点 | 偏多 60% |
 | 冯柳 | 高毅邻山（公募/私募基金经理） | 0 | — | — | 五天内未找到公开观点 | — |
 | 陈刚 | 东吴证券 | 0 | — | — | 五天内未找到公开观点 | — |
-| 但斌 | 东方港湾（私募，海外基金主要持美股） | 1 | 观点×1 | 2026-11-23 | 有记录 | 偏多 80% |
+| 但斌 | 东方港湾（私募，海外基金主要持美股） | 0 | — | — | 五天内未找到公开观点 | 偏多 80% |
 | 章盟主（章建平） | 游资（席位：国泰海通上海江苏路营业部） | 2 | 报道×1、发言×1 | 2026-11-25 | 有记录 | 偏多 75% |
-| 小瑜哥 | 个人投资者（招财小瑜哥，基金复盘博主） | 2 | 观点×2 | 2026-11-25 | 有记录 | 偏空 80% |
+| 小瑜哥 | 个人投资者（招财小瑜哥，基金复盘博主） | 3 | 观点×3 | 2026-11-27 | 有记录 | 偏空 80% |
 | 谭头论丑（谭头） | 个人投资者（谭头论丑，每日复盘） | 2 | 观点×2 | 2026-11-25 | 有记录 | 偏多 50% |
-| 葛卫东（葛老大） | 牛散（混沌投资） | 1 | 报道×1 | 2026-11-23 | 有记录 | — |
+| 葛卫东（葛老大） | 牛散（混沌投资） | 0 | — | — | 五天内未找到公开观点 | — |
 | 梁宏 | 海南希瓦私募 | 0 | — | — | 五天内未找到公开观点 | — |
 | 林园 | 深圳林园投资 | 0 | — | — | 五天内未找到公开观点 | — |
 | 刘鑫（鑫多多） | 自然人牛散 | 0 | — | — | 五天内未找到公开观点 | — |
-| 赵老哥（赵强） | 游资（席位：银河证券绍兴营业部） | 1 | 发言×1 | 2026-11-23 | 有记录 | 偏多 70% |
+| 赵老哥（赵强） | 游资（席位：银河证券绍兴营业部） | 1 | 发言×1 | 2026-11-27 | 有记录 | 偏多 70% |
 | 炒股养家（林广昌） | 游资（席位：华鑫证券上海宛平南路） | 0 | — | — | 五天内未找到公开观点 | — |
 | 作手新一 | 游资（席位：国泰海通南京太平南路） | 0 | — | — | 五天内未找到公开观点 | — |
 | 方新侠 | 游资（席位：中信证券西安朱雀大街） | 1 | 发言×1 | 2026-11-24 | 有记录 | 偏多 60% |
 | 孙哥（古北路） | 游资 | 0 | — | — | 五天内未找到公开观点 | — |
-| 陈小群 | 游资（席位：中国银河证券大连黄河路营业部） | 0 | — | — | 五天内未找到公开观点 | — |
+| 陈小群 | 游资（席位：中国银河证券大连黄河路营业部） | 1 | 观点×1 | 2026-11-27 | 有记录 | — |
 | 小鳄鱼 | 游资 | 0 | — | — | 五天内未找到公开观点 | — |
 | 呼家楼 | 游资（席位：中信证券上海凯滨路） | 0 | — | — | 五天内未找到公开观点 | — |
 | 佛山无影脚 | 游资（席位：光大证券佛山绿景路营业部） | 0 | — | — | 五天内未找到公开观点 | — |
@@ -115,7 +116,7 @@
 | 李长风 | 联博基金 | 1 | 观点×1 | 2026-11-25 | 有记录 | 偏多 70% |
 | 陈红兵 | 美通私募 | 1 | 观点×1 | 2026-11-25 | 有记录 | 偏多 60% |
 | 龙舫 | 钜阵资本 | 1 | 观点×1 | 2026-11-25 | 有记录 | 偏空 55% |
-| 水皮 | 私募（公开报道称私募大佬） | 1 | 发言×1 | 2026-11-25 | 有记录 | 偏空 70% |
+| 水皮 | 私募（公开报道称私募大佬） | 2 | 发言×2 | 2026-11-27 | 有记录 | 偏空 70% |
 
 ## 港股
 
@@ -124,7 +125,7 @@
 | 何志明 | 香港市场分析师（Longbridge 专家观点） | 1 | 观点×1 | 2026-11-25 | 有记录 | 偏空 70% |
 | 曾永健 | 香港市场分析师（Longbridge 报道引述） | 1 | 观点×1 | 2026-11-24 | 有记录 | 偏空 70% |
 | Jonathan Garner | 摩根士丹利（亚洲及新兴市场策略主管，香港） | 0 | — | — | 五天内未找到公开观点 | — |
-| Kinger Lau | 高盛（中国股票策略主管） | 0 | — | — | 五天内未找到公开观点 | — |
+| Kinger Lau | 高盛（中国股票策略主管） | 1 | 观点×1 | 2026-11-27 | 有记录 | — |
 | 刘刚 | 中金公司（首席海外与港股策略分析师） | 0 | — | — | 五天内未找到公开观点 | — |
 
 ## 逐条要点
@@ -137,7 +138,6 @@
 
 **Michael Wilson**（摩根士丹利，首席美股策略师）
 - 2026-11-24 · 报道 · 标普跌入修正区后，他称「这是我们一直在等的 fat pitch」，认为标普跌破 7,100–7,300 区间是对合理价值的过度超调，并表示「remain constructive into 2027」（仍看好至 2027 年）。 [TheStreet](https://www.thestreet.com/investing/he-correctly-said-the-s-now-morgan-stanleys-mike-wilson-has-another-gutsy-forecast)
-- 2026-11-23 · 报道 · 标普 500 与道指进入修正区后，策略团队战术层面看多程度为 4 月以来最高，认为盈利与估值都支持反弹。 [财闻网](https://www.caiwennews.com/article/1714234.shtml)
 
 **Savita Subramanian**（美国银行，美股与量化策略主管）
 - 2026-11-25 · 观点 · 2027 年底目标 7,800，牛市情景 8,500、熊市情景 6,600；担心供给（IPO）与需求（回购减少、退休资金流出）同时恶化。 [CNBC](https://www.cnbc.com/2026/11/25/bank-of-america-sp-500-outlook.html)
@@ -145,27 +145,23 @@
 **Ed Yardeni**（Yardeni Research，总裁、首席投资策略师）
 - 2026-11-25 · 观点 · Yardeni 称英伟达的反弹可能是「一日奇迹」（one-day wonder），并主张美联储加息 50 个基点，而市场定价的是 25 个基点。 [Archynewsy（转载）](https://www.archynewsy.com/u-s-stock-futures-slip-as-tech-stocks-decline-before-inflation-data/)
 - 2026-11-25 · 观点 · Yardeni 在 11 月 25 日电视采访中主张美联储加息 50 个基点，期货定价为 25 个基点；称英伟达的热情可能很快消退，预计 2027 年比今年更颠簸。 [24/7 Wall St](https://247wallst.com/investing/2026/11/25/ed-yardeni-wants-double-the-fed-rate-hike-the-market-expects/)
-- 2026-11-22 · 观点 · 2026 年底目标由 9 月的 7,900 下调至 7,500；认为熊市的可能性不大。 [Bloomberg](https://www.bloomberg.com/news/articles/2026-11-22/yardeni-cuts-s-p-500-target-again-says-bear-market-is-unlikely)
 
 **James Thorne**（Wellington-Altus，策略师）
 - 2026-11-25 · 观点 · Thorne 认为原油价格与炼油利润率回落，理由是应维持利率，并于 2027 年降息。 [BigGo Finance（转载）](https://finance.biggo.com/news/d435e0cf-69c4-4e02-9899-aa8662244080)
-- 2026-11-22 · 观点 · 认为极端恐慌为下一轮上涨创造条件；6,900 点是关键斐波那契支撑；若美联储转向宽松，历史上类似情形标普 12 个月中位涨幅约 33.7%。 [ChainCatcher（转载）](https://www.chaincatcher.com/en/article/2307040)
 
 **Ryan Detrick**（Carson Group，首席市场策略师）
 - 2026-11-25 · 采访 · 认为四年牛市不会很快结束；指数跌 10% 进入修正区，但跌 20% 才算熊市；轮动是牛市的命脉。 [Benzinga](https://www.benzinga.com/trading-ideas/long-ideas/26/11/63635768/exclusive-ryan-detrick-says-tech-sector-important-but-doesnt-have-to-lead-lifeblood-of-bull-market-is-rotation)
-
-**Jeremy Siegel**（宾大沃顿商学院，金融学教授（学术身份，非机构策略））
-- 2026-11-23 · 采访 · 在 CNBC 采访中称，下跌主要来自动量交易者的杠杆平仓，而非经济或盈利；经济仍强，预计股市反弹。 [TokenPost（转述 CNBC 采访）](https://www.tokenpost.com/news/investing/62445)
-- 备注：与机构策略师不完全同级，保留是为了覆盖「长期主义」视角
 
 **Mark Newton**（Fundstrat，技术策略负责人）
 - 2026-11-24 · 观点 · 该日技术面报告题为「缺乏跟进，多方仍需证明」，认为周一反弹后仍需多方证明自己，关注后续跟进。 [Fundstrat Direct](https://fundstratdirect.com/technical-strategy/daily-technical-strategy/2026/11/24/lack-of-follow-through-keeps-the-burden-of-proof-on-the-bulls/)
 
 **Jim Cramer**（CNBC 投资俱乐部，主持人、投资组合负责人（媒体身份））
+- 2026-11-25 · 观点 · 看好杜邦（DuPont），并建议买入英伟达（NVIDIA）。摘要依据文章标题，正文未逐段核实。 [Benzinga](https://www.benzinga.com/trading-ideas/long-ideas/26/11/63619800/jim-cramer-backs-dupont-says-buy-nvidia)
 - 2026-11-24 · 观点 · 认为超卖正是机会，「时候到了」把闲置现金投入；认为英伟达回落后仍有买盘，AMD 是很好的买点。 [CNBC Investing Club](https://www.cnbc.com/investingclub/2026/11/24/jim-cramer-says-the-time-is-now-to-put-sidelined-cash-to-work.html)
 - 备注：媒体人物，不是机构策略；保留是因为是高关注度的财经大 V
 
 **Josh Brown**（Ritholtz Wealth Management，首席执行官）
+- 2026-11-27 · 观点 · 把迪士尼（DIS）列入其「市场最佳股票」名单，认为主题乐园与漫威 IP 支撑股价；给出 120 美元附近回踩的买点参考，以 112 美元（周线收盘）作为失效位。 [CNBC（Ritholtz Wealth 的 Best Stocks in the Market 栏目）](https://www.cnbc.com/2026/11/27/josh-brown-lost-a-bet-on-disney-it-is-now-on-his-best-stocks-in-the-market-list.html)
 - 2026-11-24 · 观点 · 在 CNBC 午间节目推荐 SharkNinja、Target、eBay 三只股票。 [CNBC](https://www.cnbc.com/video/2026/11/24/josh-browns-best-stocks-in-the-market-sharkninja-target-and-ebay.html)
 
 **Dubravko Lakos-Bujas**（摩根大通，策略团队负责人（据报道文中称））
@@ -179,7 +175,7 @@
 - 2026-11-25 · 采访 · Pimco 首席投资官称，AI 带来的颠覆性风险提升了债券吸引力；通胀超目标五年以上，投资者准备迎接进一步加息。 [新浪财经（转述采访）](https://k.sina.com.cn/article_7857201856_1d45362c001908w1d2.html)
 
 **Ben Snider**（高盛，首席美股策略师）
-- 2026-11-23 · 观点 · 高盛 Ben Snider 在 11 月 23 日客户报告中，列出可能标志底部的三个条件：对 AI 盈利兑现的信心、更宽松的宏观（如美联储鸽派信号）、仓位大幅出清；建议用防御性股票分散并持有回购力度强的公司。 [Investing.com（经 Finwire 转载）](https://finwire.io/news/stock-markets-news/goldmans-snider-outlines-3-signs-of-a-market-recovery)
+- 2026-11-25 · 观点 · 文章转述高盛策略团队（Snider）的三项股市触底条件：AI 利润需要兑现、美联储释放鸽派信号、仓位出清；文中认为目前三项都还未出现，市场“还没到那一步”。 [TheStreet（2026-11-25）](https://www.thestreet.com/investing/stocks/goldman-sachs-lays-out-three-signals-stock-investors-should-watch)
 - 备注：11 月 23 日客户报告（Investing.com）
 
 **Binky Chadha**（Deutsche Bank，首席美股策略师）
@@ -187,13 +183,9 @@
 
 **Dan Ives**（Yorkville Ives & Co.，科技分析师）
 - 2026-11-24 · 观点 · Yorkville Ives 的 Dan Ives 称黄仁勋回归对英伟达价值约 1 万亿美元，并把目标价从 225 美元上调至 250 美元（牛市情景 300 美元），称英伟达领先竞争对手 2–3 年。 [CNBC](https://www.cnbc.com/2026/11/24/nvidia-stock-jensen-huang-return.html)
-- 2026-11-21 · 观点 · Dan Ives 将本轮科技股抛售比作 2020 年 3 月和 2025 年 4 月的恐慌性下跌，称这是「痛苦的科技抛售」，认为出于恐慌，不是科技与市场更黑暗时期的红旗。 [美联社（CTV 转载）](https://www.ctvnews.ca/business/article/a-10-drop-for-the-stock-market-is-unnerving-but-its-not-that-unusual/)
 
 **Mohamed El-Erian**（Allianz，首席经济顾问）
 - 2026-11-24 · 观点 · El-Erian 在 X 上称，市场与预测市场定价超过 90% 的 12 月加息，若不加息「很难」；但认为加息 50 个基点「不明智」。 [TradingView（Stocktwits 报道）](https://www.tradingview.com/news/stocktwits:1daf98ea3094b:0-fed-rate-hike-bets-build-ahead-of-december-meet-fed-s-john-williams-says-inflation-still-too-high/)
-
-**Ray Dalio**（Bridgewater Associates，创始人）
-- 2026-11-23 · 采访 · Dalio 在 11 月 23 日 Sourcery 节目中称，大选改变的是处理问题的人，问题本身未变；财富不等于可花的钱，估值泡沫可能在持有人需要现金时破裂；称市场与经济高度依赖 AI，「波动且非常危险」。 [Benzinga](https://www.benzinga.com/markets/economic-data/26/11/63614779/ray-dalio-on-us-election-were-not-changing-the-problems-spacex-anthropic-valuations-put-ai-bubble-risks-in-focus)
 
 **Jim Bianco**（Bianco Research，宏观策略师）
 - 2026-11-24 · 观点 · Bianco 在 11 月 24 日 X 帖（CNBC Fast Money 后）称英伟达已成为「AI 的美联储」；称 AI 交易支撑约一半美国 GDP，因此美联储 12 月至少加息 25 个基点。 [24/7 Wall St（转述 X 帖子）](https://247wallst.com/investing/2026/11/25/jim-bianco-calls-nvidia-the-federal-reserve-of-ai-heres-what-that-means-for-your-portfolio/)
@@ -201,17 +193,15 @@
 **Jeff deGraaf**（Renaissance Macro Research，技术研究负责人）
 - 2026-11-25 · 采访 · RenMac 的 deGraaf（Excess Returns 播客）认为，其泡沫信号目前主要针对半导体，而非整个市场；称「我们可能接近加息情绪的顶点」；近期 AI 相关股抛售中，传统避险资产未如预期起作用。 [Advisor Analyst（转载 Excess Returns 播客）](https://advisoranalyst.com/2026/11/25/when-the-bubble-pops-get-out-of-the-way.html/)
 
-**Mark Hackett**（Nationwide，首席市场策略师）
-- 2026-11-21 · 观点 · Nationwide 首席市场策略师 Mark Hackett 在研报中称，若这轮以 AI 股为主的洗盘演变为真正的「flush」，可能成为改善仓位与情绪的重设点，提高年末更可持续反弹的机会。 [美联社（CTV 转载）](https://www.ctvnews.ca/business/article/a-10-drop-for-the-stock-market-is-unnerving-but-its-not-that-unusual/)
-
 **David Trainer**（New Constructs，投资研究负责人）
-- 2026-11-21 · 观点 · New Constructs 投资研究负责人 David Trainer 称「泡沫正在破裂，还有很长的路要走」，认为 AI 过度投资与经济现实仍处于对账的早期阶段。 [美联社（CTV 转载）](https://www.ctvnews.ca/business/article/a-10-drop-for-the-stock-market-is-unnerving-but-its-not-that-unusual/)
-
-**Karan Ramchandani**（Post Oak Group，管理合伙人）
-- 2026-11-21 · 观点 · Post Oak Group 管理合伙人 Karan Ramchandani 称，AI 板块更像是重新评估，而非泡沫破裂；投资者将更挑剔，只买能兑现承诺的公司。 [美联社（CTV 转载）](https://www.ctvnews.ca/business/article/a-10-drop-for-the-stock-market-is-unnerving-but-its-not-that-unusual/)
+- 2026-11-24 · 采访 · 认为 Anthropic 估值过高、利润率为负，AI 支出接近 8 万亿美元难以持续；警惕 AI 独占式估值，认为竞争会摊薄利润。 [Stansberry Investor Hour（播客，2026-11-24）](https://www.stansberryresearch.com/stansberry-investor-hour/episode-492-david-trainer-the-2-trillion-ai-bubble-could-be-about-to-burst)
 
 **Jeffrey Buchbinder**（LPL Financial，首席股票策略师）
 - 2026-11-24 · 观点 · LPL 首席股票策略师 Buchbinder 与 Brian Booe 认为 AI 驱动的盈利与中期选举后的政策清晰度提供了有利的风险收益；维持战术性股票超配，认为科技估值有吸引力，对 AI 基建的悲观已过度，略偏好价值风格。 [LPL Research（advisoranalyst 转载）](https://advisoranalyst.com/2026/11/24/perspective-on-market-volatility-and-a-case-for-staying-with-technology.html/)
+
+**Liz Ann Sonders**（Charles Schwab，首席投资策略师）
+- 2026-11-24 · 采访 · 周二对 CNBC 表示，AI 生态系统的抛售早于黄仁勋与英伟达的消息；她指出数据中心支出的担忧，以及盈利与亏损公司之间的分化。 [StockTitan 转述 CNBC 采访](https://www.stocktitan.net/articles/stock-market-today-live-november-25-2026)
+- 备注：11 月 20 日 Bloomberg 视频（窗口外）
 
 **Andrew Slimmon**（Morgan Stanley，）
 - 2026-11-25 · 观点 · 摩根士丹利 Andrew Slimmon 称，投资者忽视了今年由美联储加息担忧带来的市盈率收缩这一主线；建议为 2027 年加强分散配置；认为超卖的科技股在美联储会议前未必能获得年末反弹。 [CNBC](https://www.cnbc.com/video/2026/11/25/fed-rate-hike-is-driving-the-story-of-the-year-for-investors-morgan-stanley.html)
@@ -227,35 +217,22 @@
 - 备注：发言来自个人 Substack；2025 年后不再提交 13F，持仓以其自述为准
 
 **Mark Haefele**（UBS Global Wealth Management，首席投资官）
+- 2026-11-26 · 观点 · UBS 全球财富管理 CIO Mark Haefele 周四早间表示，投资者应维持股票战略配置，并利用市场波动重新平衡、加强组合韧性。 [CNBC](https://www.cnbc.com/2026/11/26/stock-markets-today-.html)
 - 2026-11-24 · 观点 · 认为全球科技股波动不是 AI 投资逻辑已破灭的信号；云增长、使用量与算力需求仍有支撑；预计将出现更大分化，偏向有清晰变现与稳健资产负债表的平台。 [CNBC 直播](https://www.cnbc.com/2026/11/23/stock-market-today-live-updates.html)
 - 备注：窗口内有效发言；ai_bull_prob 按原文语气
 
-**Jay Woods**（Freedom Capital Markets，首席市场策略师）
-- 2026-11-23 · 观点 · 认为黄仁勋回归带来了超跌市场的反弹，但不确定仅凭这一消息能否让市场走出低迷。 [CNBC](https://www.cnbc.com/2026/11/23/nvidia-jensen-huang-ceo-market-rally.html)
-- 备注：窗口内有效发言
-
-**Ben Reitzes**（Melius Research，科技与半导体分析师）
-- 2026-11-23 · 观点 · 将英伟达由持有上调至买入，目标价 220 美元；认为黄仁勋回归大幅缓解了长期担忧，并希望其尽快应对圈内交易、中国销售与继任计划问题。 [CNBC](https://www.cnbc.com/2026/11/23/nvidia-has-reinstated-ceo-jensen-huang-analysts-upgraded-the-stock.html)
-- 备注：卖方分析师，对英伟达的评级观点
-
 **Rick Schafer**（Oppenheimer，科技分析师）
-- 2026-11-23 · 观点 · 将英伟达上调至跑赢大盘，目标价 250 美元；称“黄仁勋回归对 AI 和投资者都是好事”，消除了领导层悬念。 [CNBC](https://www.cnbc.com/2026/11/23/nvidia-has-reinstated-ceo-jensen-huang-analysts-upgraded-the-stock.html)
+- 2026-11-24 · 观点 · 11 月 24 日将 Marvell 目标价从 425 美元下调至 325 美元，维持“跑赢大盘”评级；认为目标价需要 12 月 1 日财报的收入与指引支撑。 [Longbridge（转载智通财经，2026-11-26）](https://longbridge.com/en/news/306881589)
 - 备注：卖方分析师，对英伟达的评级观点
 
-**Stacy Rasgon**（Bernstein，半导体分析师）
-- 2026-11-23 · 观点 · 将英伟达上调至跑赢大盘，目标价 200 美元；认为对 AI 建设基本面仍持正面看法，但此次风波留下的隐忧可能压制其估值倍数。 [CNBC](https://www.cnbc.com/2026/11/23/nvidia-has-reinstated-ceo-jensen-huang-analysts-upgraded-the-stock.html)
-- 备注：卖方分析师，对英伟达的评级观点
-
-**Tristan Gerra**（Robert W. Baird，科技分析师）
-- 2026-11-23 · 观点 · 维持英伟达持有评级，目标价 200 美元；担心出口规则收紧与 AI 数据中心支出的不确定性，并希望董事会调查更透明。 [TipRanks（转述 Baird 观点）](https://www.tipranks.com/news/is-nvidia-stock-a-buy-after-surging-31-on-jensen-huangs-comeback-heres-what-wall-street-thinks)
-- 备注：卖方分析师，对英伟达维持持有评级
-
-五天内未找到公开观点：Mislav Matejka（11 月 16 日欧洲盈利报告（窗口外）；窗口内未找到观点）、Lori Calvasina（11 月 2–5 日播客与 CNBC 采访（窗口外）；窗口内未找到观点）、John Stoltzfus（11 月 9 日 CNBC 引述（窗口外））、Barry Bannister、Liz Ann Sonders（11 月 20 日 Bloomberg 视频（窗口外））、Michael Hartnett（11 月 16 日 Flow Show 引述（窗口外））、Cathie Wood（11 月 20 日 CNBC 采访（窗口外））、Tony Dwyer、Howard Marks（11 月 11 日备忘录（窗口外）；11 月 21 日的文章为转载）、Scott Chronert（11 月 21 日 BNN 采访仅见标题，内容未核实）、Michael Kantrowitz（11 月 3 日（窗口外））、Brian Belski、Julian Emanuel（11 月 10–11 日（窗口外））、Dennis DeBusschere、Jeffrey Gundlach（11 月 12–15 日观点（窗口外））、Jeffrey Kleintop（窗口内未找到；可查到的访谈为 2025 年（窗口外））。
+五天内未找到公开观点：Jeremy Siegel（与机构策略师不完全同级，保留是为了覆盖「长期主义」视角）、Mislav Matejka（11 月 16 日欧洲盈利报告（窗口外）；窗口内未找到观点）、Lori Calvasina（11 月 2–5 日播客与 CNBC 采访（窗口外）；窗口内未找到观点）、Ray Dalio、Mark Hackett、Karan Ramchandani、John Stoltzfus（11 月 9 日 CNBC 引述（窗口外））、Barry Bannister、Michael Hartnett（11 月 16 日 Flow Show 引述（窗口外））、Cathie Wood（11 月 20 日 CNBC 采访（窗口外））、Tony Dwyer、Howard Marks（11 月 11 日备忘录（窗口外）；11 月 21 日的文章为转载）、Scott Chronert（11 月 21 日 BNN 采访仅见标题，内容未核实）、Michael Kantrowitz（11 月 3 日（窗口外））、Brian Belski、Julian Emanuel（11 月 10–11 日（窗口外））、Dennis DeBusschere、Jeffrey Gundlach（11 月 12–15 日观点（窗口外））、Jeffrey Kleintop（窗口内未找到；可查到的访谈为 2025 年（窗口外））、Jay Woods（窗口内有效发言）、Ben Reitzes（卖方分析师，对英伟达的评级观点）、Stacy Rasgon（卖方分析师，对英伟达的评级观点）、Tristan Gerra（卖方分析师，对英伟达维持持有评级）。
 
 ### A 股
 
 **陈果**（东方财富证券，研究所副所长、首席策略官）
+- 2026-11-27 · 观点 · 认为国常会释放的稳市信号非常强烈，市场大概率会把这次会议看作 A 股的重要政策底，「最悲观时刻已经过去」。 [广州日报（21 经济网转载）](https://www.21jingji.com/article/20261127/herald/a821555019a1c5918a4ff80b6c73c4ed.html)
 - 2026-11-24 · 观点 · 认为 A 股本次调整主要来自海外波动（担心美联储加息与美国 AI 放缓）；美国 AI 资本开支对中国的传导远小于对美国，应以中期、价值思维应对。 [中国商报（21 经济网转载）](https://www.21jingji.com/article/20261124/herald/8462ec91c2a8a97badcf70c32986cc85.html)
+- 备注：；11-27 观点（广州日报报道）ai_bull_prob 依据该观点
 
 **吴开达**（天风证券，首席策略分析师）
 - 2026-11-24 · 观点 · 国内科技基本面向好：半导体、电子化学品、自动化设备等板块前三季度收入保持两位数增长，利润增速快于收入。 [中国商报（21 经济网转载）](https://www.21jingji.com/article/20261124/herald/8462ec91c2a8a97badcf70c32986cc85.html)
@@ -265,17 +242,6 @@
 
 **芦哲**（东吴证券，首席经济学家）
 - 2026-11-24 · 观点 · 资本市场稳市托底持续推进，超跌后的修复窗口或临近。 [中国商报（21 经济网转载）](https://www.21jingji.com/article/20261124/herald/8462ec91c2a8a97badcf70c32986cc85.html)
-
-**刘晨明**（广发证券，策略首席分析师）
-- 2026-11-22 · 观点 · A 股多重积极因素正在积聚：资金结构转向保险、被动 ETF 等中长期力量；长周期考核缓解机构短视。 [中国基金报（21 经济网转载）](https://www.21jingji.com/article/20261122/herald/5ccec65ef71d15edb57743a2cd8f63a7.html)
-
-**张继强**（华泰证券，研究所所长、固收首席）
-- 2026-11-22 · 观点 · 近期波动主要受全球流动性收缩等外围因素冲击，A 股跌幅明显低于其他市场；从四个角度看多 A 股中长期前景。 [中国基金报（21 经济网转载）](https://www.21jingji.com/article/20261122/herald/5ccec65ef71d15edb57743a2cd8f63a7.html)
-- 备注：固收首席，不是股票策略；保留是因为其观点直接谈 A 股中长期
-
-**岳阳**（华创证券，电子首席分析师）
-- 2026-11-22 · 观点 · AI 硬件板块的预期扰动、订单节奏分化与估值回调属于景气上行中的阶段性调整，算力扩容大周期未变。 [中国基金报（21 经济网转载）](https://www.21jingji.com/article/20261122/herald/5ccec65ef71d15edb57743a2cd8f63a7.html)
-- 备注：行业首席，不是策略；保留是因为其观点谈 AI 硬件景气
 
 **包承超**（中信证券，首席策略师）
 - 2026-11-24 · 采访 · 市场调整已经前置，杠铃中段的优秀龙头存在估值洼地；看好明年行情宽度拓展，「行情分散、聚焦龙头」。 [券商中国（新浪转载）](https://k.sina.com.cn/article_7857201856_1d45362c001908w088.html)
@@ -293,19 +259,10 @@
 - 2026-11-24 · 发言 · 发帖称上周开始卖出宽基指数 put，周五和周一持续买入股指；看好中国未来 20 年的「大国运」。 [财通社（新浪转载）](https://k.sina.com.cn/article_7857201856_1d45362c001908w07x.html)
 - 备注：非机构身份，按公开发帖计入
 
-**李昊阳**（招商证券，首席策略分析师）
-- 2026-11-21 · 采访 · 部分指数回撤已进入历史中等水平；关注估值合理、盈利稳健、有股息的大盘蓝筹，以及调整较大、盈利持续的优质成长。 [中经记者（新浪转载）](https://k.sina.com.cn/article_7857201856_1d45362c001908vmw0.html)
-
-**牟一凌**（国金证券，首席策略官）
-- 2026-11-22 · 观点 · 认为美元紧缩预期可能已到顶，中国非 AI 领域会有更多机会；能源链与有色、化工的部分细分景气延续。 [中国基金报（21 经济网转载）](https://m.21jingji.com/article/20261122/herald/5ccec65ef71d15edb57743a2cd8f63a7.html)
-
 **李求索**（中金公司，国内策略首席分析师）
+- 2026-11-27 · 观点 · 认为国常会后一般进入政策落实阶段；当前外部风险较多，但多数压力偏短期、阶段性，对 A 股中期走势不必悲观，长期稳进趋势有望延续。 [每日经济新闻（21 经济网转载）](https://www.21jingji.com/article/20261127/herald/6508171930d193e58d57a612c2cd7b2c.html)
 - 2026-11-24 · 观点 · 认为 A 股短期已超调，后市有望震荡修复，中期不必悲观；稳市「三支箭」（融资保证金下限降至 80%、降费、创业板做市商）理论上可释放约 4000 亿元保证金额度。 [金融界（转载中金点睛，中金研报）](https://stock.jrj.com.cn/2026/11/25083759258938.shtml)
-- 备注：中金公司研究部国内策略首席分析师；11-24 中金研报第一作者，ai_bull_prob 依据该报告观点
-
-**王芳**（中泰证券，研究所联席所长）
-- 2026-11-22 · 观点 · 中泰证券联席所长王芳认为，国内日均 Token 调用量已从 2024 年初的千亿级增长至百万亿级，AI 算力需求增速显著高于供给，国产算力供应链是长期刚需。 [中国基金报（21 经济网转载）](https://www.21jingji.com/article/20261122/herald/5ccec65ef71d15edb57743a2cd8f63a7.html)
-- 备注：电子行业首席
+- 备注：中金公司研究部国内策略首席分析师；11-24 中金研报、11-27 国常会后观点，ai_bull_prob 依据这些发言
 
 **李长风**（联博基金，市场策略负责人）
 - 2026-11-25 · 观点 · 联博基金市场策略负责人李长风称，近期波动可能由 AI 不确定性引发，中国资本开支仍有韧性；稳市措施逐步落地后，对长期投资者是有吸引力的买入窗口；推荐自下而上寻找机会，关注科技、医疗、工业，并挖掘高股息稳健品种。 [东方财富网（21 经济网转载）](https://www.21jingji.com/article/20261125/herald/8fed83176364d859a6d120299610fbfc.html)
@@ -317,6 +274,7 @@
 - 2026-11-25 · 观点 · 野村东方国际证券 A 股首席策略师宋劲认为，筹码与情绪切换后 A 股有望迎来再配置机会，但在波动率降低之前应维持高防御性；中期中国资产有望带来战略性超额回报，但行情更趋结构化。 [东方财富网（21 经济网转载）](https://www.21jingji.com/article/20261125/herald/8fed83176364d859a6d120299610fbfc.html)
 
 **李大霄**（前券商首席经济学家，）
+- 2026-11-27 · 观点 · 认为 11 月 22 日的稳市举措（融资买入最低保证金由 100% 降至 80%、创业板引入做市商、交易所降费等）理论上带来约 4000 亿元增量资金，稳市曙光或已出现；但提醒散户理性、量力而行。 [中华网（中新经纬）](https://news.china.com/socialgd/10000169/20261127/49913116.html)
 - 2026-11-25 · 采访 · 前券商首席经济学家李大霄称，市场已处于悲观预期下的超调阶段，鉴于上市公司基本面持续向好，对 A 股中长期前景不必过于悲观。 [东方财富网（21 经济网转载）](https://www.21jingji.com/article/20261125/herald/3b86b98c514c75c5a060045ab1aea4f2.html)
 
 **罗晓鸣**（恒创天下投资，投资总监）
@@ -325,22 +283,13 @@
 **夏凡捷**（中信建投证券，首席策略分析师）
 - 2026-11-25 · 观点 · 中信建投首席策略分析师夏凡捷表示，市场出现类似 2024 年初「V 型底」的可能性较大；配置以防御为先，精选高股息、低机构配置、低拥挤的品种。 [东方财富网（21 经济网转载）](https://www.21jingji.com/article/20261125/herald/3b86b98c514c75c5a060045ab1aea4f2.html)
 
-**杨超**（中国银河证券，首席策略分析师）
-- 2026-11-23 · 采访 · 银河证券首席策略分析师杨超称，本轮反弹核心驱动来自稳市政策密集出台带来的预期修复，叠加估值充分回调、抛压释放后的技术性共振。 [第一财经（新浪 A 股热点小时报转载）](https://k.sina.com.cn/article_7857201856_1d45362c001908vyic.html)
-
-**赵伟**（申万宏源证券，首席经济学家）
-- 2026-11-22 · 观点 · 申万宏源首席经济学家赵伟认为，部分传统行业出清加速，行业出清对物价和利润的支撑已显现；随着刚性成本下降、AI 投资挤出效应减弱，2027 年社会集团消费的空间值得期待。 [中国基金报（21 经济网转载）](https://www.21jingji.com/article/20261122/herald/5ccec65ef71d15edb57743a2cd8f63a7.html)
-
-**但斌**（东方港湾（私募，海外基金主要持美股），董事长）
-- 2026-11-23 · 观点 · 但斌称，没有启动大幅减仓风控，因仍看好 AI 时代大趋势；组合中 60% 的仓位在 AI 应用方向，可对冲硬件端波动；认为股价长期由企业盈利与护城河决定。 [上海证券报（21 经济网转载）](https://www.21jingji.com/article/20261123/herald/8c58dca574632a86a47fd3981343738e.html)
-- 备注：民间私募大佬；主要持仓为海外 AI 相关股，归入 A 股名单
-
 **章盟主（章建平）**（游资（席位：国泰海通上海江苏路营业部），游资）
 - 2026-11-25 · 报道 · 席位动向（非本人发言）：11-25 龙虎榜显示，章盟主常用席位净买入荣联科技约 0.98 亿元、康芝药业约 0.30 亿元，净卖出东方海洋约 1.03 亿元、九阳股份约 0.94 亿元。 [21 财经（龙虎榜数据）](https://m.21jingji.com/article/20261125/herald/802b44b7f358aa51bc81b847cc7a6717.html)
 - 2026-11-24 · 发言 · 认为周一积极得到验证，高开后的抛压能被承接，后续会有更多资金进场，更大级别行情值得期待。 [新浪网（转自顶级游资章盟主）](https://k.sina.com.cn/article_7879995911_1d5af3207027036pfg.html)
 - 备注：知名游资；11-24 有个人发言（新浪转载「积极第二天」），ai_bull_prob 依据该发言；11-25 龙虎榜席位动向不等于本人发言
 
 **小瑜哥**（个人投资者（招财小瑜哥，基金复盘博主），个人复盘博主）
+- 2026-11-27 · 观点 · 今日 A 股集体大涨，他持有的成长基金未卖出；以股票 ETF 动向和融资余额做节奏判断，认为部分成长宽基估值已回落至近十年底部区间，同时以加入价值、商品与债券降低组合波动。 [新浪财经](https://k.sina.cn/article_5953740931_162dee083067046p8g.html)
 - 2026-11-25 · 观点 · 认为美债、美元、油价三高叠加美联储加息，应降低股票基金仓位、提高债券基金仓位；TMT 成交占比升至 45.07%；个人测算 11-25 当日 -3.75%。 [新浪财经（招财小瑜哥）](https://k.sina.cn/article_5953740931_162dee083067046kha.html)
 - 2026-11-24 · 观点 · 认为昨晚美股反弹主要是黄仁勋回归的一次性事件，加息因素仍在（市场预测 12 月加息 25bp 概率 93.5%）；个人今年以来测算约 -33%。 [新浪对冲基金热点小时报（转载招财小瑜哥）](https://k.sina.com.cn/article_7857201856_1d45362c001908w0br.html)
 - 备注：自称 8 年 A 股经验；个人持仓测算，不构成投资建议
@@ -350,17 +299,17 @@
 - 2026-11-24 · 观点 · 认为大 A 高开低走、成交量不及预期，指数强弱以科创50为观察点；机器人与传媒方向已三连反弹，对应头部兑现节点；国产芯片方向后续调整可视为上车节点。 [新浪网（谭头论丑）](https://k.sina.com.cn/article_7879922977_1d5ae152102701m1ga.html)
 - 备注：网名，个人观点；标注为民间复盘，非机构
 
-**葛卫东（葛老大）**（牛散（混沌投资），牛散）
-- 2026-11-23 · 报道 · 持仓报道（非本人发言）：葛卫东家族坚守兆易创新，妻子王萍在中材科技大跌中逆势加仓；持仓为三季末静态快照。 [东方财富网](https://finance.eastmoney.com/a/202611233937326444.html)
-- 备注：与葛老大为同一人；11-23 报道为三季报持仓，非本人发言，ai_bull_prob 留空
-
 **赵老哥（赵强）**（游资（席位：银河证券绍兴营业部），游资）
-- 2026-11-23 · 发言 · 认为情绪已修复、最坏时候已过去；修复方向先从老人气股开始；次日预期分化，后续需要新题材重新聚焦资金，否则延续抱团模式。 [新浪网（转自赵老哥-复盘）](https://k.sina.com.cn/article_7879922977_1d5ae152102701m0u0.html)
+- 2026-11-27 · 发言 · 抱团方向分歧温和、未现跌停；科技（国产算力）为今日最强方向；周末若无监管，下周抱团股有望反包；盘中不追高，等待周末落地后再决定进攻方向。 [新浪财经（转自赵老哥八年一万倍）](https://k.sina.com.cn/article_7879922977_1d5ae152102701m3gh.html)
 - 备注：游资；11-23 有个人复盘发言（新浪转载「11.23继续开香槟」），ai_bull_prob 依据该发言；席位动向不等于本人发言
 
 **方新侠**（游资（席位：中信证券西安朱雀大街），游资）
 - 2026-11-24 · 发言 · 认为北美算力高开低走、国产算力低开走高，市场恢复有效性；黄仁勋回归后的英伟达不能按之前的英伟达看待，需要时间证明。 [新浪网（转自方新侠游资）](https://k.sina.com.cn/article_7879922977_1d5ae152102701m18g.html)
 - 备注：游资；11-24 有个人发言（新浪转载「11.24全天思路」），ai_bull_prob 依据该发言
+
+**陈小群**（游资（席位：中国银河证券大连黄河路营业部），游资）
+- 2026-11-27 · 观点 · 认为 11 月下旬见底，创业板已接近 2015 年位置，今日报复性反弹可看作反转；提醒「熊市多长阳」，建议持重仓者适当减仓，空仓者下周等回踩，不追高。 [新浪财经（转自陈小群）](https://k.sina.com.cn/article_7879922977_1d5ae152102701m3k0.html)
+- 备注：窗口内未找到；2026-01 报道（窗口外）
 
 **宋劲**（野村东方国际证券，A 股首席策略师）
 - 2026-11-25 · 观点 · 认为筹码与情绪切换后A股有望迎来再配置机会，但在波动率降低前应维持高防御性；中期行情或更趋结构化。 [21 财经](https://m.21jingji.com/article/20261125/herald/8fed83176364d859a6d120299610fbfc.html)
@@ -383,10 +332,11 @@
 - 备注：11-25 国际金融报报道中的观点
 
 **水皮**（私募（公开报道称私募大佬），私募大佬）
+- 2026-11-27 · 发言 · 认为 A 股大幅反弹（沪指涨 3.73%，创业板涨 11.61%）印证其前一晚私享会「春季行情可以有、而且一定会有」的判断；关注周一能否承接，并认为科技股是此次反弹的主力。 [网易号「水皮M0RE」](https://www.163.com/dy/article/LCP0I889051994HF.html)
 - 2026-11-25 · 发言 · 11.25 股评：认为美股科技调整未结束，加息预期与美方加税威胁叠加，A 股难以独善其身；当日沪指跌 2.03%，结论为「来日方长」。 [水皮More 公众号（微信）](https://mp.weixin.qq.com/s/1Aas_TuOU2UqPqOYDZ25Iw)
 - 备注：窗口内有发言（11-25 公众号「风不止 | 谈股论金」）；ai_bull_prob 依据该发言
 
-五天内未找到公开观点：傅静涛（最近一次找到的是 11 月 9 日）、冯柳（窗口内未找到；最近的公开持仓与观点为 8 月和 10 月的报道（窗口外））、陈刚（11 月 16 日策略报告（窗口外））、梁宏（窗口内未找到；11-07 周报（窗口外，2026）。11-22 周报经核对为 2025 年，不计入）、林园（窗口内未找到；11-20 访谈比窗口早一天（窗口外））、刘鑫（鑫多多）（窗口内未找到；2026-04-23 报道，11-02 三季报持仓（窗口外））、炒股养家（林广昌）（窗口内未找到）、作手新一（窗口内未找到）、孙哥（古北路）（窗口内未找到）、陈小群（窗口内未找到；2026-01 报道（窗口外））、小鳄鱼（窗口内未找到）、呼家楼（窗口内未找到）、佛山无影脚（窗口内未找到）、王亚伟（窗口内未找到；本轮搜索未返回窗口内内容）。
+五天内未找到公开观点：刘晨明、张继强（固收首席，不是股票策略；保留是因为其观点直接谈 A 股中长期）、岳阳（行业首席，不是策略；保留是因为其观点谈 AI 硬件景气）、李昊阳、牟一凌、傅静涛（最近一次找到的是 11 月 9 日）、王芳（电子行业首席）、杨超、赵伟、冯柳（窗口内未找到；最近的公开持仓与观点为 8 月和 10 月的报道（窗口外））、陈刚（11 月 16 日策略报告（窗口外））、但斌（民间私募大佬；主要持仓为海外 AI 相关股，归入 A 股名单）、葛卫东（葛老大）（与葛老大为同一人；11-23 报道为三季报持仓，非本人发言，ai_bull_prob 留空）、梁宏（窗口内未找到；11-07 周报（窗口外，2026）。11-22 周报经核对为 2025 年，不计入）、林园（窗口内未找到；11-20 访谈比窗口早一天（窗口外））、刘鑫（鑫多多）（窗口内未找到；2026-04-23 报道，11-02 三季报持仓（窗口外））、炒股养家（林广昌）（窗口内未找到）、作手新一（窗口内未找到）、孙哥（古北路）（窗口内未找到）、小鳄鱼（窗口内未找到）、呼家楼（窗口内未找到）、佛山无影脚（窗口内未找到）、王亚伟（窗口内未找到；本轮搜索未返回窗口内内容）。
 
 ### 港股
 
@@ -396,7 +346,11 @@
 **曾永健**（香港市场分析师（Longbridge 报道引述），）
 - 2026-11-24 · 观点 · 曾永健认为，加息预期与 AI 融资需求相互拉扯，持续压制港股；恒指下跌趋势未变，22,000 点只是临时支撑。 [Longbridge（午间预览）](https://longbridge.com/en/news/306579788)
 
-五天内未找到公开观点：Jonathan Garner（窗口内未找到；可查到的观点为 2021 年（窗口外））、Kinger Lau（窗口内未找到；最近的降级报告为 6 月 3 日（窗口外））、刘刚（窗口内未找到；最近的采访为 12 月 5 日（2025 年，窗口外））。
+**Kinger Lau**（高盛（中国股票策略主管），）
+- 2026-11-27 · 观点 · 预计 2027 年 MSCI 中国指数上涨 23%，沪深 300 上涨 10%；看好服务国内 AI 市场、银行及加大分红回购的公司，并偏好港股胜过 A 股。 [China Daily Asia（Zhou Lanxu 报道）](https://www.chinadailyasia.com/hk/article/643324)
+- 备注：窗口内未找到；最近的降级报告为 6 月 3 日（窗口外）
+
+五天内未找到公开观点：Jonathan Garner（窗口内未找到；可查到的观点为 2021 年（窗口外））、刘刚（窗口内未找到；最近的采访为 12 月 5 日（2025 年，窗口外））。
 
 ## 数据覆盖说明
 

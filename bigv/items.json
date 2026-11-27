@@ -1,6 +1,6 @@
 {
   "schema": "bigv-items/1",
-  "collected_on": "2026-11-25",
+  "collected_on": "2026-11-28",
   "source_note": "沙箱只能访问 GitHub / npm / PyPI，X、YouTube、微博、雪球等平台的内容不能直接抓取。以下条目来自网络搜索结果（新闻报道、转载、研报摘要），每条都附原文链接。每日更新时在此文件末尾追加新条目即可。",
   "items": [
     {
@@ -740,6 +740,141 @@
       "url": "https://stock.jrj.com.cn/2026/11/25083759258938.shtml",
       "summary": "认为 A 股短期已超调，后市有望震荡修复，中期不必悲观；稳市「三支箭」（融资保证金下限降至 80%、降费、创业板做市商）理论上可释放约 4000 亿元保证金额度。",
       "source": "金融界（转载中金点睛，中金研报）"
+    },
+    {
+      "person": "li-qiusuo",
+      "date": "2026-11-27",
+      "dimension": "观点",
+      "title": "创业板指数涨11.61%、科创50飙升15.07%！国常会打破常规午间发声",
+      "url": "https://www.21jingji.com/article/20261127/herald/6508171930d193e58d57a612c2cd7b2c.html",
+      "summary": "认为国常会后一般进入政策落实阶段；当前外部风险较多，但多数压力偏短期、阶段性，对 A 股中期走势不必悲观，长期稳进趋势有望延续。",
+      "source": "每日经济新闻（21 经济网转载）"
+    },
+    {
+      "person": "chen-guo",
+      "date": "2026-11-27",
+      "dimension": "观点",
+      "title": "国常会罕见“午间发令”，A股放量暴拉！投资者接下来如何应对？",
+      "url": "https://www.21jingji.com/article/20261127/herald/a821555019a1c5918a4ff80b6c73c4ed.html",
+      "summary": "认为国常会释放的稳市信号非常强烈，市场大概率会把这次会议看作 A 股的重要政策底，「最悲观时刻已经过去」。",
+      "source": "广州日报（21 经济网转载）"
+    },
+    {
+      "person": "haefele",
+      "date": "2026-11-26",
+      "dimension": "观点",
+      "title": "Global stocks rally as investors shrug off U.S. tariffs and AI jitters to 'fish for bargains'",
+      "url": "https://www.cnbc.com/2026/11/26/stock-markets-today-.html",
+      "summary": "UBS 全球财富管理 CIO Mark Haefele 周四早间表示，投资者应维持股票战略配置，并利用市场波动重新平衡、加强组合韧性。",
+      "source": "CNBC"
+    },
+    {
+      "person": "cramer",
+      "date": "2026-11-25",
+      "dimension": "观点",
+      "title": "Jim Cramer Backs DuPont, Says Buy Nvidia",
+      "url": "https://www.benzinga.com/trading-ideas/long-ideas/26/11/63619800/jim-cramer-backs-dupont-says-buy-nvidia",
+      "summary": "看好杜邦（DuPont），并建议买入英伟达（NVIDIA）。摘要依据文章标题，正文未逐段核实。",
+      "source": "Benzinga"
+    },
+    {
+      "person": "brown",
+      "date": "2026-11-27",
+      "dimension": "观点",
+      "title": "Josh Brown lost a bet on Disney. It is now on his Best Stocks in the Market list",
+      "url": "https://www.cnbc.com/2026/11/27/josh-brown-lost-a-bet-on-disney-it-is-now-on-his-best-stocks-in-the-market-list.html",
+      "summary": "把迪士尼（DIS）列入其「市场最佳股票」名单，认为主题乐园与漫威 IP 支撑股价；给出 120 美元附近回踩的买点参考，以 112 美元（周线收盘）作为失效位。",
+      "source": "CNBC（Ritholtz Wealth 的 Best Stocks in the Market 栏目）"
+    },
+    {
+      "person": "sonders",
+      "date": "2026-11-24",
+      "dimension": "采访",
+      "title": "Stock Market Today, November 25, 2026: Stocks Win Back Most of Their Morning Losses After a Chip Sell-Off",
+      "url": "https://www.stocktitan.net/articles/stock-market-today-live-november-25-2026",
+      "summary": "周二对 CNBC 表示，AI 生态系统的抛售早于黄仁勋与英伟达的消息；她指出数据中心支出的担忧，以及盈利与亏损公司之间的分化。",
+      "source": "StockTitan 转述 CNBC 采访"
+    },
+    {
+      "person": "kingerlau",
+      "date": "2026-11-27",
+      "dimension": "观点",
+      "title": "Banks see upside for Chinese stocks in 2027",
+      "url": "https://www.chinadailyasia.com/hk/article/643324",
+      "summary": "预计 2027 年 MSCI 中国指数上涨 23%，沪深 300 上涨 10%；看好服务国内 AI 市场、银行及加大分红回购的公司，并偏好港股胜过 A 股。",
+      "source": "China Daily Asia（Zhou Lanxu 报道）"
+    },
+    {
+      "person": "chen-xiaoqun",
+      "date": "2026-11-27",
+      "dimension": "观点",
+      "title": "11.27复盘",
+      "url": "https://k.sina.com.cn/article_7879922977_1d5ae152102701m3k0.html",
+      "summary": "认为 11 月下旬见底，创业板已接近 2015 年位置，今日报复性反弹可看作反转；提醒「熊市多长阳」，建议持重仓者适当减仓，空仓者下周等回踩，不追高。",
+      "source": "新浪财经（转自陈小群）"
+    },
+    {
+      "person": "lidaxiao",
+      "date": "2026-11-27",
+      "dimension": "观点",
+      "title": "李大霄：稳市曙光或已出现 系列举措增强市场信心",
+      "url": "https://news.china.com/socialgd/10000169/20261127/49913116.html",
+      "summary": "认为 11 月 22 日的稳市举措（融资买入最低保证金由 100% 降至 80%、创业板引入做市商、交易所降费等）理论上带来约 4000 亿元增量资金，稳市曙光或已出现；但提醒散户理性、量力而行。",
+      "source": "中华网（中新经纬）"
+    },
+    {
+      "person": "xiaoyaoge",
+      "date": "2026-11-27",
+      "dimension": "观点",
+      "title": "2026.11.27，小瑜哥个人复盘",
+      "url": "https://k.sina.cn/article_5953740931_162dee083067046p8g.html",
+      "summary": "今日 A 股集体大涨，他持有的成长基金未卖出；以股票 ETF 动向和融资余额做节奏判断，认为部分成长宽基估值已回落至近十年底部区间，同时以加入价值、商品与债券降低组合波动。",
+      "source": "新浪财经"
+    },
+    {
+      "person": "zhao-laoge",
+      "date": "2026-11-27",
+      "dimension": "发言",
+      "title": "11.27 午盘提示！",
+      "url": "https://k.sina.com.cn/article_7879922977_1d5ae152102701m3gh.html",
+      "summary": "抱团方向分歧温和、未现跌停；科技（国产算力）为今日最强方向；周末若无监管，下周抱团股有望反包；盘中不追高，等待周末落地后再决定进攻方向。",
+      "source": "新浪财经（转自赵老哥八年一万倍）"
+    },
+    {
+      "person": "shui-pi",
+      "date": "2026-11-27",
+      "dimension": "发言",
+      "title": "大阳线 | 谈股论金",
+      "url": "https://www.163.com/dy/article/LCP0I889051994HF.html",
+      "summary": "认为 A 股大幅反弹（沪指涨 3.73%，创业板涨 11.61%）印证其前一晚私享会「春季行情可以有、而且一定会有」的判断；关注周一能否承接，并认为科技股是此次反弹的主力。",
+      "source": "网易号「水皮M0RE」"
+    },
+    {
+      "person": "trainer",
+      "date": "2026-11-24",
+      "dimension": "采访",
+      "title": "Episode 492: David Trainer: The $2 Trillion AI Bubble Could Be About to Burst",
+      "url": "https://www.stansberryresearch.com/stansberry-investor-hour/episode-492-david-trainer-the-2-trillion-ai-bubble-could-be-about-to-burst",
+      "summary": "认为 Anthropic 估值过高、利润率为负，AI 支出接近 8 万亿美元难以持续；警惕 AI 独占式估值，认为竞争会摊薄利润。",
+      "source": "Stansberry Investor Hour（播客，2026-11-24）"
+    },
+    {
+      "person": "schafer",
+      "date": "2026-11-24",
+      "dimension": "观点",
+      "title": "Marvell Tech Falls 60% from Highs as Wall Street Analysts Successively Slash Price Targets",
+      "url": "https://longbridge.com/en/news/306881589",
+      "summary": "11 月 24 日将 Marvell 目标价从 425 美元下调至 325 美元，维持“跑赢大盘”评级；认为目标价需要 12 月 1 日财报的收入与指引支撑。",
+      "source": "Longbridge（转载智通财经，2026-11-26）"
+    },
+    {
+      "person": "snider",
+      "date": "2026-11-25",
+      "dimension": "观点",
+      "title": "Goldman Sachs lays out three signals stock investors should watch",
+      "url": "https://www.thestreet.com/investing/stocks/goldman-sachs-lays-out-three-signals-stock-investors-should-watch",
+      "summary": "文章转述高盛策略团队（Snider）的三项股市触底条件：AI 利润需要兑现、美联储释放鸽派信号、仓位出清；文中认为目前三项都还未出现，市场“还没到那一步”。",
+      "source": "TheStreet（2026-11-25）"
     }
   ]
 }
