@@ -475,6 +475,7 @@ function bigvSection(b){
 var rows=b.rows||[],n=b.items_in_window||0,w=b.window||['',''];
 var h='<section><h2>大 V 观点 · 近五天<span class="muted"> '+esc(w[0])+' 至 '+esc(w[1])+'</span></h2>';
 if(!n)h+='<p class="meta">窗口内没有条目：数据需每日往 bigv/items.json 追加。</p>';
+if(b.freshness&&b.freshness.status!=='ok')h+='<p class="meta">更新检查：'+esc((b.freshness.problems||[]).join('；'))+'</p>';
 h+='<table class="card"><tr><th>人物</th><th>条数</th><th>最近要点</th></tr>';
 rows.forEach(function(r){
 var f=(r.items||[])[0];

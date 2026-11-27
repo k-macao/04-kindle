@@ -1,19 +1,26 @@
 {
   "schema": 2,
-  "generated": "2026-11-27T09:35:26Z",
+  "generated": "2026-11-27T17:07:44Z",
   "doc": "stocks.txt",
   "epub": "stocks.epub",
   "title": "同花顺行情面板",
-  "data_time": "2026-11-27T09:19:57Z",
+  "data_time": "2026-11-27T10:30:57Z",
   "data_time_kind": "exact",
-  "data_hash": "fdb78044571b22b7",
+  "data_hash": "b652360fbc4ede7f",
   "demo": false,
+  "view": {
+    "mode": "brief",
+    "reason": "周末休市",
+    "as_of": "2026-11-27",
+    "sector_rows": 5,
+    "themes": []
+  },
   "counts": {
     "indices": 13,
     "sectors": 91,
     "market": 5584,
     "hk": 23,
-    "limit_up": 20,
+    "limit_up": 0,
     "rrg": 91,
     "cross": 0,
     "volume_price": 91

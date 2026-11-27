@@ -1,21 +1,27 @@
 {
   "schema": 2,
-  "generated": "2026-11-27T09:35:26Z",
+  "generated": "2026-11-27T17:07:44Z",
   "doc": "stocks.txt",
   "epub": "stocks.epub",
   "title": "同花顺行情面板",
-  "data_timestamp": 1795771197000,
-  "data_time": "2026-11-27T09:19:57Z",
+  "data_timestamp": 1795775457000,
+  "data_time": "2026-11-27T10:30:57Z",
   "data_time_kind": "exact",
-  "data_hash": "fdb78044571b22b7",
+  "data_hash": "b652360fbc4ede7f",
   "demo": false,
-  "view": null,
+  "view": {
+    "mode": "brief",
+    "reason": "周末休市",
+    "as_of": "2026-11-27",
+    "sector_rows": 5,
+    "themes": []
+  },
   "counts": {
     "indices": 13,
     "sectors": 91,
     "market": 5584,
     "hk": 23,
-    "limit_up": 20,
+    "limit_up": 0,
     "rrg": 91,
     "cross": 0,
     "volume_price": 91
@@ -1720,8 +1726,8 @@
     "total": 5584
   },
   "hk": {
-    "generated": "2026-11-27T09:35:25.806085+00:00",
-    "data_timestamp": 1795771197000,
+    "generated": "2026-11-27T17:07:43.735181+00:00",
+    "data_timestamp": 1795775457000,
     "rows": [
       {
         "thscode": "hkHSI",
@@ -1735,10 +1741,10 @@
         "price_change_ratio_pct": 2.11,
         "volume": 25714049.4366,
         "turnover": 25714049.437,
-        "quote_time": "2026/11/27 17:19:57",
+        "quote_time": "2026/11/27 18:30:57",
         "currency": "HKD",
         "is_index": true,
-        "quote_ms": 1795771197000
+        "quote_ms": 1795775457000
       },
       {
         "thscode": "hkHSCEI",
@@ -2116,210 +2122,9 @@
       }
     ],
     "errors": [],
-    "data_time": "2026-11-27T09:19:57Z"
+    "data_time": "2026-11-27T10:30:57Z"
   },
-  "limit_up": [
-    {
-      "thscode": "603011.SH",
-      "name": "合锻智能",
-      "last_price": 14.98,
-      "price_change_ratio_pct": 9.9853,
-      "limit_up_time": "15:00",
-      "limit_up_reason": "",
-      "continue_day_text": "首板",
-      "seal_money": 0.0
-    },
-    {
-      "thscode": "000070.SZ",
-      "name": "特发信息",
-      "last_price": 11.78,
-      "price_change_ratio_pct": 9.9907,
-      "limit_up_time": "14:56",
-      "limit_up_reason": "算力+MPO连接器+光纤光缆",
-      "continue_day_text": "首板",
-      "seal_money": 1866823.7
-    },
-    {
-      "thscode": "002647.SZ",
-      "name": "仁东控股",
-      "last_price": 6.44,
-      "price_change_ratio_pct": 10.0855,
-      "limit_up_time": "14:56",
-      "limit_up_reason": "算力+东数西算+第三方支付",
-      "continue_day_text": "首板",
-      "seal_money": 3778992.0
-    },
-    {
-      "thscode": "688693.SH",
-      "name": "锴威特",
-      "last_price": 50.24,
-      "price_change_ratio_pct": 19.9904,
-      "limit_up_time": "14:56",
-      "limit_up_reason": "功率半导体+SiC+MOSFET+并购重组",
-      "continue_day_text": "首板",
-      "seal_money": 287674.24
-    },
-    {
-      "thscode": "002491.SZ",
-      "name": "通鼎互联",
-      "last_price": 12.66,
-      "price_change_ratio_pct": 9.9913,
-      "limit_up_time": "14:55",
-      "limit_up_reason": "光纤光缆+电网设备+三季报扭亏",
-      "continue_day_text": "首板",
-      "seal_money": 13012036.6
-    },
-    {
-      "thscode": "002575.SZ",
-      "name": "群兴玩具",
-      "last_price": 4.26,
-      "price_change_ratio_pct": 10.0775,
-      "limit_up_time": "14:55",
-      "limit_up_reason": "算力租赁+腾讯合作+酒类销售",
-      "continue_day_text": "首板",
-      "seal_money": 57510.0
-    },
-    {
-      "thscode": "301660.SZ",
-      "name": "粤芯半导-U",
-      "last_price": 32.26,
-      "price_change_ratio_pct": 20.0149,
-      "limit_up_time": "14:52",
-      "limit_up_reason": "硅光代工+12英寸晶圆代工+CPO",
-      "continue_day_text": "首板",
-      "seal_money": 6861605.2
-    },
-    {
-      "thscode": "603019.SH",
-      "name": "中科曙光",
-      "last_price": 76.05,
-      "price_change_ratio_pct": 9.9942,
-      "limit_up_time": "14:52",
-      "limit_up_reason": "算力+存储新品+战略合作",
-      "continue_day_text": "首板",
-      "seal_money": 2452384.4
-    },
-    {
-      "thscode": "603067.SH",
-      "name": "振华股份",
-      "last_price": 18.82,
-      "price_change_ratio_pct": 9.9942,
-      "limit_up_time": "14:52",
-      "limit_up_reason": "铬盐+SOFC+金属铬+回购",
-      "continue_day_text": "首板",
-      "seal_money": 17926050.0
-    },
-    {
-      "thscode": "688593.SH",
-      "name": "新相微",
-      "last_price": 20.94,
-      "price_change_ratio_pct": 20.0,
-      "limit_up_time": "14:52",
-      "limit_up_reason": "显示驱动芯片+半导体+OLED",
-      "continue_day_text": "首板",
-      "seal_money": 7028531.9
-    },
-    {
-      "thscode": "600602.SH",
-      "name": "云赛智联",
-      "last_price": 14.27,
-      "price_change_ratio_pct": 10.0231,
-      "limit_up_time": "14:51",
-      "limit_up_reason": "算力租赁+松江智算中心+上海国资",
-      "continue_day_text": "首板",
-      "seal_money": 7523786.2
-    },
-    {
-      "thscode": "688668.SH",
-      "name": "鼎通科技",
-      "last_price": 95.58,
-      "price_change_ratio_pct": 20.0,
-      "limit_up_time": "14:51",
-      "limit_up_reason": "高速连接器+液冷散热",
-      "continue_day_text": "首板",
-      "seal_money": 509632.56
-    },
-    {
-      "thscode": "002552.SZ",
-      "name": "宝鼎科技",
-      "last_price": 30.03,
-      "price_change_ratio_pct": 10.0,
-      "limit_up_time": "14:50",
-      "limit_up_reason": "覆铜板+铜箔+黄金采选",
-      "continue_day_text": "首板",
-      "seal_money": 18129111.0
-    },
-    {
-      "thscode": "600651.SH",
-      "name": "飞乐音响",
-      "last_price": 4.36,
-      "price_change_ratio_pct": 10.101,
-      "limit_up_time": "14:50",
-      "limit_up_reason": "芯片测试+存储器+上海国资",
-      "continue_day_text": "首板",
-      "seal_money": 244596.0
-    },
-    {
-      "thscode": "688610.SH",
-      "name": "埃科光电",
-      "last_price": 69.9,
-      "price_change_ratio_pct": 20.0,
-      "limit_up_time": "14:49",
-      "limit_up_reason": "PCB检测+半导体检测+工业相机",
-      "continue_day_text": "首板",
-      "seal_money": 1354452.3
-    },
-    {
-      "thscode": "000977.SZ",
-      "name": "浪潮信息",
-      "last_price": 46.81,
-      "price_change_ratio_pct": 10.0118,
-      "limit_up_time": "14:48",
-      "limit_up_reason": "算力租赁+液冷+超节点",
-      "continue_day_text": "首板",
-      "seal_money": 28213230.0
-    },
-    {
-      "thscode": "003019.SZ",
-      "name": "宸展光电",
-      "last_price": 22.02,
-      "price_change_ratio_pct": 9.99,
-      "limit_up_time": "14:48",
-      "limit_up_reason": "端侧AI+机器人概念+商用显示",
-      "continue_day_text": "首板",
-      "seal_money": 16341504.0
-    },
-    {
-      "thscode": "600345.SH",
-      "name": "长江通信",
-      "last_price": 34.05,
-      "price_change_ratio_pct": 10.0162,
-      "limit_up_time": "14:48",
-      "limit_up_reason": "卫星互联网+商业航天+应急通信+业绩增长",
-      "continue_day_text": "首板",
-      "seal_money": 5894055.0
-    },
-    {
-      "thscode": "603380.SH",
-      "name": "易德龙",
-      "last_price": 23.71,
-      "price_change_ratio_pct": 10.0232,
-      "limit_up_time": "14:48",
-      "limit_up_reason": "AI服务器+半导体设备+柔性EMS",
-      "continue_day_text": "首板",
-      "seal_money": 744494.0
-    },
-    {
-      "thscode": "603918.SH",
-      "name": "金桥信息",
-      "last_price": 8.83,
-      "price_change_ratio_pct": 9.9626,
-      "limit_up_time": "14:48",
-      "limit_up_reason": "人工智能+司法+智慧法院+多元解纷",
-      "continue_day_text": "首板",
-      "seal_money": 4709197.9
-    }
-  ],
+  "limit_up": [],
   "rrg": {
     "model": "RRG 相对旋转图（JdK 比率法）",
     "source": {
@@ -5893,12 +5698,12 @@
       "sectors_ok": 91,
       "members": 5581,
       "priced": 5581,
-      "pool_size": 100,
+      "pool_size": 0,
       "market_limit_up": 479
     },
     "notes": [
       "炸板/跌停数据未接入：情绪权重不做炸板负反馈，emotion 恒 ≥ 0，final 的正负跟随 momentum；emotion 为 0 时 final 为 0",
-      "涨停池只取前 100 只，市场涨停 479 只：池外涨停按涨幅记（>3% 记 1.0），连板杠杆可能偏低",
+      "涨停池这轮没取到：连板数全部按 0 处理，情绪只看涨幅",
       "成分股有快照行情 5581/5581 只"
     ],
     "rows": [
@@ -5906,88 +5711,58 @@
         "name": "通信设备",
         "members": 93,
         "priced": 93,
-        "momentum": 16.341044662677817,
-        "emotion_diff": 1.149210302195131,
-        "s_score": 1.1517163600424871,
-        "final_score": 21.62842344100934,
+        "momentum": 16.34646850610852,
+        "emotion_diff": 1.0,
+        "s_score": 1.0,
+        "final_score": 16.34646850610852,
         "up_count": 93,
-        "limit_up_count": 9,
-        "max_streak": 1,
+        "limit_up_count": 0,
+        "max_streak": 0,
         "amount": 145312109166.0,
         "code": "881129.TI",
-        "status": "ok"
-      },
-      {
-        "name": "电子化学品",
-        "members": 44,
-        "priced": 44,
-        "momentum": 15.55759669217163,
-        "emotion_diff": 1.0823862650546598,
-        "s_score": 1.1517163600424871,
-        "final_score": 19.39413067479453,
-        "up_count": 44,
-        "limit_up_count": 5,
-        "max_streak": 1,
-        "amount": 33260901301.0,
-        "code": "881172.TI",
         "status": "ok"
       },
       {
         "name": "半导体",
         "members": 190,
         "priced": 190,
-        "momentum": 15.667627789519553,
-        "emotion_diff": 1.0656867594892019,
-        "s_score": 1.1517163600424871,
-        "final_score": 19.22995870309715,
+        "momentum": 15.672988814425427,
+        "emotion_diff": 1.0,
+        "s_score": 1.0,
+        "final_score": 15.672988814425427,
         "up_count": 190,
-        "limit_up_count": 14,
-        "max_streak": 1,
+        "limit_up_count": 0,
+        "max_streak": 0,
         "amount": 280421250977.0,
         "code": "881121.TI",
         "status": "ok"
       },
       {
-        "name": "包装印刷",
-        "members": 45,
-        "priced": 45,
-        "momentum": 9.907317122077702,
-        "emotion_diff": 1.228374335757939,
-        "s_score": 1.3648510476127127,
-        "final_score": 16.61009269667391,
-        "up_count": 45,
-        "limit_up_count": 2,
-        "max_streak": 2,
-        "amount": 6568479298.0,
-        "code": "881138.TI",
-        "status": "ok"
-      },
-      {
-        "name": "计算机设备",
-        "members": 83,
-        "priced": 83,
-        "momentum": 12.106166219419181,
-        "emotion_diff": 1.1292246315721968,
-        "s_score": 1.1517163600424871,
-        "final_score": 15.744631891345236,
-        "up_count": 83,
-        "limit_up_count": 3,
-        "max_streak": 1,
-        "amount": 30676959081.0,
-        "code": "881130.TI",
+        "name": "电子化学品",
+        "members": 44,
+        "priced": 44,
+        "momentum": 15.562103046901207,
+        "emotion_diff": 1.0,
+        "s_score": 1.0,
+        "final_score": 15.562103046901207,
+        "up_count": 44,
+        "limit_up_count": 0,
+        "max_streak": 0,
+        "amount": 33260901301.0,
+        "code": "881172.TI",
         "status": "ok"
       },
       {
         "name": "自动化设备",
         "members": 101,
         "priced": 101,
-        "momentum": 13.239117830945624,
-        "emotion_diff": 1.005352461274282,
-        "s_score": 1.1517163600424871,
-        "final_score": 15.329321368224914,
+        "momentum": 13.23905281160672,
+        "emotion_diff": 1.0,
+        "s_score": 1.0,
+        "final_score": 13.23905281160672,
         "up_count": 101,
-        "limit_up_count": 1,
-        "max_streak": 1,
+        "limit_up_count": 0,
+        "max_streak": 0,
         "amount": 44436355065.4,
         "code": "881171.TI",
         "status": "ok"
@@ -5996,135 +5771,75 @@
         "name": "其他电子",
         "members": 34,
         "priced": 34,
-        "momentum": 12.941868132744913,
-        "emotion_diff": 1.007788581105076,
-        "s_score": 1.1517163600424871,
-        "final_score": 15.021452873053182,
+        "momentum": 12.942357280645156,
+        "emotion_diff": 1.0,
+        "s_score": 1.0,
+        "final_score": 12.942357280645156,
         "up_count": 34,
-        "limit_up_count": 1,
-        "max_streak": 1,
+        "limit_up_count": 0,
+        "max_streak": 0,
         "amount": 13286791918.0,
         "code": "881123.TI",
-        "status": "ok"
-      },
-      {
-        "name": "非金属材料",
-        "members": 17,
-        "priced": 17,
-        "momentum": 12.434028474804782,
-        "emotion_diff": 1.0461820728113758,
-        "s_score": 1.1517163600424871,
-        "final_score": 14.981823189351738,
-        "up_count": 17,
-        "limit_up_count": 1,
-        "max_streak": 1,
-        "amount": 3902610657.0,
-        "code": "881167.TI",
         "status": "ok"
       },
       {
         "name": "IT服务",
         "members": 129,
         "priced": 129,
-        "momentum": 12.700104919430096,
-        "emotion_diff": 0.9945219438593192,
-        "s_score": 1.1517163600424871,
-        "final_score": 14.546791528653165,
+        "momentum": 12.700727602079679,
+        "emotion_diff": 0.990451822819858,
+        "s_score": 1.0,
+        "final_score": 12.579458804618302,
         "up_count": 128,
-        "limit_up_count": 2,
-        "max_streak": 1,
+        "limit_up_count": 0,
+        "max_streak": 0,
         "amount": 54571676056.0,
         "code": "881271.TI",
+        "status": "ok"
+      },
+      {
+        "name": "非金属材料",
+        "members": 17,
+        "priced": 17,
+        "momentum": 12.436680041003285,
+        "emotion_diff": 1.0,
+        "s_score": 1.0,
+        "final_score": 12.436680041003285,
+        "up_count": 17,
+        "limit_up_count": 0,
+        "max_streak": 0,
+        "amount": 3902610657.0,
+        "code": "881167.TI",
         "status": "ok"
       },
       {
         "name": "软件开发",
         "members": 139,
         "priced": 139,
-        "momentum": 12.386976394400131,
-        "emotion_diff": 1.0056708282507858,
-        "s_score": 1.1517163600424871,
-        "final_score": 14.347185007630067,
+        "momentum": 12.387354377026094,
+        "emotion_diff": 1.0,
+        "s_score": 1.0,
+        "final_score": 12.387354377026094,
         "up_count": 139,
-        "limit_up_count": 1,
-        "max_streak": 1,
+        "limit_up_count": 0,
+        "max_streak": 0,
         "amount": 47052625331.0,
         "code": "881272.TI",
         "status": "ok"
       },
       {
-        "name": "其他社会服务",
-        "members": 42,
-        "priced": 42,
-        "momentum": 11.633146663756827,
-        "emotion_diff": 1.0700012602863582,
-        "s_score": 1.1517163600424871,
-        "final_score": 14.335968190046156,
-        "up_count": 42,
-        "limit_up_count": 1,
-        "max_streak": 1,
-        "amount": 5470088605.0,
-        "code": "881179.TI",
-        "status": "ok"
-      },
-      {
-        "name": "其他电源设备",
-        "members": 35,
-        "priced": 35,
-        "momentum": 10.30393293772769,
-        "emotion_diff": 1.1713479283635988,
-        "s_score": 1.1517163600424871,
-        "final_score": 13.900629666923914,
-        "up_count": 35,
-        "limit_up_count": 4,
-        "max_streak": 1,
-        "amount": 11174970262.0,
-        "code": "881282.TI",
-        "status": "ok"
-      },
-      {
-        "name": "元件",
-        "members": 63,
-        "priced": 63,
-        "momentum": 11.437852037447673,
-        "emotion_diff": 1.0529221703651328,
-        "s_score": 1.1517163600424871,
-        "final_score": 13.870313602648075,
-        "up_count": 63,
-        "limit_up_count": 4,
-        "max_streak": 1,
-        "amount": 112033710014.0,
-        "code": "881270.TI",
-        "status": "ok"
-      },
-      {
-        "name": "专用设备",
-        "members": 204,
-        "priced": 204,
-        "momentum": 11.218018516000859,
-        "emotion_diff": 0.9924029744661097,
-        "s_score": 1.1517163600424871,
-        "final_score": 12.821822068730606,
-        "up_count": 202,
-        "limit_up_count": 7,
-        "max_streak": 1,
-        "amount": 31332787207.0,
-        "code": "881118.TI",
-        "status": "ok"
-      },
-      {
-        "name": "塑料制品",
-        "members": 78,
-        "priced": 78,
-        "momentum": 10.377292595734614,
-        "emotion_diff": 1.058395199043942,
-        "s_score": 1.1517163600424871,
-        "final_score": 12.64961941895865,
-        "up_count": 78,
-        "limit_up_count": 1,
-        "max_streak": 1,
-        "amount": 21233458343.0,
-        "code": "881265.TI",
+        "name": "计算机设备",
+        "members": 83,
+        "priced": 83,
+        "momentum": 12.110035962132283,
+        "emotion_diff": 0.9982721898262455,
+        "s_score": 1.0,
+        "final_score": 12.089112118792379,
+        "up_count": 83,
+        "limit_up_count": 0,
+        "max_streak": 0,
+        "amount": 30676959081.0,
+        "code": "881130.TI",
         "status": "ok"
       },
       {
@@ -6143,33 +5858,33 @@
         "status": "ok"
       },
       {
-        "name": "消费电子",
-        "members": 96,
-        "priced": 96,
-        "momentum": 10.13673224835067,
-        "emotion_diff": 0.9853621842473427,
-        "s_score": 1.1517163600424871,
-        "final_score": 11.5037491331134,
-        "up_count": 95,
-        "limit_up_count": 4,
-        "max_streak": 1,
-        "amount": 51739184232.0,
-        "code": "881124.TI",
+        "name": "元件",
+        "members": 63,
+        "priced": 63,
+        "momentum": 11.440154572340633,
+        "emotion_diff": 1.0,
+        "s_score": 1.0,
+        "final_score": 11.440154572340633,
+        "up_count": 63,
+        "limit_up_count": 0,
+        "max_streak": 0,
+        "amount": 112033710014.0,
+        "code": "881270.TI",
         "status": "ok"
       },
       {
-        "name": "橡胶制品",
-        "members": 22,
-        "priced": 22,
-        "momentum": 9.592014790390138,
-        "emotion_diff": 1.0169417485738972,
-        "s_score": 1.1517163600424871,
-        "final_score": 11.234440606143963,
-        "up_count": 22,
-        "limit_up_count": 1,
-        "max_streak": 1,
-        "amount": 1997742802.0,
-        "code": "881266.TI",
+        "name": "其他社会服务",
+        "members": 42,
+        "priced": 42,
+        "momentum": 11.62176804143154,
+        "emotion_diff": 0.959636300077812,
+        "s_score": 1.0,
+        "final_score": 11.152670483641923,
+        "up_count": 42,
+        "limit_up_count": 0,
+        "max_streak": 0,
+        "amount": 5470088605.0,
+        "code": "881179.TI",
         "status": "ok"
       },
       {
@@ -6188,31 +5903,91 @@
         "status": "ok"
       },
       {
-        "name": "小金属",
-        "members": 30,
-        "priced": 30,
-        "momentum": 8.241519406528914,
-        "emotion_diff": 1.161829215369214,
-        "s_score": 1.1517163600424871,
-        "final_score": 11.02795828531262,
-        "up_count": 30,
-        "limit_up_count": 2,
-        "max_streak": 1,
-        "amount": 21955408592.0,
-        "code": "881170.TI",
+        "name": "专用设备",
+        "members": 204,
+        "priced": 204,
+        "momentum": 11.217957019226816,
+        "emotion_diff": 0.9573596543080113,
+        "s_score": 1.0,
+        "final_score": 10.739619453969112,
+        "up_count": 202,
+        "limit_up_count": 0,
+        "max_streak": 0,
+        "amount": 31332787207.0,
+        "code": "881118.TI",
+        "status": "ok"
+      },
+      {
+        "name": "塑料制品",
+        "members": 78,
+        "priced": 78,
+        "momentum": 10.360589262295882,
+        "emotion_diff": 1.0,
+        "s_score": 1.0,
+        "final_score": 10.360589262295882,
+        "up_count": 78,
+        "limit_up_count": 0,
+        "max_streak": 0,
+        "amount": 21233458343.0,
+        "code": "881265.TI",
+        "status": "ok"
+      },
+      {
+        "name": "其他电源设备",
+        "members": 35,
+        "priced": 35,
+        "momentum": 10.301275622642828,
+        "emotion_diff": 1.0,
+        "s_score": 1.0,
+        "final_score": 10.301275622642828,
+        "up_count": 35,
+        "limit_up_count": 0,
+        "max_streak": 0,
+        "amount": 11174970262.0,
+        "code": "881282.TI",
+        "status": "ok"
+      },
+      {
+        "name": "消费电子",
+        "members": 96,
+        "priced": 96,
+        "momentum": 10.135952633778812,
+        "emotion_diff": 0.9510131047170161,
+        "s_score": 1.0,
+        "final_score": 9.639423783514605,
+        "up_count": 95,
+        "limit_up_count": 0,
+        "max_streak": 0,
+        "amount": 51739184232.0,
+        "code": "881124.TI",
+        "status": "ok"
+      },
+      {
+        "name": "橡胶制品",
+        "members": 22,
+        "priced": 22,
+        "momentum": 9.59153797186003,
+        "emotion_diff": 1.0,
+        "s_score": 1.0,
+        "final_score": 9.59153797186003,
+        "up_count": 22,
+        "limit_up_count": 0,
+        "max_streak": 0,
+        "amount": 1997742802.0,
+        "code": "881266.TI",
         "status": "ok"
       },
       {
         "name": "通用设备",
         "members": 255,
         "priced": 255,
-        "momentum": 10.196260988469653,
-        "emotion_diff": 0.9150630310067533,
-        "s_score": 1.1517163600424871,
-        "final_score": 10.745768727146185,
+        "momentum": 10.196174951782803,
+        "emotion_diff": 0.9008000634143746,
+        "s_score": 1.0,
+        "final_score": 9.184715043150007,
         "up_count": 253,
-        "limit_up_count": 3,
-        "max_streak": 1,
+        "limit_up_count": 0,
+        "max_streak": 0,
         "amount": 65565727488.0,
         "code": "881117.TI",
         "status": "ok"
@@ -6221,105 +5996,60 @@
         "name": "光学光电子",
         "members": 107,
         "priced": 107,
-        "momentum": 10.249145468956039,
-        "emotion_diff": 0.8956632035640607,
-        "s_score": 1.1517163600424871,
-        "final_score": 10.572505646017955,
+        "momentum": 10.249348947043567,
+        "emotion_diff": 0.8879387531404292,
+        "s_score": 1.0,
+        "final_score": 9.100794124539036,
         "up_count": 105,
-        "limit_up_count": 3,
-        "max_streak": 1,
+        "limit_up_count": 0,
+        "max_streak": 0,
         "amount": 41662053563.0,
         "code": "881122.TI",
+        "status": "ok"
+      },
+      {
+        "name": "包装印刷",
+        "members": 45,
+        "priced": 45,
+        "momentum": 9.906879915376203,
+        "emotion_diff": 0.9169185404654981,
+        "s_score": 1.0,
+        "final_score": 9.083801872573707,
+        "up_count": 45,
+        "limit_up_count": 0,
+        "max_streak": 0,
+        "amount": 6568479298.0,
+        "code": "881138.TI",
         "status": "ok"
       },
       {
         "name": "电池",
         "members": 107,
         "priced": 107,
-        "momentum": 8.639805616363875,
-        "emotion_diff": 1.0092910553976975,
-        "s_score": 1.1517163600424871,
-        "final_score": 10.043057102670952,
+        "momentum": 8.639426987601599,
+        "emotion_diff": 0.9981187123088472,
+        "s_score": 1.0,
+        "final_score": 8.623173739951211,
         "up_count": 107,
-        "limit_up_count": 2,
-        "max_streak": 1,
+        "limit_up_count": 0,
+        "max_streak": 0,
         "amount": 50437967805.9,
         "code": "881281.TI",
         "status": "ok"
       },
       {
-        "name": "建筑材料",
-        "members": 73,
-        "priced": 73,
-        "momentum": 8.023159611999954,
-        "emotion_diff": 1.020815423166916,
-        "s_score": 1.1517163600424871,
-        "final_score": 9.432747107703536,
-        "up_count": 68,
-        "limit_up_count": 2,
-        "max_streak": 1,
-        "amount": 19219095681.0,
-        "code": "881115.TI",
-        "status": "ok"
-      },
-      {
-        "name": "能源金属",
-        "members": 14,
-        "priced": 14,
-        "momentum": 7.832096559698781,
-        "emotion_diff": 1.0156731574792868,
-        "s_score": 1.1517163600424871,
-        "final_score": 9.161731165942856,
-        "up_count": 14,
-        "limit_up_count": 1,
-        "max_streak": 1,
-        "amount": 10305984883.0,
-        "code": "881267.TI",
-        "status": "ok"
-      },
-      {
-        "name": "化学制品",
-        "members": 184,
-        "priced": 184,
-        "momentum": 7.192161392532937,
-        "emotion_diff": 0.8886587761746046,
-        "s_score": 1.3648510476127127,
-        "final_score": 8.723278059741117,
-        "up_count": 183,
-        "limit_up_count": 3,
-        "max_streak": 2,
-        "amount": 31482747761.0,
-        "code": "881109.TI",
-        "status": "ok"
-      },
-      {
-        "name": "风电设备",
-        "members": 32,
-        "priced": 32,
-        "momentum": 7.311639327498533,
-        "emotion_diff": 1.014174557262434,
-        "s_score": 1.1517163600424871,
-        "final_score": 8.540297652357586,
-        "up_count": 32,
-        "limit_up_count": 1,
-        "max_streak": 1,
-        "amount": 6476100730.0,
-        "code": "881280.TI",
-        "status": "ok"
-      },
-      {
-        "name": "工业金属",
-        "members": 55,
-        "priced": 55,
-        "momentum": 5.987910944295513,
-        "emotion_diff": 1.0062207631598457,
-        "s_score": 1.3648510476127127,
-        "final_score": 8.223446374926066,
-        "up_count": 55,
-        "limit_up_count": 2,
-        "max_streak": 2,
-        "amount": 25220222785.0,
-        "code": "881168.TI",
+        "name": "小金属",
+        "members": 30,
+        "priced": 30,
+        "momentum": 8.235895893081672,
+        "emotion_diff": 1.0,
+        "s_score": 1.0,
+        "final_score": 8.235895893081672,
+        "up_count": 30,
+        "limit_up_count": 0,
+        "max_streak": 0,
+        "amount": 21955408592.0,
+        "code": "881170.TI",
         "status": "ok"
       },
       {
@@ -6338,36 +6068,6 @@
         "status": "ok"
       },
       {
-        "name": "医疗服务",
-        "members": 56,
-        "priced": 56,
-        "momentum": 7.657422319991331,
-        "emotion_diff": 0.9137094556698304,
-        "s_score": 1.1517163600424871,
-        "final_score": 8.05816684305545,
-        "up_count": 54,
-        "limit_up_count": 1,
-        "max_streak": 1,
-        "amount": 25706930745.0,
-        "code": "881175.TI",
-        "status": "ok"
-      },
-      {
-        "name": "汽车零部件",
-        "members": 277,
-        "priced": 277,
-        "momentum": 7.764299153568187,
-        "emotion_diff": 0.8883045283334077,
-        "s_score": 1.1517163600424871,
-        "final_score": 7.943459253861961,
-        "up_count": 274,
-        "limit_up_count": 7,
-        "max_streak": 1,
-        "amount": 58900709269.6,
-        "code": "881126.TI",
-        "status": "ok"
-      },
-      {
         "name": "光伏设备",
         "members": 73,
         "priced": 73,
@@ -6383,18 +6083,18 @@
         "status": "ok"
       },
       {
-        "name": "有色金属",
-        "members": 50,
-        "priced": 50,
-        "momentum": 6.461870974609234,
-        "emotion_diff": 1.029750146529213,
-        "s_score": 1.1517163600424871,
-        "final_score": 7.663650323355833,
-        "up_count": 50,
-        "limit_up_count": 3,
-        "max_streak": 1,
-        "amount": 58411262530.0,
-        "code": "000819.SH",
+        "name": "能源金属",
+        "members": 14,
+        "priced": 14,
+        "momentum": 7.831015914913246,
+        "emotion_diff": 1.0,
+        "s_score": 1.0,
+        "final_score": 7.831015914913246,
+        "up_count": 14,
+        "limit_up_count": 0,
+        "max_streak": 0,
+        "amount": 10305984883.0,
+        "code": "881267.TI",
         "status": "ok"
       },
       {
@@ -6473,33 +6173,48 @@
         "status": "ok"
       },
       {
-        "name": "贵金属",
-        "members": 14,
-        "priced": 14,
-        "momentum": 6.022733743846615,
-        "emotion_diff": 1.0401772013142485,
-        "s_score": 1.1517163600424871,
-        "final_score": 7.215169377913604,
-        "up_count": 14,
-        "limit_up_count": 1,
-        "max_streak": 1,
-        "amount": 23940384810.0,
-        "code": "881169.TI",
+        "name": "风电设备",
+        "members": 32,
+        "priced": 32,
+        "momentum": 7.309214175668967,
+        "emotion_diff": 0.9833837081159792,
+        "s_score": 1.0,
+        "final_score": 7.187762139483229,
+        "up_count": 32,
+        "limit_up_count": 0,
+        "max_streak": 0,
+        "amount": 6476100730.0,
+        "code": "881280.TI",
         "status": "ok"
       },
       {
-        "name": "电网设备",
-        "members": 140,
-        "priced": 140,
-        "momentum": 6.747481962748336,
-        "emotion_diff": 0.9126577209348982,
-        "s_score": 1.1517163600424871,
-        "final_score": 7.092432324720953,
-        "up_count": 140,
-        "limit_up_count": 2,
-        "max_streak": 1,
-        "amount": 24603097718.0,
-        "code": "881278.TI",
+        "name": "建筑材料",
+        "members": 73,
+        "priced": 73,
+        "momentum": 8.017571395981186,
+        "emotion_diff": 0.8714558865825129,
+        "s_score": 1.0,
+        "final_score": 6.986959789123381,
+        "up_count": 68,
+        "limit_up_count": 0,
+        "max_streak": 0,
+        "amount": 19219095681.0,
+        "code": "881115.TI",
+        "status": "ok"
+      },
+      {
+        "name": "医疗服务",
+        "members": 56,
+        "priced": 56,
+        "momentum": 7.6541651036702545,
+        "emotion_diff": 0.892870789347902,
+        "s_score": 1.0,
+        "final_score": 6.8341804379132265,
+        "up_count": 54,
+        "limit_up_count": 0,
+        "max_streak": 0,
+        "amount": 25706930745.0,
+        "code": "881175.TI",
         "status": "ok"
       },
       {
@@ -6515,6 +6230,21 @@
         "max_streak": 0,
         "amount": 37366538030.0,
         "code": "881157.TI",
+        "status": "ok"
+      },
+      {
+        "name": "汽车零部件",
+        "members": 277,
+        "priced": 277,
+        "momentum": 7.763671183920408,
+        "emotion_diff": 0.8675752976199608,
+        "s_score": 1.0,
+        "final_score": 6.735569338013262,
+        "up_count": 274,
+        "limit_up_count": 0,
+        "max_streak": 0,
+        "amount": 58900709269.6,
+        "code": "881126.TI",
         "status": "ok"
       },
       {
@@ -6548,48 +6278,78 @@
         "status": "ok"
       },
       {
-        "name": "多元金融",
-        "members": 26,
-        "priced": 26,
-        "momentum": 5.97060863513594,
-        "emotion_diff": 0.8882217271635757,
-        "s_score": 1.1517163600424871,
-        "final_score": 6.107810203545033,
-        "up_count": 25,
-        "limit_up_count": 1,
-        "max_streak": 1,
-        "amount": 4957662368.0,
-        "code": "881283.TI",
+        "name": "有色金属",
+        "members": 50,
+        "priced": 50,
+        "momentum": 6.458152295200769,
+        "emotion_diff": 0.9898287466446242,
+        "s_score": 1.0,
+        "final_score": 6.3924647919986795,
+        "up_count": 50,
+        "limit_up_count": 0,
+        "max_streak": 0,
+        "amount": 58411262530.0,
+        "code": "000819.SH",
         "status": "ok"
       },
       {
-        "name": "家居用品",
-        "members": 98,
-        "priced": 98,
-        "momentum": 6.361520419438314,
-        "emotion_diff": 0.8052496844115095,
-        "s_score": 1.1517163600424871,
-        "final_score": 5.899796403731846,
-        "up_count": 97,
-        "limit_up_count": 1,
-        "max_streak": 1,
-        "amount": 9748905746.6,
-        "code": "881139.TI",
+        "name": "化学制品",
+        "members": 184,
+        "priced": 184,
+        "momentum": 7.189839770893148,
+        "emotion_diff": 0.8569375510933186,
+        "s_score": 1.0,
+        "final_score": 6.16124368602252,
+        "up_count": 183,
+        "limit_up_count": 0,
+        "max_streak": 0,
+        "amount": 31482747761.0,
+        "code": "881109.TI",
         "status": "ok"
       },
       {
-        "name": "建筑装饰",
-        "members": 144,
-        "priced": 144,
-        "momentum": 6.437138474067503,
-        "emotion_diff": 0.7573978747622759,
-        "s_score": 1.1517163600424871,
-        "final_score": 5.615164320258405,
+        "name": "贵金属",
+        "members": 14,
+        "priced": 14,
+        "momentum": 6.019390440842712,
+        "emotion_diff": 1.0,
+        "s_score": 1.0,
+        "final_score": 6.019390440842712,
+        "up_count": 14,
+        "limit_up_count": 0,
+        "max_streak": 0,
+        "amount": 23940384810.0,
+        "code": "881169.TI",
+        "status": "ok"
+      },
+      {
+        "name": "电网设备",
+        "members": 140,
+        "priced": 140,
+        "momentum": 6.746217693718498,
+        "emotion_diff": 0.8852225656554619,
+        "s_score": 1.0,
+        "final_score": 5.971904135303762,
         "up_count": 140,
-        "limit_up_count": 2,
-        "max_streak": 1,
-        "amount": 22171314134.8,
-        "code": "881116.TI",
+        "limit_up_count": 0,
+        "max_streak": 0,
+        "amount": 24603097718.0,
+        "code": "881278.TI",
+        "status": "ok"
+      },
+      {
+        "name": "工业金属",
+        "members": 55,
+        "priced": 55,
+        "momentum": 5.986575945749702,
+        "emotion_diff": 0.9415824435588942,
+        "s_score": 1.0,
+        "final_score": 5.636854807549902,
+        "up_count": 55,
+        "limit_up_count": 0,
+        "max_streak": 0,
+        "amount": 25220222785.0,
+        "code": "881168.TI",
         "status": "ok"
       },
       {
@@ -6605,6 +6365,36 @@
         "max_streak": 0,
         "amount": 12220597290.0,
         "code": "881181.TI",
+        "status": "ok"
+      },
+      {
+        "name": "多元金融",
+        "members": 26,
+        "priced": 26,
+        "momentum": 5.967472070556775,
+        "emotion_diff": 0.864587070040668,
+        "s_score": 1.0,
+        "final_score": 5.159399193032201,
+        "up_count": 25,
+        "limit_up_count": 0,
+        "max_streak": 0,
+        "amount": 4957662368.0,
+        "code": "881283.TI",
+        "status": "ok"
+      },
+      {
+        "name": "家居用品",
+        "members": 98,
+        "priced": 98,
+        "momentum": 6.360718369713372,
+        "emotion_diff": 0.8008556134951771,
+        "s_score": 1.0,
+        "final_score": 5.094017012246845,
+        "up_count": 97,
+        "limit_up_count": 0,
+        "max_streak": 0,
+        "amount": 9748905746.6,
+        "code": "881139.TI",
         "status": "ok"
       },
       {
@@ -6650,6 +6440,21 @@
         "max_streak": 0,
         "amount": 5575395800.0,
         "code": "881135.TI",
+        "status": "ok"
+      },
+      {
+        "name": "建筑装饰",
+        "members": 144,
+        "priced": 144,
+        "momentum": 6.431182929544097,
+        "emotion_diff": 0.7076014753304798,
+        "s_score": 1.0,
+        "final_score": 4.5507145290656,
+        "up_count": 140,
+        "limit_up_count": 0,
+        "max_streak": 0,
+        "amount": 22171314134.8,
+        "code": "881116.TI",
         "status": "ok"
       },
       {
@@ -6713,21 +6518,6 @@
         "status": "ok"
       },
       {
-        "name": "化学原料",
-        "members": 59,
-        "priced": 59,
-        "momentum": 4.633296662007563,
-        "emotion_diff": 0.7484541780384422,
-        "s_score": 1.1517163600424871,
-        "final_score": 3.99393379242585,
-        "up_count": 58,
-        "limit_up_count": 2,
-        "max_streak": 1,
-        "amount": 14587931643.4,
-        "code": "881108.TI",
-        "status": "ok"
-      },
-      {
         "name": "医疗器械",
         "members": 142,
         "priced": 142,
@@ -6743,18 +6533,18 @@
         "status": "ok"
       },
       {
-        "name": "综合",
-        "members": 18,
-        "priced": 18,
-        "momentum": 5.512625040239653,
-        "emotion_diff": 0.6039729075188077,
-        "s_score": 1.1517163600424871,
-        "final_score": 3.834612179523512,
-        "up_count": 18,
-        "limit_up_count": 1,
-        "max_streak": 1,
-        "amount": 3751069575.0,
-        "code": "881165.TI",
+        "name": "化学原料",
+        "members": 59,
+        "priced": 59,
+        "momentum": 4.625624794167368,
+        "emotion_diff": 0.7157003204168167,
+        "s_score": 1.0,
+        "final_score": 3.310561147313557,
+        "up_count": 58,
+        "limit_up_count": 0,
+        "max_streak": 0,
+        "amount": 14587931643.4,
+        "code": "881108.TI",
         "status": "ok"
       },
       {
@@ -6788,18 +6578,18 @@
         "status": "ok"
       },
       {
-        "name": "服装家纺",
-        "members": 74,
-        "priced": 74,
-        "momentum": 4.422188419018397,
-        "emotion_diff": 0.567541225234715,
-        "s_score": 1.1517163600424871,
-        "final_score": 2.8905480447908647,
-        "up_count": 67,
-        "limit_up_count": 1,
-        "max_streak": 1,
-        "amount": 8739910549.0,
-        "code": "881136.TI",
+        "name": "综合",
+        "members": 18,
+        "priced": 18,
+        "momentum": 5.512555052987651,
+        "emotion_diff": 0.5701039994706043,
+        "s_score": 1.0,
+        "final_score": 3.1427296830101485,
+        "up_count": 18,
+        "limit_up_count": 0,
+        "max_streak": 0,
+        "amount": 3751069575.0,
+        "code": "881165.TI",
         "status": "ok"
       },
       {
@@ -6815,6 +6605,21 @@
         "max_streak": 0,
         "amount": 9815081620.0,
         "code": "881125.TI",
+        "status": "ok"
+      },
+      {
+        "name": "服装家纺",
+        "members": 74,
+        "priced": 74,
+        "momentum": 4.421512074727617,
+        "emotion_diff": 0.5665855655200711,
+        "s_score": 1.0,
+        "final_score": 2.5051649193133696,
+        "up_count": 67,
+        "limit_up_count": 0,
+        "max_streak": 0,
+        "amount": 8739910549.0,
+        "code": "881136.TI",
         "status": "ok"
       },
       {
@@ -6998,21 +6803,6 @@
         "status": "ok"
       },
       {
-        "name": "工程机械",
-        "members": 36,
-        "priced": 36,
-        "momentum": 1.5312818412963654,
-        "emotion_diff": 0.4734543647325584,
-        "s_score": 1.1517163600424871,
-        "final_score": 0.8349852295295606,
-        "up_count": 35,
-        "limit_up_count": 1,
-        "max_streak": 1,
-        "amount": 10487961626.0,
-        "code": "881268.TI",
-        "status": "ok"
-      },
-      {
         "name": "旅游及酒店",
         "members": 35,
         "priced": 35,
@@ -7070,6 +6860,21 @@
         "max_streak": 0,
         "amount": 1929737586.0,
         "code": "881174.TI",
+        "status": "ok"
+      },
+      {
+        "name": "工程机械",
+        "members": 36,
+        "priced": 36,
+        "momentum": 1.531149227774351,
+        "emotion_diff": 0.4692419033837529,
+        "s_score": 1.0,
+        "final_score": 0.7184793780053998,
+        "up_count": 35,
+        "limit_up_count": 0,
+        "max_streak": 0,
+        "amount": 10487961626.0,
+        "code": "881268.TI",
         "status": "ok"
       },
       {
@@ -7834,13 +7639,22 @@
         "org": "CNBC 投资俱乐部",
         "role": "主持人、投资组合负责人（媒体身份）",
         "note": "媒体人物，不是机构策略；保留是因为是高关注度的财经大 V",
-        "count": 1,
+        "count": 2,
         "ai_bull_prob": 0.7,
         "dimensions": {
-          "观点": 1
+          "观点": 2
         },
-        "latest": "2026-11-24",
+        "latest": "2026-11-25",
         "items": [
+          {
+            "person": "cramer",
+            "date": "2026-11-25",
+            "dimension": "观点",
+            "title": "Jim Cramer Backs DuPont, Says Buy Nvidia",
+            "url": "https://www.benzinga.com/trading-ideas/long-ideas/26/11/63619800/jim-cramer-backs-dupont-says-buy-nvidia",
+            "summary": "看好杜邦（DuPont），并建议买入英伟达（NVIDIA）。摘要依据文章标题，正文未逐段核实。",
+            "source": "Benzinga"
+          },
           {
             "person": "cramer",
             "date": "2026-11-24",
@@ -7859,13 +7673,22 @@
         "org": "Ritholtz Wealth Management",
         "role": "首席执行官",
         "note": "",
-        "count": 1,
+        "count": 2,
         "ai_bull_prob": 0.6,
         "dimensions": {
-          "观点": 1
+          "观点": 2
         },
-        "latest": "2026-11-24",
+        "latest": "2026-11-27",
         "items": [
+          {
+            "person": "brown",
+            "date": "2026-11-27",
+            "dimension": "观点",
+            "title": "Josh Brown lost a bet on Disney. It is now on his Best Stocks in the Market list",
+            "url": "https://www.cnbc.com/2026/11/27/josh-brown-lost-a-bet-on-disney-it-is-now-on-his-best-stocks-in-the-market-list.html",
+            "summary": "把迪士尼（DIS）列入其「市场最佳股票」名单，认为主题乐园与漫威 IP 支撑股价；给出 120 美元附近回踩的买点参考，以 112 美元（周线收盘）作为失效位。",
+            "source": "CNBC（Ritholtz Wealth 的 Best Stocks in the Market 栏目）"
+          },
           {
             "person": "brown",
             "date": "2026-11-24",
@@ -7994,13 +7817,22 @@
         "org": "高盛",
         "role": "首席美股策略师",
         "note": "11 月 23 日客户报告（Investing.com）",
-        "count": 1,
+        "count": 2,
         "ai_bull_prob": 0.55,
         "dimensions": {
-          "观点": 1
+          "观点": 2
         },
-        "latest": "2026-11-23",
+        "latest": "2026-11-25",
         "items": [
+          {
+            "person": "snider",
+            "date": "2026-11-25",
+            "dimension": "观点",
+            "title": "Goldman Sachs lays out three signals stock investors should watch",
+            "url": "https://www.thestreet.com/investing/stocks/goldman-sachs-lays-out-three-signals-stock-investors-should-watch",
+            "summary": "文章转述高盛策略团队（Snider）的三项股市触底条件：AI 利润需要兑现、美联储释放鸽派信号、仓位出清；文中认为目前三项都还未出现，市场“还没到那一步”。",
+            "source": "TheStreet（2026-11-25）"
+          },
           {
             "person": "snider",
             "date": "2026-11-23",
@@ -8018,14 +7850,23 @@
         "name": "陈果",
         "org": "东方财富证券",
         "role": "研究所副所长、首席策略官",
-        "note": "",
-        "count": 1,
-        "ai_bull_prob": 0.6,
+        "note": "；11-27 观点（广州日报报道）ai_bull_prob 依据该观点",
+        "count": 2,
+        "ai_bull_prob": 0.8,
         "dimensions": {
-          "观点": 1
+          "观点": 2
         },
-        "latest": "2026-11-24",
+        "latest": "2026-11-27",
         "items": [
+          {
+            "person": "chen-guo",
+            "date": "2026-11-27",
+            "dimension": "观点",
+            "title": "国常会罕见“午间发令”，A股放量暴拉！投资者接下来如何应对？",
+            "url": "https://www.21jingji.com/article/20261127/herald/a821555019a1c5918a4ff80b6c73c4ed.html",
+            "summary": "认为国常会释放的稳市信号非常强烈，市场大概率会把这次会议看作 A 股的重要政策底，「最悲观时刻已经过去」。",
+            "source": "广州日报（21 经济网转载）"
+          },
           {
             "person": "chen-guo",
             "date": "2026-11-24",
@@ -8308,14 +8149,23 @@
         "name": "李求索",
         "org": "中金公司",
         "role": "国内策略首席分析师",
-        "note": "中金公司研究部国内策略首席分析师；11-24 中金研报第一作者，ai_bull_prob 依据该报告观点",
-        "count": 1,
+        "note": "中金公司研究部国内策略首席分析师；11-24 中金研报、11-27 国常会后观点，ai_bull_prob 依据这些发言",
+        "count": 2,
         "ai_bull_prob": 0.7,
         "dimensions": {
-          "观点": 1
+          "观点": 2
         },
-        "latest": "2026-11-24",
+        "latest": "2026-11-27",
         "items": [
+          {
+            "person": "li-qiusuo",
+            "date": "2026-11-27",
+            "dimension": "观点",
+            "title": "创业板指数涨11.61%、科创50飙升15.07%！国常会打破常规午间发声",
+            "url": "https://www.21jingji.com/article/20261127/herald/6508171930d193e58d57a612c2cd7b2c.html",
+            "summary": "认为国常会后一般进入政策落实阶段；当前外部风险较多，但多数压力偏短期、阶段性，对 A 股中期走势不必悲观，长期稳进趋势有望延续。",
+            "source": "每日经济新闻（21 经济网转载）"
+          },
           {
             "person": "li-qiusuo",
             "date": "2026-11-24",
@@ -8510,11 +8360,23 @@
         "org": "New Constructs",
         "role": "投资研究负责人",
         "note": "",
-        "count": 0,
+        "count": 1,
         "ai_bull_prob": 0.2,
-        "dimensions": {},
-        "latest": null,
-        "items": []
+        "dimensions": {
+          "采访": 1
+        },
+        "latest": "2026-11-24",
+        "items": [
+          {
+            "person": "trainer",
+            "date": "2026-11-24",
+            "dimension": "采访",
+            "title": "Episode 492: David Trainer: The $2 Trillion AI Bubble Could Be About to Burst",
+            "url": "https://www.stansberryresearch.com/stansberry-investor-hour/episode-492-david-trainer-the-2-trillion-ai-bubble-could-be-about-to-burst",
+            "summary": "认为 Anthropic 估值过高、利润率为负，AI 支出接近 8 万亿美元难以持续；警惕 AI 独占式估值，认为竞争会摊薄利润。",
+            "source": "Stansberry Investor Hour（播客，2026-11-24）"
+          }
+        ]
       },
       {
         "id": "ramchandani",
@@ -8587,11 +8449,23 @@
         "org": "Charles Schwab",
         "role": "首席投资策略师",
         "note": "11 月 20 日 Bloomberg 视频（窗口外）",
-        "count": 0,
+        "count": 1,
         "ai_bull_prob": null,
-        "dimensions": {},
-        "latest": null,
-        "items": []
+        "dimensions": {
+          "采访": 1
+        },
+        "latest": "2026-11-24",
+        "items": [
+          {
+            "person": "sonders",
+            "date": "2026-11-24",
+            "dimension": "采访",
+            "title": "Stock Market Today, November 25, 2026: Stocks Win Back Most of Their Morning Losses After a Chip Sell-Off",
+            "url": "https://www.stocktitan.net/articles/stock-market-today-live-november-25-2026",
+            "summary": "周二对 CNBC 表示，AI 生态系统的抛售早于黄仁勋与英伟达的消息；她指出数据中心支出的担忧，以及盈利与亏损公司之间的分化。",
+            "source": "StockTitan 转述 CNBC 采访"
+          }
+        ]
       },
       {
         "id": "hartnett",
@@ -8805,13 +8679,23 @@
         "org": "前券商首席经济学家",
         "role": "",
         "note": "",
-        "count": 1,
+        "count": 2,
         "ai_bull_prob": 0.7,
         "dimensions": {
+          "观点": 1,
           "采访": 1
         },
-        "latest": "2026-11-25",
+        "latest": "2026-11-27",
         "items": [
+          {
+            "person": "lidaxiao",
+            "date": "2026-11-27",
+            "dimension": "观点",
+            "title": "李大霄：稳市曙光或已出现 系列举措增强市场信心",
+            "url": "https://news.china.com/socialgd/10000169/20261127/49913116.html",
+            "summary": "认为 11 月 22 日的稳市举措（融资买入最低保证金由 100% 降至 80%、创业板引入做市商、交易所降费等）理论上带来约 4000 亿元增量资金，稳市曙光或已出现；但提醒散户理性、量力而行。",
+            "source": "中华网（中新经纬）"
+          },
           {
             "person": "lidaxiao",
             "date": "2026-11-25",
@@ -9108,11 +8992,23 @@
         "org": "高盛（中国股票策略主管）",
         "role": "",
         "note": "窗口内未找到；最近的降级报告为 6 月 3 日（窗口外）",
-        "count": 0,
+        "count": 1,
         "ai_bull_prob": null,
-        "dimensions": {},
-        "latest": null,
-        "items": []
+        "dimensions": {
+          "观点": 1
+        },
+        "latest": "2026-11-27",
+        "items": [
+          {
+            "person": "kingerlau",
+            "date": "2026-11-27",
+            "dimension": "观点",
+            "title": "Banks see upside for Chinese stocks in 2027",
+            "url": "https://www.chinadailyasia.com/hk/article/643324",
+            "summary": "预计 2027 年 MSCI 中国指数上涨 23%，沪深 300 上涨 10%；看好服务国内 AI 市场、银行及加大分红回购的公司，并偏好港股胜过 A 股。",
+            "source": "China Daily Asia（Zhou Lanxu 报道）"
+          }
+        ]
       },
       {
         "id": "liu-gang",
@@ -9194,13 +9090,22 @@
         "org": "个人投资者（招财小瑜哥，基金复盘博主）",
         "role": "个人复盘博主",
         "note": "自称 8 年 A 股经验；个人持仓测算，不构成投资建议",
-        "count": 2,
+        "count": 3,
         "ai_bull_prob": 0.2,
         "dimensions": {
-          "观点": 2
+          "观点": 3
         },
-        "latest": "2026-11-25",
+        "latest": "2026-11-27",
         "items": [
+          {
+            "person": "xiaoyaoge",
+            "date": "2026-11-27",
+            "dimension": "观点",
+            "title": "2026.11.27，小瑜哥个人复盘",
+            "url": "https://k.sina.cn/article_5953740931_162dee083067046p8g.html",
+            "summary": "今日 A 股集体大涨，他持有的成长基金未卖出；以股票 ETF 动向和融资余额做节奏判断，认为部分成长宽基估值已回落至近十年底部区间，同时以加入价值、商品与债券降低组合波动。",
+            "source": "新浪财经"
+          },
           {
             "person": "xiaoyaoge",
             "date": "2026-11-25",
@@ -9326,13 +9231,22 @@
         "org": "游资（席位：银河证券绍兴营业部）",
         "role": "游资",
         "note": "游资；11-23 有个人复盘发言（新浪转载「11.23继续开香槟」），ai_bull_prob 依据该发言；席位动向不等于本人发言",
-        "count": 1,
+        "count": 2,
         "ai_bull_prob": 0.7,
         "dimensions": {
-          "发言": 1
+          "发言": 2
         },
-        "latest": "2026-11-23",
+        "latest": "2026-11-27",
         "items": [
+          {
+            "person": "zhao-laoge",
+            "date": "2026-11-27",
+            "dimension": "发言",
+            "title": "11.27 午盘提示！",
+            "url": "https://k.sina.com.cn/article_7879922977_1d5ae152102701m3gh.html",
+            "summary": "抱团方向分歧温和、未现跌停；科技（国产算力）为今日最强方向；周末若无监管，下周抱团股有望反包；盘中不追高，等待周末落地后再决定进攻方向。",
+            "source": "新浪财经（转自赵老哥八年一万倍）"
+          },
           {
             "person": "zhao-laoge",
             "date": "2026-11-23",
@@ -9415,11 +9329,23 @@
         "org": "游资（席位：中国银河证券大连黄河路营业部）",
         "role": "游资",
         "note": "窗口内未找到；2026-01 报道（窗口外）",
-        "count": 0,
+        "count": 1,
         "ai_bull_prob": null,
-        "dimensions": {},
-        "latest": null,
-        "items": []
+        "dimensions": {
+          "观点": 1
+        },
+        "latest": "2026-11-27",
+        "items": [
+          {
+            "person": "chen-xiaoqun",
+            "date": "2026-11-27",
+            "dimension": "观点",
+            "title": "11.27复盘",
+            "url": "https://k.sina.com.cn/article_7879922977_1d5ae152102701m3k0.html",
+            "summary": "认为 11 月下旬见底，创业板已接近 2015 年位置，今日报复性反弹可看作反转；提醒「熊市多长阳」，建议持重仓者适当减仓，空仓者下周等回踩，不追高。",
+            "source": "新浪财经（转自陈小群）"
+          }
+        ]
       },
       {
         "id": "xiaoe-yu",
@@ -9505,13 +9431,22 @@
         "org": "UBS Global Wealth Management",
         "role": "首席投资官",
         "note": "窗口内有效发言；ai_bull_prob 按原文语气",
-        "count": 1,
+        "count": 2,
         "ai_bull_prob": 0.65,
         "dimensions": {
-          "观点": 1
+          "观点": 2
         },
-        "latest": "2026-11-24",
+        "latest": "2026-11-26",
         "items": [
+          {
+            "person": "haefele",
+            "date": "2026-11-26",
+            "dimension": "观点",
+            "title": "Global stocks rally as investors shrug off U.S. tariffs and AI jitters to 'fish for bargains'",
+            "url": "https://www.cnbc.com/2026/11/26/stock-markets-today-.html",
+            "summary": "UBS 全球财富管理 CIO Mark Haefele 周四早间表示，投资者应维持股票战略配置，并利用市场波动重新平衡、加强组合韧性。",
+            "source": "CNBC"
+          },
           {
             "person": "haefele",
             "date": "2026-11-24",
@@ -9580,13 +9515,22 @@
         "org": "Oppenheimer",
         "role": "科技分析师",
         "note": "卖方分析师，对英伟达的评级观点",
-        "count": 1,
+        "count": 2,
         "ai_bull_prob": 0.7,
         "dimensions": {
-          "观点": 1
+          "观点": 2
         },
-        "latest": "2026-11-23",
+        "latest": "2026-11-24",
         "items": [
+          {
+            "person": "schafer",
+            "date": "2026-11-24",
+            "dimension": "观点",
+            "title": "Marvell Tech Falls 60% from Highs as Wall Street Analysts Successively Slash Price Targets",
+            "url": "https://longbridge.com/en/news/306881589",
+            "summary": "11 月 24 日将 Marvell 目标价从 425 美元下调至 325 美元，维持“跑赢大盘”评级；认为目标价需要 12 月 1 日财报的收入与指引支撑。",
+            "source": "Longbridge（转载智通财经，2026-11-26）"
+          },
           {
             "person": "schafer",
             "date": "2026-11-23",
@@ -9780,13 +9724,22 @@
         "org": "私募（公开报道称私募大佬）",
         "role": "私募大佬",
         "note": "窗口内有发言（11-25 公众号「风不止 | 谈股论金」）；ai_bull_prob 依据该发言",
-        "count": 1,
+        "count": 2,
         "ai_bull_prob": 0.3,
         "dimensions": {
-          "发言": 1
+          "发言": 2
         },
-        "latest": "2026-11-25",
+        "latest": "2026-11-27",
         "items": [
+          {
+            "person": "shui-pi",
+            "date": "2026-11-27",
+            "dimension": "发言",
+            "title": "大阳线 | 谈股论金",
+            "url": "https://www.163.com/dy/article/LCP0I889051994HF.html",
+            "summary": "认为 A 股大幅反弹（沪指涨 3.73%，创业板涨 11.61%）印证其前一晚私享会「春季行情可以有、而且一定会有」的判断；关注周一能否承接，并认为科技股是此次反弹的主力。",
+            "source": "网易号「水皮M0RE」"
+          },
           {
             "person": "shui-pi",
             "date": "2026-11-25",
@@ -9799,19 +9752,19 @@
         ]
       }
     ],
-    "items_in_window": 69,
+    "items_in_window": 84,
     "coverage": {
       "US": {
         "people": 50,
-        "with_items": 31
+        "with_items": 33
       },
       "CN": {
         "people": 51,
-        "with_items": 30
+        "with_items": 31
       },
       "HK": {
         "people": 5,
-        "with_items": 2
+        "with_items": 3
       }
     },
     "dims_seen": [
@@ -9827,7 +9780,14 @@
       "直播",
       "互动",
       "讨论"
-    ]
+    ],
+    "freshness": {
+      "collected_on": "2026-11-28",
+      "as_of": "2026-11-27",
+      "latest_item": "2026-11-27",
+      "status": "ok",
+      "problems": []
+    }
   },
   "cross": null,
   "volume_price": {
@@ -10076,56 +10036,7 @@
       "small_pct": 8.15,
       "spread": -3.99
     },
-    "themes": [
-      {
-        "name": "半导体材料/封测/存储",
-        "count": 7,
-        "examples": [
-          "锴威特",
-          "粤芯半导-U",
-          "中科曙光"
-        ]
-      },
-      {
-        "name": "算力/液冷/数据中心",
-        "count": 6,
-        "examples": [
-          "特发信息",
-          "仁东控股",
-          "群兴玩具"
-        ]
-      },
-      {
-        "name": "其他",
-        "count": 4,
-        "examples": [
-          "合锻智能",
-          "通鼎互联",
-          "宝鼎科技"
-        ]
-      },
-      {
-        "name": "并购重组/国资",
-        "count": 1,
-        "examples": [
-          "振华股份"
-        ]
-      },
-      {
-        "name": "机器人",
-        "count": 1,
-        "examples": [
-          "宸展光电"
-        ]
-      },
-      {
-        "name": "军工",
-        "count": 1,
-        "examples": [
-          "长江通信"
-        ]
-      }
-    ],
+    "themes": [],
     "intraday": {
       "true_support": [
         {
@@ -10231,27 +10142,17 @@
         }
       ]
     },
-    "limit_up_structure": {
-      "total": 20,
-      "max_board": 1,
-      "max_board_name": "合锻智能",
-      "multi_board_count": 0,
-      "first_board_count": 20,
-      "early_count": 0,
-      "afternoon_count": 20,
-      "total_seal_yi": 1.37,
-      "median_seal_wan": 424.0
-    },
+    "limit_up_structure": {},
     "sentiment": {
-      "score": 73,
-      "level": "活跃",
+      "score": 98,
+      "level": "过热",
       "divergence": "",
       "components": {
         "breadth": 24.2,
         "extremes": 24.9,
         "support": 19.7,
-        "ladder": 2.5,
-        "seal": 2.1
+        "ladder": 14.5,
+        "seal": 14.9
       }
     },
     "narrative": [
@@ -10260,9 +10161,8 @@
       "九成板块翻红、离散度不大 → 是普涨（风险偏好整体回暖），不是某条主线的独立行情。",
       "沪深300 +4.17% vs 中证1000 +8.15%（差 -3.99 个百分点）→ 小盘活、权重拖后腿。",
       "成交额前 20 平均 +9.00%、后 20 平均 +5.59%——钱留在成交活跃的板块里，量价互相印证；最大的一块是半导体，占两市成交 13.9%，今日 +14.97%。",
-      "涨停 20 只里，7 只集中在「半导体材料/封测/存储」（锴威特、粤芯半导-U、中科曙光）；其次 算力/液冷/数据中心 6 只、其他 4 只——赚钱效应就看这几条链。",
       "隔夜 vs 日内（APM 日内动量拆分）：盘中低开走阳真承接：半导体（隔夜 +0.80% → 日内 +14.06%，分位 1.00）、电子化学品（隔夜 +0.48% → 日内 +13.99%，分位 1.00）、通信设备（隔夜 +0.53% → 日内 +10.87%，分位 1.00）。",
-      "情绪温度 73/100（活跃：宽度 24/25 · 极值 25/25 · 日内承接 20/20 · 连板 2/15 · 封板 2/15）；CCK 横截面绝对偏差 CSAD 2.28，呈同向羊群交易；最高 1 连板（合锻智能），连板 0 / 首板 20，封单合计 1.37 亿。"
+      "情绪温度 98/100（过热：宽度 24/25 · 极值 25/25 · 日内承接 20/20 · 连板 14/15 · 封板 15/15）；CCK 横截面绝对偏差 CSAD 2.28，呈同向羊群交易。"
     ]
   },
   "decision": {
@@ -10271,13 +10171,14 @@
     "risk": {
       "mode": "attack",
       "label": "进攻",
-      "score": 65,
-      "max_position_pct": 60,
-      "stance": "可分批试仓，只参与最强方向",
+      "score": 83,
+      "max_position_pct": 45,
+      "stance": "盘面过热：保持进攻观察，但不追高",
       "reasons": [
-        "盘面情绪 73/100 · 活跃",
+        "盘面情绪 98/100 · 过热",
         "RRG 领先/改善 50/91",
-        "全 A 上涨/下跌 5382/181"
+        "全 A 上涨/下跌 5382/181",
+        "情绪过热，仓位上限主动下调"
       ],
       "single_trade_risk_pct": 0.5,
       "note": "仓位是通用纪律模板，不是个性化投资建议"
