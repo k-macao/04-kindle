@@ -6,36 +6,35 @@
     <atom:link href="https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news-test.xml" rel="self" type="application/rss+xml"/>
     <description>每天 07:00（北京时间）从 RSSHub 抓取并合并的财经、政治与哲学思想新闻，英文条目附中文译文，本次 3 条。 AI 已按资产影响、证据、新鲜度与自选相关性将 3 条每日精选置顶。</description>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 26 Nov 2026 05:03:16 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 27 Nov 2026 05:08:50 +0000</lastBuildDate>
     <generator>04-kindle tools/build_feed.py</generator>
     <ttl>60</ttl>
     <item>
-      <title>【精选01·73】标普对英伟达发出治理警示，但黄仁勋的供应链影响力难以交接</title>
-      <link>https://www.yicai.com/news/103455140.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/news/103455140.html</guid>
-      <pubDate>Thu, 26 Nov 2026 04:24:31 +0000</pubDate>
+      <title>【精选01·74】AI债务风险骤升！SpaceX太空数据中心获批！存储芯片将出现分化？丨20261127从华尔街到陆家嘴</title>
+      <link>https://www.yicai.com/video/103456830.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/video/103456830.html</guid>
+      <pubDate>Fri, 27 Nov 2026 04:06:16 +0000</pubDate>
       <category>中文财经深度</category>
       <source url="https://yicai.com">第一财经 · 最新</source>
-      <description>&lt;p&gt;英伟达CEO黄仁勋重新回到公司管理岗位，但围绕这家AI芯片巨头的治理和供应链问题，并没有因此平息。 当地时间11月25日，标普全球评级将英伟达AA级长期信用评级…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：标普全球评级将英伟达AA级长期信用评级列入负面观察；&lt;/p&gt;&lt;p&gt;事实：标普认为黄仁勋辞职后复职（间隔11天）未完全消除外界对英伟达治理机制的疑问，报道称其影响力延伸至全球供应链协调与长期合作关系；&lt;/p&gt;&lt;p&gt;推断：评级机构关注点在公司治理而非短期经营，供应链影响力集中于个人属报道分析性表述；&lt;/p&gt;&lt;p&gt;影响：可能引发市场对治理结构与关键人依赖的讨论，评级是否下调待观察；&lt;/p&gt;&lt;p&gt;验证：需查阅标普评级报告原文及英伟达官方披露。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜英伟达｜公司｜负面｜中期｜置信 65/100：评级被列入负面观察，治理疑问构成信用评估压力，但摘要未提下调概率与时间&lt;/p&gt;&lt;p&gt;间接｜AI芯片供应链｜行业｜不确定｜中期｜置信 35/100：报道称关键人影响力涉及供应链协调，但无具体供应或订单变化信息&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 55/100｜暂无独立互证；仅第一财经一条RSS转述标普行动与报道分析，未附评级报告原文（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：精选第 1 名｜总分 73/100｜影响 70 · 紧迫 55 · 新颖 55 · 证据 55 · 新鲜 100 · 自选 100；涉及头部AI芯片公司信用评级与治理议题，市场关注度高&lt;/p&gt;&lt;p&gt;关注命中：行业：人工智能、行业：半导体&lt;/p&gt;</description>
+      <description>&lt;p&gt;①AI巨头CDS集体飙高 信用市场警报拉响 抄底分歧加大 感恩节前夕，华尔街对AI举债扩张的担忧在信用市场集中爆发。ICE周三数据显示，CoreWeave五年期…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：第一财经《从华尔街到陆家嘴》栏目摘要；&lt;/p&gt;&lt;p&gt;事实：摘要称感恩节前AI举债扩张担忧在信用市场集中爆发，ICE数据显示CoreWeave五年期CDS单日升2.09个百分点至15.34%，创纪录最大涨幅，隐含五年违约概率超70%；甲骨文、Alphabet和SpaceX五年期CDS连创新高；英伟达五年期CDS逼近145个基点历史高位，标普周三下调英伟达AA信用评级（摘要截断）；标题另称SpaceX太空数据中心获批、存储芯片或分化；&lt;/p&gt;&lt;p&gt;推断：信用市场对AI相关企业杠杆与偿债能力定价明显收紧，若CDS持续走高，AI资本开支融资成本可能上升；但摘要中英伟达股价“大涨逾三成”与CDS走高并存，需注意数据口径与时间点；&lt;/p&gt;&lt;p&gt;影响：AI算力与云服务相关主体融资环境可能趋紧，存储芯片分化判断缺乏细节；&lt;/p&gt;&lt;p&gt;验证：需核对ICE CDS数据、标普评级公告原文及SpaceX获批文件，当前为单一栏目转述；线索有限。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜CoreWeave｜公司｜负面｜短期｜置信 55/100：摘要称其CDS单日创纪录飙升、隐含违约概率超70%，信用市场定价收紧&lt;/p&gt;&lt;p&gt;直接｜英伟达｜公司｜负面｜短期｜置信 50/100：摘要称其CDS逼近历史高位且标普下调评级，但股价与CDS信号需核实&lt;/p&gt;&lt;p&gt;间接｜AI算力与云服务行业｜行业｜负面｜中期｜置信 45/100：若AI企业信用利差持续走阔，举债扩张的融资成本上升，传导至资本开支节奏&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 50/100｜报道内一致；单一财经栏目汇总ICE与标普数据，栏目内叙述一致，但无第二独立来源互证（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：精选第 1 名｜总分 74/100｜影响 70 · 紧迫 65 · 新颖 60 · 证据 50 · 新鲜 100 · 自选 100；涉及AI信用风险与评级下调，市场敏感度高，但摘要截断且需核实原始数据&lt;/p&gt;&lt;p&gt;关注命中：行业：人工智能、行业：半导体&lt;/p&gt;</description>
     </item>
     <item>
-      <title>【精选02·71】Bank of Korea Hikes Rate as AI Boom Powers Growth, Inflation｜中文：人工智能热潮推动经济增长和通胀，韩国央行加息</title>
-      <link>https://www.bloomberg.com/news/articles/2026-11-26/bok-hikes-rate-on-stubborn-inflation-as-ai-boom-drives-growth</link>
-      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-26/bok-hikes-rate-on-stubborn-inflation-as-ai-boom-drives-growth</guid>
-      <pubDate>Thu, 26 Nov 2026 00:50:53 +0000</pubDate>
-      <category>全球市场与要闻</category>
-      <source url="https://bloomberg.com">彭博社 · 经济</source>
-      <description>&lt;p&gt;中文：韩国央行恢复加息，同时大幅上调明年的经济增长预期，这表明随着历史性的半导体繁荣……紧缩周期可能比此前预期持续更久
-原文：The Bank of Korea…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：BLOOMBERG_ECON 报道，韩国央行恢复加息并大幅上调明年经济增长预期，称历史性半导体繁荣可能使紧缩周期比预期更久。&lt;/p&gt;&lt;p&gt;事实：韩国央行加息、上调增长预测，报道将其与半导体景气关联；具体加息幅度与预测数值摘要未给出。&lt;/p&gt;&lt;p&gt;推断：若半导体出口景气持续，韩国央行可能维持偏紧立场以应对通胀，利率路径存在上行延续可能；但幅度与节奏未披露。&lt;/p&gt;&lt;p&gt;影响：对韩国利率、韩元及半导体产业链景气预期构成中期变量。&lt;/p&gt;&lt;p&gt;验证：需核对韩国央行官方利率决议与经济增长预测全文，确认加息幅度与通胀判断。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜韩国央行｜机构｜中性｜短期｜置信 75/100：报道明确其恢复加息并上调增长预测，政策立场转向偏紧&lt;/p&gt;&lt;p&gt;直接｜韩国｜国家/地区｜双向｜中期｜置信 60/100：加息抑制通胀但抬高融资成本，半导体景气支撑增长，方向取决于两者权衡&lt;/p&gt;&lt;p&gt;间接｜半导体行业｜行业｜正面｜中期｜置信 50/100：报道将增长与通胀归因于半导体繁荣，若景气延续将支撑相关出口与盈利预期&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 60/100｜暂无独立互证；仅BLOOMBERG一家报道，未附央行决议原文，具体加息幅度与预测数值缺失（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：精选第 2 名｜总分 71/100｜影响 65 · 紧迫 55 · 新颖 55 · 证据 60 · 新鲜 90 · 自选 100；涉及主要央行货币政策转向与半导体景气判断，具宏观传导性，但细节待官方材料核实&lt;/p&gt;&lt;p&gt;关注命中：行业：人工智能、行业：半导体、主题：中国政策&lt;/p&gt;</description>
+      <title>【精选02·72】国常会：加力发挥“国家队”稳市作用 进一步优化中央汇金公司的类“平准基金”功能</title>
+      <link>https://www.cls.cn/detail/2546318</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2546318</guid>
+      <pubDate>Fri, 27 Nov 2026 04:24:51 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+      <description>&lt;p&gt;【国常会：加力发挥“国家队”稳市作用 进一步优化中央汇金公司的类“平准基金”功能】财联社11月27日电，国务院总理李强11月27日主持召开国务院常务会议，会议指…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：财联社报道国常会提出加力发挥“国家队”稳市作用、优化中央汇金类“平准基金”功能，并推动上市公司加大分红回购；&lt;/p&gt;&lt;p&gt;事实：会议明确逆周期调节与改革攻坚两手抓，实施存量政策、谋划增量政策；&lt;/p&gt;&lt;p&gt;推断：政策信号偏稳市与制度完善，具体工具规模与节奏未披露，不宜外推为即时资金投放；&lt;/p&gt;&lt;p&gt;影响：对资本市场情绪与分红回购预期偏正面，但传导取决于后续细则；&lt;/p&gt;&lt;p&gt;验证：需看中央汇金后续操作公告、增量政策文件及上市公司回购分红数据。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜中央汇金公司｜机构｜正面｜中期｜置信 60/100：会议明确优化其类平准基金功能，但具体操作规模与时机未披露&lt;/p&gt;&lt;p&gt;直接｜中国资本市场｜行业｜正面｜中期｜置信 55/100：稳市机制与分红回购导向改善预期，实际效果取决于增量政策落地&lt;/p&gt;&lt;p&gt;间接｜A股上市公司｜行业｜正面｜中期｜置信 45/100：政策鼓励加大分红回购，但公司执行力度与盈利条件决定实际影响&lt;/p&gt;&lt;p&gt;证据与共识：官方材料｜强度 75/100｜报道内一致；国常会内容经财联社转述，属官方会议信息，但摘要截断、细则未全（当前输入 1 个 RSS 来源）。跨源线索：另有 1 个不同发布方标题表述相近；不等于已确认独立采编。&lt;/p&gt;&lt;p&gt;每日优先级：精选第 2 名｜总分 72/100｜影响 75 · 紧迫 55 · 新颖 50 · 证据 75 · 新鲜 100 · 自选 65；国常会层级稳市表态，涉及平准基金功能优化，政策信号较强&lt;/p&gt;&lt;p&gt;关注命中：主题：中国政策&lt;/p&gt;</description>
     </item>
     <item>
-      <title>【精选03·69】SpaceX获首张“太空数据中心许可证”，马斯克太空算力愿景更近了</title>
-      <link>https://www.yicai.com/news/103455087.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/news/103455087.html</guid>
-      <pubDate>Thu, 26 Nov 2026 04:07:46 +0000</pubDate>
+      <title>【精选03·71】中国10月规模以上工业企业利润同比加速增长至20.1%，AI驱动下电子行业1-10月利润翻倍</title>
+      <link>https://wallstreetcn.com/articles/3786817</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/articles/3786817</guid>
+      <pubDate>Fri, 27 Nov 2026 02:01:58 +0000</pubDate>
       <category>中文财经深度</category>
-      <source url="https://yicai.com">第一财经 · 最新</source>
-      <description>&lt;p&gt;当地时间周三，美国联邦通信委员会（FCC）发布公告称，已批准SpaceX组建名为“Starmind（星脑）”的太空数据中心星座，可部署100万颗卫星。 FCC表…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：第一财经报道FCC批准SpaceX组建名为“Starmind（星脑）”的太空数据中心星座，可部署100万颗卫星。&lt;/p&gt;&lt;p&gt;事实：FCC公告称批准SpaceX轨道数据中心申请，称旨在满足AI计算增长需求，为美国监管机构首次批准此类申请；许可要求不迟于2033年11月开始部署，2035年11月前部署最大数量的10%（10万颗），2038年11月前完成50%。&lt;/p&gt;&lt;p&gt;推断：监管许可为项目提供制度前提，但部署规模与时间表跨度长，技术可行性与经济性未在摘要中体现，不能视为算力供给即将落地。&lt;/p&gt;&lt;p&gt;影响：对卫星制造、发射服务与太空算力概念构成长期主题性影响，短期实质供给影响有限。&lt;/p&gt;&lt;p&gt;验证：需核对FCC公告原文、许可条件及SpaceX后续部署进展。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜SpaceX｜公司｜正面｜长期｜置信 65/100：获得FCC轨道数据中心星座许可，但部署节点在2033年后，短期无实质运营&lt;/p&gt;&lt;p&gt;间接｜卫星制造与发射服务行业｜行业｜正面｜长期｜置信 50/100：百万颗卫星规划若推进将带动制造与发射需求，但取决于实际部署进度&lt;/p&gt;&lt;p&gt;直接｜美国联邦通信委员会（FCC）｜机构｜中性｜短期｜置信 60/100：作为审批方首次批准轨道数据中心申请，属监管事实&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 60/100｜暂无独立互证；仅第一财经一条RSS，引述FCC公告内容，未见其他独立来源（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：精选第 3 名｜总分 69/100｜影响 65 · 紧迫 35 · 新颖 80 · 证据 60 · 新鲜 100 · 自选 80；首次批准太空数据中心星座具标志性，但落地周期长&lt;/p&gt;&lt;p&gt;关注命中：行业：人工智能&lt;/p&gt;</description>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
+      <description>&lt;p&gt;11月27日，国家统计局公布数据显示，1-10月份，全国规模以上工业企业实现利润总额67373.6亿元，同比增长16.0%。全国工业生产总体平稳，新动能快速成长…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：国家统计局公布1-10月及10月规模以上工业企业利润数据；&lt;/p&gt;&lt;p&gt;事实：1-10月利润总额67373.6亿元、同比增长16.0%，较1-9月加快0.5个百分点；10月同比增长20.1%，较9月加快5.7个百分点；采矿业利润增长38.8%，制造业增长17.5%；摘要提及AI驱动下电子行业1-10月利润翻倍；&lt;/p&gt;&lt;p&gt;推断：数据为官方统计，显示工业利润加速增长、新动能行业表现突出，电子行业受AI相关需求带动；&lt;/p&gt;&lt;p&gt;影响：可能强化市场对工业盈利改善与AI产业链景气的预期，但属宏观数据层面；&lt;/p&gt;&lt;p&gt;验证：可对照国家统计局原始发布数据核对。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜中国规模以上工业｜行业｜正面｜短期｜置信 80/100：官方统计显示利润同比加速增长，直接反映工业盈利改善&lt;/p&gt;&lt;p&gt;直接｜电子行业｜行业｜正面｜中期｜置信 65/100：摘要称AI驱动下电子行业1-10月利润翻倍，属官方数据中的结构性亮点&lt;/p&gt;&lt;p&gt;证据与共识：官方材料｜强度 85/100｜报道内一致；数据引自国家统计局公布，属官方统计材料（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：精选第 3 名｜总分 71/100｜影响 70 · 紧迫 50 · 新颖 40 · 证据 85 · 新鲜 90 · 自选 80；官方宏观数据具可核验性，但属常规月度统计发布&lt;/p&gt;&lt;p&gt;关注命中：行业：人工智能&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
