@@ -76,7 +76,38 @@ def window(as_of: str, days: int) -> tuple[str, str]:
     return start.isoformat(), end.isoformat()
 
 
-def summarize(people: list[dict], items: list[dict], as_of: str, days: int) -> dict:
+def freshness(collected_on: str | None, items: list[dict], as_of: str, days: int) -> dict:
+    """更新检查：采集日是否跟上截止日、窗口里有没有数据。
+
+    - 采集日缺失或早于截止日：截止日当天的条目可能还没追加。
+    - 最新条目早于窗口起点：窗口内没有数据。
+    - 没有任何条目。
+    只提示，不报错；面板和报告里照常显示，并写明哪里需要注意。
+    """
+    start, _ = window(as_of, days)
+    dates = [it["date"] for it in items if _ISO.match(str(it.get("date", "")))]
+    latest = max(dates) if dates else None
+    problems: list[str] = []
+    if not _ISO.match(str(collected_on or "")):
+        problems.append("items.json 缺少采集日 collected_on")
+    elif collected_on < as_of:
+        problems.append(f"采集日 {collected_on} 早于截止日 {as_of}，截止日当天的条目可能还没追加")
+    if latest is None:
+        problems.append("items.json 里没有任何条目")
+    elif latest < start:
+        problems.append(f"最新条目 {latest} 早于窗口起点 {start}，窗口内没有数据")
+    return {"collected_on": collected_on, "as_of": as_of, "latest_item": latest,
+            "status": "ok" if not problems else "stale", "problems": problems}
+
+
+def freshness_line(f: dict) -> str:
+    if f["status"] == "ok":
+        return f"更新检查：正常（采集日 {f['collected_on']}，最新条目 {f['latest_item']}）。"
+    return "更新检查：需要注意——" + "；".join(f["problems"]) + "。"
+
+
+def summarize(people: list[dict], items: list[dict], as_of: str, days: int,
+              collected_on: str | None = None) -> dict:
     start, end = window(as_of, days)
     inside = [it for it in items if start <= it["date"] <= end]
     rows = []
@@ -99,7 +130,8 @@ def summarize(people: list[dict], items: list[dict], as_of: str, days: int) -> d
     return {"as_of": as_of, "window": [start, end], "days": days, "rows": rows,
             "items_in_window": len(inside), "coverage": coverage,
             "dims_seen": [d for d in DIMENSIONS if d in seen_dims],
-            "dims_missing": [d for d in DIMENSIONS if d not in seen_dims]}
+            "dims_missing": [d for d in DIMENSIONS if d not in seen_dims],
+            "freshness": freshness(collected_on, items, as_of, days)}
 
 
 def ai_view_label(prob) -> str:
@@ -121,6 +153,7 @@ def render_markdown(s: dict) -> str:
            f"截至 {s['as_of']}，窗口内共 {s['items_in_window']} 条。"
            + "；".join(f"{MARKETS[m]} {cov[m]['with_items']}/{cov[m]['people']} 位有记录"
                       for m in MARKETS) + "。",
+           freshness_line(s["freshness"]),
            "",
            f"**注意：{AI_VIEW_NOTE}**",
            "",
@@ -174,7 +207,8 @@ def main(argv: list[str] | None = None) -> int:
     except (DataError, KeyError, json.JSONDecodeError) as exc:
         print(f"数据有问题：{exc}", file=sys.stderr)
         return 2
-    summary = summarize(people, items, args.as_of, args.days)
+    summary = summarize(people, items, args.as_of, args.days,
+                        collected_on=load_json(Path(args.items)).get("collected_on"))
     text = render_markdown(summary)
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
