@@ -1,6 +1,6 @@
 {
   "schema": "bigv-items/1",
-  "collected_on": "2026-11-25",
+  "collected_on": "2026-11-28",
   "source_note": "沙箱只能访问 GitHub / npm / PyPI，X、YouTube、微博、雪球等平台的内容不能直接抓取。以下条目来自网络搜索结果（新闻报道、转载、研报摘要），每条都附原文链接。每日更新时在此文件末尾追加新条目即可。",
   "items": [
     {
@@ -857,6 +857,24 @@
       "url": "https://www.stansberryresearch.com/stansberry-investor-hour/episode-492-david-trainer-the-2-trillion-ai-bubble-could-be-about-to-burst",
       "summary": "认为 Anthropic 估值过高、利润率为负，AI 支出接近 8 万亿美元难以持续；警惕 AI 独占式估值，认为竞争会摊薄利润。",
       "source": "Stansberry Investor Hour（播客，2026-11-24）"
+    },
+    {
+      "person": "schafer",
+      "date": "2026-11-24",
+      "dimension": "观点",
+      "title": "Marvell Tech Falls 60% from Highs as Wall Street Analysts Successively Slash Price Targets",
+      "url": "https://longbridge.com/en/news/306881589",
+      "summary": "11 月 24 日将 Marvell 目标价从 425 美元下调至 325 美元，维持“跑赢大盘”评级；认为目标价需要 12 月 1 日财报的收入与指引支撑。",
+      "source": "Longbridge（转载智通财经，2026-11-26）"
+    },
+    {
+      "person": "snider",
+      "date": "2026-11-25",
+      "dimension": "观点",
+      "title": "Goldman Sachs lays out three signals stock investors should watch",
+      "url": "https://www.thestreet.com/investing/stocks/goldman-sachs-lays-out-three-signals-stock-investors-should-watch",
+      "summary": "文章转述高盛策略团队（Snider）的三项股市触底条件：AI 利润需要兑现、美联储释放鸽派信号、仓位出清；文中认为目前三项都还未出现，市场“还没到那一步”。",
+      "source": "TheStreet（2026-11-25）"
     }
   ]
 }

@@ -1,7 +1,7 @@
 # 大 V 与策略分析师：近五天公开观点（2026-11-24 至 2026-11-28）
 
-截至 2026-11-28，窗口内共 69 条。美股 25/50 位有记录；A 股 28/51 位有记录；港股 3/5 位有记录。
-更新检查：需要注意——采集日 2026-11-25 早于截止日 2026-11-28，截止日当天的条目可能还没追加。
+截至 2026-11-28，窗口内共 71 条。美股 27/50 位有记录；A 股 28/51 位有记录；港股 3/5 位有记录。
+更新检查：正常（采集日 2026-11-28，最新条目 2026-11-27）。
 
 **注意：多空概率是 AI 依据该人近五天条目的语气作出的判断，不是本人表态，仅供参考。**
 
@@ -26,7 +26,7 @@
 | Daniel Ivascyn | Pimco | 1 | 采访×1 | 2026-11-25 | 有记录 | 偏空 65% |
 | Mislav Matejka | 摩根大通 | 0 | — | — | 五天内未找到公开观点 | — |
 | Lori Calvasina | 加拿大皇家银行资本市场 | 0 | — | — | 五天内未找到公开观点 | — |
-| Ben Snider | 高盛 | 0 | — | — | 五天内未找到公开观点 | 偏多 55% |
+| Ben Snider | 高盛 | 1 | 观点×1 | 2026-11-25 | 有记录 | 偏多 55% |
 | Binky Chadha | Deutsche Bank | 1 | 观点×1 | 2026-11-25 | 有记录 | 偏多 85% |
 | Dan Ives | Yorkville Ives & Co. | 1 | 观点×1 | 2026-11-24 | 有记录 | 偏多 90% |
 | Mohamed El-Erian | Allianz | 1 | 观点×1 | 2026-11-24 | 有记录 | 偏空 55% |
@@ -58,7 +58,7 @@
 | Mark Haefele | UBS Global Wealth Management | 2 | 观点×2 | 2026-11-26 | 有记录 | 偏多 65% |
 | Jay Woods | Freedom Capital Markets | 0 | — | — | 五天内未找到公开观点 | 偏多 50% |
 | Ben Reitzes | Melius Research | 0 | — | — | 五天内未找到公开观点 | 偏多 70% |
-| Rick Schafer | Oppenheimer | 0 | — | — | 五天内未找到公开观点 | 偏多 70% |
+| Rick Schafer | Oppenheimer | 1 | 观点×1 | 2026-11-24 | 有记录 | 偏多 70% |
 | Stacy Rasgon | Bernstein | 0 | — | — | 五天内未找到公开观点 | 偏多 65% |
 | Tristan Gerra | Robert W. Baird | 0 | — | — | 五天内未找到公开观点 | 偏空 65% |
 
@@ -174,6 +174,10 @@
 **Daniel Ivascyn**（Pimco，首席投资官）
 - 2026-11-25 · 采访 · Pimco 首席投资官称，AI 带来的颠覆性风险提升了债券吸引力；通胀超目标五年以上，投资者准备迎接进一步加息。 [新浪财经（转述采访）](https://k.sina.com.cn/article_7857201856_1d45362c001908w1d2.html)
 
+**Ben Snider**（高盛，首席美股策略师）
+- 2026-11-25 · 观点 · 文章转述高盛策略团队（Snider）的三项股市触底条件：AI 利润需要兑现、美联储释放鸽派信号、仓位出清；文中认为目前三项都还未出现，市场“还没到那一步”。 [TheStreet（2026-11-25）](https://www.thestreet.com/investing/stocks/goldman-sachs-lays-out-three-signals-stock-investors-should-watch)
+- 备注：11 月 23 日客户报告（Investing.com）
+
 **Binky Chadha**（Deutsche Bank，首席美股策略师）
 - 2026-11-25 · 观点 · 德银策略师 Binky Chadha 预计标普 500 在 2027 年底收于 9,000 点（较当时约上涨 25%），理由是企业盈利强劲与经济温和复苏；该预测与 Yardeni 并列彭博统计中策略师目标的最高值。 [Longbridge（转载彭博报道）](https://longbridge.com/en/news/306800594)
 
@@ -217,7 +221,11 @@
 - 2026-11-24 · 观点 · 认为全球科技股波动不是 AI 投资逻辑已破灭的信号；云增长、使用量与算力需求仍有支撑；预计将出现更大分化，偏向有清晰变现与稳健资产负债表的平台。 [CNBC 直播](https://www.cnbc.com/2026/11/23/stock-market-today-live-updates.html)
 - 备注：窗口内有效发言；ai_bull_prob 按原文语气
 
-五天内未找到公开观点：Jeremy Siegel（与机构策略师不完全同级，保留是为了覆盖「长期主义」视角）、Mislav Matejka（11 月 16 日欧洲盈利报告（窗口外）；窗口内未找到观点）、Lori Calvasina（11 月 2–5 日播客与 CNBC 采访（窗口外）；窗口内未找到观点）、Ben Snider（11 月 23 日客户报告（Investing.com））、Ray Dalio、Mark Hackett、Karan Ramchandani、John Stoltzfus（11 月 9 日 CNBC 引述（窗口外））、Barry Bannister、Michael Hartnett（11 月 16 日 Flow Show 引述（窗口外））、Cathie Wood（11 月 20 日 CNBC 采访（窗口外））、Tony Dwyer、Howard Marks（11 月 11 日备忘录（窗口外）；11 月 21 日的文章为转载）、Scott Chronert（11 月 21 日 BNN 采访仅见标题，内容未核实）、Michael Kantrowitz（11 月 3 日（窗口外））、Brian Belski、Julian Emanuel（11 月 10–11 日（窗口外））、Dennis DeBusschere、Jeffrey Gundlach（11 月 12–15 日观点（窗口外））、Jeffrey Kleintop（窗口内未找到；可查到的访谈为 2025 年（窗口外））、Jay Woods（窗口内有效发言）、Ben Reitzes（卖方分析师，对英伟达的评级观点）、Rick Schafer（卖方分析师，对英伟达的评级观点）、Stacy Rasgon（卖方分析师，对英伟达的评级观点）、Tristan Gerra（卖方分析师，对英伟达维持持有评级）。
+**Rick Schafer**（Oppenheimer，科技分析师）
+- 2026-11-24 · 观点 · 11 月 24 日将 Marvell 目标价从 425 美元下调至 325 美元，维持“跑赢大盘”评级；认为目标价需要 12 月 1 日财报的收入与指引支撑。 [Longbridge（转载智通财经，2026-11-26）](https://longbridge.com/en/news/306881589)
+- 备注：卖方分析师，对英伟达的评级观点
+
+五天内未找到公开观点：Jeremy Siegel（与机构策略师不完全同级，保留是为了覆盖「长期主义」视角）、Mislav Matejka（11 月 16 日欧洲盈利报告（窗口外）；窗口内未找到观点）、Lori Calvasina（11 月 2–5 日播客与 CNBC 采访（窗口外）；窗口内未找到观点）、Ray Dalio、Mark Hackett、Karan Ramchandani、John Stoltzfus（11 月 9 日 CNBC 引述（窗口外））、Barry Bannister、Michael Hartnett（11 月 16 日 Flow Show 引述（窗口外））、Cathie Wood（11 月 20 日 CNBC 采访（窗口外））、Tony Dwyer、Howard Marks（11 月 11 日备忘录（窗口外）；11 月 21 日的文章为转载）、Scott Chronert（11 月 21 日 BNN 采访仅见标题，内容未核实）、Michael Kantrowitz（11 月 3 日（窗口外））、Brian Belski、Julian Emanuel（11 月 10–11 日（窗口外））、Dennis DeBusschere、Jeffrey Gundlach（11 月 12–15 日观点（窗口外））、Jeffrey Kleintop（窗口内未找到；可查到的访谈为 2025 年（窗口外））、Jay Woods（窗口内有效发言）、Ben Reitzes（卖方分析师，对英伟达的评级观点）、Stacy Rasgon（卖方分析师，对英伟达的评级观点）、Tristan Gerra（卖方分析师，对英伟达维持持有评级）。
 
 ### A 股
 
