@@ -1,5 +1,5 @@
 {
-  "checked": "2026-11-27T05:09:13+00:00",
+  "checked": "2026-11-28T04:48:35+00:00",
   "ok": 28,
   "total": 28,
   "results": [
@@ -7,19 +7,19 @@
       "url": "https://k-macao.github.io/04-kindle/site/news.xml",
       "ok": true,
       "status": 200,
-      "bytes": 533091,
-      "items": 199,
+      "bytes": 521270,
+      "items": 201,
       "error": "",
       "koreader": {
         "ok": true,
         "notes": [],
-        "content_length": "533091",
-        "bytes": 533091,
+        "content_length": "521270",
+        "bytes": 521270,
         "content_encoding": "",
         "transfer_encoding": "",
         "content_type": "application/xml",
         "issuer": "Let's Encrypt",
-        "seconds": 0.233
+        "seconds": 0.197
       },
       "key": "pages/news.xml",
       "label": "GitHub Pages · news.xml"
@@ -28,19 +28,19 @@
       "url": "https://k-macao.github.io/04-kindle/site/news-lite.xml",
       "ok": true,
       "status": 200,
-      "bytes": 152186,
+      "bytes": 141196,
       "items": 60,
       "error": "",
       "koreader": {
         "ok": true,
         "notes": [],
-        "content_length": "152186",
-        "bytes": 152186,
+        "content_length": "141196",
+        "bytes": 141196,
         "content_encoding": "",
         "transfer_encoding": "",
         "content_type": "application/xml",
         "issuer": "Let's Encrypt",
-        "seconds": 0.197
+        "seconds": 0.158
       },
       "key": "pages/news-lite.xml",
       "label": "GitHub Pages · news-lite.xml"
@@ -49,19 +49,19 @@
       "url": "https://k-macao.github.io/04-kindle/site/news-test.xml",
       "ok": true,
       "status": 200,
-      "bytes": 8955,
+      "bytes": 8970,
       "items": 3,
       "error": "",
       "koreader": {
         "ok": true,
         "notes": [],
-        "content_length": "8955",
-        "bytes": 8955,
+        "content_length": "8970",
+        "bytes": 8970,
         "content_encoding": "",
         "transfer_encoding": "",
         "content_type": "application/xml",
         "issuer": "Let's Encrypt",
-        "seconds": 0.134
+        "seconds": 0.123
       },
       "key": "pages/news-test.xml",
       "label": "GitHub Pages · news-test.xml"
@@ -70,19 +70,19 @@
       "url": "https://k-macao.github.io/04-kindle/site/eqn-news.xml",
       "ok": true,
       "status": 200,
-      "bytes": 5824,
-      "items": 2,
+      "bytes": 9071,
+      "items": 4,
       "error": "",
       "koreader": {
         "ok": true,
         "notes": [],
-        "content_length": "5824",
-        "bytes": 5824,
+        "content_length": "9071",
+        "bytes": 9071,
         "content_encoding": "",
         "transfer_encoding": "",
         "content_type": "application/xml",
         "issuer": "Let's Encrypt",
-        "seconds": 0.133
+        "seconds": 0.112
       },
       "key": "pages/eqn-news.xml",
       "label": "GitHub Pages · eqn-news.xml"
@@ -91,19 +91,19 @@
       "url": "https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news.xml",
       "ok": true,
       "status": 200,
-      "bytes": 521270,
-      "items": 201,
+      "bytes": 191254,
+      "items": 194,
       "error": "",
       "koreader": {
         "ok": true,
         "notes": [],
-        "content_length": "521270",
-        "bytes": 521270,
+        "content_length": "191254",
+        "bytes": 191254,
         "content_encoding": "",
         "transfer_encoding": "",
         "content_type": "text/plain; charset=utf-8",
         "issuer": "Let's Encrypt",
-        "seconds": 0.356
+        "seconds": 0.152
       },
       "key": "raw/news.xml",
       "label": "raw.githubusercontent.com · news.xml"
@@ -112,19 +112,19 @@
       "url": "https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news-lite.xml",
       "ok": true,
       "status": 200,
-      "bytes": 141196,
+      "bytes": 50020,
       "items": 60,
       "error": "",
       "koreader": {
         "ok": true,
         "notes": [],
-        "content_length": "141196",
-        "bytes": 141196,
+        "content_length": "50020",
+        "bytes": 50020,
         "content_encoding": "",
         "transfer_encoding": "",
         "content_type": "text/plain; charset=utf-8",
         "issuer": "Let's Encrypt",
-        "seconds": 0.196
+        "seconds": 0.137
       },
       "key": "raw/news-lite.xml",
       "label": "raw.githubusercontent.com · news-lite.xml"
@@ -133,19 +133,19 @@
       "url": "https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news-test.xml",
       "ok": true,
       "status": 200,
-      "bytes": 8970,
+      "bytes": 2848,
       "items": 3,
       "error": "",
       "koreader": {
         "ok": true,
         "notes": [],
-        "content_length": "8970",
-        "bytes": 8970,
+        "content_length": "2848",
+        "bytes": 2848,
         "content_encoding": "",
         "transfer_encoding": "",
         "content_type": "text/plain; charset=utf-8",
         "issuer": "Let's Encrypt",
-        "seconds": 0.148
+        "seconds": 0.129
       },
       "key": "raw/news-test.xml",
       "label": "raw.githubusercontent.com · news-test.xml"
@@ -154,19 +154,19 @@
       "url": "https://raw.githubusercontent.com/k-macao/04-kindle/main/site/eqn-news.xml",
       "ok": true,
       "status": 200,
-      "bytes": 9071,
-      "items": 4,
+      "bytes": 1256,
+      "items": 1,
       "error": "",
       "koreader": {
         "ok": true,
         "notes": [],
-        "content_length": "9071",
-        "bytes": 9071,
+        "content_length": "1256",
+        "bytes": 1256,
         "content_encoding": "",
         "transfer_encoding": "",
         "content_type": "text/plain; charset=utf-8",
         "issuer": "Let's Encrypt",
-        "seconds": 0.138
+        "seconds": 0.121
       },
       "key": "raw/eqn-news.xml",
       "label": "raw.githubusercontent.com · eqn-news.xml"
@@ -175,19 +175,19 @@
       "url": "https://github.com/k-macao/04-kindle/releases/download/news-feed/news.xml",
       "ok": true,
       "status": 200,
-      "bytes": 521270,
-      "items": 201,
+      "bytes": 191254,
+      "items": 194,
       "error": "",
       "koreader": {
         "ok": true,
         "notes": [],
-        "content_length": "521270",
-        "bytes": 521270,
+        "content_length": "191254",
+        "bytes": 191254,
         "content_encoding": "",
         "transfer_encoding": "",
         "content_type": "application/octet-stream",
         "issuer": "Sectigo Limited",
-        "seconds": 0.4
+        "seconds": 0.277
       },
       "key": "release/news.xml",
       "label": "GitHub Release 资产 · news.xml"
@@ -196,19 +196,19 @@
       "url": "https://github.com/k-macao/04-kindle/releases/download/news-feed/news-lite.xml",
       "ok": true,
       "status": 200,
-      "bytes": 141196,
+      "bytes": 50020,
       "items": 60,
       "error": "",
       "koreader": {
         "ok": true,
         "notes": [],
-        "content_length": "141196",
-        "bytes": 141196,
+        "content_length": "50020",
+        "bytes": 50020,
         "content_encoding": "",
         "transfer_encoding": "",
         "content_type": "application/octet-stream",
         "issuer": "Sectigo Limited",
-        "seconds": 0.377
+        "seconds": 0.263
       },
       "key": "release/news-lite.xml",
       "label": "GitHub Release 资产 · news-lite.xml"
@@ -217,19 +217,19 @@
       "url": "https://github.com/k-macao/04-kindle/releases/download/news-feed/news-test.xml",
       "ok": true,
       "status": 200,
-      "bytes": 8970,
+      "bytes": 2848,
       "items": 3,
       "error": "",
       "koreader": {
         "ok": true,
         "notes": [],
-        "content_length": "8970",
-        "bytes": 8970,
+        "content_length": "2848",
+        "bytes": 2848,
         "content_encoding": "",
         "transfer_encoding": "",
         "content_type": "application/octet-stream",
         "issuer": "Sectigo Limited",
-        "seconds": 0.329
+        "seconds": 0.258
       },
       "key": "release/news-test.xml",
       "label": "GitHub Release 资产 · news-test.xml"
@@ -238,19 +238,19 @@
       "url": "https://github.com/k-macao/04-kindle/releases/download/news-feed/eqn-news.xml",
       "ok": true,
       "status": 200,
-      "bytes": 9071,
-      "items": 4,
+      "bytes": 1256,
+      "items": 1,
       "error": "",
       "koreader": {
         "ok": true,
         "notes": [],
-        "content_length": "9071",
-        "bytes": 9071,
+        "content_length": "1256",
+        "bytes": 1256,
         "content_encoding": "",
         "transfer_encoding": "",
         "content_type": "application/octet-stream",
         "issuer": "Sectigo Limited",
-        "seconds": 0.371
+        "seconds": 0.259
       },
       "key": "release/eqn-news.xml",
       "label": "GitHub Release 资产 · eqn-news.xml"
@@ -259,19 +259,19 @@
       "url": "https://cdn.jsdelivr.net/gh/k-macao/04-kindle@main/site/news.xml",
       "ok": true,
       "status": 200,
-      "bytes": 521270,
-      "items": 201,
+      "bytes": 191254,
+      "items": 194,
       "error": "",
       "koreader": {
         "ok": true,
         "notes": [],
-        "content_length": "521270",
-        "bytes": 521270,
+        "content_length": "191254",
+        "bytes": 191254,
         "content_encoding": "",
         "transfer_encoding": "",
         "content_type": "application/xml",
-        "issuer": "Sectigo Limited",
-        "seconds": 2.724
+        "issuer": "GlobalSign nv-sa",
+        "seconds": 0.705
       },
       "key": "jsdelivr/news.xml",
       "label": "jsDelivr（Cloudflare） · news.xml"
@@ -280,21 +280,19 @@
       "url": "https://cdn.jsdelivr.net/gh/k-macao/04-kindle@main/site/news-lite.xml",
       "ok": true,
       "status": 200,
-      "bytes": 141196,
+      "bytes": 50020,
       "items": 60,
       "error": "",
       "koreader": {
-        "ok": false,
-        "notes": [
-          "Transfer-Encoding: chunked（LuaSocket 会把分块头算进正文）"
-        ],
-        "content_length": null,
-        "bytes": 141196,
+        "ok": true,
+        "notes": [],
+        "content_length": "50020",
+        "bytes": 50020,
         "content_encoding": "",
-        "transfer_encoding": "chunked",
+        "transfer_encoding": "",
         "content_type": "application/xml",
-        "issuer": "Sectigo Limited",
-        "seconds": 3.582
+        "issuer": "GlobalSign nv-sa",
+        "seconds": 0.387
       },
       "key": "jsdelivr/news-lite.xml",
       "label": "jsDelivr（Cloudflare） · news-lite.xml"
@@ -303,21 +301,19 @@
       "url": "https://cdn.jsdelivr.net/gh/k-macao/04-kindle@main/site/news-test.xml",
       "ok": true,
       "status": 200,
-      "bytes": 8970,
+      "bytes": 2848,
       "items": 3,
       "error": "",
       "koreader": {
-        "ok": false,
-        "notes": [
-          "Transfer-Encoding: chunked（LuaSocket 会把分块头算进正文）"
-        ],
-        "content_length": null,
-        "bytes": 8970,
+        "ok": true,
+        "notes": [],
+        "content_length": "2848",
+        "bytes": 2848,
         "content_encoding": "",
-        "transfer_encoding": "chunked",
+        "transfer_encoding": "",
         "content_type": "application/xml",
-        "issuer": "Sectigo Limited",
-        "seconds": 0.387
+        "issuer": "GlobalSign nv-sa",
+        "seconds": 0.475
       },
       "key": "jsdelivr/news-test.xml",
       "label": "jsDelivr（Cloudflare） · news-test.xml"
@@ -326,21 +322,19 @@
       "url": "https://cdn.jsdelivr.net/gh/k-macao/04-kindle@main/site/eqn-news.xml",
       "ok": true,
       "status": 200,
-      "bytes": 9071,
-      "items": 4,
+      "bytes": 1256,
+      "items": 1,
       "error": "",
       "koreader": {
-        "ok": false,
-        "notes": [
-          "Transfer-Encoding: chunked（LuaSocket 会把分块头算进正文）"
-        ],
-        "content_length": null,
-        "bytes": 9071,
+        "ok": true,
+        "notes": [],
+        "content_length": "1256",
+        "bytes": 1256,
         "content_encoding": "",
-        "transfer_encoding": "chunked",
+        "transfer_encoding": "",
         "content_type": "application/xml",
-        "issuer": "Sectigo Limited",
-        "seconds": 1.812
+        "issuer": "GlobalSign nv-sa",
+        "seconds": 0.334
       },
       "key": "jsdelivr/eqn-news.xml",
       "label": "jsDelivr（Cloudflare） · eqn-news.xml"
@@ -349,19 +343,19 @@
       "url": "https://fastly.jsdelivr.net/gh/k-macao/04-kindle@main/site/news.xml",
       "ok": true,
       "status": 200,
-      "bytes": 521270,
-      "items": 201,
+      "bytes": 191254,
+      "items": 194,
       "error": "",
       "koreader": {
         "ok": true,
         "notes": [],
-        "content_length": "521270",
-        "bytes": 521270,
+        "content_length": "191254",
+        "bytes": 191254,
         "content_encoding": "",
         "transfer_encoding": "",
         "content_type": "application/xml",
         "issuer": "GlobalSign nv-sa",
-        "seconds": 0.645
+        "seconds": 0.603
       },
       "key": "jsdelivr-fastly/news.xml",
       "label": "jsDelivr（Fastly） · news.xml"
@@ -370,19 +364,19 @@
       "url": "https://fastly.jsdelivr.net/gh/k-macao/04-kindle@main/site/news-lite.xml",
       "ok": true,
       "status": 200,
-      "bytes": 141196,
+      "bytes": 50020,
       "items": 60,
       "error": "",
       "koreader": {
         "ok": true,
         "notes": [],
-        "content_length": "141196",
-        "bytes": 141196,
+        "content_length": "50020",
+        "bytes": 50020,
         "content_encoding": "",
         "transfer_encoding": "",
         "content_type": "application/xml",
         "issuer": "GlobalSign nv-sa",
-        "seconds": 0.549
+        "seconds": 1.558
       },
       "key": "jsdelivr-fastly/news-lite.xml",
       "label": "jsDelivr（Fastly） · news-lite.xml"
@@ -391,19 +385,19 @@
       "url": "https://fastly.jsdelivr.net/gh/k-macao/04-kindle@main/site/news-test.xml",
       "ok": true,
       "status": 200,
-      "bytes": 8970,
+      "bytes": 2848,
       "items": 3,
       "error": "",
       "koreader": {
         "ok": true,
         "notes": [],
-        "content_length": "8970",
-        "bytes": 8970,
+        "content_length": "2848",
+        "bytes": 2848,
         "content_encoding": "",
         "transfer_encoding": "",
         "content_type": "application/xml",
         "issuer": "GlobalSign nv-sa",
-        "seconds": 0.308
+        "seconds": 0.363
       },
       "key": "jsdelivr-fastly/news-test.xml",
       "label": "jsDelivr（Fastly） · news-test.xml"
@@ -412,19 +406,19 @@
       "url": "https://fastly.jsdelivr.net/gh/k-macao/04-kindle@main/site/eqn-news.xml",
       "ok": true,
       "status": 200,
-      "bytes": 9071,
-      "items": 4,
+      "bytes": 1256,
+      "items": 1,
       "error": "",
       "koreader": {
         "ok": true,
         "notes": [],
-        "content_length": "9071",
-        "bytes": 9071,
+        "content_length": "1256",
+        "bytes": 1256,
         "content_encoding": "",
         "transfer_encoding": "",
         "content_type": "application/xml",
         "issuer": "GlobalSign nv-sa",
-        "seconds": 0.345
+        "seconds": 0.221
       },
       "key": "jsdelivr-fastly/eqn-news.xml",
       "label": "jsDelivr（Fastly） · eqn-news.xml"
@@ -433,8 +427,8 @@
       "url": "https://gcore.jsdelivr.net/gh/k-macao/04-kindle@main/site/news.xml",
       "ok": true,
       "status": 200,
-      "bytes": 521270,
-      "items": 201,
+      "bytes": 191254,
+      "items": 194,
       "error": "",
       "koreader": {
         "ok": false,
@@ -442,12 +436,12 @@
           "Transfer-Encoding: chunked（LuaSocket 会把分块头算进正文）"
         ],
         "content_length": null,
-        "bytes": 521270,
+        "bytes": 191254,
         "content_encoding": "",
         "transfer_encoding": "chunked",
         "content_type": "application/xml",
         "issuer": "Sectigo Limited",
-        "seconds": 0.375
+        "seconds": 1.826
       },
       "key": "jsdelivr-gcore/news.xml",
       "label": "jsDelivr（Gcore） · news.xml"
@@ -456,7 +450,7 @@
       "url": "https://gcore.jsdelivr.net/gh/k-macao/04-kindle@main/site/news-lite.xml",
       "ok": true,
       "status": 200,
-      "bytes": 141196,
+      "bytes": 50020,
       "items": 60,
       "error": "",
       "koreader": {
@@ -465,12 +459,12 @@
           "Transfer-Encoding: chunked（LuaSocket 会把分块头算进正文）"
         ],
         "content_length": null,
-        "bytes": 141196,
+        "bytes": 50020,
         "content_encoding": "",
         "transfer_encoding": "chunked",
         "content_type": "application/xml",
         "issuer": "Sectigo Limited",
-        "seconds": 0.596
+        "seconds": 0.333
       },
       "key": "jsdelivr-gcore/news-lite.xml",
       "label": "jsDelivr（Gcore） · news-lite.xml"
@@ -479,7 +473,7 @@
       "url": "https://gcore.jsdelivr.net/gh/k-macao/04-kindle@main/site/news-test.xml",
       "ok": true,
       "status": 200,
-      "bytes": 8970,
+      "bytes": 2848,
       "items": 3,
       "error": "",
       "koreader": {
@@ -488,12 +482,12 @@
           "Transfer-Encoding: chunked（LuaSocket 会把分块头算进正文）"
         ],
         "content_length": null,
-        "bytes": 8970,
+        "bytes": 2848,
         "content_encoding": "",
         "transfer_encoding": "chunked",
         "content_type": "application/xml",
         "issuer": "Sectigo Limited",
-        "seconds": 1.619
+        "seconds": 0.303
       },
       "key": "jsdelivr-gcore/news-test.xml",
       "label": "jsDelivr（Gcore） · news-test.xml"
@@ -502,8 +496,8 @@
       "url": "https://gcore.jsdelivr.net/gh/k-macao/04-kindle@main/site/eqn-news.xml",
       "ok": true,
       "status": 200,
-      "bytes": 9071,
-      "items": 4,
+      "bytes": 1256,
+      "items": 1,
       "error": "",
       "koreader": {
         "ok": false,
@@ -511,12 +505,12 @@
           "Transfer-Encoding: chunked（LuaSocket 会把分块头算进正文）"
         ],
         "content_length": null,
-        "bytes": 9071,
+        "bytes": 1256,
         "content_encoding": "",
         "transfer_encoding": "chunked",
         "content_type": "application/xml",
         "issuer": "Sectigo Limited",
-        "seconds": 0.243
+        "seconds": 0.188
       },
       "key": "jsdelivr-gcore/eqn-news.xml",
       "label": "jsDelivr（Gcore） · eqn-news.xml"
@@ -525,8 +519,8 @@
       "url": "https://testingcf.jsdelivr.net/gh/k-macao/04-kindle@main/site/news.xml",
       "ok": true,
       "status": 200,
-      "bytes": 521270,
-      "items": 201,
+      "bytes": 191254,
+      "items": 194,
       "error": "",
       "koreader": {
         "ok": false,
@@ -534,12 +528,12 @@
           "Transfer-Encoding: chunked（LuaSocket 会把分块头算进正文）"
         ],
         "content_length": null,
-        "bytes": 521270,
+        "bytes": 191254,
         "content_encoding": "",
         "transfer_encoding": "chunked",
         "content_type": "application/xml",
         "issuer": "Sectigo Limited",
-        "seconds": 0.529
+        "seconds": 0.287
       },
       "key": "jsdelivr-testingcf/news.xml",
       "label": "jsDelivr（TestingCF） · news.xml"
@@ -548,7 +542,7 @@
       "url": "https://testingcf.jsdelivr.net/gh/k-macao/04-kindle@main/site/news-lite.xml",
       "ok": true,
       "status": 200,
-      "bytes": 141196,
+      "bytes": 50020,
       "items": 60,
       "error": "",
       "koreader": {
@@ -557,12 +551,12 @@
           "Transfer-Encoding: chunked（LuaSocket 会把分块头算进正文）"
         ],
         "content_length": null,
-        "bytes": 141196,
+        "bytes": 50020,
         "content_encoding": "",
         "transfer_encoding": "chunked",
         "content_type": "application/xml",
         "issuer": "Sectigo Limited",
-        "seconds": 0.508
+        "seconds": 0.243
       },
       "key": "jsdelivr-testingcf/news-lite.xml",
       "label": "jsDelivr（TestingCF） · news-lite.xml"
@@ -571,7 +565,7 @@
       "url": "https://testingcf.jsdelivr.net/gh/k-macao/04-kindle@main/site/news-test.xml",
       "ok": true,
       "status": 200,
-      "bytes": 8970,
+      "bytes": 2848,
       "items": 3,
       "error": "",
       "koreader": {
@@ -580,12 +574,12 @@
           "Transfer-Encoding: chunked（LuaSocket 会把分块头算进正文）"
         ],
         "content_length": null,
-        "bytes": 8970,
+        "bytes": 2848,
         "content_encoding": "",
         "transfer_encoding": "chunked",
         "content_type": "application/xml",
         "issuer": "Sectigo Limited",
-        "seconds": 0.249
+        "seconds": 0.244
       },
       "key": "jsdelivr-testingcf/news-test.xml",
       "label": "jsDelivr（TestingCF） · news-test.xml"
@@ -594,8 +588,8 @@
       "url": "https://testingcf.jsdelivr.net/gh/k-macao/04-kindle@main/site/eqn-news.xml",
       "ok": true,
       "status": 200,
-      "bytes": 9071,
-      "items": 4,
+      "bytes": 1256,
+      "items": 1,
       "error": "",
       "koreader": {
         "ok": false,
@@ -603,12 +597,12 @@
           "Transfer-Encoding: chunked（LuaSocket 会把分块头算进正文）"
         ],
         "content_length": null,
-        "bytes": 9071,
+        "bytes": 1256,
         "content_encoding": "",
         "transfer_encoding": "chunked",
         "content_type": "application/xml",
         "issuer": "Sectigo Limited",
-        "seconds": 0.218
+        "seconds": 0.37
       },
       "key": "jsdelivr-testingcf/eqn-news.xml",
       "label": "jsDelivr（TestingCF） · eqn-news.xml"
