@@ -4,553 +4,547 @@
     <title>004 每日新闻聚合（精简）</title>
     <link>https://github.com/k-macao/04-kindle</link>
     <atom:link href="https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news-lite.xml" rel="self" type="application/rss+xml"/>
-    <description>每天 07:00（北京时间）从 RSSHub 抓取并合并的财经、政治与哲学思想新闻，英文条目附中文译文，本次 60 条。 AI 已按资产影响、证据、新鲜度与自选相关性将 10 条每日精选置顶。</description>
+    <description>每天 07:00（北京时间）从 RSSHub 抓取并合并的财经、政治与哲学思想新闻，英文条目附中文译文，本次 60 条。 本期 AI 线索分析未生成（分析接口调用失败），只保留原文与中文译文。</description>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 27 Nov 2026 05:08:50 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 28 Nov 2026 04:48:19 +0000</lastBuildDate>
     <generator>04-kindle tools/build_feed.py</generator>
     <ttl>60</ttl>
     <item>
-      <title>【精选01·74】AI债务风险骤升！SpaceX太空数据中心获批！存储芯片将出现分化？丨20261127从华尔街到陆家嘴</title>
-      <link>https://www.yicai.com/video/103456830.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/video/103456830.html</guid>
-      <pubDate>Fri, 27 Nov 2026 04:06:16 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://yicai.com">第一财经 · 最新</source>
-      <description>&lt;p&gt;①AI巨头CDS集体飙高 信用市场警报拉响 抄底分歧加大 感恩节前夕，华尔街对AI举债扩张的担忧在信用市场集中爆发。ICE周三数据显示，CoreWeave五年期CDS单日飙升2.09个百分点至15.34%，创有记录以来最大涨幅，隐含五年违约概率超70%。甲骨文、Alphabet和…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：第一财经《从华尔街到陆家嘴》栏目摘要；&lt;/p&gt;&lt;p&gt;事实：摘要称感恩节前AI举债扩张担忧在信用市场集中爆发，ICE数据显示CoreWeave五年期CDS单日升2.09个百分点至15.34%，创纪录最大涨幅，隐含五年违约概率超70%；甲骨文、Alphabet和SpaceX五年期CDS连创新高；英伟达五年期CDS逼近145个基点历史高位，标普周三下调英伟达AA信用评级（摘要截断）；标题另称SpaceX太空数据中心获批、存储芯片或分化；&lt;/p&gt;&lt;p&gt;推断：信用市场对AI相关企业杠杆与偿债能力定价明显收紧，若CDS持续走高，AI资本开支融资成本可能上升；但摘要中英伟达股价“大涨逾三成”与CDS走高并存，需注意数据口径与时间点；&lt;/p&gt;&lt;p&gt;影响：AI算力与云服务相关主体融资环境可能趋紧，存储芯片分化判断缺乏细节；&lt;/p&gt;&lt;p&gt;验证：需核对ICE CDS数据、标普评级公告原文及SpaceX获批文件，当前为单一栏目转述；线索有限。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜CoreWeave｜公司｜负面｜短期｜置信 55/100：摘要称其CDS单日创纪录飙升、隐含违约概率超70%，信用市场定价收紧&lt;/p&gt;&lt;p&gt;直接｜英伟达｜公司｜负面｜短期｜置信 50/100：摘要称其CDS逼近历史高位且标普下调评级，但股价与CDS信号需核实&lt;/p&gt;&lt;p&gt;间接｜AI算力与云服务行业｜行业｜负面｜中期｜置信 45/100：若AI企业信用利差持续走阔，举债扩张的融资成本上升，传导至资本开支节奏&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 50/100｜报道内一致；单一财经栏目汇总ICE与标普数据，栏目内叙述一致，但无第二独立来源互证（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：精选第 1 名｜总分 74/100｜影响 70 · 紧迫 65 · 新颖 60 · 证据 50 · 新鲜 100 · 自选 100；涉及AI信用风险与评级下调，市场敏感度高，但摘要截断且需核实原始数据&lt;/p&gt;&lt;p&gt;关注命中：行业：人工智能、行业：半导体&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>【精选02·72】国常会：加力发挥“国家队”稳市作用 进一步优化中央汇金公司的类“平准基金”功能</title>
-      <link>https://www.cls.cn/detail/2546318</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2546318</guid>
-      <pubDate>Fri, 27 Nov 2026 04:24:51 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-      <description>&lt;p&gt;【国常会：加力发挥“国家队”稳市作用 进一步优化中央汇金公司的类“平准基金”功能】财联社11月27日电，国务院总理李强11月27日主持召开国务院常务会议，会议指出，资本市场事关经济发展大局。要坚持目标导向、问题导向，坚持逆周期调节和改革攻坚两手抓，持续完善资本市场稳市机制，实施好…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：财联社报道国常会提出加力发挥“国家队”稳市作用、优化中央汇金类“平准基金”功能，并推动上市公司加大分红回购；&lt;/p&gt;&lt;p&gt;事实：会议明确逆周期调节与改革攻坚两手抓，实施存量政策、谋划增量政策；&lt;/p&gt;&lt;p&gt;推断：政策信号偏稳市与制度完善，具体工具规模与节奏未披露，不宜外推为即时资金投放；&lt;/p&gt;&lt;p&gt;影响：对资本市场情绪与分红回购预期偏正面，但传导取决于后续细则；&lt;/p&gt;&lt;p&gt;验证：需看中央汇金后续操作公告、增量政策文件及上市公司回购分红数据。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜中央汇金公司｜机构｜正面｜中期｜置信 60/100：会议明确优化其类平准基金功能，但具体操作规模与时机未披露&lt;/p&gt;&lt;p&gt;直接｜中国资本市场｜行业｜正面｜中期｜置信 55/100：稳市机制与分红回购导向改善预期，实际效果取决于增量政策落地&lt;/p&gt;&lt;p&gt;间接｜A股上市公司｜行业｜正面｜中期｜置信 45/100：政策鼓励加大分红回购，但公司执行力度与盈利条件决定实际影响&lt;/p&gt;&lt;p&gt;证据与共识：官方材料｜强度 75/100｜报道内一致；国常会内容经财联社转述，属官方会议信息，但摘要截断、细则未全（当前输入 1 个 RSS 来源）。跨源线索：另有 1 个不同发布方标题表述相近；不等于已确认独立采编。&lt;/p&gt;&lt;p&gt;每日优先级：精选第 2 名｜总分 72/100｜影响 75 · 紧迫 55 · 新颖 50 · 证据 75 · 新鲜 100 · 自选 65；国常会层级稳市表态，涉及平准基金功能优化，政策信号较强&lt;/p&gt;&lt;p&gt;关注命中：主题：中国政策&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>【精选03·71】中国10月规模以上工业企业利润同比加速增长至20.1%，AI驱动下电子行业1-10月利润翻倍</title>
-      <link>https://wallstreetcn.com/articles/3786817</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/articles/3786817</guid>
-      <pubDate>Fri, 27 Nov 2026 02:01:58 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
-      <description>&lt;p&gt;11月27日，国家统计局公布数据显示，1-10月份，全国规模以上工业企业实现利润总额67373.6亿元，同比增长16.0%。全国工业生产总体平稳，新动能快速成长，带动规模以上工业企业利润同比增长16.0%，较1—9月份加快0.5个百分点，今年以来继续保持两位数增长。 其中，10月…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：国家统计局公布1-10月及10月规模以上工业企业利润数据；&lt;/p&gt;&lt;p&gt;事实：1-10月利润总额67373.6亿元、同比增长16.0%，较1-9月加快0.5个百分点；10月同比增长20.1%，较9月加快5.7个百分点；采矿业利润增长38.8%，制造业增长17.5%；摘要提及AI驱动下电子行业1-10月利润翻倍；&lt;/p&gt;&lt;p&gt;推断：数据为官方统计，显示工业利润加速增长、新动能行业表现突出，电子行业受AI相关需求带动；&lt;/p&gt;&lt;p&gt;影响：可能强化市场对工业盈利改善与AI产业链景气的预期，但属宏观数据层面；&lt;/p&gt;&lt;p&gt;验证：可对照国家统计局原始发布数据核对。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜中国规模以上工业｜行业｜正面｜短期｜置信 80/100：官方统计显示利润同比加速增长，直接反映工业盈利改善&lt;/p&gt;&lt;p&gt;直接｜电子行业｜行业｜正面｜中期｜置信 65/100：摘要称AI驱动下电子行业1-10月利润翻倍，属官方数据中的结构性亮点&lt;/p&gt;&lt;p&gt;证据与共识：官方材料｜强度 85/100｜报道内一致；数据引自国家统计局公布，属官方统计材料（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：精选第 3 名｜总分 71/100｜影响 70 · 紧迫 50 · 新颖 40 · 证据 85 · 新鲜 90 · 自选 80；官方宏观数据具可核验性，但属常规月度统计发布&lt;/p&gt;&lt;p&gt;关注命中：行业：人工智能&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>【精选04·70】先声药业：先林达®获国家药品监督管理局批准上市 | 先声药业港交所公告，公司董事会欣然宣布，公司附属公司与嘉兴安帝康生物科技有限公司合作的抗流感药...</title>
-      <link>https://www.yicai.com/brief/103456863.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/brief/103456863.html</guid>
-      <pubDate>Fri, 27 Nov 2026 04:17:07 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://yicai.com">第一财经 · 简报</source>
-      <description>&lt;p&gt;先声药业港交所公告，公司董事会欣然宣布，公司附属公司与嘉兴安帝康生物科技有限公司合作的抗流感药物先林达®（氘玛巴洛沙韦片）获中国国家药品监督管理局批准上市，用于治疗既往健康的12岁及以上青少年和成人单纯性甲型和乙型流感，不包括存在流感相关并发症高风险的患者。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：先声药业港交所公告，附属公司与嘉兴安帝康生物合作的抗流感药先林达®（氘玛巴洛沙韦片）获国家药监局批准上市。&lt;/p&gt;&lt;p&gt;事实：公告称该药用于治疗既往健康的12岁及以上青少年和成人单纯性甲型和乙型流感，不包括流感并发症高风险患者。&lt;/p&gt;&lt;p&gt;推断：新产品获批可丰富公司抗感染产品线，但公告未披露定价、产能与销售预期。&lt;/p&gt;&lt;p&gt;影响：对先声药业产品组合构成正面事件，实际业绩贡献取决于上市推广与市场竞争。&lt;/p&gt;&lt;p&gt;验证：需跟踪后续销售数据、医保准入及竞品格局。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜先声药业｜公司｜正面｜中期｜置信 65/100：药品获批上市直接扩充产品线，但收入贡献取决于推广与准入&lt;/p&gt;&lt;p&gt;直接｜嘉兴安帝康生物｜公司｜正面｜中期｜置信 55/100：作为合作方参与该药，获批对其合作管线构成正面进展&lt;/p&gt;&lt;p&gt;证据与共识：官方材料｜强度 75/100｜报道内一致；依据公司港交所公告的获批表述（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：精选第 4 名｜总分 70/100｜影响 55 · 紧迫 45 · 新颖 55 · 证据 75 · 新鲜 100 · 自选 100；药品获批为明确公司事件，但摘要未含商业化细节&lt;/p&gt;&lt;p&gt;关注命中：自选股：香港交易所&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>【精选05·69】能源内参｜商务部：坚决反对美对中国等经济体加征301关税；中国华能原总会计师王益华被开除党籍</title>
-      <link>https://www.caixin.com/2026-11-27/102509196.html</link>
-      <guid isPermaLink="true">https://www.caixin.com/2026-11-27/102509196.html</guid>
-      <pubDate>Fri, 27 Nov 2026 04:00:13 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://caixin.com">财新 · 最新</source>
-      <description>&lt;p&gt;比亚迪在法国洽购产能 筹划西欧地区首座乘用车工厂；蔚来秦力洪：2027年车市或延续低迷 车企需调整经营预期 11月26日，商务部办公厅副主任兼新闻发言人何亚东就美国贸易代表办公室宣布“产能过剩”301调查结果、发布拟议措施，提出对包括中国在内的14个经济体加征301关税做出回应，…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：财新能源内参，含商务部回应美301关税及华能原总会计师被开除党籍等；&lt;/p&gt;&lt;p&gt;事实：商务部新闻发言人何亚东就美方“产能过剩”301调查结果及拟对包括中国在内14个经济体加征301关税表示坚决反对，称属单边主义、违反世贸规则；同条另载比亚迪在法国洽购产能、蔚来秦力洪称2027年车市或延续低迷、华能原总会计师王益华被开除党籍；&lt;/p&gt;&lt;p&gt;推断：报道为多条要闻汇编，关税措施尚处拟议阶段，最终范围与税率未定，对具体行业影响取决于落地情况；&lt;/p&gt;&lt;p&gt;影响：若加征实施，可能影响相关出口链，但当前仅为表态与拟议；&lt;/p&gt;&lt;p&gt;验证：需跟踪美国贸易代表办公室正式措施文本及商务部后续行动，并核对各条要闻的原始出处；线索有限，摘要未给出税率与清单。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;间接｜中国出口相关行业｜行业｜负面｜中期｜置信 45/100：美方拟议加征301关税，尚待正式落地，传导取决于清单与税率&lt;/p&gt;&lt;p&gt;间接｜比亚迪｜公司｜不确定｜长期｜置信 35/100：报道提及其在法国洽购产能，细节不足，无法判断影响方向&lt;/p&gt;&lt;p&gt;间接｜中国华能｜公司｜中性｜不明｜置信 30/100：原总会计师被开除党籍属人事纪律信息，对经营影响未披露&lt;/p&gt;&lt;p&gt;证据与共识：报道引述多方｜强度 55/100｜报道内一致；财新汇编多条要闻，商务部表态为官方发言引述，其余条目细节有限（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：精选第 5 名｜总分 69/100｜影响 65 · 紧迫 50 · 新颖 40 · 证据 55 · 新鲜 100 · 自选 100；涉及中美关税摩擦官方表态，但措施仍处拟议阶段&lt;/p&gt;&lt;p&gt;关注命中：自选股：比亚迪股份、行业：能源&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>【精选06·69】Turkey Central Bank Sidelines Policy Rate as Reserves Shrink｜中文：土耳其央行在储备金缩水的情况下暂停调整政策利率</title>
-      <link>https://www.bloomberg.com/news/articles/2026-11-26/turkey-central-bank-suspends-repo-auctions-as-reserves-shrink</link>
-      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-26/turkey-central-bank-suspends-repo-auctions-as-reserves-shrink</guid>
-      <pubDate>Thu, 26 Nov 2026 19:41:34 +0000</pubDate>
-      <category>全球市场与要闻</category>
-      <source url="https://bloomberg.com">彭博社 · 经济</source>
-      <description>&lt;p&gt;中文：土耳其央行暂停了一周期回购拍卖，此举可能会提高银行的融资成本，因为决策者正在应对外汇储备的急剧下降
-原文：Turkey’s central bank suspended its one-week repo auctions, a move that could raise…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：彭博经济报道土耳其央行暂停一周期回购拍卖，背景为外汇储备急剧下降。&lt;/p&gt;&lt;p&gt;事实：土耳其央行暂停一周期回购拍卖；报道称此举可能提高银行融资成本；决策背景是外汇储备急剧下降。&lt;/p&gt;&lt;p&gt;推断：暂停常规回购拍卖可能使银行转向成本更高的融资渠道，从而被动收紧流动性；这不等同于正式加息，而是以数量工具替代价格工具。&lt;/p&gt;&lt;p&gt;影响：土耳其银行体系融资成本与里拉流动性可能承压，央行对利率走廊的实际控制方式发生变化。&lt;/p&gt;&lt;p&gt;验证：需核对土耳其央行官方公告、回购拍卖恢复时间及后续外汇储备数据。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜土耳其央行｜机构｜不确定｜短期｜置信 65/100：暂停回购拍卖直接影响其流动性投放工具与政策操作框架&lt;/p&gt;&lt;p&gt;直接｜土耳其银行业｜行业｜负面｜短期｜置信 60/100：若银行依赖一周期回购融资，暂停拍卖可能推高其边际融资成本&lt;/p&gt;&lt;p&gt;间接｜土耳其里拉｜资产｜不确定｜短期｜置信 45/100：储备下降与流动性收紧对汇率的影响取决于后续干预与市场信心&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 55/100｜暂无独立互证；当前仅一个彭博RSS来源，未提供央行公告原文或储备具体数据（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：精选第 6 名｜总分 69/100｜影响 65 · 紧迫 60 · 新颖 55 · 证据 55 · 新鲜 80 · 自选 100；涉及新兴市场央行非常规流动性操作，但缺乏具体数据与官方确认&lt;/p&gt;&lt;p&gt;关注命中：行业：银行保险、主题：中国政策&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>【精选07·69】广东：到2030年全域智算规模力争达到4000EFlops</title>
-      <link>https://www.gelonghui.com/p/7568684</link>
-      <guid isPermaLink="true">https://www.gelonghui.com/p/7568684</guid>
-      <pubDate>Thu, 26 Nov 2026 16:08:00 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://gelonghui.com">格隆汇 · 日热文</source>
-      <description>&lt;p&gt;鼓励算力中心优先使用国产算力芯片 提升国产化替代水平和应用规模 11月26日，广东省政务服务和数据管理局和广东省发展和改革委员会印发《广东省算力发展“十五五”规划》。 规划明确，到2028年，广东算力发展取得重要阶段性成效，智算规模突破1000EFlops（FP16），全省数据中…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：广东省政务服务和数据管理局、省发改委印发《广东省算力发展“十五五”规划》，提出2030年全域智算规模力争达4000EFlops，并鼓励算力中心优先使用国产算力芯片。&lt;/p&gt;&lt;p&gt;事实：规划明确2028年智算规模突破1000EFlops（FP16）、数据中心绿电使用占比超80%、新建大型及以上数据中心PUE小于1.2；摘要提及鼓励国产算力芯片提升国产化替代水平和应用规模。&lt;/p&gt;&lt;p&gt;推断：政策将引导本地算力基础设施扩容与国产芯片采购，利好国产算力芯片及绿色数据中心相关环节，但具体落地节奏与资金安排未在摘要中体现。&lt;/p&gt;&lt;p&gt;影响：对国产算力芯片、数据中心能效与绿电配套形成中期需求导向。&lt;/p&gt;&lt;p&gt;验证：需查阅规划全文及后续配套细则、项目清单。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜国产算力芯片行业｜行业｜正面｜中期｜置信 65/100：规划明确鼓励算力中心优先使用国产算力芯片，若落地采购将传导至芯片需求&lt;/p&gt;&lt;p&gt;直接｜数据中心行业｜行业｜双向｜中期｜置信 55/100：智算扩容带来建设需求，但PUE小于1.2和绿电占比要求提高合规成本&lt;/p&gt;&lt;p&gt;直接｜广东省｜国家/地区｜正面｜长期｜置信 60/100：规划设定2030年智算规模目标，属地方产业政策导向&lt;/p&gt;&lt;p&gt;证据与共识：官方材料｜强度 75/100｜报道内一致；摘要引述省级部门印发的规划文件内容，属官方政策材料，但为单一RSS转述（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：精选第 7 名｜总分 69/100｜影响 70 · 紧迫 45 · 新颖 55 · 证据 75 · 新鲜 65 · 自选 100；省级算力规划设定明确量化目标并提国产芯片优先，具产业指向性，但属中长期规划非即时事件&lt;/p&gt;&lt;p&gt;关注命中：行业：人工智能、行业：半导体&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>【精选08·68】国务院常务会议：促进资本市场平稳健康发展</title>
-      <link>https://wallstreetcn.com/livenews/3206757</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3206757</guid>
-      <pubDate>Fri, 27 Nov 2026 04:24:37 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · A 股快讯</source>
-      <description>&lt;p&gt;国务院总理李强11月27日主持召开国务院常务会议，听取推动高质量发展综合督查情况汇报，研究持续深化资本市场投融资综合改革工作，听取国家标准体系建设情况汇报，审议通过《生产安全事故隐患排查治理条例（草案）》。 会议指出，资本市场事关经济发展大局。要坚持目标导向、问题导向，坚持逆周期…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：WSCN 报道国常会研究持续深化资本市场投融资综合改革、促进资本市场平稳健康发展；&lt;/p&gt;&lt;p&gt;事实：会议提出完善稳市机制、实施存量政策并谋划增量政策，同时审议生产安全事故隐患排查治理条例草案；&lt;/p&gt;&lt;p&gt;推断：改革与稳市并重，增量政策方向明确但工具未列明；&lt;/p&gt;&lt;p&gt;影响：对市场制度预期偏正面，具体影响待政策文件；&lt;/p&gt;&lt;p&gt;验证：需核对国常会正式通稿全文及后续部委配套措施。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜中国资本市场｜行业｜正面｜中期｜置信 55/100：投融资综合改革与稳市机制表述改善制度预期，细则未出&lt;/p&gt;&lt;p&gt;直接｜中央汇金公司｜机构｜正面｜中期｜置信 50/100：摘要提及加力发挥国家队稳市作用，但具体安排未展开&lt;/p&gt;&lt;p&gt;证据与共识：官方材料｜强度 70/100｜报道内一致；转述国常会内容，属官方会议信息，摘要部分截断（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：精选第 8 名｜总分 68/100｜影响 70 · 紧迫 50 · 新颖 45 · 证据 70 · 新鲜 100 · 自选 65；国常会部署资本市场改革，属较高层级政策信号，但内容与同批报道重叠&lt;/p&gt;&lt;p&gt;关注命中：主题：中国政策&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>【精选09·68】先声药业：先林达®获国家药品监督管理局批准上市</title>
-      <link>https://www.cls.cn/detail/2546308</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2546308</guid>
-      <pubDate>Fri, 27 Nov 2026 04:14:58 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-      <description>&lt;p&gt;【先声药业：先林达®获国家药品监督管理局批准上市】财联社11月27日电，先声药业港交所公告，公司董事会欣然宣布，公司附属公司与嘉兴安帝康生物科技有限公司合作的抗流感药物先林达®（氘玛巴洛沙韦片）获中国国家药品监督管理局批准上市，用于治疗既往健康的12岁及以上青少年和成人单纯性甲型…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：财联社转述先声药业港交所公告，称先林达®（氘玛巴洛沙韦片）获国家药监局批准上市。&lt;/p&gt;&lt;p&gt;事实：该药由先声药业附属公司与嘉兴安帝康生物科技合作开发，适应症为既往健康的12岁及以上青少年和成人单纯性甲型和乙型流感，不包括流感相关并发症高风险患者。&lt;/p&gt;&lt;p&gt;推断：获批意味着该产品可进入商业化阶段，但公告未披露定价、产能、销售目标及对财务的具体影响。&lt;/p&gt;&lt;p&gt;影响：对先声药业而言是产品管线进展，实际业绩贡献取决于后续市场准入与放量节奏。&lt;/p&gt;&lt;p&gt;验证：可核对港交所公告原文及国家药监局批准信息。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜先声药业｜公司｜正面｜中期｜置信 65/100：公告确认产品获批上市，但收入贡献取决于定价、渠道准入与放量，公告未给量化指引&lt;/p&gt;&lt;p&gt;直接｜嘉兴安帝康生物科技有限公司｜公司｜正面｜中期｜置信 55/100：作为合作方参与该抗流感药物，获批后合作收益取决于协议条款，摘要未披露&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 70/100｜暂无独立互证；当前仅财联社一条RSS转述公司港交所公告，未提供公告链接或其他独立来源（当前输入 1 个 RSS 来源）。跨源线索：另有 1 个不同发布方标题表述相近；不等于已确认独立采编。&lt;/p&gt;&lt;p&gt;每日优先级：精选第 9 名｜总分 68/100｜影响 55 · 紧迫 40 · 新颖 50 · 证据 70 · 新鲜 100 · 自选 100；药品获批属实质性进展，但适应症范围有限且缺乏商业化量化信息&lt;/p&gt;&lt;p&gt;关注命中：自选股：香港交易所&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>【精选10·68】创业板大涨超3%，科创50暴涨4%，AI算力掀涨停潮，半导体大反弹，恒科指涨3%，科网股集体拉升</title>
-      <link>https://wallstreetcn.com/articles/3786820</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/articles/3786820</guid>
-      <pubDate>Fri, 27 Nov 2026 04:06:01 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
-      <description>&lt;p&gt;11月27日，A股震荡上涨，沪指盘初一度下跌，盘中震荡走高，创业板高开高走，盘中一度大涨超4%，科创综指、科创50均涨超4%，得益于AI算力爆发，润和软件20CM涨停，常山北明、拓维信息涨停。半导体板块大反弹，华虹宏力涨超5%。算力硬件拉升，光电路交换机、光模块、光芯片概念股大涨…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：华尔街见闻盘中行情报道；&lt;/p&gt;&lt;p&gt;事实：11月27日A股震荡上涨，创业板盘中一度涨超4%，科创50涨超4%，AI算力概念掀涨停潮，润和软件20CM涨停，常山北明、拓维信息涨停，半导体反弹，华虹宏力涨超5%，光模块、光芯片等拉升，军工、基本金属走强，银行、煤炭、石油天然气调整；港股恒指、恒科指拉升，恒科指涨超3%，科网股集体反弹；&lt;/p&gt;&lt;p&gt;推断：当日市场呈科技成长领涨、传统权重调整的结构性行情，AI算力为情绪主线；&lt;/p&gt;&lt;p&gt;影响：短期科技板块风险偏好回升，但与同日AI信用风险担忧形成对照，行情持续性待观察；&lt;/p&gt;&lt;p&gt;验证：需核对收盘数据与成交额，当前为盘中快讯，数据可能变化；线索有限。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜A股创业板与科创50｜行业｜正面｜短期｜置信 55/100：盘中涨幅超3%至4%，科技成长领涨，但为盘中数据需收盘核实&lt;/p&gt;&lt;p&gt;直接｜AI算力概念板块｜行业｜正面｜短期｜置信 50/100：多只算力概念股涨停，情绪驱动明显，持续性依赖后续资金与基本面&lt;/p&gt;&lt;p&gt;直接｜港股恒生科技指数｜行业｜正面｜短期｜置信 50/100：恒科指涨超3%，科网股集体反弹，属盘中行情数据&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 50/100｜暂无独立互证；仅华尔街见闻一家盘中行情快讯，无其他来源互证且数据为盘中值（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：精选第 10 名｜总分 68/100｜影响 55 · 紧迫 70 · 新颖 35 · 证据 50 · 新鲜 100 · 自选 100；盘中大涨具时效性，但属行情描述，信息深度有限&lt;/p&gt;&lt;p&gt;关注命中：自选股：美团-W、行业：人工智能、行业：半导体、行业：能源、主题：港股&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>【方程式新闻】[新增市场] 新增 BTW 韩元市场</title>
-      <link>https://eqn.news/main/17681</link>
-      <guid isPermaLink="true">https://eqn.news/main/17681</guid>
-      <pubDate>Fri, 27 Nov 2026 04:52:31 +0000</pubDate>
-      <category>全球市场与要闻</category>
-      <source url="https://eqn.news">方程式新闻 · 加密快讯</source>
-      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：EQN 标题称新增 BTW 韩元市场，摘要为空；&lt;/p&gt;&lt;p&gt;事实：该条仅提供“新增市场”与“BTW 韩元市场”的标题信息，未说明交易平台、上线时间、交易对细则或运营主体；&lt;/p&gt;&lt;p&gt;推断：这可能是某交易平台新增以韩元计价的 BTW 交易市场，但具体平台与资产属性无法确认；&lt;/p&gt;&lt;p&gt;影响：若属实，可能提升 BTW 在韩元区的可交易性，但缺乏规模与流动性信息，影响范围不明；&lt;/p&gt;&lt;p&gt;验证：需查 EQN 原文或平台公告确认运营主体、上线时间与交易对。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜BTW｜资产｜不确定｜不明｜置信 30/100：标题仅称新增韩元市场，未说明平台与流动性条件&lt;/p&gt;&lt;p&gt;证据与共识：线索有限｜强度 20/100｜无法判断；仅有标题且摘要为空，无平台与细则信息（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 32/100｜影响 25 · 紧迫 20 · 新颖 40 · 证据 20 · 新鲜 100 · 自选 0；新增市场标题具一定新颖性，但信息量极少且影响不明&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>财联社11月27日电，现货黄金日内涨2%，报3637.8美元/盎司。</title>
-      <link>https://www.cls.cn/detail/2546330</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2546330</guid>
-      <pubDate>Fri, 27 Nov 2026 04:48:08 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：财联社快讯称现货黄金日内涨2%，报3637.8美元/盎司；&lt;/p&gt;&lt;p&gt;事实：该条仅给出金价日内涨幅与报价，未提供驱动原因；&lt;/p&gt;&lt;p&gt;推断：金价出现较大日内涨幅，但单一快讯不足以判断驱动因素与持续性；&lt;/p&gt;&lt;p&gt;影响：对黄金相关资产与避险情绪可能有短期影响，但缺乏背景无法量化；&lt;/p&gt;&lt;p&gt;验证：需对照其他行情源确认报价，并查找同日宏观或地缘事件解释。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜现货黄金｜资产｜正面｜短期｜置信 55/100：标题直接给出金价日内上涨2%的报价&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 45/100｜暂无独立互证；当前仅一个 RSS 快讯来源，无摘要与原因说明（当前输入 1 个 RSS 来源）。跨源线索：另有 1 个不同发布方标题表述相近；不等于已确认独立采编。&lt;/p&gt;&lt;p&gt;每日优先级：总分 50/100｜影响 55 · 紧迫 60 · 新颖 30 · 证据 45 · 新鲜 100 · 自选 0；金价日内大涨具市场关注度，但缺乏驱动信息且为常见快讯&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>现货黄金日内涨2%，现报3637.83美元/盎司。</title>
-      <link>https://flash.jin10.com/detail/20261127124717543800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261127124717543800</guid>
-      <pubDate>Fri, 27 Nov 2026 04:47:17 +0000</pubDate>
+      <title>前10个月黑龙江省货物贸易进出口总值同比增长9.7%</title>
+      <link>https://flash.jin10.com/detail/20261128123553459800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261128123553459800</guid>
+      <pubDate>Sat, 28 Nov 2026 04:35:53 +0000</pubDate>
       <category>中文财经快讯</category>
       <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：JIN10 快讯称现货黄金日内涨2%，现报3637.83美元/盎司；&lt;/p&gt;&lt;p&gt;事实：该条给出与另一快讯相近的涨幅与报价；&lt;/p&gt;&lt;p&gt;推断：两家快讯报价接近，可互相印证金价日内大涨这一行情事实，但不构成对原因的独立验证；&lt;/p&gt;&lt;p&gt;影响：强化金价短期走强的行情信号，驱动因素仍不明；&lt;/p&gt;&lt;p&gt;验证：需对照权威行情源与同日宏观、地缘信息确认。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜现货黄金｜资产｜正面｜短期｜置信 60/100：两条快讯报价接近，行情事实互证&lt;/p&gt;&lt;p&gt;证据与共识：报道引述多方｜强度 50/100｜报道内一致；与同批另一快讯的涨幅和报价基本一致，但均为快讯且无原因（当前输入 1 个 RSS 来源）。跨源线索：另有 1 个不同发布方标题表述相近；不等于已确认独立采编。&lt;/p&gt;&lt;p&gt;每日优先级：总分 50/100｜影响 55 · 紧迫 60 · 新颖 25 · 证据 50 · 新鲜 100 · 自选 0；与同批金价快讯重复，行情重要但新颖性低&lt;/p&gt;</description>
+      <description>金十数据11月28日讯，据哈尔滨海关统计，2026年前10个月，黑龙江省货物贸易进出口总值2830.1亿元，比去年同期增长9.7%。其中，出口877.3亿元，增长21.2%；进口1952.8亿元，增长5.2%。</description>
     </item>
     <item>
-      <title>新款红旗H9正式上市</title>
-      <link>https://news.10jqka.com.cn/20261127/c682288799.shtml</link>
-      <guid isPermaLink="true">https://news.10jqka.com.cn/20261127/c682288799.shtml</guid>
-      <pubDate>Fri, 27 Nov 2026 04:45:07 +0000</pubDate>
+      <title>全球股市情绪改善金银大涨 市场认为黄金进入超卖区域</title>
+      <link>https://www.cls.cn/detail/2547201</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2547201</guid>
+      <pubDate>Sat, 28 Nov 2026 04:32:40 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+      <description>【全球股市情绪改善金银大涨 市场认为黄金进入超卖区域】财联社11月28日电，受美元走软、黄金实物需求回升以及全球股市情绪改善等因素影响，国际黄金和白银期价27日大幅上涨，延续近期反弹趋势。美国节日假期后交易活动减少，一定程度上缓解了近期股市抛售给贵金属带来的承压局面。当日纽约商品…</description>
+    </item>
+    <item>
+      <title>南京发布鸿蒙智能体三年行动计划：2028年营收破千亿，集聚企业超100家</title>
+      <link>https://www.cls.cn/detail/2547200</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2547200</guid>
+      <pubDate>Sat, 28 Nov 2026 04:26:27 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+      <description>【南京发布鸿蒙智能体三年行动计划：2028年营收破千亿，集聚企业超100家】《科创板日报》28日讯，南京市今日发布《开源鸿蒙智能体发展行动计划（2026—2028年）》，部署九项重点任务，涵盖鸿蒙智能体产品发展、生态企业培育、公共服务体系完善、产业园区建设、特色OPC社区打造、安…</description>
+    </item>
+    <item>
+      <title>崔东树：1-10月汽车行业利润率3.2%、收入增1.9%、成本增3.2%、利润降26%</title>
+      <link>https://www.cls.cn/detail/2547199</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2547199</guid>
+      <pubDate>Sat, 28 Nov 2026 04:24:18 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+      <description>【崔东树：1-10月汽车行业利润率3.2%、收入增1.9%、成本增3.2%、利润降26%】财联社11月28日电，乘联分会崔东树发文称，2026年1-10月汽车生产2641万台，同比降4%，收入90589亿元增1.9%，成本80809亿元增3.2%，利润2867亿元降26%，销售利…</description>
+    </item>
+    <item>
+      <title>华福证券任志强：健全多层次稳市机制</title>
+      <link>https://news.10jqka.com.cn/20261128/c682325432.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261128/c682325432.shtml</guid>
+      <pubDate>Sat, 28 Nov 2026 04:07:00 +0000</pubDate>
       <category>中文财经快讯</category>
       <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
-      <description>&lt;p&gt;11月27日，一汽红旗宣布，新款红旗H9于2026广州车展正式上市，推出豪华MAX、尊贵Ultra、旗舰Ultra、四驱旗舰Ultimate共4款车型，售价区间为32.98万-41.98万元。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：同花顺快讯称新款红旗H9于2026广州车展上市，推出4款车型，售价32.98万-41.98万元；&lt;/p&gt;&lt;p&gt;事实：一汽红旗宣布新车上市及车型与价格区间；&lt;/p&gt;&lt;p&gt;推断：一汽红旗在高端燃油/混动轿车市场更新产品，价格区间覆盖30万至42万元；&lt;/p&gt;&lt;p&gt;影响：对一汽红旗及高端自主轿车竞争格局有中期影响，但缺乏销量目标与订单数据；&lt;/p&gt;&lt;p&gt;验证：需查一汽红旗官方发布与后续销量数据。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜一汽红旗｜公司｜中性｜中期｜置信 55/100：新车上市直接影响产品线，但销量与盈利影响取决于市场接受度&lt;/p&gt;&lt;p&gt;间接｜中国乘用车行业｜行业｜中性｜中期｜置信 35/100：高端自主轿车新增竞品，影响取决于实际销量&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 50/100｜暂无独立互证；仅一个 RSS 来源转述车企发布，未附官方材料（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 42/100｜影响 40 · 紧迫 30 · 新颖 35 · 证据 50 · 新鲜 100 · 自选 0；具体车型上市信息明确，但属常规产品发布&lt;/p&gt;</description>
+      <description>华福证券总裁助理兼研究所所长任志强接受采访时表示，本次会议指出资本市场事关经济发展大局，并要求坚持目标导向、问题导向，坚持逆周期调节和改革攻坚两手抓。这一表述把资本市场的平稳健康发展放在经济发展大局中统筹考虑，同时明确稳市与改革不是二选一，而是两手抓。逆周期调节对应短期稳定，改革…</description>
     </item>
     <item>
-      <title>俄罗斯黑海港口城市新罗西斯克遭无人机袭击，造成三人受伤。</title>
-      <link>https://flash.jin10.com/detail/20261127124445931800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261127124445931800</guid>
-      <pubDate>Fri, 27 Nov 2026 04:44:45 +0000</pubDate>
+      <title>乌克兰因港口停运三个月损失近30亿美元</title>
+      <link>https://flash.jin10.com/detail/20261128120619768800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261128120619768800</guid>
+      <pubDate>Sat, 28 Nov 2026 04:06:19 +0000</pubDate>
       <category>中文财经快讯</category>
       <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：JIN10 快讯称俄罗斯黑海港口城市新罗西斯克遭无人机袭击，造成三人受伤；&lt;/p&gt;&lt;p&gt;事实：该条仅报告袭击与伤亡人数，未说明袭击方、港口设施受损或运营影响；&lt;/p&gt;&lt;p&gt;推断：新罗西斯克为重要黑海港口与能源出口节点，事件可能引发地缘风险关注，但当前信息不足以判断对港口运营或能源出口的实际影响；&lt;/p&gt;&lt;p&gt;影响：可能短期扰动黑海航运与能源市场情绪，程度不明；&lt;/p&gt;&lt;p&gt;验证：需查当地官方通报、港口运营方声明及后续报道。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;间接｜俄罗斯黑海港口/能源出口｜行业｜不确定｜短期｜置信 35/100：港口城市遇袭可能扰动航运与出口情绪，但未证实设施受损&lt;/p&gt;&lt;p&gt;间接｜原油｜资产｜不确定｜短期｜置信 25/100：地缘事件或影响能源风险溢价，传导取决于港口运营是否受扰&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 40/100｜暂无独立互证；仅一个 RSS 快讯，无袭击方与设施影响细节（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 62/100｜影响 55 · 紧迫 55 · 新颖 45 · 证据 40 · 新鲜 100 · 自选 80；涉及重要港口城市的地缘安全事件，但细节有限&lt;/p&gt;&lt;p&gt;关注命中：行业：能源&lt;/p&gt;</description>
+      <description>金十数据11月28日讯，据俄罗斯卫星网报道，在乌克兰开始袭击俄罗斯炼油厂和民用货船后，俄罗斯开始对乌克兰经济至关重要的基设施实施报复性打击。乌克兰的海上贸易因俄罗斯对港口基础设施的持续打击而严重受阻。海港出口收入骤降至15.4亿美元，低于去年同期的43.9亿美元。全国出口总额降至…</description>
     </item>
     <item>
-      <title>蜜雪集团拟回购H股及根据H股奖励计划购入股份 总数不超379.6万股</title>
-      <link>https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-27/doc-inkaczqm3230908.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-27/doc-inkaczqm3230908.shtml</guid>
-      <pubDate>Fri, 27 Nov 2026 04:43:13 +0000</pubDate>
+      <title>中信证券：AH两地上市公司数量或仍将快速提升</title>
+      <link>https://www.yicai.com/news/103458587.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/news/103458587.html</guid>
+      <pubDate>Sat, 28 Nov 2026 04:05:23 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://yicai.com">第一财经 · 最新</source>
+      <description>中信证券发文称，AH两地上市公司的数量呈现提升趋势，且2025年开始有加速特征，主要系2025年开始A2H上市显著增加，截至2026年10月31日，两地上市公司数量已达200家以上。展望来看，截至2026年11月8日，仍处于申报港股IPO的项目中有约1/3为A2H项目，故A2H上…</description>
+    </item>
+    <item>
+      <title>韩当局密切关注金正恩可能访华相关动向</title>
+      <link>https://www.zaobao.com.sg/news/world/story20261128-10071582</link>
+      <guid isPermaLink="true">https://www.zaobao.com.sg/news/world/story20261128-10071582</guid>
+      <pubDate>Sat, 28 Nov 2026 04:04:07 +0000</pubDate>
+      <category>政治与政策</category>
+      <source url="https://zaobao.com">联合早报 · 国际</source>
+      <description>韩国情报当局说，正在密切关注朝鲜领导人金正恩可能访问中国的各种相关动向。 韩国广播公司（KBS）早前引述一名外交消息人士报道称，中国国家主席习近平11月初与韩国总统李在明会晤时曾表明，金正恩可能会访华。 报道还引述一名政府消息人士称，中国东北边境城市丹东已发布“紧急指令”，此举与…</description>
+    </item>
+    <item>
+      <title>金银刚跌完，CME就来提高保证金，大家还在骂它打压多头，行情却突然掉头大涨。同一条规则，真能一夜换边？CME这次到底碰到</title>
+      <link>https://flash.jin10.com/detail/20261128120150186800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261128120150186800</guid>
+      <pubDate>Sat, 28 Nov 2026 04:01:50 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>金银刚跌完，CME就来提高保证金，大家还在骂它打压多头，行情却突然掉头大涨。同一条规则，真能一夜换边？CME这次到底碰到了谁的痛处？一文带你看清真正“推手”&gt;&gt;</description>
+    </item>
+    <item>
+      <title>11月份沪牌拍卖结果公布 平均成交价为93779元</title>
+      <link>https://www.cls.cn/detail/2547197</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2547197</guid>
+      <pubDate>Sat, 28 Nov 2026 04:00:10 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+      <description>【11月份沪牌拍卖结果公布 平均成交价为93779元】财联社11月28日电，据上海发布，11月沪牌拍卖结果刚刚出炉：个人额度合计拍卖总数4229个，参加拍卖人数20384人，中标率20.7%。最低成交价93700元，平均成交价为93779元，比上个月93874元减少了95元。最低…</description>
+    </item>
+    <item>
+      <title>不满特朗普称普京“朋友” 泽连斯基敦促美对俄施压</title>
+      <link>https://news.10jqka.com.cn/20261128/c682325401.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261128/c682325401.shtml</guid>
+      <pubDate>Sat, 28 Nov 2026 03:57:53 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>在英国广播公司27日播出的采访中，乌克兰总统泽连斯基对美国总统特朗普称俄罗斯总统普京为“朋友”表达不满，并敦促美国加大力度对俄罗斯施压。俄方回应称，泽连斯基的言论表明他“不愿走和平解决的道路”。泽连斯基在位于乌克兰首都基辅的办公室接受采访时，再次以激烈言辞批评普京。他还称，特朗普…</description>
+    </item>
+    <item>
+      <title>世卫组织呼吁加快埃博拉疫苗和疗法试验 | 据央视新闻，世界卫生组织27日表示，刚果（金）本轮埃博拉疫情持续，应加快候选疫苗和疗法的临床试验。世卫组织...</title>
+      <link>https://www.yicai.com/brief/103458582.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/brief/103458582.html</guid>
+      <pubDate>Sat, 28 Nov 2026 03:56:27 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://yicai.com">第一财经 · 简报</source>
+      <description>据央视新闻，世界卫生组织27日表示，刚果（金）本轮埃博拉疫情持续，应加快候选疫苗和疗法的临床试验。世卫组织在官网发布声明说，根据近期紧急委员会会议建议，世卫组织总干事谭德塞发布了更新的疫情应对建议，同时判定本轮由本迪布焦型埃博拉病毒引发的埃博拉疫情仍构成“国际关注的突发公共卫生事…</description>
+    </item>
+    <item>
+      <title>经历职业生涯最大规模清仓之一后，高盛对冲基金主管警告：AI交易最赚钱的阶段或已过去</title>
+      <link>https://wallstreetcn.com/articles/3786895</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/articles/3786895</guid>
+      <pubDate>Sat, 28 Nov 2026 03:55:29 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
+      <description>高盛全球对冲基金业务主管Tony Pasquariello在最新客户报告中给出罕见直白的判断：过去八周是他职业生涯中见过规模最大的清仓之一，而AI基础设施交易最丰厚的上行空间已经过去，2027年将是一个回报较少的年份。 Pasquariello的核心论据在于供需格局的转换。他认为…</description>
+    </item>
+    <item>
+      <title>朱学东：美味与乡愁，青蒜茨菇炒咸肉丝|饮食</title>
+      <link>https://mini.caixin.com/2026-11-28/102509546.html</link>
+      <guid isPermaLink="true">https://mini.caixin.com/2026-11-28/102509546.html</guid>
+      <pubDate>Sat, 28 Nov 2026 03:53:48 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://caixin.com">财新 · 最新</source>
+      <description>一青（蒜叶）二白（蒜茎和茨菇片）三暗红（咸肉瘦肉部分），色泽明快，真正的色香味俱全 大蒜茨菇炒咸肉丝。 “这道菜叫大蒜茨菇炒咸肉丝，是本地经典名菜，各位可以尝尝。茨菇这东西，做菜，沈从文说‘格比土豆高’。” 2026年11月21日，在故乡武进一家餐厅，与一群在常州聚会的清华EMB…</description>
+    </item>
+    <item>
+      <title>世卫组织呼吁加快埃博拉疫苗和疗法试验</title>
+      <link>https://www.cls.cn/detail/2547196</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2547196</guid>
+      <pubDate>Sat, 28 Nov 2026 03:50:46 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+      <description>【世卫组织呼吁加快埃博拉疫苗和疗法试验】财联社11月28日电，世界卫生组织27日表示，刚果（金）本轮埃博拉疫情持续，应加快候选疫苗和疗法的临床试验。世卫组织在官网发布声明说，根据近期紧急委员会会议建议，世卫组织总干事谭德塞发布了更新的疫情应对建议，同时判定本轮由本迪布焦型埃博拉病…</description>
+    </item>
+    <item>
+      <title>中信证券：AH上市仍处于火热状态，两地上市公司数量或仍将快速提升</title>
+      <link>https://flash.jin10.com/detail/20261128114834434800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261128114834434800</guid>
+      <pubDate>Sat, 28 Nov 2026 03:48:34 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>金十数据11月28日讯，据中信证券，AH两地上市公司的数量呈现提升趋势，且2025年开始有加速特征，主要系2025年开始AH上市显著增加，截至2026年10月31日，两地上市公司数量已达200家以上。展望来看，截至2026年11月8日，仍处于申报港股IPO的项目中有约1/3为AH…</description>
+    </item>
+    <item>
+      <title>深圳首座空铁联运城市候机楼现已启用 | 据深视新闻，最近，深圳首座空铁联运城市候机楼——深圳北站城市候机楼旅客联程运输中心，正式投入运营。该候机楼...</title>
+      <link>https://www.yicai.com/brief/103458580.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/brief/103458580.html</guid>
+      <pubDate>Sat, 28 Nov 2026 03:47:34 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://yicai.com">第一财经 · 简报</source>
+      <description>据深视新闻，最近，深圳首座空铁联运城市候机楼——深圳北站城市候机楼旅客联程运输中心，正式投入运营。该候机楼依托广深港高铁、厦深铁路等干线高铁网络，直接辐射大湾区及广东省主要城市群，成为深圳机场航空网与大湾区轨道交通网深度融合的“物理接口”。</description>
+    </item>
+    <item>
+      <title>中信证券，中资境外融资市场或加速结构重塑，信用定价主线亦将随产业发展重心的转移持续演变</title>
+      <link>https://news.10jqka.com.cn/20261128/c682325362.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261128/c682325362.shtml</guid>
+      <pubDate>Sat, 28 Nov 2026 03:46:22 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>据中信证券，中国产业发展步入动能切换的深水区，信用市场同步呈现鲜明对照：一边是地产及城投主体债务滚续受到舆情扰动，另一边是中资科创企业资本开支维持高位且离岸债券融资持续放量。产业投资重心的转移带动融资格局调整，并进一步映射至中资企业的境外债券市场，科技类融资正逐步接替传统基地类融…</description>
+    </item>
+    <item>
+      <title>零跑徐军：新能源车市趋于成熟 车企需加快规模扩张</title>
+      <link>https://www.caixin.com/2026-11-28/102509540.html</link>
+      <guid isPermaLink="true">https://www.caixin.com/2026-11-28/102509540.html</guid>
+      <pubDate>Sat, 28 Nov 2026 03:44:50 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://caixin.com">财新 · 最新</source>
+      <description>零跑汽车持续扩大销量规模，2026年全年销量向百万辆迈进 2026年11月27日，2026广州国际车展，零跑汽车展台。图：视觉中国 【财新网】 随着新能源汽车支持政策逐步退坡、消费者认知和行业技术趋于成熟，车企建立竞争优势的时间窗口正在收窄，需加快规模扩张。11月27日，在广州车…</description>
+    </item>
+    <item>
+      <title>超191亿元，抢筹“易中天”</title>
+      <link>https://finance.sina.com.cn/stock/relnews/cn/2026-11-28/doc-inkaheph7409830.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/stock/relnews/cn/2026-11-28/doc-inkaheph7409830.shtml</guid>
+      <pubDate>Sat, 28 Nov 2026 03:43:12 +0000</pubDate>
       <category>中文财经快讯</category>
       <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>&lt;p&gt;热点栏目 自选股 数据中心 行情中心 资金流向 模拟交易 客户端 蜜雪集团（02097）发布公告，公司拟不时于公开市场回购H股及向公司H股奖励计划项下的受托人提供资金以购入H股，总数不超过379.6万股H股，占本公告日期公司已发行H股总数的约2.52%，但受限于公司适用得法律法规…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：新浪滚动快讯称蜜雪集团（02097）公告拟回购H股并向H股奖励计划受托人提供资金购入H股，上限379.6万股，约占已发行H股2.52%。&lt;/p&gt;&lt;p&gt;事实：公司披露回购及奖励计划购股上限与占比，并称受适用法律法规限制。&lt;/p&gt;&lt;p&gt;推断：属公司资本运作与股权激励安排，可能意在支撑股价或绑定员工利益，但公告未说明具体节奏与资金来源。&lt;/p&gt;&lt;p&gt;影响：对蜜雪集团H股短期情绪或有支撑，实际效果取决于执行力度与基本面。&lt;/p&gt;&lt;p&gt;验证：需查阅港交所公告原文及后续回购执行披露。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜蜜雪集团（02097）｜公司｜中性｜短期｜置信 65/100：回购与奖励计划购股上限明确，但执行节奏和资金安排未披露，传导至股价的效果不确定&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 60/100｜暂无独立互证；当前仅一个RSS来源转述公司公告，未提供公告原文链接（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 62/100｜影响 45 · 紧迫 40 · 新颖 35 · 证据 60 · 新鲜 100 · 自选 100；常规回购公告，规模占H股约2.52%，信息增量有限&lt;/p&gt;&lt;p&gt;关注命中：自选股：香港交易所&lt;/p&gt;</description>
+      <description>本周（11月23日至27日），“易中天”成为A股资金关注焦点。Wind数据显示， 中际旭创 、 新易盛 、 天孚通信 包揽个股主力资金净流入额前三， 合计净流入超191亿元 ，周涨幅均超过30%。行业方面， 电子 、 通信 行业本周主力资金净流入额居前。 电子 、 通信 行业资金…</description>
     </item>
     <item>
-      <title>New Zealand Dollar Gains as Traders Look Past Hung Parliament｜中文：交易员不再关注悬而未决的议会，新西兰元上涨</title>
-      <link>https://www.bloomberg.com/news/articles/2026-11-27/new-zealand-dollar-gains-as-traders-look-past-hung-parliament</link>
-      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-27/new-zealand-dollar-gains-as-traders-look-past-hung-parliament</guid>
-      <pubDate>Fri, 27 Nov 2026 04:42:58 +0000</pubDate>
+      <title>特朗普又连发深圳APEC照片：一周过去了，他还沉浸其中</title>
+      <link>https://news.10jqka.com.cn/20261128/c682325341.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261128/c682325341.shtml</guid>
+      <pubDate>Sat, 28 Nov 2026 03:41:09 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>当地时间11月27日，美国总统特朗普在社交平台连发数张深圳APEC会议的照片，包括其乘坐的专机、深圳的接机和欢迎仪式现场、中俄美元首会晤、晚宴现场等。其中一张照片上，“APEC中国年深圳进行时”的中文字样格外引人注目。（澎湃新闻）</description>
+    </item>
+    <item>
+      <title>华源证券：二级债基规模再创新高，债券配置占比回升</title>
+      <link>https://flash.jin10.com/detail/20261128114050243800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261128114050243800</guid>
+      <pubDate>Sat, 28 Nov 2026 03:40:50 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>金十数据11月28日讯，华源证券表示，在“存款搬家”与“资产荒”并行的宏观背景下，25年以来二级债基规模持续高增，26年Q3末二级债基规模再创新高，债券配置和久期上升。二级债基规模增至2.37万亿元，较Q2末+2.4%；股票市值和占比回落，债券占比升至83.2%。债券端国债配置增…</description>
+    </item>
+    <item>
+      <title>棕榈油供应若趋紧，替代需求或推高豆油价格</title>
+      <link>https://flash.jin10.com/detail/20261128113255697800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261128113255697800</guid>
+      <pubDate>Sat, 28 Nov 2026 03:32:55 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+    </item>
+    <item>
+      <title>深圳首座空铁联运城市候机楼现已启用</title>
+      <link>https://www.cls.cn/detail/2547192</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2547192</guid>
+      <pubDate>Sat, 28 Nov 2026 03:29:57 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+      <description>【深圳首座空铁联运城市候机楼现已启用】财联社11月28日电，据深视新闻，最近，深圳首座空铁联运城市候机楼——深圳北站城市候机楼旅客联程运输中心，正式投入运营。该候机楼依托广深港高铁、厦深铁路等干线高铁网络，直接辐射大湾区及广东省主要城市群，成为深圳机场航空网与大湾区轨道交通网深度…</description>
+    </item>
+    <item>
+      <title>伊朗袭击造成美驻巴林海军基地损失预计超4亿美元</title>
+      <link>https://finance.sina.com.cn/world/2026-11-28/doc-inkahepm2683229.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/world/2026-11-28/doc-inkahepm2683229.shtml</guid>
+      <pubDate>Sat, 28 Nov 2026 03:25:59 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>据报道，伊朗导弹与无人机袭击造成美国驻巴林海军基地损失预计超4亿美元，基地前景不明，五角大楼正考虑将波斯湾地区的美军转移至以色列和约旦。 巴林海军支援活动基地是美国第五舰队与美国海军中央司令部总部所在地，此前驻扎有8000余名军人、随军家属及文职承包商，如今仅剩下一小部分人员。…</description>
+    </item>
+    <item>
+      <title>人事观察｜将满63岁信长星当选江苏省委书记</title>
+      <link>https://china.caixin.com/2026-11-28/102509534.html</link>
+      <guid isPermaLink="true">https://china.caixin.com/2026-11-28/102509534.html</guid>
+      <pubDate>Sat, 28 Nov 2026 03:25:56 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://caixin.com">财新 · 最新</source>
+      <description>13人组成新一届江苏省委常委，包括两名副省长及省军区政委、镇江市委书记等新人；其中11人年逾55岁 资料图：信长星。图：视觉中国 【财新网】 江苏是第六个完成本轮省级党委换届的省份。11月27日，在江苏省委十五届一次全会上，13人当选江苏省委常委。其中有四名新晋常委，分别是江苏省…</description>
+    </item>
+    <item>
+      <title>监管部门约谈15家电动自行车企业 要求妥善处理退车诉求</title>
+      <link>https://www.caixin.com/2026-11-28/102509530.html</link>
+      <guid isPermaLink="true">https://www.caixin.com/2026-11-28/102509530.html</guid>
+      <pubDate>Sat, 28 Nov 2026 03:20:27 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://caixin.com">财新 · 最新</source>
+      <description>市场监管总局称，将坚持严管严治、一严到底，维护3C认证制度的严肃性和公信力 2026年8月16日，郑州，电动自行车销售一条街。图：视觉中国 【财新网】 电动自行车强制性产品认证（下称“3C认证”）证书大面积暂停后，部分消费者购车后无法正常上牌使用。 11月27日，市场监管总局集中…</description>
+    </item>
+    <item>
+      <title>波兰报告新增高致病性禽流感疫情</title>
+      <link>https://wallstreetcn.com/livenews/3207312</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3207312</guid>
+      <pubDate>Sat, 28 Nov 2026 03:20:17 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+      <description>波兰兽医监察总局27日表示，新确认一起高致病性禽流感疫情。这是该国近期第二起禽流感疫情。 兽医监察总局说，新增疫情发生在波兰中西部大波兰省的一处家禽养殖场，25日经实验室检测确认，正依据该国及欧盟相关法规采取防疫措施，包括扑杀和无害化处理家禽、对涉疫场所清洁消毒以及划定防疫限制区…</description>
+    </item>
+    <item>
+      <title>广东重拳打击售电市场“桌下交易”</title>
+      <link>https://www.yicai.com/news/103458574.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/news/103458574.html</guid>
+      <pubDate>Sat, 28 Nov 2026 03:16:43 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://yicai.com">第一财经 · 最新</source>
+      <description>11月27日，广东电力交易中心发布《关于广东电力市场2027年交易关键机制和参数的通知》（下称“通知”），对发电企业、售电公司和电力用户之间的“桌下交易”作出严格限制，明确要求经营主体“严守合规经营底线”。 根据通知，发电企业与售电公司若签订线下合同，并就线上合同电量约定相关结算…</description>
+    </item>
+    <item>
+      <title>财联社11月28日电，沙特领导的联盟表示，其拦截并摧毁了也门胡塞武装向利雅得发射的巡航导弹。</title>
+      <link>https://www.cls.cn/detail/2547191</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2547191</guid>
+      <pubDate>Sat, 28 Nov 2026 03:15:36 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+    </item>
+    <item>
+      <title>沙特领导的联军：也门胡塞武装向利雅得发射的巡航导弹被拦截并摧毁。</title>
+      <link>https://flash.jin10.com/detail/20261128111342365800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261128111342365800</guid>
+      <pubDate>Sat, 28 Nov 2026 03:13:42 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+    </item>
+    <item>
+      <title>德商银行：各央行利率预期分化或推动外汇波动率上升</title>
+      <link>https://flash.jin10.com/detail/20261128111123066800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261128111123066800</guid>
+      <pubDate>Sat, 28 Nov 2026 03:11:23 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>金十数据11月28日讯，德国商业银行的Michael Pfister在一份报告中指出，最近几个月，市场已反映出主要央行加息的预期，这促成了今年外汇波动率偏低。但市场对央行利率决定的预期逐渐分化可能导致2027年波动率上升。</description>
+    </item>
+    <item>
+      <title>内蒙古百亿基金投向106个项目 带动项目总投资3792.25亿元</title>
+      <link>https://www.yicai.com/news/103458573.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/news/103458573.html</guid>
+      <pubDate>Sat, 28 Nov 2026 03:10:16 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://yicai.com">第一财经 · 最新</source>
+      <description>据内蒙古日报，今年，内蒙古自治区发展和改革委员会会同3家政策性银行内蒙古分行组成联合工作组，加强谋划储备新型政策性金融工具项目。2026年内蒙古共获得投放基金197.22亿元，比2025年增长131%，为内蒙古重大项目提供了重要的资本金支持，为后续稳投资工作提供新支撑。今年，内蒙…</description>
+    </item>
+    <item>
+      <title>内蒙古百亿基金投向106个项目 带动项目总投资3792.25亿元 | 据内蒙古日报，今年，内蒙古自治区发展和改革委员会会同3家政策性银行内蒙古分行组成联合工作...</title>
+      <link>https://www.yicai.com/brief/103458572.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/brief/103458572.html</guid>
+      <pubDate>Sat, 28 Nov 2026 03:10:15 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://yicai.com">第一财经 · 简报</source>
+      <description>据内蒙古日报，今年，内蒙古自治区发展和改革委员会会同3家政策性银行内蒙古分行组成联合工作组，加强谋划储备新型政策性金融工具项目。2026年内蒙古共获得投放基金197.22亿元，比2025年增长131%，为内蒙古重大项目提供了重要的资本金支持，为后续稳投资工作提供新支撑。今年，内蒙…</description>
+    </item>
+    <item>
+      <title>瓦楞原纸期货及期权将于12月18日上市</title>
+      <link>https://news.10jqka.com.cn/20261128/c682325210.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261128/c682325210.shtml</guid>
+      <pubDate>Sat, 28 Nov 2026 03:09:42 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>记者从上期所获悉，瓦楞原纸期货及期权将于12月18日上市。瓦楞原纸期货和期权上市后，上期所的浆纸衍生品体系将进一步完善。上期所正在做好各项准备工作，确保瓦楞原纸期货和期权平稳推出和稳健运行。我国是全球最大的瓦楞原纸生产国和消费国，产量和消费量均占全球30%以上。上市瓦楞原纸期货和…</description>
+    </item>
+    <item>
+      <title>日本静冈一野猪闯入店铺 伤七人后被捕杀</title>
+      <link>https://www.zaobao.com.sg/news/world/story20261128-10071253</link>
+      <guid isPermaLink="true">https://www.zaobao.com.sg/news/world/story20261128-10071253</guid>
+      <pubDate>Sat, 28 Nov 2026 03:08:33 +0000</pubDate>
+      <category>政治与政策</category>
+      <source url="https://zaobao.com">联合早报 · 国际</source>
+      <description>日本静冈县一家店铺遭野猪闯入，造成七人受伤。 日本共同社报道，据当地警方和消防部门报告，当地时间星期五（11月27日），静冈县静冈市一家店铺报警称，一头野猪撞破玻璃闯入店内，有人被咬伤。 事件共造成店内和市内道路七人受伤，但都暂无生命危险。这头野猪已于星期五（28日）上午被捕杀。…</description>
+    </item>
+    <item>
+      <title>公私募顶流密集解除“限购令”，陈光明专户解封、董承非重启募集，顶流大佬相继“开门迎客”</title>
+      <link>https://finance.sina.com.cn/money/fund/2026-11-28/doc-inkaheph7383826.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/money/fund/2026-11-28/doc-inkaheph7383826.shtml</guid>
+      <pubDate>Sat, 28 Nov 2026 03:06:41 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>来源：时代财经 A股市场震荡之际，基金圈频频传来积极信号。近日， 陈光明、杨东、董承非 等此前“封盘”已久的投资大佬，相继解封申购。 与此同时，11月以来，多只权益基金已悄然 解除“限购令” ，恢复申购或大额申购业务，以吸纳更多增量资金。其中，不乏华商基金张明昕、华安基金桑翔宇、…</description>
+    </item>
+    <item>
+      <title>全球大救市，独缺美联储</title>
+      <link>https://wallstreetcn.com/articles/3786891</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/articles/3786891</guid>
+      <pubDate>Sat, 28 Nov 2026 03:06:36 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
+      <description>全球主要市场本周掀起一场密集的政策救市行动，从华盛顿到首尔，各市场财政部门、监管机构与国家基金轮番出手护盘。然而，分析人士警告，这些干预措施虽能短暂提振市场，却无法从根本上扭转方向，真正具备无限弹药的救市者——美联储，目前仍处于缄默期。 在美国，特朗普政府向英伟达董事会施压，推动…</description>
+    </item>
+    <item>
+      <title>内蒙古百亿元基金投向106个项目 带动项目总投资3792.25亿元</title>
+      <link>https://www.cls.cn/detail/2547189</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2547189</guid>
+      <pubDate>Sat, 28 Nov 2026 03:04:55 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+      <description>【内蒙古百亿元基金投向106个项目 带动项目总投资3792.25亿元】财联社11月28日电，据内蒙古日报，今年，内蒙古自治区发展和改革委员会会同3家政策性银行内蒙古分行组成联合工作组，加强谋划储备新型政策性金融工具项目。2026年内蒙古共获得投放基金197.22亿元，比2025年…</description>
+    </item>
+    <item>
+      <title>华为已成为中国人工智能发展的核心力量</title>
+      <link>https://finance.sina.com.cn/tech/2026-11-28/doc-inkahepm2670754.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/tech/2026-11-28/doc-inkahepm2670754.shtml</guid>
+      <pubDate>Sat, 28 Nov 2026 03:02:56 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>在中国深圳的华为总部，一条富丽堂皇的走廊金光闪闪，天花板鎏金，墙上绘有精美壁画。这条走廊以那位曾力图让这家中国科技巨头一蹶不振的美国总统命名。 华为高管将其称作“特朗普走廊”，以此直指特朗普第一任期内发起的行动：把华为逐出全球无线网络市场，切断其获取先进芯片的渠道。 这个命名体现…</description>
+    </item>
+    <item>
+      <title>China Import Logistics Fell 0.6% in January-October, Xinhua Says｜中文：新华社称，1-10月中国进口物流下降0.6%</title>
+      <link>https://www.bloomberg.com/news/articles/2026-11-28/china-import-logistics-fell-0-6-in-january-october-xinhua-says</link>
+      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-28/china-import-logistics-fell-0-6-in-january-october-xinhua-says</guid>
+      <pubDate>Sat, 28 Nov 2026 03:01:44 +0000</pubDate>
       <category>全球市场与要闻</category>
       <source url="https://bloomberg.com">彭博社 · 市场</source>
-      <description>&lt;p&gt;中文：新西兰元上涨，因为交易员对官方选举结果不以为然，该结果证实了议会可能出现悬浮状态，全球风险偏好改善支撑了市场情绪
-原文：The New Zealand dollar rose as traders shrugged off an official election resu…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：彭博报道新西兰元上涨，交易员未理会确认可能出现悬浮议会的官方选举结果，全球风险偏好改善支撑情绪。&lt;/p&gt;&lt;p&gt;事实：官方选举结果确认潜在悬浮议会，新西兰元走高，报道归因于风险偏好改善。&lt;/p&gt;&lt;p&gt;推断：市场短期更关注全球风险情绪而非新西兰国内政治不确定性，但悬浮议会意味着组阁与政策推进存在变数。&lt;/p&gt;&lt;p&gt;影响：新西兰元短期偏强，但政治不确定性可能限制中期走势。&lt;/p&gt;&lt;p&gt;验证：需跟踪组阁进展、新西兰元汇率与利率市场反应。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜新西兰元｜资产｜双向｜短期｜置信 55/100：风险偏好改善支撑汇价，但悬浮议会组阁不确定性构成反向压力&lt;/p&gt;&lt;p&gt;直接｜新西兰｜国家/地区｜不确定｜中期｜置信 50/100：悬浮议会可能影响组阁与政策推进节奏&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 55/100｜暂无独立互证；仅彭博一家报道，未提供其他来源交叉验证（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 49/100｜影响 50 · 紧迫 45 · 新颖 40 · 证据 55 · 新鲜 100 · 自选 0；选举结果与汇率反应具时效性，但属常规政治事件解读&lt;/p&gt;</description>
+      <description>中文：据新华社援引中国物流联合会数据报道，今年前 10 个月，中国进口物流需求进一步萎缩，延续了 1-2 月 9.6% 增速的放缓趋势
+原文：China’s import logistics demand contracted further in the first 10 mo…</description>
     </item>
     <item>
-      <title>科济药业-B于11月26日斥资200.13万港元回购22.7万股</title>
-      <link>https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-27/doc-inkaczqm3230372.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-27/doc-inkaczqm3230372.shtml</guid>
-      <pubDate>Fri, 27 Nov 2026 04:42:22 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>&lt;p&gt;热点栏目 自选股 数据中心 行情中心 资金流向 模拟交易 客户端 科济药业-B （02171）发布公告，于2026年11月26日斥资200.13万港元回购22.7万股。 .appendQr_wrap{border:1px solid #E6E6E6;padding:8px;} .…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：新浪滚动快讯称科济药业-B（02171）于2026年11月26日斥资200.13万港元回购22.7万股。&lt;/p&gt;&lt;p&gt;事实：公司披露单日回购金额与股数。&lt;/p&gt;&lt;p&gt;推断：属常规股份回购，规模较小，可能传递管理层对股价的态度，但单日数据不足以判断趋势。&lt;/p&gt;&lt;p&gt;影响：对科济药业-B短期情绪或有轻微支撑，实质影响有限。&lt;/p&gt;&lt;p&gt;验证：需查阅港交所公告及后续连续回购记录。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜科济药业-B（02171）｜公司｜中性｜短期｜置信 55/100：单日回购金额约200万港元，规模有限，对股价传导作用不确定&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 55/100｜暂无独立互证；仅一个RSS来源转述公司公告，未提供原文（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 54/100｜影响 30 · 紧迫 30 · 新颖 20 · 证据 55 · 新鲜 100 · 自选 100；小额单日回购，信息增量与影响均有限&lt;/p&gt;&lt;p&gt;关注命中：自选股：香港交易所&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>看通集团：出售合共175万股中国星股份</title>
-      <link>https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-27/doc-inkaczqh7847086.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-27/doc-inkaczqh7847086.shtml</guid>
-      <pubDate>Fri, 27 Nov 2026 04:41:44 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>&lt;p&gt;热点栏目 自选股 数据中心 行情中心 资金流向 模拟交易 客户端 看通集团 （01059）发布公告，于2026年11月26日，公司在市场上出售合共175万股中国星股份，平均价格为每股中国星股份7.43港元，总代价约为1301万港元（不包括交易成本）。 .appendQr_wrap…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：新浪滚动快讯称看通集团（01059）于2026年11月26日在市场出售合共175万股中国星股份，均价7.43港元，总代价约1301万港元。&lt;/p&gt;&lt;p&gt;事实：公司披露出售数量、均价与总代价。&lt;/p&gt;&lt;p&gt;推断：属处置金融资产，可能用于回笼资金或调整持仓，但公告未说明用途与对损益的影响。&lt;/p&gt;&lt;p&gt;影响：对看通集团资产结构与现金流有直接影响，对中国星股份仅属股东减持行为。&lt;/p&gt;&lt;p&gt;验证：需查阅港交所公告及中国星股份股权变动披露。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜看通集团（01059）｜公司｜不确定｜短期｜置信 55/100：出售资产回笼约1301万港元，但用途及损益影响未披露&lt;/p&gt;&lt;p&gt;间接｜中国星股份｜公司｜中性｜短期｜置信 40/100：股东减持175万股，规模相对有限，影响取决于后续是否继续减持&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 55/100｜暂无独立互证；仅一个RSS来源转述公司公告，未提供原文（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 56/100｜影响 35 · 紧迫 30 · 新颖 30 · 证据 55 · 新鲜 100 · 自选 100；常规资产出售公告，金额有限&lt;/p&gt;&lt;p&gt;关注命中：自选股：香港交易所&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>澳洲航空（Qantas）拟选择波音(BA.N)作为20架远程飞机订单的主要供应商。订单将包括更省油的787飞机，以及部分</title>
-      <link>https://flash.jin10.com/detail/20261127124116469800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261127124116469800</guid>
-      <pubDate>Fri, 27 Nov 2026 04:41:16 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>&lt;p&gt;澳洲航空（Qantas）拟选择波音(BA.N)作为20架远程飞机订单的主要供应商。订单将包括更省油的787飞机，以及部分空客A350飞机。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：金十快讯称澳洲航空拟选择波音（BA.N）作为20架远程飞机订单的主要供应商，订单包括更省油的787及部分空客A350。&lt;/p&gt;&lt;p&gt;事实：报道称澳航倾向波音为主供应商，机型组合含787与部分A350。&lt;/p&gt;&lt;p&gt;推断：若落实，波音在澳航远程机队更新中占主导，空客仍获部分份额，属订单竞争结果。&lt;/p&gt;&lt;p&gt;影响：对波音订单储备与市场情绪偏正面，对空客影响中性偏负但有限。&lt;/p&gt;&lt;p&gt;验证：需等待澳航与波音官方确认及订单细节。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜波音（BA.N）｜公司｜正面｜中期｜置信 55/100：若被选为主要供应商，将获20架远程飞机订单中的主要份额，但尚待官方确认&lt;/p&gt;&lt;p&gt;直接｜澳洲航空｜公司｜中性｜中期｜置信 50/100：机队更新涉及资本开支，787省油特性可能改善运营成本&lt;/p&gt;&lt;p&gt;间接｜空客｜公司｜负面｜中期｜置信 40/100：仅获部分A350份额，主供应商地位旁落，但订单未最终确认&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 50/100｜暂无独立互证；仅金十一家快讯，措辞为“拟选择”，未提供官方确认（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 51/100｜影响 55 · 紧迫 45 · 新颖 50 · 证据 50 · 新鲜 100 · 自选 0；涉及大型飞机订单竞争，但尚处拟选阶段，确定性不足&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>中国驻日使馆提醒公民注意防范地震等自然灾害</title>
-      <link>https://news.10jqka.com.cn/20261127/c682288725.shtml</link>
-      <guid isPermaLink="true">https://news.10jqka.com.cn/20261127/c682288725.shtml</guid>
-      <pubDate>Fri, 27 Nov 2026 04:41:00 +0000</pubDate>
+      <title>国内多家金店金饰价格集体上涨，最高报1093元/克</title>
+      <link>https://news.10jqka.com.cn/20261128/c682325140.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261128/c682325140.shtml</guid>
+      <pubDate>Sat, 28 Nov 2026 03:00:28 +0000</pubDate>
       <category>中文财经快讯</category>
       <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
-      <description>&lt;p&gt;中国驻日本大使馆27日发文提醒在日中国公民，注意防范地震等自然灾害，提前做好各项应急准备。 提醒说，近期，日本熊本县、茨城县、千叶县、静冈县、北海道近海等地地震频发。日本政府于11月2日正式成立防灾厅，以应对可能发生的首都直下型地震、南海海槽地震等大规模自然灾害。 鉴于上述情况，…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：中国驻日本大使馆27日发文，提醒在日中国公民防范地震等自然灾害并做好应急准备；摘要提及近期熊本县、茨城县、千叶县、静冈县、北海道近海等地地震频发，日本政府11月2日成立防灾厅。&lt;/p&gt;&lt;p&gt;事实：使馆发布提醒，列举地震频发地区与日方防灾机构设立情况，并给出抗震检查、家具加固、熟悉避难所等建议。&lt;/p&gt;&lt;p&gt;推断：这属于领事安全提醒，反映日方对首都直下型、南海海槽等大规模灾害风险的关注上升，但不构成对具体地震时间地点的预测。&lt;/p&gt;&lt;p&gt;影响：可能提升在日中国公民及赴日人员的防灾准备意识，对旅游、差旅安排形成心理层面的间接影响；对资产价格无直接传导。&lt;/p&gt;&lt;p&gt;验证：可核对使馆原文与日本政府防灾厅设立公告；地震频发程度需以日本气象厅数据为准。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;间接｜在日中国公民及赴日人员｜行业｜中性｜短期｜置信 55/100：领事提醒提升防灾准备意识，传导至差旅与旅游行为的程度取决于后续实际灾情&lt;/p&gt;&lt;p&gt;间接｜日本防灾相关公共机构｜机构｜中性｜中期｜置信 40/100：摘要提及防灾厅成立，属公共安全治理安排，对市场主体的传导路径不明确&lt;/p&gt;&lt;p&gt;证据与共识：官方材料｜强度 70/100｜报道内一致；内容为使馆发布的领事提醒，属官方公开信息，摘要内部表述一致（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 50/100｜影响 45 · 紧迫 50 · 新颖 35 · 证据 70 · 新鲜 100 · 自选 0；属常规领事安全提醒，涉及多地震频发与防灾机构设立，但无突发灾情细节&lt;/p&gt;</description>
+      <description>据同花顺iFinD数据，今日国内黄金饰品价格对比显示，黄金珠宝品牌公布的境内足金首饰价格较昨日集体上涨，最高报1093元/克。</description>
     </item>
     <item>
-      <title>大家乐集团将于12月23日派发中期股息每股0.15港元</title>
-      <link>https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-27/doc-inkaczqf1069272.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-27/doc-inkaczqf1069272.shtml</guid>
-      <pubDate>Fri, 27 Nov 2026 04:39:47 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>&lt;p&gt;热点栏目 自选股 数据中心 行情中心 资金流向 模拟交易 客户端 大家乐集团 （00341）发布公告，将于2026年12月23日派发截至2026年9月30日止六个月的中期股息每股0.15港元。 .appendQr_wrap{border:1px solid #E6E6E6;pad…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：大家乐集团（00341）发布公告，将于2026年12月23日派发截至2026年9月30日止六个月的中期股息每股0.15港元。&lt;/p&gt;&lt;p&gt;事实：公司公告了中期股息金额与派发日期，对应财年上半年。&lt;/p&gt;&lt;p&gt;推断：派息安排属常规公司行动，反映董事会对中期业绩与现金流的既定安排，但摘要未提供盈利、派息率等数据，无法判断派息水平变化。&lt;/p&gt;&lt;p&gt;影响：对股东现金流有直接影响，对股价的传导取决于市场对派息是否符合预期，线索有限。&lt;/p&gt;&lt;p&gt;验证：可核对港交所公告原文及公司中期业绩报告中的每股盈利与派息比率。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜大家乐集团（00341）｜公司｜中性｜短期｜置信 65/100：公告明确派息金额与日期，直接影响股东现金回流，股价反应取决于与市场预期的比较&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 60/100｜暂无独立互证；当前仅一个RSS来源转述公司公告，未提供业绩与派息率等背景数据（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 56/100｜影响 35 · 紧迫 30 · 新颖 20 · 证据 60 · 新鲜 100 · 自选 100；常规中期派息公告，信息明确但缺乏业绩对比，新闻增量有限&lt;/p&gt;&lt;p&gt;关注命中：自选股：香港交易所&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>诺诚健华佐来曲替尼儿童实体瘤适应症获批上市</title>
-      <link>https://news.10jqka.com.cn/20261127/c682288656.shtml</link>
-      <guid isPermaLink="true">https://news.10jqka.com.cn/20261127/c682288656.shtml</guid>
-      <pubDate>Fri, 27 Nov 2026 04:39:21 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
-      <description>&lt;p&gt;11月27日，诺诚健华宣布，公司自主研发的新一代TRK抑制剂佐来曲替尼（Zurletrectinib, ICP-723）获得中国国家药品监督管理局（NMPA）批准，用于治疗2岁至12岁携带 NTRK融合基因的儿童实体瘤患者。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：诺诚健华宣布佐来曲替尼获NMPA批准用于2至12岁NTRK融合基因儿童实体瘤患者。&lt;/p&gt;&lt;p&gt;事实：公司公告称该药为自主研发的新一代TRK抑制剂，适应症为儿童实体瘤，批准机构为中国NMPA。&lt;/p&gt;&lt;p&gt;推断：这是产品管线新增适应症的监管进展，可能扩大该药适用人群；但摘要未披露定价、患者规模、销售预期或竞品格局。&lt;/p&gt;&lt;p&gt;影响：对诺诚健华肿瘤管线商业化构成潜在正面条件，实际收入贡献取决于准入与放量，线索有限。&lt;/p&gt;&lt;p&gt;验证：可核对NMPA药品批准证明文件及公司后续公告中的适应症与上市信息。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜诺诚健华｜公司｜正面｜中期｜置信 60/100：获批适应症直接关联其产品管线，但商业化放量条件未披露&lt;/p&gt;&lt;p&gt;直接｜中国NMPA｜机构｜中性｜短期｜置信 70/100：作为审批机构，批准行为本身不构成方向性影响&lt;/p&gt;&lt;p&gt;间接｜儿童实体瘤治疗行业｜行业｜不确定｜长期｜置信 40/100：新增获批药物可能改变治疗选择，但摘要未提供竞品与市场规模信息&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 55/100｜暂无独立互证；当前仅一个RSS来源转述公司宣布的获批信息，未见监管文件原文（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 54/100｜影响 60 · 紧迫 50 · 新颖 55 · 证据 55 · 新鲜 100 · 自选 0；创新药新增儿童适应症获批具一定行业意义，但摘要信息有限且非突发市场事件&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>大家乐集团发布中期业绩 股东应占溢利1.01亿港元同比增长116.7%</title>
-      <link>https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-27/doc-inkaczqn5557537.shtml</link>
-      <guid isPermaLink="true">https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-27/doc-inkaczqn5557537.shtml</guid>
-      <pubDate>Fri, 27 Nov 2026 04:39:01 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
-      <description>&lt;p&gt;热点栏目 自选股 数据中心 行情中心 资金流向 模拟交易 客户端 大家乐集团 （00341）发布截至2026年9月30日止六个月业绩，收入39.95亿港元，同比下降1%；公司股权持有人应占溢利1.01亿港元，同比增长116.7%；每股基本盈利17.8港仙，拟派中期股息每股15港仙…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：大家乐集团发布截至2026年9月30日止六个月中期业绩。&lt;/p&gt;&lt;p&gt;事实：收入39.95亿港元同比下降1%，股东应占溢利1.01亿港元同比增长116.7%，每股基本盈利17.8港仙，拟派中期股息每股15港仙；摘要提及关闭表现未如理想店铺及优化营运模式。&lt;/p&gt;&lt;p&gt;推断：利润大幅增长与收入微降并存，可能来自成本控制、店铺网络优化或低基数效应，但摘要未给出具体原因拆分。&lt;/p&gt;&lt;p&gt;影响：盈利改善与派息对股东回报构成正面条件，收入下滑显示经营仍存压力，线索有限。&lt;/p&gt;&lt;p&gt;验证：可核对公司完整中期业绩公告中的成本、门店数量及一次性项目明细。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜大家乐集团（00341）｜公司｜双向｜短期｜置信 65/100：利润与派息增长为正面，但收入同比下降及关店显示经营压力&lt;/p&gt;&lt;p&gt;间接｜香港餐饮行业｜行业｜不确定｜中期｜置信 35/100：单一公司业绩不足以代表行业趋势，需更多同业数据验证&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 60/100｜暂无独立互证；当前仅一个RSS来源转述公司业绩数据，未见完整公告原文（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 62/100｜影响 50 · 紧迫 45 · 新颖 40 · 证据 60 · 新鲜 100 · 自选 80；常规中期业绩披露，利润增幅显著但收入下滑，信息完整度有限&lt;/p&gt;&lt;p&gt;关注命中：行业：消费&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>张雄：昊铂埃安全年零售量预计可突破40万辆</title>
-      <link>https://news.10jqka.com.cn/20261127/c682288599.shtml</link>
-      <guid isPermaLink="true">https://news.10jqka.com.cn/20261127/c682288599.shtml</guid>
-      <pubDate>Fri, 27 Nov 2026 04:37:59 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
-      <description>&lt;p&gt;11月27日，昊铂埃安BU总裁张雄在广州车展期间披露，昊铂埃安1-10月累计销量达32.69万辆，同比增长近55.96%，全年零售销量预计突破40万辆。（界面新闻）&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：昊铂埃安BU总裁张雄在广州车展期间披露销量数据与全年预期。&lt;/p&gt;&lt;p&gt;事实：1至10月累计销量32.69万辆，同比增长近55.96%，全年零售销量预计突破40万辆；来源为界面新闻。&lt;/p&gt;&lt;p&gt;推断：若前10月数据属实，全年40万辆目标意味着11至12月需完成约7.3万辆，属公司管理层预期而非已实现结果。&lt;/p&gt;&lt;p&gt;影响：对昊铂埃安销量增长构成正面表述，但预期目标存在执行不确定性，线索有限。&lt;/p&gt;&lt;p&gt;验证：可核对乘联会或公司月度交付数据，以及全年实际零售量是否达成。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜昊铂埃安｜公司｜正面｜短期｜置信 55/100：管理层披露的累计销量增长与全年目标构成正面表述，但目标尚未实现&lt;/p&gt;&lt;p&gt;间接｜新能源汽车行业｜行业｜不确定｜中期｜置信 30/100：单一品牌销量数据不足以判断行业整体趋势&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 50/100｜暂无独立互证；当前仅界面新闻一则报道引述管理层说法，销量数据未见独立来源核对（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 60/100｜影响 45 · 紧迫 40 · 新颖 35 · 证据 50 · 新鲜 100 · 自选 100；车展期间管理层销量表态属常规信息，全年目标为预期而非既成事实&lt;/p&gt;&lt;p&gt;关注命中：行业：新能源汽车、行业：能源、行业：消费&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>日本文部科学大臣问责决议案未通过</title>
-      <link>https://news.10jqka.com.cn/20261127/c682288596.shtml</link>
-      <guid isPermaLink="true">https://news.10jqka.com.cn/20261127/c682288596.shtml</guid>
-      <pubDate>Fri, 27 Nov 2026 04:37:47 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
-      <description>&lt;p&gt;日本参议院全体会议今天（11月27日）表决，未通过针对文部科学大臣关芳弘的问责决议案。该决议案由8个在野党于26日共同提交，要求关芳弘就政治资金问题引咎辞职。对于在野党要求关芳弘辞职，日本首相高市早苗采取了力保的态度。高市内阁的阁僚近期接连曝出丑闻，前农林水产大臣梁和生10月因不…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：日本参议院否决针对文部科学大臣关芳弘的问责决议案，该案由8个在野党共同提交，要求其因政治资金问题辞职；首相高市早苗力保；摘要还提及内阁近期接连曝出丑闻。&lt;/p&gt;&lt;p&gt;事实：参议院全体会议表决未通过问责决议案；在野党联合提交；首相采取力保态度；前农林水产大臣等阁僚近期因丑闻辞职。&lt;/p&gt;&lt;p&gt;推断：在野党问责未获议会多数支持，短期内大臣去留取决于首相而非议会；但内阁丑闻频发可能持续削弱执政公信力。&lt;/p&gt;&lt;p&gt;影响：日本政局稳定性与内阁支持率面临压力，政策推进节奏可能受干扰。&lt;/p&gt;&lt;p&gt;验证：需关注后续民调、在野党是否再提不信任案及涉事大臣政治资金调查进展。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜日本高市内阁｜机构｜负面｜短期｜置信 60/100：阁僚丑闻接连曝光且问责案虽未通过，但政治资金问题持续发酵可能压低内阁支持率&lt;/p&gt;&lt;p&gt;直接｜日本文部科学省｜机构｜中性｜短期｜置信 50/100：问责案被否决，大臣留任，但政治资金问题未澄清前政策执行存在不确定性&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 55/100｜暂无独立互证；当前仅一个RSS来源转述参议院表决及在野党提交情况（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 52/100｜影响 55 · 紧迫 50 · 新颖 45 · 证据 55 · 新鲜 100 · 自选 0；涉及日本内阁稳定性，但问责案未通过属程序性结果，边际影响有限&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>丰田母公司10月全球销量同比下降4.6%至880,087辆</title>
-      <link>https://news.10jqka.com.cn/20261127/c682288496.shtml</link>
-      <guid isPermaLink="true">https://news.10jqka.com.cn/20261127/c682288496.shtml</guid>
-      <pubDate>Fri, 27 Nov 2026 04:35:55 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
-      <description>&lt;p&gt;丰田母公司10月全球销量同比下降4.6%至880,087辆。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：丰田母公司10月全球销量同比下降4.6%至880,087辆。&lt;/p&gt;&lt;p&gt;事实：销量同比下滑4.6%，绝对值为880,087辆。&lt;/p&gt;&lt;p&gt;推断：销量下滑可能反映需求走弱或区域市场波动，但摘要未提供分区域、分车型及原因数据，无法判断驱动因素。&lt;/p&gt;&lt;p&gt;影响：若下滑持续，可能影响丰田及相关供应链的营收预期。&lt;/p&gt;&lt;p&gt;验证：需对照丰田官方月度产销公告及分地区数据确认下滑来源。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜丰田汽车｜公司｜负面｜短期｜置信 65/100：全球销量同比下降直接反映终端需求或供给节奏变化，但缺少分区域数据无法定位原因&lt;/p&gt;&lt;p&gt;间接｜汽车行业｜行业｜不确定｜短期｜置信 40/100：单一车企月度销量不足以代表行业趋势，需更多厂商数据互证&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 60/100｜报道内一致；标题与摘要给出同一销量数据，但仅一个来源且无官方公告细节（当前输入 1 个 RSS 来源）。跨源线索：另有 1 个不同发布方标题表述相近；不等于已确认独立采编。&lt;/p&gt;&lt;p&gt;每日优先级：总分 49/100｜影响 50 · 紧迫 45 · 新颖 30 · 证据 60 · 新鲜 100 · 自选 0；月度销量数据属常规披露，降幅中等且缺少原因分析&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>财联社11月27日电，丰田母公司10月全球销量同比下降4.6%至880,087辆。</title>
-      <link>https://www.cls.cn/detail/2546327</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2546327</guid>
-      <pubDate>Fri, 27 Nov 2026 04:35:21 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：财联社快讯称丰田母公司10月全球销量同比下降4.6%至880,087辆，摘要为空。&lt;/p&gt;&lt;p&gt;事实：标题给出销量同比降4.6%、880,087辆；摘要为空。&lt;/p&gt;&lt;p&gt;推断：与同批另一来源数据一致，但摘要为空导致线索有限，无法获得分区域或原因信息。&lt;/p&gt;&lt;p&gt;影响：与id 16相同，需结合官方数据判断持续性。&lt;/p&gt;&lt;p&gt;验证：以丰田官方产销公告为准。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜丰田汽车｜公司｜负面｜短期｜置信 60/100：销量同比下降为直接经营指标，但摘要为空缺少背景与原因&lt;/p&gt;&lt;p&gt;证据与共识：线索有限｜强度 45/100｜暂无独立互证；摘要为空，仅标题含数据；虽与另一条数据一致，但属同批快讯，不构成独立互证（当前输入 1 个 RSS 来源）。跨源线索：另有 1 个不同发布方标题表述相近；不等于已确认独立采编。&lt;/p&gt;&lt;p&gt;每日优先级：总分 43/100｜影响 45 · 紧迫 40 · 新颖 20 · 证据 45 · 新鲜 100 · 自选 0；重复性快讯，信息量与上一条重叠且无摘要&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>亚美尼亚总理：俄军将逐步向亚方移交边境管控</title>
-      <link>https://news.10jqka.com.cn/20261127/c682288437.shtml</link>
-      <guid isPermaLink="true">https://news.10jqka.com.cn/20261127/c682288437.shtml</guid>
-      <pubDate>Fri, 27 Nov 2026 04:34:54 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
-      <description>&lt;p&gt;埃里温消息：亚美尼亚总理尼科尔·帕什尼扬26日在首都埃里温举行的新闻发布会上表示，今后几年内俄罗斯边防部队将不会继续留在亚美尼亚执行任务，亚美尼亚将全面接管边境管控。(新华社)&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：亚美尼亚总理帕什尼扬称今后几年内俄罗斯边防部队将不再留驻亚美尼亚执行任务，亚方将全面接管边境管控，消息源为新华社。&lt;/p&gt;&lt;p&gt;事实：总理在埃里温新闻发布会上作出上述表态。&lt;/p&gt;&lt;p&gt;推断：这反映亚美尼亚与俄罗斯安全合作进一步疏离，边境管控权移交可能改变南高加索力量格局。&lt;/p&gt;&lt;p&gt;影响：俄在南高加索影响力可能下降，亚美尼亚与西方及邻国关系或调整，地区安全安排存在不确定性。&lt;/p&gt;&lt;p&gt;验证：需关注俄方回应、移交时间表及实际驻军变动。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜亚美尼亚｜国家/地区｜双向｜中期｜置信 60/100：接管边境管控增强主权自主，但失去俄边防力量可能带来安全真空风险&lt;/p&gt;&lt;p&gt;直接｜俄罗斯｜国家/地区｜负面｜中期｜置信 55/100：边防部队撤离意味着在南高加索安全存在收缩&lt;/p&gt;&lt;p&gt;间接｜南高加索地区｜国家/地区｜不确定｜长期｜置信 45/100：力量格局调整可能影响地区稳定与周边国家关系&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 60/100｜暂无独立互证；仅新华社一条报道引述亚美尼亚总理表态，未见俄方回应（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 57/100｜影响 65 · 紧迫 50 · 新颖 60 · 证据 60 · 新鲜 100 · 自选 0；涉及俄亚安全关系重大调整，但为表态性消息，落地时间表尚不明确&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>【华尔街原声】瑞银策略师：电力供应不足或拖累数据中心建设</title>
-      <link>https://database.caixin.com/2026-11-27/102509213.html</link>
-      <guid isPermaLink="true">https://database.caixin.com/2026-11-27/102509213.html</guid>
-      <pubDate>Fri, 27 Nov 2026 04:33:48 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://caixin.com">财新 · 最新</source>
-      <description>&lt;p&gt;下调2027-2028年数据中心交付预期，建议以合理估值买入成长股&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：瑞银策略师称电力供应不足或拖累数据中心建设，下调2027-2028年数据中心交付预期，并建议以合理估值买入成长股。&lt;/p&gt;&lt;p&gt;事实：瑞银策略师作出上述判断并下调交付预期。&lt;/p&gt;&lt;p&gt;推断：电力供给可能成为数据中心扩张的瓶颈，影响相关建设进度与资本开支节奏；但摘要未给出具体数据与受影响主体。&lt;/p&gt;&lt;p&gt;影响：数据中心、电力及算力相关产业链的交付与投资节奏可能受制约。&lt;/p&gt;&lt;p&gt;验证：需参考瑞银完整报告、数据中心运营商资本开支指引及电力供给数据。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜数据中心行业｜行业｜负面｜中期｜置信 55/100：电力供应不足若成立将直接制约数据中心建设与交付进度&lt;/p&gt;&lt;p&gt;间接｜电力供应行业｜行业｜双向｜中期｜置信 45/100：电力瓶颈凸显可能推动电网与发电投资，但也反映供给约束&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 50/100｜暂无独立互证；仅一条媒体转述瑞银策略师观点，摘要简短且未附报告细节（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 62/100｜影响 55 · 紧迫 40 · 新颖 50 · 证据 50 · 新鲜 100 · 自选 80；涉及AI基础设施关键瓶颈判断，但为策略师观点且缺少具体数据支撑&lt;/p&gt;&lt;p&gt;关注命中：行业：人工智能&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>泰国10月出口增速创五年多新高 进口激增推动贸易逆差创新高</title>
-      <link>https://flash.jin10.com/detail/20261127123346718800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261127123346718800</guid>
-      <pubDate>Fri, 27 Nov 2026 04:33:46 +0000</pubDate>
+      <title>据日经新闻：日本防卫省前一天发布了《防卫AI愿景》，包括新设一个统一管理AI所需数据的机构，将AI应用于自卫队执行任务。</title>
+      <link>https://flash.jin10.com/detail/20261128110015878800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261128110015878800</guid>
+      <pubDate>Sat, 28 Nov 2026 03:00:15 +0000</pubDate>
       <category>中文财经快讯</category>
       <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>&lt;p&gt;金十数据11月27日讯，泰国10月出口同比增速创五年多来最快水平，但进口增长幅度更大，推动该国贸易逆差扩大至历史最高水平。泰国10月出口额同比增长27.5%，为2021年6月以来最大增幅。泰国贸易政策与战略办公室总干事Nantapong Chiralerspong周五表示：“我们…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：金十数据报道泰国10月出口同比增27.5%，为2021年6月以来最大增幅，进口增幅更大导致贸易逆差创历史新高；引述泰国贸易政策与战略办公室总干事Nantapong Chiralerspong称AI相关电子产品需求强劲，预计2026年出口增速超19%，全年或达20%-21%。&lt;/p&gt;&lt;p&gt;事实：出口增速、逆差创纪录、官员预测均来自单一RSS报道。&lt;/p&gt;&lt;p&gt;推断：出口高增与AI电子需求相关，但进口更猛使净出口对增长的贡献存疑，逆差扩大可能带来汇率与经常账户压力。&lt;/p&gt;&lt;p&gt;影响：泰国出口链、电子产业及泰铢资产情绪偏双向。&lt;/p&gt;&lt;p&gt;验证：需核对泰国官方贸易统计原始数据及后续月度出口结构。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜泰国｜国家/地区｜双向｜短期｜置信 60/100：出口高增利好外向型经济，但逆差创纪录可能压制经常账户与汇率&lt;/p&gt;&lt;p&gt;直接｜泰国电子出口产业链｜行业｜正面｜中期｜置信 55/100：官员称AI相关电子产品需求强劲，若持续则支撑出口增速&lt;/p&gt;&lt;p&gt;间接｜泰铢｜资产｜不确定｜短期｜置信 40/100：贸易逆差扩大通常不利本币，但出口强劲与增长预期可能部分对冲&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 50/100｜暂无独立互证；仅金十数据一条RSS，含官方人士引述但无第二来源（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 66/100｜影响 60 · 紧迫 50 · 新颖 55 · 证据 50 · 新鲜 100 · 自选 80；出口创五年多新高且逆差创纪录，具宏观指示性但为单一来源&lt;/p&gt;&lt;p&gt;关注命中：行业：人工智能&lt;/p&gt;</description>
     </item>
     <item>
-      <title>财联社11月27日电，泰国SET指数上涨1%至1,428.88点。</title>
-      <link>https://www.cls.cn/detail/2546324</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2546324</guid>
-      <pubDate>Fri, 27 Nov 2026 04:33:05 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：财联社快讯称泰国SET指数上涨1%至1,428.88点，摘要为空。&lt;/p&gt;&lt;p&gt;事实：仅有一条指数点位与涨幅的行情快讯。&lt;/p&gt;&lt;p&gt;推断：属市场行情播报，未提供驱动因素，无法归因。&lt;/p&gt;&lt;p&gt;影响：对泰国股市情绪有短期指示，但缺乏背景。&lt;/p&gt;&lt;p&gt;验证：需与同日其他行情源及成分股表现交叉核对。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜泰国SET指数｜资产｜正面｜短期｜置信 50/100：报道本身即指数上涨1%的行情事实&lt;/p&gt;&lt;p&gt;证据与共识：线索有限｜强度 30/100｜暂无独立互证；摘要为空，仅一句行情快讯，无原因与细节（当前输入 1 个 RSS 来源）。跨源线索：另有 1 个不同发布方标题表述相近；不等于已确认独立采编。&lt;/p&gt;&lt;p&gt;每日优先级：总分 36/100｜影响 30 · 紧迫 40 · 新颖 20 · 证据 30 · 新鲜 100 · 自选 0；常规指数行情快讯，信息量有限&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>泰国SET指数上涨1%至1428.88</title>
-      <link>https://news.10jqka.com.cn/20261127/c682288328.shtml</link>
-      <guid isPermaLink="true">https://news.10jqka.com.cn/20261127/c682288328.shtml</guid>
-      <pubDate>Fri, 27 Nov 2026 04:32:27 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
-      <description>&lt;p&gt;泰国SET指数上涨1%至1428.88。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：同花顺快讯称泰国SET指数上涨1%至1428.88，摘要重复标题内容。&lt;/p&gt;&lt;p&gt;事实：与id 21为同一行情数据的另一来源转述。&lt;/p&gt;&lt;p&gt;推断：两条快讯相互印证点位，但均属行情播报，无驱动信息。&lt;/p&gt;&lt;p&gt;影响：仅反映泰国股市短期上涨。&lt;/p&gt;&lt;p&gt;验证：可对照交易所官方收盘数据确认。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜泰国SET指数｜资产｜正面｜短期｜置信 55/100：两条快讯一致报出同一涨幅与点位&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 35/100｜报道内一致；摘要与标题一致，且与id 21数据吻合，但均为行情快讯非独立调查（当前输入 1 个 RSS 来源）。跨源线索：另有 1 个不同发布方标题表述相近；不等于已确认独立采编。&lt;/p&gt;&lt;p&gt;每日优先级：总分 37/100｜影响 30 · 紧迫 40 · 新颖 15 · 证据 35 · 新鲜 100 · 自选 0；与id 21重复的指数行情，无新增信息&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>丰田10月全球产量为852,109辆，按母公司单独口径计算同比下降8.1%。</title>
-      <link>https://flash.jin10.com/detail/20261127123226337800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261127123226337800</guid>
-      <pubDate>Fri, 27 Nov 2026 04:32:26 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：金十数据快讯称丰田10月全球产量852,109辆，按母公司单独口径同比降8.1%，摘要为空。&lt;/p&gt;&lt;p&gt;事实：仅一条产量数据，无原因说明。&lt;/p&gt;&lt;p&gt;推断：全球产量下滑可能反映需求或生产调整，但缺乏背景无法归因。&lt;/p&gt;&lt;p&gt;影响：对丰田及日本汽车供应链偏负面信号。&lt;/p&gt;&lt;p&gt;验证：需查丰田官方产销公告及分地区数据。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜丰田汽车｜公司｜负面｜短期｜置信 55/100：全球产量同比下降8.1%直接反映生产收缩&lt;/p&gt;&lt;p&gt;间接｜日本汽车产业链｜行业｜负面｜短期｜置信 40/100：丰田减产可能传导至零部件供应商，但需确认减产原因与持续性&lt;/p&gt;&lt;p&gt;证据与共识：线索有限｜强度 35/100｜暂无独立互证；摘要为空，仅一句产量数据，无原因与分项（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 43/100｜影响 45 · 紧迫 40 · 新颖 35 · 证据 35 · 新鲜 100 · 自选 0；单一产量数据，缺乏解释但涉及大型车企&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>丰田10月在日本生产317,303辆汽车，按母公司单独口径计算同比下降2.9%。</title>
-      <link>https://flash.jin10.com/detail/20261127123213504800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261127123213504800</guid>
-      <pubDate>Fri, 27 Nov 2026 04:32:13 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：金十数据快讯称丰田10月日本产量317,303辆，按母公司单独口径同比降2.9%，摘要为空。&lt;/p&gt;&lt;p&gt;事实：仅一条日本本土产量数据。&lt;/p&gt;&lt;p&gt;推断：日本产量小幅下滑，幅度小于全球降幅，暗示海外减产更明显，但需数据支撑。&lt;/p&gt;&lt;p&gt;影响：对丰田日本工厂及本地供应链轻度负面。&lt;/p&gt;&lt;p&gt;验证：需对照丰田官方分地区产销数据。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜丰田汽车｜公司｜负面｜短期｜置信 50/100：日本产量同比降2.9%，为直接生产数据&lt;/p&gt;&lt;p&gt;间接｜日本汽车零部件供应链｜行业｜负面｜短期｜置信 35/100：本土产量下滑可能减少零部件订单，幅度较小&lt;/p&gt;&lt;p&gt;证据与共识：线索有限｜强度 30/100｜暂无独立互证；摘要为空，仅一句产量数据，无背景（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 38/100｜影响 35 · 紧迫 35 · 新颖 25 · 证据 30 · 新鲜 100 · 自选 0；单一分项产量数据，信息量有限&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>曹操出行Robotaxi加快海外布局 与阿联酋拉斯海马交通管理局达成合作</title>
-      <link>https://news.10jqka.com.cn/20261127/c682288322.shtml</link>
-      <guid isPermaLink="true">https://news.10jqka.com.cn/20261127/c682288322.shtml</guid>
-      <pubDate>Fri, 27 Nov 2026 04:32:10 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
-      <description>&lt;p&gt;11月25日，曹操出行与阿联酋拉斯海马交通管理局（RAKTA）达成战略合作。拉斯海马酋长谢赫·沙乌德·本·萨克尔·阿勒卡西米（H.H. Sheikh Saud bin Saqr Al Qasimi）与阿联酋能源与基础设施部长苏海尔·穆罕默德·马兹鲁伊（H.E. Suhail Mo…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：同花顺快讯称曹操出行与阿联酋拉斯海马交通管理局（RAKTA）达成战略合作，并列出见证官员；&lt;/p&gt;&lt;p&gt;事实：报道确认双方签署战略合作，涉及Robotaxi海外布局，但摘要未披露投资额、运营时间表或车辆规模；&lt;/p&gt;&lt;p&gt;推断：这是曹操出行Robotaxi出海的早期布局信号，具体落地节奏与商业条款尚不明确；&lt;/p&gt;&lt;p&gt;影响：若后续有实质运营落地，可能提升其海外业务预期，但短期对财务影响有限；&lt;/p&gt;&lt;p&gt;验证：需查阅曹操出行公告、RAKTA官方声明及后续运营许可信息。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜曹操出行｜公司｜正面｜长期｜置信 55/100：战略合作备忘录层面利好，实际收入贡献取决于后续运营落地&lt;/p&gt;&lt;p&gt;间接｜Robotaxi/自动驾驶出行行业｜行业｜正面｜长期｜置信 45/100：中国Robotaxi企业向中东输出，若形成示范效应可能带动行业出海预期&lt;/p&gt;&lt;p&gt;间接｜阿联酋拉斯海马｜国家/地区｜中性｜不明｜置信 40/100：当地交通管理局引入自动驾驶出行服务，影响取决于合作执行&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 50/100｜暂无独立互证；仅一条同花顺快讯，摘要未引用双方正式公告全文（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 63/100｜影响 55 · 紧迫 40 · 新颖 60 · 证据 50 · 新鲜 100 · 自选 80；Robotaxi出海属结构性题材，但缺乏金额与时间表等硬信息&lt;/p&gt;&lt;p&gt;关注命中：行业：能源&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>云南：到2030年文山三七市场年交易额突破100亿元</title>
-      <link>https://flash.jin10.com/detail/20261127123038817800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261127123038817800</guid>
-      <pubDate>Fri, 27 Nov 2026 04:30:38 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>&lt;p&gt;金十数据11月27日讯，云南省农业农村厅、云南省发展和改革委员会、云南省商务厅、云南省市场监督管理局日前印发《省部共建文山三七产地市场实施方案》提出，到2030年，建成中药材GAP规范化种植基地30个以上，三七在地面积稳定在11万亩左右，年产量1.5万吨以上，市场年交易额突破10…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：金十数据称云南多部门印发《省部共建文山三七产地市场实施方案》，提出2030年目标；&lt;/p&gt;&lt;p&gt;事实：方案明确GAP种植基地30个以上、在地面积约11万亩、年产量1.5万吨以上、市场年交易额突破100亿元；&lt;/p&gt;&lt;p&gt;推断：这是地方产业规划目标而非当期经营数据，对三七价格与相关企业的影响取决于执行力度；&lt;/p&gt;&lt;p&gt;影响：中长期或利好文山三七产地规范化与交易集散地位，短期价格影响不确定；&lt;/p&gt;&lt;p&gt;验证：需核对云南省相关部门原文及后续年度执行进展。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜文山三七产业/中药材种植行业｜行业｜正面｜长期｜置信 60/100：政策规划提出种植规范化与交易额目标，利好产地市场建设&lt;/p&gt;&lt;p&gt;直接｜云南省｜国家/地区｜正面｜长期｜置信 55/100：省部共建方案落地有助于地方特色农业产业化&lt;/p&gt;&lt;p&gt;证据与共识：官方材料｜强度 70/100｜报道内一致；报道引述多部门印发的实施方案，属政策文件转述，但未提供原文链接（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 48/100｜影响 45 · 紧迫 30 · 新颖 40 · 证据 70 · 新鲜 100 · 自选 0；地方产业规划，影响面偏窄且为长期目标&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>白银周五强势反弹，现货涨幅一度超5%，沪银大涨10%。不过有基金经理认为，市场可能仍有进一步下跌空间，正等待更低价格买入</title>
-      <link>https://xnews.jin10.com/details/236273</link>
-      <guid isPermaLink="true">https://xnews.jin10.com/details/236273</guid>
-      <pubDate>Fri, 27 Nov 2026 04:30:33 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>&lt;p&gt;白银周五强势反弹，现货涨幅一度超5%，沪银大涨10%。不过有基金经理认为，市场可能仍有进一步下跌空间，正等待更低价格买入，称十年一遇的交易机会即将到来。点击查看&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：金十数据称白银周五强势反弹，现货涨幅一度超5%、沪银大涨10%，同时引述有基金经理认为可能进一步下跌、等待更低价格买入；&lt;/p&gt;&lt;p&gt;事实：报道确认当日白银大幅反弹，并存在一位基金经理的看空/等待回调观点；&lt;/p&gt;&lt;p&gt;推断：市场情绪分歧明显，单日大涨与看跌观点并存，波动性高；&lt;/p&gt;&lt;p&gt;影响：白银相关资产短期波动加剧，方向不确定；&lt;/p&gt;&lt;p&gt;验证：需核对现货与沪银实际收盘数据及该基金经理身份与完整表述。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜白银｜资产｜双向｜短期｜置信 65/100：单日大涨与看跌观点并存，短期波动方向不确定&lt;/p&gt;&lt;p&gt;间接｜贵金属/有色板块｜行业｜不确定｜短期｜置信 45/100：白银波动可能传导至相关矿业与ETF情绪，但缺乏具体标的&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 45/100｜报道内分歧；同一报道内既有大涨事实又有基金经理看跌观点，且未具名（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 52/100｜影响 55 · 紧迫 70 · 新颖 35 · 证据 45 · 新鲜 100 · 自选 0；价格异动幅度大、时效性强，但信息以行情描述为主&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>马斯克扩大股票捐赠计划后 SpaceX另类交易平台股价涨逾7%</title>
-      <link>https://flash.jin10.com/detail/20261127123026289800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261127123026289800</guid>
-      <pubDate>Fri, 27 Nov 2026 04:30:26 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>&lt;p&gt;金十数据11月27日讯，在马斯克扩大向美国儿童捐赠SpaceX(SPCX.O)股票的计划后，SpaceX股价在Blue Ocean ATS隔夜交易中上涨超过7%。马斯克此前发文表示，将每年向美国所有儿童额外捐赠一股SpaceX股票。Blue Ocean ATS是美国股票的另类交易…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：金十数据称马斯克扩大向美国儿童捐赠SpaceX股票计划后，SpaceX在Blue Ocean ATS隔夜交易中涨超7%；&lt;/p&gt;&lt;p&gt;事实：报道确认捐赠计划扩大及该另类交易平台的隔夜涨幅；&lt;/p&gt;&lt;p&gt;推断：涨幅来自场外另类交易系统，流动性有限，价格信号代表性弱，且捐赠计划与估值之间的因果难以确认；&lt;/p&gt;&lt;p&gt;影响：对SpaceX一级估值或相关概念情绪有短期扰动，但不宜过度解读；&lt;/p&gt;&lt;p&gt;验证：需核对Blue Ocean ATS成交数据、马斯克原帖及SpaceX官方回应。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜SpaceX（SPCX.O）｜公司｜中性｜短期｜置信 40/100：涨幅来自流动性有限的ATS隔夜交易，价格代表性存疑&lt;/p&gt;&lt;p&gt;间接｜Blue Ocean ATS｜机构｜中性｜短期｜置信 30/100：作为交易场所被提及，事件对其业务影响不明&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 40/100｜暂无独立互证；仅一条快讯，且引用的是另类交易系统隔夜价格，缺乏独立验证（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 48/100｜影响 45 · 紧迫 50 · 新颖 55 · 证据 40 · 新鲜 100 · 自选 0；涉及马斯克与SpaceX话题性强，但价格信号可靠性低&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>美团：骑手薪酬均透明可查，不存在网传“工资准时险”</title>
-      <link>https://news.10jqka.com.cn/20261127/c682288235.shtml</link>
-      <guid isPermaLink="true">https://news.10jqka.com.cn/20261127/c682288235.shtml</guid>
-      <pubDate>Fri, 27 Nov 2026 04:30:22 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
-      <description>&lt;p&gt;11月27日，美团发布声明，骑手薪酬均透明可查，不存在网传“工资准时险”。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：同花顺快讯称美团发布声明，骑手薪酬透明可查，不存在网传“工资准时险”；&lt;/p&gt;&lt;p&gt;事实：美团官方否认存在所谓“工资准时险”，并强调薪酬透明可查；&lt;/p&gt;&lt;p&gt;推断：这是对网络传言的公关澄清，反映骑手权益话题持续受关注；&lt;/p&gt;&lt;p&gt;影响：短期舆情层面回应，对经营与财务无直接实质影响；&lt;/p&gt;&lt;p&gt;验证：需查阅美团声明原文及传言来源。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜美团｜公司｜中性｜短期｜置信 55/100：官方澄清传言，属舆情应对，无经营数据变化&lt;/p&gt;&lt;p&gt;间接｜外卖骑手/平台用工｜行业｜中性｜不明｜置信 35/100：骑手权益话题持续受关注，但本条仅为否认传言&lt;/p&gt;&lt;p&gt;证据与共识：官方材料｜强度 60/100｜报道内一致；报道转述美团官方声明，但摘要极简，未附声明全文（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 59/100｜影响 35 · 紧迫 45 · 新颖 25 · 证据 60 · 新鲜 100 · 自选 100；属传言澄清类消息，信息增量有限&lt;/p&gt;&lt;p&gt;关注命中：自选股：美团-W&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>先声药业：先林达获国家药监局批准在中国上市</title>
-      <link>https://news.10jqka.com.cn/20261127/c682288218.shtml</link>
-      <guid isPermaLink="true">https://news.10jqka.com.cn/20261127/c682288218.shtml</guid>
-      <pubDate>Fri, 27 Nov 2026 04:29:52 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
-      <description>&lt;p&gt;先声药业在港交所公告，公司附属公司与嘉兴安帝康生物科技有限公司合作的抗流感药物先林达 （氘玛巴洛沙韦片）获中国国家药品监督管理局批准上市，用于治疗既往健康的12岁及以上青少年和成人单纯性甲型和乙型流感，不包括存在流感相关并发症高风险的患者。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：先声药业港交所公告，附属公司与嘉兴安帝康生物科技合作的抗流感药物先林达（氘玛巴洛沙韦片）获中国国家药监局批准上市；&lt;/p&gt;&lt;p&gt;事实：该药获批用于治疗既往健康的12岁及以上青少年和成人单纯性甲型和乙型流感，不包括流感相关并发症高风险患者；&lt;/p&gt;&lt;p&gt;推断：获批意味着该产品可进入中国抗流感药物市场，但公告未披露定价、产能、销售目标及对业绩的具体影响；&lt;/p&gt;&lt;p&gt;影响：对先声药业构成产品线扩充的潜在正面因素，实际贡献取决于后续商业化执行与市场竞争；&lt;/p&gt;&lt;p&gt;验证：可核对港交所公告原文及国家药监局批准信息，并跟踪后续定价与放量情况。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜先声药业｜公司｜正面｜中期｜置信 60/100：获批上市是商业化前提，但收入贡献取决于定价、渠道与竞争格局&lt;/p&gt;&lt;p&gt;间接｜抗流感药物行业｜行业｜中性｜中期｜置信 45/100：新增一个获批品种，可能加剧同类药物市场竞争，具体影响取决于份额变化&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 60/100｜暂无独立互证；当前仅一个RSS来源转述公司公告，未提供公告全文链接（当前输入 1 个 RSS 来源）。跨源线索：另有 1 个不同发布方标题表述相近；不等于已确认独立采编。&lt;/p&gt;&lt;p&gt;每日优先级：总分 66/100｜影响 55 · 紧迫 40 · 新颖 50 · 证据 60 · 新鲜 100 · 自选 100；药品获批属实质性进展，但摘要未披露商业化关键数据&lt;/p&gt;&lt;p&gt;关注命中：自选股：香港交易所&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>【市场洞察】固态电池产业化仍在路上 堵点到底在哪里？</title>
-      <link>https://database.caixin.com/2026-11-27/102509207.html</link>
-      <guid isPermaLink="true">https://database.caixin.com/2026-11-27/102509207.html</guid>
-      <pubDate>Fri, 27 Nov 2026 04:28:23 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://caixin.com">财新 · 最新</source>
-      <description>&lt;p&gt;固态电池距离规模化量产仍有工艺和成本两道难关，一方面要保证材料质量和电芯制造的稳定性，另一方面，也要降低原料、生产环境控制及设备投入带来的成本&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：财新深度文章讨论固态电池产业化，指出距离规模化量产仍有工艺和成本两道难关；&lt;/p&gt;&lt;p&gt;事实：报道称需保证材料质量和电芯制造稳定性，并降低原料、生产环境控制及设备投入带来的成本；&lt;/p&gt;&lt;p&gt;推断：固态电池规模化量产时点尚不确定，产业化仍处早期阶段，但摘要未给出具体时间表、企业名称或数据；&lt;/p&gt;&lt;p&gt;影响：对固态电池产业链相关主体构成中期不确定性，短期难以形成规模化收入贡献；&lt;/p&gt;&lt;p&gt;验证：需跟踪后续量产时间表、良率与成本数据及企业公告。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜固态电池行业｜行业｜不确定｜长期｜置信 50/100：工艺与成本瓶颈决定产业化节奏，突破时点不明&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 45/100｜暂无独立互证；当前仅一个RSS来源的深度分析，摘要为概括性表述，无具体数据或企业信息（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 44/100｜影响 50 · 紧迫 25 · 新颖 35 · 证据 45 · 新鲜 100 · 自选 0；属行业趋势讨论，无新增具体事件或数据&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>印度贸易部长：此前阻碍美印贸易协议最终敲定的程序和路径，如今正逐渐成形。</title>
-      <link>https://flash.jin10.com/detail/20261127122820066800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261127122820066800</guid>
-      <pubDate>Fri, 27 Nov 2026 04:28:20 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：JIN10 快讯仅引述印度贸易部长称，此前阻碍美印贸易协议最终敲定的程序和路径如今正逐渐成形；摘要为空，缺少协议内容、时间表与美方回应。&lt;/p&gt;&lt;p&gt;事实：印度贸易部长作出上述表态，未提供协议细节。&lt;/p&gt;&lt;p&gt;推断：美印贸易谈判可能取得程序性进展，但“逐渐成形”不等于协议已敲定或签署。&lt;/p&gt;&lt;p&gt;影响：若后续确认，可能影响美印双边贸易预期及相关行业与汇率情绪；当前信息不足以判断方向与幅度。&lt;/p&gt;&lt;p&gt;验证：需等待美印官方联合声明、协议文本或美方贸易代表表态，并核对时间表与覆盖议题。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;间接｜美国｜国家/地区｜不确定｜中期｜置信 35/100：美印贸易协议若推进，将影响双边关税与市场准入预期，但当前仅有印方部长表态，尚无协议文本。&lt;/p&gt;&lt;p&gt;直接｜印度｜国家/地区｜不确定｜中期｜置信 40/100：表态来自印度贸易部长，指向谈判程序障碍缓解；实际经济影响取决于协议覆盖范围与生效条件。&lt;/p&gt;&lt;p&gt;间接｜双边贸易相关行业｜行业｜不确定｜不明｜置信 20/100：摘要未提及具体行业或商品，无法识别受影响的细分领域，传导路径不明确。&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 30/100｜暂无独立互证；仅一条 JIN10 快讯引述印度贸易部长表态，摘要为空，无其他来源或官方材料互证。（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 46/100｜影响 55 · 紧迫 40 · 新颖 45 · 证据 30 · 新鲜 100 · 自选 0；美印贸易协议属重要双边议题，但本条仅为程序性表态且细节缺失，紧迫性与新颖性一般。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>国常会：清理废止不符合全国统一大市场建设要求的地方标准</title>
-      <link>https://flash.jin10.com/detail/20261127122717106800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261127122717106800</guid>
-      <pubDate>Fri, 27 Nov 2026 04:27:17 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>&lt;p&gt;金十数据11月27日讯，国务院总理李强11月27日主持召开国务院常务会议，听取推动高质量发展综合督查情况汇报，研究持续深化资本市场投融资综合改革工作，听取国家标准体系建设情况汇报，审议通过《生产安全事故隐患排查治理条例（草案）》。会议指出，要系统优化标准体系，推动行业标准有序转化…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：金十数据报道国务院常务会议审议标准体系建设，提出清理废止不符合全国统一大市场要求的地方标准；&lt;/p&gt;&lt;p&gt;事实：会议明确系统优化标准体系、推动行业标准转国家标准、规范团体标准、前瞻布局新兴产业标准；&lt;/p&gt;&lt;p&gt;推断：地方标准清理可能降低跨区域市场分割，但具体涉及行业与执行时间未披露；&lt;/p&gt;&lt;p&gt;影响：对依赖地方准入壁垒的行业构成中期制度调整，短期实际影响取决于后续清单与落地；&lt;/p&gt;&lt;p&gt;验证：需跟踪国务院及市场监管总局后续发布的地方标准废止清单与配套文件。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;间接｜全国统一大市场相关行业｜行业｜不确定｜中期｜置信 45/100：地方标准清理方向明确，但涉及行业与执行节奏未披露，传导路径尚不清晰&lt;/p&gt;&lt;p&gt;直接｜国家标准体系建设｜政策/宏观｜中性｜长期｜置信 55/100：会议直接部署标准体系优化，但具体标准与时间表待后续文件&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 55/100｜暂无独立互证；当前仅金十数据一条RSS，引述国常会内容但无其他来源互证（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 62/100｜影响 60 · 紧迫 40 · 新颖 45 · 证据 55 · 新鲜 100 · 自选 65；国常会层级较高但属方向性部署，缺乏具体行业与时间细节&lt;/p&gt;&lt;p&gt;关注命中：主题：中国政策&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>【华尔街原声】毕马威经济学家：未来数月美国通胀率或逼近4%</title>
-      <link>https://database.caixin.com/2026-11-27/102509206.html</link>
-      <guid isPermaLink="true">https://database.caixin.com/2026-11-27/102509206.html</guid>
-      <pubDate>Fri, 27 Nov 2026 04:26:06 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://caixin.com">财新 · 最新</source>
-      <description>&lt;p&gt;预计美联储12月加息，通胀回归2%目标或至少需要两至三年&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：财新《华尔街原声》引述毕马威经济学家观点，称未来数月美国通胀率或逼近4%，预计美联储12月加息，通胀回归2%目标或需两至三年；&lt;/p&gt;&lt;p&gt;事实：报道为单一经济学家预测，非官方数据或美联储决议；&lt;/p&gt;&lt;p&gt;推断：若通胀预期兑现，美联储政策路径可能偏紧，但属预测而非既成事实；&lt;/p&gt;&lt;p&gt;影响：对美元、美债及全球风险资产构成潜在短期波动来源，实际取决于后续通胀数据；&lt;/p&gt;&lt;p&gt;验证：需核对美国CPI/PCE实际数据及美联储12月议息会议结果。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜美联储｜机构｜不确定｜短期｜置信 40/100：报道为经济学家对加息的预测，非美联储官方表态，需以议息会议验证&lt;/p&gt;&lt;p&gt;间接｜美国通胀与美债｜资产｜双向｜短期｜置信 35/100：通胀逼近4%的预测若兑现可能推升利率预期，但当前仅为单一观点&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 40/100｜暂无独立互证；仅财新一条RSS引述毕马威经济学家单一预测，无其他来源或官方数据互证（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 59/100｜影响 55 · 紧迫 50 · 新颖 40 · 证据 40 · 新鲜 100 · 自选 65；涉及美联储政策预期但属单一经济学家预测，非官方信息&lt;/p&gt;&lt;p&gt;关注命中：主题：美联储与美元利率&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>印度商务部长：印度与美国的贸易协议接近达成最终协议。</title>
-      <link>https://flash.jin10.com/detail/20261127122605953800</link>
-      <guid isPermaLink="true">https://flash.jin10.com/detail/20261127122605953800</guid>
-      <pubDate>Fri, 27 Nov 2026 04:26:05 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://jin10.com">金十数据 · 快讯</source>
-      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：印度商务部长称印美贸易协议接近达成最终协议，摘要为空；&lt;/p&gt;&lt;p&gt;事实：仅有一句部长表态，无协议条款、时间表或覆盖范围；&lt;/p&gt;&lt;p&gt;推断：谈判进入后期，但“接近”不等于已签署，仍可能因关税、市场准入等分歧反复；&lt;/p&gt;&lt;p&gt;影响：若落地，可能影响双边关税与相关出口行业预期，但当前信息不足以量化；&lt;/p&gt;&lt;p&gt;验证：需等待两国官方联合声明或协议文本，并核对生效时间与具体条款。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜印度｜国家/地区｜不确定｜中期｜置信 45/100：部长表态指向谈判进展，但无条款细节，实际影响取决于协议内容与生效条件&lt;/p&gt;&lt;p&gt;直接｜美国｜国家/地区｜不确定｜中期｜置信 45/100：作为协议另一方，影响取决于关税与市场准入安排，当前未披露&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 35/100｜暂无独立互证；仅一条 RSS 转述部长表态，摘要为空，无其他来源或官方文本（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 47/100｜影响 55 · 紧迫 40 · 新颖 45 · 证据 35 · 新鲜 100 · 自选 0；涉及主要经济体贸易谈判进展，但信息极简、缺乏可核验细节&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>国常会：加力发挥“国家队”稳市作用，进一步优化中央汇金公司的类“平准基金”功能 | 据新华社，国务院总理李强11月27日主持召开国务院常务会议，听取推...</title>
-      <link>https://www.yicai.com/brief/103456880.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/brief/103456880.html</guid>
-      <pubDate>Fri, 27 Nov 2026 04:24:33 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://yicai.com">第一财经 · 简报</source>
-      <description>&lt;p&gt;据新华社，国务院总理李强11月27日主持召开国务院常务会议，听取推动高质量发展综合督查情况汇报，研究持续深化资本市场投融资综合改革工作，听取国家标准体系建设情况汇报，审议通过《生产安全事故隐患排查治理条例（草案）》。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：第一财经援引新华社报道国常会听取高质量发展综合督查汇报、研究资本市场投融资综合改革等；&lt;/p&gt;&lt;p&gt;事实：标题强调加力发挥“国家队”稳市作用、优化中央汇金类平准基金功能，摘要仅列会议议程；&lt;/p&gt;&lt;p&gt;推断：与同批报道为同一会议，属官方信息，但该条摘要未含稳市细节；&lt;/p&gt;&lt;p&gt;影响：政策预期偏稳市，具体力度需看通稿全文；&lt;/p&gt;&lt;p&gt;验证：以新华社/政府网正式通稿为准，核对汇金功能表述。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜中央汇金公司｜机构｜正面｜中期｜置信 55/100：标题指向优化其类平准基金功能，但摘要未给操作细节&lt;/p&gt;&lt;p&gt;直接｜中国资本市场｜行业｜正面｜中期｜置信 50/100：稳市与改革表述改善预期，落地节奏待观察&lt;/p&gt;&lt;p&gt;证据与共识：官方材料｜强度 65/100｜报道内一致；援引新华社的国常会报道，属官方来源转述，但摘要信息有限（当前输入 1 个 RSS 来源）。跨源线索：另有 1 个不同发布方标题表述相近；不等于已确认独立采编。&lt;/p&gt;&lt;p&gt;每日优先级：总分 64/100｜影响 65 · 紧迫 45 · 新颖 35 · 证据 65 · 新鲜 100 · 自选 65；与同批国常会报道高度重叠，增量信息有限&lt;/p&gt;&lt;p&gt;关注命中：主题：中国政策&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>李强主持召开国务院常务会议 听取推动高质量发展综合督查情况汇报 研究持续深化资本市场投融资综合改革工作 听取国家标准体系建设情况汇报 审议通过《生产安全事故隐患排查治理条例（草案）》</title>
-      <link>https://www.cls.cn/detail/2546317</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2546317</guid>
-      <pubDate>Fri, 27 Nov 2026 04:23:43 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-      <description>&lt;p&gt;【李强主持召开国务院常务会议 听取推动高质量发展综合督查情况汇报 研究持续深化资本市场投融资综合改革工作 听取国家标准体系建设情况汇报 审议通过《生产安全事故隐患排查治理条例（草案）》】财联社11月27日电，国务院总理李强11月27日主持召开国务院常务会议，听取推动高质量发展综合…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：财联社报道李强主持国常会，听取高质量发展综合督查汇报、研究资本市场投融资综合改革、审议生产安全事故隐患排查治理条例草案；&lt;/p&gt;&lt;p&gt;事实：会议议程明确，摘要截断于督查部分；&lt;/p&gt;&lt;p&gt;推断：政策组合涵盖资本市场改革与安全生产制度，稳市信号与制度完善并行；&lt;/p&gt;&lt;p&gt;影响：资本市场制度预期偏正面，安全生产条例影响相关行业合规成本；&lt;/p&gt;&lt;p&gt;验证：需查政府网通稿全文及条例草案后续立法进程。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜中国资本市场｜行业｜正面｜中期｜置信 50/100：投融资综合改革研究推进，具体措施未披露&lt;/p&gt;&lt;p&gt;间接｜安全生产相关行业｜行业｜不确定｜长期｜置信 40/100：条例草案审议通过，后续合规要求可能变化，但条款未公开&lt;/p&gt;&lt;p&gt;证据与共识：官方材料｜强度 65/100｜报道内一致；转述国常会官方会议内容，摘要截断，细节有限（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 64/100｜影响 65 · 紧迫 45 · 新颖 35 · 证据 65 · 新鲜 100 · 自选 65；国常会综合议程，资本市场部分与同批报道重复，增量有限&lt;/p&gt;&lt;p&gt;关注命中：主题：中国政策&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>从收入端提振消费：三个群体，三套办法</title>
-      <link>https://opinion.caixin.com/2026-11-27/102509205.html</link>
-      <guid isPermaLink="true">https://opinion.caixin.com/2026-11-27/102509205.html</guid>
-      <pubDate>Fri, 27 Nov 2026 04:22:02 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://caixin.com">财新 · 最新</source>
-      <description>&lt;p&gt;如果重点是扩大民生支出，提振消费，那就不能按着生产的思维、供给的思维去补贴产品、补贴生产，而是应该从不同人群的消费约束条件出发 2026年11月5日，江苏省淮安市，市民在一家生活超市购物消费。图：视觉中国 有海外机构预测说，中国GDP的增长目标可能会调低到4%。我个人认为不能调低…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：财新深度文章讨论从收入端提振消费，提出按三个群体分类施策，并提及海外机构预测中国GDP增长目标可能调低至4%，作者认为不应调低。&lt;/p&gt;&lt;p&gt;事实：文章引述海外机构对GDP目标的预测，作者表达个人观点认为不能调低，并称2027年实现4.5%以上目标有挑战；摘要未给出具体政策文件或官方表态。&lt;/p&gt;&lt;p&gt;推断：这是评论性分析而非政策发布，反映对消费刺激思路从补贴生产转向按人群消费约束施策的讨论。&lt;/p&gt;&lt;p&gt;影响：若政策转向民生支出与收入端，消费相关行业可能间接受益，但当前仅为观点讨论，无落地证据。&lt;/p&gt;&lt;p&gt;验证：需跟踪官方GDP目标表述及具体消费刺激政策文件。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;间接｜中国消费行业｜行业｜不确定｜中期｜置信 35/100：取决于政策是否真从收入端扩大民生支出，目前仅为评论观点&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 40/100｜暂无独立互证；当前仅财新一篇评论性文章，含作者个人观点与海外机构预测引述（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 58/100｜影响 55 · 紧迫 30 · 新颖 40 · 证据 40 · 新鲜 100 · 自选 80；涉及宏观消费政策思路讨论，但为评论而非政策事实&lt;/p&gt;&lt;p&gt;关注命中：行业：消费&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>马来西亚空军军官涉嫌贩毒 涉案毒品价值高达2.5亿元</title>
-      <link>https://international.caixin.com/2026-11-27/102509199.html</link>
-      <guid isPermaLink="true">https://international.caixin.com/2026-11-27/102509199.html</guid>
-      <pubDate>Fri, 27 Nov 2026 04:18:06 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://caixin.com">财新 · 最新</source>
-      <description>&lt;p&gt;此前，马来西亚航空一名39岁的副机长在印尼雅加达国际机场被捕，印尼执法人员在其行李中查获逾7万粒摇头丸 资料图：马来西亚一空军基地。图：视觉中国 【财新网】 马来西亚多名空军军官涉嫌利用军方航空运输设施参与跨国毒品走私活动。11月26日，马来西亚内政部长赛夫丁在国会下议院答询时披…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：财新报道马来西亚多名空军军官涉嫌利用军方航空运输设施参与跨国毒品走私。&lt;/p&gt;&lt;p&gt;事实：马来西亚内政部长赛夫丁11月26日在国会下议院答询时披露，自2024年8月以来涉案集团至少进行21次毒品交易，涉及约3吨毒品，总值约1.56亿林吉特（约合人民币2.5亿元）；摘要另提及一名马航副机长在雅加达机场被捕查获逾7万粒摇头丸。&lt;/p&gt;&lt;p&gt;推断：案件涉及军方设施被滥用，可能引发马来西亚军方与航空运输安保审查。&lt;/p&gt;&lt;p&gt;影响：对马来西亚军方治理与航空安保监管构成压力，与资本市场直接关联有限。&lt;/p&gt;&lt;p&gt;验证：需跟踪马来西亚官方后续调查通报与司法进展。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;间接｜马来西亚军方与航空安保监管｜机构｜负面｜中期｜置信 55/100：军方运输设施被指用于走私，可能触发安保审查与治理整改&lt;/p&gt;&lt;p&gt;证据与共识：官方材料｜强度 65/100｜报道内一致；引述马来西亚内政部长在国会的答询披露，属官方表态（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 51/100｜影响 50 · 紧迫 40 · 新颖 55 · 证据 65 · 新鲜 100 · 自选 0；涉及军方人员涉毒走私，具社会与治理关注度但市场影响有限&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>蜜雪集团：拟回购最多近380万股H股 占已发行H股的2.52% | 蜜雪集团港交所公告，公司谨此宣布，本公司拟不时于公开市场回购H股，并向本公司H股奖励计划项...</title>
-      <link>https://www.yicai.com/brief/103456861.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/brief/103456861.html</guid>
-      <pubDate>Fri, 27 Nov 2026 04:16:47 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://yicai.com">第一财经 · 简报</source>
-      <description>&lt;p&gt;蜜雪集团港交所公告，公司谨此宣布，本公司拟不时于公开市场回购H股，并向本公司H股奖励计划项下的受托人提供资金以购入H股，总数不超过3,796,188股H股，占本公告日期本公司已发行H股总数的约2.52%。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：蜜雪集团港交所公告拟在公开市场回购H股，并向H股奖励计划受托人提供资金购入H股。&lt;/p&gt;&lt;p&gt;事实：回购总数不超过3,796,188股H股，占公告日已发行H股总数约2.52%。&lt;/p&gt;&lt;p&gt;推断：回购与股权激励资金安排可能传递管理层信心，但公告未披露回购价格区间与资金来源细节。&lt;/p&gt;&lt;p&gt;影响：对股价情绪可能偏正面，实际效果取决于执行节奏与市场环境。&lt;/p&gt;&lt;p&gt;验证：需跟踪后续回购执行公告与股本变动披露。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜蜜雪集团｜公司｜正面｜短期｜置信 55/100：回购计划通常对市场情绪偏正面，但规模有限且执行待观察&lt;/p&gt;&lt;p&gt;证据与共识：官方材料｜强度 70/100｜报道内一致；依据公司港交所回购公告（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 64/100｜影响 45 · 紧迫 40 · 新颖 40 · 证据 70 · 新鲜 100 · 自选 100；回购规模约占H股2.52%，属常规资本运作&lt;/p&gt;&lt;p&gt;关注命中：自选股：香港交易所&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>久之洋：航天产品现阶段体量较小暂未单独分拆披露</title>
-      <link>https://www.yicai.com/news/103456858.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/news/103456858.html</guid>
-      <pubDate>Fri, 27 Nov 2026 04:16:33 +0000</pubDate>
+      <title>阿根廷发生5.0级地震</title>
+      <link>https://www.yicai.com/news/103458571.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/news/103458571.html</guid>
+      <pubDate>Sat, 28 Nov 2026 02:54:41 +0000</pubDate>
       <category>中文财经深度</category>
       <source url="https://yicai.com">第一财经 · 最新</source>
-      <description>&lt;p&gt;久之洋在互动平台表示，公司航天产品受载荷总体项目进度以及验收节奏等外部因素影响，不同报告期呈现阶段性波动。现阶段该业务体量较小，暂未单独分拆披露，待后续业务规模达到披露标准，公司将按规定单独列报安排。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：久之洋在互动平台表示航天产品受载荷总体项目进度及验收节奏影响呈阶段性波动，现阶段体量较小暂未单独分拆披露。&lt;/p&gt;&lt;p&gt;事实：公司称待业务规模达到披露标准将按规定单独列报。&lt;/p&gt;&lt;p&gt;推断：航天业务目前对公司整体贡献有限，收入确认存在项目节奏不确定性。&lt;/p&gt;&lt;p&gt;影响：对投资者理解公司业务结构有信息价值，短期业绩影响不明。&lt;/p&gt;&lt;p&gt;验证：需跟踪后续定期报告中航天业务是否达到单独披露标准。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜久之洋｜公司｜中性｜不明｜置信 45/100：航天业务体量小且未单独披露，业绩贡献与节奏不确定&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 50/100｜暂无独立互证；依据公司在互动平台的表态，经媒体转述（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 38/100｜影响 30 · 紧迫 20 · 新颖 30 · 证据 50 · 新鲜 100 · 自选 0；属公司互动平台常规业务说明，信息增量有限&lt;/p&gt;</description>
+      <description>中国地震台网正式测定：11月28日10时25分在阿根廷（南纬24.25度，西经67.15度）发生5.0级地震，震源深度170千米。</description>
     </item>
     <item>
-      <title>久之洋：航天产品现阶段体量较小暂未单独分拆披露 | 久之洋在互动平台表示，公司航天产品受载荷总体项目进度以及验收节奏等外部因素影响，不同报告期呈现...</title>
-      <link>https://www.yicai.com/brief/103456857.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/brief/103456857.html</guid>
-      <pubDate>Fri, 27 Nov 2026 04:16:32 +0000</pubDate>
+      <title>阿根廷发生5.0级地震 | 中国地震台网正式测定：11月28日10时25分在阿根廷（南纬24.25度，西经67.15度）发生5.0级地震，震源深度170千米。</title>
+      <link>https://www.yicai.com/brief/103458570.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/brief/103458570.html</guid>
+      <pubDate>Sat, 28 Nov 2026 02:54:40 +0000</pubDate>
       <category>中文财经快讯</category>
       <source url="https://yicai.com">第一财经 · 简报</source>
-      <description>&lt;p&gt;久之洋在互动平台表示，公司航天产品受载荷总体项目进度以及验收节奏等外部因素影响，不同报告期呈现阶段性波动。现阶段该业务体量较小，暂未单独分拆披露，待后续业务规模达到披露标准，公司将按规定单独列报安排。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：久之洋在互动平台回应航天产品披露问题；&lt;/p&gt;&lt;p&gt;事实：公司称航天产品受载荷总体项目进度及验收节奏等外部因素影响，不同报告期呈阶段性波动，现阶段体量较小暂未单独分拆披露，待达到披露标准将按规定单独列报；&lt;/p&gt;&lt;p&gt;推断：航天业务当前对整体收入贡献有限且确认节奏不稳定，公司以未达披露标准为由不单独列示；&lt;/p&gt;&lt;p&gt;影响：投资者难以单独评估航天业务规模与盈利，短期信息透明度受限；&lt;/p&gt;&lt;p&gt;验证：后续定期报告分部数据及公司是否公告达到披露标准。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜久之洋｜公司｜中性｜中期｜置信 65/100：公司自身披露口径，航天业务体量小且未单独列报，影响限于信息透明度而非经营实质&lt;/p&gt;&lt;p&gt;证据与共识：官方材料｜强度 70/100｜报道内一致；内容为公司互动平台表态，属公司自身口径，单一来源转述（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 42/100｜影响 35 · 紧迫 20 · 新颖 30 · 证据 70 · 新鲜 100 · 自选 0；属公司常规互动回应，信息增量有限&lt;/p&gt;</description>
+      <description>中国地震台网正式测定：11月28日10时25分在阿根廷（南纬24.25度，西经67.15度）发生5.0级地震，震源深度170千米。</description>
     </item>
     <item>
-      <title>Thai Exports Surge as Imports Drive Trade Deficit to Record High｜中文：进口推动贸易逆差创历史新高，泰国出口激增</title>
-      <link>https://www.bloomberg.com/news/articles/2026-11-27/thai-exports-surge-as-imports-drive-trade-deficit-to-record-high</link>
-      <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-11-27/thai-exports-surge-as-imports-drive-trade-deficit-to-record-high</guid>
-      <pubDate>Fri, 27 Nov 2026 04:16:07 +0000</pubDate>
-      <category>全球市场与要闻</category>
-      <source url="https://bloomberg.com">彭博社 · 经济</source>
-      <description>&lt;p&gt;中文：10月份泰国出口增速创五年多来最快，但进口增幅更大，导致该国贸易逆差创历史新高
-原文：Thailand’s exports grew at the fastest pace in more than five years in October, but an even bi…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：彭博经济报道泰国10月贸易数据；&lt;/p&gt;&lt;p&gt;事实：10月出口增速创五年多来最快，但进口增幅更大，贸易逆差创历史新高；&lt;/p&gt;&lt;p&gt;推断：出口强劲同时内需或进口需求扩张更快，逆差扩大可能反映资本品或能源等进口增加，但摘要未说明结构；&lt;/p&gt;&lt;p&gt;影响：泰铢与泰国国际收支面临压力，需关注逆差可持续性；&lt;/p&gt;&lt;p&gt;验证：泰国官方贸易统计分项及后续月度数据。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜泰国｜国家/地区｜双向｜短期｜置信 60/100：出口高增为正面，但逆差创纪录对国际收支构成压力，方向取决于进口结构&lt;/p&gt;&lt;p&gt;间接｜泰铢｜资产｜负面｜短期｜置信 45/100：贸易逆差扩大通常对经常账户和本币形成压力，但需结合资本流动判断&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 55/100｜暂无独立互证；仅彭博一则报道，未提供具体数值与分项（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 64/100｜影响 55 · 紧迫 45 · 新颖 50 · 证据 55 · 新鲜 100 · 自选 80；逆差创纪录具一定宏观信号意义，但细节不足&lt;/p&gt;&lt;p&gt;关注命中：行业：能源&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>财联社11月27日电，韩国KOSPI指数上涨4%至4899.71点，SK海力士涨5%，三星电子涨超4%。</title>
-      <link>https://www.cls.cn/detail/2546310</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2546310</guid>
-      <pubDate>Fri, 27 Nov 2026 04:15:55 +0000</pubDate>
+      <title>今年前10个月全国社会物流总额超310万亿元</title>
+      <link>https://wallstreetcn.com/livenews/3207311</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3207311</guid>
+      <pubDate>Sat, 28 Nov 2026 02:54:30 +0000</pubDate>
       <category>中文财经快讯</category>
-      <source url="https://cls.cn">财联社 · 电报</source>
-      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：财联社快讯报韩国股市；&lt;/p&gt;&lt;p&gt;事实：KOSPI指数上涨4%至4899.71点，SK海力士涨5%，三星电子涨超4%；&lt;/p&gt;&lt;p&gt;推断：半导体权重股领涨带动指数大涨，但摘要未给出上涨原因；&lt;/p&gt;&lt;p&gt;影响：韩国半导体板块情绪偏强，可能外溢至相关产业链；&lt;/p&gt;&lt;p&gt;验证：后续报道确认驱动因素及成交量数据。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜韩国KOSPI指数｜资产｜正面｜短期｜置信 70/100：指数当日涨幅明确，属直接行情事实&lt;/p&gt;&lt;p&gt;直接｜SK海力士｜公司｜正面｜短期｜置信 65/100：报道明确其涨5%，为当日行情&lt;/p&gt;&lt;p&gt;直接｜三星电子｜公司｜正面｜短期｜置信 65/100：报道明确其涨超4%，为当日行情&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 60/100｜暂无独立互证；仅财联社一则快讯，无驱动原因说明（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 65/100｜影响 50 · 紧迫 70 · 新颖 35 · 证据 60 · 新鲜 100 · 自选 80；单日大涨具时效性，但缺乏原因分析&lt;/p&gt;&lt;p&gt;关注命中：行业：半导体&lt;/p&gt;</description>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+      <description>中国物流与采购联合会今天（28日）发布今年前10个月物流运行数据。今年1—10月，我国物流运行延续稳中有进、质效提升的发展态势。 今年1—10月，全国社会物流总额312.4万亿元，同比增长4.8%。其中，工业品物流需求基本盘稳固，1—10月工业品物流总额同比增长5.3%。从结构看…</description>
     </item>
     <item>
-      <title>韩国KOSPI指数涨4%</title>
-      <link>https://www.yicai.com/news/103456856.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/news/103456856.html</guid>
-      <pubDate>Fri, 27 Nov 2026 04:15:47 +0000</pubDate>
+      <title>歼-35A飞抵珠海 将首次真机进馆展出 | 据央视新闻，今天上午，歼-35A飞抵珠海，它将在第十六届中国国际航空航天博览会上，首次以真机形式亮相1号馆，面向...</title>
+      <link>https://www.yicai.com/brief/103458568.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/brief/103458568.html</guid>
+      <pubDate>Sat, 28 Nov 2026 02:53:53 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://yicai.com">第一财经 · 简报</source>
+      <description>据央视新闻，今天上午，歼-35A飞抵珠海，它将在第十六届中国国际航空航天博览会上，首次以真机形式亮相1号馆，面向全球观众近距离静态展示。</description>
+    </item>
+    <item>
+      <title>科勒殷拓杨战：S基金是“接棒”不是“接盘”｜投资人说</title>
+      <link>https://www.yicai.com/video/103458477.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/video/103458477.html</guid>
+      <pubDate>Sat, 28 Nov 2026 02:51:07 +0000</pubDate>
       <category>中文财经深度</category>
       <source url="https://yicai.com">第一财经 · 最新</source>
-      <description>&lt;p&gt;韩国KOSPI指数涨4%，现报4899.71点。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：第一财经快讯报韩国股市；&lt;/p&gt;&lt;p&gt;事实：KOSPI指数涨4%，现报4899.71点；&lt;/p&gt;&lt;p&gt;推断：与同日其他快讯一致，反映韩国股市当日显著上涨，但未说明原因；&lt;/p&gt;&lt;p&gt;影响：市场情绪偏强，需关注持续性；&lt;/p&gt;&lt;p&gt;验证：与同日其他来源行情数据交叉核对。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜韩国KOSPI指数｜资产｜正面｜短期｜置信 70/100：指数当日涨幅明确，属直接行情事实&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 55/100｜暂无独立互证；仅第一财经一则快讯，内容简短（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 48/100｜影响 40 · 紧迫 65 · 新颖 25 · 证据 55 · 新鲜 100 · 自选 0；与同日其他快讯重复，信息增量低&lt;/p&gt;</description>
+      <description>嘉宾简介： 杨 战 ｜科勒殷拓 投资合伙人 兼北京办公室总经理 负责项目发掘及投资工作， 2016年加入科勒资本前，曾担任贝莱德私募股权投资业务（BlackRock Private Equity Partners）董事。先后就职于瑞士再保险私募股权投资业务（Swiss Re Pr…</description>
     </item>
     <item>
-      <title>韩国KOSPI指数涨4% | 韩国KOSPI指数涨4%，现报4899.71点。</title>
-      <link>https://www.yicai.com/brief/103456855.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/brief/103456855.html</guid>
-      <pubDate>Fri, 27 Nov 2026 04:15:46 +0000</pubDate>
-      <category>中文财经快讯</category>
-      <source url="https://yicai.com">第一财经 · 简报</source>
-      <description>&lt;p&gt;韩国KOSPI指数涨4%，现报4899.71点。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：第一财经快讯报韩国股市；&lt;/p&gt;&lt;p&gt;事实：KOSPI指数涨4%，现报4899.71点；&lt;/p&gt;&lt;p&gt;推断：与同日多条快讯内容一致，属同一行情事实的重复报道；&lt;/p&gt;&lt;p&gt;影响：确认当日涨幅，但无新增信息；&lt;/p&gt;&lt;p&gt;验证：与同日其他来源行情数据交叉核对。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜韩国KOSPI指数｜资产｜正面｜短期｜置信 70/100：指数当日涨幅明确，属直接行情事实&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 55/100｜暂无独立互证；仅第一财经一则快讯，与同日其他条目内容重复（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 44/100｜影响 35 · 紧迫 60 · 新颖 15 · 证据 55 · 新鲜 100 · 自选 0；内容与同日多条快讯重复，无新增信息&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>外媒：卢拉就职典礼不请米莱</title>
-      <link>https://www.yicai.com/news/103456853.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/news/103456853.html</guid>
-      <pubDate>Fri, 27 Nov 2026 04:14:29 +0000</pubDate>
+      <title>国常会稳市引爆A股；黄仁勋闪电复职｜一周热点回顾</title>
+      <link>https://www.yicai.com/news/103458565.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/news/103458565.html</guid>
+      <pubDate>Sat, 28 Nov 2026 02:50:55 +0000</pubDate>
       <category>中文财经深度</category>
       <source url="https://yicai.com">第一财经 · 最新</source>
-      <description>&lt;p&gt;据新华社，由于两国关系交恶，巴西政府将不会邀请阿根廷总统米莱出席明年1月5日举行的总统卢拉连任就职典礼。上述消息由巴西政府一名不愿公开姓名的知情人士26日告诉多家媒体。目前，阿根廷政府是南美洲唯一未祝贺卢拉获连任的政府。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：新华社报道，巴西政府不会邀请阿根廷总统米莱出席明年1月5日卢拉连任就职典礼。&lt;/p&gt;&lt;p&gt;事实：消息由巴西政府一名不愿公开姓名的知情人士26日告诉多家媒体；阿根廷政府是南美洲唯一未祝贺卢拉获连任的政府。&lt;/p&gt;&lt;p&gt;推断：两国关系交恶已体现在外交礼仪层面，但匿名消息源意味着邀请安排仍可能存在变数。&lt;/p&gt;&lt;p&gt;影响：巴阿双边关系短期承压，可能影响南美区域合作氛围，具体经贸影响线索有限。&lt;/p&gt;&lt;p&gt;验证：需等待巴西政府官方确认或就职典礼实际邀请名单。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜巴西｜国家/地区｜负面｜短期｜置信 55/100：匿名消息称不邀请米莱，反映双边关系紧张，但未经官方确认&lt;/p&gt;&lt;p&gt;直接｜阿根廷｜国家/地区｜负面｜短期｜置信 55/100：作为未被邀请方且未祝贺卢拉连任，双边外交互动受限&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 45/100｜暂无独立互证；仅新华社一条报道，核心信息来自匿名知情人士，无官方材料互证（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 44/100｜影响 45 · 紧迫 35 · 新颖 40 · 证据 45 · 新鲜 100 · 自选 0；外交礼仪事件具象征意义，但信息源匿名且实质影响尚不明确&lt;/p&gt;</description>
+      <description>国常会稳市，A股暴力反弹 27日午间新华社消息，当天召开的国务院常务会议研究持续深化资本市场投融资综合改革工作。午后A股“暴力反弹”，截至收盘沪指涨3.73%，深证成指涨7.24%，创业板指、科创50等均涨超10%；沪深京三市成交额达到2.02万亿元。 会议指出，资本市场事关经济…</description>
     </item>
     <item>
-      <title>外媒：卢拉就职典礼不请米莱 | 据新华社，由于两国关系交恶，巴西政府将不会邀请阿根廷总统米莱出席明年1月5日举行的总统卢拉连任就职典礼。上述消息由巴...</title>
-      <link>https://www.yicai.com/brief/103456852.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/brief/103456852.html</guid>
-      <pubDate>Fri, 27 Nov 2026 04:14:28 +0000</pubDate>
+      <title>周三前半夜金价还在3426美元附近挣扎，周五已重返3600上方。反弹看得见，背后的行为却没那么容易看清，这场发生在假期前</title>
+      <link>https://xnews.jin10.com/details/236263</link>
+      <guid isPermaLink="true">https://xnews.jin10.com/details/236263</guid>
+      <pubDate>Sat, 28 Nov 2026 02:50:18 +0000</pubDate>
       <category>中文财经快讯</category>
-      <source url="https://yicai.com">第一财经 · 简报</source>
-      <description>&lt;p&gt;据新华社，由于两国关系交恶，巴西政府将不会邀请阿根廷总统米莱出席明年1月5日举行的总统卢拉连任就职典礼。上述消息由巴西政府一名不愿公开姓名的知情人士26日告诉多家媒体。目前，阿根廷政府是南美洲唯一未祝贺卢拉获连任的政府。&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：该条与id 51内容重复，均为新华社关于巴西不邀请米莱出席卢拉就职典礼的报道。&lt;/p&gt;&lt;p&gt;事实：消息源为巴西政府一名不愿公开姓名的知情人士，阿根廷是南美唯一未祝贺卢拉连任的政府。&lt;/p&gt;&lt;p&gt;推断：同一报道的重复推送，不构成新的独立信源。&lt;/p&gt;&lt;p&gt;影响：与id 51相同，双边关系短期承压，实质影响线索有限。&lt;/p&gt;&lt;p&gt;验证：需巴西政府官方确认或就职典礼邀请名单。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜巴西｜国家/地区｜负面｜短期｜置信 55/100：匿名消息称不邀请米莱，反映双边关系紧张，但未经官方确认&lt;/p&gt;&lt;p&gt;直接｜阿根廷｜国家/地区｜负面｜短期｜置信 55/100：作为未被邀请方且未祝贺卢拉连任，双边外交互动受限&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 45/100｜暂无独立互证；与id 51为同一新华社报道的重复条目，不构成独立互证（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 40/100｜影响 40 · 紧迫 30 · 新颖 20 · 证据 45 · 新鲜 100 · 自选 0；内容与id 51重复，无新增信息，新颖度低&lt;/p&gt;</description>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>周三前半夜金价还在3426美元附近挣扎，周五已重返3600上方。反弹看得见，背后的行为却没那么容易看清，这场发生在假期前后的反击，究竟该怎么看？</description>
     </item>
     <item>
-      <title>蜜雪集团：拟回购最多近380万股H股 占已发行H股的2.52%</title>
-      <link>https://www.cls.cn/detail/2546307</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2546307</guid>
-      <pubDate>Fri, 27 Nov 2026 04:12:01 +0000</pubDate>
+      <title>歼-35A飞抵珠海 将首次真机进馆展出</title>
+      <link>https://wallstreetcn.com/livenews/3207310</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3207310</guid>
+      <pubDate>Sat, 28 Nov 2026 02:50:15 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+      <description>今天（28日）上午，歼-35A飞抵珠海，它将在第十六届中国国际航空航天博览会上，首次以真机形式亮相1号馆，面向全球观众近距离静态展示。 歼-35A是航空工业集团自主研制的新一代中型隐身多用途战斗机，采用总体、气动、隐身一体化设计，为单座、双发、翼身融合布局，配备双后掠外倾垂尾、全…</description>
+    </item>
+    <item>
+      <title>中国地震台网正式测定：11月28日10时25分在阿根廷（南纬24.25度，西经67.15度）发生5.0级地震，震源深度1</title>
+      <link>https://flash.jin10.com/detail/20261128104915425800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261128104915425800</guid>
+      <pubDate>Sat, 28 Nov 2026 02:49:15 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>中国地震台网正式测定：11月28日10时25分在阿根廷（南纬24.25度，西经67.15度）发生5.0级地震，震源深度170千米。</description>
+    </item>
+    <item>
+      <title>财联社11月28日电，中国地震台网正式测定：11月28日10时25分在阿根廷（南纬24.25度，西经67.15度）发生5</title>
+      <link>https://www.cls.cn/detail/2547185</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2547185</guid>
+      <pubDate>Sat, 28 Nov 2026 02:47:51 +0000</pubDate>
       <category>中文财经快讯</category>
       <source url="https://cls.cn">财联社 · 电报</source>
-      <description>&lt;p&gt;【蜜雪集团：拟回购最多近380万股H股 占已发行H股的2.52% 】财联社11月27日电，蜜雪集团港交所公告，公司谨此宣布，本公司拟不时于公开市场回购H股，并向本公司H股奖励计划项下的受托人提供资金以购入H股，总数不超过3,796,188股H股，占本公告日期本公司已发行H股总数的…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：财联社转述蜜雪集团港交所公告，拟回购最多3,796,188股H股，约占已发行H股总数的2.52%。&lt;/p&gt;&lt;p&gt;事实：回购将在公开市场不时进行，并向H股奖励计划受托人提供资金购入H股，须受适用法律法规限制。&lt;/p&gt;&lt;p&gt;推断：回购计划通常被解读为管理层对股价或公司价值的表态，但公告未披露回购金额上限、价格区间及资金来源细节。&lt;/p&gt;&lt;p&gt;影响：对H股流通盘和股权激励安排有直接影响，实际效果取决于执行进度。&lt;/p&gt;&lt;p&gt;验证：可核对港交所公告原文及后续回购执行披露。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜蜜雪集团｜公司｜正面｜短期｜置信 60/100：回购及为奖励计划购股可能减少流通H股并支撑市场情绪，但执行规模与价格未定&lt;/p&gt;&lt;p&gt;直接｜H股｜资产｜中性｜短期｜置信 45/100：回购上限占已发行H股约2.52%，对整体流通影响有限，实际影响取决于执行节奏&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 65/100｜暂无独立互证；仅财联社一条RSS转述公司港交所公告，未提供公告原文链接（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 64/100｜影响 45 · 紧迫 40 · 新颖 45 · 证据 65 · 新鲜 100 · 自选 100；回购计划属常规资本运作信号，规模占比有限且缺乏金额细节&lt;/p&gt;&lt;p&gt;关注命中：自选股：香港交易所&lt;/p&gt;</description>
+      <description>财联社11月28日电，中国地震台网正式测定：11月28日10时25分在阿根廷（南纬24.25度，西经67.15度）发生5.0级地震，震源深度170千米。</description>
+    </item>
+    <item>
+      <title>江西袁河航道提升工程石洲枢纽改建工程开工</title>
+      <link>https://news.10jqka.com.cn/20261128/c682325015.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261128/c682325015.shtml</guid>
+      <pubDate>Sat, 28 Nov 2026 02:45:46 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>据江西发布，11月27日，袁河航道提升工程石洲枢纽改建工程正式开工，标志着项目三大航运枢纽进入同步施工阶段。袁河航道提升工程是江西省有史以来一次性投资最大的水运工程项目，项目概算总投资137.59亿元，规划航道总长103.5公里。核心船闸建成后可通行2000吨级货船，并兼顾300…</description>
+    </item>
+    <item>
+      <title>不用重复拍片化验 京津冀打通省级卫健信息平台</title>
+      <link>https://news.10jqka.com.cn/20261128/c682325012.shtml</link>
+      <guid isPermaLink="true">https://news.10jqka.com.cn/20261128/c682325012.shtml</guid>
+      <pubDate>Sat, 28 Nov 2026 02:45:29 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://10jqka.com.cn">同花顺 · 实时财经新闻</source>
+      <description>近日，京津冀首次打通省级卫生健康信息平台，三地首批共800多家医院可以相互调阅检查、检验报告和医学影像，这是京津冀协同发展在医疗数字化领域的新突破。（央视新闻）</description>
+    </item>
+    <item>
+      <title>特朗普官员计划在新一届国会就职前召开特别会议 加快推进总统项目</title>
+      <link>https://finance.sina.com.cn/world/2026-11-28/doc-inkafyfq5122941.shtml</link>
+      <guid isPermaLink="true">https://finance.sina.com.cn/world/2026-11-28/doc-inkafyfq5122941.shtml</guid>
+      <pubDate>Sat, 28 Nov 2026 02:42:57 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://sina.com.cn">新浪 · 股市滚动</source>
+      <description>据报道，美国一个关键联邦审查委员会的主席将在12月31日召集特别会议，加急审批特朗普的多项建设规划。几天后，民主党就将掌控国会，并在该委员会获得席位。 据发给委员会成员的一封周五邮件、以及媒体获悉的信息，白宫官员、国家首都规划委员会主席马克·保莱塔将于下月召开本次特别会议，同时安…</description>
+    </item>
+    <item>
+      <title>AI威胁日益加剧！大规模网络故障席卷西方，OpenAI视为比编程更大市场</title>
+      <link>https://wallstreetcn.com/articles/3786889</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/articles/3786889</guid>
+      <pubDate>Sat, 28 Nov 2026 02:42:31 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
+      <description>一连串高规格网络事件与系统中断正密集冲击欧美核心公共部门与商业机构，暴露出老旧数字基础设施在人工智能时代面临的严峻脆弱性，并直接催生了人工智能巨头对网络安全商业化的激烈争夺。 11月27日，据英国《金融时报》报道， 英国政府周五被迫将其大部分社会福利系统下线 ，成为横跨美欧关键基…</description>
+    </item>
+    <item>
+      <title>加拿大首份林业战略将美国关税列为关键挑战</title>
+      <link>https://wallstreetcn.com/livenews/3207309</link>
+      <guid isPermaLink="true">https://wallstreetcn.com/livenews/3207309</guid>
+      <pubDate>Sat, 28 Nov 2026 02:41:21 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻快讯</source>
+      <description>加拿大能源与自然资源部长蒂姆·霍奇森11月27日宣布，该国发布首份联邦林业战略。该战略将美国关税列为关键挑战。 据加能源与自然资源部发布的公报，该战略旨在通过投资、合作与创新推动林业转型。具体举措包括：联邦政府承诺在6年内投入20亿加元（约合14亿美元），帮助林业企业实现现代化、…</description>
+    </item>
+    <item>
+      <title>机构：预估2027年存储器产值增速放缓</title>
+      <link>https://www.yicai.com/news/103458567.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/news/103458567.html</guid>
+      <pubDate>Sat, 28 Nov 2026 02:38:58 +0000</pubDate>
+      <category>中文财经深度</category>
+      <source url="https://yicai.com">第一财经 · 最新</source>
+      <description>据TrendForce集邦咨询最新存储器产业研究，由于部分云端服务供应商（CSP）下修2027年存储器订单，预计NAND Flash产业在供给续增的情况下，将进入价格下行循环，全年产值因此较先前预估下调至约4193亿美元。DRAM市场尽管得以延续供不应求态势，但价格涨幅将逐季收敛…</description>
+    </item>
+    <item>
+      <title>机构：预估2027年存储器产值增速放缓 | 据TrendForce集邦咨询最新存储器产业研究，由于部分云端服务供应商（CSP）下修2027年存储器订单，预计NAND Flash...</title>
+      <link>https://www.yicai.com/brief/103458566.html</link>
+      <guid isPermaLink="true">https://www.yicai.com/brief/103458566.html</guid>
+      <pubDate>Sat, 28 Nov 2026 02:38:56 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://yicai.com">第一财经 · 简报</source>
+      <description>据TrendForce集邦咨询最新存储器产业研究，由于部分云端服务供应商（CSP）下修2027年存储器订单，预计NAND Flash产业在供给续增的情况下，将进入价格下行循环，全年产值因此较先前预估下调至约4193亿美元。DRAM市场尽管得以延续供不应求态势，但价格涨幅将逐季收敛…</description>
     </item>
   </channel>
 </rss>

@@ -4,46 +4,18 @@
     <title>方程式新闻</title>
     <link>https://eqn.news/</link>
     <atom:link href="https://raw.githubusercontent.com/k-macao/04-kindle/main/site/eqn-news.xml" rel="self" type="application/rss+xml"/>
-    <description>每天 07:00（北京时间）从 RSSHub 抓取并合并的财经、政治与哲学思想新闻，英文条目附中文译文，本次 4 条。</description>
+    <description>每天 07:00（北京时间）从 RSSHub 抓取并合并的财经、政治与哲学思想新闻，英文条目附中文译文，本次 1 条。 本期 AI 线索分析未生成（分析接口调用失败），只保留原文与中文译文。</description>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 27 Nov 2026 05:08:50 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 28 Nov 2026 04:48:20 +0000</lastBuildDate>
     <generator>04-kindle tools/build_feed.py</generator>
     <ttl>60</ttl>
     <item>
-      <title>【方程式新闻】[新增市场] 新增 BTW 韩元市场</title>
-      <link>https://eqn.news/main/17681</link>
-      <guid isPermaLink="true">https://eqn.news/main/17681</guid>
-      <pubDate>Fri, 27 Nov 2026 04:52:31 +0000</pubDate>
+      <title>【方程式新闻】共10,236,480 HAEDAL奖品！Haedal Protocol(HAEDAL) KRW市场新增纪念交易任务 &amp; TOP交易活动</title>
+      <link>https://eqn.news/main/17684</link>
+      <guid isPermaLink="true">https://eqn.news/main/17684</guid>
+      <pubDate>Fri, 27 Nov 2026 04:55:32 +0000</pubDate>
       <category>全球市场与要闻</category>
       <source url="https://eqn.news">方程式新闻 · 加密快讯</source>
-      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：EQN 标题称新增 BTW 韩元市场，摘要为空；&lt;/p&gt;&lt;p&gt;事实：该条仅提供“新增市场”与“BTW 韩元市场”的标题信息，未说明交易平台、上线时间、交易对细则或运营主体；&lt;/p&gt;&lt;p&gt;推断：这可能是某交易平台新增以韩元计价的 BTW 交易市场，但具体平台与资产属性无法确认；&lt;/p&gt;&lt;p&gt;影响：若属实，可能提升 BTW 在韩元区的可交易性，但缺乏规模与流动性信息，影响范围不明；&lt;/p&gt;&lt;p&gt;验证：需查 EQN 原文或平台公告确认运营主体、上线时间与交易对。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜BTW｜资产｜不确定｜不明｜置信 30/100：标题仅称新增韩元市场，未说明平台与流动性条件&lt;/p&gt;&lt;p&gt;证据与共识：线索有限｜强度 20/100｜无法判断；仅有标题且摘要为空，无平台与细则信息（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 32/100｜影响 25 · 紧迫 20 · 新颖 40 · 证据 20 · 新鲜 100 · 自选 0；新增市场标题具一定新颖性，但信息量极少且影响不明&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>【方程式新闻】Binance 将支持 0G (0G) BEP20 合约置换</title>
-      <link>https://eqn.news/main/17666</link>
-      <guid isPermaLink="true">https://eqn.news/main/17666</guid>
-      <pubDate>Fri, 27 Nov 2026 04:00:04 +0000</pubDate>
-      <category>全球市场与要闻</category>
-      <source url="https://eqn.news">方程式新闻 · 加密快讯</source>
-      <description>&lt;p&gt;Binance 将支持 0G (0G) BEP20 合约置换 AI 摘要 • 2026-11-30 15:00 (UTC) 起暂停旧 BNB Smart Chain (BEP20) 网络的 0G 充提，旧 0G (BEP20) 代币此后不再支持充值或提现。 • 0G 合约置换按 1:1 进行，新 0G (BEP20) 合约地址为 0x2C2d4d99F95643C8EC2EbD1d73a6Fd0273068B1e，旧地址为 0x4B94…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：EQN 报道 Binance 将支持 0G (0G) BEP20 合约置换，摘要给出暂停旧 BEP20 充提时间、1:1 置换比例及新旧合约地址。&lt;/p&gt;&lt;p&gt;事实：Binance 宣布自 2026-11-30 15:00 UTC 起暂停旧 BNB Smart Chain (BEP20) 网络的 0G 充提，旧代币此后不再支持充值或提现；置换按 1:1 进行，并列出新合约地址 0x2C2d…8B1e 与旧地址开头 0x4B94…。&lt;/p&gt;&lt;p&gt;推断：这是交易所层面的代币合约迁移安排，持有旧 BEP20 代币的用户需在截止前处理，否则可能面临旧代币无法通过该交易所充提的操作限制；1:1 比例意味着置换本身不改变持有数量。&lt;/p&gt;&lt;p&gt;影响：主要影响在 Binance 持有或拟充提 0G BEP20 代币的用户及 0G 项目方，属于运营与操作层面事件，不构成价格方向判断。&lt;/p&gt;&lt;p&gt;验证：可核对 Binance 官方公告与 0G 项目方公布的合约地址是否一致；摘要中旧地址被截断，需以官方完整地址为准。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜Binance｜公司｜中性｜短期｜置信 75/100：交易所执行合约置换并暂停旧网络充提，直接影响其平台上 0G 代币的存取操作&lt;/p&gt;&lt;p&gt;直接｜0G (0G)｜资产｜不确定｜短期｜置信 60/100：BEP20 合约 1:1 置换涉及代币合约迁移，旧代币在 Binance 停止充提，实际影响取决于用户是否按时完成迁移&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 55/100｜暂无独立互证；当前仅一个 EQN RSS 来源，摘要为 AI 摘要且旧合约地址被截断，未见官方公告原文（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 62/100｜影响 45 · 紧迫 60 · 新颖 40 · 证据 55 · 新鲜 100 · 自选 80；涉及交易所代币合约置换与充提截止时间，对相关持币者有操作时效性，但影响范围限于单一代币&lt;/p&gt;&lt;p&gt;关注命中：行业：人工智能&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>【方程式新闻】KGEN、FLR 新增交易支持公告（BTC、USDT 市场）</title>
-      <link>https://eqn.news/main/17654</link>
-      <guid isPermaLink="true">https://eqn.news/main/17654</guid>
-      <pubDate>Fri, 27 Nov 2026 03:01:08 +0000</pubDate>
-      <category>全球市场与要闻</category>
-      <source url="https://eqn.news">方程式新闻 · 加密快讯</source>
-      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：EQN标题称KGEN、FLR新增交易支持公告（BTC、USDT市场），摘要为空。&lt;/p&gt;&lt;p&gt;事实：仅知某交易平台发布新增交易支持公告，涉及KGEN、FLR两个代币及BTC、USDT计价市场；发布主体、上线时间与具体规则均未给出。&lt;/p&gt;&lt;p&gt;推断：可能意味着相关代币获得新的交易场所准入，但标题未说明平台名称与细节，无法确认。&lt;/p&gt;&lt;p&gt;影响：若属实，或对相关代币流动性有边际影响，但缺乏可核验细节。&lt;/p&gt;&lt;p&gt;验证：需查阅该平台官方公告原文，确认上线时间、交易对与地区限制。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜KGEN｜资产｜不确定｜短期｜置信 35/100：标题称新增交易支持，但平台与规则未明，影响方向取决于实际流动性变化&lt;/p&gt;&lt;p&gt;直接｜FLR｜资产｜不确定｜短期｜置信 35/100：同上，仅标题提及新增交易支持，缺少公告细节&lt;/p&gt;&lt;p&gt;证据与共识：线索有限｜强度 25/100｜无法判断；摘要为空，仅有标题，发布主体与公告内容均未提供（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 36/100｜影响 30 · 紧迫 40 · 新颖 35 · 证据 25 · 新鲜 90 · 自选 0；交易支持公告类信息，但细节缺失，可核验性低&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>【方程式新闻】HAEDAL KRW 市场新增数字资产</title>
-      <link>https://eqn.news/main/17651</link>
-      <guid isPermaLink="true">https://eqn.news/main/17651</guid>
-      <pubDate>Fri, 27 Nov 2026 03:00:56 +0000</pubDate>
-      <category>全球市场与要闻</category>
-      <source url="https://eqn.news">方程式新闻 · 加密快讯</source>
-      <description>&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：EQN标题称HAEDAL KRW市场新增数字资产，摘要为空。&lt;/p&gt;&lt;p&gt;事实：仅知某平台韩元（KRW）市场新增数字资产，但未说明具体资产名称、平台与上线时间。&lt;/p&gt;&lt;p&gt;推断：可能为交易平台扩充韩元交易对，但标题信息不足以确认标的与影响范围。&lt;/p&gt;&lt;p&gt;影响：线索有限，无法评估对具体资产或市场的影响。&lt;/p&gt;&lt;p&gt;验证：需查阅平台官方公告，确认新增资产名称与交易规则。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜HAEDAL KRW交易市场｜资产｜不确定｜不明｜置信 20/100：仅标题提及新增数字资产，标的与平台均未明确，传导路径无法建立&lt;/p&gt;&lt;p&gt;证据与共识：线索有限｜强度 20/100｜无法判断；摘要为空，标题未给出具体资产与平台信息（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：总分 40/100｜影响 20 · 紧迫 30 · 新颖 30 · 证据 20 · 新鲜 90 · 自选 65；信息要素严重缺失，难以形成有效判断&lt;/p&gt;&lt;p&gt;关注命中：主题：加密资产&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

@@ -4,37 +4,37 @@
     <title>004 新闻订阅（连通性测试）</title>
     <link>https://github.com/k-macao/04-kindle</link>
     <atom:link href="https://raw.githubusercontent.com/k-macao/04-kindle/main/site/news-test.xml" rel="self" type="application/rss+xml"/>
-    <description>每天 07:00（北京时间）从 RSSHub 抓取并合并的财经、政治与哲学思想新闻，英文条目附中文译文，本次 3 条。 AI 已按资产影响、证据、新鲜度与自选相关性将 3 条每日精选置顶。</description>
+    <description>每天 07:00（北京时间）从 RSSHub 抓取并合并的财经、政治与哲学思想新闻，英文条目附中文译文，本次 3 条。 本期 AI 线索分析未生成（分析接口调用失败），只保留原文与中文译文。</description>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 27 Nov 2026 05:08:50 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 28 Nov 2026 04:48:19 +0000</lastBuildDate>
     <generator>04-kindle tools/build_feed.py</generator>
     <ttl>60</ttl>
     <item>
-      <title>【精选01·74】AI债务风险骤升！SpaceX太空数据中心获批！存储芯片将出现分化？丨20261127从华尔街到陆家嘴</title>
-      <link>https://www.yicai.com/video/103456830.html</link>
-      <guid isPermaLink="true">https://www.yicai.com/video/103456830.html</guid>
-      <pubDate>Fri, 27 Nov 2026 04:06:16 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://yicai.com">第一财经 · 最新</source>
-      <description>&lt;p&gt;①AI巨头CDS集体飙高 信用市场警报拉响 抄底分歧加大 感恩节前夕，华尔街对AI举债扩张的担忧在信用市场集中爆发。ICE周三数据显示，CoreWeave五年期…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：第一财经《从华尔街到陆家嘴》栏目摘要；&lt;/p&gt;&lt;p&gt;事实：摘要称感恩节前AI举债扩张担忧在信用市场集中爆发，ICE数据显示CoreWeave五年期CDS单日升2.09个百分点至15.34%，创纪录最大涨幅，隐含五年违约概率超70%；甲骨文、Alphabet和SpaceX五年期CDS连创新高；英伟达五年期CDS逼近145个基点历史高位，标普周三下调英伟达AA信用评级（摘要截断）；标题另称SpaceX太空数据中心获批、存储芯片或分化；&lt;/p&gt;&lt;p&gt;推断：信用市场对AI相关企业杠杆与偿债能力定价明显收紧，若CDS持续走高，AI资本开支融资成本可能上升；但摘要中英伟达股价“大涨逾三成”与CDS走高并存，需注意数据口径与时间点；&lt;/p&gt;&lt;p&gt;影响：AI算力与云服务相关主体融资环境可能趋紧，存储芯片分化判断缺乏细节；&lt;/p&gt;&lt;p&gt;验证：需核对ICE CDS数据、标普评级公告原文及SpaceX获批文件，当前为单一栏目转述；线索有限。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜CoreWeave｜公司｜负面｜短期｜置信 55/100：摘要称其CDS单日创纪录飙升、隐含违约概率超70%，信用市场定价收紧&lt;/p&gt;&lt;p&gt;直接｜英伟达｜公司｜负面｜短期｜置信 50/100：摘要称其CDS逼近历史高位且标普下调评级，但股价与CDS信号需核实&lt;/p&gt;&lt;p&gt;间接｜AI算力与云服务行业｜行业｜负面｜中期｜置信 45/100：若AI企业信用利差持续走阔，举债扩张的融资成本上升，传导至资本开支节奏&lt;/p&gt;&lt;p&gt;证据与共识：单一报道｜强度 50/100｜报道内一致；单一财经栏目汇总ICE与标普数据，栏目内叙述一致，但无第二独立来源互证（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：精选第 1 名｜总分 74/100｜影响 70 · 紧迫 65 · 新颖 60 · 证据 50 · 新鲜 100 · 自选 100；涉及AI信用风险与评级下调，市场敏感度高，但摘要截断且需核实原始数据&lt;/p&gt;&lt;p&gt;关注命中：行业：人工智能、行业：半导体&lt;/p&gt;</description>
+      <title>前10个月黑龙江省货物贸易进出口总值同比增长9.7%</title>
+      <link>https://flash.jin10.com/detail/20261128123553459800</link>
+      <guid isPermaLink="true">https://flash.jin10.com/detail/20261128123553459800</guid>
+      <pubDate>Sat, 28 Nov 2026 04:35:53 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://jin10.com">金十数据 · 快讯</source>
+      <description>金十数据11月28日讯，据哈尔滨海关统计，2026年前10个月，黑龙江省货物贸易进出口总值2830.1亿元，比去年同期增长9.7%。其中，出口877.3亿元，增…</description>
     </item>
     <item>
-      <title>【精选02·72】国常会：加力发挥“国家队”稳市作用 进一步优化中央汇金公司的类“平准基金”功能</title>
-      <link>https://www.cls.cn/detail/2546318</link>
-      <guid isPermaLink="true">https://www.cls.cn/detail/2546318</guid>
-      <pubDate>Fri, 27 Nov 2026 04:24:51 +0000</pubDate>
+      <title>全球股市情绪改善金银大涨 市场认为黄金进入超卖区域</title>
+      <link>https://www.cls.cn/detail/2547201</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2547201</guid>
+      <pubDate>Sat, 28 Nov 2026 04:32:40 +0000</pubDate>
       <category>中文财经快讯</category>
       <source url="https://cls.cn">财联社 · 电报</source>
-      <description>&lt;p&gt;【国常会：加力发挥“国家队”稳市作用 进一步优化中央汇金公司的类“平准基金”功能】财联社11月27日电，国务院总理李强11月27日主持召开国务院常务会议，会议指…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：财联社报道国常会提出加力发挥“国家队”稳市作用、优化中央汇金类“平准基金”功能，并推动上市公司加大分红回购；&lt;/p&gt;&lt;p&gt;事实：会议明确逆周期调节与改革攻坚两手抓，实施存量政策、谋划增量政策；&lt;/p&gt;&lt;p&gt;推断：政策信号偏稳市与制度完善，具体工具规模与节奏未披露，不宜外推为即时资金投放；&lt;/p&gt;&lt;p&gt;影响：对资本市场情绪与分红回购预期偏正面，但传导取决于后续细则；&lt;/p&gt;&lt;p&gt;验证：需看中央汇金后续操作公告、增量政策文件及上市公司回购分红数据。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜中央汇金公司｜机构｜正面｜中期｜置信 60/100：会议明确优化其类平准基金功能，但具体操作规模与时机未披露&lt;/p&gt;&lt;p&gt;直接｜中国资本市场｜行业｜正面｜中期｜置信 55/100：稳市机制与分红回购导向改善预期，实际效果取决于增量政策落地&lt;/p&gt;&lt;p&gt;间接｜A股上市公司｜行业｜正面｜中期｜置信 45/100：政策鼓励加大分红回购，但公司执行力度与盈利条件决定实际影响&lt;/p&gt;&lt;p&gt;证据与共识：官方材料｜强度 75/100｜报道内一致；国常会内容经财联社转述，属官方会议信息，但摘要截断、细则未全（当前输入 1 个 RSS 来源）。跨源线索：另有 1 个不同发布方标题表述相近；不等于已确认独立采编。&lt;/p&gt;&lt;p&gt;每日优先级：精选第 2 名｜总分 72/100｜影响 75 · 紧迫 55 · 新颖 50 · 证据 75 · 新鲜 100 · 自选 65；国常会层级稳市表态，涉及平准基金功能优化，政策信号较强&lt;/p&gt;&lt;p&gt;关注命中：主题：中国政策&lt;/p&gt;</description>
+      <description>【全球股市情绪改善金银大涨 市场认为黄金进入超卖区域】财联社11月28日电，受美元走软、黄金实物需求回升以及全球股市情绪改善等因素影响，国际黄金和白银期价27日…</description>
     </item>
     <item>
-      <title>【精选03·71】中国10月规模以上工业企业利润同比加速增长至20.1%，AI驱动下电子行业1-10月利润翻倍</title>
-      <link>https://wallstreetcn.com/articles/3786817</link>
-      <guid isPermaLink="true">https://wallstreetcn.com/articles/3786817</guid>
-      <pubDate>Fri, 27 Nov 2026 02:01:58 +0000</pubDate>
-      <category>中文财经深度</category>
-      <source url="https://wallstreetcn.com">华尔街见闻 · 要闻文章</source>
-      <description>&lt;p&gt;11月27日，国家统计局公布数据显示，1-10月份，全国规模以上工业企业实现利润总额67373.6亿元，同比增长16.0%。全国工业生产总体平稳，新动能快速成长…&lt;/p&gt;&lt;p&gt;AI 线索分析&lt;/p&gt;&lt;p&gt;线索：国家统计局公布1-10月及10月规模以上工业企业利润数据；&lt;/p&gt;&lt;p&gt;事实：1-10月利润总额67373.6亿元、同比增长16.0%，较1-9月加快0.5个百分点；10月同比增长20.1%，较9月加快5.7个百分点；采矿业利润增长38.8%，制造业增长17.5%；摘要提及AI驱动下电子行业1-10月利润翻倍；&lt;/p&gt;&lt;p&gt;推断：数据为官方统计，显示工业利润加速增长、新动能行业表现突出，电子行业受AI相关需求带动；&lt;/p&gt;&lt;p&gt;影响：可能强化市场对工业盈利改善与AI产业链景气的预期，但属宏观数据层面；&lt;/p&gt;&lt;p&gt;验证：可对照国家统计局原始发布数据核对。&lt;/p&gt;&lt;p&gt;资产影响矩阵&lt;/p&gt;&lt;p&gt;直接｜中国规模以上工业｜行业｜正面｜短期｜置信 80/100：官方统计显示利润同比加速增长，直接反映工业盈利改善&lt;/p&gt;&lt;p&gt;直接｜电子行业｜行业｜正面｜中期｜置信 65/100：摘要称AI驱动下电子行业1-10月利润翻倍，属官方数据中的结构性亮点&lt;/p&gt;&lt;p&gt;证据与共识：官方材料｜强度 85/100｜报道内一致；数据引自国家统计局公布，属官方统计材料（当前输入 1 个 RSS 来源）。跨源线索：未在本期发现不同发布方的相近标题。&lt;/p&gt;&lt;p&gt;每日优先级：精选第 3 名｜总分 71/100｜影响 70 · 紧迫 50 · 新颖 40 · 证据 85 · 新鲜 90 · 自选 80；官方宏观数据具可核验性，但属常规月度统计发布&lt;/p&gt;&lt;p&gt;关注命中：行业：人工智能&lt;/p&gt;</description>
+      <title>南京发布鸿蒙智能体三年行动计划：2028年营收破千亿，集聚企业超100家</title>
+      <link>https://www.cls.cn/detail/2547200</link>
+      <guid isPermaLink="true">https://www.cls.cn/detail/2547200</guid>
+      <pubDate>Sat, 28 Nov 2026 04:26:27 +0000</pubDate>
+      <category>中文财经快讯</category>
+      <source url="https://cls.cn">财联社 · 电报</source>
+      <description>【南京发布鸿蒙智能体三年行动计划：2028年营收破千亿，集聚企业超100家】《科创板日报》28日讯，南京市今日发布《开源鸿蒙智能体发展行动计划（2026—202…</description>
     </item>
   </channel>
 </rss>
